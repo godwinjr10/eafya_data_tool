@@ -1,0 +1,64 @@
+[
+    {
+        "dataset_id": "HMIS_105_01",
+        "dataset_name": "HMIS 105.01 - OPD Attendances and Conditions",
+        "sections": [
+            {
+                "section_id": "1.1",
+                "section_name": "Outpatient Attendance"
+            },
+            {
+                "section_id": "1.2",
+                "section_name": "Outpatient Referals"
+            },
+            {
+                "section_id": "1.3.1",
+                "section_name": "Edpidemic & Referals"
+            },
+            {
+                "section_id": "1.3.2",
+                "section_name": "Other Infectious / Communicable Diseases"
+            },
+            {
+                "section_id": "1.3.3",
+                "section_name": "Neonatal Diseases"
+            },
+            {
+                "section_id": "1.3.4",
+                "section_name": "Non-Communicable Diseases"
+            },
+            {
+                "section_id": "1.3.5",
+                "section_name": "Oral Diseases"
+            },
+            {
+                "section_id": "1.3.6",
+                "section_name": "ENT Conditions"
+            },
+            {
+                "section_id": "1.3.7",
+                "section_name": "Eye Conditions"
+            },
+            {
+                "section_id": "1.3.8",
+                "section_name": "Mental Health"
+            },
+            {
+                "section_id": "1.3.9",
+                "section_name": "Neourlogical Disorders"
+            },
+            {
+                "section_id": "1.3.9",
+                "section_name": "Neourlogical Disorders"
+            },
+            {
+                "section_id": "1.3.10",
+                "section_name": "Chronic Respiratory"
+            },
+            {
+                "section_id": "1.3.11",
+                "section_name": "Cancers"
+            }
+        ]
+    }
+]
