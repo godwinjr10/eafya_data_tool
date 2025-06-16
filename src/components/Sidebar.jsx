@@ -33,11 +33,17 @@ const Sidebar = ({ selected, onSelect, dataSetId }) => {
   }, []);
 
   if (loading) {
-    return <div style={{ width: 250, background: "#e6f2e6", padding: 10 }}>Loading...</div>;
+    return <div style={{ width: 250, background: "#e6f2e6", padding: 10, height: "calc(100vh - 20px)", overflowY: "auto" }}>Loading...</div>;
   }
 
   return (
-    <div style={{ width: 250, background: "#e6f2e6", padding: 10 }}>
+    <div style={{ 
+      width: 250, 
+      background: "#e6f2e6", 
+      padding: 10,
+      height: "calc(100vh - 20px)", // This will make it full height minus padding
+      overflowY: "auto" // This enables vertical scrolling
+    }}>
       {sections.map((section, idx) => (
         <div
           key={section.section_id}
