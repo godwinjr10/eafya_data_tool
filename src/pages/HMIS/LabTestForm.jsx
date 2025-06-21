@@ -1,54 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import API from "../../helpers/api";
 
-// Lab test categories and data constants
-const hematologyTests = [
-  { code: "HE01", label: "Hb (Non automated)" },
-  { code: "HE02", label: "CBC" },
-  { code: "HE03", label: "Film Comment" },
-  { code: "HE04", label: "ESR" },
-  { code: "HE05", label: "Bleeding/Clotting Time" },
-  { code: "HE06", label: "Sickling Test" },
-  { code: "HE07", label: "Blood Group" }
-];
+const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
+  const [loading, setLoading] = useState(false);
+  const [labTests, setLabTests] = useState([]);
+  const [categorizedTests, setCategorizedTests] = useState({});
 
-const serologyTests = [
-  { code: "SR01", label: "VDRL/ RPR" },
-  { code: "SR02", label: "TPHA" },
-  { code: "SR03", label: "Shigella Dysentery" },
-  { code: "SR04", label: "Salmonella Typhi" },
-  { code: "SR05", label: "Brucella" },
-  { code: "SR06", label: "H. pylori" }
-];
+  const getMonthNumber = (monthName) => {
+    const months = {
+      'January': '01', 'February': '02', 'March': '03', 'April': '04',
+      'May': '05', 'June': '06', 'July': '07', 'August': '08',
+      'September': '09', 'October': '10', 'November': '11', 'December': '12'
+    };
+    return months[monthName] || '01';
+  };
 
-const clinicalChemistryTests = [
-  { code: "CC01", label: "Blood Sugar (RBS)" },
-  { code: "CC02", label: "Blood Sugar (FBS)" },
-  { code: "CC03", label: "LFTs" },
-  { code: "CC04", label: "RFTs" },
-  { code: "CC05", label: "Lipid Profile" },
-  { code: "CC06", label: "Electrolytes" }
-];
+  const fetchLabTests = async () => {
+    try {
+      setLoading(true);
+      const monthNumber = getMonthNumber(selectedMonth);
+      const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
+      const response = await API.get(`/labtests?report_month=${formattedMonth}&section_id=${section_id}`);
+      
+      // Group tests by category
+      const groupedTests = response.data.reduce((acc, test) => {
+        if (!acc[test.category]) {
+          acc[test.category] = [];
+        }
+        acc[test.category].push(test);
+        return acc;
+      }, {});
 
-const parasitologyTests = [
-  { code: "PA01", label: "BS for MPS" },
-  { code: "PA02", label: "Stool Analysis" },
-  { code: "PA03", label: "Urine Analysis" },
-  { code: "PA04", label: "Skin Snip" },
-  { code: "PA05", label: "CSF Analysis" }
-];
+      setCategorizedTests(groupedTests);
+      setLabTests(response.data);
+    } catch (error) {
+      console.error('Error fetching lab tests:', error.response || error);
+      setCategorizedTests({});
+      setLabTests([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-const virologyTests = [
-  { code: "VS01", label: "EID" },
-  { code: "VS02", label: "Viral Load for HIV" },
-  { code: "VS03", label: "CD4" },
-  { code: "VS04", label: "Sickle Cell Disease Confirmation" },
-  { code: "VS05", label: "Histology" },
-  { code: "VS06", label: "Polio/or Acute Flaccid Paralysis" },
-  { code: "VS07", label: "Severe Acute Respiratory Syndrome/Infection (SARS/SARI)" },
-  { code: "VS08", label: "TB Genexpert" }
-];
+  useEffect(() => {
+    if (selectedMonth && section_id) {
+      fetchLabTests();
+    }
+  }, [selectedMonth, section_id]);
 
-const LabTestForm = ({ section }) => {
   const renderClientVisitsSection = () => (
     <>
       <div className="section-header">
@@ -118,16 +117,11 @@ const LabTestForm = ({ section }) => {
     </>
   );
 
-  const renderHematologySection = () => (
-    <>
+  const renderTestCategory = (categoryName, tests) => (
+    <div className="col-md-6 mb-4">
       <div className="section-header">
-        10.2 LABORATORY ROUTINE TESTS
+        {categoryName}
       </div>
-
-      <div className="section-subheader">
-        10.2.1 HEMATOLOGY (BLOOD)
-      </div>
-
       <table className="data-entry-table">
         <thead>
           <tr>
@@ -137,165 +131,46 @@ const LabTestForm = ({ section }) => {
           </tr>
         </thead>
         <tbody>
-          {hematologyTests.map(test => (
-            <tr key={test.code}>
-              <td>{test.code}. {test.label}</td>
+          {tests.map(test => (
+            <tr key={test.hmis_code}>
+              <td>{test.hmis_code}. {test.hmis_name}</td>
               <td>
-                <input type="number" min="0" className="form-control form-control-sm" />
+                <input 
+                  type="number" 
+                  min="0" 
+                  className="form-control form-control-sm"
+                  value={test.total_cases || ''}
+                  readOnly
+                />
               </td>
               <td>
-                <input type="number" min="0" className="form-control form-control-sm" />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
-  );
-
-  const renderSerologySection = () => (
-    <>
-      <div className="section-header">
-        10.2.2 SEROLOGY
-      </div>
-
-      <table className="data-entry-table">
-        <thead>
-          <tr>
-            <th>Lab Tests</th>
-            <th>Number Done</th>
-            <th>Number Positive</th>
-          </tr>
-        </thead>
-        <tbody>
-          {serologyTests.map(test => (
-            <tr key={test.code}>
-              <td>{test.code}. {test.label}</td>
-              <td>
-                <input type="number" min="0" className="form-control form-control-sm" />
-              </td>
-              <td>
-                <input type="number" min="0" className="form-control form-control-sm" />
+                <input 
+                  type="number" 
+                  min="0" 
+                  className="form-control form-control-sm"
+                  value={test.positive_cases || ''}
+                  readOnly
+                />
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-    </>
+    </div>
   );
 
-  const renderClinicalChemistrySection = () => (
-    <>
-      <div className="section-header">
-        10.2.3 CLINICAL CHEMISTRY
-      </div>
-
-      <table className="data-entry-table">
-        <thead>
-          <tr>
-            <th>Lab Tests</th>
-            <th>Number Done</th>
-            <th>Number Positive</th>
-          </tr>
-        </thead>
-        <tbody>
-          {clinicalChemistryTests.map(test => (
-            <tr key={test.code}>
-              <td>{test.code}. {test.label}</td>
-              <td>
-                <input type="number" min="0" className="form-control form-control-sm" />
-              </td>
-              <td>
-                <input type="number" min="0" className="form-control form-control-sm" />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
-  );
-
-  const renderParasitologySection = () => (
-    <>
-      <div className="section-header">
-        10.2.4 PARASITOLOGY
-      </div>
-
-      <table className="data-entry-table">
-        <thead>
-          <tr>
-            <th>Lab Tests</th>
-            <th>Number Done</th>
-            <th>Number Positive</th>
-          </tr>
-        </thead>
-        <tbody>
-          {parasitologyTests.map(test => (
-            <tr key={test.code}>
-              <td>{test.code}. {test.label}</td>
-              <td>
-                <input type="number" min="0" className="form-control form-control-sm" />
-              </td>
-              <td>
-                <input type="number" min="0" className="form-control form-control-sm" />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
-  );
-
-  const renderReferralTestingSection = () => (
-    <>
-      <div className="section-header">
-        10.5 REFERRAL TESTING
-      </div>
-
-      <div className="section-subheader">
-        10.5.1. Volume of Sample Referred
-      </div>
-
-      <table className="data-entry-table">
-        <thead>
-          <tr>
-            <th>Type of Test</th>
-            <th>No. of Specimen Referred</th>
-            <th>Average Turn Around Time (Days)</th>
-            <th>No. of Pending Results/Feedback</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr className="category-header">
-            <td colSpan="4">Virology</td>
-          </tr>
-          {virologyTests.map(test => (
-            <tr key={test.code}>
-              <td>{test.code} {test.label}</td>
-              <td>
-                <input type="number" min="0" className="form-control form-control-sm" />
-              </td>
-              <td>
-                <input type="number" min="0" className="form-control form-control-sm" />
-              </td>
-              <td>
-                <input type="number" min="0" className="form-control form-control-sm" />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
-  );
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="lab-test-container">
-      {section === 0 && renderClientVisitsSection()}
-      {section === 1 && renderHematologySection()}
-      {section === 2 && renderSerologySection()}
-      {section === 3 && renderClinicalChemistrySection()}
-      {section === 4 && renderParasitologySection()}
-      {section === 5 && renderReferralTestingSection()}
+      {renderClientVisitsSection()}
+      <div className="row">
+        {Object.entries(categorizedTests).map(([category, tests]) => 
+          renderTestCategory(category, tests)
+        )}
+      </div>
     </div>
   );
 };

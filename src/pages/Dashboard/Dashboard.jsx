@@ -2757,7 +2757,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container p-3">
-      <div className="d-flex align-items-center mb-3">
+      {/* <div className="d-flex align-items-center mb-3">
         <div className="input-group dashboard-search" style={{ width: '300px' }}>
           <span className="input-group-text">
             <i className="bi bi-search"></i>
@@ -2768,7 +2768,7 @@ const Dashboard = () => {
             placeholder="Search for a dashboard"
           />
         </div>
-      </div>
+      </div> */}
 
       <Nav variant="pills" className="dashboard-tabs mb-4">
         {dashboardTabs.map(tab => (

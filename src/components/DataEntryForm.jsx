@@ -113,11 +113,11 @@ useEffect(() => {
       case 'HMIS_105_01':
         return <ConditionsForm section={section} selectedMonth={selectedMonth} selectedYear={selectedYear} />;
       case 'HMIS_105_02':
-        return <MCHForm section={section} />;
-      case 'HMIS_105_03':
-        return <MedicinesForm section={section} />;
-      case 'HMIS_105_04':
-        return <LabTestForm section={section} />;
+        return <MCHForm section={section} selectedMonth={selectedMonth} selectedYear={selectedYear} />;
+      case 'HMIS_105_06':
+        return <MedicinesForm section={section} selectedMonth={selectedMonth} selectedYear={selectedYear} section_id='6.1' />;
+      case 'HMIS_105_10':
+        return <LabTestForm section={section} selectedMonth={selectedMonth} selectedYear={selectedYear} section_id='10.2.1' />;
       default:
         return <div>Please select a data set</div>;
     }

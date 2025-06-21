@@ -8,6 +8,8 @@ import dhisEafyaMappingRoutes from './routes/eafya_mapping.routes.js';
 import attendanceRoutes from './routes/attendance.js';
 import datasetRoutes from './routes/dataset.js';
 import conditionRoutes from './routes/conditions.js';
+import commoditiesRoutes from './routes/commodities.js';
+import labTestRoutes from './routes/labtests.js';
 
 dotenv.config();
 
@@ -36,10 +38,12 @@ syncDatabase();
 
 // Routes
 app.use('/api/hmis', hmisRoutes);
+app.use('/api/labtests', labTestRoutes);
 app.use('/api/mappings', dhisEafyaMappingRoutes);
 app.use('/api/attendance', attendanceRoutes);
 app.use('/api/datasets', datasetRoutes);
 app.use('/api/conditions', conditionRoutes);
+app.use('/api/commodities', commoditiesRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

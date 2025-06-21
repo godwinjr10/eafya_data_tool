@@ -31,10 +31,10 @@ router.get('/', async (req, res) => {
             a."10-19y Female" AS "10-19y_female",
             a."20y+ Male" AS "20y+_male",
             a."20y+ Female" AS "20y+_female"
-        FROM reporting."105_03_conditions" a
+        FROM reporting."105_01_conditions" a
         JOIN (
                 SELECT DISTINCT section_id, section_name, hmis_code, hmis_name, eafya_hmis_id
-                FROM reporting.dhis_eafya_mapping 
+                FROM reporting.dhis_eafya_mapping_conditions 
                 WHERE section_id = $1
             ) m ON a.hmis_code = CAST(m.eafya_hmis_id AS int)
         WHERE 1=1

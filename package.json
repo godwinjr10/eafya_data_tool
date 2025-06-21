@@ -23,7 +23,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "yarn build && sudo cp -r ./build/* /var/www/eafya_data_tool/html"
+    "dev": "yarn build && sudo cp -r ./build/* /var/www/eafya_data_tool/html",
+    "deploy": "react-scripts build && scp -r ./build/* root@209.38.246.149:/var/www/eafya_data_tool/html"
   },
   "eslintConfig": {
     "extends": [
