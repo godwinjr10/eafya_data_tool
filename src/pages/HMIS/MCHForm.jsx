@@ -506,13 +506,13 @@ const MCHForm = ({ section }) => {
 
   return (
     <div className="mch-container">
-      {section === 0 && renderAntenatalSection()}
-      {section === 1 && renderUltrasoundSection()}
-      {section === 2 && renderMaternitySection()}
-      {section === 3 && renderChildHealthSection()}
-      {section === 4 && renderFamilyPlanningSection()}
-      {section === 5 && renderContraceptivesSection()}
-      {section === 6 && renderChildHealthServicesSection()}
+      {renderAntenatalSection()}
+      {renderUltrasoundSection()}
+      {renderMaternitySection()}
+      {renderChildHealthSection()}
+      {renderFamilyPlanningSection()}
+      {renderContraceptivesSection()}
+      {renderChildHealthServicesSection()}
     </div>
   );
 };
