@@ -1,28 +1,37 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import MCH from '../pages/MCH';
 import HMIS from '../pages/HMIS';
+import Users from '../pages/Users';
 import LabTest from '../pages/LabTests';
+import Facility from '../pages/Facility';
+import Login from '../pages/Auth/Login';
 import Inpatient from '../pages/Inpatient';
 import Outpatient from '../pages/Outpatient';
 import Supplychain from '../pages/Supplychain';
 import MainLayout from '../components/MainLayout';
 import Dashboard from '../pages/Dashboard/Dashboard';
+import ProtectedRoute from '../helpers/Protected';
 
 const AppRoutes = () => {
   return (
-    <MainLayout>
+    <Fragment>
       <Switch>
-        <Route path="/hmis" component={HMIS} />
-        <Route path="/lab" component={LabTest} />
-        <Route path="/mch" component={MCH} />
-        <Route path="/outpatient" component={Outpatient} />
-        <Route path="/inpatient" component={Inpatient} />
-        <Route path="/supplychain" component={Supplychain} />
-        <Route path="/" exact component={Dashboard} />
+        <Route exact path="/" component={Login} />
+        <MainLayout>
+          <ProtectedRoute path="/hmis" component={HMIS} />
+          <ProtectedRoute path="/lab" component={LabTest} />
+          <ProtectedRoute path="/mch" component={MCH} />
+          <ProtectedRoute path="/facility" component={Facility} />
+          <ProtectedRoute path="/outpatient" component={Outpatient} />
+          <ProtectedRoute path="/inpatient" component={Inpatient} />
+          <ProtectedRoute path="/users" component={Users} />
+          <ProtectedRoute path="/supplychain" component={Supplychain} />
+          <ProtectedRoute path="/dashboard" exact component={Dashboard} />
+        </MainLayout>
       </Switch>
-    </MainLayout>
+    </Fragment>
   );
 };
 

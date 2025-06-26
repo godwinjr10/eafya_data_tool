@@ -10,6 +10,8 @@ import datasetRoutes from './routes/dataset.js';
 import conditionRoutes from './routes/conditions.js';
 import commoditiesRoutes from './routes/commodities.js';
 import labTestRoutes from './routes/labtests.js';
+import FacilityRoutes from './routes/facility.js';
+import userRoutes from "./routes/users.js";
 
 dotenv.config();
 
@@ -38,12 +40,14 @@ syncDatabase();
 
 // Routes
 app.use('/api/hmis', hmisRoutes);
+app.use("/api/users", userRoutes);
 app.use('/api/labtests', labTestRoutes);
-app.use('/api/mappings', dhisEafyaMappingRoutes);
-app.use('/api/attendance', attendanceRoutes);
 app.use('/api/datasets', datasetRoutes);
+app.use('/api/facility', FacilityRoutes);
 app.use('/api/conditions', conditionRoutes);
 app.use('/api/commodities', commoditiesRoutes);
+app.use('/api/mappings', dhisEafyaMappingRoutes);
+app.use('/api/attendance', attendanceRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

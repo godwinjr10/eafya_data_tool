@@ -1,9 +1,32 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import '../styles/dhis2.css';
+import API from "../helpers/api";
+import { logout } from "../helpers/auth";
 
 const MainLayout = ({ children }) => {
+  const [facilities, setFacilities] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
   const location = useLocation();
+  const history = useHistory();
+
+  const handleLogout = () => {
+    logout();
+    history.push('/');
+  };
+
+  const fetchFacilities = async () => {
+    try {
+      const response = await API.get(`/facility`);
+      setFacilities(response.data.facility);
+    } catch (error) {
+      console.log('Error fetching facilities', 'danger');
+    }
+  };
+
+  useEffect(() => {
+    fetchFacilities();
+  }, []);
 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: 'speedometer2', path: '/' },
@@ -16,7 +39,8 @@ const MainLayout = ({ children }) => {
     { id: 'pediatrics', label: 'Pediatrics', icon: 'emoji-smile', path: '/pediatrics' },
     { id: 'emergency', label: 'Emergency', icon: 'exclamation-diamond', path: '/emergency' },
     { id: 'pharmacy', label: 'Pharmacy', icon: 'prescription2', path: '/pharmacy' },
-    { id: 'nutrition', label: 'Nutrition', icon: 'egg-fried', path: '/nutrition' }
+    { id: 'facility', label: 'Facility', icon: 'egg-fried', path: '/facility' },
+    { id: 'users', label: 'Users', icon: 'person-circle', path: '/users' }
   ];
 
   return (
@@ -24,12 +48,12 @@ const MainLayout = ({ children }) => {
       <aside className="dhis2-sidebar">
         <div className="p-3">
           <h5 className="mb-3">eAFYA Data Platform</h5>
-          
+
           <div className="mt-4">
             <ul className="nav nav-pills flex-column">
               {menuItems.map(item => (
                 <li className="nav-item" key={item.id}>
-                  <Link 
+                  <Link
                     to={item.path}
                     className={`nav-link ${location.pathname === item.path ? 'active' : ''}`}
                   >
@@ -52,7 +76,27 @@ const MainLayout = ({ children }) => {
           </div>
           <div>
             <i className="bi bi-person-circle me-2"></i>
-            Naguru National Referral Hospital
+            {facilities.length > 0 && facilities[0].facility_name}
+            <div className="dropdown d-inline-block ms-2">
+              <button 
+                className="btn btn-link text-white dropdown-toggle" 
+                type="button" 
+                onClick={() => setShowDropdown(!showDropdown)}
+              >
+                <i className="bi bi-gear"></i>
+              </button>
+              {showDropdown && (
+                <div className="dropdown-menu show" style={{ position: 'absolute', right: 0 }}>
+                  <button 
+                    className="dropdown-item" 
+                    onClick={handleLogout}
+                  >
+                    <i className="bi bi-box-arrow-right me-2"></i>
+                    Logout
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </header>
 
