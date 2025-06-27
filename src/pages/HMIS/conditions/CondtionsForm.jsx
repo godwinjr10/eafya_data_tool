@@ -57,11 +57,11 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
                         {conditions.map(item => {
                             const getValueForCell = (ageGroup, gender) => {
                                 const ageKeyMap = {
-                                    "0-28d": "0-28d",
-                                    "29d-4y": "29d-4y",
-                                    "5-9y": "5-9y",
-                                    "10-19y": "10-19y",
-                                    "20y+": "20y+"
+                                    "0-28d": "0_28d",
+                                    "29d-4y": "29d_4y",
+                                    "5-9y": "5_9y",
+                                    "10-19y": "10_19y",
+                                    "20y+": "20y_plus"
                                 };
                                 const key = `${ageKeyMap[ageGroup]}_${gender.toLowerCase() === 'm' ? 'male' : 'female'}`;
                                 return item[key] || "0";
