@@ -17,8 +17,8 @@ router.get('/', async (req, res) => {
             e.section_id,
             e.section_name,
             e.eafya_hmis_id,
-            m.hmis_code,
-            m.hmis_name,
+            e.hmis_code,
+            e.hmis_name,
             c."0-28d Male" AS "0_28d_male",
             c."0-28d Female" AS "0_28d_female", 
             c."29d-4y Male" AS "29d_4y_male",
@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
             params.push(report_month);
         }
 
-        query += ` ORDER BY c.report_month DESC, e.section_id, m.hmis_code, e.eafya_hmis_id`;
+        query += ` ORDER BY c.report_month DESC, e.section_id, e.hmis_code, e.eafya_hmis_id`;
 
         const { rows } = await pool.query(query, params);
         res.json(rows);
