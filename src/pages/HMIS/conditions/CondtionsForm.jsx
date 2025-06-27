@@ -13,7 +13,7 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
             const monthNumber = getMonthNumber(selectedMonth);
 
             const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
-            const response = await API.get(`/conditions/?report_month=${formattedMonth}&section_id=${section_id}`);
+            const response = await API.get(`/conditions?report_month=${formattedMonth}&section_id=${section_id}`);
             console.log(response);
             setConditions(response.data);
         } catch (error) {
