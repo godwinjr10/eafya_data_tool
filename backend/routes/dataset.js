@@ -1,7 +1,5 @@
 import express from 'express';
 import Dataset from '../models/dataset.js';
-import { pool } from '../config/database.js';
-import { Op, literal } from 'sequelize';
 
 const router = express.Router();
 
@@ -25,7 +23,9 @@ router.post('/', async (req, res) => {
 // Get all datasets with pagination and filtering
 router.get('/', async (req, res) => {
     try {
-        const datasets = await Dataset.findAll();
+        const datasets = await Dataset.findAll({
+            order: [['id', 'ASC']]
+        });
         res.status(200).json({
             success: true,
             count: datasets.length,

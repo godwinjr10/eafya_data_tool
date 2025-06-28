@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import API from "../helpers/api";
 import '../styles/dhis2.css';
 
-import MCHForm from '../pages/HMIS/MCHForm';
+import MCHForm from '../pages/HMIS/MCH';
 import LabTestForm from '../pages/HMIS/LabTestForm';
 import MedicinesForm from '../pages/HMIS/MedicinesForm';
 import ConditionsForm from '../pages/HMIS/conditions';
