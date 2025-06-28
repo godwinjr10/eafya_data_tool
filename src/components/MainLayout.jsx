@@ -8,26 +8,12 @@ const MainLayout = ({ children }) => {
   const [facilities, setFacilities] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showSettingsDropdown, setShowSettingsDropdown] = useState(false);
-  const [showDhisMappingDropdown, setShowDhisMappingDropdown] = useState(false);
   const location = useLocation();
   const history = useHistory();
 
   const handleLogout = () => {
     logout();
     history.push('/');
-  };
-
-  const handleDropdownToggle = (dropdownId) => {
-    switch (dropdownId) {
-      case 'settings':
-        setShowSettingsDropdown(!showSettingsDropdown);
-        break;
-      case 'dhis2-mapping':
-        setShowDhisMappingDropdown(!showDhisMappingDropdown);
-        break;
-      default:
-        break;
-    }
   };
 
   const fetchFacilities = async () => {
@@ -54,17 +40,6 @@ const MainLayout = ({ children }) => {
     { id: 'imaging', label: 'Imaging', icon: 'emoji-smile', path: '/imaging' },
     { id: 'theatre', label: 'Theatre', icon: 'exclamation-diamond', path: '/theatre' },
     { 
-      id: 'dhis2-mapping', 
-      label: 'DHIS2 eAFYA Mapping', 
-      icon: 'diagram-3',
-      children: [
-        { id: 'conditions', label: 'Conditions', icon: 'clipboard2-pulse', path: '/dhis2-mapping/conditions' },
-        { id: 'commodities', label: 'Commodities', icon: 'box-seam', path: '/dhis2-mapping/commodities' },
-        { id: 'vaccines', label: 'Vaccines', icon: 'shield-plus', path: '/dhis2-mapping/vaccines' },
-        { id: 'labtests', label: 'LabTests', icon: 'flask-fill', path: '/dhis2-mapping/labtests' }
-      ]
-    },
-    { 
       id: 'settings', 
       label: 'Settings', 
       icon: 'gear',
@@ -89,18 +64,13 @@ const MainLayout = ({ children }) => {
                     <div>
                       <button
                         className="nav-link w-100 text-start border-0 bg-transparent"
-                        onClick={() => handleDropdownToggle(item.id)}
+                        onClick={() => setShowSettingsDropdown(!showSettingsDropdown)}
                       >
                         <i className={`bi bi-${item.icon} me-2`}></i>
                         {item.label}
-                        <i className={`bi bi-chevron-${
-                          (item.id === 'settings' && showSettingsDropdown) || 
-                          (item.id === 'dhis2-mapping' && showDhisMappingDropdown) 
-                            ? 'up' : 'down'
-                        } float-end mt-1`}></i>
+                        <i className={`bi bi-chevron-${showSettingsDropdown ? 'up' : 'down'} float-end mt-1`}></i>
                       </button>
-                      {((item.id === 'settings' && showSettingsDropdown) ||
-                        (item.id === 'dhis2-mapping' && showDhisMappingDropdown)) && (
+                      {showSettingsDropdown && (
                         <ul className="nav nav-pills flex-column ms-3">
                           {item.children.map(child => (
                             <li className="nav-item" key={child.id}>
