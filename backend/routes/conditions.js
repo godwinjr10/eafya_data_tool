@@ -4,6 +4,7 @@ import { pool } from '../config/database.js';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
+    console.log("conditions");
     try {
         const { report_month, section_id } = req.query;
 

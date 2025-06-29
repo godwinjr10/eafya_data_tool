@@ -39,4 +39,4 @@ $$ language 'plpgsql';
 CREATE TRIGGER update_dhis_eafya_mapping_updated_at
     BEFORE UPDATE ON reporting.dhis_eafya_mapping
     FOR EACH ROW
-    EXECUTE FUNCTION reporting.update_updated_at_column(); 
+    EXECUTE FUNCTION reporting.update_updated_at_column();
