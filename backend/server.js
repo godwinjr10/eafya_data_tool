@@ -12,6 +12,7 @@ import commoditiesRoutes from './routes/commodities.js';
 import labTestRoutes from './routes/labtests.js';
 import FacilityRoutes from './routes/facility.js';
 import userRoutes from "./routes/users.js";
+import antenatalRoutes from './routes/antenatal.js';
 
 dotenv.config();
 
@@ -48,6 +49,7 @@ app.use('/api/conditions', conditionRoutes);
 app.use('/api/commodities', commoditiesRoutes);
 app.use('/api/mappings', dhisEafyaMappingRoutes);
 app.use('/api/attendance', attendanceRoutes);
+app.use('/api/antenatal', antenatalRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
