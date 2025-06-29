@@ -1,66 +1,78 @@
 import React from 'react'
 
 const FamilyPlanning = () => {
-
-    const familyPlanningMethods = [
-        { code: "FP01", label: "Oral: Lo-Femenal" },
-        { code: "FP02", label: "Oral: Microgynon" },
-        { code: "FP11", label: "4 year implant (e.g. Sino plant)" },
-        { code: "FP12", label: "5 year implant (e.g. Jadelle)" }
-    ];
-
     return (
-        <div><>
+        <div>
             <div className="section-header">
-                2.6 FAMILY PLANNING METHODS
+                2.4 FAMILY PLANNING METHODS
             </div>
 
             <table className="data-entry-table">
                 <thead>
                     <tr>
-                        <th rowSpan="2">Category</th>
-                        <th colSpan="2" className="text-center">Below 15 years</th>
-                        <th colSpan="2" className="text-center">15-19 years</th>
-                        <th colSpan="2" className="text-center">20-24 years</th>
-                        <th colSpan="2" className="text-center">25-49 years</th>
-                        <th colSpan="2" className="text-center">50+ years</th>
+                        <th rowSpan="3">2.4.1 Family Planning Client Visits</th>
+                        <th colSpan="2">Below 15 Yrs</th>
+                        <th colSpan="2">15-19 Yrs</th>
+                        <th colSpan="2">20-24 Yrs</th>
+                        <th colSpan="2">25-49 Yrs</th>
+                        <th colSpan="2">50+ Yrs</th>
                     </tr>
                     <tr>
-                        {Array(5).fill().map((_, i) => (
-                            <React.Fragment key={i}>
-                                <th className="text-center">NEW USERS</th>
-                                <th className="text-center">REVISITS</th>
-                            </React.Fragment>
-                        ))}
+                        <th>New users</th>
+                        <th>Revisits</th>
+                        <th>New users</th>
+                        <th>Revisits</th>
+                        <th>New users</th>
+                        <th>Revisits</th>
+                        <th>New users</th>
+                        <th>Revisits</th>
+                        <th>New users</th>
+                        <th>Revisits</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {familyPlanningMethods.map(method => (
-                        <tr key={method.code}>
-                            <td>{method.code}. {method.label}</td>
-                            {Array(5).fill().map((_, i) => (
-                                <React.Fragment key={i}>
-                                    <td className="text-center">
-                                        <input
-                                            type="number"
-                                            min="0"
-                                            className="form-control form-control-sm"
-                                        />
-                                    </td>
-                                    <td className="text-center">
-                                        <input
-                                            type="number"
-                                            min="0"
-                                            className="form-control form-control-sm"
-                                        />
-                                    </td>
-                                </React.Fragment>
-                            ))}
-                        </tr>
-                    ))}
+                    <tr>
+                        <td>FP01. Combined Oral Contraceptives Pills (COCs)</td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                    </tr>
+                    <tr>
+                        <td>FP02. Progesterone Only Pills (POP)</td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                    </tr>
+                    <tr>
+                        <td>FP03. Emergency Contraceptive Pills (ECP)</td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                        <td><input type="number" className="form-control form-control-sm" /></td>
+                    </tr>
                 </tbody>
             </table>
-        </></div>
+        </div>
     )
 }
 

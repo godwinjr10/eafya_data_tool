@@ -8,7 +8,12 @@ const HMIS = () => {
 
     const handleDataSetChange = (dataSetId) => {
         setSelectedDataSet(dataSetId);
-        setSelectedSection('1.1');
+        // Set section to 2.1 (Antenatal) when HMIS_105_02 is selected
+        if (dataSetId === 'HMIS_105_02') {
+            setSelectedSection('2.1');
+        } else {
+            setSelectedSection('1.1');
+        }
     };
 
     return (
