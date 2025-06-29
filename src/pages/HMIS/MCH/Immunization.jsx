@@ -1,31 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import API from '../../../helpers/api';
 
-const Immunization = () => {
-  const immunizationData = [
-    { code: "CL01", label: "BCG" },
-    { code: "CL02", label: "Hep B zero doze" },
-    { code: "CL03", label: "Protection At Birth for Td (PAB)" },
-    { code: "CL04", label: "Polio 0" },
-    { code: "CL05", label: "Polio 1" },
-    { code: "CL06", label: "Polio 2" },
-    { code: "CL07", label: "Polio 3" },
-    { code: "CL08", label: "IPV1" },
-    { code: "CL09", label: "IPV2" },
-    { code: "CL10", label: "DPT+Hep B+Hib 1" },
-    { code: "CL11", label: "DPT+Hep B+Hib 2" },
-    { code: "CL12", label: "DPT+Hep B+Hib 3" },
-    { code: "CL13", label: "PCV 1" },
-    { code: "CL14", label: "PCV 2" },
-    { code: "CL15", label: "PCV 3" },
-    { code: "CL16", label: "Rotavirus 1 Vaccine" },
-    { code: "CL17", label: "Rotavirus 2 Vaccine" },
-    { code: "CL18", label: "Rotavirus 3 Vaccine" },
-    { code: "CL19", label: "Malaria 1" },
-    { code: "CL20", label: "Malaria 2" },
-    { code: "CL21", label: "Malaria 3" },
-    { code: "CL22", label: "Yellow Fever" },
-    { code: "CL23", label: "Measles (MR1)" }
-  ];
+const Immunization = ({ selectedMonth, getMonthNumber, selectedYear }) => {
+  const [loading, setLoading] = useState(false);
+  const [immunizationData, setImmunizationData] = useState([]);
+
+  const fetchImmunizationData = async () => {
+    try {
+      setLoading(true);
+      const monthNumber = getMonthNumber(selectedMonth);
+      const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
+      const response = await API.get(`/immunization?report_month=${formattedMonth}`);
+      
+      // Transform API data to match the required format
+      const transformedData = response.data.map(item => ({
+        code: item.hmis_code,
+        label: item.hmis_name,
+        data: {
+          under1: {
+            static: item.Under1y || "0",
+            outreach: "0"
+          },
+          "1to4": {
+            static: item["1-4y"] || "0",
+            outreach: "0"
+          }
+        }
+      }));
+      
+      setImmunizationData(transformedData);
+    } catch (error) {
+      console.error('Error fetching immunization data:', error);
+      // Set default data in case of error
+      setImmunizationData([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedMonth && selectedYear) {
+      fetchImmunizationData();
+    }
+  }, [selectedMonth, selectedYear]);
 
   // State for form values
   const [formData, setFormData] = useState({});
@@ -36,6 +53,8 @@ const Immunization = () => {
       [`${code}_${ageGroup}_${type}`]: value
     }));
   };
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div>
@@ -67,37 +86,33 @@ const Immunization = () => {
               <td className="text-center">
                 <input
                   type="number"
-                  min="0"
                   className="form-control form-control-sm"
-                  value={formData[`${vaccine.code}_under1_static`] || ''}
-                  onChange={(e) => handleInputChange(vaccine.code, 'under1', 'static', e.target.value)}
+                  value={vaccine.data.under1.static}
+                  readOnly
                 />
               </td>
               <td className="text-center">
                 <input
                   type="number"
-                  min="0"
                   className="form-control form-control-sm"
-                  value={formData[`${vaccine.code}_under1_outreach`] || ''}
-                  onChange={(e) => handleInputChange(vaccine.code, 'under1', 'outreach', e.target.value)}
+                  value={vaccine.data.under1.outreach}
+                  readOnly
                 />
               </td>
               <td className="text-center">
                 <input
                   type="number"
-                  min="0"
                   className="form-control form-control-sm"
-                  value={formData[`${vaccine.code}_1to4_static`] || ''}
-                  onChange={(e) => handleInputChange(vaccine.code, '1to4', 'static', e.target.value)}
+                  value={vaccine.data["1to4"].static}
+                  readOnly
                 />
               </td>
               <td className="text-center">
                 <input
                   type="number"
-                  min="0"
                   className="form-control form-control-sm"
-                  value={formData[`${vaccine.code}_1to4_outreach`] || ''}
-                  onChange={(e) => handleInputChange(vaccine.code, '1to4', 'outreach', e.target.value)}
+                  value={vaccine.data["1to4"].outreach}
+                  readOnly
                 />
               </td>
             </tr>

@@ -1,126 +1,63 @@
 import React, { useState, useEffect } from 'react';
 import API from '../../../helpers/api';
 
-const Tetanus = () => {
+const Tetanus = ({ selectedMonth, getMonthNumber, selectedYear }) => {
     const [tetanusData, setTetanusData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    // Mock data for tetanus vaccination
-    const mockTetanusData = [
-        {
-            code: "TD01",
-            label: "Td1-Dose 1",
+    const transformApiData = (apiData) => {
+        const doses = [
+            { code: "TD01", label: "Td1-Dose 1", pregKey: "td1_preg", nonPregKey: "td1_non_preg" },
+            { code: "TD02", label: "Td2-Dose 2", pregKey: "td2_preg", nonPregKey: "td2_non_preg" },
+            { code: "TD03", label: "Td3-Dose 3", pregKey: "td3_preg", nonPregKey: "td3_non_preg" },
+            { code: "TD04", label: "Td4-Dose 4", pregKey: "td4_preg", nonPregKey: "td4_non_preg" },
+            { code: "TD05", label: "Td5-Dose 5", pregKey: "td5_preg", nonPregKey: "td5_non_preg" }
+        ];
+
+        // Use the most recent month's data
+        const latestData = apiData[0] || {};
+
+        return doses.map(dose => ({
+            code: dose.code,
+            label: dose.label,
             data: {
                 pregnant: {
-                    Static: 25,
-                    Outreach: 15
+                    Static: Number(latestData[dose.pregKey] || 0),
+                    Outreach: 0
                 },
                 nonPregnant: {
-                    Static: 30,
-                    Outreach: 20,
-                    School: 40
+                    Static: Number(latestData[dose.nonPregKey] || 0),
+                    Outreach: 0,
+                    School: 0
                 }
             }
-        },
-        {
-            code: "TD02",
-            label: "Td2-Dose 2",
-            data: {
-                pregnant: {
-                    Static: 20,
-                    Outreach: 12
-                },
-                nonPregnant: {
-                    Static: 25,
-                    Outreach: 18,
-                    School: 35
-                }
-            }
-        },
-        {
-            code: "TD03",
-            label: "Td3-Dose 3",
-            data: {
-                pregnant: {
-                    Static: 18,
-                    Outreach: 10
-                },
-                nonPregnant: {
-                    Static: 22,
-                    Outreach: 15,
-                    School: 30
-                }
-            }
-        },
-        {
-            code: "TD04",
-            label: "Td4-Dose 4",
-            data: {
-                pregnant: {
-                    Static: 15,
-                    Outreach: 8
-                },
-                nonPregnant: {
-                    Static: 20,
-                    Outreach: 12,
-                    School: 25
-                }
-            }
-        },
-        {
-            code: "TD05",
-            label: "Td5-Dose 5",
-            data: {
-                pregnant: {
-                    Static: 12,
-                    Outreach: 6
-                },
-                nonPregnant: {
-                    Static: 18,
-                    Outreach: 10,
-                    School: 20
-                }
-            }
-        }
-    ];
+        }));
+    };
 
     useEffect(() => {
-        // Simulate API call with mock data
-        const simulateApiCall = () => {
-            setTimeout(() => {
-                try {
-                    setTetanusData(mockTetanusData);
-                    setLoading(false);
-                } catch (err) {
-                    setError("Error processing data");
-                    setLoading(false);
-                }
-            }, 1000);
+        const fetchTetanusData = async () => {
+            if (!selectedMonth) return;
+            
+            try {
+                setLoading(true);
+                const monthNumber = getMonthNumber(selectedMonth);
+                const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
+                
+                const response = await API.get(`/tetanus?report_month=${formattedMonth}`);
+                const transformedData = transformApiData(response.data);
+                setTetanusData(transformedData);
+                setError(null);
+            } catch (err) {
+                console.error('Error fetching tetanus data:', err);
+                setError(err.message || "Error fetching tetanus data");
+            } finally {
+                setLoading(false);
+            }
         };
 
-        simulateApiCall();
-    }, []);
-
-    const handleTetanusInputChange = (doseCode, category, servicePoint, value) => {
-        setTetanusData(prevData => {
-            return prevData.map(dose => {
-                if (dose.code === doseCode) {
-                    return {
-                        ...dose,
-                        data: {
-                            ...dose.data,
-                            [category]: {
-                                ...dose.data[category],
-                                [servicePoint]: value
-                            }
-                        }
-                    };
-                }
-                return dose;
-            });
-        });
-    };
+        fetchTetanusData();
+    }, [selectedMonth, selectedYear, getMonthNumber]);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error}</div>;
@@ -155,46 +92,41 @@ const Tetanus = () => {
                             <td>
                                 <input
                                     type="number"
-                                    min="0"
                                     className="form-control form-control-sm"
-                                    value={dose.data.pregnant.Static || ''}
-                                    onChange={(e) => handleTetanusInputChange(dose.code, 'pregnant', 'Static', e.target.value)}
+                                    value={dose.data.pregnant.Static || 0}
+                                    readOnly
                                 />
                             </td>
                             <td>
                                 <input
                                     type="number"
-                                    min="0"
                                     className="form-control form-control-sm"
-                                    value={dose.data.pregnant.Outreach || ''}
-                                    onChange={(e) => handleTetanusInputChange(dose.code, 'pregnant', 'Outreach', e.target.value)}
+                                    value={dose.data.pregnant.Outreach || 0}
+                                    readOnly
                                 />
                             </td>
                             <td>
                                 <input
                                     type="number"
-                                    min="0"
                                     className="form-control form-control-sm"
-                                    value={dose.data.nonPregnant.Static || ''}
-                                    onChange={(e) => handleTetanusInputChange(dose.code, 'nonPregnant', 'Static', e.target.value)}
+                                    value={dose.data.nonPregnant.Static || 0}
+                                    readOnly
                                 />
                             </td>
                             <td>
                                 <input
                                     type="number"
-                                    min="0"
                                     className="form-control form-control-sm"
-                                    value={dose.data.nonPregnant.Outreach || ''}
-                                    onChange={(e) => handleTetanusInputChange(dose.code, 'nonPregnant', 'Outreach', e.target.value)}
+                                    value={dose.data.nonPregnant.Outreach || 0}
+                                    readOnly
                                 />
                             </td>
                             <td>
                                 <input
                                     type="number"
-                                    min="0"
                                     className="form-control form-control-sm"
-                                    value={dose.data.nonPregnant.School || ''}
-                                    onChange={(e) => handleTetanusInputChange(dose.code, 'nonPregnant', 'School', e.target.value)}
+                                    value={dose.data.nonPregnant.School || 0}
+                                    readOnly
                                 />
                             </td>
                         </tr>

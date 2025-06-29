@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import API from '../../../helpers/api';
 
-const ChildHealth = () => {
+const ChildHealth = ({ selectedMonth, getMonthNumber, selectedYear }) => {
     const [vaccines, setVaccines] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -15,118 +15,67 @@ const ChildHealth = () => {
 
     const servicePoints = ["Static", "Outreach", "In school"];
 
-    // Simulated API response data
-    const mockData = [
-        {
-            report_month: "2024-03",
-            section_id: "2.3",
-            section_name: "Child Health",
-            hmis_code: "CH01",
-            hmis_name: "Vit A supplement (1st dose)",
-            "0-5m_male": 45,
-            "0-5m_female": 52,
-            "6-11m_male": 38,
-            "6-11m_female": 41,
-            "12-59m_male": 65,
-            "12-59m_female": 58,
-            "5-14y_male": 0,
-            "5-14y_female": 0,
-            service_point: "Static"
-        },
-        {
-            report_month: "2024-03",
-            section_id: "2.3",
-            section_name: "Child Health",
-            hmis_code: "CH01",
-            hmis_name: "Vit A supplement (1st dose)",
-            "0-5m_male": 25,
-            "0-5m_female": 28,
-            "6-11m_male": 22,
-            "6-11m_female": 24,
-            "12-59m_male": 35,
-            "12-59m_female": 32,
-            "5-14y_male": 0,
-            "5-14y_female": 0,
-            service_point: "Outreach"
-        },
-        {
-            report_month: "2024-03",
-            section_id: "2.3",
-            section_name: "Child Health",
-            hmis_code: "CH02",
-            hmis_name: "Vit A supplement (2nd dose)",
-            "0-5m_male": 0,
-            "0-5m_female": 0,
-            "6-11m_male": 42,
-            "6-11m_female": 45,
-            "12-59m_male": 55,
-            "12-59m_female": 58,
-            "5-14y_male": 0,
-            "5-14y_female": 0,
-            service_point: "Static"
-        },
-        {
-            report_month: "2024-03",
-            section_id: "2.3",
-            section_name: "Child Health",
-            hmis_code: "CH03",
-            hmis_name: "Dewormed (1st dose)",
-            "0-5m_male": 0,
-            "0-5m_female": 0,
-            "6-11m_male": 35,
-            "6-11m_female": 38,
-            "12-59m_male": 48,
-            "12-59m_female": 52,
-            "5-14y_male": 62,
-            "5-14y_female": 58,
-            service_point: "Static"
-        },
-        {
-            report_month: "2024-03",
-            section_id: "2.3",
-            section_name: "Child Health",
-            hmis_code: "CH04",
-            hmis_name: "Dewormed (2nd dose)",
-            "0-5m_male": 0,
-            "0-5m_female": 0,
-            "6-11m_male": 32,
-            "6-11m_female": 35,
-            "12-59m_male": 45,
-            "12-59m_female": 48,
-            "5-14y_male": 58,
-            "5-14y_female": 55,
-            service_point: "Static"
-        }
-    ];
-
     useEffect(() => {
-        // Simulate API call with mock data
-        const simulateApiCall = () => {
-            setTimeout(() => {
-                try {
-                    // Group the mock data by vaccine (hmis_code)
-                    const groupedData = mockData.reduce((acc, curr) => {
-                        if (!acc[curr.hmis_code]) {
-                            acc[curr.hmis_code] = {
-                                code: curr.hmis_code,
-                                label: curr.hmis_name,
-                                data: {}
-                            };
+        const fetchData = async () => {
+            if (!selectedMonth || !selectedYear) return;
+            
+            try {
+                setLoading(true);
+                const monthNumber = getMonthNumber(selectedMonth);
+                const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
+                
+                const response = await API.get(`/immunization/child?report_month=${formattedMonth}`);
+                
+                // Transform API data to match the component's structure
+                const transformedData = response.data.map(item => ({
+                    code: item.vaccine_id,
+                    label: item.vaccine_name,
+                    data: {
+                        Static: {
+                            "0-5m_male": item["0-5m Male"] || "0",
+                            "0-5m_female": item["0-5m Female"] || "0",
+                            "6-11m_male": item["6-11m Male"] || "0",
+                            "6-11m_female": item["6-11m Female"] || "0",
+                            "12-59m_male": item["12-59m Male"] || "0",
+                            "12-59m_female": item["12-59m Female"] || "0",
+                            "5-14y_male": item["5-14y Male"] || "0",
+                            "5-14y_female": item["5-14y Female"] || "0"
+                        },
+                        Outreach: {
+                            "0-5m_male": "0",
+                            "0-5m_female": "0",
+                            "6-11m_male": "0",
+                            "6-11m_female": "0",
+                            "12-59m_male": "0",
+                            "12-59m_female": "0",
+                            "5-14y_male": "0",
+                            "5-14y_female": "0"
+                        },
+                        "In school": {
+                            "0-5m_male": "0",
+                            "0-5m_female": "0",
+                            "6-11m_male": "0",
+                            "6-11m_female": "0",
+                            "12-59m_male": "0",
+                            "12-59m_female": "0",
+                            "5-14y_male": "0",
+                            "5-14y_female": "0"
                         }
-                        acc[curr.hmis_code].data[curr.service_point] = curr;
-                        return acc;
-                    }, {});
-                    setVaccines(Object.values(groupedData));
-                    setLoading(false);
-                } catch (err) {
-                    setError("Error processing data");
-                    setLoading(false);
-                }
-            }, 1000);
+                    }
+                }));
+                
+                setVaccines(transformedData);
+                setError(null);
+            } catch (err) {
+                console.error('Error fetching child immunization data:', err);
+                setError("Error fetching data");
+            } finally {
+                setLoading(false);
+            }
         };
 
-        simulateApiCall();
-    }, []);
+        fetchData();
+    }, [selectedMonth, selectedYear, getMonthNumber]);
 
     const handleInputChange = (vaccineCode, servicePoint, ageGroup, gender, value) => {
         setVaccines(prevVaccines => {
