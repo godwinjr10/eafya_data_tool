@@ -125,4 +125,49 @@ router.get('/stats/overview', async (req, res) => {
     }
 });
 
+// Get child health vaccines data
+router.get('/child-health/vaccines', async (req, res) => {
+    try {
+        const { report_month } = req.query;
+        
+        let query = `
+            SELECT 
+                v.report_month,
+                m.section_id,
+                m.section_name,
+                m.hmis_code,
+                m.hmis_name,
+                v."0-5m_male",
+                v."0-5m_female",
+                v."6-11m_male",
+                v."6-11m_female",
+                v."12-59m_male",
+                v."12-59m_female",
+                v."5-14y_male",
+                v."5-14y_female",
+                v.service_point
+            FROM reporting."105_03_child_vaccines" v
+            JOIN reporting.dhis_eafya_mapping_child_health m 
+            ON v.vaccine_id = m.eafya_vaccine_id
+            WHERE section_id = '2.3'
+        `;
+
+        const params = [];
+        let paramCount = 1;
+
+        if (report_month) {
+            query += ` AND v.report_month = $${paramCount}`;
+            params.push(report_month);
+            paramCount++;
+        }
+
+        query += ` ORDER BY v.report_month DESC, m.hmis_code`;
+
+        const { rows } = await pool.query(query, params);
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 export default router; 
