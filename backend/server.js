@@ -26,6 +26,7 @@ import antenatalMappingRoutes from "./routes/mappings/antenatalMapping.js";
 import antenatalRoutes from './routes/antenatal.js';
 import tetanusRoutes from './routes/tetanus.js';
 import immunizationRoutes from './routes/immunization.js';
+import downloadRoutes from './routes/downloads.js';
 
 dotenv.config();
 
@@ -152,6 +153,7 @@ app.use('/api/attendance', attendanceRoutes);
 app.use('/api/antenatal', antenatalRoutes);
 app.use('/api/tetanus', tetanusRoutes);
 app.use('/api/immunization', immunizationRoutes);
+app.use('/api/downloads', downloadRoutes);
 
 // Error handling middleware
 app.use(
