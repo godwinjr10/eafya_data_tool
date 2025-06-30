@@ -62,7 +62,7 @@ class ConditionsMapping {
         hmis_name,
         data_element_id,
         category_optioncombo_id,
-        category_optioncombo_name
+        category_optioncombo_name,
       } = updateData;
 
       const query = `
@@ -82,33 +82,45 @@ class ConditionsMapping {
         RETURNING *
       `;
 
-      const { rows } = await pool.query(query, [
-        id,
-        eafya_id,
-        eafya_name,
-        section_id,
-        section_name,
-        hmis_code,
-        hmis_name,
-        data_element_id,
-        category_optioncombo_id,
-        category_optioncombo_name
-      ]);
+      const { rows } =
+        await pool.query(
+          query,
+          [
+            id,
+            eafya_id,
+            eafya_name,
+            section_id,
+            section_name,
+            hmis_code,
+            hmis_name,
+            data_element_id,
+            category_optioncombo_id,
+            category_optioncombo_name,
+          ]
+        );
 
       return rows[0];
     } catch (error) {
-      throw new Error(`Error updating conditions mapping: ${error.message}`);
+      throw new Error(
+        `Error updating conditions mapping: ${error.message}`
+      );
     }
   }
 
   // Bulk update multiple mappings
-  static async bulkUpdate(mappings) {
-    const client = await pool.connect();
+  static async bulkUpdate(
+    mappings
+  ) {
+    const client =
+      await pool.connect();
     try {
-      await client.query('BEGIN');
-      
-      const updatedMappings = [];
-      
+      await client.query(
+        "BEGIN"
+      );
+
+      const updatedMappings =
+        [];
+
       for (const mapping of mappings) {
         const {
           id,
@@ -120,7 +132,7 @@ class ConditionsMapping {
           hmis_name,
           data_element_id,
           category_optioncombo_id,
-          category_optioncombo_name
+          category_optioncombo_name,
         } = mapping;
 
         const query = `
@@ -140,29 +152,41 @@ class ConditionsMapping {
           RETURNING *
         `;
 
-        const { rows } = await client.query(query, [
-          id,
-          eafya_id,
-          eafya_name,
-          section_id,
-          section_name,
-          hmis_code,
-          hmis_name,
-          data_element_id,
-          category_optioncombo_id,
-          category_optioncombo_name
-        ]);
+        const { rows } =
+          await client.query(
+            query,
+            [
+              id,
+              eafya_id,
+              eafya_name,
+              section_id,
+              section_name,
+              hmis_code,
+              hmis_name,
+              data_element_id,
+              category_optioncombo_id,
+              category_optioncombo_name,
+            ]
+          );
 
         if (rows[0]) {
-          updatedMappings.push(rows[0]);
+          updatedMappings.push(
+            rows[0]
+          );
         }
       }
 
-      await client.query('COMMIT');
+      await client.query(
+        "COMMIT"
+      );
       return updatedMappings;
     } catch (error) {
-      await client.query('ROLLBACK');
-      throw new Error(`Error bulk updating conditions mappings: ${error.message}`);
+      await client.query(
+        "ROLLBACK"
+      );
+      throw new Error(
+        `Error bulk updating conditions mappings: ${error.message}`
+      );
     } finally {
       client.release();
     }
