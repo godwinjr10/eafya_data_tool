@@ -23,6 +23,9 @@ import postnatalMappingRoutes from "./routes/mappings/postnatalMapping.js";
 import maternityMappingRoutes from "./routes/mappings/maternityMapping.js";
 import familyplanningMappingRoutes from "./routes/mappings/familyplanningMapping.js";
 import antenatalMappingRoutes from "./routes/mappings/antenatalMapping.js";
+import antenatalRoutes from './routes/antenatal.js';
+import tetanusRoutes from './routes/tetanus.js';
+import immunizationRoutes from './routes/immunization.js';
 
 dotenv.config();
 
@@ -137,6 +140,18 @@ app.use(
   "/api/attendance",
   attendanceRoutes
 );
+app.use('/api/hmis', hmisRoutes);
+app.use("/api/users", userRoutes);
+app.use('/api/labtests', labTestRoutes);
+app.use('/api/datasets', datasetRoutes);
+app.use('/api/facility', FacilityRoutes);
+app.use('/api/conditions', conditionRoutes);
+app.use('/api/commodities', commoditiesRoutes);
+app.use('/api/mappings', dhisEafyaMappingRoutes);
+app.use('/api/attendance', attendanceRoutes);
+app.use('/api/antenatal', antenatalRoutes);
+app.use('/api/tetanus', tetanusRoutes);
+app.use('/api/immunization', immunizationRoutes);
 
 // Error handling middleware
 app.use(
