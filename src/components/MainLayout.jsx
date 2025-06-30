@@ -55,7 +55,7 @@ const MainLayout = ({ children }) => {
     <div className="dhis2-layout">
       <aside className="dhis2-sidebar">
         <div className="p-3">
-          <h5 className="mb-3">eAFYA Data Platform</h5>
+          <h5 className="mb-3">eAFYA Data Mining Tool</h5>
 
           <div className="mt-4">
             <ul className="nav nav-pills flex-column">
