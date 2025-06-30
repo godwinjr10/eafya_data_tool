@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Nav } from 'react-bootstrap';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line, ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
 import '../../styles/dhis2.css';
+import API from "../../helpers/api";
+
 
 const dashboardTabs = [
   { id: 'opd', title: 'Outpatient Dashboard', active: true  },
@@ -930,6 +932,27 @@ const Dashboard = () => {
   const [activeTab, setActiveTab] = useState('opd');
   const [chartWidth, setChartWidth] = useState(500);
   const chartContainerRef = useRef(null);
+  const [admissionTrendData, setAdmissionTrendData] = useState([]);
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+
+  useEffect(() => {
+    const fetchAdmissionTrend = async () => {
+      try {
+        const res = await API.get('/dashboard'); // Backend endpoint
+        const formatted = res.data.map(item => ({
+          month: monthNames[item.month - 1],
+          total: item.total,
+        }));
+        setAdmissionTrendData(formatted);
+      } catch (err) {
+        console.error("Error fetching admission trend data:", err);
+      }
+    };
+
+    fetchAdmissionTrend();
+  }, []);
+
 
   useEffect(() => {
     const updateChartWidth = () => {
@@ -1340,28 +1363,27 @@ const Dashboard = () => {
 
       {/* Charts First Row */}
       <div className="row">
-        <div className="col-md-8">
-          <div className="card mb-4">
-            <div className="card-body">
-              <h5 className="card-title">OPD Visits Trend</h5>
-              <ResponsiveContainer width="100%" height={300}>
-                <BarChart
-                  data={opdVisitsData}
-                  margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
-                >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis dataKey="month" angle={-45} textAnchor="end" height={60} />
-                  <YAxis />
-                  <Tooltip />
-                  <Legend />
-                  <Bar dataKey="newVisits" fill="#2ecc71" name="New Visits" />
-                  <Bar dataKey="revisits" fill="#3498db" name="Revisits" />
-                  <Bar dataKey="referrals" fill="#e74c3c" name="Referrals" />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
+      <div className="col-md-8">
+        <div className="card mb-4">
+          <div className="card-body">
+            <h5 className="card-title">Monthly Admissions Trend</h5>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart
+                data={admissionTrendData}
+                margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
+              >
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="month" angle={-45} textAnchor="end" height={60} />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="total" fill="#3b82f6" name="Total Admissions" />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </div>
+      </div>
+
         <div className="col-md-4">
           <div className="card mb-4">
             <div className="card-body">
