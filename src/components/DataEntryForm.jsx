@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import API from "../helpers/api";
 import '../styles/dhis2.css';
+import ConditionsReport from './ConditionsReport';
+import CommoditiesReport from './CommoditiesReport';
+import LabReport from './LabReport';
 
 import MCHForm from '../pages/HMIS/MCH';
 import LabTestForm from '../pages/HMIS/LabTestForm';
@@ -12,10 +15,34 @@ const months = [
   'July', 'August', 'September', 'October', 'November', 'December'
 ];
 
-const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
+// Define report configurations
+const REPORT_CONFIGS = {
+  'HMIS_105_01': {
+    endpoint: '/downloads/conditions',
+    component: ConditionsReport,
+    title: 'Conditions Report'
+  },
+  'HMIS_105_02': {
+    endpoint: '/downloads/mch',
+    component: null, // Add MCH report component when ready
+    title: 'MCH Report'
+  },
+  'HMIS_105_06': {
+    endpoint: '/downloads/commodities',
+    component: CommoditiesReport,
+    title: 'Commodities Report'
+  },
+  'HMIS_105_10': {
+    endpoint: '/downloads/labtests',
+    component: LabReport,
+    title: 'Lab Tests Report'
+  }
+};
 
+const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
   const [loading, setLoading] = useState(false);
   const [datasets, setDatasets] = useState([]);
+  const [reportProps, setReportProps] = useState(null);
 
   const currentDate = new Date();
   const [selectedMonth, setSelectedMonth] = useState(months[currentDate.getMonth()]);
@@ -23,16 +50,55 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
 
   const fetchDatasets = async () => {
     try {
-        const response = await API.get('/datasets');
-        setDatasets(response.data.datasets);
+      const response = await API.get('/datasets');
+      setDatasets(response.data.datasets);
     } catch (error) {
-        console.error('Error fetching hierarchy levels:', error);
+      console.error('Error fetching hierarchy levels:', error);
     }
-};
+  };
 
-useEffect(() => {
-  fetchDatasets();
-}, []);
+  useEffect(() => {
+    fetchDatasets();
+  }, []);
+
+  const handlePrintReport = async () => {
+    const reportConfig = REPORT_CONFIGS[dataSetId];
+    
+    if (!reportConfig || !reportConfig.component) {
+      alert('Report generation not yet implemented for this section');
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const monthIndex = months.indexOf(selectedMonth) + 1;
+      const formattedMonth = monthIndex.toString().padStart(2, '0');
+      const reportMonth = `${selectedYear}${formattedMonth}`;
+
+      const response = await API.get(`${reportConfig.endpoint}?report_month=${reportMonth}`);
+      
+      setReportProps({
+        data: response.data,
+        reportMonth: reportMonth,
+        type: dataSetId
+      });
+    } catch (error) {
+      console.error('Error fetching report data:', error);
+      alert('Failed to generate report');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Effect to clean up reportProps after PDF is generated
+  useEffect(() => {
+    if (reportProps) {
+      const timer = setTimeout(() => {
+        setReportProps(null);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [reportProps]);
 
   const renderFormHeader = () => (
     <div className="report-selector mb-4">
@@ -57,12 +123,15 @@ useEffect(() => {
               <i className="bi bi-check2-circle me-2"></i>
               Push To DHIS2
             </button>
-            <button className="btn btn-secondary">
+            <button 
+              className="btn btn-secondary" 
+              onClick={handlePrintReport}
+              disabled={loading}
+            >
               <i className="bi bi-printer me-2"></i>
-              Print Report
+              {loading ? 'Generating...' : 'Print Report'}
             </button>
           </div>
-
         </div>
       </div>
       <div className="row">
@@ -123,10 +192,58 @@ useEffect(() => {
     }
   };
 
+  const renderReport = () => {
+    if (!reportProps) return null;
+
+    const ReportComponent = REPORT_CONFIGS[reportProps.type]?.component;
+    if (!ReportComponent) return null;
+
+    return (
+      <div style={{ display: 'none' }}>
+        <ReportComponent 
+          data={reportProps.data} 
+          reportMonth={reportProps.reportMonth} 
+        />
+      </div>
+    );
+  };
+
   return (
     <div>
       {renderFormHeader()}
       {renderFormContent()}
+      {renderReport()}
+      {loading && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          zIndex: 9999,
+        }}>
+          <div style={{
+            width: '50px',
+            height: '50px',
+            border: '5px solid #f3f3f3',
+            borderTop: '5px solid #3498db',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+          }}></div>
+          <div style={{
+            marginTop: '20px',
+            fontSize: '16px',
+            color: '#333',
+          }}>
+            Generating Report...
+          </div>
+        </div>
+      )}
     </div>
   );
 };
