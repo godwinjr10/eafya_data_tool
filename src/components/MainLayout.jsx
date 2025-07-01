@@ -30,7 +30,7 @@ const MainLayout = ({ children }) => {
   }, []);
 
   const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: 'speedometer2', path: '/' },
+    { id: 'dashboard', label: 'Dashboard', icon: 'speedometer2', path: '/dashboard' },
     { id: 'hmis', label: 'HMIS Reports', icon: 'file-earmark-text', path: '/hmis' },
     { id: 'hmis', label: 'DHIS2 Mapping', icon: 'map', path: '/mapping' },
     { id: 'opd', label: 'Outpatient', icon: 'person-walking', path: '/outpatient' },
