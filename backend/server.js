@@ -27,6 +27,8 @@ import antenatalRoutes from './routes/antenatal.js';
 import tetanusRoutes from './routes/tetanus.js';
 import immunizationRoutes from './routes/immunization.js';
 import downloadRoutes from './routes/downloads.js';
+import outpatientRoutes from './routes/reports/outpatient.js';
+import commoditiesReportRoutes from './routes/reports/commodities.js';
 
 dotenv.config();
 
@@ -154,6 +156,8 @@ app.use('/api/antenatal', antenatalRoutes);
 app.use('/api/tetanus', tetanusRoutes);
 app.use('/api/immunization', immunizationRoutes);
 app.use('/api/downloads', downloadRoutes);
+app.use('/api/outpatient', outpatientRoutes);
+app.use('/api/commodities/report', commoditiesReportRoutes);
 
 // Error handling middleware
 app.use(
