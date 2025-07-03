@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { format, subDays } from 'date-fns';
 import ReportHeader from '../../components/ReportHeader';
 import YearStockReport from './YearStockBalance';
-import OrderFufillment from './OrderFufillment';
+import OrderFufillment from './StockMovement';
 import api from '../../helpers/api';
 
 const SupplyChain = () => {
