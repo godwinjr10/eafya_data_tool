@@ -29,6 +29,7 @@ import immunizationRoutes from './routes/immunization.js';
 import downloadRoutes from './routes/downloads.js';
 import outpatientRoutes from './routes/reports/outpatient.js';
 import commoditiesReportRoutes from './routes/reports/commodities.js';
+import dashboardRoutes from './routes/dashboard.js';
 
 dotenv.config();
 
@@ -158,6 +159,7 @@ app.use('/api/immunization', immunizationRoutes);
 app.use('/api/downloads', downloadRoutes);
 app.use('/api/outpatient', outpatientRoutes);
 app.use('/api/commodities/report', commoditiesReportRoutes);
+app.use('/api/dashboard',dashboardRoutes)
 
 // Error handling middleware
 app.use(
