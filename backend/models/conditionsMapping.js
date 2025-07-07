@@ -33,8 +33,8 @@ class ConditionsMapping {
             "data_element_id",
             "category_optioncombo_id",
             "category_optioncombo_name",
-            '"createdAt"',
-            '"updatedAt"',
+            "createdAt",
+            "updatedAt",
           ],
           orderBy:
             "section_id, hmis_code",
