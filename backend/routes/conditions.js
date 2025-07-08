@@ -34,7 +34,6 @@ router.get('/', async (req, res) => {
         INNER JOIN reporting.hmis_eafya_mapping m ON m.eafya_disease_id = c.disease_id
         INNER JOIN reporting.dhis_eafya_mapping_conditions e
                    ON e.eafya_hmis_id IS NOT NULL
-                       AND e.eafya_hmis_id <> ''
                        AND CAST(e.eafya_hmis_id AS int) = m.hmis_code
         WHERE e.section_id = $1
         `;
