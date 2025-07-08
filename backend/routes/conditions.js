@@ -31,8 +31,11 @@ router.get('/', async (req, res) => {
             c."20y+ Male" AS "20y_plus_male",
             c."20y+ Female" AS "20y_plus_female"
         FROM reporting."105_01_conditions" c
-        INNER JOIN reporting.hmis_eafya_mapping m ON m.eafya_disease_id = c.disease_id 
-        INNER JOIN reporting.dhis_eafya_mapping_conditions e ON CAST(e.eafya_hmis_id AS int) = m.hmis_code
+        INNER JOIN reporting.hmis_eafya_mapping m ON m.eafya_disease_id = c.disease_id
+        INNER JOIN reporting.dhis_eafya_mapping_conditions e
+                   ON e.eafya_hmis_id IS NOT NULL
+                       AND e.eafya_hmis_id <> ''
+                       AND CAST(e.eafya_hmis_id AS int) = m.hmis_code
         WHERE e.section_id = $1
         `;
 
