@@ -33,8 +33,8 @@ class ConditionsMapping {
             "data_element_id",
             "category_optioncombo_id",
             "category_optioncombo_name",
-            "createdAt",
-            "updatedAt",
+            "createdat",
+            "updatedat",
           ],
           orderBy:
             "section_id, hmis_code",
@@ -77,7 +77,7 @@ class ConditionsMapping {
           data_element_id = $8,
           category_optioncombo_id = $9,
           category_optioncombo_name = $10,
-          "updatedAt" = NOW()
+          "updatedat" = NOW()
         WHERE id = $1
         RETURNING *
       `;
@@ -147,7 +147,7 @@ class ConditionsMapping {
             data_element_id = $8,
             category_optioncombo_id = $9,
             category_optioncombo_name = $10,
-            "updatedAt" = NOW()
+            "updatedat" = NOW()
           WHERE id = $1
           RETURNING *
         `;
