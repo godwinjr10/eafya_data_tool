@@ -23,14 +23,15 @@ import postnatalMappingRoutes from "./routes/mappings/postnatalMapping.js";
 import maternityMappingRoutes from "./routes/mappings/maternityMapping.js";
 import familyplanningMappingRoutes from "./routes/mappings/familyplanningMapping.js";
 import antenatalMappingRoutes from "./routes/mappings/antenatalMapping.js";
-import antenatalRoutes from './routes/antenatal.js';
-import tetanusRoutes from './routes/tetanus.js';
-import immunizationRoutes from './routes/immunization.js';
-import downloadRoutes from './routes/downloads.js';
-import outpatientRoutes from './routes/reports/outpatient.js';
-import commoditiesReportRoutes from './routes/reports/commodities.js';
-import dashboardRoutes from './routes/dashboard.js';
-
+import antenatalRoutes from "./routes/antenatal.js";
+import tetanusRoutes from "./routes/tetanus.js";
+import immunizationRoutes from "./routes/immunization.js";
+import downloadRoutes from "./routes/downloads.js";
+import outpatientRoutes from "./routes/reports/outpatient.js";
+import commoditiesReportRoutes from "./routes/reports/commodities.js";
+import dashboardRoutes from "./routes/dashboard.js";
+import AllMappingsRoutes from "./routes/mappings/allMappings.js";
+import ItemsMappedRoutes from "./routes/mappings/itemsMapped.js";
 dotenv.config();
 
 const app = express();
@@ -144,22 +145,78 @@ app.use(
   "/api/attendance",
   attendanceRoutes
 );
-app.use('/api/hmis', hmisRoutes);
-app.use("/api/users", userRoutes);
-app.use('/api/labtests', labTestRoutes);
-app.use('/api/datasets', datasetRoutes);
-app.use('/api/facility', FacilityRoutes);
-app.use('/api/conditions', conditionRoutes);
-app.use('/api/commodities', commoditiesRoutes);
-app.use('/api/mappings', dhisEafyaMappingRoutes);
-app.use('/api/attendance', attendanceRoutes);
-app.use('/api/antenatal', antenatalRoutes);
-app.use('/api/tetanus', tetanusRoutes);
-app.use('/api/immunization', immunizationRoutes);
-app.use('/api/downloads', downloadRoutes);
-app.use('/api/outpatient', outpatientRoutes);
-app.use('/api/commodities/report', commoditiesReportRoutes);
-app.use('/api/dashboard',dashboardRoutes)
+app.use(
+  "/api/hmis",
+  hmisRoutes
+);
+app.use(
+  "/api/users",
+  userRoutes
+);
+app.use(
+  "/api/labtests",
+  labTestRoutes
+);
+app.use(
+  "/api/datasets",
+  datasetRoutes
+);
+app.use(
+  "/api/facility",
+  FacilityRoutes
+);
+app.use(
+  "/api/conditions",
+  conditionRoutes
+);
+app.use(
+  "/api/commodities",
+  commoditiesRoutes
+);
+app.use(
+  "/api/mappings",
+  dhisEafyaMappingRoutes
+);
+app.use(
+  "/api/attendance",
+  attendanceRoutes
+);
+app.use(
+  "/api/antenatal",
+  antenatalRoutes
+);
+app.use(
+  "/api/tetanus",
+  tetanusRoutes
+);
+app.use(
+  "/api/immunization",
+  immunizationRoutes
+);
+app.use(
+  "/api/downloads",
+  downloadRoutes
+);
+app.use(
+  "/api/outpatient",
+  outpatientRoutes
+);
+app.use(
+  "/api/commodities/report",
+  commoditiesReportRoutes
+);
+app.use(
+  "/api/dashboard",
+  dashboardRoutes
+);
+app.use(
+  "/api/elements",
+  AllMappingsRoutes
+);
+app.use(
+  "/api/mapItems",
+  ItemsMappedRoutes
+);
 
 // Error handling middleware
 app.use(
