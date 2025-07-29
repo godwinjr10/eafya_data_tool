@@ -8,19 +8,37 @@ export const SectionItemDetails =
     item,
     handleSectionItemClick,
     fetchItemsCount,
-    selectedSectionItem
+    selectedSectionItem,
   }) => {
     const [count, setCount] =
       useState(null);
 
     useEffect(() => {
       let mounted = true;
-      fetchItemsCount(
-        item.id
-      ).then((c) => {
-        if (mounted)
-          setCount(c);
-      });
+      fetchItemsCount(item.id)
+        .then((response) => {
+          if (mounted) {
+            // Extract the count number from the response object
+            const countValue =
+              response &&
+              response.count !==
+                undefined
+                ? response.count
+                : 0;
+            setCount(
+              countValue
+            );
+          }
+        })
+        .catch((error) => {
+          console.error(
+            "Error fetching count:",
+            error
+          );
+          if (mounted) {
+            setCount(0);
+          }
+        });
       return () => {
         mounted = false;
       };
@@ -37,10 +55,14 @@ export const SectionItemDetails =
           fontSize: "11px",
           borderBottom:
             "1px solid #f1f1f1",
-          backgroundColor: selectedSectionItem?.id === item.id ? "#E8F4F8" :
-            "#fafafa",
+          backgroundColor:
+            selectedSectionItem?.id ===
+            item.id
+              ? "#E8F4F8"
+              : "#fafafa",
           cursor: "pointer",
-          position: "relative",
+          position:
+            "relative",
         }}
         onClick={() =>
           handleSectionItemClick(
@@ -49,18 +71,30 @@ export const SectionItemDetails =
         }
       >
         <div
-         className="flex items-center justify-between w-full"
+          className="flex items-center justify-between w-full"
           style={{
             fontWeight: "500",
             color: "#333",
           }}
         >
-          <a>
-          📄({item.hmis_code}) {item.hmis_name}{" "}
-          </a>
-         <a className={`text-decoration-none  ${count == 0 ? "text-danger" : "text-success"}`}> {count !== null
-            ? `(${count})`
-            : ""}</a>
+          <span>
+            📄(
+            {
+              item.hmis_code
+            }){" "}
+            {item.hmis_name}{" "}
+          </span>
+          <span
+            className={`text-decoration-none ${
+              count === 0
+                ? "text-danger"
+                : "text-success"
+            }`}
+          >
+            {count !== null
+              ? `(${count})`
+              : "(...)"}
+          </span>
         </div>
       </div>
     );
