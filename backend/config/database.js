@@ -30,9 +30,9 @@ pool.connect((err, client, release) => {
 
 // For Sequelize ORM
 export const sequelize = new Sequelize(
-  process.env.DB_NAME || 'reportingdb',
+  process.env.DB_NAME || 'eafyaentebbedb',
   process.env.DB_USER || 'postgres',
-  process.env.DB_PASSWORD || 'prod123Q',
+  process.env.DB_PASSWORD || 'postgres',
   {
     host: process.env.DB_HOST || 'localhost',
     port: parseInt(process.env.DB_PORT || '5432'),
