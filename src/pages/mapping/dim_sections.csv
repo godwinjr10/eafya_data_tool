@@ -1,0 +1,216 @@
+id,section_name,section_id,section_item_name,section_item_code
+1,Epidemic-Prone Diseases,1.3.1,Malaria,EP01
+2,Epidemic-Prone Diseases,1.3.1,"Suspected Malaria (fever)",EP01a
+3,Epidemic-Prone Diseases,1.3.1,"Malaria Tested (B/s & RDT)",EP01b
+4,Epidemic-Prone Diseases,1.3.1,"Malaria confirmed (B/s & RDT)",EP01c
+5,Epidemic-Prone Diseases,1.3.1,"Confirmed Malaria cases treated",EP01d
+6,Epidemic-Prone Diseases,1.3.1,"Total malaria cases treated",EP01e
+7,Epidemic-Prone Diseases,1.3.1,Acute Flaccid Paralysis,EP02
+8,Epidemic-Prone Diseases,1.3.1,"Animal Bites (suspected rabies)",EP03
+9,Epidemic-Prone Diseases,1.3.1,Cholera,EP04
+10,Epidemic-Prone Diseases,1.3.1,Dysentery,EP05
+11,Epidemic-Prone Diseases,1.3.1,Guinea Worm,EP06
+12,Epidemic-Prone Diseases,1.3.1,Measles,EP07
+13,Epidemic-Prone Diseases,1.3.1,Bacterial Meningitis,EP08
+14,Epidemic-Prone Diseases,1.3.1,Neonatal tetanus,EP09
+15,Epidemic-Prone Diseases,1.3.1,Plague,EP10
+16,Epidemic-Prone Diseases,1.3.1,Yellow Fever,EP11
+17,Epidemic-Prone Diseases,1.3.1,"Other Viral Haemorrhagic Fevers",EP12
+18,Epidemic-Prone Diseases,1.3.1,"Severe Acute Respiratory Infection (SARI)",EP13
+19,Epidemic-Prone Diseases,1.3.1,"Adverse Events Following Immunization (AEFI)",EP14
+20,Epidemic-Prone Diseases,1.3.1,Typhoid Fever,EP15
+21,Epidemic-Prone Diseases,1.3.1,"Rifampicin resistant TB cases",EP16
+22,Epidemic-Prone Diseases,1.3.1,"Other Emerging Infectious Diseases (e.g., Influenza-like illness (ILI), SARS)",EP17
+23,Epidemic-Prone Diseases,1.3.1,"COVID-19",EP18
+24,Other Infectious/Communicable Diseases,1.3.2,"Diarrhoea - Acute",CD01
+25,Other Infectious/Communicable Diseases,1.3.2,"Diarrhoea - Persistent",CD02
+26,Other Infectious/Communicable Diseases,1.3.2,"Urethral discharges",CD03
+27,Other Infectious/Communicable Diseases,1.3.2,"Genital ulcers",CD04
+28,Other Infectious/Communicable Diseases,1.3.2,"Sexually Transmitted Infection due to Sexual Gender Based Violence",CD05
+29,Other Infectious/Communicable Diseases,1.3.2,"Other Sexually Transmitted Infections",CD06
+30,Other Infectious/Communicable Diseases,1.3.2,"Urinary Tract Infections (UTI)",CD07
+31,Other Infectious/Communicable Diseases,1.3.2,"Intestinal Worms",CD08
+32,Other Infectious/Communicable Diseases,1.3.2,"Haematological Meningitis",CD09
+33,Other Infectious/Communicable Diseases,1.3.2,"Other types of meningitis",CD10
+34,Other Infectious/Communicable Diseases,1.3.2,"Cough or cold - No pneumonia",CD11
+35,Other Infectious/Communicable Diseases,1.3.2,"Pneumonia",CD12
+36,Other Infectious/Communicable Diseases,1.3.2,"Severe Pneumonia",CD13
+37,Other Infectious/Communicable Diseases,1.3.2,"Skin Diseases",CD14
+38,Other Infectious/Communicable Diseases,1.3.2,"Tetanus (over 28 days)",CD15
+39,Other Infectious/Communicable Diseases,1.3.2,"Sleeping sickness",CD16
+40,Other Infectious/Communicable Diseases,1.3.2,"Pelvic Inflammatory Disease (PID)",CD17
+41,Other Infectious/Communicable Diseases,1.3.2,"Brucellosis",CD18
+42,Other Infectious/Communicable Diseases,1.3.2,"Surgical Site Infections (SSI)",CD19
+43,Neonatal Diseases,1.3.3,"Neonatal Sepsis (0-7 days)",ND01
+44,Neonatal Diseases,1.3.3,"Neonatal Sepsis (8-28 days)",ND02
+45,Neonatal Diseases,1.3.3,"Neonatal Pneumonia (0-7 days)",ND03
+46,Neonatal Diseases,1.3.3,"Neonatal Pneumonia (8-28 days)",ND04
+47,Neonatal Diseases,1.3.3,"Neonatal Meningitis",ND05
+48,Neonatal Diseases,1.3.3,"Neonatal Jaundice",ND06
+49,Neonatal Diseases,1.3.3,"Other Neonatal Conditions",ND07
+50,Non Communicable Diseases/Conditions,1.3.4,"Sickle Cell Anaemia",NC01
+51,Non Communicable Diseases/Conditions,1.3.4,"Other Haemoglobinopathies",NC02
+52,Non Communicable Diseases/Conditions,1.3.4,"Gastro-Intestinal Disorders (non-Infective)",NC03
+53,Non Communicable Diseases/Conditions,1.3.4,"Pain Requiring Palliative Care",NC04
+54,Non Communicable Diseases/Conditions,1.3.4,"Haemophilia",NC05
+55,Non Communicable Diseases/Conditions,1.3.4,"Deep Vein Thrombosis (DVT)",NC06
+56,Oral diseases,1.3.5,"Dental Caries",OD01
+57,Oral diseases,1.3.5,"Gingivitis",OD02
+58,Oral diseases,1.3.5,"HIV-Oral lesions",OD03
+59,Oral diseases,1.3.5,"Oral Cancers",OD04
+60,Oral diseases,1.3.5,"Other Oral Conditions",OD05
+61,ENT Conditions,1.3.6,"Otitis media acute and chronic",EN01
+62,ENT Conditions,1.3.6,"Mastoiditis",EN02
+63,ENT Conditions,1.3.6,"Hearing loss",EN03
+64,ENT Conditions,1.3.6,"Rhinitis",EN04
+65,ENT Conditions,1.3.6,"Sinusitis",EN05
+66,ENT Conditions,1.3.6,"Epistaxis",EN06
+67,ENT Conditions,1.3.6,"Adenoid Hypertrophy",EN07
+68,ENT Conditions,1.3.6,"Foreign Body in nose, ear, and aero-digestive system",EN08
+69,ENT Conditions,1.3.6,"Infected pre-auricular sinuses and abscess",EN09
+70,ENT Conditions,1.3.6,"Otitis externa",EN10
+71,ENT Conditions,1.3.6,"Mastoid abscess",EN11
+72,ENT Conditions,1.3.6,"Vertigo",EN12
+73,ENT Conditions,1.3.6,"Tonsillitis",EN13
+74,ENT Conditions,1.3.6,"Tonsillar hypertrophy",EN14
+75,ENT Conditions,1.3.6,"Tinnitus",EN15
+76,ENT Conditions,1.3.6,"Head and neck cancers",EN16
+77,ENT Conditions,1.3.6,"Other ENT conditions",EN17
+78,Eye conditions,1.3.7,"Allergic conjunctivitis",EC01
+79,Eye conditions,1.3.7,"Bacterial Conjunctivitis",EC02
+80,Eye conditions,1.3.7,"Ophthalmia neonatorum",EC03
+81,Eye conditions,1.3.7,"Corneal Ulcers/Keratitis",EC04
+82,Eye conditions,1.3.7,"Un Operable Cataract (>6/60)",EC05
+83,Eye conditions,1.3.7,"Operable Cataract (<6/60)",EC06
+84,Eye conditions,1.3.7,"Refractive errors",EC07
+85,Eye conditions,1.3.7,"Glaucoma",EC08
+86,Eye conditions,1.3.7,"Trachoma",EC09
+87,Eye conditions,1.3.7,"Vitamin A Deficiency",EC10
+88,Eye conditions,1.3.7,"Diabetic Retinopathy (All stages)",EC12
+89,Eye conditions,1.3.7,"Chorioretinal, Macular & Vitreous Disorders",EC13
+90,Eye conditions,1.3.7,"Corneal scars (Non-trachomatous)",EC16
+91,Eye conditions,1.3.7,"Tumours",EC17
+92,Eye conditions,1.3.7,"Blindness",EC24
+93,Eye conditions,1.3.7,"Other eye conditions",EC25
+94,Mental Health,1.3.8,"Brief Psychotic Disorder",MH05
+95,Mental Health,1.3.8,"Schizophrenia",MH07
+96,Mental Health,1.3.8,"Bipolar Affective Disorder",MH08
+97,Mental Health,1.3.8,"Major Depressive Disorder",MH09
+98,Mental Health,1.3.8,"Anxiety - Phobic Disorders",MH10
+99,Mental Health,1.3.8,"Anxiety - Social anxiety Disorders",MH11
+100,Mental Health,1.3.8,"Anxiety - Panic Disorder",MH12
+101,Mental Health,1.3.8,"Anxiety - Generalized anxiety Disorder",MH13
+102,Mental Health,1.3.8,"Alcohol Use Disorders",MH26
+103,Mental Health,1.3.8,"Epilepsy",MH33
+104,Mental Health,1.3.8,"Other Childhood Mental Disorders",MH45
+105,Mental Health,1.3.8,"Other Adult Mental Disorders",MH46
+106,Neurological Disorders,1.3.9,"Parkinson’s disease",NE03
+107,Neurological Disorders,1.3.9,"Dementia",NE04
+108,Neurological Disorders,1.3.9,"Persons in Coma/Emergency Care",NE07
+109,Neurological Disorders,1.3.9,"Down Syndrome (DS)",NE08
+110,Neurological Disorders,1.3.9,"CP/PMLD",NE09
+111,Neurological Disorders,1.3.9,"Learning Disability",NE11
+112,Neurological Disorders,1.3.9,"Eating disorders (anorexia, bulimia, other feeding)",NE12
+113,Neurological Disorders,1.3.9,"Others",NE15
+114,Chronic respiratory diseases,1.3.10,"Chronic Obstructive Pulmonary Disease (COPD)",CR01
+115,Cancers,1.3.11,"Breast Cancer",CA01
+116,Cancers,1.3.11,"Cervical Cancer",CA02
+117,Cancers,1.3.11,"Prostate Cancer",CA03
+118,Cancers,1.3.11,"Colon Cancer",CA04
+119,Palliative,1.3.12,"Patients needing palliative care (Cancer)",PA01
+120,Palliative,1.3.12,"Patients needing palliative care (HIV/AIDS)",PA02
+121,Palliative,1.3.12,"Patients needing palliative care (Others)",PA03
+122,Palliative,1.3.12,"Patients who received palliative care (Cancer)",PA04
+123,Palliative,1.3.12,"Patients who received palliative care (HIV/AIDS)",PA05
+124,Palliative,1.3.12,"Patients who received palliative care (Others)",PA06
+125,Disabilities,1.3.14,"Individuals with difficulty in seeing",DS01
+126,Disabilities,1.3.14,"Individuals with difficulty in hearing",DS02
+127,Disabilities,1.3.14,"Individuals with difficulty in walking",DS03
+128,Disabilities,1.3.14,"Individuals with difficulty in remembering",DS04
+129,Disabilities,1.3.14,"Individuals with difficulty in self-care",DS05
+130,Disabilities,1.3.14,"Individuals with difficulty in communicating",DS06
+131,Disabilities,1.3.14,"Individuals with difficulty in learning",DS07
+132,Disabilities,1.3.14,"Individuals with difficulty in behavior",DS08
+133,Disabilities,1.3.14,"Individuals with difficulty in development",DS09
+134,Disabilities,1.3.14,"Individuals with difficulty in writing",DS10
+135,Disabilities,1.3.14,"Individuals with difficulty in self-care",DS11
+136,Disabilities,1.3.14,"Individuals with mental impairment",DS12
+137,Disabilities,1.3.14,"Individuals with emotional impairment",DS13
+138,Cardiovascular diseases,1.3.15,"Stroke/Cardiovascular Accident (CVA)",CV01
+139,Cardiovascular diseases,1.3.15,"Hypertension",CV02
+140,Cardiovascular diseases,1.3.15,"Heart failure",CV03
+141,Cardiovascular diseases,1.3.15,"Ischemic Heart Diseases",CV04
+142,Cardiovascular diseases,1.3.15,"Rheumatic Heart Diseases",CV05
+143,Cardiovascular diseases,1.3.15,"Congenital Heart Diseases",CV06
+144,Cardiovascular diseases,1.3.15,"Other Cardiovascular Diseases",CV07
+145,Renal Diseases,1.3.16,"Acute Kidney Injury",RD01
+146,Renal Diseases,1.3.16,"Acute glomerulonephritis",RD02
+147,Renal Diseases,1.3.16,"Nephrotic syndrome",RD03
+148,Renal Diseases,1.3.16,"Uncomplicated UTI",RD08
+149,Renal Diseases,1.3.16,"Complicated UTI",RD09
+150,Liver Diseases,1.3.17,"Liver Cirrhosis",LD01
+151,Liver Diseases,1.3.17,"Liver Abscess",LD02
+152,Liver Diseases,1.3.17,"Hepatitis A",LD06
+153,Liver Diseases,1.3.17,"Hepatitis B",LD07
+154,Liver Diseases,1.3.17,"Hepatitis C",LD08
+155,Liver Diseases,1.3.17,"Hepatitis D",LD09
+156,Liver Diseases,1.3.17,"Hepatitis E",LD10
+157,Endocrine and Metabolic Disorders,1.3.18,"Diabetes mellitus (Type 1)",EM01
+158,Endocrine and Metabolic Disorders,1.3.18,"Diabetes mellitus (Type 2)",EM01
+159,Endocrine and Metabolic Disorders,1.3.18,"Diabetes mellitus (Other Forms)",EM01
+160,Endocrine and Metabolic Disorders,1.3.18,"Thyroid Disease",EM02
+161,Endocrine and Metabolic Disorders,1.3.18,"Other Endocrine and Metabolic Diseases",EM03
+162,Injuries,1.3.19,"Jaw Injuries",IN01
+163,Injuries,1.3.19,"Injuries due to Gender-based violence",IN02
+164,Injuries,1.3.19,"Injuries (Trauma due to other causes)",IN03
+165,Injuries,1.3.19,"Animal bites (Domestic)",IN04a
+166,Injuries,1.3.19,"Animal bites (Wild)",IN04b
+167,Injuries,1.3.19,"Snake bites",IN05
+168,Injuries,1.3.19,"Insect bites",IN06
+169,Minor Operations in OPD,1.3.20,"Tooth extractions",MN01
+170,Minor Operations in OPD,1.3.20,"Dental Fillings",MN02
+171,Minor Operations in OPD,1.3.20,"Other Minor Operations",MN03
+172,Neglected Tropical Diseases (NTDs),1.3.21,"Leprosy",NT01
+173,Neglected Tropical Diseases (NTDs),1.3.21,"Schistosomiasis",NT02
+174,Neglected Tropical Diseases (NTDs),1.3.21,"Onchocerciasis",NT03
+175,Neglected Tropical Diseases (NTDs),1.3.21,"Lymphatic Filariasis",NT04
+176,Neglected Tropical Diseases (NTDs),1.3.21,"Buruli Ulcer",NT05
+177,Maternal conditions,1.3.22,"Malaria in pregnancy",MC01
+178,Maternal conditions,1.3.22,"Diabetes in Pregnancy",MC02
+179,Maternal conditions,1.3.22,"Obstructed labour",MC03
+180,Maternal conditions,1.3.22,"Puerperal sepsis",MC04
+181,Maternal conditions,1.3.22,"Post Traumatic Stress Disorder of Postpartum onset",MC05
+182,Maternal conditions,1.3.22,"Breast cancer (Total Screened)",MC06
+183,Maternal conditions,1.3.22,"Cervical cancer (Total Screened)",MC07
+184,Other OPD conditions,1.3.23,"Other conditions not listed above",OC01
+185,Deaths in OPD,1.3.24,"Deaths recorded in OPD",DD01
+186,Emergency Medical Services,1.3.25,"Emergency cases at the facility",EM01
+187,Emergency Medical Services,1.3.25,"Emergency cases that arrived via ambulance",EM02
+188,Emergency Medical Services,1.3.25,"Emergency cases that arrived via police vehicle",EM03
+189,Emergency Medical Services,1.3.25,"Emergency cases that arrived via private transportation",EM04
+190,TB Screening,1.3.26,"TB Screening in OPD",TB01
+191,TB Screening,1.3.26,"TB Screening in ART",TB02
+192,TB Screening,1.3.26,"TB Screening in Outreaches",TB03
+193,Leprosy services,1.3.27,"Leprosy cases registered",LP01
+194,Leprosy services,1.3.27,"Leprosy cases screened",LP02
+195,Leprosy services,1.3.27,"Leprosy cases presumed",LP03
+196,Leprosy services,1.3.27,"Leprosy cases diagnosed",LP04
+197,Nutrition Services,1.3.28,"Nutrition assessment (0-5 months)",NU01
+198,Nutrition Services,1.3.28,"Nutrition assessment (6-23 months)",NU02
+199,Nutrition Services,1.3.28,"Nutrition assessment (24-59 months)",NU03
+200,Nutrition Services,1.3.28,"Severe Acute Malnutrition (SAM)",NU04
+201,Nutrition Services,1.3.28,"Moderate Acute Malnutrition (MAM)",NU05
+202,Nutrition Services,1.3.28,"Underweight",NU06
+203,Nutrition Services,1.3.28,"Overweight/Obesity",NU07
+204,Nutrition Services,1.3.28,"SAM clients in OTC (Outpatient Therapeutic Care)",NU08
+205,Nutrition Services,1.3.28,"SAM clients discharged as cured",NU09
+206,Nutrition Services,1.3.28,"SAM clients defaulted from care",NU10
+207,Nutrition Services,1.3.28,"SAM clients who died during treatment",NU11
+208,Gender Based Violence Services,1.3.29,"Clients receiving post-GBV clinical care (Sexual Violence)",GB01
+209,Gender Based Violence Services,1.3.29,"Clients receiving post-GBV clinical care (Physical/Emotional Violence)",GB02
+210,Gender Based Violence Services,1.3.29,"SGBV survivors eligible for PEP",GB03
+211,Gender Based Violence Services,1.3.29,"SGBV survivors initiated on PEP",GB04
+212,Gender Based Violence Services,1.3.29,"SGBV survivors who completed PEP",GB05
+213,Gender Based Violence Services,1.3.29,"SGBV survivors with documented outcome (Negative)",GB06
+214,Gender Based Violence Services,1.3.29,"SGBV survivors with documented outcome (Positive)",GB07
+215,Gender Based Violence Services,1.3.29,"SGBV survivors with documented outcome (Lost to Follow-up)",GB08
