@@ -32,6 +32,7 @@ import commoditiesReportRoutes from "./routes/reports/commodities.js";
 import dashboardRoutes from "./routes/dashboard.js";
 import AllMappingsRoutes from "./routes/mappings/allMappings.js";
 import ItemsMappedRoutes from "./routes/mappings/itemsMapped.js";
+import ConditionsMappingRoutes from "./routes/conditionsMapping.js";
 dotenv.config();
 
 const app = express();
@@ -216,6 +217,10 @@ app.use(
 app.use(
   "/api/mapItems",
   ItemsMappedRoutes
+);
+app.use(
+  "/api/conditions-mapping",
+  ConditionsMappingRoutes
 );
 
 // Error handling middleware

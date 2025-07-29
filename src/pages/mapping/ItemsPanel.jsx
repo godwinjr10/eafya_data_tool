@@ -24,9 +24,9 @@ const ItemsPanel = ({
           panelHeaderStyle
         }
       >
-        Items
+        Conditions
         {selectedSection &&
-          `(${selectedSection.name})`}
+          ` (${selectedSection.name})`}
       </div>
       {renderPaginationControls()}
       <div
@@ -54,7 +54,7 @@ const ItemsPanel = ({
             }}
           >
             Select a section
-            to view items
+            to view conditions
           </div>
         ) : currentSectionItems.length ===
           0 ? (
@@ -68,8 +68,9 @@ const ItemsPanel = ({
               color: "#666",
             }}
           >
-            No items found for
-            this section
+            No conditions
+            found for this
+            section
           </div>
         ) : (
           currentSectionItems.map(
