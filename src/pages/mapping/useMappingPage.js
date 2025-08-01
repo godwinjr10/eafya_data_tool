@@ -11,6 +11,14 @@ const useMappingPage = () => {
     setSections,
   ] = useState([]);
   const [
+    labTestSections,
+    setLabTestSections,
+  ] = useState([]);
+  const [
+    commoditySections,
+    setCommoditySections,
+  ] = useState([]);
+  const [
     conditions,
     setConditions,
   ] = useState([]);
@@ -55,6 +63,7 @@ const useMappingPage = () => {
     setSelectedSectionItem,
   ] = useState(null);
 
+
   // Fetch sections from the new API
   const fetchSections =
     async () => {
@@ -77,6 +86,59 @@ const useMappingPage = () => {
           error
         );
         setSections([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const fetchLabTestSections =
+    async () => {
+      setLoading(true);
+      try {
+        const response =
+          await API.get(
+            "/conditions-mapping/labTest/sections"
+          );
+        console.log(
+          "Lab TestSections API response:",
+          response.data
+        );
+        setLabTestSections(
+          response.data || []
+        );
+      } catch (error) {
+        console.error(
+          "Error fetching lab test   sections:",
+          error
+        );
+        setLabTestSections([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+
+    const fetchCommoditySections =
+    async () => {
+      setLoading(true);
+      try {
+        const response =
+          await API.get(
+            "/conditions-mapping/commodity/sections"
+          );
+        console.log(
+          "Commodity Sections API response:",
+          response.data
+        );
+        setCommoditySections(
+          response.data || []
+        );
+      } catch (error) {
+        console.error(
+          "Error fetching commodity sections:",
+          error
+        );
+        setCommoditySections([]);
       } finally {
         setLoading(false);
       }
@@ -113,6 +175,8 @@ const useMappingPage = () => {
 
   useEffect(() => {
     fetchSections();
+    fetchCommoditySections();
+    fetchLabTestSections();
     searchItems(); // Load initial items
   }, []);
 
@@ -491,6 +555,8 @@ const useMappingPage = () => {
   return {
     // State
     sections,
+    labTestSections,
+    commoditySections,
     conditions,
     loading,
     selectedSection,

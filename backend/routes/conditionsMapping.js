@@ -10,20 +10,58 @@ router.get('/sections', async (req, res) => {
             SELECT DISTINCT 
                 section_id as id,
                 section_name as name
-            FROM reporting.dim_all_mappings
+            FROM reporting.dim_sections
             WHERE section_id IS NOT NULL 
             AND section_id != '' 
             AND section_name IS NOT NULL 
             AND section_name != ''
-            ORDER BY 
-                CASE 
-                    WHEN section_id ~ '^[0-9]+\.[0-9]+\.[0-9]+$' 
-                    THEN split_part(section_id, '.', 1)::int * 1000000 + 
-                         split_part(section_id, '.', 2)::int * 1000 + 
-                         split_part(section_id, '.', 3)::int
-                    ELSE 999999999
-                END,
-                section_id
+            AND section_id ilike '1.3%'
+         
+     
+        `;
+        const { rows } = await pool.query(query);
+        console.log(`Found ${rows.length} sections:`, rows.map(r => `${r.id}: ${r.name}`));
+        res.json(rows);
+    } catch (error) {
+        console.error('Database error in /sections:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+router.get('/labTest/sections', async (req, res) => {
+    try {
+        const query = `
+            SELECT DISTINCT 
+                section_id as id,
+                section_name as name
+            FROM reporting.dim_sections
+            WHERE section_id IS NOT NULL 
+            AND section_id != '' 
+            AND section_name IS NOT NULL 
+            AND section_name != ''
+         
+     
+        `;
+        const { rows } = await pool.query(query);
+        console.log(`Found ${rows.length} sections:`, rows.map(r => `${r.id}: ${r.name}`));
+        res.json(rows);
+    } catch (error) {
+        console.error('Database error in /sections:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+router.get('/commodity/sections', async (req, res) => {
+    try {
+        const query = `
+            SELECT DISTINCT 
+                section_id as id,
+                section_name as name
+            FROM reporting.dim_sections
+            WHERE section_id IS NOT NULL 
+            AND section_id != '' 
+            AND section_name IS NOT NULL 
+            AND section_name != ''
+            AND section_id = '6.0'
+     
         `;
         const { rows } = await pool.query(query);
         console.log(`Found ${rows.length} sections:`, rows.map(r => `${r.id}: ${r.name}`));
@@ -45,7 +83,7 @@ router.get('/sections/:sectionId/conditions', async (req, res) => {
                 section_name,
                 section_item_code as hmis_code, 
                 section_item_name as hmis_name
-            FROM reporting.dim_all_mappings
+            FROM reporting.dim_sections
             WHERE section_id = $1
             ORDER BY section_item_code
         `;
@@ -76,7 +114,7 @@ router.get('/conditions/:conditionId/mappings', async (req, res) => {
                 m.created_at,
                 m.updated_at
             FROM reporting.eafya_hmis_mappings m
-            JOIN reporting.dim_all_mappings d ON m.dim_id = d.id
+            JOIN reporting.dim_sections d ON m.dim_id = d.id
             WHERE m.dim_id = $1
             ORDER BY m.eafya_name
         `;
@@ -104,7 +142,7 @@ router.post('/conditions/:conditionId/mappings', async (req, res) => {
         // Verify the condition exists in dim table
         const dimQuery = `
             SELECT id, section_name, section_item_name 
-            FROM reporting.dim_all_mappings 
+            FROM reporting.dim_sections 
             WHERE id = $1
         `;
         const { rows: dimRows } = await pool.query(dimQuery, [conditionId]);
@@ -129,18 +167,15 @@ router.post('/conditions/:conditionId/mappings', async (req, res) => {
             return res.status(409).json({ error: 'Mapping already exists for this condition and EAFYA item' });
         }
 
-        // Insert new mapping
-        const insertQuery = `
-            INSERT INTO reporting.eafya_hmis_mappings 
-            (dim_id, eafya_id, eafya_name)
-            VALUES ($1, $2, $3)
-            RETURNING *
-        `;
+        // Import the model
+        const EafyaHmisMapping = (await import('../models/eafyaHmisMapping.js')).default;
         
-        console.log('Inserting mapping with values:', [conditionId, eafya_id, eafya_name]);
-        const { rows } = await pool.query(insertQuery, [conditionId, eafya_id, eafya_name]);
-        
-        const newMapping = rows[0];
+        // Insert new mapping using Sequelize model
+        const newMapping = await EafyaHmisMapping.create({
+            dim_id: conditionId,
+            eafya_id: eafya_id,
+            eafya_name: eafya_name
+        });
         console.log('Mapping created successfully:', newMapping);
         
         res.status(201).json({
@@ -278,7 +313,7 @@ router.get('/conditions', async (req, res) => {
                 d.section_item_code as hmis_code, 
                 d.section_item_name as hmis_name,
                 COUNT(m.id) as mapping_count
-            FROM reporting.dim_all_mappings d
+            FROM reporting.dim_sections d
             LEFT JOIN reporting.eafya_hmis_mappings m ON d.id = m.dim_id
             GROUP BY d.id, d.section_id, d.section_name, d.section_item_code, d.section_item_name
             ORDER BY d.section_id, d.section_item_code
@@ -300,7 +335,7 @@ router.get('/stats', async (req, res) => {
                 COUNT(DISTINCT m.dim_id) as mapped_conditions,
                 COUNT(m.id) as total_mappings,
                 COUNT(DISTINCT d.section_id) as total_sections
-            FROM reporting.dim_all_mappings d
+            FROM reporting.dim_sections d
             LEFT JOIN reporting.eafya_hmis_mappings m ON d.id = m.dim_id
         `;
         const { rows } = await pool.query(query);
