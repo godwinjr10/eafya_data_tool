@@ -3,7 +3,7 @@
 
 CREATE TABLE IF NOT EXISTS reporting.eafya_hmis_mappings (
     id SERIAL PRIMARY KEY,
-    dim_id INTEGER NOT NULL REFERENCES reporting.dim_all_mappings(id),
+    dim_id INTEGER NOT NULL REFERENCES reporting.dim_sections(id),
     eafya_id VARCHAR(50) NOT NULL,
     eafya_name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -32,6 +32,6 @@ CREATE TRIGGER update_eafya_hmis_mappings_updated_at
 
 -- Add comments for documentation
 COMMENT ON TABLE reporting.eafya_hmis_mappings IS 'Stores mappings between EAFYA items and HMIS dimension data';
-COMMENT ON COLUMN reporting.eafya_hmis_mappings.dim_id IS 'Foreign key to reporting.dim_all_mappings';
+COMMENT ON COLUMN reporting.eafya_hmis_mappings.dim_id IS 'Foreign key to reporting.dim_sections';
 COMMENT ON COLUMN reporting.eafya_hmis_mappings.eafya_id IS 'EAFYA item identifier';
 COMMENT ON COLUMN reporting.eafya_hmis_mappings.eafya_name IS 'EAFYA item name/description'; 

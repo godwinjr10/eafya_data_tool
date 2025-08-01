@@ -12,6 +12,8 @@ import { SectionItemDetails } from "./utils";
 const MappingPage = () => {
   const {
     sections,
+    labTestSections,
+    commoditySections,
     conditions,
     loading,
     selectedSection,
@@ -25,7 +27,7 @@ const MappingPage = () => {
     selectedSectionItem,
     handleSectionClick,
     handleSectionItemClick,
-    handleAddMappedItem,
+    handleAddMappedItem, 
     handleUpdateMappedItem,
     handleDeleteMappedItem,
     resetSelections,
@@ -75,6 +77,12 @@ const MappingPage = () => {
       <SectionPanel
         currentSections={
           sections
+        }
+        labTestSections={
+          labTestSections
+        }
+        commoditySections={
+          commoditySections
         }
         selectedSection={
           selectedSection

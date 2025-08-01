@@ -6,6 +6,8 @@ import {
   testConnection,
   sequelize,
 } from "./config/database.js";
+import DimSections from "./models/dimSections.js";
+import EafyaHmisMapping from "./models/eafyaHmisMapping.js";
 import hmisRoutes from "./routes/hmis.routes.js";
 import dhisEafyaMappingRoutes from "./routes/eafya_mapping.routes.js";
 import attendanceRoutes from "./routes/attendance.js";
