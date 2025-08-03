@@ -1,5 +1,5 @@
 /* Import Google Font - Using Inter, a modern and clean font */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap");
 
 :root {
   --primary-blue: #2c6693;
@@ -12,7 +12,7 @@
   --active-item-bg: #e3f2fd;
   /* Base font size and family */
   font-size: 14px;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 .dhis2-layout {
@@ -47,7 +47,7 @@
   flex: 1;
   margin-top: 40px;
   padding: 15px;
-  background: #fff;
+  background: #f5f5f5;
   margin-left: 250px;
   min-height: calc(100vh - 40px);
 }
@@ -273,7 +273,7 @@
 .dashboard-tabs .nav-link.active {
   background: #2e8b57;
   color: white;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-content {
@@ -283,13 +283,13 @@
 .dashboard-content .card {
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   margin-bottom: 15px;
 }
 
 .dashboard-content .card:hover {
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .dashboard-content .card-title {
@@ -342,7 +342,7 @@
   background-color: rgba(255, 255, 255, 0.95) !important;
   border: 1px solid #ddd !important;
   border-radius: 4px !important;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
 .recharts-tooltip-label {
@@ -397,7 +397,7 @@
   background-color: rgba(255, 255, 255, 0.95) !important;
   border: 1px solid #ddd !important;
   border-radius: 4px !important;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
   padding: 8px 12px !important;
 }
 
@@ -513,7 +513,8 @@
   font-size: 0.875rem;
 }
 
-.trend-up, .trend-down {
+.trend-up,
+.trend-down {
   font-size: 0.875rem;
   font-weight: 500;
   display: flex;
@@ -543,4 +544,4 @@
 
 .bg-warning {
   background-color: #f1c40f !important;
-} 
+}

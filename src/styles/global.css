@@ -1,0 +1,18 @@
+/* Works on Chrome, Edge, and Safari */
+::-webkit-scrollbar {
+  width: 5px; /* vertical scrollbar */
+  height: 5px; /* horizontal scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* track color */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E2E2E2; /* handle color */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: 	#a7a7a7; /* handle hover color */
+}

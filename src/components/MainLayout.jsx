@@ -136,7 +136,7 @@ const MainLayout = ({ children }) => {
           </div>
         </header>
 
-        <main className="dhis2-main-content">
+        <main className="dhis2-main-content ">
           {children}
         </main>
       </div>

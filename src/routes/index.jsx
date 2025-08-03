@@ -13,7 +13,8 @@ import Supplychain from '../pages/Supplychain';
 import MainLayout from '../components/MainLayout';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import ProtectedRoute from '../helpers/Protected';
-import MappingPage from '../pages/mapping/mappingPage';
+import MappingPage from '../pages/mapping';
+
 
 const AppRoutes = () => {
   return (
