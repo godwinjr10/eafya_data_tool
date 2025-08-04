@@ -1,5 +1,5 @@
 import express from "express";
-import { pool } from "../config/database.js";
+import { pool } from "../../config/database.js";
 
 const router = express.Router();
 
@@ -190,7 +190,7 @@ router.post("/conditions/:conditionId/mappings", async (req, res) => {
     }
 
     // Import the model
-    const EafyaHmisMapping = (await import("../models/eafyaHmisMapping.js"))
+    const EafyaHmisMapping = (await import("../../models/eafyaHmisMapping.js"))
       .default;
 
     // Insert new mapping using Sequelize model

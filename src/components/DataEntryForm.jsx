@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import API from "../helpers/api";
-import '../styles/dhis2.css';
 import ConditionsReport from './ConditionsReport';
 import CommoditiesReport from './CommoditiesReport';
 import LabReport from './LabReport';
@@ -101,8 +100,8 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
   }, [reportProps]);
 
   const renderFormHeader = () => (
-    <div className="report-selector mb-4">
-      <div className="row g-3">
+    <div className="p-4 border rounded mb-4">
+      <div className="row g-2 ">
         <div className="col-md-6">
           <label className="form-label">Data Set</label>
           <select
@@ -117,7 +116,7 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
             ))}
           </select>
         </div>
-        <div className="col-md-4">
+        <div className="col-md-6">
           <div className="d-flex justify-content-end gap-2 mt-4">
             <button className="validation-button">
               <i className="bi bi-check2-circle me-2"></i>

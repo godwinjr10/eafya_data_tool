@@ -2,20 +2,17 @@ import { LampDesk } from "lucide-react";
 import React, { useState } from "react";
 
 const SectionPanel = ({
-  currentSections,
+  conditions,
   labTestSections,
   commoditySections,
-  selectedSection,
   handleSectionClick,
-  panelHeaderStyle,
-  columnHeaderStyle,
-  loading,
+  loading
 }) => {
   const [selectedSections, setSelectedSections] = useState({
     section: "Select The Section ...",
     data: [],
   });
-  const [activeSubSection, setActiveSubSection]=useState('')
+  const [activeSubSection, setActiveSubSection] = useState("");
   const renderSectionItem = (section, index) => (
     <div
       key={index}
@@ -29,8 +26,8 @@ const SectionPanel = ({
         activeSubSection === section.name ? "text-primary" : "text-secondary"
       }`}
       onClick={() => {
-        handleSectionClick( section.id, section.name)
-        setActiveSubSection(section.name)
+        handleSectionClick(section.id, section.name);
+        setActiveSubSection(section.name);
       }}
     >
       <div>
@@ -43,6 +40,8 @@ const SectionPanel = ({
       </div>
     </div>
   );
+
+  
 
   return (
     <div
@@ -79,7 +78,7 @@ const SectionPanel = ({
               onClick={() =>
                 setSelectedSections({
                   section: "Conditons",
-                  data: currentSections,
+                  data: conditions,
                 })
               }
             >
@@ -133,7 +132,7 @@ const SectionPanel = ({
           >
             Loading sections...
           </div>
-        ) : currentSections.length === 0 ? (
+        ) : conditions?.length === 0 ? (
           <div
             style={{
               padding: "20px",

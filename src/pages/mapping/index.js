@@ -10,7 +10,6 @@ import { SectionItemDetails } from "../../components/SectionItemDetails";
 
 const MappingPage = () => {
   const {
-    sections,
     labTestSections,
     commoditySections,
     conditions,
@@ -36,21 +35,18 @@ const MappingPage = () => {
     fetchItemsCount,
   } = useMappingPage();
 
-
-
   return (
     <div
       style={{
         display: "flex",
         flex: 1,
         overflow: "hidden",
-       
       }}
       className="row "
     >
       {/* Left Panel - Sections */}
       <SectionPanel
-        currentSections={sections}
+        conditions={conditions}
         labTestSections={labTestSections}
         commoditySections={commoditySections}
         selectedSection={selectedSection}

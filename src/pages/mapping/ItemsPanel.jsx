@@ -3,12 +3,12 @@ import React from "react";
 const ItemsPanel = ({
   currentSectionItems,
   selectedSection,
-  renderSectionItemDetails
+  renderSectionItemDetails,
 }) => {
   return (
     <div className="col">
       <div className="p-4 border-bottom fw-bold">
-        Conditions
+        All
         {selectedSection && (
           <small className="text-xs text-secondary fw-thin">
             -({selectedSection.name})

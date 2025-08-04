@@ -3,10 +3,9 @@ import API from "./api";
 
 const useMappingPage = () => {
   // State management for the simplified conditions-only mapping
-  const [sections, setSections] = useState([]);
+  const [conditions, setConditions] = useState([]);
   const [labTestSections, setLabTestSections] = useState([]);
   const [commoditySections, setCommoditySections] = useState([]);
-  const [conditions, setConditions] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedSection, setSelectedSection] = useState(null);
   const [currentSectionItems, setCurrentSectionItems] = useState([]);
@@ -24,10 +23,10 @@ const useMappingPage = () => {
     try {
       const response = await API.get("/conditions-mapping/sections");
       console.log("Sections API response:", response.data);
-      setSections(response.data || []);
+      setConditions(response.data || []);
     } catch (error) {
       console.error("Error fetching sections:", error);
-      setSections([]);
+      setConditions([]);
     } finally {
       setLoading(false);
     }
@@ -86,7 +85,7 @@ const useMappingPage = () => {
   }, []);
 
   // Handle section selection - fetch conditions for that section
-  const handleSectionClick = async ( sectionId, sectionName) => {
+  const handleSectionClick = async (sectionId, sectionName) => {
     console.log("Section clicked:", sectionId, sectionName);
     setSelectedSection({
       id: sectionId,
@@ -289,7 +288,8 @@ const useMappingPage = () => {
 
   return {
     // State
-    sections,
+    conditions,
+    setConditions,
     labTestSections,
     commoditySections,
     conditions,
