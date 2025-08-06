@@ -35,6 +35,9 @@ import dashboardRoutes from "./routes/dashboard.js";
 import AllMappingsRoutes from "./routes/mappings/allMappings.js";
 import ItemsMappedRoutes from "./routes/mappings/itemsMapped.js";
 import ConditionsMappingRoutes from "./routes/conditionsMapping.js";
+
+import dhisConditions from './routes/dhis/dhisroutes.js';
+
 dotenv.config();
 
 const app = express();
@@ -223,6 +226,11 @@ app.use(
 app.use(
   "/api/conditions-mapping",
   ConditionsMappingRoutes
+);
+
+app.use(
+  "/api/dhis",
+  dhisConditions
 );
 
 // Error handling middleware
