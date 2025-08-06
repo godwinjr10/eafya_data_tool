@@ -8,7 +8,7 @@ const ItemsPanel = ({
   return (
     <div className="col">
       <div className="p-4 border-bottom fw-bold">
-        All
+        Hmis Names
         {selectedSection && (
           <small className="text-xs text-secondary fw-thin">
             -({selectedSection.name})

@@ -347,26 +347,125 @@ router.delete("/mappings/:mappingId", async (req, res) => {
 // Get all EAFYA items for search/mapping
 router.get("/eafya-items", async (req, res) => {
   try {
-    const { search } = req.query;
+    const { search, download, categories } = req.query;
+
+    // Parse categories if provided
+    const selectedCategories = categories ? categories.split(",") : [];
+
+    console.log("Categories requested:", selectedCategories);
+    console.log("Download mode:", download);
+
     let query = `
             SELECT * FROM (
-                SELECT id, name FROM dwh.dim_eafya_disease
+                SELECT id, name, 'Bed' as category FROM dwh.dim_eafya_bed
                 UNION
-                SELECT id, name FROM dwh.dim_eafya_clinic  
+                SELECT id, name, 'Blood Transfusion' as category FROM dwh.dim_eafya_blood_transfusion
                 UNION
-                SELECT id, name FROM dwh.dim_eafya_department
+                SELECT id, name, 'Clinic' as category FROM dwh.dim_eafya_clinic
+                UNION
+                SELECT id, name, 'Department' as category FROM dwh.dim_eafya_department
+                UNION
+                SELECT id, name, 'Disease' as category FROM dwh.dim_eafya_disease
+                UNION
+                SELECT id, name, 'Family Planning' as category FROM dwh.dim_eafya_family_planning
+                UNION
+                SELECT id, name, 'Family Planning Category' as category FROM dwh.dim_eafya_family_planning_category
+                UNION
+                SELECT id, name, 'Imaging' as category FROM dwh.dim_eafya_imaging
+                UNION
+                SELECT id, name, 'Imaging Category' as category FROM dwh.dim_eafya_imaging_category
+                UNION
+                SELECT id, name, 'Inventory Unit' as category FROM dwh.dim_eafya_inventory_unit
+                UNION
+                SELECT id, name, 'Lab Test' as category FROM dwh.dim_eafya_lab_test
+                UNION
+                SELECT id, name, 'Lab Test Category' as category FROM dwh.dim_eafya_lab_test_category
+                UNION
+                SELECT lab_test_sample_type_id as id, sample_type as name, 'Lab Test Sample Type' as category FROM dwh.dim_eafya_lab_test_sample_type
+                UNION
+                SELECT id, name, 'Lab Tests Parent' as category FROM dwh.dim_eafya_lab_tests_parent
+                UNION
+                SELECT id, major_theater_name as name, 'Major Theatre' as category FROM dwh.dim_eafya_major_theatre
+                UNION
+                SELECT id, major_theater_category as name, 'Major Theatre Category' as category FROM dwh.dim_eafya_major_theatre_category
+                UNION
+                SELECT id, major_theater_room as name, 'Major Theatre Room' as category FROM dwh.dim_eafya_major_theatre_room
+                UNION
+                SELECT id, minor_theater_name as name, 'Minor Theatre' as category FROM dwh.dim_eafya_minor_theatre
+                UNION
+                SELECT id, minor_theater_categroy as name, 'Minor Theatre Category' as category FROM dwh.dim_eafya_minor_theatre_category
+                UNION
+                SELECT id, name, 'Pharmacology' as category FROM dwh.dim_eafya_pharmacology
+                UNION
+                SELECT id, name, 'Product' as category FROM dwh.dim_eafya_product
+                UNION
+                SELECT id, name, 'Room' as category FROM dwh.dim_eafya_room
+                UNION
+                SELECT id, name, 'Store' as category FROM dwh.dim_eafya_store
+                UNION
+                SELECT id, name, 'Triage Type' as category FROM dwh.dim_eafya_triage_type
+                UNION
+                SELECT id, name, 'Vaccine' as category FROM dwh.dim_eafya_vaccine
+                UNION
+                SELECT id, name, 'Visit Type' as category FROM dwh.dim_eafya_visit_type
+                UNION
+                SELECT id, caption as name, 'Vital Type' as category FROM dwh.dim_eafya_vital_type
+                UNION
+                SELECT id, name, 'Ward' as category FROM dwh.dim_eafya_ward
             ) combined
         `;
 
     const params = [];
-    if (search && search.trim()) {
-      query += ` WHERE LOWER(name) LIKE LOWER($1)`;
+    let paramCount = 1;
+    let whereConditions = [];
+
+    // Add category filter if specific categories are selected
+    if (selectedCategories.length > 0) {
+      // Use a more explicit approach for category filtering
+      const categoryConditions = selectedCategories
+        .map(() => `category = $${paramCount++}`)
+        .join(" OR ");
+      whereConditions.push(`(${categoryConditions})`);
+      params.push(...selectedCategories);
+      console.log("Filtering by categories:", selectedCategories);
+      console.log("WHERE condition:", `(${categoryConditions})`);
+      console.log("Parameters to bind:", params);
+    } else {
+      console.log("No categories selected, returning all items");
+    }
+
+    // Add search filter if provided and not downloading
+    if (search && search.trim() && !download) {
+      whereConditions.push(`LOWER(name) LIKE LOWER($${paramCount})`);
       params.push(`%${search.trim()}%`);
     }
 
-    query += ` ORDER BY name LIMIT 100`;
+    // Add WHERE clause if there are conditions
+    if (whereConditions.length > 0) {
+      query += ` WHERE ${whereConditions.join(" AND ")}`;
+      console.log("Final WHERE clause:", whereConditions.join(" AND "));
+    }
 
+    // If downloading, get all items without limit
+    if (download) {
+      query += ` ORDER BY category, name`;
+    } else {
+      query += ` ORDER BY name LIMIT 100`;
+    }
+
+    console.log("Final query params:", params);
+    console.log("Final query:", query);
     const { rows } = await pool.query(query, params);
+    console.log(`Returning ${rows.length} items`);
+
+    // Log first few items to see what categories we're getting
+    if (rows.length > 0) {
+      console.log(
+        "First 5 items categories:",
+        rows.slice(0, 5).map((item) => item.category)
+      );
+    }
+
     res.json(rows);
   } catch (error) {
     console.error("Database error:", error);

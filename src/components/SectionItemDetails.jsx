@@ -30,12 +30,12 @@ export const SectionItemDetails = ({
         }}
       >
         <span>
-          📄({item.code}) {item.name}
-          {item.dhis2_name && (
+          📄- {item.name}
+          {/* {item.dhis2_name && (
             <div className="text-xs text-secondary mt-1">
               ↳ {item.dhis2_name}
             </div>
-          )}
+          )} */}
         </span>
         <span
           className={`text-decoration-none ${

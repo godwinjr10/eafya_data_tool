@@ -36,9 +36,7 @@ const SectionPanel = ({
     >
       <div>
         <div className="d-flex align-items-center gap-1">
-          <div className="text-xs p-1" style={{ fontSize: "8px" }}>
-            ({section.id})
-          </div>
+
           <div className="flex-grow-1">{section.name}</div>
           <div className="text-xs text-secondary" style={{ fontSize: "8px" }}>
             {section.count || 0}
