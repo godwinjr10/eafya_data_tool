@@ -6,29 +6,8 @@ export const SectionItemDetails = ({
   fetchItemsCount,
   selectedSectionItem,
 }) => {
-  const [count, setCount] = useState(null);
-
-  useEffect(() => {
-    let mounted = true;
-    fetchItemsCount(item.id)
-      .then((response) => {
-        if (mounted) {
-          // Extract the count number from the response object
-          const countValue =
-            response && response.count !== undefined ? response.count : 0;
-          setCount(countValue);
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching count:", error);
-        if (mounted) {
-          setCount(0);
-        }
-      });
-    return () => {
-      mounted = false;
-    };
-  }, [item.id, fetchItemsCount]);
+  // Use mapping_count directly from the item data
+  const count = item.mapping_count || 0;
 
   return (
     <div
@@ -51,8 +30,12 @@ export const SectionItemDetails = ({
         }}
       >
         <span>
-          📄(
-          {item.hmis_code}) {item.hmis_name}{" "}
+          📄({item.code}) {item.name}
+          {item.dhis2_name && (
+            <div className="text-xs text-secondary mt-1">
+              ↳ {item.dhis2_name}
+            </div>
+          )}
         </span>
         <span
           className={`text-decoration-none ${

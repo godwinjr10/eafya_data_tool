@@ -5,8 +5,11 @@ const SectionPanel = ({
   conditions,
   labTestSections,
   commoditySections,
+  vaccineSections,
+  antenatalSections,
+  postnatalSections,
   handleSectionClick,
-  loading
+  loading,
 }) => {
   const [selectedSections, setSelectedSections] = useState({
     section: "Select The Section ...",
@@ -29,19 +32,21 @@ const SectionPanel = ({
         handleSectionClick(section.id, section.name);
         setActiveSubSection(section.name);
       }}
+      title={`${section.count || 0} items`}
     >
       <div>
         <div className="d-flex align-items-center gap-1">
-          <div className="   text-xs p-1 " style={{ fontSize: "8px" }}>
-            ({section.id}){" "}
+          <div className="text-xs p-1" style={{ fontSize: "8px" }}>
+            ({section.id})
           </div>
-          {section.name}
+          <div className="flex-grow-1">{section.name}</div>
+          <div className="text-xs text-secondary" style={{ fontSize: "8px" }}>
+            {section.count || 0}
+          </div>
         </div>
       </div>
     </div>
   );
-
-  
 
   return (
     <div
@@ -77,7 +82,7 @@ const SectionPanel = ({
               href="#"
               onClick={() =>
                 setSelectedSections({
-                  section: "Conditons",
+                  section: "Conditions",
                   data: conditions,
                 })
               }
@@ -105,7 +110,49 @@ const SectionPanel = ({
               href="#"
               onClick={() =>
                 setSelectedSections({
-                  section: "   Lab Tests",
+                  section: "Vaccines",
+                  data: vaccineSections,
+                })
+              }
+            >
+              Vaccines
+            </a>
+          </li>
+          <li className="p-0 m-0">
+            <a
+              class="dropdown-item w-100 border-bottom"
+              href="#"
+              onClick={() =>
+                setSelectedSections({
+                  section: "Antenatal",
+                  data: antenatalSections,
+                })
+              }
+            >
+              Antenatal
+            </a>
+          </li>
+          <li className="p-0 m-0">
+            <a
+              class="dropdown-item w-100 border-bottom"
+              href="#"
+              onClick={() =>
+                setSelectedSections({
+                  section: "Postnatal",
+                  data: postnatalSections,
+                })
+              }
+            >
+              Postnatal
+            </a>
+          </li>
+          <li className="p-0 m-0">
+            <a
+              class="dropdown-item w-100 border-bottom"
+              href="#"
+              onClick={() =>
+                setSelectedSections({
+                  section: "Lab Tests",
                   data: labTestSections,
                 })
               }

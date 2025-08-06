@@ -12,6 +12,9 @@ const MappingPage = () => {
   const {
     labTestSections,
     commoditySections,
+    vaccineSections,
+    antenatalSections,
+    postnatalSections,
     conditions,
     loading,
     selectedSection,
@@ -49,6 +52,9 @@ const MappingPage = () => {
         conditions={conditions}
         labTestSections={labTestSections}
         commoditySections={commoditySections}
+        vaccineSections={vaccineSections}
+        antenatalSections={antenatalSections}
+        postnatalSections={postnatalSections}
         selectedSection={selectedSection}
         loading={loading}
         handleSectionClick={handleSectionClick}

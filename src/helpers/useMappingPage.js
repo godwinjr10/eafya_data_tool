@@ -6,6 +6,9 @@ const useMappingPage = () => {
   const [conditions, setConditions] = useState([]);
   const [labTestSections, setLabTestSections] = useState([]);
   const [commoditySections, setCommoditySections] = useState([]);
+  const [vaccineSections, setVaccineSections] = useState([]);
+  const [antenatalSections, setAntenatalSections] = useState([]);
+  const [postnatalSections, setPostnatalSections] = useState([]);
   const [loading, setLoading] = useState(false);
   const [selectedSection, setSelectedSection] = useState(null);
   const [currentSectionItems, setCurrentSectionItems] = useState([]);
@@ -17,43 +20,66 @@ const useMappingPage = () => {
   const [mappedLoading, setMappedLoading] = useState(false);
   const [selectedSectionItem, setSelectedSectionItem] = useState(null);
 
-  // Fetch sections from the new API
+  // Fetch sections using the new unified API
   const fetchSections = async () => {
     setLoading(true);
     try {
-      const response = await API.get("mapping/items/sections");
-      console.log("Sections API response:", response.data);
-      setConditions(response.data || []);
+      // Fetch all categories in parallel
+      // Fetch all sections data at once
+      const response = await API.get("/mapping/items/all-sections");
+
+      // Filter sections by type with expanded categories
+      const conditions = response.data.filter((section) =>
+        section.id.startsWith("1.3.")
+      );
+
+      const labTestSections = response.data.filter((section) =>
+        section.id.startsWith("10.")
+      );
+
+      const commoditySections = response.data.filter(
+        (section) => section.id === "6"
+      );
+
+      // Add new section categories
+      const vaccineSections = response.data.filter(
+        (section) =>
+          section.id.startsWith("7.") ||
+          section.name.toLowerCase().includes("vaccine")
+      );
+
+      const antenatalSections = response.data.filter(
+        (section) =>
+          section.id.startsWith("2.") ||
+          section.name.toLowerCase().includes("antenatal")
+      );
+
+      const postnatalSections = response.data.filter(
+        (section) =>
+          section.id.startsWith("3.") ||
+          section.name.toLowerCase().includes("postnatal")
+      );
+
+      // Update state with filtered sections
+      setConditions(conditions || []);
+      setLabTestSections(labTestSections || []);
+      setCommoditySections(commoditySections || []);
+      setVaccineSections(vaccineSections || []);
+      setAntenatalSections(antenatalSections || []);
+      setPostnatalSections(postnatalSections || []);
+
+      console.log("Sections loaded:", {
+        conditions: conditions?.length || 0,
+        labTests: labTestSections?.length || 0,
+        commodities: commoditySections?.length || 0,
+        vaccines: vaccineSections?.length || 0,
+        antenatal: antenatalSections?.length || 0,
+        postnatal: postnatalSections?.length || 0,
+      });
     } catch (error) {
       console.error("Error fetching sections:", error);
       setConditions([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchLabTestSections = async () => {
-    setLoading(true);
-    try {
-      const response = await API.get("mapping/items/labTest/sections");
-      console.log("Lab TestSections API response:", response.data);
-      setLabTestSections(response.data || []);
-    } catch (error) {
-      console.error("Error fetching lab test   sections:", error);
       setLabTestSections([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const fetchCommoditySections = async () => {
-    setLoading(true);
-    try {
-      const response = await API.get("mapping/items/commodity/sections");
-      console.log("Commodity Sections API response:", response.data);
-      setCommoditySections(response.data || []);
-    } catch (error) {
-      console.error("Error fetching commodity sections:", error);
       setCommoditySections([]);
     } finally {
       setLoading(false);
@@ -76,32 +102,40 @@ const useMappingPage = () => {
   };
 
   useEffect(() => {
-    fetchSections();
-    fetchCommoditySections();
-    fetchLabTestSections();
+    fetchSections(); // Now fetches all sections in parallel
     searchItems(); // Load initial items
   }, []);
 
-  // Handle section selection - fetch conditions for that section
+  // Handle section selection - use data from unified API
   const handleSectionClick = async (sectionId, sectionName) => {
     console.log("Section clicked:", sectionId, sectionName);
+
+    // Find the section in our loaded data
+    const section = [
+      ...conditions,
+      ...labTestSections,
+      ...commoditySections,
+      ...vaccineSections,
+      ...antenatalSections,
+      ...postnatalSections,
+    ].find((s) => s.id === sectionId);
+
+    if (!section) {
+      console.error("Section not found:", sectionId);
+      return;
+    }
+
     setSelectedSection({
       id: sectionId,
       name: sectionName,
+      count: section.count,
     });
+
     setSelectedSectionItem(null);
     setMappedItems([]);
 
-    try {
-      const response = await API.get(
-        `mapping/items/sections/${sectionId}/conditions`
-      );
-      console.log("Conditions response:", response.data);
-      setCurrentSectionItems(response.data || []);
-    } catch (error) {
-      console.error("Error fetching conditions for section:", error);
-      setCurrentSectionItems([]);
-    }
+    // Data is already loaded in the section object
+    setCurrentSectionItems(section.data || []);
   };
 
   // Handle condition selection - fetch mappings for that condition
@@ -287,7 +321,9 @@ const useMappingPage = () => {
     setConditions,
     labTestSections,
     commoditySections,
-    conditions,
+    vaccineSections,
+    antenatalSections,
+    postnatalSections,
     loading,
     selectedSection,
     currentSectionItems,
