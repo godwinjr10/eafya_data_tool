@@ -5,26 +5,27 @@ const Sidebar = ({ selected, onSelect, dataSetId }) => {
   const [loading, setLoading] = useState(false);
   const [datasets, setDatasets] = useState({});
 
-  const sections = dataSetId && datasets[dataSetId] ? datasets[dataSetId].sections : [];
+  const sections =
+    dataSetId && datasets[dataSetId] ? datasets[dataSetId].sections : [];
 
   const fetchDatasets = async () => {
     try {
-        setLoading(true);
-        const response = await API.get('/datasets');
-        // Transform the array into an object with dataSetId as keys
-        const datasetsObj = response.data.datasets.reduce((acc, dataset) => {
-            acc[dataset.dataset_id] = {
-                id: dataset.dataset_id,
-                name: dataset.dataset_name,
-                sections: dataset.sections || []
-            };
-            return acc;
-        }, {});
-        setDatasets(datasetsObj);
+      setLoading(true);
+      const response = await API.get("/datasets");
+      // Transform the array into an object with dataSetId as keys
+      const datasetsObj = response.data.datasets.reduce((acc, dataset) => {
+        acc[dataset.dataset_id] = {
+          id: dataset.dataset_id,
+          name: dataset.dataset_name,
+          sections: dataset.sections || [],
+        };
+        return acc;
+      }, {});
+      setDatasets(datasetsObj);
     } catch (error) {
-        console.error('Error fetching datasets:', error);
+      console.error("Error fetching datasets:", error);
     } finally {
-        setLoading(false);
+      setLoading(false);
     }
   };
 
@@ -33,17 +34,31 @@ const Sidebar = ({ selected, onSelect, dataSetId }) => {
   }, []);
 
   if (loading) {
-    return <div style={{ width: 250, background: "#e6f2e6", padding: 10, height: "calc(100vh - 20px)", overflowY: "auto" }}>Loading...</div>;
+    return (
+      <div
+        style={{
+          width: 250,
+          background: "#e6f2e6",
+          padding: 10,
+          height: "calc(100vh - 20px)",
+          overflowY: "auto",
+        }}
+      >
+        Loading...
+      </div>
+    );
   }
 
   return (
-    <div style={{ 
-      width: 250, 
-      background: "#e6f2e6", 
-      padding: 10,
-      height: "calc(100vh - 20px)", // This will make it full height minus padding
-      overflowY: "auto" // This enables vertical scrolling
-    }}>
+    <div
+      style={{
+        minWidth: "250px",
+        background: "#e6f2e6",
+        padding: 10,
+        height: "calc(100vh - 20px)", // This will make it full height minus padding
+        overflowY: "auto", // This enables vertical scrolling
+      }}
+    >
       {sections.map((section, idx) => (
         <div
           key={section.section_id}
@@ -51,10 +66,11 @@ const Sidebar = ({ selected, onSelect, dataSetId }) => {
           style={{
             padding: "10px 15px",
             margin: "5px 0",
-            background: selected === section.section_id ? "#b3d9b3" : "transparent",
+            background:
+              selected === section.section_id ? "#b3d9b3" : "transparent",
             cursor: "pointer",
             borderRadius: 4,
-            fontWeight: selected === section.section_id ? "bold" : "normal"
+            fontWeight: selected === section.section_id ? "bold" : "normal",
           }}
         >
           {section.section_name}
