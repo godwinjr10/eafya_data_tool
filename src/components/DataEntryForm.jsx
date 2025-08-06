@@ -1,15 +1,8 @@
 import React, { useState, useEffect } from "react";
 import API from "../helpers/api";
-<<<<<<< HEAD
-import '../styles/dhis2.css';
-import ConditionsReport from './ConditionsReport';
-import CommoditiesReport from './CommoditiesReport';
-import LabReport from './LabReport';
-=======
 import ConditionsReport from "./ConditionsReport";
 import CommoditiesReport from "./CommoditiesReport";
 import LabReport from "./LabReport";
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
 
 import MCHForm from "../pages/HMIS/MCH";
 import LabTestForm from "../pages/HMIS/LabTestForm";
@@ -33,28 +26,6 @@ const months = [
 
 // Define report configurations
 const REPORT_CONFIGS = {
-<<<<<<< HEAD
-  'HMIS_105_01': {
-    endpoint: '/downloads/conditions',
-    component: ConditionsReport,
-    title: 'Conditions Report'
-  },
-  'HMIS_105_02': {
-    endpoint: '/downloads/mch',
-    component: null, // Add MCH report component when ready
-    title: 'MCH Report'
-  },
-  'HMIS_105_06': {
-    endpoint: '/downloads/commodities',
-    component: CommoditiesReport,
-    title: 'Commodities Report'
-  },
-  'HMIS_105_10': {
-    endpoint: '/downloads/labtests',
-    component: LabReport,
-    title: 'Lab Tests Report'
-  }
-=======
   HMIS_105_01: {
     endpoint: "/downloads/conditions",
     component: ConditionsReport,
@@ -75,7 +46,6 @@ const REPORT_CONFIGS = {
     component: LabReport,
     title: "Lab Tests Report",
   },
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
 };
 
 const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
@@ -91,17 +61,10 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
 
   const fetchDatasets = async () => {
     try {
-<<<<<<< HEAD
-      const response = await API.get('/datasets');
-      setDatasets(response.data.datasets);
-    } catch (error) {
-      console.error('Error fetching hierarchy levels:', error);
-=======
       const response = await API.get("/datasets");
       setDatasets(response.data.datasets);
     } catch (error) {
       console.error("Error fetching hierarchy levels:", error);
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
     }
   };
 
@@ -111,36 +74,15 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
 
   const handlePrintReport = async () => {
     const reportConfig = REPORT_CONFIGS[dataSetId];
-<<<<<<< HEAD
-    
-    if (!reportConfig || !reportConfig.component) {
-      alert('Report generation not yet implemented for this section');
-=======
 
     if (!reportConfig || !reportConfig.component) {
       alert("Report generation not yet implemented for this section");
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
       return;
     }
 
     try {
       setLoading(true);
       const monthIndex = months.indexOf(selectedMonth) + 1;
-<<<<<<< HEAD
-      const formattedMonth = monthIndex.toString().padStart(2, '0');
-      const reportMonth = `${selectedYear}${formattedMonth}`;
-
-      const response = await API.get(`${reportConfig.endpoint}?report_month=${reportMonth}`);
-      
-      setReportProps({
-        data: response.data,
-        reportMonth: reportMonth,
-        type: dataSetId
-      });
-    } catch (error) {
-      console.error('Error fetching report data:', error);
-      alert('Failed to generate report');
-=======
       const formattedMonth = monthIndex.toString().padStart(2, "0");
       const reportMonth = `${selectedYear}${formattedMonth}`;
 
@@ -156,7 +98,6 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
     } catch (error) {
       console.error("Error fetching report data:", error);
       alert("Failed to generate report");
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
     } finally {
       setLoading(false);
     }
@@ -195,22 +136,13 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
               <i className="bi bi-check2-circle me-2"></i>
               Push To DHIS2
             </button>
-<<<<<<< HEAD
-            <button 
-              className="btn btn-secondary" 
-=======
             <button
               className="btn btn-secondary"
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
               onClick={handlePrintReport}
               disabled={loading}
             >
               <i className="bi bi-printer me-2"></i>
-<<<<<<< HEAD
-              {loading ? 'Generating...' : 'Print Report'}
-=======
               {loading ? "Generating..." : "Print Report"}
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
             </button>
           </div>
         </div>
@@ -306,17 +238,10 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
     if (!ReportComponent) return null;
 
     return (
-<<<<<<< HEAD
-      <div style={{ display: 'none' }}>
-        <ReportComponent 
-          data={reportProps.data} 
-          reportMonth={reportProps.reportMonth} 
-=======
       <div style={{ display: "none" }}>
         <ReportComponent
           data={reportProps.data}
           reportMonth={reportProps.reportMonth}
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
         />
       </div>
     );
@@ -328,34 +253,6 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
       {renderFormContent()}
       {renderReport()}
       {loading && (
-<<<<<<< HEAD
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 9999,
-        }}>
-          <div style={{
-            width: '50px',
-            height: '50px',
-            border: '5px solid #f3f3f3',
-            borderTop: '5px solid #3498db',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-          }}></div>
-          <div style={{
-            marginTop: '20px',
-            fontSize: '16px',
-            color: '#333',
-          }}>
-=======
         <div
           style={{
             position: "fixed",
@@ -388,7 +285,6 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
               color: "#333",
             }}
           >
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
             Generating Report...
           </div>
         </div>

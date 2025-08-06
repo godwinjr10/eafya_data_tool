@@ -4,33 +4,6 @@ const ItemsPanel = ({
   currentSectionItems,
   selectedSection,
   renderSectionItemDetails,
-<<<<<<< HEAD
-  renderPaginationControls,
-  panelHeaderStyle,
-  columnHeaderStyle,
-}) => {
-  return (
-    <div
-      style={{
-        flex: 1,
-        backgroundColor:
-          "white",
-        display: "flex",
-        flexDirection:
-          "column",
-      }}
-    >
-      <div
-        style={
-          panelHeaderStyle
-        }
-      >
-        Conditions
-        {selectedSection &&
-          ` (${selectedSection.name})`}
-      </div>
-      {renderPaginationControls()}
-=======
 }) => {
   return (
     <div className="col">
@@ -42,62 +15,16 @@ const ItemsPanel = ({
           </small>
         )}
       </div>
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
       <div
         style={{
           flex: 1,
           overflow: "auto",
         }}
       >
-<<<<<<< HEAD
-        <div
-          style={
-            columnHeaderStyle
-          }
-        >
-          Details
-        </div>
-=======
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
         {!selectedSection ? (
           <div
             style={{
               padding: "20px",
-<<<<<<< HEAD
-              textAlign:
-                "center",
-              fontSize:
-                "12px",
-              color: "#666",
-            }}
-          >
-            Select a section
-            to view conditions
-          </div>
-        ) : currentSectionItems.length ===
-          0 ? (
-          <div
-            style={{
-              padding: "20px",
-              textAlign:
-                "center",
-              fontSize:
-                "12px",
-              color: "#666",
-            }}
-          >
-            No conditions
-            found for this
-            section
-          </div>
-        ) : (
-          currentSectionItems.map(
-            (item) =>
-              renderSectionItemDetails(
-                item
-              )
-          )
-=======
               textAlign: "center",
               fontSize: "12px",
               color: "#666",
@@ -125,7 +52,6 @@ const ItemsPanel = ({
           >
             {currentSectionItems.map((item) => renderSectionItemDetails(item))}
           </div>
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
         )}
       </div>
     </div>

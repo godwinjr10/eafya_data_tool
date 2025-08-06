@@ -45,35 +45,6 @@ const MainLayout = ({ children }) => {
     };
   }, []);
 
-<<<<<<< HEAD
-  const menuItems = [
-    { id: 'dashboard', label: 'Dashboard', icon: 'speedometer2', path: '/dashboard' },
-    { id: 'hmis', label: 'HMIS Reports', icon: 'file-earmark-text', path: '/hmis' },
-    { id: 'hmis', label: 'DHIS2 Mapping', icon: 'map', path: '/mapping' },
-    { id: 'opd', label: 'Outpatient', icon: 'person-walking', path: '/outpatient' },
-    { id: 'inpatient', label: 'Inpatient', icon: 'hospital', path: '/inpatient' },
-    { id: 'laboratory', label: 'Laboratory', icon: 'flask', path: '/lab' },
-    { id: 'medicines', label: 'Supply Chain', icon: 'capsule', path: '/supplychain' },
-    { id: 'familyplanning', label: 'Family Planning', icon: 'person-hearts', path: '/familyplanning' },
-    { id: 'imaging', label: 'Imaging', icon: 'emoji-smile', path: '/imaging' },
-    { id: 'theatre', label: 'Theatre', icon: 'exclamation-diamond', path: '/theatre' },
-    { 
-      id: 'settings', 
-      label: 'Settings', 
-      icon: 'gear',
-      children: [
-        { id: 'facility', label: 'Facility', icon: 'egg-fried', path: '/facility' },
-        { id: 'users', label: 'Users', icon: 'person-circle', path: '/users' }
-      ]
-    }
-  ];
-
-  return (
-    <div className="dhis2-layout">
-      <aside className="dhis2-sidebar">
-        <div className="p-3">
-          <h5 className="mb-3">eAFYA Data Mining Tool</h5>
-=======
   useEffect(() => {
     fetchFacilities();
     // You might want to fetch user data here too
@@ -84,7 +55,6 @@ const MainLayout = ({ children }) => {
     <div className="d-flex vh-100 bg-light">
       {/* Sidebar */}
       <MainSideBar />
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
 
       {/* Main Content Area */}
       <div className="flex-fill d-flex flex-column overflow-hidden">

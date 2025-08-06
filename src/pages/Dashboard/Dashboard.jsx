@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import React, { useState, useRef, useEffect } from 'react';
-import { Nav } from 'react-bootstrap';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line, ResponsiveContainer, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
-import '../../styles/dhis2.css';
-import API from "../../helpers/api";
-
-=======
 import React, { useState, useRef, useEffect } from "react";
 import { Nav } from "react-bootstrap";
 import {
@@ -27,7 +19,6 @@ import {
 } from "recharts";
 import "../../styles/dhis2.css";
 import API from "../../helpers/api";
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
 
 const dashboardTabs = [
   { id: "opd", title: "Outpatient Dashboard", active: true },
@@ -1061,10 +1052,6 @@ const Dashboard = () => {
   const [chartWidth, setChartWidth] = useState(500);
   const chartContainerRef = useRef(null);
   const [admissionTrendData, setAdmissionTrendData] = useState([]);
-<<<<<<< HEAD
-  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-=======
   const monthNames = [
     "Jan",
     "Feb",
@@ -1079,18 +1066,12 @@ const Dashboard = () => {
     "Nov",
     "Dec",
   ];
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
 
   useEffect(() => {
     const fetchAdmissionTrend = async () => {
       try {
-<<<<<<< HEAD
-        const res = await API.get('/dashboard'); // Backend endpoint
-        const formatted = res.data.map(item => ({
-=======
         const res = await API.get("/dashboard"); // Backend endpoint
         const formatted = res.data.map((item) => ({
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
           month: monthNames[item.month - 1],
           total: item.total,
         }));
@@ -1102,10 +1083,6 @@ const Dashboard = () => {
 
     fetchAdmissionTrend();
   }, []);
-<<<<<<< HEAD
-
-=======
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
 
   useEffect(() => {
     const updateChartWidth = () => {
@@ -1623,28 +1600,6 @@ const Dashboard = () => {
 
       {/* Charts First Row */}
       <div className="row">
-<<<<<<< HEAD
-      <div className="col-md-8">
-        <div className="card mb-4">
-          <div className="card-body">
-            <h5 className="card-title">Monthly Admissions Trend</h5>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart
-                data={admissionTrendData}
-                margin={{ top: 20, right: 30, left: 20, bottom: 60 }}
-              >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" angle={-45} textAnchor="end" height={60} />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="total" fill="#3b82f6" name="Total Admissions" />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </div>
-      </div>
-=======
         <div className="col-md-8">
           <div className="card mb-4">
             <div className="card-body">
@@ -1670,7 +1625,6 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
->>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
 
         <div className="col-md-4">
           <div className="card mb-4">
