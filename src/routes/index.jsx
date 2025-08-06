@@ -14,6 +14,7 @@ import MainLayout from "../components/MainLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ProtectedRoute from "../helpers/Protected";
 import MappingPage from "../pages/mapping";
+import ReportSections from "../pages/ReportSections";
 
 const AppRoutes = () => {
   return (
@@ -31,6 +32,7 @@ const AppRoutes = () => {
           <ProtectedRoute path="/supplychain" component={Supplychain} />
           <ProtectedRoute path="/dashboard" exact component={Dashboard} />
           <ProtectedRoute path="/mapping" exact component={MappingPage} />
+          <ProtectedRoute path="/report/mapping" exact component={ReportSections} />
         </MainLayout>
       </Switch>
     </Fragment>
