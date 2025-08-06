@@ -5,7 +5,11 @@ const router = express.Router();
 
 router.post('/sync', async (req, res) => {
     try {
-        const result = await pushToDHIS2();
+        const { dataset, period } = req.body;
+        if (!dataset || !period) {
+            throw new Error('Dataset and period are required');
+        }
+        const result = await pushToDHIS2(dataset, period);
         
         if (result.status === 'success') {
             res.json({

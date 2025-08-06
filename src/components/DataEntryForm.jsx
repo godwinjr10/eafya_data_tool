@@ -30,28 +30,35 @@ const REPORT_CONFIGS = {
     endpoint: "/downloads/conditions",
     component: ConditionsReport,
     title: "Conditions Report",
+    dataset: 'RtEYsASU7PG'
   },
   HMIS_105_02: {
     endpoint: "/downloads/mch",
-    component: null, // Add MCH report component when ready
+    component: null,
     title: "MCH Report",
+    dataset: 'RtEYsASU7PG'
   },
   HMIS_105_06: {
     endpoint: "/downloads/commodities",
     component: CommoditiesReport,
     title: "Commodities Report",
+    dataset: 'RtEYsASU7PG'
   },
   HMIS_105_10: {
     endpoint: "/downloads/labtests",
     component: LabReport,
     title: "Lab Tests Report",
+    dataset: 'RtEYsASU7PG'
   },
 };
 
 const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
   const [loading, setLoading] = useState(false);
+  const [pushingToDHIS2, setPushingToDHIS2] = useState(false);
   const [datasets, setDatasets] = useState([]);
   const [reportProps, setReportProps] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [modalMessage, setModalMessage] = useState({ type: '', text: '' });
 
   const currentDate = new Date();
   const [selectedMonth, setSelectedMonth] = useState(
@@ -71,6 +78,47 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
   useEffect(() => {
     fetchDatasets();
   }, []);
+
+  const handlePushToDHIS2 = async () => {
+    try {
+      setPushingToDHIS2(true);
+      const monthIndex = months.indexOf(selectedMonth) + 1;
+      const formattedMonth = monthIndex.toString().padStart(2, "0");
+      const period = `${selectedYear}${formattedMonth}`;
+      
+      const reportConfig = REPORT_CONFIGS[dataSetId];
+      if (!reportConfig) {
+        throw new Error("Dataset configuration not found");
+      }
+
+      const response = await API.post("/dhis/sync", {
+        dataset: reportConfig.dataset,
+        period: period
+      });
+
+      if (response.data.status === 'success') {
+        setModalMessage({
+          type: 'success',
+          text: `Successfully pushed ${response.data.details?.total || 0} records to DHIS2`
+        });
+      } else {
+        setModalMessage({
+          type: 'error',
+          text: response.data.failureDetails?.[0]?.error || "Unknown error occurred while pushing data"
+        });
+      }
+      setShowModal(true);
+    } catch (error) {
+      console.error("Error pushing to DHIS2:", error);
+      setModalMessage({
+        type: 'error',
+        text: error.message || "Failed to push data to DHIS2"
+      });
+      setShowModal(true);
+    } finally {
+      setPushingToDHIS2(false);
+    }
+  };
 
   const handlePrintReport = async () => {
     const reportConfig = REPORT_CONFIGS[dataSetId];
@@ -132,9 +180,13 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
         </div>
         <div className="col-md-6">
           <div className="d-flex justify-content-end gap-2 mt-4">
-            <button className="validation-button">
+            <button 
+              className="validation-button"
+              onClick={handlePushToDHIS2}
+              disabled={pushingToDHIS2}
+            >
               <i className="bi bi-check2-circle me-2"></i>
-              Push To DHIS2
+              {pushingToDHIS2 ? "Pushing to DHIS2..." : "Push To DHIS2"}
             </button>
             <button
               className="btn btn-secondary"
@@ -231,6 +283,98 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
     }
   };
 
+
+
+  const renderMessageModal = () => {
+    if (!showModal) return null;
+
+    const isSuccess = modalMessage.type === 'success';
+    const icon = isSuccess ? 'check-circle-fill' : 'exclamation-circle-fill';
+    const themeColor = isSuccess ? '#28a745' : '#dc3545';
+
+    return (
+      <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+        <div 
+          className="modal-dialog modal-sm" 
+          style={{ 
+            marginTop: '20px',
+            maxWidth: '320px'
+          }}
+        >
+          <div 
+            className="modal-content border-0 shadow" 
+            style={{ 
+              borderRadius: '12px',
+              overflow: 'hidden'
+            }}
+          >
+            <div 
+              className="modal-body p-0"
+              style={{
+                backgroundColor: '#f8f9fa'
+              }}
+            >
+              <div 
+                className="d-flex flex-column align-items-center text-center p-4"
+                style={{
+                  backgroundColor: 'white',
+                  borderBottom: '1px solid #eee'
+                }}
+              >
+                <div 
+                  style={{ 
+                    color: themeColor,
+                    fontSize: '3rem',
+                    marginBottom: '0.5rem',
+                    lineHeight: 1
+                  }}
+                >
+                  <i className={`bi bi-${icon}`}></i>
+                </div>
+                <h5 
+                  style={{ 
+                    color: themeColor,
+                    margin: '0.5rem 0',
+                    fontWeight: '600'
+                  }}
+                >
+                  {isSuccess ? 'Success!' : 'Error'}
+                </h5>
+              </div>
+              <div className="p-3">
+                <p 
+                  className="mb-3 text-center" 
+                  style={{ 
+                    fontSize: '0.95rem',
+                    color: '#666'
+                  }}
+                >
+                  {modalMessage.text}
+                </p>
+                <button 
+                  type="button" 
+                  className="btn w-100"
+                  style={{
+                    backgroundColor: themeColor,
+                    color: 'white',
+                    border: 'none',
+                    padding: '0.5rem',
+                    borderRadius: '6px',
+                    fontSize: '0.95rem',
+                    fontWeight: '500'
+                  }}
+                  onClick={() => setShowModal(false)}
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   const renderReport = () => {
     if (!reportProps) return null;
 
@@ -252,43 +396,7 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
       {renderFormHeader()}
       {renderFormContent()}
       {renderReport()}
-      {loading && (
-        <div
-          style={{
-            position: "fixed",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            backgroundColor: "rgba(255, 255, 255, 0.8)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 9999,
-          }}
-        >
-          <div
-            style={{
-              width: "50px",
-              height: "50px",
-              border: "5px solid #f3f3f3",
-              borderTop: "5px solid #3498db",
-              borderRadius: "50%",
-              animation: "spin 1s linear infinite",
-            }}
-          ></div>
-          <div
-            style={{
-              marginTop: "20px",
-              fontSize: "16px",
-              color: "#333",
-            }}
-          >
-            Generating Report...
-          </div>
-        </div>
-      )}
+      {renderMessageModal()}
     </div>
   );
 };

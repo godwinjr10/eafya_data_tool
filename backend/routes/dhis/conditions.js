@@ -10,11 +10,9 @@ const dhis2Auth = {
 };
 
 const ORG_UNIT = 'h40pKp93Mtc';
-const DATA_SET = 'RtEYsASU7PG';
 const ATTRIBUTE_OPTION_COMBO = 'Lf2Axb9E6B4';
-const REPORTING_PERIOD = '202505';
 
-const fetchStructuredDataQuery = `
+const fetchStructuredDataQuery = (period) => `
     SELECT
         t.report_month AS period,
         t.data_element_id AS dataElement,
@@ -35,17 +33,17 @@ const fetchStructuredDataQuery = `
             0
         ) AS value
     FROM reporting.conditions_push t
-    WHERE t.report_month = '${REPORTING_PERIOD}'
+    WHERE t.report_month = '${period}'
 `;
 
-export async function fetchStructuredData() {
-    const { rows } = await pool.query(fetchStructuredDataQuery);
+export async function fetchStructuredData(period) {
+    const { rows } = await pool.query(fetchStructuredDataQuery(period));
     return rows;
 }
 
-export async function pushToDHIS2() {
+export async function pushToDHIS2(dataset, period) {
     try {
-        const rows = await fetchStructuredData();
+        const rows = await fetchStructuredData(period);
         if (!rows || rows.length === 0) {
             throw new Error('No data found to push to DHIS2');
         }
@@ -53,10 +51,9 @@ export async function pushToDHIS2() {
         // Format data for DHIS2
         const dataValues = [];
         for (const row of rows) {
-            // Always push a value, using 0 if no value exists
             dataValues.push({
                 dataElement: row.dataelement,
-                value: parseInt(row.value) || 0,  // Convert to number or use 0 if null/undefined/NaN
+                value: parseInt(row.value) || 0,  
                 categoryOptionCombo: row.categoryoptioncombo
             });
         }
@@ -72,8 +69,8 @@ export async function pushToDHIS2() {
         const apiUrl = `${baseUrl.replace(/\/+$/, '')}/dataValueSets`;
         
         const dataValueSet = {
-            dataSet: DATA_SET,
-            period: REPORTING_PERIOD,
+            dataSet: dataset,
+            period: period,
             orgUnit: ORG_UNIT,
             attributeOptionCombo: ATTRIBUTE_OPTION_COMBO,
             dataValues: dataValues
@@ -94,7 +91,7 @@ export async function pushToDHIS2() {
                 }
             );
             
-            console.log(`✅ Posted data for period ${REPORTING_PERIOD}:`, response.data.status);
+            console.log(`✅ Posted data for period ${period}:`, response.data.status);
             return {
                 status: 'success',
                 summary: {
@@ -103,7 +100,7 @@ export async function pushToDHIS2() {
                     failed: 0
                 },
                 successDetails: [{
-                    period: REPORTING_PERIOD,
+                    period: period,
                     orgUnit: ORG_UNIT,
                     status: response.data.status
                 }],
@@ -130,7 +127,7 @@ export async function pushToDHIS2() {
                                err.response?.data || 
                                err.message;
 
-            console.error(`❌ Failed to post data for period ${REPORTING_PERIOD}:`, errorMessage);
+            // console.error(`❌ Failed to post data for period ${REPORTING_PERIOD}:`, errorMessage);
             
             return {
                 status: 'error',
@@ -141,7 +138,7 @@ export async function pushToDHIS2() {
                 },
                 successDetails: [],
                 failureDetails: [{
-                    period: REPORTING_PERIOD,
+                    period: period,
                     orgUnit: ORG_UNIT,
                     error: errorMessage
                 }]
