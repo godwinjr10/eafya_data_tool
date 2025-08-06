@@ -62,7 +62,7 @@ const MainLayout = ({ children }) => {
         <header className=" bg-primary text-white d-flex justify-content-between align-items-center p-2">
           <div className="text-white">
             <i className="bi bi-grid me-2"></i>
-            Ministry of Health
+            Ministry of Health - eAFYA Data Mining Tool
           </div>
           <div>
             <i className="bi bi-person-circle me-2"></i>

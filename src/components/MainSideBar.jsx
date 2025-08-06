@@ -220,9 +220,9 @@ function MainSideBar() {
         <div className="flex-shrink-0 p-3 border-top bg-light">
           {!isCollapsed ? (
             <div className="text-center">
-              <small className="text-muted">© 2024 eAFYA System</small>
+              <small className="text-muted">© 2025 eAFYA System</small>
               <br />
-              <small className="text-muted">Version 2.1.0</small>
+              <small className="text-muted">Version 1.1.0</small>
             </div>
           ) : (
             <div className="text-center">
