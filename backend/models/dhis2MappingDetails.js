@@ -24,7 +24,7 @@ const Dhis2MappingDetails = sequelize.define(
       type: DataTypes.STRING(50),
       allowNull: true,
     },
-    dhis2_dataElement_id: {
+    dhis2_data_element_id: {
       type: DataTypes.STRING(50),
       allowNull: true,
     },

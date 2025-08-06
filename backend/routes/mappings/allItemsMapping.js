@@ -3,81 +3,124 @@ import { pool } from "../../config/database.js";
 
 const router = express.Router();
 
-// Get all sections from dimension table
-router.get("/sections", async (req, res) => {
+// Get all sections with complete data in one call
+router.get("/all-sections", async (req, res) => {
   try {
     const query = `
-            SELECT DISTINCT 
-                hmis_section_id as id,
-                hmis_section as name
-            FROM reporting.dhis2_mapping_details
-            WHERE hmis_section_id IS NOT NULL 
-            AND hmis_section_id != '' 
-            AND hmis_section IS NOT NULL 
-            AND hmis_section != ''
-            AND hmis_section_id in ('1.3.1','1.3.3','1.3.4','1.3.5','1.3.7','1.3.8','1.3.9','1.3.10','1.3.11','1.3.17','1.3.18','1.3.21')
-         ORDER BY hmis_section_id
-     
-        `;
+      SELECT 
+        d.hmis_section_id as id,
+        d.hmis_section as name,
+        COUNT(d.hmis_id) as count,
+        COALESCE(
+          JSON_AGG(
+            JSON_BUILD_OBJECT(
+              'id', d.hmis_id,
+              'code', d.hmis_code,
+              'name', d.hmis_name,
+              'dhis2_id', d.dhis2_data_element_id,
+              'dhis2_name', d.dhis2_name,
+              'mapping_count', COALESCE(m.mapping_count, 0)
+            ) ORDER BY d.hmis_code
+          ) FILTER (WHERE d.hmis_id IS NOT NULL),
+          '[]'::json
+        ) as data
+      FROM reporting.dhis2_mapping_details d
+      LEFT JOIN (
+        SELECT dim_id, COUNT(*) as mapping_count
+        FROM reporting.eafya_hmis_mappings
+        GROUP BY dim_id
+      ) m ON d.hmis_id = m.dim_id
+      WHERE d.hmis_section_id IS NOT NULL 
+        AND d.hmis_section_id != '' 
+        AND d.hmis_section IS NOT NULL 
+        AND d.hmis_section != ''
+      GROUP BY d.hmis_section_id, d.hmis_section
+      ORDER BY d.hmis_section_id
+    `;
+
     const { rows } = await pool.query(query);
-    console.log(
-      `Found ${rows.length} sections:`,
-      rows.map((r) => `${r.id}: ${r.name}`)
-    );
+    console.log(`Found ${rows.length} sections with complete data`);
     res.json(rows);
   } catch (error) {
-    console.error("Database error in /sections:", error);
+    console.error("Database error in /all-sections:", error);
     res.status(500).json({ error: error.message });
   }
 });
-router.get("/labTest/sections", async (req, res) => {
+
+// Get specific category sections (conditions, lab tests, commodities)
+router.get("/sections/:category", async (req, res) => {
   try {
+    const { category } = req.params;
+    let whereClause = "";
+
+    switch (category) {
+      case "conditions":
+        whereClause =
+          "AND d.hmis_section_id IN ('1.3.1','1.3.3','1.3.4','1.3.5','1.3.7','1.3.8','1.3.9','1.3.10','1.3.11','1.3.17','1.3.18','1.3.21')";
+        break;
+      case "labtests":
+        whereClause = "AND d.hmis_section_id ILIKE '10.%'";
+        break;
+      case "commodities":
+        whereClause = "AND d.hmis_section_id = '6'";
+        break;
+      case "vaccines":
+        whereClause =
+          "AND (d.hmis_section_id ILIKE '7.%' OR d.hmis_section ILIKE '%vaccine%')";
+        break;
+      case "antenatal":
+        whereClause =
+          "AND (d.hmis_section_id ILIKE '2.%' OR d.hmis_section ILIKE '%antenatal%' OR d.hmis_section ILIKE '%maternal%')";
+        break;
+      case "postnatal":
+        whereClause =
+          "AND (d.hmis_section_id ILIKE '3.%' OR d.hmis_section ILIKE '%postnatal%' OR d.hmis_section ILIKE '%maternal%')";
+        break;
+      default:
+        return res.status(400).json({
+          error:
+            "Invalid category. Use: conditions, labtests, commodities, vaccines, antenatal, or postnatal",
+        });
+    }
+
     const query = `
-            SELECT DISTINCT
-                hmis_section_id as id,
-                hmis_section as name
-            FROM reporting.dhis2_mapping_details
-            WHERE hmis_section_id IS NOT NULL 
-            AND hmis_section_id != '' 
-            AND hmis_section IS NOT NULL 
-            AND hmis_section != ''
-            AND hmis_section_id ilike '10.%'
-         
-     
-        `;
+      SELECT 
+        d.hmis_section_id as id,
+        d.hmis_section as name,
+        COUNT(d.hmis_id) as count,
+        COALESCE(
+          JSON_AGG(
+            JSON_BUILD_OBJECT(
+              'id', d.hmis_id,
+              'code', d.hmis_code,
+              'name', d.hmis_name,
+              'dhis2_id', d.dhis2_data_element_id,
+              'dhis2_name', d.dhis2_name,
+              'mapping_count', COALESCE(m.mapping_count, 0)
+            ) ORDER BY d.hmis_code
+          ) FILTER (WHERE d.hmis_id IS NOT NULL),
+          '[]'::json
+        ) as data
+      FROM reporting.dhis2_mapping_details d
+      LEFT JOIN (
+        SELECT dim_id, COUNT(*) as mapping_count
+        FROM reporting.eafya_hmis_mappings
+        GROUP BY dim_id
+      ) m ON d.hmis_id = m.dim_id
+      WHERE d.hmis_section_id IS NOT NULL 
+        AND d.hmis_section_id != '' 
+        AND d.hmis_section IS NOT NULL 
+        AND d.hmis_section != ''
+        ${whereClause}
+      GROUP BY d.hmis_section_id, d.hmis_section
+      ORDER BY d.hmis_section_id
+    `;
+
     const { rows } = await pool.query(query);
-    console.log(
-      `Found ${rows.length} sections:`,
-      rows.map((r) => `${r.id}: ${r.name}`)
-    );
+    console.log(`Found ${rows.length} ${category} sections with complete data`);
     res.json(rows);
   } catch (error) {
-    console.error("Database error in /sections:", error);
-    res.status(500).json({ error: error.message });
-  }
-});
-router.get("/commodity/sections", async (req, res) => {
-  try {
-    const query = `
-            SELECT DISTINCT 
-                hmis_section_id as id,
-                hmis_section as name
-            FROM reporting.dhis2_mapping_details
-            WHERE hmis_section_id IS NOT NULL 
-            AND hmis_section_id != '' 
-            AND hmis_section IS NOT NULL 
-            AND hmis_section != ''
-            AND hmis_section_id = '6.0'
-     
-        `;
-    const { rows } = await pool.query(query);
-    console.log(
-      `Found ${rows.length} sections:`,
-      rows.map((r) => `${r.id}: ${r.name}`)
-    );
-    res.json(rows);
-  } catch (error) {
-    console.error("Database error in /sections:", error);
+    console.error(`Database error in /sections/${category}:`, error);
     res.status(500).json({ error: error.message });
   }
 });
