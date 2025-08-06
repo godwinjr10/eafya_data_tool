@@ -1,41 +1,51 @@
 import React, { useState, useEffect } from "react";
 import API from "../helpers/api";
-import ConditionsReport from './ConditionsReport';
-import CommoditiesReport from './CommoditiesReport';
-import LabReport from './LabReport';
+import ConditionsReport from "./ConditionsReport";
+import CommoditiesReport from "./CommoditiesReport";
+import LabReport from "./LabReport";
 
-import MCHForm from '../pages/HMIS/MCH';
-import LabTestForm from '../pages/HMIS/LabTestForm';
-import MedicinesForm from '../pages/HMIS/MedicinesForm';
-import ConditionsForm from '../pages/HMIS/conditions';
+import MCHForm from "../pages/HMIS/MCH";
+import LabTestForm from "../pages/HMIS/LabTestForm";
+import MedicinesForm from "../pages/HMIS/MedicinesForm";
+import ConditionsForm from "../pages/HMIS/conditions";
 
 const months = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
 ];
 
 // Define report configurations
 const REPORT_CONFIGS = {
-  'HMIS_105_01': {
-    endpoint: '/downloads/conditions',
+  HMIS_105_01: {
+    endpoint: "/downloads/conditions",
     component: ConditionsReport,
-    title: 'Conditions Report'
+    title: "Conditions Report",
   },
-  'HMIS_105_02': {
-    endpoint: '/downloads/mch',
+  HMIS_105_02: {
+    endpoint: "/downloads/mch",
     component: null, // Add MCH report component when ready
-    title: 'MCH Report'
+    title: "MCH Report",
   },
-  'HMIS_105_06': {
-    endpoint: '/downloads/commodities',
+  HMIS_105_06: {
+    endpoint: "/downloads/commodities",
     component: CommoditiesReport,
-    title: 'Commodities Report'
+    title: "Commodities Report",
   },
-  'HMIS_105_10': {
-    endpoint: '/downloads/labtests',
+  HMIS_105_10: {
+    endpoint: "/downloads/labtests",
     component: LabReport,
-    title: 'Lab Tests Report'
-  }
+    title: "Lab Tests Report",
+  },
 };
 
 const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
@@ -44,15 +54,17 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
   const [reportProps, setReportProps] = useState(null);
 
   const currentDate = new Date();
-  const [selectedMonth, setSelectedMonth] = useState(months[currentDate.getMonth()]);
+  const [selectedMonth, setSelectedMonth] = useState(
+    months[currentDate.getMonth()]
+  );
   const [selectedYear, setSelectedYear] = useState(currentDate.getFullYear());
 
   const fetchDatasets = async () => {
     try {
-      const response = await API.get('/datasets');
+      const response = await API.get("/datasets");
       setDatasets(response.data.datasets);
     } catch (error) {
-      console.error('Error fetching hierarchy levels:', error);
+      console.error("Error fetching hierarchy levels:", error);
     }
   };
 
@@ -62,28 +74,30 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
 
   const handlePrintReport = async () => {
     const reportConfig = REPORT_CONFIGS[dataSetId];
-    
+
     if (!reportConfig || !reportConfig.component) {
-      alert('Report generation not yet implemented for this section');
+      alert("Report generation not yet implemented for this section");
       return;
     }
 
     try {
       setLoading(true);
       const monthIndex = months.indexOf(selectedMonth) + 1;
-      const formattedMonth = monthIndex.toString().padStart(2, '0');
+      const formattedMonth = monthIndex.toString().padStart(2, "0");
       const reportMonth = `${selectedYear}${formattedMonth}`;
 
-      const response = await API.get(`${reportConfig.endpoint}?report_month=${reportMonth}`);
-      
+      const response = await API.get(
+        `${reportConfig.endpoint}?report_month=${reportMonth}`
+      );
+
       setReportProps({
         data: response.data,
         reportMonth: reportMonth,
-        type: dataSetId
+        type: dataSetId,
       });
     } catch (error) {
-      console.error('Error fetching report data:', error);
-      alert('Failed to generate report');
+      console.error("Error fetching report data:", error);
+      alert("Failed to generate report");
     } finally {
       setLoading(false);
     }
@@ -109,7 +123,7 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
             value={dataSetId}
             onChange={(e) => onDataSetChange(e.target.value)}
           >
-            {Object.values(datasets).map(dataSet => (
+            {Object.values(datasets).map((dataSet) => (
               <option key={dataSet.dataset_id} value={dataSet.dataset_id}>
                 {dataSet.dataset_name}
               </option>
@@ -122,13 +136,13 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
               <i className="bi bi-check2-circle me-2"></i>
               Push To DHIS2
             </button>
-            <button 
-              className="btn btn-secondary" 
+            <button
+              className="btn btn-secondary"
               onClick={handlePrintReport}
               disabled={loading}
             >
               <i className="bi bi-printer me-2"></i>
-              {loading ? 'Generating...' : 'Print Report'}
+              {loading ? "Generating..." : "Print Report"}
             </button>
           </div>
         </div>
@@ -136,16 +150,16 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
       <div className="row">
         <div className="col-md-4">
           <label className="form-label">Period</label>
-          <select 
+          <select
             className="form-select"
             value={`${selectedMonth} ${selectedYear}`}
             onChange={(e) => {
-              const [month, year] = e.target.value.split(' ');
+              const [month, year] = e.target.value.split(" ");
               setSelectedMonth(month);
               setSelectedYear(parseInt(year));
             }}
           >
-            {months.map(month => (
+            {months.map((month) => (
               <option key={month} value={`${month} ${selectedYear}`}>
                 {month} {selectedYear}
               </option>
@@ -153,13 +167,13 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
           </select>
         </div>
         <div className="col-md-4 d-flex align-items-end">
-          <button 
+          <button
             className="btn btn-primary me-2"
             onClick={() => setSelectedYear(selectedYear - 1)}
           >
             Prev year
           </button>
-          <button 
+          <button
             className="btn btn-primary"
             onClick={() => {
               const currentYear = new Date().getFullYear();
@@ -178,14 +192,40 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
 
   const renderFormContent = () => {
     switch (dataSetId) {
-      case 'HMIS_105_01':
-        return <ConditionsForm section={section} selectedMonth={selectedMonth} selectedYear={selectedYear} />;
-      case 'HMIS_105_02':
-        return <MCHForm section={section} selectedMonth={selectedMonth} selectedYear={selectedYear} />;
-      case 'HMIS_105_06':
-        return <MedicinesForm section={section} selectedMonth={selectedMonth} selectedYear={selectedYear} section_id='6.1' />;
-      case 'HMIS_105_10':
-        return <LabTestForm section={section} selectedMonth={selectedMonth} selectedYear={selectedYear} section_id='10.2.1' />;
+      case "HMIS_105_01":
+        return (
+          <ConditionsForm
+            section={section}
+            selectedMonth={selectedMonth}
+            selectedYear={selectedYear}
+          />
+        );
+      case "HMIS_105_02":
+        return (
+          <MCHForm
+            section={section}
+            selectedMonth={selectedMonth}
+            selectedYear={selectedYear}
+          />
+        );
+      case "HMIS_105_06":
+        return (
+          <MedicinesForm
+            section={section}
+            selectedMonth={selectedMonth}
+            selectedYear={selectedYear}
+            section_id="6.1"
+          />
+        );
+      case "HMIS_105_10":
+        return (
+          <LabTestForm
+            section={section}
+            selectedMonth={selectedMonth}
+            selectedYear={selectedYear}
+            section_id="10.2.1"
+          />
+        );
       default:
         return <div>Please select a data set</div>;
     }
@@ -198,10 +238,10 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
     if (!ReportComponent) return null;
 
     return (
-      <div style={{ display: 'none' }}>
-        <ReportComponent 
-          data={reportProps.data} 
-          reportMonth={reportProps.reportMonth} 
+      <div style={{ display: "none" }}>
+        <ReportComponent
+          data={reportProps.data}
+          reportMonth={reportProps.reportMonth}
         />
       </div>
     );
@@ -213,32 +253,38 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
       {renderFormContent()}
       {renderReport()}
       {loading && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 9999,
-        }}>
-          <div style={{
-            width: '50px',
-            height: '50px',
-            border: '5px solid #f3f3f3',
-            borderTop: '5px solid #3498db',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-          }}></div>
-          <div style={{
-            marginTop: '20px',
-            fontSize: '16px',
-            color: '#333',
-          }}>
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(255, 255, 255, 0.8)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999,
+          }}
+        >
+          <div
+            style={{
+              width: "50px",
+              height: "50px",
+              border: "5px solid #f3f3f3",
+              borderTop: "5px solid #3498db",
+              borderRadius: "50%",
+              animation: "spin 1s linear infinite",
+            }}
+          ></div>
+          <div
+            style={{
+              marginTop: "20px",
+              fontSize: "16px",
+              color: "#333",
+            }}
+          >
             Generating Report...
           </div>
         </div>

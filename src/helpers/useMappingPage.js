@@ -21,7 +21,7 @@ const useMappingPage = () => {
   const fetchSections = async () => {
     setLoading(true);
     try {
-      const response = await API.get("/conditions-mapping/sections");
+      const response = await API.get("mapping/items/sections");
       console.log("Sections API response:", response.data);
       setConditions(response.data || []);
     } catch (error) {
@@ -35,7 +35,7 @@ const useMappingPage = () => {
   const fetchLabTestSections = async () => {
     setLoading(true);
     try {
-      const response = await API.get("/conditions-mapping/labTest/sections");
+      const response = await API.get("mapping/items/labTest/sections");
       console.log("Lab TestSections API response:", response.data);
       setLabTestSections(response.data || []);
     } catch (error) {
@@ -49,7 +49,7 @@ const useMappingPage = () => {
   const fetchCommoditySections = async () => {
     setLoading(true);
     try {
-      const response = await API.get("/conditions-mapping/commodity/sections");
+      const response = await API.get("mapping/items/commodity/sections");
       console.log("Commodity Sections API response:", response.data);
       setCommoditySections(response.data || []);
     } catch (error) {
@@ -64,9 +64,7 @@ const useMappingPage = () => {
   const searchItems = async (query = "") => {
     try {
       const searchParam = query ? `?search=${encodeURIComponent(query)}` : "";
-      const response = await API.get(
-        `/conditions-mapping/eafya-items${searchParam}`
-      );
+      const response = await API.get(`mapping/items/eafya-items${searchParam}`);
       const items = response.data || [];
       setCurrentSearch(items);
       return items;
@@ -96,7 +94,7 @@ const useMappingPage = () => {
 
     try {
       const response = await API.get(
-        `/conditions-mapping/sections/${sectionId}/conditions`
+        `mapping/items/sections/${sectionId}/conditions`
       );
       console.log("Conditions response:", response.data);
       setCurrentSectionItems(response.data || []);
@@ -114,7 +112,7 @@ const useMappingPage = () => {
 
     try {
       const response = await API.get(
-        `/conditions-mapping/conditions/${condition.id}/mappings`
+        `mapping/items/conditions/${condition.id}/mappings`
       );
       console.log("Mappings response:", response.data);
       setMappedItems(response.data || []);
@@ -130,7 +128,7 @@ const useMappingPage = () => {
   const fetchItemsCount = async (conditionId) => {
     try {
       const response = await API.get(
-        `/conditions-mapping/conditions/${conditionId}/mappings`
+        `mapping/items/conditions/${conditionId}/mappings`
       );
       return {
         count: (response.data || []).length,
@@ -150,7 +148,7 @@ const useMappingPage = () => {
 
     try {
       const response = await API.post(
-        `/conditions-mapping/conditions/${selectedSectionItem.id}/mappings`,
+        `mapping/items/conditions/${selectedSectionItem.id}/mappings`,
         {
           eafya_id: eafyaItem.id,
           eafya_name: eafyaItem.name,
@@ -188,13 +186,10 @@ const useMappingPage = () => {
     }
 
     try {
-      const response = await API.put(
-        `/conditions-mapping/mappings/${mappingId}`,
-        {
-          eafya_id,
-          eafya_name,
-        }
-      );
+      const response = await API.put(`mapping/items/mappings/${mappingId}`, {
+        eafya_id,
+        eafya_name,
+      });
 
       console.log("Mapping updated:", response.data);
 
@@ -224,7 +219,7 @@ const useMappingPage = () => {
     }
 
     try {
-      await API.delete(`/conditions-mapping/mappings/${mappingId}`);
+      await API.delete(`mapping/items/mappings/${mappingId}`);
 
       console.log("Mapping deleted");
 

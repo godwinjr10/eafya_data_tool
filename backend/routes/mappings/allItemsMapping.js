@@ -8,15 +8,15 @@ router.get("/sections", async (req, res) => {
   try {
     const query = `
             SELECT DISTINCT 
-                section_id as id,
-                section_name as name
-            FROM reporting.dim_sections
-            WHERE section_id IS NOT NULL 
-            AND section_id != '' 
-            AND section_name IS NOT NULL 
-            AND section_name != ''
-            AND section_id in ('1.3.1','1.3.3','1.3.4','1.3.5','1.3.7','1.3.8','1.3.9','1.3.10','1.3.11','1.3.17','1.3.18','1.3.21')
-         ORDER BY section_id
+                hmis_section_id as id,
+                hmis_section as name
+            FROM reporting.dhis2_mapping_details
+            WHERE hmis_section_id IS NOT NULL 
+            AND hmis_section_id != '' 
+            AND hmis_section IS NOT NULL 
+            AND hmis_section != ''
+            AND hmis_section_id in ('1.3.1','1.3.3','1.3.4','1.3.5','1.3.7','1.3.8','1.3.9','1.3.10','1.3.11','1.3.17','1.3.18','1.3.21')
+         ORDER BY hmis_section_id
      
         `;
     const { rows } = await pool.query(query);
@@ -34,14 +34,14 @@ router.get("/labTest/sections", async (req, res) => {
   try {
     const query = `
             SELECT DISTINCT
-                section_id as id,
-                section_name as name
-            FROM reporting.dim_sections
-            WHERE section_id IS NOT NULL 
-            AND section_id != '' 
-            AND section_name IS NOT NULL 
-            AND section_name != ''
-            AND section_id ilike '10.%'
+                hmis_section_id as id,
+                hmis_section as name
+            FROM reporting.dhis2_mapping_details
+            WHERE hmis_section_id IS NOT NULL 
+            AND hmis_section_id != '' 
+            AND hmis_section IS NOT NULL 
+            AND hmis_section != ''
+            AND hmis_section_id ilike '10.%'
          
      
         `;
@@ -60,14 +60,14 @@ router.get("/commodity/sections", async (req, res) => {
   try {
     const query = `
             SELECT DISTINCT 
-                section_id as id,
-                section_name as name
-            FROM reporting.dim_sections
-            WHERE section_id IS NOT NULL 
-            AND section_id != '' 
-            AND section_name IS NOT NULL 
-            AND section_name != ''
-            AND section_id = '6.0'
+                hmis_section_id as id,
+                hmis_section as name
+            FROM reporting.dhis2_mapping_details
+            WHERE hmis_section_id IS NOT NULL 
+            AND hmis_section_id != '' 
+            AND hmis_section IS NOT NULL 
+            AND hmis_section != ''
+            AND hmis_section_id = '6.0'
      
         `;
     const { rows } = await pool.query(query);
@@ -88,14 +88,14 @@ router.get("/sections/:sectionId/conditions", async (req, res) => {
     const { sectionId } = req.params;
     const query = `
             SELECT 
-                id,
-                section_id, 
-                section_name,
-                section_item_code as hmis_code, 
-                section_item_name as hmis_name
-            FROM reporting.dim_sections
-            WHERE section_id = $1
-            ORDER BY section_item_code
+                hmis_id as id,
+                hmis_section_id as section_id, 
+                hmis_section as section_name,
+                hmis_code, 
+                hmis_name
+            FROM reporting.dhis2_mapping_details
+            WHERE hmis_section_id = $1
+            ORDER BY hmis_code
         `;
     const { rows } = await pool.query(query, [sectionId]);
     console.log(`Found ${rows.length} conditions for section ${sectionId}`);
@@ -117,14 +117,14 @@ router.get("/conditions/:conditionId/mappings", async (req, res) => {
                 m.dim_id,
                 m.eafya_id,
                 m.eafya_name,
-                d.section_id,
-                d.section_name,
-                d.section_item_code as hmis_code,
-                d.section_item_name as hmis_name,
+                d.hmis_section_id as section_id,
+                d.hmis_section as section_name,
+                d.hmis_code,
+                d.hmis_name,
                 m.created_at,
                 m.updated_at
             FROM reporting.eafya_hmis_mappings m
-            JOIN reporting.dim_sections d ON m.dim_id = d.id
+            JOIN reporting.dhis2_mapping_details d ON m.dim_id = d.hmis_id
             WHERE m.dim_id = $1
             ORDER BY m.eafya_name
         `;
@@ -156,9 +156,9 @@ router.post("/conditions/:conditionId/mappings", async (req, res) => {
 
     // Verify the condition exists in dim table
     const dimQuery = `
-            SELECT id, section_name, section_item_name 
-            FROM reporting.dim_sections 
-            WHERE id = $1
+            SELECT hmis_id, hmis_section, hmis_name 
+            FROM reporting.dhis2_mapping_details 
+            WHERE hmis_id = $1
         `;
     const { rows: dimRows } = await pool.query(dimQuery, [conditionId]);
 
@@ -206,8 +206,8 @@ router.post("/conditions/:conditionId/mappings", async (req, res) => {
       dim_id: newMapping.dim_id,
       eafya_id: newMapping.eafya_id,
       eafya_name: newMapping.eafya_name,
-      section_name: dimRows[0].section_name,
-      condition_name: dimRows[0].section_item_name,
+      section_name: dimRows[0].hmis_section,
+      condition_name: dimRows[0].hmis_name,
       created_at: newMapping.created_at,
     });
   } catch (error) {
@@ -336,16 +336,16 @@ router.get("/conditions", async (req, res) => {
   try {
     const query = `
             SELECT 
-                d.id,
-                d.section_id, 
-                d.section_name,
-                d.section_item_code as hmis_code, 
-                d.section_item_name as hmis_name,
+                d.hmis_id as id,
+                d.hmis_section_id as section_id, 
+                d.hmis_section as section_name,
+                d.hmis_code, 
+                d.hmis_name,
                 COUNT(m.id) as mapping_count
-            FROM reporting.dim_sections d
-            LEFT JOIN reporting.eafya_hmis_mappings m ON d.id = m.dim_id
-            GROUP BY d.id, d.section_id, d.section_name, d.section_item_code, d.section_item_name
-            ORDER BY d.section_id, d.section_item_code
+            FROM reporting.dhis2_mapping_details d
+            LEFT JOIN reporting.eafya_hmis_mappings m ON d.hmis_id = m.dim_id
+            GROUP BY d.hmis_id, d.hmis_section_id, d.hmis_section, d.hmis_code, d.hmis_name
+            ORDER BY d.hmis_section_id, d.hmis_code
         `;
     const { rows } = await pool.query(query);
     res.json(rows);
@@ -360,12 +360,12 @@ router.get("/stats", async (req, res) => {
   try {
     const query = `
             SELECT 
-                COUNT(DISTINCT d.id) as total_conditions,
+                COUNT(DISTINCT d.hmis_id) as total_conditions,
                 COUNT(DISTINCT m.dim_id) as mapped_conditions,
                 COUNT(m.id) as total_mappings,
-                COUNT(DISTINCT d.section_id) as total_sections
-            FROM reporting.dim_sections d
-            LEFT JOIN reporting.eafya_hmis_mappings m ON d.id = m.dim_id
+                COUNT(DISTINCT d.hmis_section_id) as total_sections
+            FROM reporting.dhis2_mapping_details d
+            LEFT JOIN reporting.eafya_hmis_mappings m ON d.hmis_id = m.dim_id
         `;
     const { rows } = await pool.query(query);
     res.json(rows[0]);
