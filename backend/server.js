@@ -24,6 +24,7 @@ import commoditiesReportRoutes from "./routes/reports/commodities.js";
 import dashboardRoutes from "./routes/dashboard.js";
 import ConditionsMappingRoutes from "./routes/mappings/allItemsMapping.js";
 import dhis2Routes from "./routes/mappings/push_to_dhis2.js";
+import dhisIntegration from "./routes/dhis/dhisroutes.js";
 dotenv.config();
 
 const app = express();
@@ -74,6 +75,7 @@ app.use("/api/commodities/report", commoditiesReportRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/mapping/items", ConditionsMappingRoutes);
 app.use("/api/dhis2", dhis2Routes);
+app.use("/api/dhis", dhisIntegration);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -83,7 +85,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT =
+  process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

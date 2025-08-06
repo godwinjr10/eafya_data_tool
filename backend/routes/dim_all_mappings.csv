@@ -1,0 +1,310 @@
+id,section_name,section_id,section_item_name,section_item_code
+1,Epidemic-Prone Diseases,1.3.1,Malaria,EP01
+2,Epidemic-Prone Diseases,1.3.1,"Suspected Malaria (fever)",EP01a
+3,Epidemic-Prone Diseases,1.3.1,"Malaria Tested (B/s & RDT)",EP01b
+4,Epidemic-Prone Diseases,1.3.1,"Malaria confirmed (B/s & RDT)",EP01c
+5,Epidemic-Prone Diseases,1.3.1,"Confirmed Malaria cases treated",EP01d
+6,Epidemic-Prone Diseases,1.3.1,"Total malaria cases treated",EP01e
+7,Epidemic-Prone Diseases,1.3.1,Acute Flaccid Paralysis,EP02
+8,Epidemic-Prone Diseases,1.3.1,"Animal Bites (suspected rabies)",EP03
+9,Epidemic-Prone Diseases,1.3.1,Cholera,EP04
+10,Epidemic-Prone Diseases,1.3.1,Dysentery,EP05
+11,Epidemic-Prone Diseases,1.3.1,Guinea Worm,EP06
+12,Epidemic-Prone Diseases,1.3.1,Measles,EP07
+13,Epidemic-Prone Diseases,1.3.1,Bacterial Meningitis,EP08
+14,Epidemic-Prone Diseases,1.3.1,Neonatal tetanus,EP09
+15,Epidemic-Prone Diseases,1.3.1,Plague,EP10
+16,Epidemic-Prone Diseases,1.3.1,Yellow Fever,EP11
+17,Epidemic-Prone Diseases,1.3.1,Other Viral Haemorrhagic Fevers,EP12
+18,Epidemic-Prone Diseases,1.3.1,"Severe Acute Respiratory Infection (SARI)",EP13
+19,Epidemic-Prone Diseases,1.3.1,"Adverse Events Following Immunization (AEFI) - Serious",EP14a
+20,Epidemic-Prone Diseases,1.3.1,"Adverse Events Following Immunization (AEFI) - Non Serious",EP14b
+21,Epidemic-Prone Diseases,1.3.1,Typhoid Fever,EP15
+22,Epidemic-Prone Diseases,1.3.1,Refampicin resistant TB cases,EP16
+23,Epidemic-Prone Diseases,1.3.1,"Other Emerging infectious Diseases e.g. Influenza like illness (ILI), SARS",EP17
+24,Epidemic-Prone Diseases,1.3.1,Covid,EP18
+25,Other Infectious/Communicable Diseases,1.3.2,Diarrhoea Acute,CD01
+26,Other Infectious/Communicable Diseases,1.3.2,Diarrhoea Persistent,CD02
+27,Other Infectious/Communicable Diseases,1.3.2,Urethral discharges,CD03
+28,Other Infectious/Communicable Diseases,1.3.2,Genital ulcers,CD04
+29,Other Infectious/Communicable Diseases,1.3.2,"Sexually Transmitted Infection due to Sexual Gender Based Violence",CD05
+30,Other Infectious/Communicable Diseases,1.3.2,Other Sexually Transmitted Infections,CD06
+31,Other Infectious/Communicable Diseases,1.3.2,"Urinary Tract Infections (UTI)",CD07
+32,Other Infectious/Communicable Diseases,1.3.2,Intestinal Worms,CD08
+33,Other Infectious/Communicable Diseases,1.3.2,Haematological Meningitis,CD09
+34,Other Infectious/Communicable Diseases,1.3.2,Other types of meningitis,CD10
+35,Other Infectious/Communicable Diseases,1.3.2,"Cough or cold (No pneumonia)",CD11
+36,Other Infectious/Communicable Diseases,1.3.2,Pneumonia,CD12
+37,Other Infectious/Communicable Diseases,1.3.2,Severe Pneumonia,CD13
+38,Other Infectious/Communicable Diseases,1.3.2,Skin Diseases,CD14
+39,Other Infectious/Communicable Diseases,1.3.2,"Tetanus (over 28 days)",CD15
+40,Other Infectious/Communicable Diseases,1.3.2,Sleeping sickness,CD16
+41,Other Infectious/Communicable Diseases,1.3.2,"Pelvic Inflammatory Disease (PID)",CD17
+42,Other Infectious/Communicable Diseases,1.3.2,Brucellosis,CD18
+43,Other Infectious/Communicable Diseases,1.3.2,"Surgical Site Infections (SSI)",CD19
+44,Neonatal Diseases,1.3.3,"Neonatal Sepsis (0-7 days)",ND01
+45,Neonatal Diseases,1.3.3,"Neonatal Sepsis (8-28 days)",ND02
+46,Neonatal Diseases,1.3.3,"Neonatal Pneumonia (0-7 days)",ND03
+47,Neonatal Diseases,1.3.3,"Neonatal Pneumonia (8-28 days)",ND04
+48,Neonatal Diseases,1.3.3,Neonatal Meningitis,ND05
+49,Neonatal Diseases,1.3.3,Neonatal Jaundice,ND06
+50,Neonatal Diseases,1.3.3,Other Neonatal Conditions,ND07
+51,Non Communicable Diseases/Conditions,1.3.4,"Sickle Cell Anaemia - New",NC01a
+52,Non Communicable Diseases/Conditions,1.3.4,"Sickle Cell Anaemia - Known",NC01b
+53,Non Communicable Diseases/Conditions,1.3.4,Other Haemoglobinopathies,NC02
+54,Non Communicable Diseases/Conditions,1.3.4,"Gastro Intestinal Disorders (non-Infective)",NC03
+55,Non Communicable Diseases/Conditions,1.3.4,Pain Requiring Palliative Care,NC04
+56,Non Communicable Diseases/Conditions,1.3.4,Haemophilia,NC05
+57,Non Communicable Diseases/Conditions,1.3.4,"Deep Vein Thrombosis (DVT)",NC06
+58,Oral diseases,1.3.5,Dental Caries,OD01
+59,Oral diseases,1.3.5,Gingivitis,OD02
+60,Oral diseases,1.3.5,HIV Oral lesions,OD03
+61,Oral diseases,1.3.5,Oral Cancers,OD04
+62,Oral diseases,1.3.5,Other Oral Conditions,OD05
+63,ENT Conditions,1.3.6,"Otitis media acute and chronic",EN01
+64,ENT Conditions,1.3.6,Mastoiditis,EN02
+65,ENT Conditions,1.3.6,Hearing loss,EN03
+66,ENT Conditions,1.3.6,Rhinitis,EN04
+67,ENT Conditions,1.3.6,Sinusitis,EN05
+68,ENT Conditions,1.3.6,Epistaxis,EN06
+69,ENT Conditions,1.3.6,Adenoid Hypertrophy,EN07
+70,ENT Conditions,1.3.6,"Foreign Body in nose, ear and aerodigestive system",EN08
+71,ENT Conditions,1.3.6,"Infected preauricular sinuses and abscess",EN09
+72,ENT Conditions,1.3.6,Otitis external,EN10
+73,ENT Conditions,1.3.6,Mastoid abscess,EN11
+74,ENT Conditions,1.3.6,Vertigo,EN12
+75,ENT Conditions,1.3.6,Tonsillitis,EN13
+76,ENT Conditions,1.3.6,Tonsillar hypertrophy,EN14
+77,ENT Conditions,1.3.6,Tinnitus,EN15
+78,ENT Conditions,1.3.6,Head and neck cancers,EN16
+79,ENT Conditions,1.3.6,Other ENT conditions,EN17
+80,Eye conditions,1.3.7,Allergic conjunctivitis,EC01
+81,Eye conditions,1.3.7,Bacterial Conjunctivitis,EC02
+82,Eye conditions,1.3.7,Ophthalmia neonatorum,EC03
+83,Eye conditions,1.3.7,"Corneal Ulcers/Keratitis",EC04
+84,Eye conditions,1.3.7,"Un-Operable Cataract (>18)",EC05
+85,Eye conditions,1.3.7,"Operable Cataract (<18)",EC06
+86,Eye conditions,1.3.7,Refractive errors,EC07
+87,Eye conditions,1.3.7,Glaucoma,EC08
+88,Eye conditions,1.3.7,Trachoma,EC09
+89,Eye conditions,1.3.7,Vitamin A Deficiency,EC10
+90,Eye conditions,1.3.7,"Diabetic Retinopathy (All stages)",EC11
+91,Eye conditions,1.3.7,"Chorioretinal Macular/Vitreous Disorders",EC12
+92,Eye conditions,1.3.7,"Corneal scars (Non-trachomatous)",EC13
+93,Eye conditions,1.3.7,Tumours,EC14
+94,Eye conditions,1.3.7,Blindness,EC15
+95,Eye conditions,1.3.7,Other eye conditions,EC16
+96,Mental Health,1.3.8,Brief Psychotic Disorder,MH01
+97,Mental Health,1.3.8,Schizophrenia,MH02
+98,Mental Health,1.3.8,Bipolar Affective Disorder,MH03
+99,Mental Health,1.3.8,Major Depressive Disorder,MH04
+100,Mental Health,1.3.8,"Anxiety/Phobic Disorders",MH05
+101,Mental Health,1.3.8,"Anxiety/Social anxiety Disorders",MH06
+102,Mental Health,1.3.8,"Anxiety/Panic Disorder",MH07
+103,Mental Health,1.3.8,"Anxiety/Generalized anxiety Disorder",MH08
+104,Mental Health,1.3.8,Alcohol Use Disorders,MH09
+105,Mental Health,1.3.8,"Epilepsy - New",MH10a
+106,Mental Health,1.3.8,"Epilepsy - Known",MH10b
+107,Mental Health,1.3.8,Other Childhood Mental Disorders,MH11
+108,Mental Health,1.3.8,Other Adult Mental Disorders,MH12
+109,Neurological Disorders,1.3.9,Parkinson's disease,NE01
+110,Neurological Disorders,1.3.9,Dementia,NE02
+111,Neurological Disorders,1.3.9,"Persons in Coma/Emergency Care",NE03
+112,Neurological Disorders,1.3.9,"Down Syndrome (DS)",NE04
+113,Neurological Disorders,1.3.9,CPPMD,NE05
+114,Neurological Disorders,1.3.9,Learning Disability,NE06
+115,Neurological Disorders,1.3.9,"Eating disorders (anorexia, Bulimia, other feeding)",NE07
+116,Neurological Disorders,1.3.9,Others,NE08
+117,Chronic respiratory diseases,1.3.10,"Asthma - New",CR01a
+118,Chronic respiratory diseases,1.3.10,"Asthma - Known",CR01b
+119,Chronic respiratory diseases,1.3.10,"Chronic Obstructive Pulmonary Disease (COPD) - New",CR02a
+120,Chronic respiratory diseases,1.3.10,"Chronic Obstructive Pulmonary Disease (COPD) - Known",CR02b
+121,Chronic respiratory diseases,1.3.10,Other Chronic Respiratory diseases,CR03
+122,Cancers,1.3.11,Cervical Cancer,CA01
+123,Cancers,1.3.11,Prostate Cancer,CA02
+124,Cancers,1.3.11,Breast Cancer,CA03
+125,Cancers,1.3.11,Lung Cancer,CA04
+126,Cancers,1.3.11,Liver Cancer,CA05
+127,Cancers,1.3.11,Colon Cancer,CA06
+128,Cancers,1.3.11,Kaposis Sarcoma,CA07
+129,Cancers,1.3.11,Other Cancers,CA08
+130,Palliative,1.3.12,"No of patients that need palliative care - Cancer",PC01a
+131,Palliative,1.3.12,"No of patients that need palliative care - HIV/AIDS",PC01b
+132,Palliative,1.3.12,"No of patients that need palliative care - Sickle Cell Anemia (SCA)",PC01c
+133,Palliative,1.3.12,"No of patients that need palliative care - Others",PC01d
+134,Palliative,1.3.12,"No of new patients that received palliative care during the month - Cancer",PC02a
+135,Palliative,1.3.12,"No of new patients that received palliative care during the month - HIV/AIDS",PC02b
+136,Palliative,1.3.12,"No of new patients that received palliative care during the month - Sickle Cell Anemia (SCA)",PC02c
+137,Palliative,1.3.12,"No of new patients that received palliative care during the month - Others",PC02d
+138,Palliative,1.3.12,"No of patients that received palliative care during the month - Cancer",PC03a
+139,Palliative,1.3.12,"No of patients that received palliative care during the month - HIV/AIDS",PC03b
+140,Palliative,1.3.12,"No of patients that received palliative care during the month - Sickle Cell Anemia (SCA)",PC03c
+141,Palliative,1.3.12,"No of patients that received palliative care during the month - Others",PC03d
+142,Palliative,1.3.12,"No of patients that received palliative care with a documented WHO performance status during the month - Working (Adults)",PC04a
+143,Palliative,1.3.12,"No of patients that received palliative care with a documented WHO performance status during the month - Playing (Children)",PC04b
+144,Palliative,1.3.12,"No of patients that received palliative care with a documented WHO performance status during the month - Ambulant",PC04c
+145,Palliative,1.3.12,"No of patients that received palliative care with a documented WHO performance status during the month - Bedridden",PC04d
+146,Palliative,1.3.12,"No of patients that received palliative care and are on oral/liquid morphine",PC05
+147,Palliative,1.3.12,"No of patients on palliative care who died during the month",PC06
+148,Disabilities,1.3.14,Individuals with Difficulty in seeing,DS01
+149,Disabilities,1.3.14,Individuals with Albinism,DS02
+150,Disabilities,1.3.14,Individuals with Difficulty in hearing,DS03
+151,Disabilities,1.3.14,Individuals with Speech Difficulties,DS04
+152,Disabilities,1.3.14,"Individuals with delayed age specific motor development",DS05
+153,Disabilities,1.3.14,Individuals with Dwarfism,DS06
+154,Disabilities,1.3.14,Individuals with Difficulty understanding,DS07
+155,Disabilities,1.3.14,Individuals with Difficulty in remembering,DS08
+156,Disabilities,1.3.14,Individuals with Difficulty in reading,DS09
+157,Disabilities,1.3.14,Individuals with Difficulty in writing,DS10
+158,Disabilities,1.3.14,Individuals with Difficulty in self care,DS11
+159,Disabilities,1.3.14,Individuals with Mentally impairment,DS12
+160,Disabilities,1.3.14,Individuals with Emotionally impairment,DS13
+161,Cardiovascular diseases,1.3.15,"Stroke/Cardiovascular Accident (CVA)",CV01
+162,Cardiovascular diseases,1.3.15,"Hypertension - New",CV02a
+163,Cardiovascular diseases,1.3.15,"Hypertension - Known",CV02b
+164,Cardiovascular diseases,1.3.15,Heart failure,CV03
+165,Cardiovascular diseases,1.3.15,Ischemic Heart Diseases,CV04
+166,Cardiovascular diseases,1.3.15,Rheumatic Heart Diseases,CV05
+167,Cardiovascular diseases,1.3.15,Congenital Heart Diseases,CV06
+168,Cardiovascular diseases,1.3.15,Other Cardiovascular Diseases,CV07
+169,Renal Diseases,1.3.16,Acute Kidney Injury,RD01
+170,Renal Diseases,1.3.16,Acute glomerulonephritis,RD02
+171,Renal Diseases,1.3.16,Nephrotic syndrome,RD03
+172,Renal Diseases,1.3.16,Uncomplicated UTI,RD04
+173,Renal Diseases,1.3.16,Complicated UTI,RD05
+174,Liver Diseases,1.3.17,Liver Cirrhosis,LD01
+175,Liver Diseases,1.3.17,Liver Abscess,LD02
+176,Liver Diseases,1.3.17,Hepatitis A,LD03
+177,Liver Diseases,1.3.17,Hepatitis B,LD04
+178,Liver Diseases,1.3.17,Hepatitis C,LD05
+179,Liver Diseases,1.3.17,Hepatitis D,LD06
+180,Liver Diseases,1.3.17,Hepatitis E,LD07
+181,Endocrine and Metabolic Disorders,1.3.18,"Diabetes mellitus - New Type 1",EM01a
+182,Endocrine and Metabolic Disorders,1.3.18,"Diabetes mellitus - New Type 2",EM01b
+183,Endocrine and Metabolic Disorders,1.3.18,"Diabetes mellitus - New Other Forms",EM01c
+184,Endocrine and Metabolic Disorders,1.3.18,"Diabetes mellitus - Known Type 1",EM01d
+185,Endocrine and Metabolic Disorders,1.3.18,"Diabetes mellitus - Known Type 2",EM01e
+186,Endocrine and Metabolic Disorders,1.3.18,"Diabetes mellitus - Known Other Forms",EM01f
+187,Endocrine and Metabolic Disorders,1.3.18,Thyroid Disease,EM02
+188,Endocrine and Metabolic Disorders,1.3.18,Other Endocrine and Metabolic Diseases,EM03
+189,Injuries,1.3.19,Jaw injuries,IN01
+190,Injuries,1.3.19,Injuries due to Gender based violence,IN02
+191,Injuries,1.3.19,Injuries/Trauma due to other causes,IN03
+192,Injuries,1.3.19,"Animal bites - Domestic",IN04a
+193,Injuries,1.3.19,"Animal bites - Wild",IN04b
+194,Injuries,1.3.19,Snake bites,IN05
+195,Injuries,1.3.19,Insect bites,IN06
+196,Minor Operations in OPD,1.3.20,Tooth extractions,MO01
+197,Minor Operations in OPD,1.3.20,Dental Fillings,MO02
+198,Minor Operations in OPD,1.3.20,Other Minor Operations,MO03
+199,Neglected Tropical Diseases (NTDs),1.3.21,Leishmaniasis,NT01
+200,Neglected Tropical Diseases (NTDs),1.3.21,"Lymphatic Filariasis (hydrocele)",NT02
+201,Neglected Tropical Diseases (NTDs),1.3.21,"Lymphatic Filariasis (Lymphoedema)",NT03
+202,Neglected Tropical Diseases (NTDs),1.3.21,Urinary Schistosomiasis,NT04
+203,Neglected Tropical Diseases (NTDs),1.3.21,Intestinal Schistosomiasis,NT05
+204,Neglected Tropical Diseases (NTDs),1.3.21,Onchocerciasis,NT06
+205,Maternal conditions,1.3.22,"Abortions due to Gender Based Violence (GBV)",MC01
+206,Maternal conditions,1.3.22,Abortions due to other causes,MC02
+207,Maternal conditions,1.3.22,Malaria in pregnancy,MC03
+208,Maternal conditions,1.3.22,High blood pressure in pregnancy,MC04
+209,Maternal conditions,1.3.22,Diabetes in Pregnancy,MC05
+210,Maternal conditions,1.3.22,Obstructed labour,MC06
+211,Maternal conditions,1.3.22,Puerperal sepsis,MC07
+212,Maternal conditions,1.3.22,Psychosis of Postpartum onset,MC08
+213,Maternal conditions,1.3.22,Post Traumatic Stress Disorder of Postpartum onset,MC09
+214,Maternal conditions,1.3.22,"Haemorrhage related to pregnancy (APH)",MC10
+215,Maternal conditions,1.3.22,"Haemorrhage related to pregnancy (PPH)",MC11
+216,Maternal conditions,1.3.22,"Breast cancer - Total Screened",MC12a
+217,Maternal conditions,1.3.22,"Breast cancer - Now with breast cancer",MC12b
+218,Maternal conditions,1.3.22,"Cervical cancer - Total Screened",MC13a
+219,Maternal conditions,1.3.22,"Cervical cancer - Now with cervical cancer",MC13b
+220,Other OPD conditions,1.3.23,All others,OP01
+221,Deaths in OPD,1.3.24,Deaths in OPD,DT01
+222,Emergency Medical Services,1.3.25,"No of emergency cases at the facility - Medical",ES01a
+223,Emergency Medical Services,1.3.25,"No of emergency cases at the facility - Obstetrics/gynaecology",ES01b
+224,Emergency Medical Services,1.3.25,"No of emergency cases at the facility - Surgical",ES01c
+225,Emergency Medical Services,1.3.25,"No of emergency cases at the facility - Road Traffic Injuries",ES01d
+226,Emergency Medical Services,1.3.25,"No of Patients that received care at the scene of emergency",ES02
+227,Emergency Medical Services,1.3.25,"No of emergency cases that arrived at the facility by Ambulance",ES03a
+228,Emergency Medical Services,1.3.25,"No of emergency cases that arrived at the facility by Police Vehicle",ES03b
+229,Emergency Medical Services,1.3.25,"No of emergency cases that arrived at the facility by Private Transportation",ES03c
+230,Emergency Medical Services,1.3.25,"No of patients accessing care within 1hr in an emergency unit",ES04
+231,Emergency Medical Services,1.3.25,"No of patients who developed complications within 24 hours of care",ES05
+232,Emergency Medical Services,1.3.25,"No of patients with hypoxemia - Total",ES06a
+233,Emergency Medical Services,1.3.25,"No of patients with hypoxemia - Administered with Oxygen",ES06b
+234,Emergency Medical Services,1.3.25,"No of patients with external haemorrhages - Total",ES07a
+235,Emergency Medical Services,1.3.25,"No of patients with external haemorrhages - Controlled",ES07b
+236,Emergency Medical Services,1.3.25,"Road Traffic Injuries - Motor Vehicle",ES08a
+237,Emergency Medical Services,1.3.25,"Road Traffic Injuries - Motor Cycle",ES08b
+238,Emergency Medical Services,1.3.25,"Road Traffic Injuries - Bicycle",ES08c
+239,Emergency Medical Services,1.3.25,"Road Traffic Injuries - Pedestrian",ES08d
+240,Emergency Medical Services,1.3.25,"Road Traffic Injuries - Others",ES08e
+241,Emergency Medical Services,1.3.25,"No of deaths at the emergency unit - Medical",ES09a
+242,Emergency Medical Services,1.3.25,"No of deaths at the emergency unit - Obstetrics/gynaecology",ES09b
+243,Emergency Medical Services,1.3.25,"No of deaths at the emergency unit - Surgical",ES09c
+244,Emergency Medical Services,1.3.25,"No of deaths at the emergency unit - Road traffic injuries",ES09d
+245,Emergency Medical Services,1.3.25,"No of Patients who received vaccination for Tetanus",ES10a
+246,Emergency Medical Services,1.3.25,"No of Patients who received vaccination for Rabies",ES10b
+247,Emergency Medical Services,1.3.25,"No of Patients who received vaccination for Antivenom",ES10c
+248,TB Screening,1.3.26,"OPD - No screened for TB",TP01a
+249,TB Screening,1.3.26,"OPD - No of presumptive TB cases identified",TP01b
+250,TB Screening,1.3.26,"OPD - No of presumptive diagnosed with TB",TP01c
+251,TB Screening,1.3.26,"ART - No screened for TB",TP02a
+252,TB Screening,1.3.26,"ART - No of presumptive TB cases identified",TP02b
+253,TB Screening,1.3.26,"ART - No of presumptive diagnosed with TB",TP02c
+254,TB Screening,1.3.26,"Out Reaches - No screened for TB",TP03a
+255,TB Screening,1.3.26,"Out Reaches - No of presumptive TB cases identified",TP03b
+256,TB Screening,1.3.26,"Out Reaches - No of presumptive diagnosed with TB",TP03c
+257,Leprosy services,1.3.27,"New and relapse leprosy cases registered - Screened",TS01a
+258,Leprosy services,1.3.27,"New and relapse leprosy cases registered - Presumed",TS01b
+259,Leprosy services,1.3.27,"New and relapse leprosy cases registered - Diagnosed",TS01c
+260,Essential Medicines and Health Supplies,6.0,"Artemether/Lumefantrine 20mg/120mg",SS01
+261,Essential Medicines and Health Supplies,6.0,"Artesunate 60mg",SS02
+262,Essential Medicines and Health Supplies,6.0,"Long Lasting Insecticidal Nets (LLINs)",SS03
+263,Essential Medicines and Health Supplies,6.0,"Chlorhexidine Digluconate Gel (equivalent to 7.1% chlorhexidine)",SS04
+264,Essential Medicines and Health Supplies,6.0,"Therapeutic milk F-75 2.4kcal/ml",SS05
+265,Essential Medicines and Health Supplies,6.0,"Ready-to-use Therapeutic feeds (RUTF)",SS06
+266,Essential Medicines and Health Supplies,6.0,"Oral/Liquid Morphine 10mg/5ml",SS07
+267,Essential Medicines and Health Supplies,6.0,"Retinol (Vitamin A) 200,000 IU",SS08
+268,Essential Medicines and Health Supplies,6.0,"Bendroflumethiazide 5mg",SS09
+269,Essential Medicines and Health Supplies,6.0,"Amlodipine 5mg",SS10
+270,Essential Medicines and Health Supplies,6.0,"Captopril 25mg",SS11
+271,Essential Medicines and Health Supplies,6.0,"Metformin 850mg",SS12
+272,Essential Medicines and Health Supplies,6.0,"Glimepiride 2mg",SS13
+273,Essential Medicines and Health Supplies,6.0,"Insulin short acting 40IU/1ml",SS14
+274,Essential Medicines and Health Supplies,6.0,"Filled Oxygen Cylinder (Big Size 47L:WC+GC)",SS15
+275,Essential Medicines and Health Supplies,6.0,"Ferrous sulphate + Folic Acid",SS16
+276,Essential Medicines and Health Supplies,6.0,"Salbutamol inhaler",SS17
+277,Essential Medicines and Health Supplies,6.0,"Carbamazepine 200mg",SS18
+278,Essential Medicines and Health Supplies,6.0,"Fluoxetine 20mg",SS19
+279,Essential Medicines and Health Supplies,6.0,"Chlorpromazine 100mg",SS20
+280,Essential Medicines and Health Supplies,6.0,"Depot Medroxyprogesterone Acetate (DMPA)_IMSC",SS21
+281,Essential Medicines and Health Supplies,6.0,"Amoxicillin 250mg",SS22
+282,Essential Medicines and Health Supplies,6.0,"Amoxicillin dispersible 125mg",SS23
+283,Essential Medicines and Health Supplies,6.0,"Sulfadoxine/Pyrimethamine tablet 500mg/25mg",SS24
+284,Essential Medicines and Health Supplies,6.0,"Misoprostol 200mg",SS25
+285,Essential Medicines and Health Supplies,6.0,"ORS Sachets with zinc tablets",SS26
+286,Essential Medicines and Health Supplies,6.0,"Measles-Rubella Vaccine",SS27
+287,Essential Medicines and Health Supplies,6.0,"Ceftriaxone 1g Injection",SS28
+288,Essential Medicines and Health Supplies,6.0,"Oxytocin 10IU/1ml Injection",SS29
+289,Essential Medicines and Health Supplies,6.0,"Mama Kit",SS30
+290,Essential Medicines and Health Supplies,6.0,"Etonogestrel 68mg Implant (Implanon)",SS31
+291,Essential Medicines and Health Supplies,6.0,"Male Condoms",SS32
+292,Essential Medicines and Health Supplies,6.0,"CD4 reagent (BD Presto/Visitect/PIMA)",SS33
+293,Essential Medicines and Health Supplies,6.0,"Malaria Rapid Diagnostic Tests",SS34
+294,Essential Medicines and Health Supplies,6.0,"TB GeneXpert Cartridges",SS35
+295,Essential Medicines and Health Supplies,6.0,"Determine HIV (1/2 screening test)",SS36
+296,Essential Medicines and Health Supplies,6.0,"Statpack HIV Confirmatory rapid tests",SS37
+297,Essential Medicines and Health Supplies,6.0,"SD Bioline test-Tie Breaker",SS38
+298,Essential Medicines and Health Supplies,6.0,"Blood 450ml",SS39
+299,Essential Medicines and Health Supplies,6.0,"Hepatitis HBsAg Test Kits",SS40
+300,Essential Medicines and Health Supplies,6.0,"HIV/Syphilis Duo Kit",SS41
+301,Essential Medicines and Health Supplies,6.0,"Tenofovir/Lamivudine/Dolutegravir (TDF/3TC/DTG) 300mg/300mg/50mg",SS42
+302,Essential Medicines and Health Supplies,6.0,"Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 600mg/300mg/50mg",SS43
+303,Essential Medicines and Health Supplies,6.0,"Zidovudine/Lamivudine (AZT/3TC) 300mg/150mg",SS44
+304,Essential Medicines and Health Supplies,6.0,"Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 120mg/60mg/5mg",SS45
+305,Essential Medicines and Health Supplies,6.0,"Zidovudine/Lamivudine (AZT/3TC) 60mg/30mg",SS46
+306,Essential Medicines and Health Supplies,6.0,"Nevirapine (NVP) 50mg/5ml oral susp",SS47
+307,Essential Medicines and Health Supplies,6.0,"Ethambutol 400mg",SS48
+308,Essential Medicines and Health Supplies,6.0,"RHZE 150mg/75mg/400mg/275mg",SS49
+309,Essential Medicines and Health Supplies,6.0,"RHZ 150mg/75mg/400mg",SS50
