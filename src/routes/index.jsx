@@ -1,6 +1,7 @@
-import React, { Fragment } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Switch, Route } from "react-router-dom";
 
+<<<<<<< HEAD
 import MCH from '../pages/MCH';
 import HMIS from '../pages/HMIS';
 import Users from '../pages/Users';
@@ -14,6 +15,21 @@ import MainLayout from '../components/MainLayout';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import ProtectedRoute from '../helpers/Protected';
 import MappingPage from '../pages/mapping/mappingPage';
+=======
+import MCH from "../pages/MCH";
+import HMIS from "../pages/HMIS";
+import Users from "../pages/Users";
+import LabTest from "../pages/LabTests";
+import Facility from "../pages/Facility";
+import Login from "../pages/Auth/Login";
+import Inpatient from "../pages/Inpatient";
+import Outpatient from "../pages/Outpatient";
+import Supplychain from "../pages/Supplychain";
+import MainLayout from "../components/MainLayout";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import ProtectedRoute from "../helpers/Protected";
+import MappingPage from "../pages/mapping";
+>>>>>>> 5e8829423a7c3b61e0fb755c12ff1b92b1c93459
 
 const AppRoutes = () => {
   return (
