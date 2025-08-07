@@ -1,23 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaTrash } from 'react-icons/fa';
-import { mappingService } from '../../services/mappingService';
+import { hmisData } from './hmisData';
 import './styles.css';
 
 const mainSections = [
   { id: 'conditions', name: 'Conditions' },
-  { id: 'commodities', name: 'Commodities' },
+  { id: 'commodities', name: 'Essential Medicines' },
   { id: 'lab_tests', name: 'Lab Tests' }
 ];
 
+// Get condition subsections from hmisData
+const getConditionSubSections = () => {
+  // Get all section keys from hmisData that have data
+  const sectionKeys = Object.keys(hmisData).filter(key => hmisData[key]?.length > 0);
+  
+  // Create subsection objects with proper format
+  return sectionKeys.map(key => ({
+    id: key,
+    // Convert key to display name (e.g., 'epidemic_prone' -> 'Epidemic Prone')
+    name: key.split('_')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ')
+  }));
+};
+
 const subSections = {
-  conditions: [
-    { id: 'epidemic_prone', name: 'Epidemic Prone' },
-    { id: 'tb', name: 'TB' },
-    { id: 'cancer', name: 'Cancer' }
-  ],
+  // Dynamically get conditions subsections
+  conditions: getConditionSubSections(),
+  // Keep other sections hardcoded
   commodities: [
-    { id: 'essential_medicines', name: 'Essential Medicines' },
-    { id: 'general_medicines', name: 'General Medicines' }
+    { id: 'commodities', name: 'Essential Medicines' }
   ],
   lab_tests: [
     { id: 'blood_tests', name: 'Blood Tests' },
@@ -25,62 +37,115 @@ const subSections = {
   ]
 };
 
-const hmisData = {
-  epidemic_prone: [
-    {
-      hmis_code: '51',
-      hmis_name: 'EP01. Malaria',
-      mappings: [
-        { id: '710', name: 'Plasmodium falciparum malaria' },
-        { id: '713', name: 'Plasmodium falciparum malaria, unspecified' },
-        { id: '714', name: 'Plasmodium vivax malaria' },
-        { id: '718', name: 'Plasmodium malariae malaria' },
-        { id: '722', name: 'Other parasitologically confirmed malaria' },
-        { id: '726', name: 'Unspecified malaria' }
-      ]
-    },
-    {
-      hmis_code: '152',
-      hmis_name: 'EP02. Acute Flaccid Paralysis',
-      mappings: [
-        { id: '3182', name: 'Flaccid paraplegia' },
-        { id: '3185', name: 'Flaccid tetraplegia' },
-        { id: '6130', name: 'Flaccid neuropathic bladder, not elsewhere classified' }
-      ]
-    },
-    {
-      hmis_code: '152',
-      hmis_name: 'EP02. Acute Flaccid Paralysis',
-      mappings: [
-        { id: '3182', name: 'Flaccid paraplegia' },
-        { id: '3185', name: 'Flaccid tetraplegia' },
-        { id: '6130', name: 'Flaccid neuropathic bladder, not elsewhere classified' }
-      ]
-    },
-    {
-      hmis_code: '152',
-      hmis_name: 'EP02. Acute Flaccid Paralysis',
-      mappings: [
-        { id: '3182', name: 'Flaccid paraplegia' },
-        { id: '3185', name: 'Flaccid tetraplegia' },
-        { id: '6130', name: 'Flaccid neuropathic bladder, not elsewhere classified' }
-      ]
-    }
-  ],
-  tb: [
-    {
-      hmis_code: '168',
-      hmis_name: 'EP16. Presumptive MDRTB cases',
-      mappings: [
-        { id: '11440', name: 'Observation for suspected tuberculosis' },
-        { id: '28501', name: 'Observation for suspected tuberculosis ruled out' }
-      ]
-    }
-  ]
-};
+// No subsections needed as we're using the main sections directly
+
+// All available eAFYA commodities/medicines for mapping
+const eafyaCommodities = [
+  { id: '8', name: 'Ready to use Therapeutic feeds (RUTF)' },
+  { id: '10', name: 'Therapeutic Milk' },
+  { id: '59', name: 'Chlorhexidine gel' },
+  { id: '239', name: 'Measles vaccine, live attenuated' },
+  { id: '272', name: 'Vitamin A (Retinol)' },
+  { id: '339', name: 'Salbutamol inhaler' },
+  { id: '510', name: 'Nevirapine (NVP)' },
+  { id: '605', name: 'Amoxicillin tabs' },
+  { id: '678', name: 'Amoxicillin caps' },
+  { id: '685', name: 'Artemether + Lumefantrine(24\'s) (coartem)' },
+  { id: '688', name: 'Metformin Glucophage' },
+  { id: '716', name: 'Amlodipine' },
+  { id: '725', name: 'Artemether+ Lumefantrine (6\'s) (coartem)' },
+  { id: '726', name: 'Artesunate' },
+  { id: '754', name: 'Captopril' },
+  { id: '759', name: 'Ceftriaxone INJ' },
+  { id: '805', name: 'Ethambutol (E) 100mg ADULT' },
+  { id: '817', name: 'Ferrous sulphate+Folic acid' },
+  { id: '822', name: 'Fluoxetine' },
+  { id: '830', name: 'Glimepiride' },
+  { id: '969', name: 'RHZE(ADULT)' },
+  { id: '1018', name: 'Zidovudine/Lamivudine/Nevirapine (AZT/3TC/NVP)' },
+  { id: '1104', name: 'HIV Determine I/II' },
+  { id: '1140', name: 'Malaria Rapid Test Kits' },
+  { id: '1162', name: 'Condoms' },
+  { id: '1257', name: 'FACS Count % CD4 Reagent' },
+  { id: '1288', name: 'Tenofovir + Lamivudine + Dolutegravir (TDF/3TC/DTG)' },
+  { id: '2182', name: 'HIV-1/2 3.0 SD Bioline' },
+  { id: '2189', name: 'HIV + Syphilis Duo Test Kit' },
+  { id: '2243', name: 'Safe Delivery Kits (mama kits)' },
+  { id: '2426', name: 'Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 600/300/50' },
+  { id: '2461', name: 'Refilled Gas Cylinder' },
+  { id: '2491', name: 'Abacavir/Lamivudine/Lopinavir/Ritonavir (ABC/3TC/LPV/r)' },
+  { id: '2625', name: 'Gene expert (TB)' },
+  { id: '2803', name: 'OXYTOCIN(PITOCIN)' },
+  { id: '2846', name: 'CHLORPROMAZINE(CPZ) tabs' }
+];
 
 // All available eAFYA diseases for mapping
 const eafyaDiseases = [
+  // Preterm newborn conditions
+  { id: '22539', name: 'Preterm newborn unspecified' },
+  { id: '22529', name: 'Preterm newborn' },
+  { id: '22530', name: 'Preterm newborn gestational age 28 completed weeks' },
+  { id: '22531', name: 'Preterm newborn gestational age 29 completed weeks' },
+  { id: '22532', name: 'Preterm newborn gestational age 30 completed weeks' },
+  { id: '22533', name: 'Preterm newborn gestational age 31 completed weeks' },
+  { id: '22534', name: 'Preterm newborn gestational age 32 completed weeks' },
+  { id: '22535', name: 'Preterm newborn gestational age 33 completed weeks' },
+  { id: '22536', name: 'Preterm newborn gestational age 34 completed weeks' },
+  { id: '22537', name: 'Preterm newborn gestational age 35 completed weeks' },
+  { id: '22538', name: 'Preterm newborn gestational age 36 completed weeks' },
+  // Congenital and respiratory conditions
+  { id: '7415', name: 'Congenital malformation of optic disc' },
+  { id: '7078', name: 'Congenital pneumonia due to streptococcus, group B' },
+  { id: '7080', name: 'Congenital pneumonia due to Pseudomonas' },
+  { id: '7102', name: 'Chronic respiratory disease originating in the perinatal period' },
+  { id: '4413', name: 'Chronic respiratory failure' },
+  { id: '4355', name: 'Chronic respiratory conditions due to chemicals, gases, fumes and vapours' },
+  { id: '7106', name: 'Unspecified chronic respiratory disease originating in the perinatal period' },
+  { id: '7105', name: 'Other chronic respiratory diseases originating in the perinatal period' },
+  { id: '15519', name: 'Chronic respiratory acidosis' },
+  { id: '19147', name: 'Chronic respiratory failure' },
+  { id: '19148', name: 'Chronic respiratory failure Type I' },
+  { id: '19149', name: 'Chronic respiratory failure Type II' },
+  { id: '190', name: 'Other tetanus' },
+  { id: '189', name: 'Obstetrical tetanus' },
+  { id: '188', name: 'Tetanus neonatorum' },
+  { id: '7137', name: 'Sepsis of newborn due to anaerobes' },
+  { id: '7138', name: 'Other bacterial sepsis of newborn' },
+  { id: '7139', name: 'Bacterial sepsis of newborn, unspecified' },
+  { id: '7131', name: 'Bacterial sepsis of newborn' },
+  { id: '7132', name: 'Sepsis of newborn due to streptococcus, group B' },
+  { id: '7133', name: 'Sepsis of newborn due to other and unspecified streptococci' },
+  { id: '7134', name: 'Sepsis of newborn due to Staphylococcus aureus' },
+  { id: '7135', name: 'Sepsis of newborn due to other and unspecified staphylococci' },
+  { id: '7136', name: 'Sepsis of newborn due to Escherichia coli' },
+  { id: '7081', name: 'Congenital pneumonia due to other bacterial agents' },
+  { id: '7077', name: 'Congenital pneumonia due to staphylococcus' },
+  { id: '7076', name: 'Congenital pneumonia due to Chlamydia' },
+  { id: '7075', name: 'Congenital pneumonia due to viral agent' },
+  { id: '7074', name: 'Congenital pneumonia' },
+  { id: '7082', name: 'Congenital pneumonia due to other organisms' },
+  { id: '7078', name: 'Congenital pneumonia due to streptococcus, group B' },
+  { id: '7079', name: 'Congenital pneumonia due to Escherichia coli' },
+  { id: '7140', name: 'Other congenital infectious and parasitic diseases' },
+  { id: '22649', name: 'Neonatal meningitis' },
+  { id: '7206', name: 'Neonatal jaundice due to bleeding' },
+  { id: '7219', name: 'Neonatal jaundice, unspecified' },
+  { id: '7218', name: 'Neonatal jaundice from other specified causes' },
+  { id: '7217', name: 'Neonatal jaundice from breast milk inhibitor' },
+  { id: '7216', name: 'Neonatal jaundice from other and unspecified hepatocellular damage' },
+  { id: '7214', name: 'Neonatal jaundice associated with preterm delivery' },
+  { id: '7213', name: 'Neonatal jaundice from other and unspecified causes' },
+  { id: '7212', name: 'Neonatal jaundice due to excessive haemolysis, unspecified' },
+  { id: '7211', name: 'Neonatal jaundice due to other specified excessive haemolysis' },
+  { id: '7210', name: 'Neonatal jaundice due to swallowed maternal blood' },
+  { id: '7209', name: 'Neonatal jaundice due to drugs or toxins transmitted from mother or given to newborn' },
+  { id: '7208', name: 'Neonatal jaundice due to polycythaemia' },
+  { id: '7207', name: 'Neonatal jaundice due to infection' },
+  { id: '7205', name: 'Neonatal jaundice due to bruising' },
+  { id: '7204', name: 'Neonatal jaundice due to other excessive haemolysis' },
+  { id: '7222', name: 'Other neonatal jaundice' },
+  { id: '7083', name: 'Congenital pneumonia, unspecified' },
+  { id: '7099', name: 'Congenital pneumonia due to Pseudomonas' },
   { id: '710', name: 'Plasmodium falciparum malaria' },
   { id: '713', name: 'Plasmodium falciparum malaria, unspecified' },
   { id: '714', name: 'Plasmodium vivax malaria' },
@@ -93,18 +158,27 @@ const eafyaDiseases = [
   { id: '394', name: 'Rabies, unspecified' },
   { id: '391', name: 'Rabies' },
   { id: '392', name: 'Sylvatic rabies' }
-  // Add more diseases as needed
 ];
 
-const MappingDialog = ({ isOpen, onClose, onSave, hmisName }) => {
+const MappingDialog = ({ isOpen, onClose, onSave, hmisName, section }) => {
+  // Determine which array to use based on section
+  const itemsArray = section === 'commodities' ? eafyaCommodities : eafyaDiseases;
   const [selectedDiseases, setSelectedDiseases] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   
+  // Reset state when dialog closes
+  useEffect(() => {
+    if (!isOpen) {
+      setSelectedDiseases([]);
+      setSearchTerm('');
+    }
+  }, [isOpen]);
+  
   if (!isOpen) return null;
 
-  const filteredDiseases = eafyaDiseases.filter(disease => 
-    disease.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    disease.id.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredItems = itemsArray.filter(item => 
+    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    item.id.toLowerCase().includes(searchTerm.toLowerCase())
   );
   
   return (
@@ -121,24 +195,24 @@ const MappingDialog = ({ isOpen, onClose, onSave, hmisName }) => {
           />
         </div>
         <div className="disease-list">
-          {filteredDiseases.map(disease => (
-            <label key={disease.id} className="disease-item">
+          {filteredItems.map(item => (
+            <label key={item.id} className="disease-item">
               <input
                 type="checkbox"
-                checked={selectedDiseases.includes(disease.id)}
+                checked={selectedDiseases.includes(item.id)}
                 onChange={(e) => {
                   if (e.target.checked) {
-                    setSelectedDiseases([...selectedDiseases, disease.id]);
+                    setSelectedDiseases([...selectedDiseases, item.id]);
                   } else {
-                    setSelectedDiseases(selectedDiseases.filter(id => id !== disease.id));
+                    setSelectedDiseases(selectedDiseases.filter(id => id !== item.id));
                   }
                 }}
               />
-              <span>{disease.id} - {disease.name}</span>
+              <span>{item.id} - {item.name}</span>
             </label>
           ))}
-          {filteredDiseases.length === 0 && (
-            <div className="no-results">No matching diseases found</div>
+          {filteredItems.length === 0 && (
+            <div className="no-results">No matching items found</div>
           )}
         </div>
         <div className="dialog-actions">
@@ -169,20 +243,16 @@ const ReportSections = () => {
     hmisName: '' 
   });
 
-  // Get all HMIS data across all sections
-  const allHmisData = Object.values(hmisData).flat();
+  // Get data for selected subsection
+  const subsectionData = selectedSubSection ? hmisData[selectedSubSection] || [] : [];
   
-  // Filter based on search term first
-  const searchFilteredData = hmisSearch
-    ? allHmisData.filter(hmis =>
-        hmis.hmis_name.toLowerCase().includes(hmisSearch.toLowerCase())
+  // Filter based on search term
+  const filteredHmisData = hmisSearch
+    ? subsectionData.filter(hmis =>
+        hmis.hmis_name.toLowerCase().includes(hmisSearch.toLowerCase()) ||
+        hmis.hmis_code.toLowerCase().includes(hmisSearch.toLowerCase())
       )
-    : allHmisData;
-
-  // Then filter by selected section if one is selected
-  const filteredHmisData = selectedSubSection
-    ? searchFilteredData.filter(hmis => hmisData[selectedSubSection]?.some(item => item.hmis_code === hmis.hmis_code))
-    : searchFilteredData;
+    : subsectionData;
 
   const handleAddMapping = (hmisCode, hmisName) => {
     setDialogState({
@@ -192,73 +262,53 @@ const ReportSections = () => {
     });
   };
 
-  // Load existing mappings when component mounts
+  // Load existing mappings from localStorage when component mounts
   useEffect(() => {
-    const loadMappings = async () => {
+    const savedMappings = localStorage.getItem('hmisEafyaMappings');
+    if (savedMappings) {
       try {
-        const allMappings = await mappingService.getAllMappings();
-        // Group mappings by HMIS code
-        const mappingsByCode = allMappings.reduce((acc, mapping) => {
-          if (!acc[mapping.hmis_code]) {
-            acc[mapping.hmis_code] = [];
-          }
-          acc[mapping.hmis_code].push({
-            id: mapping.eafya_disease_id,
-            name: mapping.eafya_disease_name
-          });
-          return acc;
-        }, {});
-        setCurrentMappings(mappingsByCode);
+        setCurrentMappings(JSON.parse(savedMappings));
       } catch (error) {
-        console.error('Error loading mappings:', error);
-        // TODO: Add proper error handling/notification
+        console.error('Error loading mappings from localStorage:', error);
+        setCurrentMappings({});
       }
-    };
-
-    loadMappings();
+    }
   }, []);
 
-  const handleSaveMapping = async (selectedDiseases) => {
-    try {
-      const mappingsToCreate = selectedDiseases.map(diseaseId => {
-        const disease = eafyaDiseases.find(d => d.id === diseaseId);
-        return {
-          hmis_code: dialogState.hmisCode,
-          hmis_name: dialogState.hmisName,
-          eafya_disease_id: disease.id,
-          eafya_disease_name: disease.name
-        };
-      });
+  const handleSaveMapping = (selectedDiseases) => {
+    const mappingsToCreate = selectedDiseases.map(diseaseId => {
+      const disease = eafyaDiseases.find(d => d.id === diseaseId);
+      return {
+        id: disease.id,
+        name: disease.name
+      };
+    });
 
-      await mappingService.createManyMappings(mappingsToCreate);
-
-      // Update local state
-      setCurrentMappings(prev => ({
-        ...prev,
-        [dialogState.hmisCode]: mappingsToCreate.map(m => ({
-          id: m.eafya_disease_id,
-          name: m.eafya_disease_name
-        }))
-      }));
-    } catch (error) {
-      console.error('Error saving mappings:', error);
-      // TODO: Add proper error handling/notification
-    }
+    // Update local state
+    const newMappings = {
+      ...currentMappings,
+      [dialogState.hmisCode]: mappingsToCreate
+    };
+    
+    setCurrentMappings(newMappings);
+    // Save to localStorage
+    localStorage.setItem('hmisEafyaMappings', JSON.stringify(newMappings));
   };
 
-  const handleRemoveMapping = async (hmisCode, diseaseId) => {
-    try {
-      await mappingService.deleteMapping(hmisCode, diseaseId);
+  const handleRemoveMapping = (hmisCode, diseaseId) => {
+    const newMappings = {
+      ...currentMappings,
+      [hmisCode]: (currentMappings[hmisCode] || []).filter(d => d.id !== diseaseId)
+    };
 
-      // Update local state
-      setCurrentMappings(prev => ({
-        ...prev,
-        [hmisCode]: prev[hmisCode].filter(d => d.id !== diseaseId)
-      }));
-    } catch (error) {
-      console.error('Error removing mapping:', error);
-      // TODO: Add proper error handling/notification
+    // If no mappings left for this HMIS code, remove the key
+    if (newMappings[hmisCode].length === 0) {
+      delete newMappings[hmisCode];
     }
+
+    setCurrentMappings(newMappings);
+    // Save to localStorage
+    localStorage.setItem('hmisEafyaMappings', JSON.stringify(newMappings));
   };
 
 
@@ -309,7 +359,7 @@ const ReportSections = () => {
           <label>Search HMIS:</label>
           <input
             type="text"
-            placeholder="Search by HMIS name..."
+            placeholder="Search by HMIS code or name..."
             value={hmisSearch}
             onChange={(e) => setHmisSearch(e.target.value)}
             className="search-input"
@@ -365,6 +415,7 @@ const ReportSections = () => {
         onClose={() => setDialogState({ isOpen: false, hmisCode: '', hmisName: '' })}
         onSave={handleSaveMapping}
         hmisName={dialogState.hmisName}
+        section={selectedMainSection}
       />
     </div>
   );

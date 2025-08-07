@@ -21,7 +21,7 @@ function MainSideBar() {
       icon: "file-earmark-text",
       path: "/hmis",
     },
-    { id: "mapping", label: "DHIS2 Mapping", icon: "map", path: "/mapping" },
+    { id: "mapping", label: "DHIS2 Mapping", icon: "map", path: "/report/mapping" },
     {
       id: "opd",
       label: "Outpatient",
@@ -221,9 +221,9 @@ function MainSideBar() {
         <div className="flex-shrink-0 p-3 border-top bg-light">
           {!isCollapsed ? (
             <div className="text-center">
-              <small className="text-muted">© 2025 eAFYA System</small>
+              <small className="text-muted">© HMIS Version</small>
               <br />
-              <small className="text-muted">Version 1.1.0</small>
+              <small className="text-muted">Print July 2024</small>
             </div>
           ) : (
             <div className="text-center">

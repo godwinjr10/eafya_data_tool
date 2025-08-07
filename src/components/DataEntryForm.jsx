@@ -30,25 +30,29 @@ const REPORT_CONFIGS = {
     endpoint: "/downloads/conditions",
     component: ConditionsReport,
     title: "Conditions Report",
-    dataset: 'RtEYsASU7PG'
+    dataset: 'RtEYsASU7PG',
+    dhisEndpoint: '/dhis/sync'
   },
   HMIS_105_02: {
     endpoint: "/downloads/mch",
     component: null,
     title: "MCH Report",
-    dataset: 'RtEYsASU7PG'
+    dataset: 'RtEYsASU7PG',
+    dhisEndpoint: '/dhis/sync'
   },
   HMIS_105_06: {
     endpoint: "/downloads/commodities",
     component: CommoditiesReport,
     title: "Commodities Report",
-    dataset: 'RtEYsASU7PG'
+    dataset: 'VDhwrW9DiC1',
+    dhisEndpoint: '/dhis/commodities'
   },
   HMIS_105_10: {
     endpoint: "/downloads/labtests",
     component: LabReport,
     title: "Lab Tests Report",
-    dataset: 'RtEYsASU7PG'
+    dataset: 'RtEYsASU7PG',
+    dhisEndpoint: '/dhis/sync'
   },
 };
 
@@ -91,7 +95,7 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
         throw new Error("Dataset configuration not found");
       }
 
-      const response = await API.post("/dhis/sync", {
+      const response = await API.post(reportConfig.dhisEndpoint, {
         dataset: reportConfig.dataset,
         period: period
       });
