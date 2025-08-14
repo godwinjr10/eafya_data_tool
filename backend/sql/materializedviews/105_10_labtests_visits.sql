@@ -1,0 +1,17 @@
+-------------Number Of Out Patients' and In Patients' Lab Visits----------------------
+CREATE MATERIALIZED VIEW reporting."105_10_labtests_visits" AS
+SELECT 
+    TO_CHAR(DATE_TRUNC('month', r.date_created), 'YYYYMM') AS report_month,
+    COUNT(CASE WHEN r.patient_id NOT IN (
+        SELECT e.patient_id
+        FROM reporting.patient_admissions pa
+        INNER JOIN reporting.encounters e ON e.encounter_id = pa.encounter_id
+    ) THEN 1 END) AS LV01_Out_patient_OPD,
+    COUNT(CASE WHEN r.patient_id IN (
+        SELECT e.patient_id
+        FROM reporting.patient_admissions pa
+        INNER JOIN reporting.encounters e ON e.encounter_id = pa.encounter_id
+    ) THEN 1 END) AS LV02_In_patient_IPD
+FROM dwh.dim_eafya_registered_patients r
+GROUP BY TO_CHAR(DATE_TRUNC('month', r.date_created), 'YYYYMM')
+ORDER BY report_month;

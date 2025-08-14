@@ -1,0 +1,373 @@
+﻿section_id,section_name,eafya_vaccine_id,eafya_vaccine_name,hmis_code,hmis_name,dhis2_data_element_id,categoryoptioncombo_uid,categoryoptioncombo_name
+2.6.1,HPV Vaccination,39,HPV,VP01, HPV Vaccine,Gtk7tbHfVfj,eb7FlxCjx2d,"10 Years, Community"
+2.6.1,HPV Vaccination,39,HPV,VP01, HPV Vaccine,Gtk7tbHfVfj,m3Eem4T8lMF,"10 Years, Facility"
+2.6.1,HPV Vaccination,39,HPV,VP01, HPV Vaccine,Gtk7tbHfVfj,O84d9kvyKnb,"10 Years, School"
+2.6.1,HPV Vaccination,39,HPV,VP01, HPV Vaccine,Gtk7tbHfVfj,gqTSAzGvkfT,"11+ Years, Community"
+2.6.1,HPV Vaccination,39,HPV,VP01, HPV Vaccine,Gtk7tbHfVfj,io8nXIMjnCe,"11+ Years, Facility"
+2.6.1,HPV Vaccination,39,HPV,VP01, HPV Vaccine,Gtk7tbHfVfj,hctMHy5b9hk,"11+ Years, School"
+2.6.1,HPV Vaccination,39,HPV,VP01, HPV Vaccine,Gtk7tbHfVfj,UVCZoUrkkNC,Community
+2.6.1,HPV Vaccination,39,HPV,VP01, HPV Vaccine,Gtk7tbHfVfj,ux3tRpWIkgC,Facility
+2.6.1,HPV Vaccination,39,HPV,VP01, HPV Vaccine,Gtk7tbHfVfj,p6NhJJHCk42,School
+2.6.2,Tetanus Vaccination,40,T D NONE PREG 1,TD01,Td1-Dose 1,oj4ttY118Fg,ti1wQxWVB4m,"Non-Pregnant Women, Outreach"
+2.6.2,Tetanus Vaccination,40,T D NONE PREG 1,TD01,Td1-Dose 1,oj4ttY118Fg,BVWANSUbMUc,"Non-Pregnant Women, School"
+2.6.2,Tetanus Vaccination,40,T D NONE PREG 1,TD01,Td1-Dose 1,oj4ttY118Fg,HFZpUNRdkVF,"Non-Pregnant Women, Static"
+2.6.2,Tetanus Vaccination,23,T D 1 PREG,TD01,Td1-Dose 1,oj4ttY118Fg,OnvxZRXJz9g,"Pregnant Women, Outreach"
+2.6.2,Tetanus Vaccination,23,T D 1 PREG,TD01,Td1-Dose 1,oj4ttY118Fg,DDHU3d2Aq1L,"Pregnant Women, School"
+2.6.2,Tetanus Vaccination,23,T D 1 PREG,TD01,Td1-Dose 1,oj4ttY118Fg,KEONQZzpUjz,"Pregnant Women, Static"
+2.6.2,Tetanus Vaccination,41,T D NONE PREG 2,TD02,Td2-Dose 2,OrKSwpDxQaJ,ti1wQxWVB4m,"Non-Pregnant Women, Outreach"
+2.6.2,Tetanus Vaccination,41,T D NONE PREG 2,TD02,Td2-Dose 2,OrKSwpDxQaJ,BVWANSUbMUc,"Non-Pregnant Women, School"
+2.6.2,Tetanus Vaccination,41,T D NONE PREG 2,TD02,Td2-Dose 2,OrKSwpDxQaJ,HFZpUNRdkVF,"Non-Pregnant Women, Static"
+2.6.2,Tetanus Vaccination,22,T D  2 PREG,TD02,Td2-Dose 2,OrKSwpDxQaJ,OnvxZRXJz9g,"Pregnant Women, Outreach"
+2.6.2,Tetanus Vaccination,22,T D  2 PREG,TD02,Td2-Dose 2,OrKSwpDxQaJ,DDHU3d2Aq1L,"Pregnant Women, School"
+2.6.2,Tetanus Vaccination,22,T D  2 PREG,TD02,Td2-Dose 2,OrKSwpDxQaJ,KEONQZzpUjz,"Pregnant Women, Static"
+2.6.2,Tetanus Vaccination,21,T D 3 PREG,TD03,Td3-Dose 3,vMZQxa2plDI,OnvxZRXJz9g,"Pregnant Women, Outreach"
+2.6.2,Tetanus Vaccination,42,T D NONE PREG 3,TD03,Td3-Dose 3,vMZQxa2plDI,ti1wQxWVB4m,"Non-Pregnant Women, Outreach"
+2.6.2,Tetanus Vaccination,42,T D NONE PREG 3,TD03,Td3-Dose 3,vMZQxa2plDI,BVWANSUbMUc,"Non-Pregnant Women, School"
+2.6.2,Tetanus Vaccination,42,T D NONE PREG 3,TD03,Td3-Dose 3,vMZQxa2plDI,HFZpUNRdkVF,"Non-Pregnant Women, Static"
+2.6.2,Tetanus Vaccination,21,T D 3 PREG,TD03,Td3-Dose 3,vMZQxa2plDI,DDHU3d2Aq1L,"Pregnant Women, School"
+2.6.2,Tetanus Vaccination,21,T D 3 PREG,TD03,Td3-Dose 3,vMZQxa2plDI,KEONQZzpUjz,"Pregnant Women, Static"
+2.6.2,Tetanus Vaccination,43,T D NONE PREG 4,TD04,Td4-Dose 4,Jd24EcGuIvS,ti1wQxWVB4m,"Non-Pregnant Women, Outreach"
+2.6.2,Tetanus Vaccination,43,T D NONE PREG 4,TD04,Td4-Dose 4,Jd24EcGuIvS,BVWANSUbMUc,"Non-Pregnant Women, School"
+2.6.2,Tetanus Vaccination,43,T D NONE PREG 4,TD04,Td4-Dose 4,Jd24EcGuIvS,HFZpUNRdkVF,"Non-Pregnant Women, Static"
+2.6.2,Tetanus Vaccination,20,T D 4 PREG,TD04,Td4-Dose 4,Jd24EcGuIvS,OnvxZRXJz9g,"Pregnant Women, Outreach"
+2.6.2,Tetanus Vaccination,20,T D 4 PREG,TD04,Td4-Dose 4,Jd24EcGuIvS,DDHU3d2Aq1L,"Pregnant Women, School"
+2.6.2,Tetanus Vaccination,20,T D 4 PREG,TD04,Td4-Dose 4,Jd24EcGuIvS,KEONQZzpUjz,"Pregnant Women, Static"
+2.6.2,Tetanus Vaccination,44,T D NONE PREG 5,TD05,Td5-Dose 5 ,fyTVWlH6jqm,ti1wQxWVB4m,"Non-Pregnant Women, Outreach"
+2.6.2,Tetanus Vaccination,44,T D NONE PREG 5,TD05,Td5-Dose 5 ,fyTVWlH6jqm,BVWANSUbMUc,"Non-Pregnant Women, School"
+2.6.2,Tetanus Vaccination,44,T D NONE PREG 5,TD05,Td5-Dose 5 ,fyTVWlH6jqm,HFZpUNRdkVF,"Non-Pregnant Women, Static"
+2.6.2,Tetanus Vaccination,19,T D  5 PREG,TD05,Td5-Dose 5 ,fyTVWlH6jqm,OnvxZRXJz9g,"Pregnant Women, Outreach"
+2.6.2,Tetanus Vaccination,19,T D  5 PREG,TD05,Td5-Dose 5 ,fyTVWlH6jqm,DDHU3d2Aq1L,"Pregnant Women, School"
+2.6.2,Tetanus Vaccination,19,T D  5 PREG,TD05,Td5-Dose 5 ,fyTVWlH6jqm,KEONQZzpUjz,"Pregnant Women, Static"
+2.6.3,Child Immunization,1,BCG,CL01, BCG,MxAg9De4cra,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,1,BCG,CL01, BCG,MxAg9De4cra,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,1,BCG,CL01, BCG,MxAg9De4cra,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,1,BCG,CL01, BCG,MxAg9De4cra,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,1,BCG,CL01, BCG,MxAg9De4cra,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,1,BCG,CL01, BCG,MxAg9De4cra,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,27,HEP B ZERO DOSE,CL02,Hep B zero doze,yJgPv7Q9lS1,CP0MHOvBToK,"Outreach, 1-4 years"
+2.6.3,Child Immunization,27,HEP B ZERO DOSE,CL02,Hep B zero doze,yJgPv7Q9lS1,Sz8SNUUTD6D,"Outreach, <1year"
+2.6.3,Child Immunization,27,HEP B ZERO DOSE,CL02,Hep B zero doze,yJgPv7Q9lS1,e19gHanM78r,"Outreach, 5-14 years"
+2.6.3,Child Immunization,27,HEP B ZERO DOSE,CL02,Hep B zero doze,yJgPv7Q9lS1,q6RbdRzxb2i,"Static, 1-4 years"
+2.6.3,Child Immunization,27,HEP B ZERO DOSE,CL02,Hep B zero doze,yJgPv7Q9lS1,xkUM54cCGVv,"Static, <1year"
+2.6.3,Child Immunization,27,HEP B ZERO DOSE,CL02,Hep B zero doze,yJgPv7Q9lS1,B07dELqs94E,"Static, 5-14 years"
+2.6.3,Child Immunization,0,,CL24  ,Fully immunized by 1 year,OG2VmPZSmyv,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL24  ,Fully immunized by 1 year,OG2VmPZSmyv,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,0,,CL24  ,Fully immunized by 1 year,OG2VmPZSmyv,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,0,,CL24  ,Fully immunized by 1 year,OG2VmPZSmyv,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,0,,CL24  ,Fully immunized by 1 year,OG2VmPZSmyv,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL24  ,Fully immunized by 1 year,OG2VmPZSmyv,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,0,,CL25,No. received LLINs,peXxgiReRrs,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL25,No. received LLINs,peXxgiReRrs,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,0,,CL25,No. received LLINs,peXxgiReRrs,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,0,,CL25,No. received LLINs,peXxgiReRrs,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,0,,CL25,No. received LLINs,peXxgiReRrs,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL25,No. received LLINs,peXxgiReRrs,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,0,,CL26,Malaria 4,nOi3WF8kNxD,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL26,Malaria 4,nOi3WF8kNxD,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,0,,CL26,Malaria 4,nOi3WF8kNxD,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,0,,CL26,Malaria 4,nOi3WF8kNxD,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,0,,CL26,Malaria 4,nOi3WF8kNxD,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL26,Malaria 4,nOi3WF8kNxD,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,17,MR 2,CL27,Measles (MR2),yctOQDdXZav,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,17,MR 2,CL27,Measles (MR2),yctOQDdXZav,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,17,MR 2,CL27,Measles (MR2),yctOQDdXZav,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,17,MR 2,CL27,Measles (MR2),yctOQDdXZav,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,17,MR 2,CL27,Measles (MR2),yctOQDdXZav,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,17,MR 2,CL27,Measles (MR2),yctOQDdXZav,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,0,,CL28,Fully immunized by 2 years,t1oNQuw0bL4,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL28,Fully immunized by 2 years,t1oNQuw0bL4,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,0,,CL28,Fully immunized by 2 years,t1oNQuw0bL4,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,0,,CL28,Fully immunized by 2 years,t1oNQuw0bL4,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,0,,CL28,Fully immunized by 2 years,t1oNQuw0bL4,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL28,Fully immunized by 2 years,t1oNQuw0bL4,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,9,DPT+HIB+HEPB 3,CL12,DPT-Hep B+Hib 3,ujs4ipzA4tb,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,9,DPT+HIB+HEPB 3,CL12,DPT-Hep B+Hib 4,ujs4ipzA4tb,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,9,DPT+HIB+HEPB 3,CL12,DPT-Hep B+Hib 5,ujs4ipzA4tb,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,9,DPT+HIB+HEPB 3,CL12,DPT-Hep B+Hib 6,ujs4ipzA4tb,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,9,DPT+HIB+HEPB 3,CL12,DPT-Hep B+Hib 7,ujs4ipzA4tb,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,9,DPT+HIB+HEPB 3,CL12,DPT-Hep B+Hib 8,ujs4ipzA4tb,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,10,Pneumococcal 1,CL13,PCV 1,NbG01i1Md55,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,10,Pneumococcal 1,CL13,PCV 1,NbG01i1Md55,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,10,Pneumococcal 1,CL13,PCV 1,NbG01i1Md55,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,10,Pneumococcal 1,CL13,PCV 1,NbG01i1Md55,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,10,Pneumococcal 1,CL13,PCV 1,NbG01i1Md55,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,10,Pneumococcal 1,CL13,PCV 1,NbG01i1Md55,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,11,Pneumococcal 2,CL14,PCV 2,dmSXPXTnV0e,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,11,Pneumococcal 2,CL14,PCV 2,dmSXPXTnV0e,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,11,Pneumococcal 2,CL14,PCV 2,dmSXPXTnV0e,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,11,Pneumococcal 2,CL14,PCV 2,dmSXPXTnV0e,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,11,Pneumococcal 2,CL14,PCV 2,dmSXPXTnV0e,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,11,Pneumococcal 2,CL14,PCV 2,dmSXPXTnV0e,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,12,Pneumococcal 3,CL15,PCV 3,QHawVF72X6E,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,12,Pneumococcal 3,CL15,PCV 3,QHawVF72X6E,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,12,Pneumococcal 3,CL15,PCV 3,QHawVF72X6E,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,12,Pneumococcal 3,CL15,PCV 3,QHawVF72X6E,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,12,Pneumococcal 3,CL15,PCV 3,QHawVF72X6E,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,12,Pneumococcal 3,CL15,PCV 3,QHawVF72X6E,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,13,Rota 1,CL16,Rotavirus 1 Vaccine,rDZlacXXUPM,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,13,Rota 1,CL16,Rotavirus 1 Vaccine,rDZlacXXUPM,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,13,Rota 1,CL16,Rotavirus 1 Vaccine,rDZlacXXUPM,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,13,Rota 1,CL16,Rotavirus 1 Vaccine,rDZlacXXUPM,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,13,Rota 1,CL16,Rotavirus 1 Vaccine,rDZlacXXUPM,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,13,Rota 1,CL16,Rotavirus 1 Vaccine,rDZlacXXUPM,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,14,Rota 2,CL17,Rotavirus 2 Vaccine,QFolEgl8SEB,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,14,Rota 2,CL17,Rotavirus 2 Vaccine,QFolEgl8SEB,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,14,Rota 2,CL17,Rotavirus 2 Vaccine,QFolEgl8SEB,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,14,Rota 2,CL17,Rotavirus 2 Vaccine,QFolEgl8SEB,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,14,Rota 2,CL17,Rotavirus 2 Vaccine,QFolEgl8SEB,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,14,Rota 2,CL17,Rotavirus 2 Vaccine,QFolEgl8SEB,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,35,Rota 3,CL18,Rotavirus 3 Vaccine,JREalJsVgAD,CP0MHOvBToK,"Outreach, 1-4 years"
+2.6.3,Child Immunization,35,Rota 3,CL18,Rotavirus 3 Vaccine,JREalJsVgAD,Sz8SNUUTD6D,"Outreach, <1year"
+2.6.3,Child Immunization,35,Rota 3,CL18,Rotavirus 3 Vaccine,JREalJsVgAD,e19gHanM78r,"Outreach, 5-14 years"
+2.6.3,Child Immunization,35,Rota 3,CL18,Rotavirus 3 Vaccine,JREalJsVgAD,q6RbdRzxb2i,"Static, 1-4 years"
+2.6.3,Child Immunization,35,Rota 3,CL18,Rotavirus 3 Vaccine,JREalJsVgAD,xkUM54cCGVv,"Static, <1year"
+2.6.3,Child Immunization,35,Rota 3,CL18,Rotavirus 3 Vaccine,JREalJsVgAD,B07dELqs94E,"Static, 5-14 years"
+2.6.3,Child Immunization,0,,CL19,Malaria 1,umOw6ICceuL,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL19,Malaria 1,umOw6ICceuL,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,0,,CL19,Malaria 1,umOw6ICceuL,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,0,,CL19,Malaria 1,umOw6ICceuL,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,0,,CL19,Malaria 1,umOw6ICceuL,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL19,Malaria 1,umOw6ICceuL,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,0,,CL20,Malaria 2,tYobnmqU9Fk,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL20,Malaria 2,tYobnmqU9Fk,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,0,,CL20,Malaria 2,tYobnmqU9Fk,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,0,,CL20,Malaria 2,tYobnmqU9Fk,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,0,,CL20,Malaria 2,tYobnmqU9Fk,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL20,Malaria 2,tYobnmqU9Fk,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,0,,CL21,Malaria 3,xZTA1fYRqy8,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL21,Malaria 3,xZTA1fYRqy8,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,0,,CL21,Malaria 3,xZTA1fYRqy8,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,0,,CL21,Malaria 3,xZTA1fYRqy8,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,0,,CL21,Malaria 3,xZTA1fYRqy8,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,0,,CL21,Malaria 3,xZTA1fYRqy8,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,25,yellow fever for children,CL22,Yellow Fever,Ln0EgQilDUI,CP0MHOvBToK,"Outreach, 1-4 years"
+2.6.3,Child Immunization,25,yellow fever for children,CL22,Yellow Fever,Ln0EgQilDUI,Sz8SNUUTD6D,"Outreach, <1year"
+2.6.3,Child Immunization,25,yellow fever for children,CL22,Yellow Fever,Ln0EgQilDUI,e19gHanM78r,"Outreach, 5-14 years"
+2.6.3,Child Immunization,25,yellow fever for children,CL22,Yellow Fever,Ln0EgQilDUI,q6RbdRzxb2i,"Static, 1-4 years"
+2.6.3,Child Immunization,25,yellow fever for children,CL22,Yellow Fever,Ln0EgQilDUI,xkUM54cCGVv,"Static, <1year"
+2.6.3,Child Immunization,25,yellow fever for children,CL22,Yellow Fever,Ln0EgQilDUI,B07dELqs94E,"Static, 5-14 years"
+2.6.3,Child Immunization,16,MR   1,CL23,Measles (MR1),WAjgHQVxVVm,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,16,MR   1,CL23,Measles (MR1),WAjgHQVxVVm,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,16,MR   1,CL23,Measles (MR1),WAjgHQVxVVm,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,16,MR   1,CL23,Measles (MR1),WAjgHQVxVVm,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,16,MR   1,CL23,Measles (MR1),WAjgHQVxVVm,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,16,MR   1,CL23,Measles (MR1),WAjgHQVxVVm,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.4,Vaccine Availability And Wastage,13,Rota 1,WT07,Rotavirus,KBxOZNiR67y,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,13,Rota 1,WT07,Rotavirus,xpZ6TjMsme7,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,13,Rota 1,WT07,Rotavirus,syx0YWdQeAW,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,13,Rota 1,WT07,Rotavirus,VUcc4loOjrS,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,13,Rota 1,WT07,Rotavirus,VUcc4loOjrS,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,14,Rota 2,WT07,Rotavirus,KBxOZNiR67y,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,14,Rota 2,WT07,Rotavirus,xpZ6TjMsme7,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,14,Rota 2,WT07,Rotavirus,syx0YWdQeAW,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,14,Rota 2,WT07,Rotavirus,VUcc4loOjrS,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,14,Rota 2,WT07,Rotavirus,VUcc4loOjrS,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,35,Rota 3,WT07,Rotavirus,KBxOZNiR67y,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,35,Rota 3,WT07,Rotavirus,xpZ6TjMsme7,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,35,Rota 3,WT07,Rotavirus,syx0YWdQeAW,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,35,Rota 3,WT07,Rotavirus,VUcc4loOjrS,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,35,Rota 3,WT07,Rotavirus,VUcc4loOjrS,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,16,MR   1,WT08,Measles,MD2YuRl94Fz,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,16,MR   1,WT08,Measles,W76e0DKlJ4c,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,16,MR   1,WT08,Measles,kxwF7G5Sa9i,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,16,MR   1,WT08,Measles,BnJW6UAa9nj,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,16,MR   1,WT08,Measles,BnJW6UAa9nj,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,17,MR 2,WT08,Measles,MD2YuRl94Fz,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,17,MR 2,WT08,Measles,W76e0DKlJ4c,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,17,MR 2,WT08,Measles,kxwF7G5Sa9i,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,17,MR 2,WT08,Measles,BnJW6UAa9nj,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,17,MR 2,WT08,Measles,BnJW6UAa9nj,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,15,Yellow Fever,WT09,Yellow Fever,c4DJHtoOxR5,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,15,Yellow Fever,WT09,Yellow Fever,FHnkrOy9cyJ,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,15,Yellow Fever,WT09,Yellow Fever,qnUDnMdP4Bl,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,15,Yellow Fever,WT09,Yellow Fever,lnwoasEJlj6,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,15,Yellow Fever,WT09,Yellow Fever,lnwoasEJlj6,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,25,yellow fever for children,WT09,Yellow Fever,c4DJHtoOxR5,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,25,yellow fever for children,WT09,Yellow Fever,FHnkrOy9cyJ,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,25,yellow fever for children,WT09,Yellow Fever,qnUDnMdP4Bl,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,25,yellow fever for children,WT09,Yellow Fever,lnwoasEJlj6,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,25,yellow fever for children,WT09,Yellow Fever,lnwoasEJlj6,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,19,T D  5 PREG,WT10,Td,Vm17iJeYWrM,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,19,T D  5 PREG,WT10,Td,rn9w80fi5rI,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,19,T D  5 PREG,WT10,Td,lmpQmvOtybC,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,19,T D  5 PREG,WT10,Td,fTonlL3eWFE,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,19,T D  5 PREG,WT10,Td,fTonlL3eWFE,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,40,T D NONE PREG 1,WT10,Td,Vm17iJeYWrM,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,40,T D NONE PREG 1,WT10,Td,rn9w80fi5rI,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,40,T D NONE PREG 1,WT10,Td,lmpQmvOtybC,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,40,T D NONE PREG 1,WT10,Td,fTonlL3eWFE,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,40,T D NONE PREG 1,WT10,Td,fTonlL3eWFE,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,41,T D NONE PREG 2,WT10,Td,Vm17iJeYWrM,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,41,T D NONE PREG 2,WT10,Td,rn9w80fi5rI,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,41,T D NONE PREG 2,WT10,Td,lmpQmvOtybC,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,41,T D NONE PREG 2,WT10,Td,fTonlL3eWFE,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,41,T D NONE PREG 2,WT10,Td,fTonlL3eWFE,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,42,T D NONE PREG 3,WT10,Td,Vm17iJeYWrM,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,42,T D NONE PREG 3,WT10,Td,rn9w80fi5rI,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,42,T D NONE PREG 3,WT10,Td,lmpQmvOtybC,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,42,T D NONE PREG 3,WT10,Td,fTonlL3eWFE,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,42,T D NONE PREG 3,WT10,Td,fTonlL3eWFE,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,43,T D NONE PREG 4,WT10,Td,Vm17iJeYWrM,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,43,T D NONE PREG 4,WT10,Td,rn9w80fi5rI,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,43,T D NONE PREG 4,WT10,Td,lmpQmvOtybC,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,43,T D NONE PREG 4,WT10,Td,fTonlL3eWFE,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,43,T D NONE PREG 4,WT10,Td,fTonlL3eWFE,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,44,T D NONE PREG 5,WT10,Td,Vm17iJeYWrM,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,44,T D NONE PREG 5,WT10,Td,rn9w80fi5rI,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,44,T D NONE PREG 5,WT10,Td,lmpQmvOtybC,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,44,T D NONE PREG 5,WT10,Td,fTonlL3eWFE,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,44,T D NONE PREG 5,WT10,Td,fTonlL3eWFE,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,23,T D 1 PREG,WT10,Td,Vm17iJeYWrM,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,23,T D 1 PREG,WT10,Td,rn9w80fi5rI,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,23,T D 1 PREG,WT10,Td,lmpQmvOtybC,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,23,T D 1 PREG,WT10,Td,fTonlL3eWFE,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,23,T D 1 PREG,WT10,Td,fTonlL3eWFE,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,22,T D  2 PREG,WT10,Td,Vm17iJeYWrM,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,22,T D  2 PREG,WT10,Td,rn9w80fi5rI,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,22,T D  2 PREG,WT10,Td,lmpQmvOtybC,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,22,T D  2 PREG,WT10,Td,fTonlL3eWFE,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,22,T D  2 PREG,WT10,Td,fTonlL3eWFE,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,21,T D 3 PREG,WT10,Td,Vm17iJeYWrM,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,21,T D 3 PREG,WT10,Td,rn9w80fi5rI,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,21,T D 3 PREG,WT10,Td,lmpQmvOtybC,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,21,T D 3 PREG,WT10,Td,fTonlL3eWFE,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,21,T D 3 PREG,WT10,Td,fTonlL3eWFE,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,20,T D 4 PREG,WT10,Td,Vm17iJeYWrM,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,20,T D 4 PREG,WT10,Td,rn9w80fi5rI,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,20,T D 4 PREG,WT10,Td,lmpQmvOtybC,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,20,T D 4 PREG,WT10,Td,fTonlL3eWFE,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,20,T D 4 PREG,WT10,Td,fTonlL3eWFE,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,39,HPV,WT11,HPV,gl4CRezThOQ,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,39,HPV,WT11,HPV,SELnREPYiGs,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,39,HPV,WT11,HPV,S3sJne8SfDt,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,39,HPV,WT11,HPV,HIRzx2RSpRR,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,39,HPV,WT11,HPV,HIRzx2RSpRR,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,0,,WT12,Malaria,KkO23okGi5a,HllvX50cXC0,Opening Balance
+2.6.4,Vaccine Availability And Wastage,0,,WT12,Malaria,ory0dLlfYiD,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,0,,WT12,Malaria,KhS4mq3zNfA,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,0,,WT12,Malaria,LwD8GEuedFt,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,0,,WT12,Malaria,LwD8GEuedFt,EbX2otukBRk,Open Vials (OV)
+2.6.3,Child Immunization,27,HEP B ZERO DOSE,CL02,Hep B zero dose,yJgPv7Q9lS1,CP0MHOvBToK,"Outreach, 1-4 years"
+2.6.3,Child Immunization,27,HEP B ZERO DOSE,CL02,Hep B zero dose,yJgPv7Q9lS1,Sz8SNUUTD6D,"Outreach, <1year"
+2.6.3,Child Immunization,27,HEP B ZERO DOSE,CL02,Hep B zero dose,yJgPv7Q9lS1,e19gHanM78r,"Outreach, 5-14 years"
+2.6.3,Child Immunization,27,HEP B ZERO DOSE,CL02,Hep B zero dose,yJgPv7Q9lS1,q6RbdRzxb2i,"Static, 1-4 years"
+2.6.3,Child Immunization,27,HEP B ZERO DOSE,CL02,Hep B zero dose,yJgPv7Q9lS1,xkUM54cCGVv,"Static, <1year"
+2.6.3,Child Immunization,27,HEP B ZERO DOSE,CL02,Hep B zero dose,yJgPv7Q9lS1,B07dELqs94E,"Static, 5-14 years"
+2.6.3,Child Immunization,2,OPV (Birth dose),CL04,Polio 0,eEllJg5kQn6,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,2,OPV (Birth dose),CL04,Polio 0,eEllJg5kQn6,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,2,OPV (Birth dose),CL04,Polio 0,eEllJg5kQn6,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,2,OPV (Birth dose),CL04,Polio 0,eEllJg5kQn6,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,2,OPV (Birth dose),CL04,Polio 0,eEllJg5kQn6,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,2,OPV (Birth dose),CL04,Polio 0,eEllJg5kQn6,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,3,OPV1,CL05,Polio 1,G4uZN2Y4oAG,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,3,OPV1,CL05,Polio 1,G4uZN2Y4oAG,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,3,OPV1,CL05,Polio 1,G4uZN2Y4oAG,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,3,OPV1,CL05,Polio 1,G4uZN2Y4oAG,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,3,OPV1,CL05,Polio 1,G4uZN2Y4oAG,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,3,OPV1,CL05,Polio 1,G4uZN2Y4oAG,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,4,OPV2,CL06,Polio 2,Quc9uIBIxk6,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,4,OPV2,CL06,Polio 2,Quc9uIBIxk6,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,4,OPV2,CL06,Polio 2,Quc9uIBIxk6,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,4,OPV2,CL06,Polio 2,Quc9uIBIxk6,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,4,OPV2,CL06,Polio 2,Quc9uIBIxk6,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,4,OPV2,CL06,Polio 2,Quc9uIBIxk6,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,5,OPV3,CL07,Polio 3,HLyPaHaoHSu,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,5,OPV3,CL07,Polio 3,HLyPaHaoHSu,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,5,OPV3,CL07,Polio 3,HLyPaHaoHSu,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,5,OPV3,CL07,Polio 3,HLyPaHaoHSu,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,5,OPV3,CL07,Polio 3,HLyPaHaoHSu,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,5,OPV3,CL07,Polio 3,HLyPaHaoHSu,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,28,IPV 1,CL08,IPV1,ehj9x0CXNN5,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,28,IPV 1,CL08,IPV1,ehj9x0CXNN5,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,28,IPV 1,CL08,IPV1,ehj9x0CXNN5,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,28,IPV 1,CL08,IPV1,ehj9x0CXNN5,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,28,IPV 1,CL08,IPV1,ehj9x0CXNN5,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,28,IPV 1,CL08,IPV1,ehj9x0CXNN5,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,29,IPV 2,CL09,IPV2,l8gda1Lshsh,CP0MHOvBToK,"Outreach, 1-4 years"
+2.6.3,Child Immunization,29,IPV 2,CL09,IPV2,l8gda1Lshsh,Sz8SNUUTD6D,"Outreach, <1year"
+2.6.3,Child Immunization,29,IPV 2,CL09,IPV2,l8gda1Lshsh,e19gHanM78r,"Outreach, 5-14 years"
+2.6.3,Child Immunization,29,IPV 2,CL09,IPV2,l8gda1Lshsh,q6RbdRzxb2i,"Static, 1-4 years"
+2.6.3,Child Immunization,29,IPV 2,CL09,IPV2,l8gda1Lshsh,xkUM54cCGVv,"Static, <1year"
+2.6.3,Child Immunization,29,IPV 2,CL09,IPV2,l8gda1Lshsh,B07dELqs94E,"Static, 5-14 years"
+2.6.3,Child Immunization,7,DPT+HIB+HEPB 1,CL10,DPT-Hep B+Hib 1,Ys31ug5E3f1,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,7,DPT+HIB+HEPB 1,CL10,DPT-Hep B+Hib 1,Ys31ug5E3f1,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,7,DPT+HIB+HEPB 1,CL10,DPT-Hep B+Hib 1,Ys31ug5E3f1,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,7,DPT+HIB+HEPB 1,CL10,DPT-Hep B+Hib 1,Ys31ug5E3f1,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,7,DPT+HIB+HEPB 1,CL10,DPT-Hep B+Hib 1,Ys31ug5E3f1,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,7,DPT+HIB+HEPB 1,CL10,DPT-Hep B+Hib 1,Ys31ug5E3f1,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.3,Child Immunization,7,DPT+HIB+HEPB 1,CL11,DPT-Hep B+Hib 2,z1s4aIzf8ga,V371IdtogXY,"1-4Yrs, Outreach"
+2.6.3,Child Immunization,7,DPT+HIB+HEPB 1,CL11,DPT-Hep B+Hib 2,z1s4aIzf8ga,OZvmnoWj5tZ,"1-4Yrs, Static"
+2.6.3,Child Immunization,7,DPT+HIB+HEPB 1,CL11,DPT-Hep B+Hib 2,z1s4aIzf8ga,LbCqcOuZipd,"<1Yr, Outreach"
+2.6.3,Child Immunization,7,DPT+HIB+HEPB 1,CL11,DPT-Hep B+Hib 2,z1s4aIzf8ga,kBLpiQanUSy,"<1Yr, Static"
+2.6.3,Child Immunization,7,DPT+HIB+HEPB 1,CL11,DPT-Hep B+Hib 2,z1s4aIzf8ga,qFxUvRqriX5,"5-14Yrs, Outreach"
+2.6.3,Child Immunization,7,DPT+HIB+HEPB 1,CL11,DPT-Hep B+Hib 2,z1s4aIzf8ga,aMhI72s7Xgf,"5-14Yrs, Static"
+2.6.4,Vaccine Availability And Wastage,1,BCG,WT01,BCG,JSRCj9aRZcz,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,1,BCG,WT01,BCG,QGoQrfDCKYl,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,1,BCG,WT01,BCG,OdcboRpaL6I,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,1,BCG,WT01,BCG,OZ4bSvHFF9Y,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,1,BCG,WT01,BCG,OZ4bSvHFF9Y,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,27,HEP B ZERO DOSE,WT02,Hep B zero dose,mfNGTqKlfpc,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,27,HEP B ZERO DOSE,WT02,Hep B zero dose,I2rc7lEpb7z,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,27,HEP B ZERO DOSE,WT02,Hep B zero dose,G6RGJzeAQlR,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,27,HEP B ZERO DOSE,WT02,Hep B zero dose,HHj0p0Ac8A3,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,27,HEP B ZERO DOSE,WT02,Hep B zero dose,HHj0p0Ac8A3,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,2,OPV (Birth dose),WT03,Polio (OPV),ppGkYNMqWX8,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,2,OPV (Birth dose),WT03,Polio (OPV),iPWG1C3NTi1,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,2,OPV (Birth dose),WT03,Polio (OPV),XQnMR1KMwT5,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,2,OPV (Birth dose),WT03,Polio (OPV),SUmRVIrStBP,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,2,OPV (Birth dose),WT03,Polio (OPV),SUmRVIrStBP,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,3,OPV1,WT03,Polio (OPV),ppGkYNMqWX8,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,3,OPV1,WT03,Polio (OPV),iPWG1C3NTi1,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,3,OPV1,WT03,Polio (OPV),XQnMR1KMwT5,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,3,OPV1,WT03,Polio (OPV),SUmRVIrStBP,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,3,OPV1,WT03,Polio (OPV),SUmRVIrStBP,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,4,OPV2,WT03,Polio (OPV),ppGkYNMqWX8,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,4,OPV2,WT03,Polio (OPV),iPWG1C3NTi1,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,4,OPV2,WT03,Polio (OPV),XQnMR1KMwT5,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,4,OPV2,WT03,Polio (OPV),SUmRVIrStBP,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,4,OPV2,WT03,Polio (OPV),SUmRVIrStBP,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,5,OPV3,WT03,Polio (OPV),ppGkYNMqWX8,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,5,OPV3,WT03,Polio (OPV),iPWG1C3NTi1,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,5,OPV3,WT03,Polio (OPV),XQnMR1KMwT5,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,5,OPV3,WT03,Polio (OPV),SUmRVIrStBP,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,5,OPV3,WT03,Polio (OPV),SUmRVIrStBP,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,28,IPV 1,WT04,IPV,noDiieWFh6r,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,28,IPV 1,WT04,IPV,lXdHXpzOilO,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,28,IPV 1,WT04,IPV,BrWcfdYGPXO,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,28,IPV 1,WT04,IPV,NjD7qC46klG,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,28,IPV 1,WT04,IPV,NjD7qC46klG,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,29,IPV 2,WT04,IPV,noDiieWFh6r,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,29,IPV 2,WT04,IPV,lXdHXpzOilO,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,29,IPV 2,WT04,IPV,BrWcfdYGPXO,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,29,IPV 2,WT04,IPV,NjD7qC46klG,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,29,IPV 2,WT04,IPV,NjD7qC46klG,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,7,DPT+HIB+HEPB 1,WT05,DPT+Hep B+Hib,q0eJayyV6Js,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,7,DPT+HIB+HEPB 1,WT05,DPT+Hep B+Hib,FLBA3T25bpz,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,7,DPT+HIB+HEPB 1,WT05,DPT+Hep B+Hib,mBTn9mI2Hx0,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,7,DPT+HIB+HEPB 1,WT05,DPT+Hep B+Hib,Zcw2OCp00oE,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,7,DPT+HIB+HEPB 1,WT05,DPT+Hep B+Hib,Zcw2OCp00oE,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,8,DPT+HIB+HEPB 2,WT05,DPT+Hep B+Hib,q0eJayyV6Js,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,8,DPT+HIB+HEPB 2,WT05,DPT+Hep B+Hib,FLBA3T25bpz,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,8,DPT+HIB+HEPB 2,WT05,DPT+Hep B+Hib,mBTn9mI2Hx0,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,8,DPT+HIB+HEPB 2,WT05,DPT+Hep B+Hib,Zcw2OCp00oE,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,8,DPT+HIB+HEPB 2,WT05,DPT+Hep B+Hib,Zcw2OCp00oE,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,9,DPT+HIB+HEPB 3,WT05,DPT+Hep B+Hib,q0eJayyV6Js,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,9,DPT+HIB+HEPB 3,WT05,DPT+Hep B+Hib,FLBA3T25bpz,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,9,DPT+HIB+HEPB 3,WT05,DPT+Hep B+Hib,mBTn9mI2Hx0,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,9,DPT+HIB+HEPB 3,WT05,DPT+Hep B+Hib,Zcw2OCp00oE,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,9,DPT+HIB+HEPB 3,WT05,DPT+Hep B+Hib,Zcw2OCp00oE,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,10,Pneumococcal 1,WT06,PCV,R0JGyJ4piOh,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,10,Pneumococcal 1,WT06,PCV,BzBLojjjeRB,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,10,Pneumococcal 1,WT06,PCV,cXy4Pwau1SF,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,10,Pneumococcal 1,WT06,PCV,a5p50RZM4j8,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,10,Pneumococcal 1,WT06,PCV,a5p50RZM4j8,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,11,Pneumococcal 2,WT06,PCV,R0JGyJ4piOh,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,11,Pneumococcal 2,WT06,PCV,BzBLojjjeRB,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,11,Pneumococcal 2,WT06,PCV,cXy4Pwau1SF,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,11,Pneumococcal 2,WT06,PCV,a5p50RZM4j8,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,11,Pneumococcal 2,WT06,PCV,a5p50RZM4j8,EbX2otukBRk,Open Vials (OV)
+2.6.4,Vaccine Availability And Wastage,12,Pneumococcal 3,WT06,PCV,R0JGyJ4piOh,HllvX50cXC0,Open Balance
+2.6.4,Vaccine Availability And Wastage,12,Pneumococcal 3,WT06,PCV,BzBLojjjeRB,HllvX50cXC0,Received
+2.6.4,Vaccine Availability And Wastage,12,Pneumococcal 3,WT06,PCV,cXy4Pwau1SF,HllvX50cXC0,Closing Balance
+2.6.4,Vaccine Availability And Wastage,12,Pneumococcal 3,WT06,PCV,a5p50RZM4j8,ltwvjot7N9B,Closed Vials (CV)
+2.6.4,Vaccine Availability And Wastage,12,Pneumococcal 3,WT06,PCV,a5p50RZM4j8,EbX2otukBRk,Open Vials (OV)

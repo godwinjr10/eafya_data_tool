@@ -1,0 +1,462 @@
+/* DHIS2 Layout Styles */
+
+.dhis2-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.dhis2-sidebar {
+  width: 250px;
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--border-color);
+  padding: 0;
+  overflow-y: auto;
+  height: 100vh;
+  position: fixed;
+  z-index: 1000;
+}
+
+.dhis2-topbar {
+  background: var(--header-bg);
+  color: white;
+  padding: 0.25rem 1rem;
+  height: 40px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 250px;
+  z-index: 1000;
+}
+
+.dhis2-main-content {
+  flex: 1;
+  margin-top: 40px;
+  padding: 15px;
+  background: #f5f5f5;
+  margin-left: 250px;
+  min-height: calc(100vh - 40px);
+}
+
+/* Tree Menu Styles */
+.dhis2-tree-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dhis2-tree-menu li {
+  margin: 2px 0;
+}
+
+.dhis2-tree-menu .menu-item {
+  padding: 6px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.dhis2-tree-menu .menu-item:hover {
+  background: var(--hover-bg);
+}
+
+.dhis2-tree-menu li.active > .menu-item {
+  background: var(--active-item-bg);
+  color: var(--primary-blue);
+}
+
+.dhis2-tree-menu .bi-chevron-right,
+.dhis2-tree-menu .bi-chevron-down {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.dhis2-tree-submenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+.report-selector {
+  background: #f8f9fa;
+  padding: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.section-header {
+  background: var(--section-header-bg);
+  color: var(--section-header-text);
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+}
+
+.section-subheader {
+  background: #f0f9f0;
+  color: var(--section-header-bg);
+  padding: 8px 15px;
+  border-left: 4px solid var(--section-header-bg);
+}
+
+.data-entry-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  background: white;
+}
+
+.data-entry-table th,
+.data-entry-table td {
+  border: 1px solid var(--border-color);
+  padding: 6px;
+  vertical-align: middle;
+}
+
+.data-entry-table th {
+  background: #f3f3f3;
+}
+
+.data-entry-table input[type="number"] {
+  width: 80px;
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-align: right;
+}
+
+.data-entry-table input[type="number"]:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px rgba(44, 102, 147, 0.2);
+}
+
+.validation-button {
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.validation-button:hover {
+  background: #1a4d80;
+}
+
+/* Nav Pills Customization */
+.nav-pills .nav-link {
+  color: var(--primary-blue);
+  border-radius: 4px;
+  padding: 8px 15px;
+  margin-bottom: 4px;
+  text-align: left;
+  width: 100%;
+  background: transparent;
+  border: none;
+  transition: all 0.2s ease;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.nav-pills .nav-link:hover:not(.disabled) {
+  background: var(--hover-bg);
+}
+
+.nav-pills .nav-link.active {
+  background: var(--primary-blue);
+  color: white;
+}
+
+.nav-pills .nav-link.disabled {
+  color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Disease Header Styling */
+.disease-header td {
+  background: #f0f9f0;
+  color: var(--section-header-bg);
+}
+
+/* Dashboard Styles */
+.dashboard-container {
+  background: #fff;
+  min-height: calc(100vh - 40px);
+}
+
+.dashboard-tabs {
+  border-bottom: 1px solid var(--border-color);
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 1px;
+  scrollbar-width: thin;
+  -ms-overflow-style: none;
+}
+
+.dashboard-tabs::-webkit-scrollbar {
+  height: 4px;
+}
+
+.dashboard-tabs::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.dashboard-tabs::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 2px;
+}
+
+.dashboard-tabs .nav-link {
+  background: #e6f2e6;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.dashboard-tabs .nav-link:hover {
+  background: #d1e7d1;
+}
+
+.dashboard-tabs .nav-link.active {
+  background: #2e8b57;
+  color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-content {
+  padding: 1rem 0;
+}
+
+.dashboard-content .card {
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+}
+
+.dashboard-content .card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-content .card-body {
+  padding: 1rem;
+}
+
+/* Search bar styles */
+.dashboard-search {
+  position: relative;
+}
+
+.dashboard-search .input-group-text {
+  background: white;
+  border-right: none;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.dashboard-search .form-control {
+  border-left: none;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding-left: 0;
+}
+
+.dashboard-search .form-control:focus {
+  box-shadow: none;
+  border-color: var(--border-color);
+}
+
+.dashboard-search .form-control::placeholder {
+  color: var(--text-light);
+}
+
+/* Chart styles */
+.recharts-wrapper {
+  margin: 0 auto;
+}
+
+.recharts-default-tooltip {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.recharts-tooltip-label {
+  color: var(--text-muted) !important;
+}
+
+.recharts-tooltip-item {
+  color: var(--text-color) !important;
+}
+
+.chart-placeholder {
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+/* TB Screening Metrics */
+.metric-item {
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.metric-item:hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
+}
+
+.metric-item h3 {
+  margin: 0;
+}
+
+.metric-item p {
+  opacity: 0.8;
+}
+
+/* Chart customizations */
+.recharts-pie-label-text {
+  fill: var(--text-muted);
+}
+
+.recharts-default-tooltip {
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  padding: 8px 12px !important;
+}
+
+.recharts-tooltip-label {
+  margin-bottom: 4px !important;
+}
+
+.recharts-tooltip-item-list {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.recharts-tooltip-item {
+  margin: 2px 0 !important;
+}
+
+/* HIV Dashboard Styles */
+.hiv-metric {
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+}
+
+.hiv-metric:hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
+}
+
+.hiv-metric h4 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.hiv-metric p {
+  color: var(--text-muted);
+  margin: 0.5rem 0;
+}
+
+.hiv-metric .progress {
+  height: 8px;
+  border-radius: 4px;
+  background-color: #e9ecef;
+  margin-top: 0.5rem;
+}
+
+.hiv-metric .progress-bar {
+  border-radius: 4px;
+  transition: width 0.6s ease;
+}
+
+/* HIV Chart Customizations */
+.dashboard-content .card-body {
+  position: relative;
+}
+
+.dashboard-content .card-title {
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+
+.recharts-area {
+  opacity: 0.8;
+}
+
+.recharts-area:hover {
+  opacity: 1;
+}
+
+.recharts-bar-rectangle:hover {
+  opacity: 0.8;
+}
+
+/* OPD Dashboard Styles */
+.opd-stat {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.stat-details {
+  flex: 1;
+}
+
+.stat-details h3 {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.stat-details p {
+  margin: 0.25rem 0;
+  color: var(--text-muted);
+}
+
+.trend-up,
+.trend-down {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.trend-up {
+  color: var(--success-color);
+}
+
+.trend-down {
+  color: var(--danger-color);
+}
