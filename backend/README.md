@@ -84,3 +84,11 @@ When fetching HMIS entries, you can use the following query parameters:
   }
 }
 ``` 
+
+```
+# Upload all CSV files
+node uploads.js
+
+# Upload specific file
+node uploads.js dhis_eafya_mapping_conditions.csv
+```

@@ -13,8 +13,7 @@ import Supplychain from "../pages/Supplychain";
 import MainLayout from "../components/MainLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ProtectedRoute from "../helpers/Protected";
-import MappingPage from "../pages/mapping";
-import ReportSections from "../pages/ReportSections";
+import Mapping from "../pages/Mapping";
 
 const AppRoutes = () => {
   return (
@@ -31,8 +30,7 @@ const AppRoutes = () => {
           <ProtectedRoute path="/users" component={Users} />
           <ProtectedRoute path="/supplychain" component={Supplychain} />
           <ProtectedRoute path="/dashboard" exact component={Dashboard} />
-          <ProtectedRoute path="/mapping" exact component={MappingPage} />
-          <ProtectedRoute path="/report/mapping" exact component={ReportSections} />
+          <ProtectedRoute path="/mapping" exact component={Mapping} />
         </MainLayout>
       </Switch>
     </Fragment>

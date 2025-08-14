@@ -1,0 +1,296 @@
+﻿section_id,section_name,category,eafya_labtest_id,eafya_labtest_name,hmis_code,hmis_name,status,dhis2_data_element_id
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),,,HE01,Hb (Non automated),,ZYwSMDa5lRO
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),865,Film comment,HE02,Film Comment,,uy82zDUjjCl
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),759,FILM COMMENT,HE02,Film Comment,,uy82zDUjjCl
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),409,COMPLETE BLOOD COUNT (CBC),HE03,CBC,,EHyI7eYeoH1
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),410,RETICULOCYTE COUNT,HE04,Reticulocyte count,,a59ozSxc5Nf
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),408,ERYTHROCYTE SEDIMENTATION RATE (ESR),HE05,ESR,,NfIVbWjrJgg
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),813,ESR,HE05,ESR,,NfIVbWjrJgg
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),,,HE06,Bleeding time,,fSqxW8rnjPJ
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),265,PROTHROMBIN TIME,HE07,Prothrombin time,,CXW0ReX8CGY
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),266,PROTHROMBIN TIME INDEX,HE07,Prothrombin time,,CXW0ReX8CGY
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),852,PROTHROMBIN TIME,HE07,Prothrombin time,,CXW0ReX8CGY
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),,,HE08,Clotting time,,hERmSDObVoo
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),186,PTI/INR,HE09,PT/INR ,Positive,Ad83DJKiDcq
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),186,PTI/INR,HE09,PT/INR,Negative,dgS5bQLXlnl
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),831,APTT,HE10,APTT,Number Done,yZo1ZXzFVTx
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),831,APTT,HE10,APTT ,Positive,gMKw8wWc6IH
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),834,APTT (ACTIVATED PARTIAL THROMBOPLASTIN TIME),HE10,APTT ,Number Done,yZo1ZXzFVTx
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),834,APTT (ACTIVATED PARTIAL THROMBOPLASTIN TIME),HE10,APTT ,Positive,gMKw8wWc6IH
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),412,ACTIVATED PARTIAL THROMBOPLASTIN TIME (APTT),HE10,APTT ,Number Done,yZo1ZXzFVTx
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),412,ACTIVATED PARTIAL THROMBOPLASTIN TIME (APTT),HE10,APTT ,Positive,gMKw8wWc6IH
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),,,HE11,Sickle Cell,Done ,LpM6ADG2duN
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),,,HE11,Sickle Cell,Positive,zMcPisBKSZM
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),,,HE11,Sickle Cell,Disease Confirmed,gpYLUiKrNHx
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),,,HE11,Sickle Cell,Disease Confirmed,Da2nbJXyvFD
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),,,HE12,Others,Done ,FvpSeAddsKQ
+10.2.1,Number of Routine Tests Done in Facility Laboratory,HEMATOLOGY (BLOOD),,,HE12,Others,Positive,TjA2XpEWM5B
+10.2.1,Number of Routine Tests Done in Facility Laboratory,BLOOD TRANSFUSION,,,BT01,AHG (Comb's Test),Done ,QJpefO3BuLI
+10.2.1,Number of Routine Tests Done in Facility Laboratory,BLOOD TRANSFUSION,,,BT01,AHG (Comb's Test),Positive,cxhuYzdHB5s
+10.2.1,Number of Routine Tests Done in Facility Laboratory,BLOOD TRANSFUSION,,,BT02,ABO Grouping,Done ,ozre5Ynz0z6
+10.2.1,Number of Routine Tests Done in Facility Laboratory,BLOOD TRANSFUSION,,,BT03,Rhesus Grouping,Done ,PSR0ZkLuXZc
+10.2.1,Number of Routine Tests Done in Facility Laboratory,BLOOD TRANSFUSION,842,cross matching,BT04,Cross Matching,Done ,asWZcgcckzZ
+10.2.1,Number of Routine Tests Done in Facility Laboratory,BLOOD TRANSFUSION,,,BT05,Auto immune antibodies,Number Done,oWp3y7CArEU
+10.2.1,Number of Routine Tests Done in Facility Laboratory,IMMUNOLOGY,,,BT05,Auto immune antibodies,Number Positive,Wtl3AK0zl7K
+10.2.1,Number of Routine Tests Done in Facility Laboratory,IMMUNOLOGY,204,CD4 COUNT,IG01,CD4 test,Number Done ,uPzFvnylwxF
+10.2.1,Number of Routine Tests Done in Facility Laboratory,IMMUNOLOGY,377,CD4 ABSOLUTE COUNT,IG01,CD4 test,Number Done ,uPzFvnylwxF
+10.2.1,Number of Routine Tests Done in Facility Laboratory,IMMUNOLOGY,413,CD4/CD8 RATIO,IG01,CD4 test,Number Done ,uPzFvnylwxF
+10.2.1,Number of Routine Tests Done in Facility Laboratory,IMMUNOLOGY,864,TB-LAM,IG02,TB LAM,Number Done,V3pwu7dz5bE
+10.2.1,Number of Routine Tests Done in Facility Laboratory,IMMUNOLOGY,864,TB-LAM,IG02,TB LAM,Number Positive,k7ut0wuDciZ
+10.2.1,Number of Routine Tests Done in Facility Laboratory,IMMUNOLOGY,,,IG03,CRP,Number Done,d9f2PISTS6A
+10.2.1,Number of Routine Tests Done in Facility Laboratory,IMMUNOLOGY,,,IG03,CRP,Number Positive,Gdsh69w1ULd
+10.2.1,Number of Routine Tests Done in Facility Laboratory,IMMUNOLOGY,,,IG04,Others,Number Done,ioFXvXGyrFY
+10.2.1,Number of Routine Tests Done in Facility Laboratory,IMMUNOLOGY,,,IG04,Others,Number Positive,Sllv4L02jGv
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,MB01,Auramine (FM) for AFBs,,N2tdd2oVD7j
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,MB01,Auramine (FM) for AFBs,,HEVh1IAiSns
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",190,ZN STAIN (AFB),MB02,ZN for AFBs,Done,Rc9Rhl5IzHB
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",190,ZN STAIN (AFB),MB02,ZN for AFBs,Positive,ERiU13xMW1o
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,MB03,Leishman Stain,Done,nOBfsFT3Phs
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,MB03,Leishman Stain,Positive,PS2RpCXHCda
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",96,GRAM STAIN,MB04,Gram Stain,Done,UMWxzjiDLIN
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",96,GRAM STAIN,MB04,Gram Stain,Positive,fBNWix8sx8S
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",98,GRAM STAIN,MB04,Gram Stain,Done,UMWxzjiDLIN
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",98,GRAM STAIN,MB04,Gram Stain,Positive,fBNWix8sx8S
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",806,GRAM STAIN,MB04,Gram Stain,Done,UMWxzjiDLIN
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",806,GRAM STAIN,MB04,Gram Stain,Positive,fBNWix8sx8S
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",18,GRAM STAIN,MB04,Gram Stain,Done,UMWxzjiDLIN
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",18,GRAM STAIN,MB04,Gram Stain,Positive,fBNWix8sx8S
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",712,GRAM STAIN,MB04,Gram Stain,Done,UMWxzjiDLIN
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",712,GRAM STAIN,MB04,Gram Stain,Positive,fBNWix8sx8S
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",537,INDIA INK STAIN,MB05,India Ink,Done,qvKuzu2i7ul
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",537,INDIA INK STAIN,MB05,India Ink,Positive,RbzDr6tksXF
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",144,URINALYSIS/URINE MICROSCOPY/ URINE ROUTINE,MB06,Urine Microscopy,Done,tUnMWSsmire
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",144,URINALYSIS/URINE MICROSCOPY/ URINE ROUTINE,MB06,Urine Microscopy,Positive,zfGWuExNfc7
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,MB07,Urine Protein,Done,UrW2mViO9dP
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,MB07,Urine Protein,Positive,TyScVue0q2V
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,MB08,Urine Glucose,Done,XfUP592funq
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,MB08,Urine Glucose,Positive,rNbbIYr9Aua
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",807,WET PREP,MB09,Wet Preps,Done,wDU2VlALGnN
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,,,Positive,FNKrq1mhRgo
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,MB010,Stool for Gene X-pert,Done,KfQ1gcLszOB
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,,,Positive,HHKeuwKNIVs
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,MB11,Skin Smear,Done,qwwGSP1B5QN
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,,,Positive,TGUAulMmWi1
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,MB12,Others,Done,D1cZoWEpVZr
+10.2.1,Number of Routine Tests Done in Facility Laboratory,"MICROBIOLOGY (CSF, URINE, STOOL, BLOOD, SPUTUM, SWABS)",,,MB12,Others,Positive,PHzHQU8XPae
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CLINICAL CHEMISTRY,244,UREA,RP01,Urea,Done,zGgvWmAoA26
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CLINICAL CHEMISTRY,29,"UREA, ELECTROLYTES AND CREATININE (UEC)",RP01,Urea,Done,zGgvWmAoA26
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CLINICAL CHEMISTRY,883,UREA,RP01,Urea,Done,zGgvWmAoA26
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CLINICAL CHEMISTRY,450,CHLORIDE,RP02,Chloride,Done,V4F9DIaEfke
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CLINICAL CHEMISTRY,449,POTASSIUM,RP03,Potassium,Done,Q5NfznovGC7
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CLINICAL CHEMISTRY,28,SODIUM,RP04,Sodium,Done,UnoKFNaPlS4
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CLINICAL CHEMISTRY,245,CREATININE,RP05,Creatinine,Done,yijGYWqLK3L
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,,,LP01,ALT,Done,mj9EwT0PIF5
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,,,LP02,AST,Done,aaGYInATRwj
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,252,ALKALINE PHOSPHATASE (ALP),LP03,ALP,Done,rPhjTy1Vovv
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,236,GAMMA GT (GGT),LP04,GGT,Done,YlTN6XqlCmW
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,250,TOTAL PROTEIN,LP05,Protein - Total,Done,wj8rSCxEd9e
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,510,TOTAL PROTEIN,LP05,Protein - Total,Done,wj8rSCxEd9e
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,251,ALBUMIN,LP06,Albumin,Done,PL5GgsqbGr7
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,511,ALBUMIN,LP06,Albumin,Done,PL5GgsqbGr7
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,239,TOTAL BILIRUBIN,LP07,Bilirubin - Total,Done,UoaGo2p2XSa
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,797,TOTAL BILIRUBIN,LP07,Bilirubin - Total,Done,UoaGo2p2XSa
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,799,DIRECT BILIRUBIN,LP08,Bilirubin - Direct,Done,ejqKJTZBJd6
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,240,DIRECT BILIRUBIN,LP08,Bilirubin - Direct,Done,ejqKJTZBJd6
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,257,TRIGLYCERIDES,LR01,Triglycerides,Done,zyMJoyTBAPg
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,327,TOTAL CHOLESTEROL,LR02,Cholesterol - Total,Done,fpzhsuLYZ5b
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,255,HDL-CHOLESTEROL,LR03,HDL,Done,wx0vmw3ieey
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Liver Profile,256,LDL-CHOLESTEROL,LR04,LDL,Done,MQkfVna7ir2
+10.4.1,Volume of Sample Referred,Microbiology,,,VS19,Typhoid Fever,Samples referred,tOsGLpfwUxE
+10.4.1,Volume of Sample Referred,Microbiology,,,VS19,Typhoid Fever,Pending results/feedback,SkpUysoBjiU
+10.4.1,Volume of Sample Referred,Microbiology,839,CHOLERA ANTIGEN,VS20,Cholera,Samples referred,ro2teNSPV6w
+10.4.1,Volume of Sample Referred,Microbiology,839,CHOLERA ANTIGEN,VS20,Cholera,Pending results/feedback,srFuDYplT9H
+10.4.1,Volume of Sample Referred,Microbiology,838,CHOLERA CULTURE,VS20,Cholera,Samples referred,ro2teNSPV6w
+10.4.1,Volume of Sample Referred,Microbiology,838,CHOLERA CULTURE,VS20,Cholera,Pending results/feedback,srFuDYplT9H
+10.4.1,Volume of Sample Referred,Microbiology,,,VS21,Dysentery,Samples referred,RjVFFtBf0fQ
+10.4.1,Volume of Sample Referred,Microbiology,,,VS21,Dysentery,Pending results/feedback,DKP8p4TuogU
+10.4.1,Volume of Sample Referred,Microbiology,554,ROTAVIRUS,VS22,Rota Virus,Samples referred,Fck9FzNPbwj
+10.4.1,Volume of Sample Referred,Microbiology,554,ROTAVIRUS,VS22,Rota Virus,Pending results/feedback,USSX14ZROi8
+10.4.1,Volume of Sample Referred,Microbiology,,,VS23,Meningitis,Samples referred,K66vr4DBIfd
+10.4.1,Volume of Sample Referred,Microbiology,,,VS23,Meningitis,Pending results/feedback,T042dWDJUI4
+10.4.1,Volume of Sample Referred,Microbiology,,,VS24,Neonatal tetanus,Samples referred,w5I7khBBJaS
+10.4.1,Volume of Sample Referred,Microbiology,,,VS24,Neonatal tetanus,Pending results/feedback,eX8nrnBi2Sv
+10.4.1,Volume of Sample Referred,Microbiology,,,VS25,Plague,Samples referred,DYQgUlAEiPn
+10.4.1,Volume of Sample Referred,Microbiology,,,VS25,Plague,Pending results/feedback,p8EPIdnGpMD
+10.4.1,Volume of Sample Referred,Microbiology,,,VS26,Isolates,Samples referred,kB8Qlz2IqMJ
+10.4.1,Volume of Sample Referred,Microbiology,,,VS26,Isolates,Pending results/feedback,R8U2KwDlBp1
+10.4.1,Volume of Sample Referred,Microbiology,,,VS27,Viral Haemorrhagic Fevers (VHF),Samples referred,VaLQ3ZEDyY7
+10.4.1,Volume of Sample Referred,Microbiology,,,VS27,Viral Haemorrhagic Fevers (VHF),Pending results/feedback,Dz8eF4R8wCZ
+10.4.1,Volume of Sample Referred,Microbiology,,,VS28,Animal Bites (suspected rabies),Samples referred,ljSKKF2sS3S
+10.4.1,Volume of Sample Referred,Microbiology,,,VS28,Animal Bites (suspected rabies),Pending results/feedback,W7lV5TYWYwF
+10.4.1,Volume of Sample Referred,Microbiology,,,VS29,Hemo parasites,,
+10.4.1,Volume of Sample Referred,Microbiology,,,VS30,Intestinal parasites,Samples referred,EXX2b97lU8Q
+10.4.1,Volume of Sample Referred,Microbiology,,,VS30,Intestinal parasites,Pending results/feedback,QqIkh4bVRpw
+10.4.1,Volume of Sample Referred,Microbiology,,,VS31,Tissue parasites,Samples referred,vlCCIaDbkBw
+10.4.1,Volume of Sample Referred,Microbiology,,,VS31,Tissue parasites,Pending results/feedback,U3PMfuxLkg1
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,795,TB GENEXPERT,ML01,"NAAT (Xpert, Trunat, TB LAMP)",Done,zkzJZxS01UL
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,862,X-PERT MTB,ML01,"NAAT (Xpert, Trunat, TB LAMP)",Positive,HCSpaYVtSQo
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,864,TB-LAM,ML01,"NAAT (Xpert, Trunat, TB LAMP)",RR,bf1COdgT1ut
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,,,ML02,Latent TB Infection test - Done,Done,z3p7CQxWkum
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,,,ML02,Latent TB Infection test - Positive,Positive,nY1Zl8YQZwa
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,300,HPV DNA PCR,ML03,HPV DNA Test,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,414,HIV VIRAL LOAD,ML04,HIV Viral Load PCR,Done,I9mOZypWPiC
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,414,HIV VIRAL LOAD,ML04,HIV Viral Load PCR,Positive,gLc0j9gZ3Hz
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,544,HEPATITIS B VIRAL LOAD,ML05,Hep B Viral Load,Done,aHEz1agukWH
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,544,HEPATITIS B VIRAL LOAD,ML05,Hep B Viral Load,Number done,Bax9SZ4nvPw
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,544,HEPATITIS B VIRAL LOAD,ML05,Hep B Viral Load,Positive,TN0mmttzxnd
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,,,ML06,EID PCR (Early Infant Diagnosis),Done,EoapWImZrpK
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,,,ML06,EID PCR (Early Infant Diagnosis),Positive,xPtOdRdjbze
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,,,ML06,EID PCR (Early Infant Diagnosis),Samples referred,aJ7qRn2xZJX
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,,,ML06,EID PCR (Early Infant Diagnosis),Pending results/feedback,ogPzhS1PmWv
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,,,ML07,COVID-19 (GeneXpert/mRDT),Done,Lta7wvGeMcV
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,,,ML07,COVID-19 (GeneXpert/mRDT),Positive,lnhQcD8kNEe
+10.2.1,Number of Routine Tests Done in Facility Laboratory,MOLECULAR,,,ML08,Other Molecular Tests,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,PARASITOLOGY (Blood),,,PS01,Malaria Microscopy,Done,jmpvzaJi5c0
+10.2.1,Number of Routine Tests Done in Facility Laboratory,PARASITOLOGY (Blood),,,PS01,Malaria Microscopy,Positive,OwLbdAphoNp
+10.2.1,Number of Routine Tests Done in Facility Laboratory,PARASITOLOGY (Blood),402,MALARIA RDT,PS02,Malaria RDTs,Done,JfOGWtiSj1J
+10.2.1,Number of Routine Tests Done in Facility Laboratory,PARASITOLOGY (Blood),921,MALARIA RDT,PS02,Malaria RDTs,Positive,OOsYcFK5YbS
+10.2.1,Number of Routine Tests Done in Facility Laboratory,PARASITOLOGY (Blood),,,PS03,Trypanosoma,Done,NrNzNOidiE8
+10.2.1,Number of Routine Tests Done in Facility Laboratory,PARASITOLOGY (Blood),,,PS03,Trypanosoma,Positive,b97pHj26X0h
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Thyroid Profile,945,T3,TP01,T3,Done,TU4hCLREQB2
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Thyroid Profile,944,T4,TP02,T4,Done,oCig5lw6NFd
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Thyroid Profile,943,TSH,TP03,TSH,Done,f50jzpPHhJV
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Thyroid Profile,794,FREE T3,TP04,Free T3,Done,BfUGncAgsIa
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Thyroid Profile,762,FREE T4,TP05,Free T4,Done,ubBoPfBZF8D
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Pancreatic Profile,47,AMYLASE,PP01,Amylase,Done,lyKbbP7LeTH
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Pancreatic Profile,358,LIPASE,PP02,Lipase,Done,QGgeoySty6L
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Pancreatic Profile,882,Extended Electrolytes,PP03,Extended Electrolytes,Done,XxiY4tHbl2Z
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Pancreatic Profile,51,CALCIUM,PP04,Calcium,Done,vyKwpmxmgl5
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Pancreatic Profile,51,CALCIUM,PP04,Calcium,Done,w2SEZRMUtUn
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Pancreatic Profile,380,MAGNESIUM,PP05,Magnesium,Done,uhto05XLPSr
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,252,ALKALINE PHOSPHATASE (ALP),CX01,Alkaline Phosphate,Done,XgjY88WyEvw
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,47,AMYLASE,CX02,Amylase,Done,i83XCw9TZoy
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,91,GLUCOSE,CX03,Glucose,Done,hvSAoW7JMVT
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,420,GLUCOSE,CX03,Glucose,Done,hvSAoW7JMVT
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,873,GLUCOSE,CX03,Glucose,Done,hvSAoW7JMVT
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,698,GLUCOSE,CX03,Glucose,Done,hvSAoW7JMVT
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,239,TOTAL BILIRUBIN,CX04,Total Bilirubin,Done,WWPOwDdMfqS
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,797,TOTAL BILIRUBIN,CX04,Total Bilirubin,Done,WWPOwDdMfqS
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,358,LIPASE,CX05,Lipase,Done,tqarc2TinGp
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,532,ALPHA FETO PROTEIN,CX06,AFP,Done,qnEaYKEvLJt
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,532,ALPHA FETO PROTEIN,CX06,AFP,Positive,tleuJ6SCAQO
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,,,CX07,LDH,Done,h6VEWpbIw5j
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,150,LACTATE,CX08,Lactate,Done,R1i21ipKUvI
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,55,URIC ACID,CX09,Uric Acid,Done,YJS6tdhuN61
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,320,C-REACTIVE PROTEIN,CX10,CRP,Done,DORqImfxgss
+10.2.1,Number of Routine Tests Done in Facility Laboratory,Other Clinical Chemistry Tests,,,CX11,Others,Done,U0HoNLueK9m
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,425,BLOOD,CS01,Blood,Done,C6bn6zPbQCz
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,692,BLOOD,CS01,Blood,Done,C6bn6zPbQCz
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,144,URINALYSIS/URINE MICROSCOPY/ URINE ROUTINE,CS02,Urine,Done,Z6fz0YSRNWq
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,2,URINE CULTURE & SENSITIVITY,CS02,Urine,Done,Z6fz0YSRNWq
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,502,URINE MICROALBUMIN,CS02,Urine,Done,Z6fz0YSRNWq
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,553,STOOL ROTA/ADENOVIRUS ANTIGEN,CS03,Stool,Done,Z74IqKrAu2R
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,551,H. PYLORI ANTIGEN (STOOL),CS03,Stool,Done,Z74IqKrAu2R
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,7,STOOL FOR CULTURE & SENSITIVITY,CS03,Stool,Done,Z74IqKrAu2R
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,197,STOOL ANALYSIS,CS03,Stool,Done,Z74IqKrAu2R
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,,,CS04,Urogenital Swabs,Done,eUm4aLsUREy
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,,,CS05,Sputum,Done,tKa9eCTAuTa
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,928,CEREBRAL SPINAL FLUID (CSF),CS06,CSF,Done,Y311j0z9uy7
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,,,CS07,Pus/wound swabs,Done,P8wR4WH0xvv
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,,,CS08,Other swabs,Done,BhJKRTRxKeA
+10.2.1,Number of Routine Tests Done in Facility Laboratory,CULTURE & SENSITIVITY,,,CS09,Others,Done,F9yAAAMOFIW
+10.2.1,Number of Routine Tests Done in Facility Laboratory,PARASITOLOGY (Blood),,,PS03,Trypanosoma ,Done,NrNzNOidiE8
+10.2.1,Number of Routine Tests Done in Facility Laboratory,PARASITOLOGY (Blood),,,PS03,Trypanosoma ,Positive,b97pHj26X0h
+10.2.1,Number of Routine Tests Done in Facility Laboratory,PARASITOLOGY (Blood),,,PS04,Microfilaria ,Done,S8VpnPS89ZJ
+10.2.1,Number of Routine Tests Done in Facility Laboratory,PARASITOLOGY (Blood),,,PS04,Microfilaria ,Positive,aTpLorJB8OX
+10.2.1,Number of Routine Tests Done in Facility Laboratory,PARASITOLOGY (Blood),,,PS05,Trichinella ,Done,jVBv8a8sTby
+10.2.1,Number of Routine Tests Done in Facility Laboratory,PARASITOLOGY (Blood),,,PS05,Trichinella ,Positive,PFTxDUPFBuc
+10.2.1,Number of Routine Tests Done in Facility Laboratory,PARASITOLOGY (Blood),,,PS06,Borrelia,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS01,Entamoeba histolytic ,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS01,Entamoeba histolytic ,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS02,Giardia lamblia ,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS02,Giardia lamblia ,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS03,Cryptosporidium ,Positive,jd8YHK81EYe
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS04,Isospora belli,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS05,Cyclospora cayetanensis,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS06,Strongyloides stercoralis,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS07,Schistosoma mansoni,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS08,Taenia species,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS09,Ascaris lumbricoides,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS10,Hookworm ,Positive,dHBQ4tnISlq
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS11,Trichuris trichiura,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS12,Other parasites,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,STOOL MICROSCOPY,,,MS14,Total Stool Microscopy Tests,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR01,VDRL/RPR (Syphilis),,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR02,TPHA (Syphilis confirmation),,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR03,Shigella Antibody,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR04,Hepatitis B Surface Antigen (HBsAg),,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR05,Brucella Antibody,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR06,Pregnancy Test (HCG),Done,lLCw5i5eoQn
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR06,Pregnancy Test (HCG),Positive,SxFU9oxVzDk
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR07,Cryptococcal Antigen (CrAg),,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,200,RHEUMATOID FACTOR (RF),SR08,Rheumatoid Factor,Done,nlQ2XHHaB5L
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR08,Rheumatoid Factor,Positive,awNr3PBxRtR
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR09,Hepatitis B Core Antigen (HBcAg),,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR10,Hepatitis C Antibody,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR11,Hepatitis A Antibody,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR12,Hepatitis B e Antigen (HBeAg),,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR13,H. pylori Antibody,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,295,FECAL OCCULT BLOOD,SR14,Fecal Occult Blood,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR15,Toxoplasma IgG,Done,Fa9hodskeJ9
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,,Toxoplasma IgG,Positive,CjO5qomd6A5
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR16,Toxoplasma IgM,Done,QMf9LkI1COW
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,,Toxoplasma IgM,Positive,dJIA1SFb816
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,562,RUBELLA IG G,SR17,Rubella,Done,iyHv5ZAvDpl
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,563,RUBELLA IG M,,Rubella,Positive,y8wjTLBBCSt
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,561,RUBELLA ANTIBODIES,,,,
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,SR18,Others,Done,HNIGPbNjTS1
+10.2.1,Number of Routine Tests Done in Facility Laboratory,SEROLOGY,,,,Others,Positive,DE64n22luZt
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,HP01,Determine,Inconclusive Results,gt4nnXmktFt
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,Determine,Repeat Testers,WFWo6gd8q84
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,Determine,DNA Confirmed Tests,xSWi87nPvsg
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,Determine,,qPPkRwNbQLK
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,HP02,Statpak,Inconclusive Results,vUni7HncD5H
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,Statpak,Repeat Testers,R6Hab5TGlDx
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,Statpak,DNA Confirmed Tests,rKVy7AdYoFB
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,,,dmlmELeuSyP
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,HP03,SD Bioline,Inconclusive Results,yCFhLSgtm2V
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,SD Bioline,Repeat Testers,YBf6aiFlFzr
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,SD Bioline,DNA Confirmed Tests,A3tyalJbIgS
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,,,SaePW1w1INK
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,HP04,HIV Syphilis DUO,Inconclusive Results,fhApW96IgLz
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,HIV Syphilis DUO,Repeat Testers,jkLKbugzh9s
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,HIV Syphilis DUO,DNA Confirmed Tests,Qi7G1rpttno
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,,,FKsdBDFpAuu
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,HP05,Oraquick (Self Testing),Inconclusive Results,Ts4EfBkJa8V
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,Oraquick (Self Testing),Repeat Testers,LV7Qudb9E7J
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,Oraquick (Self Testing),DNA Confirmed Tests,qQ7RtdPhGcU
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,,,RLuOjNZaq0k
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,HP06,HIV Recency Testing,Inconclusive Results,JXhZmNPaNKV
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,HP06,HIV Recency Testing,Repeat Testers,tpHKA3yqaIl
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,HP06,HIV Recency Testing,DNA Confirmed Tests,MNnG5aukNOu
+10.3,Summary of HIV Tests by Purpose,SUMMARY OF HIV TESTS BY PURPOSE,,,,,,EgvsCowqr2w
+10.4.1,Volume of Sample Referred,Virology,,,VS01,HIV EID,,
+10.4.1,Volume of Sample Referred,Virology,,,VS02,Viral Load for HIV,Samples Referred,PCgPk2ogPHn
+10.4.1,Volume of Sample Referred,Virology,,,VS02,Viral Load for HIV,Pending Results/Feedback,mY67oZffpOd
+10.4.1,Volume of Sample Referred,Virology,204,CD4 COUNT,VS03,CD4,Samples Referred,ASdJwmuvKPO
+10.4.1,Volume of Sample Referred,Virology,377,CD4 ABSOLUTE COUNT,VS03,CD4,Pending Results/Feedback,YpMOS6ALssw
+10.4.1,Volume of Sample Referred,Virology,413,CD4/CD8 RATIO,,,,
+10.4.1,Volume of Sample Referred,Virology,,,VS04,Sickle Cell Disease Confirmation,Samples Referred,gpYLUiKrNHx
+10.4.1,Volume of Sample Referred,Virology,,,,,Pending Results/Feedback,Da2nbJXyvFD
+10.4.1,Volume of Sample Referred,Virology,597,MEDIUM BIOPSY HISTOLOGY (Unspecified),VS05,Histology,Samples Referred,cE4xYyV9cP0
+10.4.1,Volume of Sample Referred,Virology,871,HISTOLOGY,,,Pending Results/Feedback,x1jRXEJQk7x
+10.4.1,Volume of Sample Referred,Virology,,,VS06,Polio for Acute Flaccid Paralysis,,
+10.4.1,Volume of Sample Referred,Virology,,,VS07,Severe Acute Respiratory Syndrome/Infection (SARS/SARI),Samples Referred,xkzCOlTZvUm
+10.4.1,Volume of Sample Referred,Virology,,,,,Pending Results/Feedback,i1wNCbGgehn
+10.4.1,Volume of Sample Referred,Virology,795,TB GENEXPERT,VS08,TB GeneXpert,Samples Referred,uk1ygS4ih90
+10.4.1,Volume of Sample Referred,Virology,,,,,Pending Results/Feedback,Xl9LoXyDBQi
+10.4.1,Volume of Sample Referred,Virology,,,VS09,DST for Multi Drug Resistance TB (MDR TB),Samples Referred,bb7858UYVhK
+10.4.1,Volume of Sample Referred,Virology,,,,,Pending Results/Feedback,nAPg66rGeOq
+10.4.1,Volume of Sample Referred,Virology,544,HEPATITIS B VIRAL LOAD,VS10,Hepatitis B Viral load,Samples Referred,Frr8PBtDifn
+10.4.1,Volume of Sample Referred,Virology,,,,,Pending Results/Feedback,QADL6fJFoGZ
+10.4.1,Volume of Sample Referred,Virology,,,VS11,Hepatitis C Viral load,Samples Referred,Fn15HIXzWg9
+10.4.1,Volume of Sample Referred,Virology,,,,,Pending Results/Feedback,OuUfsq2oCzQ
+10.4.1,Volume of Sample Referred,Virology,,,VS12,Hep BcAg,Samples Referred,M2Tgala2egP
+10.4.1,Volume of Sample Referred,Virology,,,,,Pending Results/Feedback,G0NxD60y255
+10.4.1,Volume of Sample Referred,Virology,,,VS13,HIV MDR,Samples Referred,tpGCsq755n7
+10.4.1,Volume of Sample Referred,Virology,,,,,Pending Results/Feedback,YHvInhasswm
+10.4.1,Volume of Sample Referred,Virology,,,VS14,"VHFs (EBOLA, MARBURG)",,
+10.4.1,Volume of Sample Referred,Virology,500,BODY FLUID CYTOLOGY,VS15,Cytology,Samples Referred,tvOutAcRbNB
+10.4.1,Volume of Sample Referred,Virology,499,FINE NEEDLE ASPIRATE CYTOLOGY - REPORTING + PROCEDURE,,,Pending Results/Feedback,ErsezpC2yVP
+10.4.1,Volume of Sample Referred,Virology,308,BONE MARROW ASPIRATE CYTOLOGY,,,,
+10.4.1,Volume of Sample Referred,Virology,,,VS16,Measles/Rubella,,
+10.4.1,Volume of Sample Referred,Virology,,,VS17,Yellow fever,Samples Referred,z11eXUduMTj
+10.4.1,Volume of Sample Referred,Virology,,,,,Pending Results/Feedback,KvLgrcwvZgW
+10.4.1,Volume of Sample Referred,Virology,,,VS18,Rabies,Samples Referred,gwc2FljFEe2
+10.4.1,Volume of Sample Referred,Virology,,,,,Pending Results/Feedback,UvMyjP1sr4H

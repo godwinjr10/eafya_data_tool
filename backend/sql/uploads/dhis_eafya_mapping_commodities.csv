@@ -1,0 +1,209 @@
+section_id,section_name,eafya_product_id,eafya_product_name,hmis_name,hmis_code,unit,dhis2_data_element_id,data_element_name
+6.1,Stock Status,725,Artemether+ Lumefantrine (6's) (coartem),Artemether/Lumefantrine 20/120mg,SS01,Tablet,RIBMopGoWHl,Quantity Consumed
+6.1,Stock Status,725,Artemether+ Lumefantrine (6's) (coartem),Artemether/Lumefantrine 20/120mg,SS01,Tablet,pDoc60OZDbH,Days out of stock
+6.1,Stock Status,725,Artemether+ Lumefantrine (6's) (coartem),Artemether/Lumefantrine 20/120mg,SS01,Tablet,fy34HLoHa0x,Stock at Hand
+6.1,Stock Status,725,Artemether+ Lumefantrine (6's) (coartem),Artemether/Lumefantrine 20/120mg,SS01,Tablet,Q6ne3khBitH,Quantity Expired
+6.1,Stock Status,685,Artemether + Lumefantrine(24's) (coartem),Artemether/Lumefantrine 20/120mg,SS01,Tablet,RIBMopGoWHl,Quantity Consumed
+6.1,Stock Status,685,Artemether + Lumefantrine(24's) (coartem),Artemether/Lumefantrine 20/120mg,SS01,Tablet,pDoc60OZDbH,Days out of stock
+6.1,Stock Status,685,Artemether + Lumefantrine(24's) (coartem),Artemether/Lumefantrine 20/120mg,SS01,Tablet,fy34HLoHa0x,Stock at Hand
+6.1,Stock Status,685,Artemether + Lumefantrine(24's) (coartem),Artemether/Lumefantrine 20/120mg,SS01,Tablet,Q6ne3khBitH,Quantity Expired
+6.1,Stock Status,141,Artesunate,Artesunate 60mg,SS02,Vial,FNT0AWnEok7,Quantity Consumed
+6.1,Stock Status,141,Artesunate,Artesunate 60mg,SS02,Vial,eSjJv1tjFWu,Days out of stock
+6.1,Stock Status,141,Artesunate,Artesunate 60mg,SS02,Vial,O3hT4aIhzLi,Stock at Hand
+6.1,Stock Status,141,Artesunate,Artesunate 60mg,SS02,Vial,Jdb1lBj4uoP,Quantity Expired
+6.1,Stock Status,,,Long Lasting Insecticidal Nets (LLINs),SS03,Piece,LM7oz5Glohw,Quantity Consumed
+6.1,Stock Status,,,Long Lasting Insecticidal Nets (LLINs),SS03,Piece,So21oM09xKL,Days out of stock
+6.1,Stock Status,,,Long Lasting Insecticidal Nets (LLINs),SS03,Piece,eJjn1Av0vHI,Stock at Hand
+6.1,Stock Status,,,Long Lasting Insecticidal Nets (LLINs),SS03,Piece,f65rrKcnJLg,Quantity Expired
+6.1,Stock Status,59,Chlorhexidine gel,Chlorhexidine Digluconate Gel 7.1%,SS04,Tube,RvUzMtiTOnh,Quantity Consumed
+6.1,Stock Status,59,Chlorhexidine gel,Chlorhexidine Digluconate Gel 7.1%,SS04,Tube,pnkTSdn1z9e,Days out of stock
+6.1,Stock Status,59,Chlorhexidine gel,Chlorhexidine Digluconate Gel 7.1%,SS04,Tube,NH01RQyn58l,Stock at Hand
+6.1,Stock Status,59,Chlorhexidine gel,Chlorhexidine Digluconate Gel 7.1%,SS04,Tube,tgtarB7Bvsx,Quantity Expired
+6.1,Stock Status,10,Therapeutic Milk,Therapeutic milk F75 (75Kcal/100ml),SS05,Can,aB6rpIpPXWf,Quantity Consumed
+6.1,Stock Status,10,Therapeutic Milk,Therapeutic milk F75 (75Kcal/100ml),SS05,Can,RUgRUwwMAlh,Days out of stock
+6.1,Stock Status,10,Therapeutic Milk,Therapeutic milk F75 (75Kcal/100ml),SS05,Can,YhhLA8HoLr7,Stock at Hand
+6.1,Stock Status,10,Therapeutic Milk,Therapeutic milk F75 (75Kcal/100ml),SS05,Can,uhDyKR4nE95,Quantity Expired
+6.1,Stock Status,8,Ready to use Therapeutic feeds (RUTF),Ready to use Therapeutic feeds (RUTF),SS06,Sachet,MaYXvxNPKGR,Quantity Consumed
+6.1,Stock Status,8,Ready to use Therapeutic feeds (RUTF),Ready to use Therapeutic feeds (RUTF),SS06,Sachet,Ftnf3Yn7oht,Days out of stock
+6.1,Stock Status,8,Ready to use Therapeutic feeds (RUTF),Ready to use Therapeutic feeds (RUTF),SS06,Sachet,zc7pf9ctwyc,Stock at Hand
+6.1,Stock Status,8,Ready to use Therapeutic feeds (RUTF),Ready to use Therapeutic feeds (RUTF),SS06,Sachet,avFhBPl6YUj,Quantity Expired
+6.1,Stock Status,,,Oral Liquid Morphine 5mg/5mL,SS07,Bottle of 500ml,wIp7Gr1lf7S,Quantity Consumed
+6.1,Stock Status,,,Oral Liquid Morphine 5mg/5mL,SS07,Bottle of 500ml,d9yRtY7kB3L,Days out of stock
+6.1,Stock Status,,,Oral Liquid Morphine 5mg/5mL,SS07,Bottle of 500ml,wHgX40UfiCw,Stock at Hand
+6.1,Stock Status,,,Oral Liquid Morphine 5mg/5mL,SS07,Bottle of 500ml,JxQNnKwaTbR,Quantity Expired
+6.1,Stock Status,272,Vitamin A (Retinol),Retinol (Vitamin A) 200000IU,SS08,Capsule,iQJkiLHfOyZ,Quantity Consumed
+6.1,Stock Status,272,Vitamin A (Retinol),Retinol (Vitamin A) 200000IU,SS08,Capsule,Wc8HjvOATV9,Days out of stock
+6.1,Stock Status,272,Vitamin A (Retinol),Retinol (Vitamin A) 200000IU,SS08,Capsule,T3I0ee84Xrp,Stock at Hand
+6.1,Stock Status,272,Vitamin A (Retinol),Retinol (Vitamin A) 200000IU,SS08,Capsule,jTFze4K9xBv,Quantity Expired
+6.1,Stock Status,,,Bendrofluazide 5mg,SS09,Tablet,ELUJ8kvdyTi,Quantity Consumed
+6.1,Stock Status,,,Bendrofluazide 5mg,SS09,Tablet,jbVZGLCmLcE,Days out of stock
+6.1,Stock Status,,,Bendrofluazide 5mg,SS09,Tablet,xfyEsSF1Yeh,Stock at Hand
+6.1,Stock Status,,,Bendrofluazide 5mg,SS09,Tablet,io2jyFaluMb,Quantity Expired
+6.1,Stock Status,716,Amlodipine,Amlodipine 5mg,SS10,Tablet,u0eqaAAypzu,Quantity Consumed
+6.1,Stock Status,716,Amlodipine,Amlodipine 5mg,SS10,Tablet,aeoCYWtyaGU,Days out of stock
+6.1,Stock Status,716,Amlodipine,Amlodipine 5mg,SS10,Tablet,vfrGRFSS7ei,Stock at Hand
+6.1,Stock Status,716,Amlodipine,Amlodipine 5mg,SS10,Tablet,MMmOpkseCwP,Quantity Expired
+6.1,Stock Status,754,Captopril,Captopril 25mg,SS11,Tablet,GgypgARVxzI,Quantity Consumed
+6.1,Stock Status,754,Captopril,Captopril 25mg,SS11,Tablet,YDbEU5bBWyJ,Days out of stock
+6.1,Stock Status,754,Captopril,Captopril 25mg,SS11,Tablet,QIy53MYZZHq,Stock at Hand
+6.1,Stock Status,754,Captopril,Captopril 25mg,SS11,Tablet,bZGloO0dfM6,Quantity Expired
+6.1,Stock Status,897,Metformin HCl,Metformin 500mg,SS12,Tablet,klbaYAoSygw,Quantity Consumed
+6.1,Stock Status,897,Metformin HCl,Metformin 500mg,SS12,Tablet,wiqUBGIcpQd,Days out of stock
+6.1,Stock Status,897,Metformin HCl,Metformin 500mg,SS12,Tablet,msmJxt9LGqX,Stock at Hand
+6.1,Stock Status,897,Metformin HCl,Metformin 500mg,SS12,Tablet,pgMS4A4T41F,Quantity Expired
+6.1,Stock Status,688,Metformin Glucophage,Metformin 500mg,SS12,Tablet,klbaYAoSygw,Quantity Consumed
+6.1,Stock Status,688,Metformin Glucophage,Metformin 500mg,SS12,Tablet,wiqUBGIcpQd,Days out of stock
+6.1,Stock Status,688,Metformin Glucophage,Metformin 500mg,SS12,Tablet,msmJxt9LGqX,Stock at Hand
+6.1,Stock Status,688,Metformin Glucophage,Metformin 500mg,SS12,Tablet,pgMS4A4T41F,Quantity Expired
+6.1,Stock Status,830,Glimepiride,Glimepiride 2mg,SS13,Tablet,p9xEniNiV1j,Quantity Consumed
+6.1,Stock Status,830,Glimepiride,Glimepiride 2mg,SS13,Tablet,XIIggi79snv,Days out of stock
+6.1,Stock Status,830,Glimepiride,Glimepiride 2mg,SS13,Tablet,EB24zcuiRH4,Stock at Hand
+6.1,Stock Status,830,Glimepiride,Glimepiride 2mg,SS13,Tablet,micrXkUusxI,Quantity Expired
+6.1,Stock Status,,,Insulin short-acting 100IU/MI,SS14,Vial,iYxpEkbr4jw,Quantity Consumed
+6.1,Stock Status,,,Insulin short-acting 100IU/MI,SS14,Vial,lx4a6tm5Ctl,Days out of stock
+6.1,Stock Status,,,Insulin short-acting 100IU/MI,SS14,Vial,bYQQBS9F9Bp,Stock at Hand
+6.1,Stock Status,,,Insulin short-acting 100IU/MI,SS14,Vial,y1JeU6PTNy7,Quantity Expired
+6.1,Stock Status,2461,Refilled Gas Cylinder,Filled Oxygen Cylinder (Big Size),SS15,Cylinder,eorpVNcBh68,Quantity Consumed
+6.1,Stock Status,2461,Refilled Gas Cylinder,Filled Oxygen Cylinder (Big Size),SS15,Cylinder,V3K5RNMBcpr,Days out of stock
+6.1,Stock Status,2461,Refilled Gas Cylinder,Filled Oxygen Cylinder (Big Size),SS15,Cylinder,l45DU6fKh35,Stock at Hand
+6.1,Stock Status,2461,Refilled Gas Cylinder,Filled Oxygen Cylinder (Big Size),SS15,Cylinder,PD0KQJ5jSiV,Quantity Expired
+6.1,Stock Status,817,Ferrous sulphate+Folic acid,Ferrous sulphate + Folic Acid,SS16,Tablet,Gko0hroCGQf,Quantity Consumed
+6.1,Stock Status,817,Ferrous sulphate+Folic acid,Ferrous sulphate + Folic Acid,SS16,Tablet,MVeuvhMqlyx,Days out of stock
+6.1,Stock Status,817,Ferrous sulphate+Folic acid,Ferrous sulphate + Folic Acid,SS16,Tablet,U103VVvl2Km,Stock at Hand
+6.1,Stock Status,817,Ferrous sulphate+Folic acid,Ferrous sulphate + Folic Acid,SS16,Tablet,ZYWlByvGa4Y,Quantity Expired
+6.1,Stock Status,339,Salbutamol inhaler,Salbutamol inhaler,SS17,Piece,MdDIyLTtzVZ,Quantity Consumed
+6.1,Stock Status,339,Salbutamol inhaler,Salbutamol inhaler,SS17,Piece,UW7CUMrQIUh,Days out of stock
+6.1,Stock Status,339,Salbutamol inhaler,Salbutamol inhaler,SS17,Piece,sO1U2VBiaTL,Stock at Hand
+6.1,Stock Status,339,Salbutamol inhaler,Salbutamol inhaler,SS17,Piece,yMg98ft9QuB,Quantity Expired
+6.1,Stock Status,339,Salbutamol inhaler,Carbamazepine 200mg,SS18,Tablet,H8uIox9gXEA,Quantity Consumed
+6.1,Stock Status,339,Salbutamol inhaler,Carbamazepine 200mg,SS18,Tablet,R3OzIXOWCOe,Days out of stock
+6.1,Stock Status,339,Salbutamol inhaler,Carbamazepine 200mg,SS18,Tablet,ex3OpmyHlxP,Stock at Hand
+6.1,Stock Status,339,Salbutamol inhaler,Carbamazepine 200mg,SS18,Tablet,DXBOe7Us5yo,Quantity Expired
+6.1,Stock Status,822,Fluoxetine,Fluoxetine 20 mg,SS19,Capsule,fFsNsiGg2CB,Quantity Consumed
+6.1,Stock Status,822,Fluoxetine,Fluoxetine 20 mg,SS19,Capsule,xQ8AWPY8Ude,Days out of stock
+6.1,Stock Status,822,Fluoxetine,Fluoxetine 20 mg,SS19,Capsule,HPMRhsim2CG,Stock at Hand
+6.1,Stock Status,822,Fluoxetine,Fluoxetine 20 mg,SS19,Capsule,tJrUDw21Xmb,Quantity Expired
+6.1,Stock Status,2846,CHLORPROMAZINE(CPZ) tabs,Chlorpromazine 25mg,SS20,Tablet,mOOdFWzGNAD,Quantity Consumed
+6.1,Stock Status,2846,CHLORPROMAZINE(CPZ) tabs,Chlorpromazine 25mg,SS20,Tablet,LkQrMVTYCPz,Days out of stock
+6.1,Stock Status,2846,CHLORPROMAZINE(CPZ) tabs,Chlorpromazine 25mg,SS20,Tablet,CHADo6zEvP7,Stock at Hand
+6.1,Stock Status,2846,CHLORPROMAZINE(CPZ) tabs,Chlorpromazine 25mg,SS20,Tablet,AdBRLfOzQQP,Quantity Expired
+6.1,Stock Status,,,Depot Medroxyprogosterone Acetate (DMPA)_IM + SC,SS21,Vial,oxs9PnKVkY9,Quantity Consumed
+6.1,Stock Status,,,Depot Medroxyprogosterone Acetate (DMPA)_IM + SC,SS21,Vial,TiTizk6ySeY,Days out of stock
+6.1,Stock Status,,,Depot Medroxyprogosterone Acetate (DMPA)_IM + SC,SS21,Vial,FrWnOPWPbSF,Stock at Hand
+6.1,Stock Status,,,Depot Medroxyprogosterone Acetate (DMPA)_IM + SC,SS21,Vial,btxC6bS9r1M,Quantity Expired
+6.1,Stock Status,678,Amoxicillin caps,Amoxicillin 250 mg,SS22,Capsule,aYLRo9MS3zb,Quantity Consumed
+6.1,Stock Status,678,Amoxicillin caps,Amoxicillin 250 mg,SS22,Capsule,dBpUBrwQoEg,Days out of stock
+6.1,Stock Status,678,Amoxicillin caps,Amoxicillin 250 mg,SS22,Capsule,z75W19sQozD,Stock at Hand
+6.1,Stock Status,678,Amoxicillin caps,Amoxicillin 250 mg,SS22,Capsule,H4UtEhJHCIb,Quantity Expired
+6.1,Stock Status,605,Amoxicillin tabs,Amoxicillin dispersible 250mg,SS23,Tablet,pvBjG3TnbtJ,Quantity Consumed
+6.1,Stock Status,605,Amoxicillin tabs,Amoxicillin dispersible 250mg,SS23,Tablet,ydkgbCWZ0u9,Days out of stock
+6.1,Stock Status,605,Amoxicillin tabs,Amoxicillin dispersible 250mg,SS23,Tablet,rPFM5bTGYMY,Stock at Hand
+6.1,Stock Status,605,Amoxicillin tabs,Amoxicillin dispersible 250mg,SS23,Tablet,SQr7jL5gMBe,Quantity Expired
+6.1,Stock Status,,,Sulfadoxine/Pyrimethamine tablet 500/25mg,SS24,Tablet,eu5hj9Xa9vP,Quantity Consumed
+6.1,Stock Status,,,Sulfadoxine/Pyrimethamine tablet 500/25mg,SS24,Tablet,g6UvWXJodNP,Days out of stock
+6.1,Stock Status,,,Sulfadoxine/Pyrimethamine tablet 500/25mg,SS24,Tablet,SttnQWaT8fW,Stock at Hand
+6.1,Stock Status,,,Sulfadoxine/Pyrimethamine tablet 500/25mg,SS24,Tablet,RKgzwmmLqUK,Quantity Expired
+6.1,Stock Status,,,Misoprostol 200mg,SS25,Tablet,EDOQsUzygay,Quantity Consumed
+6.1,Stock Status,,,Misoprostol 200mg,SS25,Tablet,yQyD3fmgUkC,Days out of stock
+6.1,Stock Status,,,Misoprostol 200mg,SS25,Tablet,B9tp1MLDv2F,Stock at Hand
+6.1,Stock Status,,,Misoprostol 200mg,SS25,Tablet,jrWc3PfVAAK,Quantity Expired
+6.1,Stock Status,,,ORS Sachets with zinc tablets,SS26,1 sachet with 1 strip,lz5KzKAbFbX,Quantity Consumed
+6.1,Stock Status,,,ORS Sachets with zinc tablets,SS26,1 sachet with 1 strip,RooCY6sOLZo,Days out of stock
+6.1,Stock Status,,,ORS Sachets with zinc tablets,SS26,1 sachet with 1 strip,F38NBUN9Srm,Stock at Hand
+6.1,Stock Status,,,ORS Sachets with zinc tablets,SS26,1 sachet with 1 strip,RA5qTvZBF8v,Quantity Expired
+6.1,Stock Status,239,"Measles vaccine, live attenuated",Measles-Rubella Vaccine,SS27,Vial,MSKEKWtoB54,Quantity Consumed
+6.1,Stock Status,239,"Measles vaccine, live attenuated",Measles-Rubella Vaccine,SS27,Vial,uoCNTBk8wCN,Days out of stock
+6.1,Stock Status,239,"Measles vaccine, live attenuated",Measles-Rubella Vaccine,SS27,Vial,WQGiJmR3Fpn,Stock at Hand
+6.1,Stock Status,239,"Measles vaccine, live attenuated",Measles-Rubella Vaccine,SS27,Vial,F3qRgHbdaGn,Quantity Expired
+6.1,Stock Status,759,Ceftriaxone INJ,Ceftriaxone 1g Injection,SS28,Vial,wE9AHBOIFCE,Quantity Consumed
+6.1,Stock Status,759,Ceftriaxone INJ,Ceftriaxone 1g Injection,SS28,Vial,tXhsTnLY5q1,Days out of stock
+6.1,Stock Status,759,Ceftriaxone INJ,Ceftriaxone 1g Injection,SS28,Vial,h5nYtk0kLWs,Stock at Hand
+6.1,Stock Status,759,Ceftriaxone INJ,Ceftriaxone 1g Injection,SS28,Vial,t2ec7RhRJih,Quantity Expired
+6.1,Stock Status,2803,OXYTOCIN(PITOCIN),Oxytocin 10IU/1ml Injection,SS29,Ampoule,QYtOYWYSof5,Quantity Consumed
+6.1,Stock Status,2803,OXYTOCIN(PITOCIN),Oxytocin 10IU/1ml Injection,SS29,Ampoule,H9cd4w2pZz7,Days out of stock
+6.1,Stock Status,2803,OXYTOCIN(PITOCIN),Oxytocin 10IU/1ml Injection,SS29,Ampoule,XArRo0aFWMq,Stock at Hand
+6.1,Stock Status,2803,OXYTOCIN(PITOCIN),Oxytocin 10IU/1ml Injection,SS29,Ampoule,ba82zZBuypr,Quantity Expired
+6.1,Stock Status,2243,Safe Delivery Kits (mama kits),Mama Kit,SS30,Kit,I8g7GERvAjt,Quantity Consumed
+6.1,Stock Status,2243,Safe Delivery Kits (mama kits),Mama Kit,SS30,Kit,AfULYK9Vpyc,Days out of stock
+6.1,Stock Status,2243,Safe Delivery Kits (mama kits),Mama Kit,SS30,Kit,sFLr3TIyeT3,Stock at Hand
+6.1,Stock Status,2243,Safe Delivery Kits (mama kits),Mama Kit,SS30,Kit,Z7MLPmFef54,Quantity Expired
+6.1,Stock Status,,,Elonogestrel 68mg Implant (Implanon),SS31,1 Implant,mDqfoaIlslo,Quantity Consumed
+6.1,Stock Status,,,Elonogestrel 68mg Implant (Implanon),SS31,1 Implant,RgJfEDFIOmI,Days out of stock
+6.1,Stock Status,,,Elonogestrel 68mg Implant (Implanon),SS31,1 Implant,cPQww1wkUF5,Stock at Hand
+6.1,Stock Status,,,Elonogestrel 68mg Implant (Implanon),SS31,1 Implant,pQS34kFrxph,Quantity Expired
+6.1,Stock Status,1162,Condoms,Male Condoms,SS32,Piece,Zbmfh4YV81V,Quantity Consumed
+6.1,Stock Status,1162,Condoms,Male Condoms,SS32,Piece,AQBgo2lFYcB,Days out of stock
+6.1,Stock Status,1162,Condoms,Male Condoms,SS32,Piece,ydAtcUUXAd4,Stock at Hand
+6.1,Stock Status,1162,Condoms,Male Condoms,SS32,Piece,YXxDY7UlYw0,Quantity Expired
+6.1,Stock Status,1257,FACS Count % CD4 Reagent,CD4 reagent (BD Presto/Visitect/PIMA),SS33,Tests,CQEYQ8lyY3s,Quantity Consumed
+6.1,Stock Status,1257,FACS Count % CD4 Reagent,CD4 reagent (BD Presto/Visitect/PIMA),SS33,Tests,MiELOgN8VHl,Days out of stock
+6.1,Stock Status,1257,FACS Count % CD4 Reagent,CD4 reagent (BD Presto/Visitect/PIMA),SS33,Tests,FNljrtQsZDH,Stock at Hand
+6.1,Stock Status,1257,FACS Count % CD4 Reagent,CD4 reagent (BD Presto/Visitect/PIMA),SS33,Tests,CR482O9NVwb,Quantity Expired
+6.1,Stock Status,1140,Malaria Rapid Test Kits,Malaria Rapid Diagnostic,SS34,Tests,oCtCwUE7utd,Quantity Consumed
+6.1,Stock Status,1140,Malaria Rapid Test Kits,Malaria Rapid Diagnostic,SS34,Tests,SBbhtV3VJvj,Days out of stock
+6.1,Stock Status,1140,Malaria Rapid Test Kits,Malaria Rapid Diagnostic,SS34,Tests,HhhkiZDx1vo,Stock at Hand
+6.1,Stock Status,1140,Malaria Rapid Test Kits,Malaria Rapid Diagnostic,SS34,Tests,Uk5CFlynuP8,Quantity Expired
+6.1,Stock Status,2625,Gene expert (TB),TB GeneXpert Cartridges,SS35,Cartridges,LwQS4dn6CNo,Quantity Consumed
+6.1,Stock Status,2625,Gene expert (TB),TB GeneXpert Cartridges,SS35,Cartridges,YBrTKDdbjeZ,Days out of stock
+6.1,Stock Status,2625,Gene expert (TB),TB GeneXpert Cartridges,SS35,Cartridges,tZhzAESh4sL,Stock at Hand
+6.1,Stock Status,2625,Gene expert (TB),TB GeneXpert Cartridges,SS35,Cartridges,T0TejU8ASOy,Quantity Expired
+6.1,Stock Status,1104,HIV Determine I/II,Determine HIV 1 & 2 screening test,SS36,Tests,E6bQbrXhKgU,Quantity Consumed
+6.1,Stock Status,1104,HIV Determine I/II,Determine HIV 1 & 2 screening test,SS36,Tests,nySjHa5fLGm,Days out of stock
+6.1,Stock Status,1104,HIV Determine I/II,Determine HIV 1 & 2 screening test,SS36,Tests,RQ1tlXaPcar,Stock at Hand
+6.1,Stock Status,1104,HIV Determine I/II,Determine HIV 1 & 2 screening test,SS36,Tests,UMNerD5NBOw,Quantity Expired
+6.1,Stock Status,,,Stat-pack HIV Confirmatory rapid tests,SS37,Tests,mCBBugESiLL,Quantity Consumed
+6.1,Stock Status,,,Stat-pack HIV Confirmatory rapid tests,SS37,Tests,lqKvHtoTCSI,Days out of stock
+6.1,Stock Status,,,Stat-pack HIV Confirmatory rapid tests,SS37,Tests,EEx8UTWSL9K,Stock at Hand
+6.1,Stock Status,,,Stat-pack HIV Confirmatory rapid tests,SS37,Tests,C6TE4BvkksF,Quantity Expired
+6.1,Stock Status,2182,HIV-1/2 3.0 SD Bioline,SD Bioline test-Tie Breaker,SS38,Tests,QfoK6gO7Ywl,Quantity Consumed
+6.1,Stock Status,2182,HIV-1/2 3.0 SD Bioline,SD Bioline test-Tie Breaker,SS38,Tests,Xsan86wc3PJ,Days out of stock
+6.1,Stock Status,2182,HIV-1/2 3.0 SD Bioline,SD Bioline test-Tie Breaker,SS38,Tests,ya5mexhLqPi,Stock at Hand
+6.1,Stock Status,2182,HIV-1/2 3.0 SD Bioline,SD Bioline test-Tie Breaker,SS38,Tests,mtl18MPGwtc,Quantity Expired
+6.1,Stock Status,,,Blood 450 ml,SS39,Unit,zrzLwJlJT0P,Quantity Consumed
+6.1,Stock Status,,,Blood 450 ml,SS39,Unit,ia9dCV1swjb,Days out of stock
+6.1,Stock Status,,,Blood 450 ml,SS39,Unit,hIF6SoT1CPV,Stock at Hand
+6.1,Stock Status,,,Blood 450 ml,SS39,Unit,KjL3gz0ztDT,Quantity Expired
+6.1,Stock Status,,,Hepatitis B (HBsAg) Test Kits,SS40,Tests,lQRFuUgxIko,Quantity Consumed
+6.1,Stock Status,,,Hepatitis B (HBsAg) Test Kits,SS40,Tests,RMbAB4oIe3v,Days out of stock
+6.1,Stock Status,,,Hepatitis B (HBsAg) Test Kits,SS40,Tests,AhfrSeifgVM,Stock at Hand
+6.1,Stock Status,,,Hepatitis B (HBsAg) Test Kits,SS40,Tests,ObEurrF8fkT,Quantity Expired
+6.1,Stock Status,2189,HIV + Syphilis Duo Test Kit,HIV/Syphilis Duo Kit,SS41,Tests,Y2rG87X018G,Quantity Consumed
+6.1,Stock Status,2189,HIV + Syphilis Duo Test Kit,HIV/Syphilis Duo Kit,SS41,Tests,uPxx6wu73ZL,Days out of stock
+6.1,Stock Status,2189,HIV + Syphilis Duo Test Kit,HIV/Syphilis Duo Kit,SS41,Tests,FjDiDncMSYs,Stock at Hand
+6.1,Stock Status,2189,HIV + Syphilis Duo Test Kit,HIV/Syphilis Duo Kit,SS41,Tests,WjRrKZXi5UA,Quantity Expired
+6.1,Stock Status,1288,Tenofovir + Lamivudine + Dolutegravir (TDF/3TC/DTG),Tendrovir/Lamvudine/Dolutegravir (TDF/3TC/DTG) 300/300/50mg,SS42,Pack of 90,VkjK3NWHyJR,Quantity Consumed
+6.1,Stock Status,1288,Tenofovir + Lamivudine + Dolutegravir (TDF/3TC/DTG),Tendrovir/Lamvudine/Dolutegravir (TDF/3TC/DTG) 300/300/50mg,SS42,Pack of 90,whzcuwyG1mb,Days out of stock
+6.1,Stock Status,1288,Tenofovir + Lamivudine + Dolutegravir (TDF/3TC/DTG),Tendrovir/Lamvudine/Dolutegravir (TDF/3TC/DTG) 300/300/50mg,SS42,Pack of 90,L2exKCG9ZxY,Stock at Hand
+6.1,Stock Status,1288,Tenofovir + Lamivudine + Dolutegravir (TDF/3TC/DTG),Tendrovir/Lamvudine/Dolutegravir (TDF/3TC/DTG) 300/300/50mg,SS42,Pack of 90,Ea8UVuVDfa5,Quantity Expired
+6.1,Stock Status,2426,Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 600/300/50,Abacavir/Lamvudine/Dolutegravir (ABC/3TC/DTG) 600/300/50mg,SS43,Pack of 30,x9HO4Wzv7rx,Quantity Consumed
+6.1,Stock Status,2426,Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 600/300/50,Abacavir/Lamvudine/Dolutegravir (ABC/3TC/DTG) 600/300/50mg,SS43,Pack of 30,IksyrSS2A3e,Days out of stock
+6.1,Stock Status,2426,Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 600/300/50,Abacavir/Lamvudine/Dolutegravir (ABC/3TC/DTG) 600/300/50mg,SS43,Pack of 30,qXdpOMhAsLE,Stock at Hand
+6.1,Stock Status,2426,Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 600/300/50,Abacavir/Lamvudine/Dolutegravir (ABC/3TC/DTG) 600/300/50mg,SS43,Pack of 30,cdMpfZVEhxN,Quantity Expired
+6.1,Stock Status,1018,Zidovudine/Lamivudine/Nevirapine (AZT/3TC/NVP),Zidovudine/Lamvudine (AZT/3TC) 300/150mg,SS44,Pack of 60,RaHMrWfK14P,Quantity Consumed
+6.1,Stock Status,1018,Zidovudine/Lamivudine/Nevirapine (AZT/3TC/NVP),Zidovudine/Lamvudine (AZT/3TC) 300/150mg,SS44,Pack of 60,hANVx2Y5XjG,Days out of stock
+6.1,Stock Status,1018,Zidovudine/Lamivudine/Nevirapine (AZT/3TC/NVP),Zidovudine/Lamvudine (AZT/3TC) 300/150mg,SS44,Pack of 60,G998reqcHxo,Stock at Hand
+6.1,Stock Status,1018,Zidovudine/Lamivudine/Nevirapine (AZT/3TC/NVP),Zidovudine/Lamvudine (AZT/3TC) 300/150mg,SS44,Pack of 60,pzFHcVuOC7F,Quantity Expired
+6.1,Stock Status,2491,Abacavir/Lamivudine/Lopinavir/Ritonavir (ABC/3TC/LPV/r),Abacavir/Lamvudine/Dolutegravir (ABC/3TC/DTG) 60/30/5mg,SS45,Pack of 90,lTLNDFuDDba,Quantity Consumed
+6.1,Stock Status,2491,Abacavir/Lamivudine/Lopinavir/Ritonavir (ABC/3TC/LPV/r),Abacavir/Lamvudine/Dolutegravir (ABC/3TC/DTG) 60/30/5mg,SS45,Pack of 90,k4erSOlCCkS,Days out of stock
+6.1,Stock Status,2491,Abacavir/Lamivudine/Lopinavir/Ritonavir (ABC/3TC/LPV/r),Abacavir/Lamvudine/Dolutegravir (ABC/3TC/DTG) 60/30/5mg,SS45,Pack of 90,rHhScmlbCBl,Stock at Hand
+6.1,Stock Status,2491,Abacavir/Lamivudine/Lopinavir/Ritonavir (ABC/3TC/LPV/r),Abacavir/Lamvudine/Dolutegravir (ABC/3TC/DTG) 60/30/5mg,SS45,Pack of 90,WqpK9umwIgV,Quantity Expired
+6.1,Stock Status,1018,Zidovudine/Lamivudine/Nevirapine (AZT/3TC/NVP),Zidovudine/Lamvudine (AZT/3TC) 60/30mg,SS46,Pack of 60,yIWazgZwraU,Quantity Consumed
+6.1,Stock Status,1018,Zidovudine/Lamivudine/Nevirapine (AZT/3TC/NVP),Zidovudine/Lamvudine (AZT/3TC) 60/30mg,SS46,Pack of 60,Q0KPtGrBoQb,Days out of stock
+6.1,Stock Status,1018,Zidovudine/Lamivudine/Nevirapine (AZT/3TC/NVP),Zidovudine/Lamvudine (AZT/3TC) 60/30mg,SS46,Pack of 60,Fjuod4X2s6q,Stock at Hand
+6.1,Stock Status,1018,Zidovudine/Lamivudine/Nevirapine (AZT/3TC/NVP),Zidovudine/Lamvudine (AZT/3TC) 60/30mg,SS46,Pack of 60,GJh7HiEjOFA,Quantity Expired
+6.1,Stock Status,510,Nevirapine (NVP),Nevirapine (NVP) 10mg/ml oral susp.,SS47,Bottle 100ml,NOAUnQ5exkd,Quantity Consumed
+6.1,Stock Status,510,Nevirapine (NVP),Nevirapine (NVP) 10mg/ml oral susp.,SS47,Bottle 100ml,dS1SBQizsCk,Days out of stock
+6.1,Stock Status,510,Nevirapine (NVP),Nevirapine (NVP) 10mg/ml oral susp.,SS47,Bottle 100ml,eIdyJNIeFMU,Stock at Hand
+6.1,Stock Status,510,Nevirapine (NVP),Nevirapine (NVP) 10mg/ml oral susp.,SS47,Bottle 100ml,ZQGRrTL9f7f,Quantity Expired
+6.1,Stock Status,805,Ethambutol (E) 100mg ADULT,Ethambutol 100mg,SS48,Blister of 10 tablets,vLfFqTKaUZc,Quantity Consumed
+6.1,Stock Status,805,Ethambutol (E) 100mg ADULT,Ethambutol 100mg,SS48,Blister of 10 tablets,Cyt3BC4JNR5,Days out of stock
+6.1,Stock Status,805,Ethambutol (E) 100mg ADULT,Ethambutol 100mg,SS48,Blister of 10 tablets,M7QQo23mMqK,Stock at Hand
+6.1,Stock Status,805,Ethambutol (E) 100mg ADULT,Ethambutol 100mg,SS48,Blister of 10 tablets,V2IeNGMa5aZ,Quantity Expired
+6.1,Stock Status,969,RHZE(ADULT),RHZE 150/75/400/275mg,SS49,Blister of 28 tablets,tViJTDJyvRx,Quantity Consumed
+6.1,Stock Status,969,RHZE(ADULT),RHZE 150/75/400/275mg,SS49,Blister of 28 tablets,XcKSEjnZEut,Days out of stock
+6.1,Stock Status,969,RHZE(ADULT),RHZE 150/75/400/275mg,SS49,Blister of 28 tablets,LIyDtNQVsGo,Stock at Hand
+6.1,Stock Status,969,RHZE(ADULT),RHZE 150/75/400/275mg,SS49,Blister of 28 tablets,jEjYbOgLaEI,Quantity Expired
+6.1,Stock Status,969,RHZE(ADULT),RHZ 75/50/150mg,SS50,Blister of 28 tablets,Ry5PQiLsEZX,Quantity Consumed
+6.1,Stock Status,969,RHZE(ADULT),RHZ 75/50/150mg,SS50,Blister of 28 tablets,KVma72HXIFm,Days out of stock
+6.1,Stock Status,969,RHZE(ADULT),RHZ 75/50/150mg,SS50,Blister of 28 tablets,kFVmUnfCxTc,Stock at Hand
+6.1,Stock Status,969,RHZE(ADULT),RHZ 75/50/150mg,SS50,Blister of 28 tablets,np7eWusrF7l,Quantity Expired
