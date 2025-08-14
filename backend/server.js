@@ -26,7 +26,6 @@ import ConditionsMappingRoutes from "./routes/mappings/allItemsMapping.js";
 import dhis2Routes from "./routes/mappings/push_to_dhis2.js";
 import dhisIntegration from "./routes/dhis/dhisroutes.js";
 import commoditiesDhis from "./routes/dhis/commoditiesRoutes.js";
-import uploadRoutes from "./routes/uploads.js";
 dotenv.config();
 
 const app = express();
@@ -79,7 +78,6 @@ app.use("/api/mapping/items", ConditionsMappingRoutes);
 app.use("/api/dhis2", dhis2Routes);
 app.use("/api/dhis", dhisIntegration);
 app.use("/api/dhis/commodities", commoditiesDhis);
-app.use("/api/uploads", uploadRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

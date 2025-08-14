@@ -1,4 +1,4 @@
-import { pool } from './config/database.js';
+import { pool } from '../config/database.js';
 import { readFile } from 'fs/promises';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
@@ -15,13 +15,40 @@ const sqlFiles = [
   '004_reporting_tables.sql'
 ];
 
+// Function to test database connection
+async function testConnection() {
+  try {
+    console.log('🔌 Testing database connection...');
+    const client = await pool.connect();
+    
+    // Test with a simple query
+    const result = await client.query('SELECT NOW() as current_time, current_database() as database_name, current_user as username');
+    console.log('✅ Database connection successful!');
+    console.log(`   📊 Database: ${result.rows[0].database_name}`);
+    console.log(`   👤 User: ${result.rows[0].username}`);
+    console.log(`   🕐 Time: ${result.rows[0].current_time}`);
+    
+    client.release();
+    return true;
+  } catch (error) {
+    console.error('❌ Database connection failed:', error.message);
+    if (error.message.includes('password')) {
+      console.log('💡 Password issue detected. Please check:');
+      console.log('   1. Your .env file exists and has DB_PASSWORD set');
+      console.log('   2. The password is correct for your PostgreSQL user');
+      console.log('   3. The password doesn\'t contain special characters that need escaping');
+    }
+    return false;
+  }
+}
+
 // Function to read and execute SQL file
 async function executeSqlFile(filename) {
   try {
     console.log(`\n📁 Executing: ${filename}`);
     
     // Read the SQL file
-    const filePath = join(__dirname, 'sql', 'tablescripts', filename);
+    const filePath = join(__dirname, '..', 'sql', 'tablescripts', filename);
     const sqlContent = await readFile(filePath, 'utf8');
     
     // Split SQL content by semicolon to execute multiple statements
@@ -61,9 +88,10 @@ async function setupDatabase() {
   
   try {
     // Test database connection first
-    const client = await pool.connect();
-    console.log('✅ Database connection established');
-    client.release();
+    const connectionOk = await testConnection();
+    if (!connectionOk) {
+      throw new Error('Database connection failed');
+    }
     
     // Execute SQL files in sequence
     for (const filename of sqlFiles) {
@@ -89,7 +117,6 @@ async function setupDatabase() {
 }
 
 // Run the setup when this file is executed
-console.log('🚀 Starting database setup...');
 setupDatabase().catch(error => {
   console.error('❌ Setup failed:', error);
   process.exit(1);

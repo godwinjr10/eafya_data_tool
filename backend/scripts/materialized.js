@@ -1,11 +1,18 @@
-// run-views.js
 import fs from 'fs';
 import path from 'path';
 import { Client } from 'pg';
 import dotenv from 'dotenv';
-dotenv.config();
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-const SQL_DIR = process.env.SQL_DIR || './sql';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const envPath = path.join(__dirname, '..', '.env');
+dotenv.config({ path: envPath });
+
+const calculatedPath = path.resolve(__dirname, '..', 'sql', 'materializedviews');
+const SQL_DIR = calculatedPath;
 
 const DB_CONFIG = {
   host: process.env.DB_HOST,

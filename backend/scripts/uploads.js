@@ -2,14 +2,14 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import csv from 'csv-parser';
-import { pool } from './config/database.js';
+import { pool } from '../config/database.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 class CSVUploadService {
   constructor() {
-    this.uploadsDir = path.join(__dirname, 'sql', 'uploads');
+    this.uploadsDir = path.join(__dirname, '..', 'sql', 'uploads');
     this.results = [];
     this.errors = [];
   }

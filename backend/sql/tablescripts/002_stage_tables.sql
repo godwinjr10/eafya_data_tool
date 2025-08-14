@@ -177,7 +177,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_sample
 , description TEXT
 )
 ;
------COMMODITY FACT & DIM STAGING TABLES-------------------------------
+
 CREATE TABLE IF NOT EXISTS stage.dim_eafya_pharmacology
 (
   id BIGINT
