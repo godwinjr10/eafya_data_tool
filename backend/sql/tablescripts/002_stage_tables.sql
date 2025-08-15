@@ -948,7 +948,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_minor_theatre_category
 )
 ;
 
-CREATE TABLE stage.dim_eafya_lab_test
+CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_test
 (
   id BIGINT
 , allow_multiple_orders BOOLEAN
@@ -982,5 +982,17 @@ CREATE TABLE stage.dim_eafya_lab_test
 , lab_test_worksheet_id BIGINT
 , processing_hour_type VARCHAR(255)
 , processing_time NUMERIC(23, 2)
+)
+;
+
+CREATE TABLE IF NOT EXISTS stage.fact_eafya_deceased_patient
+(
+  id BIGINT
+, admission_id BIGINT
+, date_created TIMESTAMP
+, patient_id VARCHAR(255)
+, patient_visit_id BIGINT
+, place_of_death VARCHAR(255)
+, time_of_death TIMESTAMP
 )
 ;
