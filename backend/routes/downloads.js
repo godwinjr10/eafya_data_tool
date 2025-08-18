@@ -8,28 +8,29 @@ router.get('/conditions', async (req, res) => {
         const { report_month } = req.query;
         
         let query = `
-            SELECT DISTINCT
-                c.report_month, 
-                e.section_id,
-                e.section_name,
-                e.hmis_code,
-                e.hmis_name,
-                c."0-28d Male" AS "0_28d_male",
-                c."0-28d Female" AS "0_28d_female", 
-                c."29d-4y Male" AS "29d_4y_male",
-                c."29d-4y Female" AS "29d_4y_female",
-                c."5-9y Male" AS "5_9y_male",
-                c."5-9y Female" AS "5_9y_female",
-                c."10-19y Male" AS "10_19y_male",
-                c."10-19y Female" AS "10_19y_female",
-                c."20y+ Male" AS "20y_plus_male",
-                c."20y+ Female" AS "20y_plus_female"
-            FROM reporting."105_01_conditions" c
-            INNER JOIN reporting.hmis_eafya_mapping m ON m.eafya_disease_id = c.disease_id 
-            INNER JOIN reporting.dhis_eafya_mapping_conditions e ON e.eafya_hmis_id IS NOT NULL and CAST(e.eafya_hmis_id AS int) = m.hmis_code
-            WHERE c.report_month = $1
-            order by e.section_id, e.hmis_code;
-        `;
+            SELECT
+            c.report_month,
+            e.section_id,
+            e.section_name,
+            e.eafya_hmis_id,
+            m.hmis_code,
+            m.hmis_name,
+            SUM(COALESCE(c."0-28d Male", 0)) AS "0_28d_male",
+            SUM(COALESCE(c."0-28d Female", 0)) AS "0_28d_female",
+            SUM(COALESCE(c."29d-4y Male", 0)) AS "29d_4y_male",
+            SUM(COALESCE(c."29d-4y Female", 0)) AS "29d_4y_female",
+            SUM(COALESCE(c."5-9y Male", 0)) AS "5_9y_male",
+            SUM(COALESCE(c."5-9y Female", 0)) AS "5_9y_female",
+            SUM(COALESCE(c."10-19y Male", 0)) AS "10_19y_male",
+            SUM(COALESCE(c."10-19y Female", 0)) AS "10_19y_female",
+            SUM(COALESCE(c."20y+ Male", 0)) AS "20y_plus_male",
+            SUM(COALESCE(c."20y+ Female", 0)) AS "20y_plus_female"
+        FROM reporting."105_01_conditions" c
+        INNER JOIN reporting.hmis_eafya_mapping m ON m.eafya_disease_id = c.disease_id
+        INNER JOIN reporting.dhis_eafya_mapping_conditions e ON CAST(e.eafya_hmis_id AS int) = m.hmis_code
+        WHERE c.report_month = $1
+        GROUP by c.report_month, e.section_id, e.section_name, e.eafya_hmis_id,m.hmis_code, m.hmis_name
+        ORDER by c.report_month, m.hmis_name`;
 
         const params = [report_month];
         const { rows } = await pool.query(query, params);

@@ -37,7 +37,7 @@ const Sidebar = ({ selected, onSelect, dataSetId }) => {
     return (
       <div
         style={{
-          width: 250,
+          width: 200,
           background: "#e6f2e6",
           padding: 10,
           height: "calc(100vh - 20px)",
@@ -52,7 +52,7 @@ const Sidebar = ({ selected, onSelect, dataSetId }) => {
   return (
     <div
       style={{
-        minWidth: "250px",
+        minWidth: "200px",
         background: "#e6f2e6",
         padding: 10,
         height: "calc(100vh - 20px)", // This will make it full height minus padding
