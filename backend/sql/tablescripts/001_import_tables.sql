@@ -1341,3 +1341,24 @@ CREATE TABLE IF NOT EXISTS import.eafya_minor_theatre
 , "name" VARCHAR(255)
 )
 ;
+
+CREATE TABLE IF NOT EXISTS import.eafya_deceased_patient
+(
+  id BIGINT
+, version BIGINT
+, admission_id BIGINT
+, branch_id BIGINT
+, comments TEXT
+, company_id BIGINT
+, created_by_id BIGINT
+, date_created TIMESTAMP
+, death_certificate_id BIGINT
+, last_updated TIMESTAMP
+, mp_certification INTEGER
+, origin VARCHAR(2)
+, patient_id VARCHAR(255)
+, patient_visit_id BIGINT
+, place_of_death VARCHAR(255)
+, time_of_death TIMESTAMP
+)
+;

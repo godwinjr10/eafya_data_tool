@@ -1149,3 +1149,15 @@ CREATE TABLE IF NOT EXISTS dwh.dim_eafya_lab_test
 , processing_time NUMERIC(25, 2)
 )
 ;
+
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_deceased_patient
+(
+  id BIGINT
+, admission_id BIGINT
+, date_created TIMESTAMP
+, patient_id VARCHAR(255)
+, patient_visit_id BIGINT
+, place_of_death VARCHAR(255)
+, time_of_death TIMESTAMP
+)
+;

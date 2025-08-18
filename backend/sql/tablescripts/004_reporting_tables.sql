@@ -421,3 +421,17 @@ CREATE TABLE IF NOT EXISTS reporting.patient_postnatal
 )
 ;
 
+CREATE TABLE IF NOT EXISTS reporting."108_inpatient"
+(
+  encounter_id BIGINT
+, patient_id VARCHAR(255)
+, diagnosis VARCHAR(255)
+, gender VARCHAR(6)
+, birth_date TIMESTAMP
+, admission_date TIMESTAMP
+, delivery_mode VARCHAR(255)
+, mother_blood_pressure VARCHAR(255)
+, mother_blood_loss_volume DOUBLE PRECISION
+, death_date TIMESTAMP
+)
+;
