@@ -21,7 +21,7 @@ function MainSideBar() {
       icon: "file-earmark-text",
       path: "/hmis",
     },
-    { id: "mapping", label: "DHIS2 Mapping", icon: "map", path: "/report/mapping" },
+    { id: "mapping", label: "DHIS2 Mapping", icon: "map", path: "/mapping" },
     {
       id: "opd",
       label: "Outpatient",
