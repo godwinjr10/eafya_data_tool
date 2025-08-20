@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 import API from '../../helpers/api';
+import MappingDialog from './MappingDialog';
 import './styles.css';
 
-// Dataset code to display name mapping
-const datasetDisplayNames = {
+// Constants - moved to top for easy maintenance
+const DATASET_DISPLAY_NAMES = {
   'HMIS1052': 'Maternal & Child Health',
   'HMIS1051': 'Outpatient Diagnosis',
   'HMIS1055': 'Laboratory Tests',
@@ -13,8 +14,7 @@ const datasetDisplayNames = {
   'HMIS108': 'IPD Monthly Report'
 };
 
-// Section ID to display name mapping
-const sectionDisplayNames = {
+const SECTION_DISPLAY_NAMES = {
   '1.3.1': 'Epidemic Prone Diseases',
   '1.3.2': 'Communicable Diseases',
   '1.3.3': 'Neonatal Diseases',
@@ -41,139 +41,43 @@ const sectionDisplayNames = {
   '1.3.25': 'Emergency Medical Services',
   '1.3.26': 'TB Screening',
   '1.3.28': 'Nutrition Services',
-  '1.3.29': 'Gender Based Violence'
+  '1.3.29': 'Gender Based Violence',
+  // HMIS1054 (Essential Medicines) section mappings
+  '6.1': 'Essential Medicines',
+  '6.2': 'Outreach Activities',
+  '6.3': 'Meetings',
+  '6.4': 'Support Supervision',
+  // HMIS1052 (Maternal & Child Health) section mappings
+  '2.1': 'Antenatal',
+  '2.2': 'Maternity',
+  '2.3': 'Postnatal',
+  '2.4': 'Family Planning',
+  '2.5': 'Contraceptives',
+  '2.6': 'Vitamin A',
+  '2.7': 'Immunization',
+  '2.8': 'Tetanus'
 };
 
-const MappingDialog = ({ isOpen, onClose, onSave, hmisName, section, eafyaItems, onEafyaItemsLoaded }) => {
-  // Determine which array to use based on section
-  const [selectedDiseases, setSelectedDiseases] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [loading, setLoading] = useState(false);
-  
-  // Reset state when dialog closes
-  useEffect(() => {
-    if (!isOpen) {
-      setSelectedDiseases([]);
-      setSearchTerm('');
-    }
-  }, [isOpen]);
-
-  // Fetch eAFYA items when dialog opens
-  useEffect(() => {
-    if (isOpen && section) {
-      fetchEafyaItems();
-    }
-  }, [isOpen, section]);
-
-  const fetchEafyaItems = async () => {
-    setLoading(true);
-    try {
-      // Fetch diseases from the backend API endpoint
-      const response = await API.get('/mapping/diseases');
-      const items = response.data || [];
-      onEafyaItemsLoaded(items);
-      setLoading(false);
-    } catch (error) {
-      console.error('Error fetching diseases:', error);
-      setLoading(false);
-    }
-  };
-  
-  if (!isOpen) return null;
-
-  const filteredItems = eafyaItems.filter(item => 
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.id.toString().toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (item.icd_code && item.icd_code.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
-  
-  return (
-    <div className="mapping-dialog-overlay">
-      <div className="mapping-dialog">
-        <h3>Map eAFYA Items to {hmisName}</h3>
-        <div className="dialog-search">
-          <input
-            type="text"
-            placeholder="Search by disease name, ID, or ICD code..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="search-input"
-          />
-        </div>
-        <div className="disease-list">
-          {loading ? (
-            <div className="loading">Loading...</div>
-          ) : (
-            <>
-              {filteredItems.length > 0 ? (
-                <table className="disease-table">
-                  <thead>
-                    <tr>
-                      <th>
-                        <input
-                          type="checkbox"
-                          checked={filteredItems.length > 0 && selectedDiseases.length === filteredItems.length}
-                          onChange={(e) => {
-                            if (e.target.checked) {
-                              setSelectedDiseases(filteredItems.map(item => item.id));
-                            } else {
-                              setSelectedDiseases([]);
-                            }
-                          }}
-                        />
-                      </th>
-                      <th>ID</th>
-                      <th>ICD Code</th>
-                      <th>Name</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredItems.map(item => (
-                      <tr key={item.id} className="disease-row">
-                        <td>
-                          <input
-                            type="checkbox"
-                            checked={selectedDiseases.includes(item.id)}
-                            onChange={(e) => {
-                              if (e.target.checked) {
-                                setSelectedDiseases([...selectedDiseases, item.id]);
-                              } else {
-                                setSelectedDiseases(selectedDiseases.filter(id => id !== item.id));
-                              }
-                            }}
-                          />
-                        </td>
-                        <td>{item.id}</td>
-                        <td>{item.icd_code || '-'}</td>
-                        <td>{item.name}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              ) : (
-                <div className="no-results">No matching items found</div>
-              )}
-            </>
-          )}
-        </div>
-        <div className="dialog-actions">
-          <button className="secondary-btn" onClick={onClose}>Cancel</button>
-          <button 
-            className="primary-btn" 
-            onClick={() => {
-              onSave(selectedDiseases);
-              onClose();
-            }}
-          >
-            Save Mapping
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+// Utility functions
+const getDisplayNameForDataset = (datasetCode) => {
+  return DATASET_DISPLAY_NAMES[datasetCode] || datasetCode;
 };
 
+const getDisplayNameForSection = (sectionId) => {
+  return SECTION_DISPLAY_NAMES[sectionId] || sectionId;
+};
+
+const sortSectionsByName = (sections) => {
+  return sections.sort((a, b) => {
+    const nameA = getDisplayNameForSection(a);
+    const nameB = getDisplayNameForSection(b);
+    return nameA.localeCompare(nameB);
+  });
+};
+
+// Main Mapping Component
 const Mapping = () => {
+  // State management
   const [datasetCodes, setDatasetCodes] = useState([]);
   const [selectedDataset, setSelectedDataset] = useState('');
   const [datasetElements, setDatasetElements] = useState([]);
@@ -185,27 +89,11 @@ const Mapping = () => {
     isOpen: false, 
     hmisCode: '', 
     hmisName: '',
-    dataelementId: null // Added dataelementId to dialogState
+    dataelementId: null
   });
   const [loading, setLoading] = useState(false);
 
-  // Fetch dataset codes on component mount
-  useEffect(() => {
-    fetchDatasetCodes();
-  }, []);
-
-  // Fetch dataset elements when dataset changes
-  useEffect(() => {
-    if (selectedDataset) {
-      fetchDatasetElements(selectedDataset);
-      fetchDatasetMappings(selectedDataset);
-    } else {
-      setDatasetElements([]);
-      setSelectedSection('');
-      setCurrentMappings({});
-    }
-  }, [selectedDataset]);
-
+  // API functions
   const fetchDatasetCodes = async () => {
     try {
       const response = await API.get('/mapping/datasets/codes');
@@ -239,32 +127,43 @@ const Mapping = () => {
     }
   };
 
-  // Get unique section IDs from dataset elements
+  // Data processing functions
   const getUniqueSections = () => {
     const sections = [...new Set(datasetElements.map(el => el.section_id).filter(Boolean))];
-    return sections.sort((a, b) => {
-      const nameA = sectionDisplayNames[a] || a;
-      const nameB = sectionDisplayNames[b] || b;
-      return nameA.localeCompare(nameB);
-    }).map(sectionId => ({
+    const sortedSections = sortSectionsByName(sections);
+    
+    return sortedSections.map(sectionId => ({
       id: sectionId,
-      name: sectionDisplayNames[sectionId] || sectionId
+      name: getDisplayNameForSection(sectionId)
     }));
   };
 
-  // Get data for selected section
   const getSectionData = () => {
     if (!selectedSection) return [];
     return datasetElements.filter(el => el.section_id === selectedSection);
   };
 
-  // Filter based on search term - search across all data elements when searching
-  const filteredDataElements = hmisSearch
-    ? datasetElements.filter(element =>
+  const getFilteredDataElements = () => {
+    if (hmisSearch) {
+      return datasetElements.filter(element =>
         element.dataelement_name.toLowerCase().includes(hmisSearch.toLowerCase()) ||
         element.dataelement_code.toLowerCase().includes(hmisSearch.toLowerCase())
-      )
-    : getSectionData();
+      );
+    }
+    return getSectionData();
+  };
+
+  // Event handlers
+  const handleDatasetChange = (newDataset) => {
+    setSelectedDataset(newDataset);
+    setSelectedSection('');
+    setHmisSearch('');
+  };
+
+  const handleSectionChange = (newSection) => {
+    setSelectedSection(newSection);
+    setHmisSearch('');
+  };
 
   const handleAddMapping = (dataelementCode, dataelementName, dataelementId) => {
     setDialogState({
@@ -277,9 +176,7 @@ const Mapping = () => {
 
   const handleSaveMapping = async (selectedItems) => {
     try {
-      // Get the eAFYA item details for the selected IDs
       const selectedEafyaItems = selectedItems.map(itemId => {
-        // Find the item in the eafyaItems array from the dialog
         const item = eafyaItems.find(eafyaItem => eafyaItem.id === itemId);
         return {
           id: itemId,
@@ -287,7 +184,6 @@ const Mapping = () => {
         };
       });
 
-      // Prepare the mapping data
       const mappingData = {
         hmis_dataelement_code: dialogState.hmisCode,
         hmis_dataelement_name: dialogState.hmisName,
@@ -297,47 +193,38 @@ const Mapping = () => {
         mappings: selectedEafyaItems
       };
 
-      // Save to database via API
       const response = await API.post('/mapping/mappings', mappingData);
       
       if (response.status === 200) {
-        // Update local state
         const newMappings = {
           ...currentMappings,
           [dialogState.hmisCode]: selectedEafyaItems
         };
         
         setCurrentMappings(newMappings);
-        
-        // Show success message (you can add a toast notification here)
         console.log('Mappings saved successfully:', response.data);
       }
     } catch (error) {
       console.error('Error saving mappings:', error);
-      // Show error message to user
       alert('Error saving mappings. Please try again.');
     }
   };
 
   const handleRemoveMapping = async (dataelementCode, itemId) => {
     try {
-      // Delete from database via API
       const response = await API.delete(`/mapping/mappings/${dataelementCode}/${itemId}`);
       
       if (response.status === 200) {
-        // Update local state
         const newMappings = {
           ...currentMappings,
           [dataelementCode]: (currentMappings[dataelementCode] || []).filter(d => d.id !== itemId)
         };
 
-        // If no mappings left for this data element, remove the key
         if (newMappings[dataelementCode].length === 0) {
           delete newMappings[dataelementCode];
         }
 
         setCurrentMappings(newMappings);
-        
         console.log('Mapping deleted successfully');
       }
     } catch (error) {
@@ -350,128 +237,159 @@ const Mapping = () => {
     setEafyaItems(items);
   };
 
-  return (
-    <div className="report-sections">
-      <h1 className="page-title">
-        HMIS eAFYA Mapping
-        {selectedDataset && (
-          <span className="selected-dataset">
-            {' '}- {datasetDisplayNames[selectedDataset] || selectedDataset}
-          </span>
-        )}
-        {selectedSection && (
-          <span className="selected-section">
-            {' '}- {sectionDisplayNames[selectedSection] || selectedSection}
-          </span>
-        )}
-      </h1>
-      <div className="section-selectors">
+  const closeDialog = () => {
+    setDialogState({ isOpen: false, hmisCode: '', hmisName: '', dataelementId: null });
+  };
+
+  // Effects
+  useEffect(() => {
+    fetchDatasetCodes();
+  }, []);
+
+  useEffect(() => {
+    if (selectedDataset) {
+      fetchDatasetElements(selectedDataset);
+      fetchDatasetMappings(selectedDataset);
+    } else {
+      setDatasetElements([]);
+      setSelectedSection('');
+      setCurrentMappings({});
+    }
+  }, [selectedDataset]);
+
+  // Render functions
+  const renderPageTitle = () => (
+    <h1 className="page-title">
+      HMIS eAFYA Mapping
+      {selectedDataset && (
+        <span className="selected-dataset">
+          {' '}- {getDisplayNameForDataset(selectedDataset)}
+        </span>
+      )}
+      {selectedSection && (
+        <span className="selected-section">
+          {' '}- {getDisplayNameForSection(selectedSection)}
+        </span>
+      )}
+    </h1>
+  );
+
+  const renderSectionSelectors = () => (
+    <div className="section-selectors">
+      <div className="select-group">
+        <label>Dataset:</label>
+        <select 
+          value={selectedDataset} 
+          onChange={(e) => handleDatasetChange(e.target.value)}
+        >
+          <option value="">Select Dataset</option>
+          {datasetCodes.map(datasetCode => (
+            <option key={datasetCode} value={datasetCode}>
+              {getDisplayNameForDataset(datasetCode)}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      {selectedDataset && (
         <div className="select-group">
-          <label>Dataset:</label>
-          <select 
-            value={selectedDataset} 
-            onChange={(e) => {
-              setSelectedDataset(e.target.value);
-              setSelectedSection('');
-              setHmisSearch('');
-            }}
+          <label>Section:</label>
+          <select
+            value={selectedSection}
+            onChange={(e) => handleSectionChange(e.target.value)}
           >
-            <option value="">Select Dataset</option>
-            {datasetCodes.map(datasetCode => (
-              <option key={datasetCode} value={datasetCode}>
-                {datasetDisplayNames[datasetCode] || datasetCode}
+            <option value="">Select Section</option>
+            {getUniqueSections().map(section => (
+              <option key={section.id} value={section.id}>
+                {section.name}
               </option>
             ))}
           </select>
         </div>
+      )}
 
-        {selectedDataset && (
-          <div className="select-group">
-            <label>Section:</label>
-            <select
-              value={selectedSection}
-              onChange={(e) => {
-                setSelectedSection(e.target.value);
-                setHmisSearch('');
-              }}
-            >
-              <option value="">Select Section</option>
-              {getUniqueSections().map(section => (
-                <option key={section.id} value={section.id}>
-                  {section.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
-                 <div className="select-group">
-           <label>Search Data Elements:</label>
-           <input
-             type="text"
-             placeholder="Search across all data elements..."
-             value={hmisSearch}
-             onChange={(e) => setHmisSearch(e.target.value)}
-             className="search-input"
-           />
-         </div>
+      <div className="select-group">
+        <label>Search Data Elements:</label>
+        <input
+          type="text"
+          placeholder="Search across all data elements..."
+          value={hmisSearch}
+          onChange={(e) => setHmisSearch(e.target.value)}
+          className="search-input"
+        />
       </div>
+    </div>
+  );
+
+  const renderMappingTable = () => {
+    if (!selectedSection || loading) return null;
+
+    const filteredElements = getFilteredDataElements();
+
+    return (
+      <div className="mapping-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Data Element Code</th>
+              <th>Data Element Name</th>
+              <th>eAFYA Mappings</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredElements.map(element => (
+              <tr key={element.id} className="hmis-row">
+                <td>{element.dataelement_code}</td>
+                <td>{element.dataelement_name}</td>
+                <td>
+                  <div className="item-mappings">
+                    {(currentMappings[element.dataelement_code] || [])?.map(item => (
+                      <div key={item.id} className="item-tag">
+                        <span>{item.id} - {item.name}</span>
+                        <button 
+                          className="remove-btn"
+                          onClick={() => handleRemoveMapping(element.dataelement_code, item.id)}
+                        >
+                          <FaTrash />
+                        </button>
+                      </div>
+                    ))}
+                    <button 
+                      className="add-mapping-btn"
+                      onClick={() => handleAddMapping(element.dataelement_code, element.dataelement_name, element.id)}
+                    >
+                      <FaPlus /> Add Mapping
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
+  return (
+    <div className="report-sections">
+      {renderPageTitle()}
+      {renderSectionSelectors()}
 
       {loading && (
         <div className="loading-message">Loading dataset elements...</div>
       )}
 
-      {selectedSection && !loading && (
-        <div className="mapping-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Data Element Code</th>
-                <th>Data Element Name</th>
-                <th>eAFYA Mappings</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredDataElements.map(element => (
-                <tr key={element.id} className="hmis-row">
-                  <td>{element.dataelement_code}</td>
-                  <td>{element.dataelement_name}</td>
-                  <td>
-                    <div className="disease-mappings">
-                      {(currentMappings[element.dataelement_code] || [])?.map(item => (
-                        <div key={item.id} className="disease-tag">
-                          <span>{item.id} - {item.name}</span>
-                          <button 
-                            className="remove-btn"
-                            onClick={() => handleRemoveMapping(element.dataelement_code, item.id)}
-                          >
-                            <FaTrash />
-                          </button>
-                        </div>
-                      ))}
-                      <button 
-                        className="add-mapping-btn"
-                        onClick={() => handleAddMapping(element.dataelement_code, element.dataelement_name, element.id)}
-                      >
-                        <FaPlus /> Add Mapping
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+      {renderMappingTable()}
 
       <MappingDialog
         isOpen={dialogState.isOpen}
-        onClose={() => setDialogState({ isOpen: false, hmisCode: '', hmisName: '', dataelementId: null })}
+        onClose={closeDialog}
         onSave={handleSaveMapping}
         hmisName={dialogState.hmisName}
         section={selectedDataset}
         eafyaItems={eafyaItems}
         onEafyaItemsLoaded={handleEafyaItemsLoaded}
+        datasetCode={selectedDataset}
       />
     </div>
   );

@@ -89,6 +89,61 @@ router.get('/diseases', async (req, res) => {
     }
 });
 
+// Get all commodities (drugs)
+router.get('/commodities', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                s.id,
+                s."name"
+            FROM dwh.dim_eafya_product s
+            WHERE s.product_type = 'drug'
+            ORDER BY s."name"
+        `;
+
+        const { rows } = await pool.query(query);
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Get all lab tests
+router.get('/labtests', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                id, 
+                "name"
+            FROM dwh.dim_eafya_lab_test
+            ORDER BY "name"
+        `;
+
+        const { rows } = await pool.query(query);
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Get all vaccines
+router.get('/vaccines', async (req, res) => {
+    try {
+        const query = `
+            SELECT 
+                id, 
+                "name"
+            FROM dwh.dim_eafya_vaccine
+            ORDER BY "name"
+        `;
+
+        const { rows } = await pool.query(query);
+        res.json(rows);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
 // Get existing mappings for a specific data element
 router.get('/mappings/:dataelementCode', async (req, res) => {
     try {

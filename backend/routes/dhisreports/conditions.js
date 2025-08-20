@@ -52,57 +52,6 @@ router.get('/', async (req, res) => {
         const { rows } = await pool.query(query, params);
         console.log('Query Results:', rows);
         
-        // If no results, let's run a diagnostic query
-        if (rows.length === 0) {
-            console.log('No results found. Running diagnostic query...');
-            
-            const diagnosticQuery = `
-            SELECT 
-                '105_01_conditions' as table_name,
-                COUNT(*) as total_rows,
-                COUNT(DISTINCT disease_id) as unique_diseases,
-                COUNT(DISTINCT report_month) as unique_months
-            FROM reporting."105_01_conditions"
-            UNION ALL
-            SELECT 
-                'hmis_eafya_mapping' as table_name,
-                COUNT(*) as total_rows,
-                COUNT(DISTINCT eafya_disease_id) as unique_diseases,
-                COUNT(DISTINCT hmis_code) as unique_hmis_codes
-            FROM reporting.hmis_eafya_mapping
-            UNION ALL
-            SELECT 
-                'dhis_eafya_mapping_conditions' as table_name,
-                COUNT(*) as total_rows,
-                COUNT(DISTINCT section_id) as unique_sections,
-                COUNT(DISTINCT eafya_hmis_id) as unique_eafya_ids
-            FROM reporting.dhis_eafya_mapping_conditions
-            WHERE section_id = $1`;
-            
-            const diagnosticResult = await pool.query(diagnosticQuery, [section_id]);
-            console.log('Diagnostic Results:', diagnosticResult.rows);
-            
-            // Let's also check a sample of actual data
-            const sampleQuery = `
-            SELECT 
-                c.disease_id,
-                c."0-28d Male",
-                c."0-28d Female",
-                c.report_month,
-                m.hmis_code,
-                m.hmis_name,
-                e.section_id,
-                e.eafya_hmis_id
-            FROM reporting."105_01_conditions" c
-            LEFT JOIN reporting.hmis_eafya_mapping m ON m.eafya_disease_id = c.disease_id
-            LEFT JOIN reporting.dhis_eafya_mapping_conditions e ON CAST(e.eafya_hmis_id AS int) = m.hmis_code
-            WHERE c.report_month = COALESCE($2, c.report_month)
-            LIMIT 5`;
-            
-            const sampleResult = await pool.query(sampleQuery, [section_id, report_month]);
-            console.log('Sample Data:', sampleResult.rows);
-        }
-        
         res.json(rows);
     } catch (error) {
         console.error('Query error:', error);
