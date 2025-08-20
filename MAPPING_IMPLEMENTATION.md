@@ -35,7 +35,6 @@ CREATE TABLE reporting.eafya_mappings (
   section_id VARCHAR(50),                      -- Section identifier within dataset (e.g., "1.3.11")
   eafya_item_id BIGINT NOT NULL,              -- eAFYA disease/item identifier
   eafya_item_name VARCHAR(500) NOT NULL,      -- eAFYA disease/item name
-  mapping_name VARCHAR(255),                   -- Generated mapping identifier
   created_at TIMESTAMP DEFAULT NOW(),          -- Creation timestamp
   updated_at TIMESTAMP DEFAULT NOW()           -- Last update timestamp
 );
@@ -43,7 +42,7 @@ CREATE TABLE reporting.eafya_mappings (
 
 ### Supporting Tables
 
-- **`reporting.dhis2_datasets_elements`**: Source HMIS data elements
+- **`reporting.dhis2_datasets_elements`**: Source HMIS data elements (provides dataelement_id for mappings)
 - **`dwh.dim_eafya_disease`**: eAFYA disease catalog
 
 ### Database Indexes
@@ -197,6 +196,8 @@ Content-Type: application/json
 }
 ```
 
+**Note**: The `dataelement_id` field is required and must contain the DHIS2 data element ID from the `reporting.dhis2_datasets_elements` table.
+
 **Response:**
 ```json
 {
@@ -218,7 +219,7 @@ GET /api/mapping/dataset/HMIS1051/mappings
       "id": 123,
       "name": "Cervical Cancer",
       "dataelement_id": "z07394519Gs",
-      "mapping_name": "105-CA01_123",
+
       "created_at": "2024-01-15T10:30:00Z",
       "updated_at": "2024-01-15T10:30:00Z"
     }
@@ -228,7 +229,7 @@ GET /api/mapping/dataset/HMIS1051/mappings
       "id": 125,
       "name": "Breast Cancer",
       "dataelement_id": "z07394520Hs",
-      "mapping_name": "105-CA02_125",
+
       "created_at": "2024-01-15T11:00:00Z",
       "updated_at": "2024-01-15T11:00:00Z"
     }

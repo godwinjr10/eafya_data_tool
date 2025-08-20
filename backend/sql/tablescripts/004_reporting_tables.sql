@@ -446,7 +446,6 @@ CREATE TABLE IF NOT EXISTS reporting.eafya_mappings
 , section_id VARCHAR(50)
 , eafya_item_id BIGINT NOT NULL
 , eafya_item_name VARCHAR(500) NOT NULL
-, mapping_name VARCHAR(255)
 , created_at TIMESTAMP DEFAULT NOW()
 , updated_at TIMESTAMP DEFAULT NOW()
 )

@@ -157,7 +157,6 @@ router.get('/mappings/:dataelementCode', async (req, res) => {
                 em.dataelement_id,
                 em.eafya_item_id,
                 em.eafya_item_name,
-                em.mapping_name,
                 em.created_at,
                 em.updated_at
             FROM reporting.eafya_mappings em
@@ -184,9 +183,9 @@ router.post('/mappings', async (req, res) => {
             mappings 
         } = req.body;
 
-        if (!hmis_dataelement_code || !mappings || !Array.isArray(mappings)) {
+        if (!hmis_dataelement_code || !mappings || !Array.isArray(mappings) || !dataelement_id) {
             return res.status(400).json({ 
-                message: 'Missing required fields: hmis_dataelement_code and mappings array' 
+                message: 'Missing required fields: hmis_dataelement_code, dataelement_id, and mappings array' 
             });
         }
 
@@ -213,10 +212,9 @@ router.post('/mappings', async (req, res) => {
                         section_id,
                         eafya_item_id,
                         eafya_item_name,
-                        mapping_name,
                         created_at,
                         updated_at
-                    ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW(), NOW())`,
+                    ) VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), NOW())`,
                     [
                         hmis_dataelement_code,
                         hmis_dataelement_name,
@@ -224,8 +222,7 @@ router.post('/mappings', async (req, res) => {
                         dataset_code,
                         section_id,
                         mapping.id,
-                        mapping.name,
-                        `${hmis_dataelement_code}_${mapping.id}`,
+                        mapping.name
                     ]
                 );
             }
@@ -285,7 +282,6 @@ router.get('/dataset/:datasetCode/mappings', async (req, res) => {
                 em.section_id,
                 em.eafya_item_id,
                 em.eafya_item_name,
-                em.mapping_name,
                 em.created_at,
                 em.updated_at
             FROM reporting.eafya_mappings em
@@ -305,7 +301,6 @@ router.get('/dataset/:datasetCode/mappings', async (req, res) => {
                 id: row.eafya_item_id,
                 name: row.eafya_item_name,
                 dataelement_id: row.dataelement_id,
-                mapping_name: row.mapping_name,
                 created_at: row.created_at,
                 updated_at: row.updated_at
             });

@@ -1,0 +1,27 @@
+1. reporting.dhis2_1051_dataelements; new dataelements table created from these 3 tables this will contain the dataelements and categorycombos
+
+2, 105 Conditions Report Script is found in eafya_report_scripts => sql => datatool => dhis2 => conditions.sql
+
+
+DHIS2 Integration Tables
+
+The system maintains several key tables to support DHIS2 data integration and reporting. These tables are either directly synchronized from DHIS2 API endpoints or generated through SQL scripts within the reporting schema.
+
+reporting.dhis2_datasets
+Stores DHIS2 dataset identifiers and their corresponding names. Data in this table is retrieved directly from the DHIS2 API.
+
+reporting.dhis2_datasets_elements
+Contains the primary DHIS2 data elements associated with each dataset. The contents are obtained through the DHIS2 API.
+
+reporting.dhis2_optioncombos
+Holds all DHIS2 category option combo identifiers and their names. These mappings are also fetched from the DHIS2 API.
+
+reporting.dhis2_dataelements_1051, 1052, 1053, 1054, 1055, 108
+Each of these tables stores the data element and category option combo combinations for a specific dataset. Data is extracted from the relevant DHIS2 API endpoints.
+
+reporting.dhis2_1051_dataelements
+Serves as the primary mapping table for 1051 data elements and their category option combos. This table is generated internally through SQL join scripts.
+
+eafya_report_scripts\sql\data tool\dhis2
+A folder containing the finalized SQL scripts used for generating reports and handling DHIS2 integration within the data tool.
+

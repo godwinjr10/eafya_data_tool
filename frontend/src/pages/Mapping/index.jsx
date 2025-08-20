@@ -109,6 +109,7 @@ const Mapping = () => {
     try {
       const response = await API.get(`/mapping/datasets/${datasetCode}/elements`);
       setDatasetElements(response.data || []);
+      console.error('fetching dataset elements:', response);
     } catch (error) {
       console.error('Error fetching dataset elements:', error);
       setDatasetElements([]);
@@ -356,7 +357,7 @@ const Mapping = () => {
                     ))}
                     <button 
                       className="add-mapping-btn"
-                      onClick={() => handleAddMapping(element.dataelement_code, element.dataelement_name, element.id)}
+                      onClick={() => handleAddMapping(element.dataelement_code, element.dataelement_name, element.dataelement_id)}
                     >
                       <FaPlus /> Add Mapping
                     </button>
