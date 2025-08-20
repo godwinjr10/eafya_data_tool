@@ -6,6 +6,7 @@ import { testConnection, sequelize } from "./config/database.js";
 import DimSections from "./models/dimSections.js";
 import Dhis2MappingDetails from "./models/dhis2MappingDetails.js";
 import EafyaHmisMapping from "./models/eafyaHmisMapping.js";
+import mainSectionMappingModel from "./models/mainSectionMapping.js";
 import hmisRoutes from "./routes/hmis.routes.js";
 import dhisEafyaMappingRoutes from "./routes/eafya_mapping.routes.js";
 import attendanceRoutes from "./routes/attendance.js";
@@ -26,6 +27,8 @@ import ConditionsMappingRoutes from "./routes/mappings/allItemsMapping.js";
 import dhis2Routes from "./routes/mappings/push_to_dhis2.js";
 import dhisIntegration from "./routes/dhis/dhisroutes.js";
 import commoditiesDhis from "./routes/dhis/commoditiesRoutes.js";
+import mainSectionMappingRoutes from "./routes/mainSectionMapping.js";
+import { initializeAssociations } from "./models/associations.js";
 dotenv.config();
 
 const app = express();
@@ -35,9 +38,9 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(
-  express.urlencoded({
-    extended: true,
-  })
+	express.urlencoded({
+		extended: true,
+	})
 );
 
 // Test database connection
@@ -45,14 +48,17 @@ testConnection();
 
 // Sync database models
 const syncDatabase = async () => {
-  try {
-    await sequelize.sync({
-      alter: process.env.NODE_ENV === "development",
-    });
-    console.log("Database synced successfully");
-  } catch (error) {
-    console.error("Error syncing database:", error);
-  }
+	try {
+		await sequelize.sync({
+			alter: process.env.NODE_ENV === "development",
+		});
+		console.log("Database synced successfully");
+
+		// Initialize model associations after database sync
+		initializeAssociations();
+	} catch (error) {
+		console.error("Error syncing database:", error);
+	}
 };
 
 syncDatabase();
@@ -78,17 +84,17 @@ app.use("/api/mapping/items", ConditionsMappingRoutes);
 app.use("/api/dhis2", dhis2Routes);
 app.use("/api/dhis", dhisIntegration);
 app.use("/api/dhis/commodities", commoditiesDhis);
+app.use("/api/main-sections", mainSectionMappingRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({
-    message: "Something went wrong!",
-  });
+	console.error(err.stack);
+	res.status(500).json({
+		message: "Something went wrong!",
+	});
 });
 
-const PORT =
-  process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+	console.log(`Server running on port ${PORT}`);
 });

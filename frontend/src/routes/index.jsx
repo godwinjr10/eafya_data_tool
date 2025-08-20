@@ -30,7 +30,7 @@ const AppRoutes = () => {
           <ProtectedRoute path="/users" component={Users} />
           <ProtectedRoute path="/supplychain" component={Supplychain} />
           <ProtectedRoute path="/dashboard" exact component={Dashboard} />
-          <ProtectedRoute path="/mapping" exact component={Mapping} />
+          <ProtectedRoute path="/report/mapping" exact component={Mapping} />
         </MainLayout>
       </Switch>
     </Fragment>

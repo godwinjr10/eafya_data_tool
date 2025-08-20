@@ -1,18 +1,20 @@
-import express from 'express';
-import { pool } from '../config/database.js';
+import express from "express";
+import { pool } from "../config/database.js";
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    console.log("conditions");
-    try {
-        const { report_month, section_id } = req.query;
+router.get("/", async (req, res) => {
+	console.log("conditions");
+	try {
+		const { report_month, section_id } = req.query;
 
-        if (!section_id) {
-            return res.status(400).json({ message: "section_id is required" });
-        }
+		if (!section_id) {
+			return res
+				.status(400)
+				.json({ message: "section_id is required" });
+		}
 
-        let query = `
+		let query = `
         SELECT
             c.report_month,
             e.section_id,
@@ -35,28 +37,28 @@ router.get('/', async (req, res) => {
         INNER JOIN reporting.dhis_eafya_mapping_conditions e ON e.section_id = $1 AND CAST(e.eafya_hmis_id AS int) = m.hmis_code
         WHERE 1=1`;
 
-        const params = [section_id];
+		const params = [section_id];
 
-        if (report_month) {
-            query += ` AND c.report_month = $2`;
-            params.push(report_month);
-        }
+		if (report_month) {
+			query += ` AND c.report_month = $2`;
+			params.push(report_month);
+		}
 
-        query += ` GROUP BY c.report_month, e.section_id, e.section_name, e.eafya_hmis_id, m.hmis_code, m.hmis_name`;
+		query += ` GROUP BY c.report_month, e.section_id, e.section_name, e.eafya_hmis_id, m.hmis_code, m.hmis_name`;
 
-        query += ` ORDER BY c.report_month, m.hmis_name`;
+		query += ` ORDER BY c.report_month, m.hmis_name`;
 
-        console.log('Final Query:', query);
-        console.log('Parameters:', params);
-        
-        const { rows } = await pool.query(query, params);
-        console.log('Query Results:', rows);
-        
-        // If no results, let's run a diagnostic query
-        if (rows.length === 0) {
-            console.log('No results found. Running diagnostic query...');
-            
-            const diagnosticQuery = `
+		console.log("Final Query:", query);
+		console.log("Parameters:", params);
+
+		const { rows } = await pool.query(query, params);
+		console.log("Query Results:", rows);
+
+		// If no results, let's run a diagnostic query
+		if (rows.length === 0) {
+			console.log("No results found. Running diagnostic query...");
+
+			const diagnosticQuery = `
             SELECT 
                 '105_01_conditions' as table_name,
                 COUNT(*) as total_rows,
@@ -78,12 +80,14 @@ router.get('/', async (req, res) => {
                 COUNT(DISTINCT eafya_hmis_id) as unique_eafya_ids
             FROM reporting.dhis_eafya_mapping_conditions
             WHERE section_id = $1`;
-            
-            const diagnosticResult = await pool.query(diagnosticQuery, [section_id]);
-            console.log('Diagnostic Results:', diagnosticResult.rows);
-            
-            // Let's also check a sample of actual data
-            const sampleQuery = `
+
+			const diagnosticResult = await pool.query(diagnosticQuery, [
+				section_id,
+			]);
+			console.log("Diagnostic Results:", diagnosticResult.rows);
+
+			// Let's also check a sample of actual data
+			const sampleQuery = `
             SELECT 
                 c.disease_id,
                 c."0-28d Male",
@@ -98,16 +102,19 @@ router.get('/', async (req, res) => {
             LEFT JOIN reporting.dhis_eafya_mapping_conditions e ON CAST(e.eafya_hmis_id AS int) = m.hmis_code
             WHERE c.report_month = COALESCE($2, c.report_month)
             LIMIT 5`;
-            
-            const sampleResult = await pool.query(sampleQuery, [section_id, report_month]);
-            console.log('Sample Data:', sampleResult.rows);
-        }
-        
-        res.json(rows);
-    } catch (error) {
-        console.error('Query error:', error);
-        res.status(500).json({ message: error.message });
-    }
+
+			const sampleResult = await pool.query(sampleQuery, [
+				section_id,
+				report_month,
+			]);
+			console.log("Sample Data:", sampleResult.rows);
+		}
+
+		res.json(rows);
+	} catch (error) {
+		console.error("Query error:", error);
+		res.status(500).json({ message: error.message });
+	}
 });
 
 export default router;
