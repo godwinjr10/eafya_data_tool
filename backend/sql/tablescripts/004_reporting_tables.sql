@@ -435,3 +435,24 @@ CREATE TABLE IF NOT EXISTS reporting."108_inpatient"
 , death_date TIMESTAMP
 )
 ;
+
+CREATE TABLE IF NOT EXISTS reporting.eafya_mappings
+(
+  id BIGSERIAL PRIMARY KEY
+, hmis_dataelement_code VARCHAR(255) NOT NULL
+, hmis_dataelement_name VARCHAR(500) NOT NULL
+, dataelement_id VARCHAR(255)
+, dataset_code VARCHAR(50) NOT NULL
+, section_id VARCHAR(50)
+, eafya_item_id BIGINT NOT NULL
+, eafya_item_name VARCHAR(500) NOT NULL
+, mapping_name VARCHAR(255)
+, created_at TIMESTAMP DEFAULT NOW()
+, updated_at TIMESTAMP DEFAULT NOW()
+)
+;
+
+-- Create index for better performance
+CREATE INDEX IF NOT EXISTS idx_eafya_mappings_dataelement ON reporting.eafya_mappings(hmis_dataelement_code);
+CREATE INDEX IF NOT EXISTS idx_eafya_mappings_dataset ON reporting.eafya_mappings(dataset_code);
+CREATE INDEX IF NOT EXISTS idx_eafya_mappings_item ON reporting.eafya_mappings(eafya_item_id);
