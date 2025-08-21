@@ -17,7 +17,6 @@ import outpatientRoutes from "./routes/reports/outpatient.js";
 import commoditiesReportRoutes from "./routes/reports/commodities.js";
 import dashboardRoutes from "./routes/dhisreports/dashboard.js";
 import dhisIntegration from "./routes/dhisintegration/dhisroutes.js";
-import commoditiesDhis from "./routes/dhisintegration/commoditiesRoutes.js";
 import mappingRoutes from "./routes/mapping/hmis.js";
 
 dotenv.config();
@@ -66,7 +65,6 @@ app.use("/api/outpatient", outpatientRoutes);
 app.use("/api/commodities/report", commoditiesReportRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/dhis", dhisIntegration);
-app.use("/api/dhis/commodities", commoditiesDhis);
 app.use("/api/mapping", mappingRoutes);
 
 // Error handling middleware
