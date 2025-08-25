@@ -505,6 +505,25 @@ CREATE TABLE IF NOT EXISTS reporting.census_death
 )
 ;
 
+CREATE TABLE IF NOT EXISTS reporting."108_maternal_neonatal"
+(
+  encounter_id BIGINT
+, patient_id VARCHAR(255)
+, diagnosis VARCHAR(255)
+, gender VARCHAR(6)
+, birth_date TIMESTAMP
+, admission_date TIMESTAMP
+, delivery_mode VARCHAR(255)
+, mother_blood_pressure VARCHAR(255)
+, mother_blood_loss_volume DOUBLE PRECISION
+, death_date TIMESTAMP
+, baby_weight DOUBLE PRECISION
+, baby_status VARCHAR(255)
+, baby_gender VARCHAR(255)
+, newborn_date TIMESTAMP
+)
+;
+
 -- Create index for better performance
 CREATE INDEX IF NOT EXISTS idx_eafya_mappings_dataelement ON reporting.eafya_mappings(hmis_dataelement_code);
 CREATE INDEX IF NOT EXISTS idx_eafya_mappings_dataset ON reporting.eafya_mappings(dataset_code);
