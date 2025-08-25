@@ -25,3 +25,6 @@ Serves as the primary mapping table for 1051 data elements and their category op
 eafya_report_scripts\sql\data tool\dhis2
 A folder containing the finalized SQL scripts used for generating reports and handling DHIS2 integration within the data tool.
 
+I had also spoken to Arthur. we need to investigate the script that pushes data to MOH
+The last time I checked it wasn't working
+

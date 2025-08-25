@@ -12,36 +12,32 @@ router.get('/', async (req, res) => {
         }
 
         let query = `
-        SELECT 
-            a.report_month,
-            m.section_id,
-            m.section_name,
-            m.hmis_code,
-            m.hmis_name,
-            a.qty_consumed,
-            a.days_out_of_stock,
-            a.stock_level,
-            a.quantity_expired
-        FROM reporting."105_06_commodities" a
-        JOIN (
-            SELECT DISTINCT section_id, section_name, hmis_code, hmis_name, eafya_product_id
-            FROM reporting.dhis_eafya_mapping_commodities
-            WHERE section_id = $1
-            ) m 
-            ON a.product_id = m.eafya_product_id
-            WHERE 1=1
+        SELECT
+            p.report_month,
+            e.section_id,
+            e.hmis_dataelement_code,
+            e.hmis_dataelement_name,
+            e.dataelement_id,
+            SUM(COALESCE(p.qty_consumed, 0)) AS "qty_consumed",
+            SUM(COALESCE(p.days_out_of_stock, 0)) AS "days_out_of_stock",
+            SUM(COALESCE(p.stock_level, 0)) AS "stock_level",
+            SUM(COALESCE(p.quantity_expired, 0)) AS "quantity_expired"
+        FROM reporting."105_06_commodities" p
+        INNER JOIN reporting.eafya_mappings e ON e.eafya_item_id = p.product_id
+        WHERE e.section_id = $1
 `;
 
         const params = [section_id];
         let paramCount = 2;
 
         if (report_month) {
-            query += ` AND a.report_month = $${paramCount}`;
+            query += ` AND p.report_month = $${paramCount}`;
             params.push(report_month);
             paramCount++;
         }
 
-        query += ` ORDER BY a.report_month DESC, m.section_id, m.hmis_code, m.eafya_product_id`;
+        query += ` GROUP BY p.report_month, e.section_id, e.hmis_dataelement_code, e.hmis_dataelement_name, e.dataelement_id`;
+        query += ` ORDER BY p.report_month, e.hmis_dataelement_code`;
 
         const { rows } = await pool.query(query, params);
         res.json(rows);

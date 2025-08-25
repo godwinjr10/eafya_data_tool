@@ -18,6 +18,7 @@ SUM(COALESCE(c."20y+ Female", 0)) AS "20y_plus_female"
 FROM reporting."105_01_conditions" c
 inner join reporting.eafya_mappings e on eafya_item_id = c.disease_id 
 WHERE c.report_month = '202502'
+and e.section_id ='1.3.1'
 GROUP by c.report_month, e.section_id, e.hmis_dataelement_code, e.hmis_dataelement_name, e.dataelement_id
 ORDER by c.report_month, e.hmis_dataelement_code
 

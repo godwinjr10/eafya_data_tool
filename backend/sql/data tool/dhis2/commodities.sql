@@ -57,3 +57,22 @@ SELECT
     ) AS value
 FROM reporting.commodities_push t
 WHERE t.report_month = '202505';
+
+
+---- New Query for commodities -----
+select
+p.report_month,
+e.section_id,
+e.hmis_dataelement_code,
+e.hmis_dataelement_name,
+e.dataelement_id,
+SUM(COALESCE(p.qty_consumed, 0)) AS "qty_consumed",
+SUM(COALESCE(p.days_out_of_stock, 0)) AS "days_out_of_stock",
+SUM(COALESCE(p.stock_level, 0)) AS "stock_level",
+SUM(COALESCE(p.quantity_expired, 0)) AS "quantity_expired"
+FROM reporting."105_06_commodities" p
+inner join reporting.eafya_mappings e on eafya_item_id = p.product_id
+WHERE p.report_month = '202503'
+and e.section_id ='6.1'
+GROUP by p.report_month, e.section_id, e.hmis_dataelement_code, e.hmis_dataelement_name, e.dataelement_id
+ORDER by p.report_month, e.hmis_dataelement_code

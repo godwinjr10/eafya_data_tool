@@ -4,7 +4,6 @@ import API from "../../helpers/api";
 const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
   const [loading, setLoading] = useState(false);
   const [labTests, setLabTests] = useState([]);
-  const [categorizedTests, setCategorizedTests] = useState({});
 
   const getMonthNumber = (monthName) => {
     const months = {
@@ -22,20 +21,9 @@ const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
       const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
       const response = await API.get(`/labtests?report_month=${formattedMonth}&section_id=${section_id}`);
       
-      // Group tests by category
-      const groupedTests = response.data.reduce((acc, test) => {
-        if (!acc[test.category]) {
-          acc[test.category] = [];
-        }
-        acc[test.category].push(test);
-        return acc;
-      }, {});
-
-      setCategorizedTests(groupedTests);
       setLabTests(response.data);
     } catch (error) {
       console.error('Error fetching lab tests:', error.response || error);
-      setCategorizedTests({});
       setLabTests([]);
     } finally {
       setLoading(false);
@@ -117,10 +105,10 @@ const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
     </>
   );
 
-  const renderTestCategory = (categoryName, tests) => (
-    <div className="col-md-6 mb-4">
+  const renderLabTestsSection = () => (
+    <div className="col-12 mb-4">
       <div className="section-header">
-        {categoryName}
+        {section_id === '10.2' ? '10.2 LABORATORY TESTS' : '10.2.1 LABORATORY ROUTINE TESTS'}
       </div>
       <table className="data-entry-table">
         <thead>
@@ -131,9 +119,9 @@ const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
           </tr>
         </thead>
         <tbody>
-          {tests.map(test => (
-            <tr key={test.hmis_code}>
-              <td>{test.hmis_code}. {test.hmis_name}</td>
+          {labTests.map(test => (
+            <tr key={test.hmis_dataelement_code}>
+              <td>{test.hmis_dataelement_code}. {test.hmis_dataelement_name}</td>
               <td>
                 <input 
                   type="number" 
@@ -167,9 +155,7 @@ const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
     <div className="lab-test-container">
       {renderClientVisitsSection()}
       <div className="row">
-        {Object.entries(categorizedTests).map(([category, tests]) => 
-          renderTestCategory(category, tests)
-        )}
+        {renderLabTestsSection()}
       </div>
     </div>
   );

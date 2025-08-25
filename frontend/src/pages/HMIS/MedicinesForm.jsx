@@ -63,8 +63,7 @@ const MedicinesForm = ({ selectedMonth, selectedYear, section_id }) => {
         <table className="data-entry-table">
           <thead>
             <tr>
-              <th>HMIS Code</th>
-              <th>NAME OF DRUG ITEM</th>
+              <th>HMIS Data Element Name</th>
               <th>Quantity Consumed</th>
               <th>Days out of stock</th>
               <th>Stock on hand</th>
@@ -73,9 +72,8 @@ const MedicinesForm = ({ selectedMonth, selectedYear, section_id }) => {
           </thead>
           <tbody>
             {medicines.map(medicine => (
-              <tr key={medicine.hmis_code}>
-                <td>{medicine.hmis_code}</td>
-                <td>{medicine.hmis_name}</td>
+              <tr key={medicine.hmis_dataelement_code}>
+                <td>{medicine.hmis_dataelement_name}</td>
                 <td>
                   <input
                     type="text"

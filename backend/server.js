@@ -18,6 +18,7 @@ import commoditiesReportRoutes from "./routes/reports/commodities.js";
 import dashboardRoutes from "./routes/dhisreports/dashboard.js";
 import dhisIntegration from "./routes/dhisintegration/dhisroutes.js";
 import mappingRoutes from "./routes/mapping/hmis.js";
+import datasetRoutes from "./routes/mapping/datasets.js";
 
 dotenv.config();
 
@@ -53,6 +54,7 @@ syncDatabase();
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/labtests", labTestRoutes);
+app.use("/api/datasets", datasetRoutes);
 app.use("/api/facility", FacilityRoutes);
 app.use("/api/conditions", conditionRoutes);
 app.use("/api/commodities", commoditiesRoutes);
