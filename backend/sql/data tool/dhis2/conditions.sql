@@ -1,10 +1,10 @@
 /**** DATA TOOL 105 Conditions Report Script ****/
-select
+SELECT
 c.report_month,
 e.section_id,
-e.hmis_dataelement_code,
-e.hmis_dataelement_name,
-e.dataelement_id,
+e.section_name,
+e.hmis_code,
+e.hmis_name,
 SUM(COALESCE(c."0-28d Male", 0)) AS "0_28d_male",
 SUM(COALESCE(c."0-28d Female", 0)) AS "0_28d_female",
 SUM(COALESCE(c."29d-4y Male", 0)) AS "29d_4y_male",
@@ -16,11 +16,10 @@ SUM(COALESCE(c."10-19y Female", 0)) AS "10_19y_female",
 SUM(COALESCE(c."20y+ Male", 0)) AS "20y_plus_male",
 SUM(COALESCE(c."20y+ Female", 0)) AS "20y_plus_female"
 FROM reporting."105_01_conditions" c
-inner join reporting.eafya_mappings e on eafya_item_id = c.disease_id 
+INNER JOIN reporting.dhis_eafya_mapping_conditions_final e ON e.eafya_disease_id = c.disease_id
 WHERE c.report_month = '202502'
-and e.section_id ='1.3.1'
-GROUP by c.report_month, e.section_id, e.hmis_dataelement_code, e.hmis_dataelement_name, e.dataelement_id
-ORDER by c.report_month, e.hmis_dataelement_code
+GROUP by c.report_month, e.section_id, e.section_name, e.hmis_code, e.hmis_name
+ORDER by c.report_month, e.section_id
 
 
 /**** Raw Mapped Script ****/

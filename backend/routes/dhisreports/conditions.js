@@ -16,9 +16,9 @@ router.get('/', async (req, res) => {
         SELECT
             c.report_month,
             e.section_id,
-            e.hmis_dataelement_code,
-            e.hmis_dataelement_name,
-            e.dataelement_id,
+            e.section_name,
+            e.hmis_code,
+            e.hmis_name,
             SUM(COALESCE(c."0-28d Male", 0)) AS "0_28d_male",
             SUM(COALESCE(c."0-28d Female", 0)) AS "0_28d_female",
             SUM(COALESCE(c."29d-4y Male", 0)) AS "29d_4y_male",
@@ -30,15 +30,15 @@ router.get('/', async (req, res) => {
             SUM(COALESCE(c."20y+ Male", 0)) AS "20y_plus_male",
             SUM(COALESCE(c."20y+ Female", 0)) AS "20y_plus_female"
         FROM reporting."105_01_conditions" c
-        INNER JOIN reporting.eafya_mappings e ON e.eafya_item_id = c.disease_id 
+        INNER JOIN reporting.dhis_eafya_mapping_conditions_final e ON e.eafya_disease_id = c.disease_id 
         WHERE c.report_month = $2
         AND e.section_id = $1`;
 
         const params = [section_id, report_month];
 
-        query += ` GROUP BY c.report_month, e.section_id, e.hmis_dataelement_code, e.hmis_dataelement_name, e.dataelement_id`;
+        query += ` GROUP BY c.report_month, e.section_id, e.section_name, e.hmis_code, e.hmis_name`;
 
-        query += ` ORDER BY c.report_month, e.hmis_dataelement_code`;
+        query += ` ORDER BY c.report_month, e.section_id`;
 
         console.log('Final Query:', query);
         console.log('Parameters:', params);

@@ -159,9 +159,6 @@ const Conditions = () => {
               <tr>
                 <th>HMIS Code</th>
                 <th>HMIS Name</th>
-                <th>Section</th>
-                <th>CSV ID</th>
-                <th>Data Element ID</th>
                 <th>Category Option Combo</th>
                 <th>eAFYA Disease ID</th>
                 <th>eAFYA Disease Name</th>
@@ -173,9 +170,6 @@ const Conditions = () => {
                 <tr key={`${row.id}-${row.eafya_disease_id || ''}`} className="hmis-row">
                   <td>{row.hmis_code}</td>
                   <td>{row.hmis_name}</td>
-                  <td>{row.section_id} - {row.section_name}</td>
-                  <td>{row.csv_id || '-'}</td>
-                  <td>{row.data_element_id || '-'}</td>
                   <td>{row.category_optioncombo_name || '-'}</td>
                   <td>{row.eafya_disease_id || '-'}</td>
                   <td>{row.eafya_disease_name || '-'}</td>
