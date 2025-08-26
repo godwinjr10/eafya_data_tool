@@ -276,7 +276,7 @@ tbody tr:nth-child(even) {
   color: #d32f2f;
 }
 
-.add-mapping-btn {
+.btn btn-outline-primary btn-sm {
   background: none;
   border: 1px dashed #2196f3;
   padding: 1px 4px;
@@ -290,11 +290,11 @@ tbody tr:nth-child(even) {
   height: 20px;
 }
 
-.add-mapping-btn:hover {
+.btn btn-outline-primary btn-sm:hover {
   background-color: #e3f2fd;
 }
 
-.add-mapping-btn svg {
+.btn btn-outline-primary btn-sm svg {
   font-size: 10px;
 }
 

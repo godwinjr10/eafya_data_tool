@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Select from 'react-select';
-import './styles.css';
 
 // Import existing components
 import Conditions from './Conditions';
@@ -27,27 +26,57 @@ const EafyaMapping = () => {
 
 
 
-  // Render functions
+  // // Render functions
+  // const renderPageTitle = () => (
+  //   <div className="page-header">
+  //     <div className="mapping-type-selector">
+  //       <label>Mapping Type:</label>
+  //       <Select
+  //         value={MAPPING_TYPE_OPTIONS.find(option => option.value === selectedMappingType)}
+  //         onChange={(selectedOption) => setSelectedMappingType(selectedOption.value)}
+  //         options={MAPPING_TYPE_OPTIONS}
+  //         placeholder="Select mapping type..."
+  //         isSearchable={false}
+  //         className="mapping-type-select"
+  //         classNamePrefix="react-select"
+  //       />
+  //     </div>
+  //     <h1 className="page-title">
+  //       eAFYA Mapping Management - {MAPPING_TYPE_OPTIONS.find(option => option.value === selectedMappingType)?.label}
+  //     </h1>
+  //   </div>
+  // );
+
+
+
   const renderPageTitle = () => (
-    <div className="page-header">
-      <div className="mapping-type-selector">
-        <label>Mapping Type:</label>
-        <Select
-          value={MAPPING_TYPE_OPTIONS.find(option => option.value === selectedMappingType)}
-          onChange={(selectedOption) => setSelectedMappingType(selectedOption.value)}
-          options={MAPPING_TYPE_OPTIONS}
-          placeholder="Select mapping type..."
-          isSearchable={false}
-          className="mapping-type-select"
-          classNamePrefix="react-select"
-        />
+    <div className="container-fluid py-3 mb-4">
+      <div className="row align-items-center">
+        <div className="col-md-8">
+          <h1 className="h3 mb-1 text-primary fw-bold">
+            eAFYA Mapping Management
+          </h1>
+          <p className="text-muted mb-0">
+            {MAPPING_TYPE_OPTIONS.find(option => option.value === selectedMappingType)?.label || 'Select a mapping type'}
+          </p>
+        </div>
+        <div className="col-md-4">
+          <div className="d-flex flex-column">
+            <label className="form-label fw-semibold mb-2">Mapping Type:</label>
+            <Select
+              value={MAPPING_TYPE_OPTIONS.find(option => option.value === selectedMappingType)}
+              onChange={(selectedOption) => setSelectedMappingType(selectedOption.value)}
+              options={MAPPING_TYPE_OPTIONS}
+              placeholder="Select mapping type..."
+              isSearchable={false}
+              className="mapping-type-select"
+              classNamePrefix="react-select"
+            />
+          </div>
+        </div>
       </div>
-      <h1 className="page-title">
-        eAFYA Mapping Management - {MAPPING_TYPE_OPTIONS.find(option => option.value === selectedMappingType)?.label}
-      </h1>
     </div>
   );
-
   // Render different components based on selected mapping type
   const renderSelectedComponent = () => {
     switch (selectedMappingType) {
@@ -67,7 +96,7 @@ const EafyaMapping = () => {
   };
 
   return (
-    <div className="report-sections">
+    <div className="">
       {renderPageTitle()}
       {renderSelectedComponent()}
     </div>

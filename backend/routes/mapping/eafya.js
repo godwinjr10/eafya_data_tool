@@ -8,7 +8,7 @@ router.get('/commodities', async (req, res) => {
 
         const query = `
         SELECT 
-            id,
+            ROW_NUMBER() OVER (ORDER BY section_name) AS id,
             section_id, 
             section_name,
             hmis_code,

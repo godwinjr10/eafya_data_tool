@@ -1,61 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import { FaPlus, FaTrash } from 'react-icons/fa';
-import API from '../../helpers/api';
-import MappingDialog from './MappingDialog';
-import './styles.css';
+import React, { useState, useEffect } from "react";
+import { FaPlus, FaTrash } from "react-icons/fa";
+import API from "../../helpers/api";
+import MappingDialog from "./MappingDialog";
 
 // Constants - moved to top for easy maintenance
 const DATASET_DISPLAY_NAMES = {
-  'HMIS1052': 'Maternal & Child Health',
-  'HMIS1051': 'Outpatient Diagnosis',
-  'HMIS1055': 'Laboratory Tests',
-  'HMIS1053': 'HIV/AIDS Testing Services',
-  'HMIS1054': 'Essential Medicines',
-  'HMIS108': 'IPD Monthly Report'
+  HMIS1052: "Maternal & Child Health",
+  HMIS1051: "Outpatient Diagnosis",
+  HMIS1055: "Laboratory Tests",
+  HMIS1053: "HIV/AIDS Testing Services",
+  HMIS1054: "Essential Medicines",
+  HMIS108: "IPD Monthly Report",
 };
 
 const SECTION_DISPLAY_NAMES = {
-  '1.3.1': 'Epidemic Prone Diseases',
-  '1.3.2': 'Communicable Diseases',
-  '1.3.3': 'Neonatal Diseases',
-  '1.3.4': 'Non-Communicable Diseases',
-  '1.3.5': 'Oral Diseases',
-  '1.3.6': 'ENT Diseases',
-  '1.3.7': 'Eye Conditions',
-  '1.3.8': 'Mental Health',
-  '1.3.9': 'Neurological Disorders',
-  '1.3.10': 'Chronic Respiratory',
-  '1.3.11': 'Cancers',
-  '1.3.12': 'Palliative',
-  '1.3.14': 'Disability',
-  '1.3.15': 'Cardiovascular Diseases',
-  '1.3.16': 'Renal Diseases',
-  '1.3.17': 'Liver Diseases',
-  '1.3.18': 'Endocrine & Metabolic Disorders',
-  '1.3.19': 'Injuries',
-  '1.3.20': 'Minor Operations in OPD',
-  '1.3.21': 'Neglected Tropical Diseases',
-  '1.3.22': 'Maternal Conditions',
-  '1.3.23': 'Other OPD Conditions',
-  '1.3.24': 'Deaths in OPD',
-  '1.3.25': 'Emergency Medical Services',
-  '1.3.26': 'TB Screening',
-  '1.3.28': 'Nutrition Services',
-  '1.3.29': 'Gender Based Violence',
+  "1.3.1": "Epidemic Prone Diseases",
+  "1.3.2": "Communicable Diseases",
+  "1.3.3": "Neonatal Diseases",
+  "1.3.4": "Non-Communicable Diseases",
+  "1.3.5": "Oral Diseases",
+  "1.3.6": "ENT Diseases",
+  "1.3.7": "Eye Conditions",
+  "1.3.8": "Mental Health",
+  "1.3.9": "Neurological Disorders",
+  "1.3.10": "Chronic Respiratory",
+  "1.3.11": "Cancers",
+  "1.3.12": "Palliative",
+  "1.3.14": "Disability",
+  "1.3.15": "Cardiovascular Diseases",
+  "1.3.16": "Renal Diseases",
+  "1.3.17": "Liver Diseases",
+  "1.3.18": "Endocrine & Metabolic Disorders",
+  "1.3.19": "Injuries",
+  "1.3.20": "Minor Operations in OPD",
+  "1.3.21": "Neglected Tropical Diseases",
+  "1.3.22": "Maternal Conditions",
+  "1.3.23": "Other OPD Conditions",
+  "1.3.24": "Deaths in OPD",
+  "1.3.25": "Emergency Medical Services",
+  "1.3.26": "TB Screening",
+  "1.3.28": "Nutrition Services",
+  "1.3.29": "Gender Based Violence",
   // HMIS1054 (Essential Medicines) section mappings
-  '6.1': 'Essential Medicines',
-  '6.2': 'Outreach Activities',
-  '6.3': 'Meetings',
-  '6.4': 'Support Supervision',
+  6.1: "Essential Medicines",
+  6.2: "Outreach Activities",
+  6.3: "Meetings",
+  6.4: "Support Supervision",
   // HMIS1052 (Maternal & Child Health) section mappings
-  '2.1': 'Antenatal',
-  '2.2': 'Maternity',
-  '2.3': 'Postnatal',
-  '2.4': 'Family Planning',
-  '2.5': 'Contraceptives',
-  '2.6': 'Vitamin A',
-  '2.7': 'Immunization',
-  '2.8': 'Tetanus'
+  2.1: "Antenatal",
+  2.2: "Maternity",
+  2.3: "Postnatal",
+  2.4: "Family Planning",
+  2.5: "Contraceptives",
+  2.6: "Vitamin A",
+  2.7: "Immunization",
+  2.8: "Tetanus",
 };
 
 // Utility functions
@@ -79,27 +78,27 @@ const sortSectionsByName = (sections) => {
 const Mapping = () => {
   // State management
   const [datasetCodes, setDatasetCodes] = useState([]);
-  const [selectedDataset, setSelectedDataset] = useState('');
+  const [selectedDataset, setSelectedDataset] = useState("");
   const [datasetElements, setDatasetElements] = useState([]);
-  const [selectedSection, setSelectedSection] = useState('');
-  const [hmisSearch, setHmisSearch] = useState('');
+  const [selectedSection, setSelectedSection] = useState("");
+  const [hmisSearch, setHmisSearch] = useState("");
   const [currentMappings, setCurrentMappings] = useState({});
   const [eafyaItems, setEafyaItems] = useState([]);
-  const [dialogState, setDialogState] = useState({ 
-    isOpen: false, 
-    hmisCode: '', 
-    hmisName: '',
-    dataelementId: null
+  const [dialogState, setDialogState] = useState({
+    isOpen: false,
+    hmisCode: "",
+    hmisName: "",
+    dataelementId: null,
   });
   const [loading, setLoading] = useState(false);
 
   // API functions
   const fetchDatasetCodes = async () => {
     try {
-      const response = await API.get('/mapping/datasets/codes');
+      const response = await API.get("/mapping/datasets/codes");
       setDatasetCodes(response.data || []);
     } catch (error) {
-      console.error('Error fetching dataset codes:', error);
+      console.error("Error fetching dataset codes:", error);
       setDatasetCodes([]);
     }
   };
@@ -107,11 +106,13 @@ const Mapping = () => {
   const fetchDatasetElements = async (datasetCode) => {
     setLoading(true);
     try {
-      const response = await API.get(`/mapping/datasets/${datasetCode}/elements`);
+      const response = await API.get(
+        `/mapping/datasets/${datasetCode}/elements`
+      );
       setDatasetElements(response.data || []);
-      console.error('fetching dataset elements:', response);
+      console.error("fetching dataset elements:", response);
     } catch (error) {
-      console.error('Error fetching dataset elements:', error);
+      console.error("Error fetching dataset elements:", error);
       setDatasetElements([]);
     } finally {
       setLoading(false);
@@ -120,35 +121,44 @@ const Mapping = () => {
 
   const fetchDatasetMappings = async (datasetCode) => {
     try {
-      const response = await API.get(`/mapping/dataset/${datasetCode}/mappings`);
+      const response = await API.get(
+        `/mapping/dataset/${datasetCode}/mappings`
+      );
       setCurrentMappings(response.data || {});
     } catch (error) {
-      console.error('Error fetching dataset mappings:', error);
+      console.error("Error fetching dataset mappings:", error);
       setCurrentMappings({});
     }
   };
 
   // Data processing functions
   const getUniqueSections = () => {
-    const sections = [...new Set(datasetElements.map(el => el.section_id).filter(Boolean))];
+    const sections = [
+      ...new Set(datasetElements.map((el) => el.section_id).filter(Boolean)),
+    ];
     const sortedSections = sortSectionsByName(sections);
-    
-    return sortedSections.map(sectionId => ({
+
+    return sortedSections.map((sectionId) => ({
       id: sectionId,
-      name: getDisplayNameForSection(sectionId)
+      name: getDisplayNameForSection(sectionId),
     }));
   };
 
   const getSectionData = () => {
     if (!selectedSection) return [];
-    return datasetElements.filter(el => el.section_id === selectedSection);
+    return datasetElements.filter((el) => el.section_id === selectedSection);
   };
 
   const getFilteredDataElements = () => {
     if (hmisSearch) {
-      return datasetElements.filter(element =>
-        element.dataelement_name.toLowerCase().includes(hmisSearch.toLowerCase()) ||
-        element.dataelement_code.toLowerCase().includes(hmisSearch.toLowerCase())
+      return datasetElements.filter(
+        (element) =>
+          element.dataelement_name
+            .toLowerCase()
+            .includes(hmisSearch.toLowerCase()) ||
+          element.dataelement_code
+            .toLowerCase()
+            .includes(hmisSearch.toLowerCase())
       );
     }
     return getSectionData();
@@ -157,31 +167,35 @@ const Mapping = () => {
   // Event handlers
   const handleDatasetChange = (newDataset) => {
     setSelectedDataset(newDataset);
-    setSelectedSection('');
-    setHmisSearch('');
+    setSelectedSection("");
+    setHmisSearch("");
   };
 
   const handleSectionChange = (newSection) => {
     setSelectedSection(newSection);
-    setHmisSearch('');
+    setHmisSearch("");
   };
 
-  const handleAddMapping = (dataelementCode, dataelementName, dataelementId) => {
+  const handleAddMapping = (
+    dataelementCode,
+    dataelementName,
+    dataelementId
+  ) => {
     setDialogState({
       isOpen: true,
       hmisCode: dataelementCode,
       hmisName: dataelementName,
-      dataelementId: dataelementId
+      dataelementId: dataelementId,
     });
   };
 
   const handleSaveMapping = async (selectedItems) => {
     try {
-      const selectedEafyaItems = selectedItems.map(itemId => {
-        const item = eafyaItems.find(eafyaItem => eafyaItem.id === itemId);
+      const selectedEafyaItems = selectedItems.map((itemId) => {
+        const item = eafyaItems.find((eafyaItem) => eafyaItem.id === itemId);
         return {
           id: itemId,
-          name: item ? item.name : `Item ${itemId}`
+          name: item ? item.name : `Item ${itemId}`,
         };
       });
 
@@ -191,34 +205,38 @@ const Mapping = () => {
         dataelement_id: dialogState.dataelementId,
         dataset_code: selectedDataset,
         section_id: selectedSection,
-        mappings: selectedEafyaItems
+        mappings: selectedEafyaItems,
       };
 
-      const response = await API.post('/mapping/mappings', mappingData);
-      
+      const response = await API.post("/mapping/mappings", mappingData);
+
       if (response.status === 200) {
         const newMappings = {
           ...currentMappings,
-          [dialogState.hmisCode]: selectedEafyaItems
+          [dialogState.hmisCode]: selectedEafyaItems,
         };
-        
+
         setCurrentMappings(newMappings);
-        console.log('Mappings saved successfully:', response.data);
+        console.log("Mappings saved successfully:", response.data);
       }
     } catch (error) {
-      console.error('Error saving mappings:', error);
-      alert('Error saving mappings. Please try again.');
+      console.error("Error saving mappings:", error);
+      alert("Error saving mappings. Please try again.");
     }
   };
 
   const handleRemoveMapping = async (dataelementCode, itemId) => {
     try {
-      const response = await API.delete(`/mapping/mappings/${dataelementCode}/${itemId}`);
-      
+      const response = await API.delete(
+        `/mapping/mappings/${dataelementCode}/${itemId}`
+      );
+
       if (response.status === 200) {
         const newMappings = {
           ...currentMappings,
-          [dataelementCode]: (currentMappings[dataelementCode] || []).filter(d => d.id !== itemId)
+          [dataelementCode]: (currentMappings[dataelementCode] || []).filter(
+            (d) => d.id !== itemId
+          ),
         };
 
         if (newMappings[dataelementCode].length === 0) {
@@ -226,11 +244,11 @@ const Mapping = () => {
         }
 
         setCurrentMappings(newMappings);
-        console.log('Mapping deleted successfully');
+        console.log("Mapping deleted successfully");
       }
     } catch (error) {
-      console.error('Error deleting mapping:', error);
-      alert('Error deleting mapping. Please try again.');
+      console.error("Error deleting mapping:", error);
+      alert("Error deleting mapping. Please try again.");
     }
   };
 
@@ -239,7 +257,12 @@ const Mapping = () => {
   };
 
   const closeDialog = () => {
-    setDialogState({ isOpen: false, hmisCode: '', hmisName: '', dataelementId: null });
+    setDialogState({
+      isOpen: false,
+      hmisCode: "",
+      hmisName: "",
+      dataelementId: null,
+    });
   };
 
   // Effects
@@ -253,7 +276,7 @@ const Mapping = () => {
       fetchDatasetMappings(selectedDataset);
     } else {
       setDatasetElements([]);
-      setSelectedSection('');
+      setSelectedSection("");
       setCurrentMappings({});
     }
   }, [selectedDataset]);
@@ -264,12 +287,14 @@ const Mapping = () => {
       HMIS eAFYA Mapping
       {selectedDataset && (
         <span className="selected-dataset">
-          {' '}- {getDisplayNameForDataset(selectedDataset)}
+          {" "}
+          - {getDisplayNameForDataset(selectedDataset)}
         </span>
       )}
       {selectedSection && (
         <span className="selected-section">
-          {' '}- {getDisplayNameForSection(selectedSection)}
+          {" "}
+          - {getDisplayNameForSection(selectedSection)}
         </span>
       )}
     </h1>
@@ -279,12 +304,12 @@ const Mapping = () => {
     <div className="section-selectors">
       <div className="select-group">
         <label>Dataset:</label>
-        <select 
-          value={selectedDataset} 
+        <select
+          value={selectedDataset}
           onChange={(e) => handleDatasetChange(e.target.value)}
         >
           <option value="">Select Dataset</option>
-          {datasetCodes.map(datasetCode => (
+          {datasetCodes.map((datasetCode) => (
             <option key={datasetCode} value={datasetCode}>
               {getDisplayNameForDataset(datasetCode)}
             </option>
@@ -300,7 +325,7 @@ const Mapping = () => {
             onChange={(e) => handleSectionChange(e.target.value)}
           >
             <option value="">Select Section</option>
-            {getUniqueSections().map(section => (
+            {getUniqueSections().map((section) => (
               <option key={section.id} value={section.id}>
                 {section.name}
               </option>
@@ -338,26 +363,41 @@ const Mapping = () => {
             </tr>
           </thead>
           <tbody>
-            {filteredElements.map(element => (
+            {filteredElements.map((element) => (
               <tr key={element.id} className="hmis-row">
                 <td>{element.dataelement_code}</td>
                 <td>{element.dataelement_name}</td>
                 <td>
                   <div className="item-mappings">
-                    {(currentMappings[element.dataelement_code] || [])?.map(item => (
-                      <div key={item.id} className="item-tag">
-                        <span>{item.id} - {item.name}</span>
-                        <button 
-                          className="remove-btn"
-                          onClick={() => handleRemoveMapping(element.dataelement_code, item.id)}
-                        >
-                          <FaTrash />
-                        </button>
-                      </div>
-                    ))}
-                    <button 
-                      className="add-mapping-btn"
-                      onClick={() => handleAddMapping(element.dataelement_code, element.dataelement_name, element.dataelement_id)}
+                    {(currentMappings[element.dataelement_code] || [])?.map(
+                      (item) => (
+                        <div key={item.id} className="item-tag">
+                          <span>
+                            {item.id} - {item.name}
+                          </span>
+                          <button
+                            className="remove-btn"
+                            onClick={() =>
+                              handleRemoveMapping(
+                                element.dataelement_code,
+                                item.id
+                              )
+                            }
+                          >
+                            <FaTrash />
+                          </button>
+                        </div>
+                      )
+                    )}
+                    <button
+                      className="btn btn-outline-primary btn-sm"
+                      onClick={() =>
+                        handleAddMapping(
+                          element.dataelement_code,
+                          element.dataelement_name,
+                          element.dataelement_id
+                        )
+                      }
                     >
                       <FaPlus /> Add Mapping
                     </button>
