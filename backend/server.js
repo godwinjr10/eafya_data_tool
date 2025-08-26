@@ -19,6 +19,7 @@ import dashboardRoutes from "./routes/dhisreports/dashboard.js";
 import dhisIntegration from "./routes/dhisintegration/dhisroutes.js";
 import mappingRoutes from "./routes/mapping/hmis.js";
 import datasetRoutes from "./routes/mapping/datasets.js";
+import eafyaRoutes from "./routes/mapping/eafya.js";
 
 dotenv.config();
 
@@ -68,6 +69,7 @@ app.use("/api/commodities/report", commoditiesReportRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/dhis", dhisIntegration);
 app.use("/api/mapping", mappingRoutes);
+app.use("/api/eafya", eafyaRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

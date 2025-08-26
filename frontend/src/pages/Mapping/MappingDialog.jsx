@@ -3,9 +3,12 @@ import API from '../../helpers/api';
 
 // Constants for endpoint mappings
 const ENDPOINT_MAPPINGS = {
-  'HMIS1054': '/mapping/commodities',
-  'HMIS1055': '/mapping/labtests',
-  'HMIS1052': '/mapping/vaccines',
+  'HMIS1054': '/eafya/products',
+  'HMIS1055': '/eafya/lab',
+  'HMIS1052': '/eafya/vaccines',
+  'HMIS1052_FP': '/eafya/familyplanning-items',
+  'HMIS1052_VACCINE': '/eafya/vaccine-items',
+  'HMIS1052_CONDITIONS': '/eafya/disease-items',
   'default': '/mapping/diseases'
 };
 
@@ -18,7 +21,10 @@ const getItemTypeForDataset = (datasetCode) => {
   const typeMap = {
     'HMIS1054': 'commodity',
     'HMIS1055': 'lab test',
-    'HMIS1052': 'vaccine'
+    'HMIS1052': 'vaccine',
+    'HMIS1052_FP': 'family planning item',
+    'HMIS1052_VACCINE': 'vaccine',
+    'HMIS1052_CONDITIONS': 'disease'
   };
   return typeMap[datasetCode] || 'disease';
 };
@@ -29,7 +35,7 @@ const MappingDialog = ({ isOpen, onClose, onSave, hmisName, section, eafyaItems,
   const [loading, setLoading] = useState(false);
   
   const itemType = getItemTypeForDataset(datasetCode);
-  const isSpecialDataset = ['HMIS1054', 'HMIS1055', 'HMIS1052'].includes(datasetCode);
+  const isSpecialDataset = ['HMIS1054', 'HMIS1055', 'HMIS1052', 'HMIS1052_FP', 'HMIS1052_VACCINE', 'HMIS1052_CONDITIONS'].includes(datasetCode);
   
   // Reset state when dialog closes
   useEffect(() => {
@@ -41,10 +47,10 @@ const MappingDialog = ({ isOpen, onClose, onSave, hmisName, section, eafyaItems,
 
   // Fetch eAFYA items when dialog opens
   useEffect(() => {
-    if (isOpen && section) {
+    if (isOpen) {
       fetchEafyaItems();
     }
-  }, [isOpen, section]);
+  }, [isOpen]);
 
   const fetchEafyaItems = async () => {
     setLoading(true);

@@ -66,7 +66,7 @@ function MainSideBar() {
           path: "/facility",
         },
         { id: "users", label: "Users", icon: "person-circle", path: "/users" },
-        { id: "reportmapping", label: "Report Mapping", icon: "person-circle", path: "/report/mapping" },
+        { id: "reportmapping", label: "Report Mapping", icon: "person-circle", path: "/mappingtest" },
       ],
     },
   ];

@@ -4,11 +4,37 @@
   min-height: 100vh;
 }
 
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
 .page-title {
-  margin: 0 0 24px 0;
+  margin: 0;
   color: #333;
   font-size: 24px;
   font-weight: 500;
+}
+
+.mapping-type-selector {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mapping-type-selector label {
+  font-weight: 500;
+  color: #333;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.mapping-type-select {
+  min-width: 200px;
 }
 
 .selected-dataset {
@@ -449,4 +475,208 @@ tbody tr:nth-child(even) {
   gap: 8px;
   padding-top: 16px;
   border-top: 1px solid #ddd;
+}
+
+/* eAFYA Mapping specific styles */
+.section-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background-color: #e8f5e8;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #2e7d32;
+  font-weight: 500;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: background-color 0.2s;
+}
+
+.view-btn {
+  color: #2196f3;
+}
+
+.view-btn:hover {
+  background-color: #e3f2fd;
+}
+
+.edit-btn {
+  color: #ff9800;
+}
+
+.edit-btn:hover {
+  background-color: #fff3e0;
+}
+
+.add-btn {
+  color: #4caf50;
+}
+
+.add-btn:hover {
+  background-color: #e8f5e8;
+}
+
+.mapping-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.detail-row:last-child {
+  border-bottom: none;
+}
+
+.detail-row label {
+  font-weight: 500;
+  color: #333;
+  min-width: 180px;
+  flex-shrink: 0;
+}
+
+.detail-row span {
+  color: #666;
+  flex: 1;
+}
+
+/* Product Selection Styles */
+.product-selection-section {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.product-selection-section h4 {
+  margin: 0 0 16px 0;
+  color: #333;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.product-select-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.product-select {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* React Select Custom Styles */
+.react-select__control {
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  min-height: 42px !important;
+  box-shadow: none !important;
+}
+
+.react-select__control:hover {
+  border-color: #2196f3 !important;
+}
+
+.react-select__control--is-focused {
+  border-color: #2196f3 !important;
+  box-shadow: 0 0 0 1px #2196f3 !important;
+}
+
+.react-select__menu {
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.react-select__option {
+  padding: 8px 12px !important;
+  cursor: pointer !important;
+}
+
+.react-select__option--is-focused {
+  background-color: #e3f2fd !important;
+  color: #333 !important;
+}
+
+.react-select__option--is-selected {
+  background-color: #2196f3 !important;
+  color: white !important;
+}
+
+.react-select__placeholder {
+  color: #999 !important;
+}
+
+.react-select__single-value {
+  color: #333 !important;
+}
+
+.react-select__input-container {
+  color: #333 !important;
+}
+
+.no-products-message {
+  padding: 12px;
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+/* Disabled button state */
+.primary-btn:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.primary-btn:disabled:hover {
+  background-color: #ccc;
+}
+
+/* Component Placeholder Styles */
+.component-placeholder {
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.component-placeholder h2 {
+  color: #333;
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.component-placeholder p {
+  color: #666;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.5;
 }

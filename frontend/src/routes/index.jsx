@@ -14,6 +14,7 @@ import MainLayout from "../components/MainLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ProtectedRoute from "../helpers/Protected";
 import Mapping from "../pages/Mapping";
+import EafyaMappingDemo from "../pages/Mapping/EafyaMapping";
 
 const AppRoutes = () => {
   return (
@@ -31,6 +32,7 @@ const AppRoutes = () => {
           <ProtectedRoute path="/supplychain" component={Supplychain} />
           <ProtectedRoute path="/dashboard" exact component={Dashboard} />
           <ProtectedRoute path="/mapping" exact component={Mapping} />
+          <ProtectedRoute path="/mappingtest" exact component={EafyaMappingDemo} />
         </MainLayout>
       </Switch>
     </Fragment>
