@@ -3,32 +3,24 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import { testConnection, sequelize } from "./config/database.js";
-import DimSections from "./models/dimSections.js";
-import Dhis2MappingDetails from "./models/dhis2MappingDetails.js";
-import EafyaHmisMapping from "./models/eafyaHmisMapping.js";
-import mainSectionMappingModel from "./models/mainSectionMapping.js";
-import hmisRoutes from "./routes/hmis.routes.js";
-import dhisEafyaMappingRoutes from "./routes/eafya_mapping.routes.js";
-import attendanceRoutes from "./routes/attendance.js";
-import datasetRoutes from "./routes/dataset.js";
-import conditionRoutes from "./routes/conditions.js";
-import commoditiesRoutes from "./routes/commodities.js";
-import labTestRoutes from "./routes/labtests.js";
+import attendanceRoutes from "./routes/dhisreports/attendance.js";
+import conditionRoutes from "./routes/dhisreports/conditions.js";
+import commoditiesRoutes from "./routes/dhisreports/commodities.js";
+import labTestRoutes from "./routes/dhisreports/labtests.js";
 import FacilityRoutes from "./routes/facility.js";
 import userRoutes from "./routes/users.js";
-import antenatalRoutes from "./routes/antenatal.js";
-import tetanusRoutes from "./routes/tetanus.js";
-import immunizationRoutes from "./routes/immunization.js";
-import downloadRoutes from "./routes/downloads.js";
+import antenatalRoutes from "./routes/dhisreports/antenatal.js";
+import tetanusRoutes from "./routes/dhisreports/tetanus.js";
+import immunizationRoutes from "./routes/dhisreports/immunization.js";
+import downloadRoutes from "./routes/dhisreports/downloads.js";
 import outpatientRoutes from "./routes/reports/outpatient.js";
 import commoditiesReportRoutes from "./routes/reports/commodities.js";
-import dashboardRoutes from "./routes/dashboard.js";
-import ConditionsMappingRoutes from "./routes/mappings/allItemsMapping.js";
-import dhis2Routes from "./routes/mappings/push_to_dhis2.js";
-import dhisIntegration from "./routes/dhis/dhisroutes.js";
-import commoditiesDhis from "./routes/dhis/commoditiesRoutes.js";
-import mainSectionMappingRoutes from "./routes/mainSectionMapping.js";
-import { initializeAssociations } from "./models/associations.js";
+import dashboardRoutes from "./routes/dhisreports/dashboard.js";
+import dhisIntegration from "./routes/dhisintegration/dhisroutes.js";
+import mappingRoutes from "./routes/mapping/hmis.js";
+import datasetRoutes from "./routes/mapping/datasets.js";
+import eafyaRoutes from "./routes/mapping/eafya.js";
+
 dotenv.config();
 
 const app = express();
@@ -64,14 +56,12 @@ const syncDatabase = async () => {
 syncDatabase();
 
 // Routes
-app.use("/api/hmis", hmisRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/labtests", labTestRoutes);
 app.use("/api/datasets", datasetRoutes);
 app.use("/api/facility", FacilityRoutes);
 app.use("/api/conditions", conditionRoutes);
 app.use("/api/commodities", commoditiesRoutes);
-app.use("/api/mappings", dhisEafyaMappingRoutes);
 app.use("/api/attendance", attendanceRoutes);
 app.use("/api/antenatal", antenatalRoutes);
 app.use("/api/tetanus", tetanusRoutes);
@@ -80,11 +70,9 @@ app.use("/api/downloads", downloadRoutes);
 app.use("/api/outpatient", outpatientRoutes);
 app.use("/api/commodities/report", commoditiesReportRoutes);
 app.use("/api/dashboard", dashboardRoutes);
-app.use("/api/mapping/items", ConditionsMappingRoutes);
-app.use("/api/dhis2", dhis2Routes);
 app.use("/api/dhis", dhisIntegration);
-app.use("/api/dhis/commodities", commoditiesDhis);
-app.use("/api/main-sections", mainSectionMappingRoutes);
+app.use("/api/mapping", mappingRoutes);
+app.use("/api/eafya", eafyaRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

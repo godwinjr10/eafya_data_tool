@@ -435,3 +435,96 @@ CREATE TABLE IF NOT EXISTS reporting."108_inpatient"
 , death_date TIMESTAMP
 )
 ;
+
+CREATE TABLE IF NOT EXISTS reporting.eafya_mappings
+(
+  id BIGSERIAL PRIMARY KEY
+, hmis_dataelement_code VARCHAR(255) NOT NULL
+, hmis_dataelement_name VARCHAR(500) NOT NULL
+, dataelement_id VARCHAR(255)
+, dataset_code VARCHAR(50) NOT NULL
+, section_id VARCHAR(50)
+, eafya_item_id BIGINT NOT NULL
+, eafya_item_name VARCHAR(500) NOT NULL
+, created_at TIMESTAMP DEFAULT NOW()
+, updated_at TIMESTAMP DEFAULT NOW()
+)
+;
+
+CREATE TABLE IF NOT EXISTS reporting.patient_bed_admissions
+(
+  id BIGINT
+, birth_date TIMESTAMP
+, gender VARCHAR(6)
+, patient_id VARCHAR(255)
+, patient_admission_id BIGINT
+, admission_ward_id BIGINT
+, encounter_id BIGINT
+, patient_visit_id BIGINT
+, admission_date TIMESTAMP
+, medical_discharge_date TIMESTAMP
+, ward_name VARCHAR(255)
+, room_name VARCHAR(255)
+, bed_id BIGINT
+, bed_type VARCHAR(6)
+, bed_name VARCHAR(255)
+)
+;
+
+CREATE TABLE IF NOT EXISTS reporting.patient_days
+(
+  id BIGINT
+, birth_date TIMESTAMP
+, gender VARCHAR(6)
+, patient_id VARCHAR(255)
+, patient_admission_id BIGINT
+, admission_ward_id BIGINT
+, encounter_id BIGINT
+, patient_visit_id BIGINT
+, admission_date TIMESTAMP
+, medical_discharge_date TIMESTAMP
+, ward_name VARCHAR(255)
+)
+;
+
+CREATE TABLE IF NOT EXISTS reporting.census_death
+(
+  id BIGINT
+, birth_date TIMESTAMP
+, gender VARCHAR(6)
+, patient_id VARCHAR(255)
+, patient_admission_id BIGINT
+, admission_ward_id BIGINT
+, encounter_id BIGINT
+, patient_visit_id BIGINT
+, ward_name VARCHAR(255)
+, admission_date TIMESTAMP
+, medical_discharge_date TIMESTAMP
+, place_of_death VARCHAR(255)
+, time_of_death TIMESTAMP
+)
+;
+
+CREATE TABLE IF NOT EXISTS reporting."108_maternal_neonatal"
+(
+  encounter_id BIGINT
+, patient_id VARCHAR(255)
+, diagnosis VARCHAR(255)
+, gender VARCHAR(6)
+, birth_date TIMESTAMP
+, admission_date TIMESTAMP
+, delivery_mode VARCHAR(255)
+, mother_blood_pressure VARCHAR(255)
+, mother_blood_loss_volume DOUBLE PRECISION
+, death_date TIMESTAMP
+, baby_weight DOUBLE PRECISION
+, baby_status VARCHAR(255)
+, baby_gender VARCHAR(255)
+, newborn_date TIMESTAMP
+)
+;
+
+-- Create index for better performance
+CREATE INDEX IF NOT EXISTS idx_eafya_mappings_dataelement ON reporting.eafya_mappings(hmis_dataelement_code);
+CREATE INDEX IF NOT EXISTS idx_eafya_mappings_dataset ON reporting.eafya_mappings(dataset_code);
+CREATE INDEX IF NOT EXISTS idx_eafya_mappings_item ON reporting.eafya_mappings(eafya_item_id);

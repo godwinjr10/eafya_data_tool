@@ -69,7 +69,7 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
 
                             return (
                                 <tr key={`attendance-${item.hmis_code}`}>
-                                    <td>{item.hmis_code}. {item.hmis_name}</td>
+                                    <td>{item.hmis_name}</td>
                                     {Object.keys(ageGroupMapping).map(ageKey =>
                                         genders.map(gender => (
                                             <td key={`${ageKey}-${gender}`} className="text-center">

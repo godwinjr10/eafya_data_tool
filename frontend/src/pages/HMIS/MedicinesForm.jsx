@@ -21,13 +21,13 @@ const MedicinesForm = ({ selectedMonth, selectedYear, section_id }) => {
       const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
       const response = await API.get(`/commodities?report_month=${formattedMonth}&section_id=${section_id}`);
       
-      // Format the numbers to remove decimal points
+      // Format the numbers to remove decimal points and add thousand separators
       const formattedData = response.data.map(item => ({
         ...item,
-        qty_consumed: Math.round(parseFloat(item.qty_consumed || 0)).toString(),
-        days_out_of_stock: Math.round(parseFloat(item.days_out_of_stock || 0)).toString(),
-        stock_level: Math.round(parseFloat(item.stock_level || 0)).toString(),
-        quantity_expired: Math.round(parseFloat(item.quantity_expired || 0)).toString()
+        "Quantity Consumed": Math.round(parseFloat(item["Quantity Consumed"] || 0)).toLocaleString(),
+        "Days out Stock": Math.round(parseFloat(item["Days out Stock"] || 0)).toLocaleString(),
+        "Stock on Hand": Math.round(parseFloat(item["Stock on Hand"] || 0)).toLocaleString(),
+        "Quantity Expired": Math.round(parseFloat(item["Quantity Expired"] || 0)).toLocaleString()
       }));
       
       setMedicines(formattedData);
@@ -63,8 +63,7 @@ const MedicinesForm = ({ selectedMonth, selectedYear, section_id }) => {
         <table className="data-entry-table">
           <thead>
             <tr>
-              <th>HMIS Code</th>
-              <th>NAME OF DRUG ITEM</th>
+              <th>HMIS Data Element Name</th>
               <th>Quantity Consumed</th>
               <th>Days out of stock</th>
               <th>Stock on hand</th>
@@ -74,12 +73,11 @@ const MedicinesForm = ({ selectedMonth, selectedYear, section_id }) => {
           <tbody>
             {medicines.map(medicine => (
               <tr key={medicine.hmis_code}>
-                <td>{medicine.hmis_code}</td>
                 <td>{medicine.hmis_name}</td>
                 <td>
                   <input
                     type="text"
-                    value={medicine.qty_consumed}
+                    value={medicine["Quantity Consumed"]}
                     readOnly
                     className="form-control form-control-sm"
                   />
@@ -87,7 +85,7 @@ const MedicinesForm = ({ selectedMonth, selectedYear, section_id }) => {
                 <td>
                   <input
                     type="text"
-                    value={medicine.days_out_of_stock}
+                    value={medicine["Days out Stock"]}
                     readOnly
                     className="form-control form-control-sm"
                   />
@@ -95,7 +93,7 @@ const MedicinesForm = ({ selectedMonth, selectedYear, section_id }) => {
                 <td>
                   <input
                     type="text"
-                    value={medicine.stock_level}
+                    value={medicine["Stock on Hand"]}
                     readOnly
                     className="form-control form-control-sm"
                   />
@@ -103,7 +101,7 @@ const MedicinesForm = ({ selectedMonth, selectedYear, section_id }) => {
                 <td>
                   <input
                     type="text"
-                    value={medicine.quantity_expired}
+                    value={medicine["Quantity Expired"]}
                     readOnly
                     className="form-control form-control-sm"
                   />

@@ -1,421 +1,436 @@
-import React, { useState, useEffect } from 'react';
-import { FaPlus, FaTrash } from 'react-icons/fa';
-import { hmisData } from './hmisData';
-import './styles.css';
+import React, { useState, useEffect } from "react";
+import { FaPlus, FaTrash } from "react-icons/fa";
+import API from "../../helpers/api";
+import MappingDialog from "./MappingDialog";
 
-const mainSections = [
-  { id: 'conditions', name: 'Conditions' },
-  { id: 'commodities', name: 'Essential Medicines' },
-  { id: 'lab_tests', name: 'Lab Tests' }
-];
-
-// Get condition subsections from hmisData
-const getConditionSubSections = () => {
-  // Get all section keys from hmisData that have data
-  const sectionKeys = Object.keys(hmisData).filter(key => hmisData[key]?.length > 0);
-  
-  // Create subsection objects with proper format
-  return sectionKeys.map(key => ({
-    id: key,
-    // Convert key to display name (e.g., 'epidemic_prone' -> 'Epidemic Prone')
-    name: key.split('_')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ')
-  }));
+// Constants - moved to top for easy maintenance
+const DATASET_DISPLAY_NAMES = {
+  HMIS1052: "Maternal & Child Health",
+  HMIS1051: "Outpatient Diagnosis",
+  HMIS1055: "Laboratory Tests",
+  HMIS1053: "HIV/AIDS Testing Services",
+  HMIS1054: "Essential Medicines",
+  HMIS108: "IPD Monthly Report",
 };
 
-const subSections = {
-  // Dynamically get conditions subsections
-  conditions: getConditionSubSections(),
-  // Keep other sections hardcoded
-  commodities: [
-    { id: 'commodities', name: 'Essential Medicines' }
-  ],
-  lab_tests: [
-    { id: 'blood_tests', name: 'Blood Tests' },
-    { id: 'imaging', name: 'Imaging' }
-  ]
+const SECTION_DISPLAY_NAMES = {
+  "1.3.1": "Epidemic Prone Diseases",
+  "1.3.2": "Communicable Diseases",
+  "1.3.3": "Neonatal Diseases",
+  "1.3.4": "Non-Communicable Diseases",
+  "1.3.5": "Oral Diseases",
+  "1.3.6": "ENT Diseases",
+  "1.3.7": "Eye Conditions",
+  "1.3.8": "Mental Health",
+  "1.3.9": "Neurological Disorders",
+  "1.3.10": "Chronic Respiratory",
+  "1.3.11": "Cancers",
+  "1.3.12": "Palliative",
+  "1.3.14": "Disability",
+  "1.3.15": "Cardiovascular Diseases",
+  "1.3.16": "Renal Diseases",
+  "1.3.17": "Liver Diseases",
+  "1.3.18": "Endocrine & Metabolic Disorders",
+  "1.3.19": "Injuries",
+  "1.3.20": "Minor Operations in OPD",
+  "1.3.21": "Neglected Tropical Diseases",
+  "1.3.22": "Maternal Conditions",
+  "1.3.23": "Other OPD Conditions",
+  "1.3.24": "Deaths in OPD",
+  "1.3.25": "Emergency Medical Services",
+  "1.3.26": "TB Screening",
+  "1.3.28": "Nutrition Services",
+  "1.3.29": "Gender Based Violence",
+  // HMIS1054 (Essential Medicines) section mappings
+  6.1: "Essential Medicines",
+  6.2: "Outreach Activities",
+  6.3: "Meetings",
+  6.4: "Support Supervision",
+  // HMIS1052 (Maternal & Child Health) section mappings
+  2.1: "Antenatal",
+  2.2: "Maternity",
+  2.3: "Postnatal",
+  2.4: "Family Planning",
+  2.5: "Contraceptives",
+  2.6: "Vitamin A",
+  2.7: "Immunization",
+  2.8: "Tetanus",
 };
 
-// No subsections needed as we're using the main sections directly
-
-// All available eAFYA commodities/medicines for mapping
-const eafyaCommodities = [
-  { id: '8', name: 'Ready to use Therapeutic feeds (RUTF)' },
-  { id: '10', name: 'Therapeutic Milk' },
-  { id: '59', name: 'Chlorhexidine gel' },
-  { id: '239', name: 'Measles vaccine, live attenuated' },
-  { id: '272', name: 'Vitamin A (Retinol)' },
-  { id: '339', name: 'Salbutamol inhaler' },
-  { id: '510', name: 'Nevirapine (NVP)' },
-  { id: '605', name: 'Amoxicillin tabs' },
-  { id: '678', name: 'Amoxicillin caps' },
-  { id: '685', name: 'Artemether + Lumefantrine(24\'s) (coartem)' },
-  { id: '688', name: 'Metformin Glucophage' },
-  { id: '716', name: 'Amlodipine' },
-  { id: '725', name: 'Artemether+ Lumefantrine (6\'s) (coartem)' },
-  { id: '726', name: 'Artesunate' },
-  { id: '754', name: 'Captopril' },
-  { id: '759', name: 'Ceftriaxone INJ' },
-  { id: '805', name: 'Ethambutol (E) 100mg ADULT' },
-  { id: '817', name: 'Ferrous sulphate+Folic acid' },
-  { id: '822', name: 'Fluoxetine' },
-  { id: '830', name: 'Glimepiride' },
-  { id: '969', name: 'RHZE(ADULT)' },
-  { id: '1018', name: 'Zidovudine/Lamivudine/Nevirapine (AZT/3TC/NVP)' },
-  { id: '1104', name: 'HIV Determine I/II' },
-  { id: '1140', name: 'Malaria Rapid Test Kits' },
-  { id: '1162', name: 'Condoms' },
-  { id: '1257', name: 'FACS Count % CD4 Reagent' },
-  { id: '1288', name: 'Tenofovir + Lamivudine + Dolutegravir (TDF/3TC/DTG)' },
-  { id: '2182', name: 'HIV-1/2 3.0 SD Bioline' },
-  { id: '2189', name: 'HIV + Syphilis Duo Test Kit' },
-  { id: '2243', name: 'Safe Delivery Kits (mama kits)' },
-  { id: '2426', name: 'Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 600/300/50' },
-  { id: '2461', name: 'Refilled Gas Cylinder' },
-  { id: '2491', name: 'Abacavir/Lamivudine/Lopinavir/Ritonavir (ABC/3TC/LPV/r)' },
-  { id: '2625', name: 'Gene expert (TB)' },
-  { id: '2803', name: 'OXYTOCIN(PITOCIN)' },
-  { id: '2846', name: 'CHLORPROMAZINE(CPZ) tabs' }
-];
-
-// All available eAFYA diseases for mapping
-const eafyaDiseases = [
-  // Preterm newborn conditions
-  { id: '22539', name: 'Preterm newborn unspecified' },
-  { id: '22529', name: 'Preterm newborn' },
-  { id: '22530', name: 'Preterm newborn gestational age 28 completed weeks' },
-  { id: '22531', name: 'Preterm newborn gestational age 29 completed weeks' },
-  { id: '22532', name: 'Preterm newborn gestational age 30 completed weeks' },
-  { id: '22533', name: 'Preterm newborn gestational age 31 completed weeks' },
-  { id: '22534', name: 'Preterm newborn gestational age 32 completed weeks' },
-  { id: '22535', name: 'Preterm newborn gestational age 33 completed weeks' },
-  { id: '22536', name: 'Preterm newborn gestational age 34 completed weeks' },
-  { id: '22537', name: 'Preterm newborn gestational age 35 completed weeks' },
-  { id: '22538', name: 'Preterm newborn gestational age 36 completed weeks' },
-  // Congenital and respiratory conditions
-  { id: '7415', name: 'Congenital malformation of optic disc' },
-  { id: '7078', name: 'Congenital pneumonia due to streptococcus, group B' },
-  { id: '7080', name: 'Congenital pneumonia due to Pseudomonas' },
-  { id: '7102', name: 'Chronic respiratory disease originating in the perinatal period' },
-  { id: '4413', name: 'Chronic respiratory failure' },
-  { id: '4355', name: 'Chronic respiratory conditions due to chemicals, gases, fumes and vapours' },
-  { id: '7106', name: 'Unspecified chronic respiratory disease originating in the perinatal period' },
-  { id: '7105', name: 'Other chronic respiratory diseases originating in the perinatal period' },
-  { id: '15519', name: 'Chronic respiratory acidosis' },
-  { id: '19147', name: 'Chronic respiratory failure' },
-  { id: '19148', name: 'Chronic respiratory failure Type I' },
-  { id: '19149', name: 'Chronic respiratory failure Type II' },
-  { id: '190', name: 'Other tetanus' },
-  { id: '189', name: 'Obstetrical tetanus' },
-  { id: '188', name: 'Tetanus neonatorum' },
-  { id: '7137', name: 'Sepsis of newborn due to anaerobes' },
-  { id: '7138', name: 'Other bacterial sepsis of newborn' },
-  { id: '7139', name: 'Bacterial sepsis of newborn, unspecified' },
-  { id: '7131', name: 'Bacterial sepsis of newborn' },
-  { id: '7132', name: 'Sepsis of newborn due to streptococcus, group B' },
-  { id: '7133', name: 'Sepsis of newborn due to other and unspecified streptococci' },
-  { id: '7134', name: 'Sepsis of newborn due to Staphylococcus aureus' },
-  { id: '7135', name: 'Sepsis of newborn due to other and unspecified staphylococci' },
-  { id: '7136', name: 'Sepsis of newborn due to Escherichia coli' },
-  { id: '7081', name: 'Congenital pneumonia due to other bacterial agents' },
-  { id: '7077', name: 'Congenital pneumonia due to staphylococcus' },
-  { id: '7076', name: 'Congenital pneumonia due to Chlamydia' },
-  { id: '7075', name: 'Congenital pneumonia due to viral agent' },
-  { id: '7074', name: 'Congenital pneumonia' },
-  { id: '7082', name: 'Congenital pneumonia due to other organisms' },
-  { id: '7078', name: 'Congenital pneumonia due to streptococcus, group B' },
-  { id: '7079', name: 'Congenital pneumonia due to Escherichia coli' },
-  { id: '7140', name: 'Other congenital infectious and parasitic diseases' },
-  { id: '22649', name: 'Neonatal meningitis' },
-  { id: '7206', name: 'Neonatal jaundice due to bleeding' },
-  { id: '7219', name: 'Neonatal jaundice, unspecified' },
-  { id: '7218', name: 'Neonatal jaundice from other specified causes' },
-  { id: '7217', name: 'Neonatal jaundice from breast milk inhibitor' },
-  { id: '7216', name: 'Neonatal jaundice from other and unspecified hepatocellular damage' },
-  { id: '7214', name: 'Neonatal jaundice associated with preterm delivery' },
-  { id: '7213', name: 'Neonatal jaundice from other and unspecified causes' },
-  { id: '7212', name: 'Neonatal jaundice due to excessive haemolysis, unspecified' },
-  { id: '7211', name: 'Neonatal jaundice due to other specified excessive haemolysis' },
-  { id: '7210', name: 'Neonatal jaundice due to swallowed maternal blood' },
-  { id: '7209', name: 'Neonatal jaundice due to drugs or toxins transmitted from mother or given to newborn' },
-  { id: '7208', name: 'Neonatal jaundice due to polycythaemia' },
-  { id: '7207', name: 'Neonatal jaundice due to infection' },
-  { id: '7205', name: 'Neonatal jaundice due to bruising' },
-  { id: '7204', name: 'Neonatal jaundice due to other excessive haemolysis' },
-  { id: '7222', name: 'Other neonatal jaundice' },
-  { id: '7083', name: 'Congenital pneumonia, unspecified' },
-  { id: '7099', name: 'Congenital pneumonia due to Pseudomonas' },
-  { id: '710', name: 'Plasmodium falciparum malaria' },
-  { id: '713', name: 'Plasmodium falciparum malaria, unspecified' },
-  { id: '714', name: 'Plasmodium vivax malaria' },
-  { id: '718', name: 'Plasmodium malariae malaria' },
-  { id: '722', name: 'Other parasitologically confirmed malaria' },
-  { id: '726', name: 'Unspecified malaria' },
-  { id: '3182', name: 'Flaccid paraplegia' },
-  { id: '3185', name: 'Flaccid tetraplegia' },
-  { id: '6130', name: 'Flaccid neuropathic bladder, not elsewhere classified' },
-  { id: '394', name: 'Rabies, unspecified' },
-  { id: '391', name: 'Rabies' },
-  { id: '392', name: 'Sylvatic rabies' }
-];
-
-const MappingDialog = ({ isOpen, onClose, onSave, hmisName, section }) => {
-  // Determine which array to use based on section
-  const itemsArray = section === 'commodities' ? eafyaCommodities : eafyaDiseases;
-  const [selectedDiseases, setSelectedDiseases] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  // Reset state when dialog closes
-  useEffect(() => {
-    if (!isOpen) {
-      setSelectedDiseases([]);
-      setSearchTerm('');
-    }
-  }, [isOpen]);
-  
-  if (!isOpen) return null;
-
-  const filteredItems = itemsArray.filter(item => 
-    item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.id.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-  
-  return (
-    <div className="mapping-dialog-overlay">
-      <div className="mapping-dialog">
-        <h3>Map Diseases to {hmisName}</h3>
-        <div className="dialog-search">
-          <input
-            type="text"
-            placeholder="Search diseases..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="search-input"
-          />
-        </div>
-        <div className="disease-list">
-          {filteredItems.map(item => (
-            <label key={item.id} className="disease-item">
-              <input
-                type="checkbox"
-                checked={selectedDiseases.includes(item.id)}
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setSelectedDiseases([...selectedDiseases, item.id]);
-                  } else {
-                    setSelectedDiseases(selectedDiseases.filter(id => id !== item.id));
-                  }
-                }}
-              />
-              <span>{item.id} - {item.name}</span>
-            </label>
-          ))}
-          {filteredItems.length === 0 && (
-            <div className="no-results">No matching items found</div>
-          )}
-        </div>
-        <div className="dialog-actions">
-          <button className="secondary-btn" onClick={onClose}>Cancel</button>
-          <button 
-            className="primary-btn" 
-            onClick={() => {
-              onSave(selectedDiseases);
-              onClose();
-            }}
-          >
-            Save Mapping
-          </button>
-        </div>
-      </div>
-    </div>
-  );
+// Utility functions
+const getDisplayNameForDataset = (datasetCode) => {
+  return DATASET_DISPLAY_NAMES[datasetCode] || datasetCode;
 };
 
-const Mapping = () => {
-  const [selectedMainSection, setSelectedMainSection] = useState('');
-  const [selectedSubSection, setSelectedSubSection] = useState('');
-  const [hmisSearch, setHmisSearch] = useState('');
-  const [currentMappings, setCurrentMappings] = useState({});
-  const [dialogState, setDialogState] = useState({ 
-    isOpen: false, 
-    hmisCode: '', 
-    hmisName: '' 
+const getDisplayNameForSection = (sectionId) => {
+  return SECTION_DISPLAY_NAMES[sectionId] || sectionId;
+};
+
+const sortSectionsByName = (sections) => {
+  return sections.sort((a, b) => {
+    const nameA = getDisplayNameForSection(a);
+    const nameB = getDisplayNameForSection(b);
+    return nameA.localeCompare(nameB);
   });
+};
 
-  // Get data for selected subsection
-  const subsectionData = selectedSubSection ? hmisData[selectedSubSection] || [] : [];
-  
-  // Filter based on search term
-  const filteredHmisData = hmisSearch
-    ? subsectionData.filter(hmis =>
-        hmis.hmis_name.toLowerCase().includes(hmisSearch.toLowerCase()) ||
-        hmis.hmis_code.toLowerCase().includes(hmisSearch.toLowerCase())
-      )
-    : subsectionData;
+// Main Mapping Component
+const Mapping = () => {
+  // State management
+  const [datasetCodes, setDatasetCodes] = useState([]);
+  const [selectedDataset, setSelectedDataset] = useState("");
+  const [datasetElements, setDatasetElements] = useState([]);
+  const [selectedSection, setSelectedSection] = useState("");
+  const [hmisSearch, setHmisSearch] = useState("");
+  const [currentMappings, setCurrentMappings] = useState({});
+  const [eafyaItems, setEafyaItems] = useState([]);
+  const [dialogState, setDialogState] = useState({
+    isOpen: false,
+    hmisCode: "",
+    hmisName: "",
+    dataelementId: null,
+  });
+  const [loading, setLoading] = useState(false);
 
-  const handleAddMapping = (hmisCode, hmisName) => {
+  // API functions
+  const fetchDatasetCodes = async () => {
+    try {
+      const response = await API.get("/mapping/datasets/codes");
+      setDatasetCodes(response.data || []);
+    } catch (error) {
+      console.error("Error fetching dataset codes:", error);
+      setDatasetCodes([]);
+    }
+  };
+
+  const fetchDatasetElements = async (datasetCode) => {
+    setLoading(true);
+    try {
+      const response = await API.get(
+        `/mapping/datasets/${datasetCode}/elements`
+      );
+      setDatasetElements(response.data || []);
+      console.error("fetching dataset elements:", response);
+    } catch (error) {
+      console.error("Error fetching dataset elements:", error);
+      setDatasetElements([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchDatasetMappings = async (datasetCode) => {
+    try {
+      const response = await API.get(
+        `/mapping/dataset/${datasetCode}/mappings`
+      );
+      setCurrentMappings(response.data || {});
+    } catch (error) {
+      console.error("Error fetching dataset mappings:", error);
+      setCurrentMappings({});
+    }
+  };
+
+  // Data processing functions
+  const getUniqueSections = () => {
+    const sections = [
+      ...new Set(datasetElements.map((el) => el.section_id).filter(Boolean)),
+    ];
+    const sortedSections = sortSectionsByName(sections);
+
+    return sortedSections.map((sectionId) => ({
+      id: sectionId,
+      name: getDisplayNameForSection(sectionId),
+    }));
+  };
+
+  const getSectionData = () => {
+    if (!selectedSection) return [];
+    return datasetElements.filter((el) => el.section_id === selectedSection);
+  };
+
+  const getFilteredDataElements = () => {
+    if (hmisSearch) {
+      return datasetElements.filter(
+        (element) =>
+          element.dataelement_name
+            .toLowerCase()
+            .includes(hmisSearch.toLowerCase()) ||
+          element.dataelement_code
+            .toLowerCase()
+            .includes(hmisSearch.toLowerCase())
+      );
+    }
+    return getSectionData();
+  };
+
+  // Event handlers
+  const handleDatasetChange = (newDataset) => {
+    setSelectedDataset(newDataset);
+    setSelectedSection("");
+    setHmisSearch("");
+  };
+
+  const handleSectionChange = (newSection) => {
+    setSelectedSection(newSection);
+    setHmisSearch("");
+  };
+
+  const handleAddMapping = (
+    dataelementCode,
+    dataelementName,
+    dataelementId
+  ) => {
     setDialogState({
       isOpen: true,
-      hmisCode,
-      hmisName
+      hmisCode: dataelementCode,
+      hmisName: dataelementName,
+      dataelementId: dataelementId,
     });
   };
 
-  // Load existing mappings from localStorage when component mounts
-  useEffect(() => {
-    const savedMappings = localStorage.getItem('hmisEafyaMappings');
-    if (savedMappings) {
-      try {
-        setCurrentMappings(JSON.parse(savedMappings));
-      } catch (error) {
-        console.error('Error loading mappings from localStorage:', error);
-        setCurrentMappings({});
+  const handleSaveMapping = async (selectedItems) => {
+    try {
+      const selectedEafyaItems = selectedItems.map((itemId) => {
+        const item = eafyaItems.find((eafyaItem) => eafyaItem.id === itemId);
+        return {
+          id: itemId,
+          name: item ? item.name : `Item ${itemId}`,
+        };
+      });
+
+      const mappingData = {
+        hmis_dataelement_code: dialogState.hmisCode,
+        hmis_dataelement_name: dialogState.hmisName,
+        dataelement_id: dialogState.dataelementId,
+        dataset_code: selectedDataset,
+        section_id: selectedSection,
+        mappings: selectedEafyaItems,
+      };
+
+      const response = await API.post("/mapping/mappings", mappingData);
+
+      if (response.status === 200) {
+        const newMappings = {
+          ...currentMappings,
+          [dialogState.hmisCode]: selectedEafyaItems,
+        };
+
+        setCurrentMappings(newMappings);
+        console.log("Mappings saved successfully:", response.data);
       }
+    } catch (error) {
+      console.error("Error saving mappings:", error);
+      alert("Error saving mappings. Please try again.");
     }
+  };
+
+  const handleRemoveMapping = async (dataelementCode, itemId) => {
+    try {
+      const response = await API.delete(
+        `/mapping/mappings/${dataelementCode}/${itemId}`
+      );
+
+      if (response.status === 200) {
+        const newMappings = {
+          ...currentMappings,
+          [dataelementCode]: (currentMappings[dataelementCode] || []).filter(
+            (d) => d.id !== itemId
+          ),
+        };
+
+        if (newMappings[dataelementCode].length === 0) {
+          delete newMappings[dataelementCode];
+        }
+
+        setCurrentMappings(newMappings);
+        console.log("Mapping deleted successfully");
+      }
+    } catch (error) {
+      console.error("Error deleting mapping:", error);
+      alert("Error deleting mapping. Please try again.");
+    }
+  };
+
+  const handleEafyaItemsLoaded = (items) => {
+    setEafyaItems(items);
+  };
+
+  const closeDialog = () => {
+    setDialogState({
+      isOpen: false,
+      hmisCode: "",
+      hmisName: "",
+      dataelementId: null,
+    });
+  };
+
+  // Effects
+  useEffect(() => {
+    fetchDatasetCodes();
   }, []);
 
-  const handleSaveMapping = (selectedDiseases) => {
-    const mappingsToCreate = selectedDiseases.map(diseaseId => {
-      const disease = eafyaDiseases.find(d => d.id === diseaseId);
-      return {
-        id: disease.id,
-        name: disease.name
-      };
-    });
-
-    // Update local state
-    const newMappings = {
-      ...currentMappings,
-      [dialogState.hmisCode]: mappingsToCreate
-    };
-    
-    setCurrentMappings(newMappings);
-    // Save to localStorage
-    localStorage.setItem('hmisEafyaMappings', JSON.stringify(newMappings));
-  };
-
-  const handleRemoveMapping = (hmisCode, diseaseId) => {
-    const newMappings = {
-      ...currentMappings,
-      [hmisCode]: (currentMappings[hmisCode] || []).filter(d => d.id !== diseaseId)
-    };
-
-    // If no mappings left for this HMIS code, remove the key
-    if (newMappings[hmisCode].length === 0) {
-      delete newMappings[hmisCode];
+  useEffect(() => {
+    if (selectedDataset) {
+      fetchDatasetElements(selectedDataset);
+      fetchDatasetMappings(selectedDataset);
+    } else {
+      setDatasetElements([]);
+      setSelectedSection("");
+      setCurrentMappings({});
     }
+  }, [selectedDataset]);
 
-    setCurrentMappings(newMappings);
-    // Save to localStorage
-    localStorage.setItem('hmisEafyaMappings', JSON.stringify(newMappings));
-  };
+  // Render functions
+  const renderPageTitle = () => (
+    <h1 className="page-title">
+      HMIS eAFYA Mapping
+      {selectedDataset && (
+        <span className="selected-dataset">
+          {" "}
+          - {getDisplayNameForDataset(selectedDataset)}
+        </span>
+      )}
+      {selectedSection && (
+        <span className="selected-section">
+          {" "}
+          - {getDisplayNameForSection(selectedSection)}
+        </span>
+      )}
+    </h1>
+  );
 
+  const renderSectionSelectors = () => (
+    <div className="section-selectors">
+      <div className="select-group">
+        <label>Dataset:</label>
+        <select
+          value={selectedDataset}
+          onChange={(e) => handleDatasetChange(e.target.value)}
+        >
+          <option value="">Select Dataset</option>
+          {datasetCodes.map((datasetCode) => (
+            <option key={datasetCode} value={datasetCode}>
+              {getDisplayNameForDataset(datasetCode)}
+            </option>
+          ))}
+        </select>
+      </div>
 
-  return (
-    <div className="report-sections">
-      <h1 className="page-title">HMIS eAFYA Mapping</h1>
-      <div className="section-selectors">
+      {selectedDataset && (
         <div className="select-group">
-          <label>Main Section:</label>
-          <select 
-            value={selectedMainSection} 
-            onChange={(e) => {
-              setSelectedMainSection(e.target.value);
-              setSelectedSubSection('');
-              setHmisSearch('');
-            }}
+          <label>Section:</label>
+          <select
+            value={selectedSection}
+            onChange={(e) => handleSectionChange(e.target.value)}
           >
-            <option value="">Select Main Section</option>
-            {mainSections.map(section => (
+            <option value="">Select Section</option>
+            {getUniqueSections().map((section) => (
               <option key={section.id} value={section.id}>
                 {section.name}
               </option>
             ))}
           </select>
         </div>
+      )}
 
-        {selectedMainSection && (
-          <div className="select-group">
-            <label>Sub Section:</label>
-            <select
-              value={selectedSubSection}
-              onChange={(e) => {
-                setSelectedSubSection(e.target.value);
-                setHmisSearch('');
-              }}
-            >
-              <option value="">Select Sub Section</option>
-              {subSections[selectedMainSection]?.map(section => (
-                <option key={section.id} value={section.id}>
-                  {section.name}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-
-        <div className="select-group">
-          <label>Search HMIS:</label>
-          <input
-            type="text"
-            placeholder="Search by HMIS code or name..."
-            value={hmisSearch}
-            onChange={(e) => setHmisSearch(e.target.value)}
-            className="search-input"
-          />
-        </div>
+      <div className="select-group">
+        <label>Search Data Elements:</label>
+        <input
+          type="text"
+          placeholder="Search across all data elements..."
+          value={hmisSearch}
+          onChange={(e) => setHmisSearch(e.target.value)}
+          className="search-input"
+        />
       </div>
+    </div>
+  );
 
-      {selectedSubSection && (
-        <div className="mapping-table">
-          <table>
-            <thead>
-              <tr>
-                <th>HMIS Code</th>
-                <th>HMIS Name</th>
-                <th>eAFYA Disease Mappings</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredHmisData.map(hmis => (
-                <tr key={hmis.hmis_code} className="hmis-row">
-                  <td>{hmis.hmis_code}</td>
-                  <td>{hmis.hmis_name}</td>
-                  <td>
-                    <div className="disease-mappings">
-                      {(currentMappings[hmis.hmis_code] || hmis.mappings)?.map(disease => (
-                        <div key={disease.id} className="disease-tag">
-                          <span>{disease.id} - {disease.name}</span>
-                          <button 
+  const renderMappingTable = () => {
+    if (!selectedSection || loading) return null;
+
+    const filteredElements = getFilteredDataElements();
+
+    return (
+      <div className="mapping-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Data Element Code</th>
+              <th>Data Element Name</th>
+              <th>eAFYA Mappings</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredElements.map((element) => (
+              <tr key={element.id} className="hmis-row">
+                <td>{element.dataelement_code}</td>
+                <td>{element.dataelement_name}</td>
+                <td>
+                  <div className="item-mappings">
+                    {(currentMappings[element.dataelement_code] || [])?.map(
+                      (item) => (
+                        <div key={item.id} className="item-tag">
+                          <span>
+                            {item.id} - {item.name}
+                          </span>
+                          <button
                             className="remove-btn"
-                            onClick={() => handleRemoveMapping(hmis.hmis_code, disease.id)}
+                            onClick={() =>
+                              handleRemoveMapping(
+                                element.dataelement_code,
+                                item.id
+                              )
+                            }
                           >
                             <FaTrash />
                           </button>
                         </div>
-                      ))}
-                      <button 
-                        className="add-mapping-btn"
-                        onClick={() => handleAddMapping(hmis.hmis_code, hmis.hmis_name)}
-                      >
-                        <FaPlus /> Add Mapping
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+                      )
+                    )}
+                    <button
+                      className="btn btn-outline-primary btn-sm"
+                      onClick={() =>
+                        handleAddMapping(
+                          element.dataelement_code,
+                          element.dataelement_name,
+                          element.dataelement_id
+                        )
+                      }
+                    >
+                      <FaPlus /> Add Mapping
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
+
+  return (
+    <div className="report-sections">
+      {renderPageTitle()}
+      {renderSectionSelectors()}
+
+      {loading && (
+        <div className="loading-message">Loading dataset elements...</div>
       )}
+
+      {renderMappingTable()}
 
       <MappingDialog
         isOpen={dialogState.isOpen}
-        onClose={() => setDialogState({ isOpen: false, hmisCode: '', hmisName: '' })}
+        onClose={closeDialog}
         onSave={handleSaveMapping}
         hmisName={dialogState.hmisName}
-        section={selectedMainSection}
+        section={selectedDataset}
+        eafyaItems={eafyaItems}
+        onEafyaItemsLoaded={handleEafyaItemsLoaded}
+        datasetCode={selectedDataset}
       />
     </div>
   );
