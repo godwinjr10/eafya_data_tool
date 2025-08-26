@@ -279,7 +279,7 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
             section={section}
             selectedMonth={selectedMonth}
             selectedYear={selectedYear}
-            section_id="10.2"
+            section_id="10.2.1"
           />
         );
       default:

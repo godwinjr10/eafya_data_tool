@@ -4,6 +4,8 @@ import API from "../../helpers/api";
 const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
   const [loading, setLoading] = useState(false);
   const [labTests, setLabTests] = useState([]);
+  const [formData, setFormData] = useState({});
+  const [error, setError] = useState(null);
 
   const getMonthNumber = (monthName) => {
     const months = {
@@ -17,14 +19,27 @@ const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
   const fetchLabTests = async () => {
     try {
       setLoading(true);
+      setError(null);
       const monthNumber = getMonthNumber(selectedMonth);
       const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
       const response = await API.get(`/labtests?report_month=${formattedMonth}&section_id=${section_id}`);
       
       setLabTests(response.data);
+      
+      // Initialize form data with fetched values
+      const initialFormData = {};
+      response.data.forEach(test => {
+        initialFormData[test.hmis_code] = {
+          total_cases: test.total_cases || 0,
+          positive_cases: test.positive_cases || 0
+        };
+      });
+      setFormData(initialFormData);
     } catch (error) {
       console.error('Error fetching lab tests:', error.response || error);
+      setError('Failed to fetch lab tests data. Please try again.');
       setLabTests([]);
+      setFormData({});
     } finally {
       setLoading(false);
     }
@@ -35,6 +50,16 @@ const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
       fetchLabTests();
     }
   }, [selectedMonth, section_id]);
+
+  const handleInputChange = (hmisCode, field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [hmisCode]: {
+        ...prev[hmisCode],
+        [field]: parseInt(value) || 0
+      }
+    }));
+  };
 
   const renderClientVisitsSection = () => (
     <>
@@ -110,25 +135,36 @@ const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
       <div className="section-header">
         {section_id === '10.2' ? '10.2 LABORATORY TESTS' : '10.2.1 LABORATORY ROUTINE TESTS'}
       </div>
+      
+      {error && (
+        <div className="alert alert-danger">
+          {error}
+        </div>
+      )}
+      
       <table className="data-entry-table">
         <thead>
           <tr>
-            <th>Lab Tests</th>
+            <th>Category</th>
+            <th>HMIS Code</th>
+            <th>Lab Test Name</th>
             <th>Number Done</th>
             <th>Number Positive</th>
           </tr>
         </thead>
         <tbody>
           {labTests.map(test => (
-            <tr key={test.hmis_dataelement_code}>
-              <td>{test.hmis_dataelement_code}. {test.hmis_dataelement_name}</td>
+            <tr key={test.hmis_code}>
+              <td>{test.category}</td>
+              <td>{test.hmis_code}</td>
+              <td>{test.hmis_name}</td>
               <td>
                 <input 
                   type="number" 
                   min="0" 
                   className="form-control form-control-sm"
-                  value={test.total_cases || ''}
-                  readOnly
+                  value={formData[test.hmis_code]?.total_cases || 0}
+                  onChange={(e) => handleInputChange(test.hmis_code, 'total_cases', e.target.value)}
                 />
               </td>
               <td>
@@ -136,8 +172,8 @@ const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
                   type="number" 
                   min="0" 
                   className="form-control form-control-sm"
-                  value={test.positive_cases || ''}
-                  readOnly
+                  value={formData[test.hmis_code]?.positive_cases || 0}
+                  onChange={(e) => handleInputChange(test.hmis_code, 'positive_cases', e.target.value)}
                 />
               </td>
             </tr>
