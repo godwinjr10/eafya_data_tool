@@ -1,9 +1,29 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 import pkg from 'pg';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
 const { Pool } = pkg;
 
-dotenv.config();
+// Get the directory where this config file is located
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// Load .env file from the backend directory (parent of config)
+const envPath = join(__dirname, '..', '.env');
+dotenv.config({ path: envPath });
+
+// Validate environment variables
+if (!process.env.DB_PASSWORD) {
+  console.error('❌ DB_PASSWORD is not set');
+  process.exit(1);
+}
+
+if (typeof process.env.DB_PASSWORD !== 'string') {
+  console.error('❌ DB_PASSWORD is not a string. Type:', typeof process.env.DB_PASSWORD);
+  process.exit(1);
+}
 
 // For raw SQL queries
 export const pool = new Pool({
@@ -11,7 +31,11 @@ export const pool = new Pool({
   host: process.env.DB_HOST,
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT,
+  port: parseInt(process.env.DB_PORT),
+  // Add connection timeout and retry settings
+  connectionTimeoutMillis: 10000,
+  idleTimeoutMillis: 30000,
+  max: 20,
 });
 
 // Test database connection
@@ -30,12 +54,12 @@ pool.connect((err, client, release) => {
 
 // For Sequelize ORM
 export const sequelize = new Sequelize(
-  process.env.DB_NAME || 'reportingdb',
-  process.env.DB_USER || 'postgres',
-  process.env.DB_PASSWORD || 'prod123Q',
+  process.env.DB_NAME,
+  process.env.DB_USER,
+  process.env.DB_PASSWORD,
   {
-    host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT || '5432'),
+    host: process.env.DB_HOST,
+    port: parseInt(process.env.DB_PORT),
     dialect: 'postgres',
     logging: process.env.NODE_ENV === 'development' ? console.log : false,
     pool: {

@@ -1,0 +1,58 @@
+{
+  "name": "eafya-data-tool",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "@react-pdf/renderer": "^4.3.0",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.10.0",
+    "bootstrap": "^5.3.7",
+    "bootstrap-icons": "^1.11.3",
+    "date-fns": "^4.1.0",
+    "papaparse": "^5.5.3",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.10.10",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "5.0.1",
+    "react-select": "^5.10.2",
+    "recharts": "^2.15.3",
+    "sass": "^1.89.2",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "react-scripts start && sass --watch src/styles/global.scss src/styles/global.css",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "deploy": "yarn build && sudo cp -r ./build/* /var/www/eafya_data_tool/html",
+    "dev": "react-scripts build && scp -r ./build/* root@209.38.246.149:/var/www/eafya_data_tool/html"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.27.4",
+    "@babel/preset-env": "^7.27.2",
+    "@babel/preset-react": "^7.27.1"
+  }
+}

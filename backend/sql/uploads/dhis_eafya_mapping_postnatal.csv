@@ -1,0 +1,52 @@
+﻿section_id,section_name,eafya_id,eafya_name,hmis_code,hmis_name,data_element_id,categoryoptioncombo_uid,categoryoptioncombo_name
+2.3,Postnatal,,,PN13,Cancer of the breast,eWYmABy3bIe,HllvX50cXC0,Clients screened for cancer of the breast
+2.3,Postnatal,,,PN14,Cancer of the Cervix,X6G2WoGb4r3,HllvX50cXC0,Cervical Cancer Screening-Number with pre-malignant cancer of the cervix
+2.3,Postnatal,,,PN14,Cancer of the Cervix,tA2bFyzLtwd,HllvX50cXC0,Clients screened for cancer of the cervix
+2.3,Postnatal,,,PN15,Lactating mothers who received Nutritional assessment,TkPGLLgBpWR,HllvX50cXC0,Lactating mothers who received Nutritional assessment - Total
+2.3,Postnatal,,,PN15,Lactating mothers who received Nutritional assessment,AAjeczxMEya,HllvX50cXC0,Lactating mothers who received Nutritional assessment-MAM & SAM
+2.3,Postnatal,,,PN15,Lactating mothers who received Nutritional assessment,kVxxrDU9QrQ,HllvX50cXC0,Lactating mothers who received Nutritional assessment - HIV POS
+2.3,Postnatal,,,PN16,Post-natal mothers who received Counselling,,,
+2.3,Postnatal,,,PN06,HIV+ women initiating ART in Postnatal,ctuIcyUKiHs,HllvX50cXC0,HIV+ women initiating ART in Postnatal
+2.3,Postnatal,,,PN06,HIV+ women initiating ART in Postnatal,fYOmKMoV3Iq,HllvX50cXC0,HIV+ women initiating ART in Postnatal
+2.3,Postnatal,,,PN06,HIV+ women initiating ART in Postnatal,BdXf0FPwUcX,HllvX50cXC0,HIV+ women initiating ART in Postnatal
+2.3,Postnatal,,,PN06,HIV+ women initiating ART in Postnatal,kGC9MVJppnk,HllvX50cXC0,HIV+ women initiating ART in Postnatal
+2.3,Postnatal,,,PN07,HIV+ breast feeding mothers newly enrolled in MCH groups,ctuIcyUKiHs,HllvX50cXC0,HIV+ breast feeding mothers newly enrolled in MCH groups
+2.3,Postnatal,,,PN07,HIV+ breast feeding mothers newly enrolled in MCH groups,fYOmKMoV3Iq,HllvX50cXC0,HIV+ breast feeding mothers newly enrolled in MCH groups
+2.3,Postnatal,,,PN07,HIV+ breast feeding mothers newly enrolled in MCH groups,BdXf0FPwUcX,HllvX50cXC0,HIV+ breast feeding mothers newly enrolled in MCH groups
+2.3,Postnatal,,,PN07,HIV+ breast feeding mothers newly enrolled in MCH groups,kGC9MVJppnk,HllvX50cXC0,HIV+ breast feeding mothers newly enrolled in MCH groups
+2.3,Postnatal,,,PN08,Mother-baby pairs enrolled at Mother-Baby care point,bVOnb8GrpHA,HllvX50cXC0,Mother-baby pairs enrolled at Mother-Baby care point - NEG
+2.3,Postnatal,,,PN08,Mother-baby pairs enrolled at Mother-Baby care point,bVOnb8GrpHA,HllvX50cXC0,Mother-baby pairs enrolled at Mother-Baby care point - POS
+2.3,Postnatal,,,PN09,Male partners received HIV test results in the postnatal setting,FEGgBZlxolM,HllvX50cXC0,Male partners received HIV test results in the postnatal setting
+2.3,Postnatal,,,PN09,Male partners received HIV test results in the postnatal setting,KuJuECNX5PL,HllvX50cXC0,Male partners received HIV test results in the postnatal setting
+2.3,Postnatal,,,PN09,Male partners received HIV test results in the postnatal setting,KuJuECNX5PL,E7OcV5dLNeV,Negative
+2.3,Postnatal,,,PN09,Male partners received HIV test results in the postnatal setting,KuJuECNX5PL,gqp69grjFaC,Positive
+2.3,Postnatal,,,PN10,HIV+ male partners initiated on ART in the postnatal setting,MhjBKi2d8uz,HllvX50cXC0,HIV+ male partners initiated on ART in the postnatal setting
+2.3,Postnatal,,,PN11,Breast feeding mothers given self-testing kits for their male partners,qR5nmJekYKc,HllvX50cXC0,Breast feeding mothers given self-testing kits for their male partners
+2.3,Postnatal,,,PN11,Breast feeding mothers given self-testing kits for their male partners,qR5nmJekYKc,HllvX50cXC0,Tests returned HIV POS
+2.3,Postnatal,,,PN11,Breast feeding mothers given self-testing kits for their male partners,nFnWRksZmwa,HllvX50cXC0,Tests returned HIV NEG
+2.3,Postnatal,,,PN12,No. of discordant couples identified in PNC,IgfY3xqa8An,HllvX50cXC0,No. of discordant couples identified in PNC
+2.3,Postnatal,,,PNO1,PostNatal Attendances,RYcEItpNCUp,Ck8FveDhZSy,6Dys
+2.3,Postnatal,,,PNO1,PostNatal Attendances,RYcEItpNCUp,tkvTY7b4tGg,6Mths
+2.3,Postnatal,,,PNO1,PostNatal Attendances,RYcEItpNCUp,YftbycyVKYC,6Wks
+2.3,Postnatal,,,PNO2,Community referrals to PNC,m8sRWV8h3Z2,HllvX50cXC0,Community referrals to PNC
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,T7yfGxRzCGs,PwuKTzy4vLJ,15-19Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,T7yfGxRzCGs,JtoaNPpY2BF,<15Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,T7yfGxRzCGs,c9JPAeQh49R,20-24Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,T7yfGxRzCGs,QGprPUGJp4N,25-49Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,T7yfGxRzCGs,sxBbkmHxnBP,50+Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,Ex31WlJUSqs,PwuKTzy4vLJ,15-19Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,Ex31WlJUSqs,JtoaNPpY2BF,<15Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,Ex31WlJUSqs,c9JPAeQh49R,20-24Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,Ex31WlJUSqs,QGprPUGJp4N,25-49Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,Ex31WlJUSqs,sxBbkmHxnBP,50+Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,SuoC1635LA8,PwuKTzy4vLJ,15-19Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,SuoC1635LA8,JtoaNPpY2BF,<15Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,SuoC1635LA8,c9JPAeQh49R,20-24Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,SuoC1635LA8,QGprPUGJp4N,25-49Yrs
+2.3,Postnatal,,,PN03,TB Screening for PNC Clients,SuoC1635LA8,sxBbkmHxnBP,50+Yrs
+2.3,Postnatal,,,PNO4,Breast feeding mothers tested for HIV 1st time during Postnatal,L0kzvUuDu0M,HllvX50cXC0,Breast feeding mothers tested for HIV 1st time during Postnatal
+2.3,Postnatal,,,PNO4,Breast feeding mothers tested for HIV 1st time during Postnatal,L0kzvUuDu0M,E7OcV5dLNeV,Negative
+2.3,Postnatal,,,PNO4,Breast feeding mothers tested for HIV 1st time during Postnatal,L0kzvUuDu0M,gqp69grjFaC,Positive
+2.3,Postnatal,,,PN05,Breastfeeding mothers re-tested for HIV during Postnatal,Bqwt1lhWVNY,HllvX50cXC0,Breastfeeding mothers re-tested for HIV during Postnatal
+2.3,Postnatal,,,PN05,Breastfeeding mothers re-tested for HIV during Postnatal,Bqwt1lhWVNY,E7OcV5dLNeV,Negative
+2.3,Postnatal,,,PN05,Breastfeeding mothers re-tested for HIV during Postnatal,Bqwt1lhWVNY,gqp69grjFaC,Positive
