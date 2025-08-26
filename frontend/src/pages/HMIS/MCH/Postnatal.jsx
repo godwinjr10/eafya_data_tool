@@ -244,8 +244,8 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
           <table className="data-entry-table mb-4">
             <thead>
               <tr>
-                <th>Category</th>
-                <th className="text-center">Number</th>
+                <th style={{ width: '70%' }}>Category</th>
+                <th className="text-end" style={{ width: '30%' }}>Number</th>
               </tr>
             </thead>
             <tbody>
@@ -255,11 +255,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">NEG</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={hivRetestData.NEG}
                     readOnly
                   />
@@ -267,11 +268,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">POS</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={hivRetestData.POS}
                     readOnly
                   />
@@ -284,11 +286,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">Total</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={artInitiationData.value}
                     readOnly
                   />
@@ -301,11 +304,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">Total</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={mchEnrollmentData.value}
                     readOnly
                   />
@@ -318,11 +322,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">Total</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={motherBabyPairsData.value}
                     readOnly
                   />
@@ -335,11 +340,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">NEG</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={malePartnerHivData.NEG}
                     readOnly
                   />
@@ -347,11 +353,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">POS</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={malePartnerHivData.POS}
                     readOnly
                   />
@@ -364,11 +371,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">Total</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={malePartnerArtData.value}
                     readOnly
                   />
@@ -384,8 +392,8 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
           <table className="data-entry-table mb-4">
             <thead>
               <tr>
-                <th>Category</th>
-                <th className="text-center">Number</th>
+                <th style={{ width: '70%' }}>Category</th>
+                <th className="text-end" style={{ width: '30%' }}>Number</th>
               </tr>
             </thead>
             <tbody>
@@ -395,11 +403,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">Total</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={selfTestingKitsData.total}
                     readOnly
                   />
@@ -407,11 +416,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">Tests returned HIV POS</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={selfTestingKitsData.tests_returned_pos}
                     readOnly
                   />
@@ -419,11 +429,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">Tests returned HIV NEG</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={selfTestingKitsData.tests_returned_neg}
                     readOnly
                   />
@@ -436,11 +447,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">Total</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={discordantCouplesData.value}
                     readOnly
                   />
@@ -453,11 +465,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">Clients screened for Cancer of the Breast</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={breastCancerData.screened}
                     readOnly
                   />
@@ -465,11 +478,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">Clients with pre-malignant conditions of breast</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={breastCancerData.pre_malignant}
                     readOnly
                   />
@@ -482,11 +496,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">Clients screened for Cancer of the Cervix</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={cervixCancerData.screened}
                     readOnly
                   />
@@ -494,11 +509,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">Clients with pre-malignant conditions of cervix</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={cervixCancerData.pre_malignant}
                     readOnly
                   />
@@ -511,11 +527,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">Total</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={nutritionalAssessmentData.total}
                     readOnly
                   />
@@ -523,11 +540,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">MAM & SAM</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={nutritionalAssessmentData.mam_sam}
                     readOnly
                   />
@@ -535,11 +553,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-4">HIV POS</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={nutritionalAssessmentData.hiv_pos}
                     readOnly
                   />
@@ -555,11 +574,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-5">Total</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={counsellingData.maternal_nutrition.total}
                     readOnly
                   />
@@ -567,11 +587,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-5">HIV +</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={counsellingData.maternal_nutrition.hiv_pos}
                     readOnly
                   />
@@ -582,11 +603,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-5">Total</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={counsellingData.infant_feeding.total}
                     readOnly
                   />
@@ -594,11 +616,12 @@ const Postnatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
               <tr>
                 <td className="ps-5">HIV +</td>
-                <td className="text-center">
+                <td className="text-end">
                   <input
                     type="number"
                     min="0"
-                    className="form-control form-control-sm"
+                    className="form-control form-control-sm text-end"
+                    style={{ textAlign: 'right' }}
                     value={counsellingData.infant_feeding.hiv_pos}
                     readOnly
                   />

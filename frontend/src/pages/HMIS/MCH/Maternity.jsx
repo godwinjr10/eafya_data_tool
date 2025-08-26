@@ -199,11 +199,12 @@ const Maternity = () => {
     ];
 
     const renderInputCell = () => (
-        <td className="text-center">
+        <td className="text-center" style={{ paddingLeft: '10px' }}>
             <input
                 type="number"
                 min="0"
                 className="form-control form-control-sm"
+                style={{ width: '80px', margin: '0 auto' }}
             />
         </td>
     );
@@ -213,13 +214,14 @@ const Maternity = () => {
             return (
                 <>
                     <tr className="bg-light">
-                        <td colSpan={7} className={indent ? "ps-4" : ""}>
+                        <td className={indent ? "ps-4" : ""} style={{ paddingRight: '20px' }}>
                             {item.code && `${item.code}. `}{item.label}
                         </td>
+                        <td></td>
                     </tr>
                     {ageGroups.map((age, idx) => (
                         <tr key={idx}>
-                            <td className="ps-4">{age}</td>
+                            <td className="ps-4" style={{ paddingRight: '20px' }}>{age}</td>
                             {renderInputCell()}
                         </tr>
                     ))}
@@ -231,15 +233,16 @@ const Maternity = () => {
             return (
                 <>
                     <tr className="bg-light">
-                        <td colSpan={7} className={indent ? "ps-4" : ""}>
+                        <td className={indent ? "ps-4" : ""} style={{ paddingRight: '20px' }}>
                             {item.code && `${item.code}. `}{item.label}
                         </td>
+                        <td></td>
                     </tr>
                     {item.subItems.map((subItem, idx) => (
                         subItem.subItems ? 
                             renderRow(subItem, true) :
                             <tr key={idx}>
-                                <td className="ps-4">{subItem.label}</td>
+                                <td className="ps-4" style={{ paddingRight: '20px' }}>{subItem.label}</td>
                                 {renderInputCell()}
                             </tr>
                     ))}
@@ -249,7 +252,7 @@ const Maternity = () => {
 
         return (
             <tr className={item.code ? "bg-light" : ""}>
-                <td className={indent ? "ps-4" : ""}>
+                <td className={indent ? "ps-4" : ""} style={{ paddingRight: '20px' }}>
                     {item.code && `${item.code}. `}{item.label}
                 </td>
                 {renderInputCell()}
@@ -258,11 +261,11 @@ const Maternity = () => {
     };
 
     const renderTable = (data, title) => (
-        <table className="data-entry-table">
+        <table className="data-entry-table" style={{ width: '100%' }}>
             <thead>
                 <tr>
-                    <th>Category</th>
-                    <th className="text-center">Total</th>
+                    <th style={{ width: '75%', textAlign: 'left' }}>Category</th>
+                    <th style={{ width: '25%', textAlign: 'center' }}>Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -282,10 +285,10 @@ const Maternity = () => {
             </div>
 
             <div className="row">
-                <div className="col-6">
+                <div className="col-6" style={{ paddingRight: '15px' }}>
                     {renderTable(leftColumnData)}
                 </div>
-                <div className="col-6">
+                <div className="col-6" style={{ paddingLeft: '15px' }}>
                     {renderTable(rightColumnData)}
                 </div>
             </div>
