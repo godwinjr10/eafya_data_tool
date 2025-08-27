@@ -228,7 +228,6 @@ router.get("/conditions", async (req, res) => {
     const query = `
       select 
        distinct  hmis_code, 
-       eafya_hmis_id, 
        hmis_name,  
        section_id, 
        section_name
