@@ -1,4 +1,4 @@
-create materialized view reporting."105_02_maternity_birth_in_the_unit" as
+create materialized view reporting."105_02_maternity_births" as
 SELECT 
     TO_CHAR(admission_date, 'YYYYMM') AS report_month,
     'MATERNITY' AS ward_name,

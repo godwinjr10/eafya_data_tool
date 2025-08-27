@@ -33,5 +33,24 @@ inner join dhis2_optioncombos o on o.code = d.categoryoptioncombo
 --where d.dataelement = 'R9l3TcJpS5I'
 order by e.dataelement_code
 
+--- Views and Mapping Join ---
+SELECT 
+  t.report_month, 
+  t.hmis_code, 
+  CASE m.categoryoptioncombo_uid
+    WHEN 'JtoaNPpY2BF' THEN t.below_15_years
+    WHEN 'PwuKTzy4vLJ' THEN t."15-19_years"
+    WHEN 'c9JPAeQh49R' THEN t."20-24_years"
+    WHEN 'QGprPUGJp4N' THEN t."25-49_years"
+    WHEN 'sxBbkmHxnBP' THEN t."50+_years"
+  END AS value,
+  m.hmis_name, 
+  m.data_element_id, 
+  m.categoryoptioncombo_uid
+FROM reporting."105_02_maternity_total_deliveries_in_unit" t
+JOIN reporting.dhis_eafya_mapping_maternity m 
+  ON m.hmis_code = t.hmis_code
+  where t.report_month = '2023-10'
+
 
 
