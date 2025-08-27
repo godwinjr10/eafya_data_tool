@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from "react";
 
 const MappingTable = ({
   data = [],
@@ -6,27 +6,27 @@ const MappingTable = ({
   pageSize = 10,
   searchable = true,
   sortable = true,
-  className = '',
+  className = "",
   onRowClick = null,
-  emptyMessage = 'No data available',
+  emptyMessage = "No data available",
   loading = false,
   striped = true,
   hover = true,
   bordered = false,
-  size = 'md' // sm, md, lg
+  size = "md", // sm, md, lg
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   const [itemsPerPage, setItemsPerPage] = useState(pageSize);
 
   // Filter data based on search term
   const filteredData = useMemo(() => {
     if (!searchTerm.trim()) return data;
-    
-    return data.filter(item =>
-      columns.some(column => {
-        const value = column.accessor ? item[column.accessor] : '';
+
+    return data.filter((item) =>
+      columns.some((column) => {
+        const value = column.accessor ? item[column.accessor] : "";
         return String(value).toLowerCase().includes(searchTerm.toLowerCase());
       })
     );
@@ -40,8 +40,8 @@ const MappingTable = ({
       const aValue = a[sortConfig.key];
       const bValue = b[sortConfig.key];
 
-      if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
-      if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
+      if (aValue < bValue) return sortConfig.direction === "asc" ? -1 : 1;
+      if (aValue > bValue) return sortConfig.direction === "asc" ? 1 : -1;
       return 0;
     });
   }, [filteredData, sortConfig]);
@@ -54,15 +54,19 @@ const MappingTable = ({
 
   // Calculate pagination info
   const totalPages = Math.ceil(sortedData.length / itemsPerPage);
-  const startItem = sortedData.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
+  const startItem =
+    sortedData.length === 0 ? 0 : (currentPage - 1) * itemsPerPage + 1;
   const endItem = Math.min(currentPage * itemsPerPage, sortedData.length);
 
   const handleSort = (columnKey) => {
     if (!sortable) return;
-    
-    setSortConfig(prevConfig => ({
+
+    setSortConfig((prevConfig) => ({
       key: columnKey,
-      direction: prevConfig.key === columnKey && prevConfig.direction === 'asc' ? 'desc' : 'asc'
+      direction:
+        prevConfig.key === columnKey && prevConfig.direction === "asc"
+          ? "desc"
+          : "asc",
     }));
   };
 
@@ -87,7 +91,10 @@ const MappingTable = ({
 
     // Previous button
     buttons.push(
-      <li key="prev" className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+      <li
+        key="prev"
+        className={`page-item ${currentPage === 1 ? "disabled" : ""}`}
+      >
         <button
           className="page-link"
           onClick={() => handlePageChange(currentPage - 1)}
@@ -119,7 +126,10 @@ const MappingTable = ({
     // Page numbers
     for (let i = startPage; i <= endPage; i++) {
       buttons.push(
-        <li key={i} className={`page-item ${i === currentPage ? 'active' : ''}`}>
+        <li
+          key={i}
+          className={`page-item ${i === currentPage ? "active" : ""}`}
+        >
           <button className="page-link" onClick={() => handlePageChange(i)}>
             {i}
           </button>
@@ -138,7 +148,10 @@ const MappingTable = ({
       }
       buttons.push(
         <li key={totalPages} className="page-item">
-          <button className="page-link" onClick={() => handlePageChange(totalPages)}>
+          <button
+            className="page-link"
+            onClick={() => handlePageChange(totalPages)}
+          >
             {totalPages}
           </button>
         </li>
@@ -147,7 +160,10 @@ const MappingTable = ({
 
     // Next button
     buttons.push(
-      <li key="next" className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+      <li
+        key="next"
+        className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}
+      >
         <button
           className="page-link"
           onClick={() => handlePageChange(currentPage + 1)}
@@ -165,37 +181,47 @@ const MappingTable = ({
     if (column.render) {
       return column.render(item, item[column.accessor]);
     }
-    return item[column.accessor] || '-';
+    return item[column.accessor] || "-";
   };
 
   const getSortIcon = (columnKey) => {
     if (!sortable || sortConfig.key !== columnKey) {
       return <span className="text-muted ms-1">↕</span>;
     }
-    return sortConfig.direction === 'asc' ? 
-      <span className="text-primary ms-1">↑</span> : 
-      <span className="text-primary ms-1">↓</span>;
+    return sortConfig.direction === "asc" ? (
+      <span className="text-primary ms-1">↑</span>
+    ) : (
+      <span className="text-primary ms-1">↓</span>
+    );
   };
 
   const tableClasses = [
-    'table',
-    striped && 'table-striped',
-    hover && 'table-hover',
-    bordered && 'table-bordered',
-    size === 'md' && 'table-md',
-    className
-  ].filter(Boolean).join(' ');
+    "table",
+    striped && "table-striped",
+    hover && "table-hover",
+    bordered && "table-bordered",
+    size === "md" && "table-md",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div className="card bg-white p-4">
       {/* Header Controls */}
+
       <div className="row mb-3 align-items-center">
         <div className="col-md-6">
           {searchable && (
-            <div className="input-group" style={{ maxWidth: '300px' }}>
+            <div className="input-group" style={{ maxWidth: "300px" }}>
               <span className="input-group-text">
-                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                <svg
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
                 </svg>
               </span>
               <input
@@ -217,7 +243,7 @@ const MappingTable = ({
               <label className="form-label me-2 mb-0">Show:</label>
               <select
                 className="form-select form-select-sm"
-                style={{ width: 'auto' }}
+                style={{ width: "auto" }}
                 value={itemsPerPage}
                 onChange={handleItemsPerPageChange}
               >
@@ -253,14 +279,21 @@ const MappingTable = ({
                     key={column.key || column.accessor}
                     style={{
                       width: column.width,
-                      cursor: sortable && column.sortable !== false ? 'pointer' : 'default',
-                      userSelect: 'none'
+                      cursor:
+                        sortable && column.sortable !== false
+                          ? "pointer"
+                          : "default",
+                      userSelect: "none",
                     }}
-                    onClick={() => column.sortable !== false && handleSort(column.accessor)}
+                    onClick={() =>
+                      column.sortable !== false && handleSort(column.accessor)
+                    }
                   >
                     <div className="d-flex align-items-center justify-content-between">
                       <span>{column.header}</span>
-                      {sortable && column.sortable !== false && getSortIcon(column.accessor)}
+                      {sortable &&
+                        column.sortable !== false &&
+                        getSortIcon(column.accessor)}
                     </div>
                   </th>
                 ))}
@@ -272,10 +305,10 @@ const MappingTable = ({
                   <tr
                     key={item.id || index}
                     style={{
-                      cursor: onRowClick ? 'pointer' : 'default'
+                      cursor: onRowClick ? "pointer" : "default",
                     }}
                     onClick={() => onRowClick && onRowClick(item)}
-                    className={onRowClick ? 'table-row-hover' : ''}
+                    className={onRowClick ? "table-row-hover" : ""}
                   >
                     {columns.map((column) => (
                       <td key={column.key || column.accessor}>
@@ -286,7 +319,10 @@ const MappingTable = ({
                 ))
               ) : (
                 <tr>
-                  <td colSpan={columns.length} className="text-center py-4 text-muted">
+                  <td
+                    colSpan={columns.length}
+                    className="text-center py-4 text-muted"
+                  >
                     {emptyMessage}
                   </td>
                 </tr>
@@ -341,4 +377,4 @@ const MappingTable = ({
     </div>
   );
 };
-export default MappingTable
+export default MappingTable;
