@@ -10,27 +10,27 @@ bed_counts AS (
 admission_counts AS (
     SELECT 
         ward_name,
-        TO_CHAR(admission_date, 'YYYY-MM') AS report_month,
+        TO_CHAR(admission_date, 'YYYYMM') AS report_month,
         COUNT(DISTINCT patient_id) AS total_admissions
     FROM reporting.patient_bed_admissions
-    GROUP BY ward_name, TO_CHAR(admission_date, 'YYYY-MM')
+    GROUP BY ward_name, TO_CHAR(admission_date, 'YYYYMM')
 ),
 patient_days AS (
     SELECT
         ward_name,
-        TO_CHAR(admission_date, 'YYYY-MM') AS report_month,
+        TO_CHAR(admission_date, 'YYYYMM') AS report_month,
         SUM(
             CASE 
                 WHEN medical_discharge_date IS NULL THEN 
                     DATE_PART('day', CURRENT_DATE - admission_date)
-                WHEN TO_CHAR(medical_discharge_date, 'YYYY-MM') = TO_CHAR(admission_date, 'YYYY-MM') THEN
+                WHEN TO_CHAR(medical_discharge_date, 'YYYYMM') = TO_CHAR(admission_date, 'YYYYMM') THEN
                     1
                 ELSE 
                     DATE_PART('day', medical_discharge_date - admission_date)
             END
         ) AS total_patient_days
     FROM reporting.patient_days
-    GROUP BY ward_name, TO_CHAR(admission_date, 'YYYY-MM')
+    GROUP BY ward_name, TO_CHAR(admission_date, 'YYYYMM')
 ),
 ward_data AS (
     SELECT

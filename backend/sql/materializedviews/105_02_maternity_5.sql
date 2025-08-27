@@ -1,6 +1,6 @@
 create materialized view reporting."105_02_maternity_birth_in_the_unit" as
 SELECT 
-    TO_CHAR(admission_date, 'YYYY-MM') AS report_month,
+    TO_CHAR(admission_date, 'YYYYMM') AS report_month,
     'MATERNITY' AS ward_name,
     COUNT(CASE WHEN baby_status = 'Live Birth' THEN 1 END) AS live_births,
     COUNT(CASE WHEN baby_status = 'Fresh Still Birth' THEN 1 END) AS fresh_still_births,
@@ -13,6 +13,6 @@ WHERE
     AND admission_date IS NOT NULL
     AND baby_status IN ('Live Birth', 'Fresh Still Birth', 'Macerated Still Birth')
 GROUP BY 
-    TO_CHAR(admission_date, 'YYYY-MM')
+    TO_CHAR(admission_date, 'YYYYMM')
 ORDER BY 
     report_month;
