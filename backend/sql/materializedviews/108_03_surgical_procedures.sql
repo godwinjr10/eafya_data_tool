@@ -14,9 +14,7 @@ WHERE
 GROUP BY 
     EXTRACT(YEAR FROM date_created),
     EXTRACT(MONTH FROM date_created)
-
 UNION ALL
-
 SELECT 
     '3.1' AS section,
     'SP02' AS code,
@@ -203,9 +201,7 @@ WHERE
 GROUP BY 
     EXTRACT(YEAR FROM date_created),
     EXTRACT(MONTH FROM date_created)
-
 UNION ALL
-
 SELECT 
     '3.3' AS section,
     'PR03' AS code,
@@ -220,9 +216,7 @@ WHERE
 GROUP BY 
     EXTRACT(YEAR FROM date_created),
     EXTRACT(MONTH FROM date_created)
-
 UNION ALL
-
 SELECT 
     '3.3' AS section,
     'PR04' AS code,
@@ -255,9 +249,7 @@ WHERE
 GROUP BY 
     EXTRACT(YEAR FROM date_created),
     EXTRACT(MONTH FROM date_created)
-
 UNION ALL
-
 SELECT 
     '3.4' AS section,
     'CS02' AS code,
@@ -272,9 +264,7 @@ WHERE
 GROUP BY 
     EXTRACT(YEAR FROM date_created),
     EXTRACT(MONTH FROM date_created)
-
 UNION ALL
-
 SELECT 
     '3.4' AS section,
     'CS03' AS code,
@@ -289,9 +279,7 @@ WHERE
 GROUP BY 
     EXTRACT(YEAR FROM date_created),
     EXTRACT(MONTH FROM date_created)
-
 UNION ALL
-
 SELECT 
     '3.4' AS section,
     'CS04' AS code,
@@ -341,9 +329,7 @@ WHERE
 GROUP BY 
     EXTRACT(YEAR FROM date_created),
     EXTRACT(MONTH FROM date_created)
-
 UNION ALL
-
 SELECT 
     '3.5' AS section,
     'VS02' AS code,
