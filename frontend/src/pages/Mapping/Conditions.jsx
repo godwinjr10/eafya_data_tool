@@ -13,12 +13,14 @@ const Conditions = () => {
   const [selectedSection, setSelectedSection] = useState("");
   const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
   const [diseaseItems, setDiseaseItems] = useState([]);
+  const [count, setCount]= useState(0)
 
   const fetchMappings = async () => {
     setLoading(true);
     try {
       const res = await API.get("/eafya/conditions");
       setMappings(res.data || []);
+      setCount(res?.data?.length)
     } catch (e) {
       console.error("Error fetching condition mappings", e);
       setMappings([]);
@@ -182,6 +184,7 @@ const Conditions = () => {
 
   return (
     <>
+    <a>Total : {count}</a>
       <MappingTable
         data={filteredMappings}
         columns={columns}

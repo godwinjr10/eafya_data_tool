@@ -9,61 +9,96 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
     const [totalData, setTotalData] = useState([]);
     const [iptData, setIptData] = useState([]);
     const [anaemiaData, setAnaemiaData] = useState([]);
+    const [bloodGroupingData, setBloodGroupingData] = useState([]);
     const [tabletsData, setTabletsData] = useState([]);
     const [llinsData, setLlinsData] = useState([]);
     const [ultrasoundData, setUltrasoundData] = useState([]);
     const [dewormingData, setDewormingData] = useState([]);
     const [syphilisData, setSyphilisData] = useState([]);
-    const [hepatitisData, setHepatitisData] = useState({});
+    const [hepatitisData, setHepatitisData] = useState([]);
     const [hivData, setHivData] = useState([]);
-    const [viralLoadData, setViralLoadData] = useState({});
-    const [selfTestingData, setSelfTestingData] = useState({});
-    const [malePartnerData, setMalePartnerData] = useState({});
-    const [hivMalePartnerData, setHivMalePartnerData] = useState({});
-    const [discordantData, setDiscordantData] = useState({});
-    const [nutritionData, setNutritionData] = useState({});
-    const [tbScreeningData, setTbScreeningData] = useState([]);
-    const [arvProphylaxisData, setArvProphylaxisData] = useState({});
-    const [malePartnerStatusData, setMalePartnerStatusData] = useState({});
+    const [hivAssessmentData, setHivAssessmentData] = useState([]);
+    const [hivArtData, setHivArtData] = useState([]);
+    const [hivStatusData, setHivStatusData] = useState([]);
+    const [hivRetestData, setHivRetestData] = useState([]);
 
-    const defaultData = [
+    // Mock data for demonstration - no backend integration yet
+    const mockFirstData = [
         {
             hmis_code: 'AN01',
             hmis_name: 'ANC 1st contacts/visits for women',
+            type: 'Total',
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         },
+        {
+            hmis_code: 'AN01',
+            hmis_name: 'ANC 1st contacts/visits for women',
+            type: 'No. in 1st Trimester',
+            Below_15yrs: "0",
+            "15_19yrs": "0",
+            "20_24yrs": "0",
+            "25_49yrs": "0",
+            "50+yrs": "0"
+        }
+    ];
+
+    const mockFourthData = [
         {
             hmis_code: 'AN02',
             hmis_name: 'ANC 4th contacts/visits for women',
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
-        },
+        }
+    ];
+
+    const mockEighthData = [
         {
             hmis_code: 'AN03',
             hmis_name: 'ANC 8th contacts/visits for women',
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         }
     ];
 
-    const defaultIptData = [
+    const mockTotalData = [
+        {
+            hmis_code: 'AN04',
+            hmis_name: 'Total ANC contacts/visits',
+            Below_15yrs: "0",
+            "15_19yrs": "0",
+            "20_24yrs": "0",
+            "25_49yrs": "0",
+            "50+yrs": "0"
+        },
+        {
+            hmis_code: 'AN05',
+            hmis_name: 'Referrals from community',
+            Below_15yrs: "0",
+            "15_19yrs": "0",
+            "20_24yrs": "0",
+            "25_49yrs": "0",
+            "50+yrs": "0"
+        }
+    ];
+
+    const mockIptData = [
         {
             hmis_code: 'AN06.1',
             hmis_name: 'First dose IPT (IPT1)',
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         },
         {
@@ -72,7 +107,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         },
         {
@@ -81,7 +116,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         },
         {
@@ -90,19 +125,30 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         }
     ];
 
-    const defaultAnaemiaData = [
+    const mockBloodGroupingData = [
+        { hmis_code: 'AN07', group: 'O', rhesus: 'Rhesus O+', Below_15yrs: "0", "15_19yrs": "0", "20_24yrs": "0", "25_49yrs": "0", "50+yrs": "0" },
+        { hmis_code: 'AN07', group: 'O', rhesus: 'Rhesus O-', Below_15yrs: "0", "15_19yrs": "0", "20_24yrs": "0", "25_49yrs": "0", "50+yrs": "0" },
+        { hmis_code: 'AN07', group: 'A', rhesus: 'Rhesus A+', Below_15yrs: "0", "15_19yrs": "0", "20_24yrs": "0", "25_49yrs": "0", "50+yrs": "0" },
+        { hmis_code: 'AN07', group: 'A', rhesus: 'Rhesus A-', Below_15yrs: "0", "15_19yrs": "0", "20_24yrs": "0", "25_49yrs": "0", "50+yrs": "0" },
+        { hmis_code: 'AN07', group: 'B', rhesus: 'Rhesus B+', Below_15yrs: "0", "15_19yrs": "0", "20_24yrs": "0", "25_49yrs": "0", "50+yrs": "0" },
+        { hmis_code: 'AN07', group: 'B', rhesus: 'Rhesus B-', Below_15yrs: "0", "15_19yrs": "0", "20_24yrs": "0", "25_49yrs": "0", "50+yrs": "0" },
+        { hmis_code: 'AN07', group: 'AB', rhesus: 'Rhesus AB+', Below_15yrs: "0", "15_19yrs": "0", "20_24yrs": "0", "25_49yrs": "0", "50+yrs": "0" },
+        { hmis_code: 'AN07', group: 'AB', rhesus: 'Rhesus AB-', Below_15yrs: "0", "15_19yrs": "0", "20_24yrs": "0", "25_49yrs": "0", "50+yrs": "0" }
+    ];
+
+    const mockAnaemiaData = [
         {
             hmis_code: 'AN08',
             hmis_name: 'No. of pregnant women who were tested for Anaemia using Hb Test at ANC 1st Contact / visit',
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         },
         {
@@ -111,19 +157,19 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         }
     ];
 
-    const defaultTabletsData = [
+    const mockTabletsData = [
         {
             hmis_code: 'AN10.1',
             hmis_name: 'Folic Acid 0-12 wks of gestation',
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         },
         {
@@ -132,29 +178,29 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         }
     ];
 
-    const defaultLlinsData = {
+    const mockLlinsData = {
         hmis_code: 'AN11',
         hmis_name: 'Pregnant Women receiving LLINs at ANC 1st visit',
         Below_15yrs: "0",
         "15_19yrs": "0",
         "20_24yrs": "0",
-        "25_50yrs": "0",
+        "25_49yrs": "0",
         "50+yrs": "0"
     };
 
-    const defaultUltrasoundData = [
+    const mockUltrasoundData = [
         {
             hmis_code: 'AN12.1',
             hmis_name: 'Total U/S Scan done',
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         },
         {
@@ -163,18 +209,18 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         }
     ];
 
-    const defaultDewormingData = {
+    const mockDewormingData = {
         hmis_code: 'AN13',
         hmis_name: 'No. of pregnant women dewormed',
         value: "0"
     };
 
-    const defaultSyphilisData = {
+    const mockSyphilisData = {
         hmis_code: 'AN14',
         hmis_name: 'Pregnant Women tested for syphilis',
         first_time: "0",
@@ -182,21 +228,21 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
         started_treatment: "0"
     };
 
-    const defaultStisData = {
+    const mockStisData = {
         hmis_code: 'AN15',
         hmis_name: 'Male partner tested for syphilis',
         total_tested: "0",
         tested_positive: "0"
     };
 
-    const defaultHepatitisData = {
+    const mockHepatitisData = {
         hmis_code: 'AN16',
         hmis_name: 'No. Pregnant women tested for Hepatitis B.',
         total_tested: "0",
         tested_positive: "0"
     };
 
-    const defaultHivData = [
+    const mockHivData = [
         {
             hmis_code: 'AN17',
             hmis_name: 'Pregnant women newly tested for HIV in this pregnancy at any ANC visit (NEG & POS)',
@@ -204,7 +250,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         },
         {
@@ -214,9 +260,12 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
-        },
+        }
+    ];
+
+    const mockHivAssessmentData = [
         {
             hmis_code: 'AN18',
             hmis_name: 'Pregnant Women tested HIV POS for 1st time this pregnancy at any ANC Visit',
@@ -224,7 +273,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         },
         {
@@ -234,311 +283,88 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
-            "25_50yrs": "0",
+            "25_49yrs": "0",
             "50+yrs": "0"
         }
     ];
 
-    const defaultViralLoadData = {
-        hmis_code: 'AN23',
-        hmis_name: 'HIV+ pregnant women',
-        eligible_viral_load: "0",
-        samples_collected: "0",
-        viral_load_suppressed: "0"
-    };
-
-    const defaultSelfTestingData = {
-        hmis_code: 'AN24',
-        hmis_name: 'Pregnant women given self-testing kits for their male partners',
-        total: "0",
-        tests_returned_neg: "0",
-        tests_returned_pos: "0"
-    };
-
-    const defaultMalePartnerData = {
-        hmis_code: 'AN25',
-        hmis_name: 'Male partners received HIV test results in eMTCT',
-        neg: "0",
-        pos: "0"
-    };
-
-    const defaultHivMalePartnerData = {
-        hmis_code: 'AN26',
-        hmis_name: 'HIV+ Male partners initiated on ART in the ANC setting',
-        known_art: "0",
-        new: "0"
-    };
-
-    const defaultDiscordantData = {
-        hmis_code: 'AN27',
-        hmis_name: 'No. of discordant couple identified in ANC',
-        value: "0"
-    };
-
-    const defaultNutritionData = {
-        hmis_code: 'AN28',
-        hmis_name: 'Women assessed for nutrition status',
-        total: "0",
-        mam: "0",
-        sam: "0"
-    };
-
-    const defaultTbScreeningData = [
+    const mockHivStatusData = [
         {
-            hmis_code: 'AN29.1',
-            hmis_name: 'Screened for TB',
+            hmis_code: 'AN21',
+            hmis_name: 'Pregnant Women who knew status before 1st ANC',
+            type: 'NEG',
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
             "25_49yrs": "0",
-            "50+yrs": "0",
-            "Total": "0"
+            "50+yrs": "0"
         },
         {
-            hmis_code: 'AN29.2',
-            hmis_name: 'Presumed to have TB',
+            hmis_code: 'AN21',
+            hmis_name: 'Pregnant Women who knew status before 1st ANC',
+            type: 'POS',
             Below_15yrs: "0",
             "15_19yrs": "0",
             "20_24yrs": "0",
             "25_49yrs": "0",
-            "50+yrs": "0",
-            "Total": "0"
-        },
-        {
-            hmis_code: 'AN29.3',
-            hmis_name: 'Diagnosed with TB',
-            Below_15yrs: "0",
-            "15_19yrs": "0",
-            "20_24yrs": "0",
-            "25_49yrs": "0",
-            "50+yrs": "0",
-            "Total": "0"
+            "50+yrs": "0"
         }
     ];
 
-    const defaultArvProphylaxisData = {
-        hmis_code: 'AN30',
-        hmis_name: 'HIV+ pregnant women given ARV prophylaxis for the un born infants for the 1st time in ANC',
-        value: "0"
-    };
-
-    const defaultMalePartnerStatusData = {
-        hmis_code: 'AN31',
-        hmis_name: 'Male partners with a known status at their first visit as couple in ANC',
-        neg: "0",
-        pos: "0"
-    };
-
-    const fetchFirst = async () => {
-        try {
-            setLoading(true);
-            const monthNumber = getMonthNumber(selectedMonth);
-
-            const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
-            const response = await API.get(`/antenatal?report_month=${formattedMonth}`);
-            console.log(response);
-            setFirstData(response.data.length > 0 ? response.data : [defaultData[0]]);
-        } catch (error) {
-            console.error('Error fetching Antenatal data:', error);
-            setFirstData([defaultData[0]]);
-        } finally {
-            setLoading(false);
+    const mockHivRetestData = [
+        {
+            hmis_code: 'AN22',
+            hmis_name: 'Pregnant women who re-tested later in pregnancy',
+            type: 'NEG',
+            Below_15yrs: "0",
+            "15_19yrs": "0",
+            "20_24yrs": "0",
+            "25_49yrs": "0",
+            "50+yrs": "0"
+        },
+        {
+            hmis_code: 'AN22',
+            hmis_name: 'Pregnant women who re-tested later in pregnancy',
+            type: 'POS',
+            Below_15yrs: "0",
+            "15_19yrs": "0",
+            "20_24yrs": "0",
+            "25_49yrs": "0",
+            "50+yrs": "0"
         }
-    };
+    ];
 
-    const fetchFourth = async () => {
-        try {
-            setLoading(true);
-            const monthNumber = getMonthNumber(selectedMonth);
-
-            const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
-            const response = await API.get(`/antenatal/four?report_month=${formattedMonth}`);
-            console.log("Fourth data", response);
-            setFourthData(response.data.length > 0 ? response.data : [defaultData[1]]);
-        } catch (error) {
-            console.error('Error fetching Antenatal data:', error);
-            setFourthData([defaultData[1]]);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const fetchEighth = async () => {
-        try {
-            setLoading(true);
-            const monthNumber = getMonthNumber(selectedMonth);
-
-            const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
-            const response = await API.get(`/antenatal/eight?report_month=${formattedMonth}`);
-            console.log("Eighth data", response);
-            setEighthData(response.data.length > 0 ? response.data : [defaultData[2]]);
-        } catch (error) {
-            console.error('Error fetching Antenatal data:', error);
-            setEighthData([defaultData[2]]);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const fetchTotal = async () => {
-        try {
-            setLoading(true);
-            const monthNumber = getMonthNumber(selectedMonth);
-
-            const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
-            const response = await API.get(`/antenatal/total?report_month=${formattedMonth}`);
-            console.log("Total data", response);
-            setTotalData(response.data.length > 0 ? response.data : [defaultData[2]]);
-        } catch (error) {
-            console.error('Error fetching Antenatal data:', error);
-            setTotalData([defaultData[2]]);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const fetchIpt = async () => {
-        try {
-            setLoading(true);
-            const monthNumber = getMonthNumber(selectedMonth);
-
-            const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
-            const response = await API.get(`/antenatal/ipt?report_month=${formattedMonth}`);
-            console.log("IPT data", response);
-            setIptData(response.data.length > 0 ? response.data : defaultIptData);
-        } catch (error) {
-            console.error('Error fetching IPT data:', error);
-            setIptData(defaultIptData);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const fetchAnaemia = async () => {
-        try {
-            setLoading(true);
-            const monthNumber = getMonthNumber(selectedMonth);
-
-            const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
-            const response = await API.get(`/antenatal/anaemia?report_month=${formattedMonth}`);
-            console.log("Anaemia data", response);
-            setAnaemiaData(response.data.length > 0 ? response.data : defaultAnaemiaData);
-        } catch (error) {
-            console.error('Error fetching Anaemia data:', error);
-            setAnaemiaData(defaultAnaemiaData);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const fetchAdditionalData = async () => {
-        try {
-            setLoading(true);
-            const monthNumber = getMonthNumber(selectedMonth);
-            const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
-
-            const [tabletsRes, llinsRes, ultrasoundRes, dewormingRes, syphilisRes, hepatitisRes, hivRes] = await Promise.all([
-                API.get(`/antenatal/tablets?report_month=${formattedMonth}`),
-                API.get(`/antenatal/llins?report_month=${formattedMonth}`),
-                API.get(`/antenatal/ultrasound?report_month=${formattedMonth}`),
-                API.get(`/antenatal/deworming?report_month=${formattedMonth}`),
-                API.get(`/antenatal/syphilis?report_month=${formattedMonth}`),
-                API.get(`/antenatal/hepatitis?report_month=${formattedMonth}`),
-                API.get(`/antenatal/hiv?report_month=${formattedMonth}`)
-            ]);
-
-            setTabletsData(tabletsRes.data.length > 0 ? tabletsRes.data : defaultTabletsData);
-            setLlinsData(llinsRes.data.length > 0 ? llinsRes.data[0] : defaultLlinsData);
-            setUltrasoundData(ultrasoundRes.data.length > 0 ? ultrasoundRes.data : defaultUltrasoundData);
-            setDewormingData(dewormingRes.data.length > 0 ? dewormingRes.data[0] : defaultDewormingData);
-            setSyphilisData(syphilisRes.data.length > 0 ? syphilisRes.data[0] : defaultSyphilisData);
-            setHepatitisData(hepatitisRes.data.length > 0 ? hepatitisRes.data[0] : defaultHepatitisData);
-            setHivData(hivRes.data.length > 0 ? hivRes.data : defaultHivData);
-
-        } catch (error) {
-            console.error('Error fetching additional data:', error);
-            setTabletsData(defaultTabletsData);
-            setLlinsData(defaultLlinsData);
-            setUltrasoundData(defaultUltrasoundData);
-            setDewormingData(defaultDewormingData);
-            setSyphilisData(defaultSyphilisData);
-            setHepatitisData(defaultHepatitisData);
-            setHivData(defaultHivData);
-        } finally {
-            setLoading(false);
-        }
-    };
-
-    const fetchFinalSections = async () => {
-        try {
-            setLoading(true);
-            const monthNumber = getMonthNumber(selectedMonth);
-            const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
-
-            const [
-                viralLoadRes,
-                selfTestingRes,
-                malePartnerRes,
-                hivMalePartnerRes,
-                discordantRes,
-                nutritionRes,
-                tbScreeningRes,
-                arvProphylaxisRes,
-                malePartnerStatusRes
-            ] = await Promise.all([
-                API.get(`/antenatal/viral-load?report_month=${formattedMonth}`),
-                API.get(`/antenatal/self-testing?report_month=${formattedMonth}`),
-                API.get(`/antenatal/male-partner?report_month=${formattedMonth}`),
-                API.get(`/antenatal/hiv-male-partner?report_month=${formattedMonth}`),
-                API.get(`/antenatal/discordant?report_month=${formattedMonth}`),
-                API.get(`/antenatal/nutrition?report_month=${formattedMonth}`),
-                API.get(`/antenatal/tb-screening?report_month=${formattedMonth}`),
-                API.get(`/antenatal/arv-prophylaxis?report_month=${formattedMonth}`),
-                API.get(`/antenatal/male-partner-status?report_month=${formattedMonth}`)
-            ]);
-
-            setViralLoadData(viralLoadRes.data.length > 0 ? viralLoadRes.data[0] : defaultViralLoadData);
-            setSelfTestingData(selfTestingRes.data.length > 0 ? selfTestingRes.data[0] : defaultSelfTestingData);
-            setMalePartnerData(malePartnerRes.data.length > 0 ? malePartnerRes.data[0] : defaultMalePartnerData);
-            setHivMalePartnerData(hivMalePartnerRes.data.length > 0 ? hivMalePartnerRes.data[0] : defaultHivMalePartnerData);
-            setDiscordantData(discordantRes.data.length > 0 ? discordantRes.data[0] : defaultDiscordantData);
-            setNutritionData(nutritionRes.data.length > 0 ? nutritionRes.data[0] : defaultNutritionData);
-            setTbScreeningData(tbScreeningRes.data.length > 0 ? tbScreeningRes.data : defaultTbScreeningData);
-            setArvProphylaxisData(arvProphylaxisRes.data.length > 0 ? arvProphylaxisRes.data[0] : defaultArvProphylaxisData);
-            setMalePartnerStatusData(malePartnerStatusRes.data.length > 0 ? malePartnerStatusRes.data[0] : defaultMalePartnerStatusData);
-
-        } catch (error) {
-            console.error('Error fetching final sections data:', error);
-            setViralLoadData(defaultViralLoadData);
-            setSelfTestingData(defaultSelfTestingData);
-            setMalePartnerData(defaultMalePartnerData);
-            setHivMalePartnerData(defaultHivMalePartnerData);
-            setDiscordantData(defaultDiscordantData);
-            setNutritionData(defaultNutritionData);
-            setTbScreeningData(defaultTbScreeningData);
-            setArvProphylaxisData(defaultArvProphylaxisData);
-            setMalePartnerStatusData(defaultMalePartnerStatusData);
-        } finally {
-            setLoading(false);
-        }
-    };
-
+    // Initialize with mock data
     useEffect(() => {
-        if (selectedMonth) {
-            fetchFirst();
-            fetchFourth();
-            fetchEighth();
-            fetchTotal();
-            fetchIpt();
-            fetchAnaemia();
-            fetchAdditionalData();
-            fetchFinalSections();
-        }
-    }, [selectedMonth]);
+        setFirstData(mockFirstData);
+        setFourthData(mockFourthData);
+        setEighthData(mockEighthData);
+        setTotalData(mockTotalData);
+        setIptData(mockIptData);
+        setBloodGroupingData(mockBloodGroupingData);
+        setAnaemiaData(mockAnaemiaData);
+        setTabletsData(mockTabletsData);
+        setLlinsData(mockLlinsData);
+        setUltrasoundData(mockUltrasoundData);
+        setDewormingData(mockDewormingData);
+        setSyphilisData(mockSyphilisData);
+        setHepatitisData(mockHepatitisData);
+        setHivData(mockHivData);
+        setHivAssessmentData(mockHivAssessmentData);
+        setHivStatusData(mockHivStatusData);
+        setHivRetestData(mockHivRetestData);
+    }, []);
 
     const getValueForCell = (item, ageGroup) => {
         const key = `${ageGroup}`;
         return item[key] || "0";
+    };
+
+    const computeTotal = (item, ageKeys) => {
+        return ageKeys.reduce((sum, key) => {
+            const value = Number(item[key] || 0);
+            return sum + (isNaN(value) ? 0 : value);
+        }, 0);
     };
 
     return (
@@ -555,18 +381,21 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                 <table className="data-entry-table">
                     <thead>
                         <tr>
-                            <th>Category</th>
-                            {["Below_15yrs", "15_19yrs", "20_24yrs", "25_50yrs", "50+yrs"].map((ag, i) => (
-                                <th key={i} className="text-center">{ag}</th>
+                            <th style={{ fontWeight: 'normal' }}>Category</th>
+                            {["Below 15 Years", "15 - 19 Years", "20 - 24 Years", "25 - 49 Years", "50+ Years", "Total"].map((ag, i) => (
+                                <th key={i} className="text-center" style={{ fontWeight: 'normal' }}>{ag}</th>
                             ))}
                         </tr>
                     </thead>
                     <tbody>
-                        {/* First Data */}
-                        {firstData.map(item => (
-                            <tr key={`attendance-${item.hmis_code}`}>
-                                <td>{item.hmis_code}. {item.hmis_name}</td>
-                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_50yrs", "50+yrs"].map(ageGroup => (
+                        {/* AN01 - ANC 1st contacts with sub-rows */}
+                        <tr>
+                            <td colSpan="6">AN01. ANC 1st contacts/visits for women</td>
+                        </tr>
+                        {firstData.map((item, idx) => (
+                            <tr key={`AN01-${idx}`}>
+                                <td className="ps-4">{item.type}</td>
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
                                     <td key={ageGroup} className="text-center">
                                         <input
                                             type="number"
@@ -577,14 +406,23 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         />
                                     </td>
                                 ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value={computeTotal(item, ["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"])}
+                                        readOnly
+                                    />
+                                </td>
                             </tr>
                         ))}
 
-                        {/* Fourth Data */}
+                        {/* AN02 - ANC 4th contacts */}
                         {fourthData.map(item => (
                             <tr key={`${item.hmis_code}`}>
                                 <td>{item.hmis_code}. {item.hmis_name}</td>
-                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_50yrs", "50+yrs"].map(ageGroup => (
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
                                     <td key={ageGroup} className="text-center">
                                         <input
                                             type="number"
@@ -595,14 +433,23 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         />
                                     </td>
                                 ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value={computeTotal(item, ["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"])}
+                                        readOnly
+                                    />
+                                </td>
                             </tr>
                         ))}
 
-                        {/* Eighth Data */}
+                        {/* AN03 - ANC 8th contacts */}
                         {eighthData.map(item => (
                             <tr key={`${item.hmis_code}`}>
                                 <td>{item.hmis_code}. {item.hmis_name}</td>
-                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_50yrs", "50+yrs"].map(ageGroup => (
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
                                     <td key={ageGroup} className="text-center">
                                         <input
                                             type="number"
@@ -613,14 +460,23 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         />
                                     </td>
                                 ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value={computeTotal(item, ["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"])}
+                                        readOnly
+                                    />
+                                </td>
                             </tr>
                         ))}
 
-                        {/* TotalData */}
+                        {/* AN04 & AN05 - Total ANC contacts and Referrals */}
                         {totalData.map(item => (
                             <tr key={`${item.hmis_code}`}>
                                 <td>{item.hmis_code}. {item.hmis_name}</td>
-                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_50yrs", "50+yrs"].map(ageGroup => (
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
                                     <td key={ageGroup} className="text-center">
                                         <input
                                             type="number"
@@ -631,19 +487,28 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         />
                                     </td>
                                 ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value={computeTotal(item, ["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"])}
+                                        readOnly
+                                    />
+                                </td>
                             </tr>
                         ))}
 
                         {/* IPT Header Row */}
                         <tr>
-                            <td colSpan="6" className="fw-bold">AN 06. No. of pregnant women who received IPT</td>
+                            <td colSpan="6">AN 06. No. of pregnant women who received IPT</td>
                         </tr>
 
                         {/* IPT Data */}
                         {iptData.map(item => (
                             <tr key={`${item.hmis_code}`}>
                                 <td className="ps-4">{item.hmis_name}</td>
-                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_50yrs", "50+yrs"].map(ageGroup => (
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
                                     <td key={ageGroup} className="text-center">
                                         <input
                                             type="number"
@@ -654,6 +519,47 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         />
                                     </td>
                                 ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value={computeTotal(item, ["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"])}
+                                        readOnly
+                                    />
+                                </td>
+                            </tr>
+                        ))}
+
+                        {/* AN07 Blood Grouping */}
+                        <tr>
+                            <td colSpan="6">AN07. No. of pregnant women who were tested for blood grouping</td>
+                        </tr>
+                        {bloodGroupingData.map((item, idx) => (
+                            <tr key={`AN07-${idx}`}>
+                                <td className="ps-4">{`Blood Group (${item.group}) ${item.rhesus}`}</td>
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                    <td key={ageGroup} className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value={getValueForCell(item, ageGroup)}
+                                            readOnly
+                                            style={{ backgroundColor: '#f8f9fa' }} // Grey background for age cells
+                                        />
+                                    </td>
+                                ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value={computeTotal(item, ["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"])}
+                                        readOnly
+                                        style={{ backgroundColor: 'white' }} // White background for total cells
+                                    />
+                                </td>
                             </tr>
                         ))}
 
@@ -661,7 +567,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                         {anaemiaData.map(item => (
                             <tr key={`${item.hmis_code}`}>
                                 <td>{item.hmis_code}. {item.hmis_name}</td>
-                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_50yrs", "50+yrs"].map(ageGroup => (
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
                                     <td key={ageGroup} className="text-center">
                                         <input
                                             type="number"
@@ -672,33 +578,44 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         />
                                     </td>
                                 ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value={computeTotal(item, ["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"])}
+                                        readOnly
+                                    />
+                                </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
 
-                {/* Tablets Section */}
+                {/* ANTENATAL (Continued) Section */}
                 <div className="mt-4">
+                    <div className="section-subheader mb-3">
+                        ANTENATAL (Continued)
+                    </div>
+                    
                     <table className="data-entry-table">
                         <thead>
                             <tr>
-                                <th>Category</th>
-                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_50yrs", "50+yrs"].map((ag, i) => (
-                                    <th key={i} className="text-center">{ag}</th>
+                                <th style={{ fontWeight: 'normal' }}>Category</th>
+                                {["Below 15 Years", "15 - 19 Years", "20 - 24 Years", "25 - 49 Years", "50+ Years", "Total"].map((ag, i) => (
+                                    <th key={i} className="text-center" style={{ fontWeight: 'normal' }}>{ag}</th>
                                 ))}
                             </tr>
                         </thead>
                         <tbody>
-                            {/* AN10 Header */}
+                            {/* AN10 - Tablets */}
                             <tr>
-                                <td colSpan="6" className="fw-bold">AN10. No. of pregnant women receiving atleast 30 Tablets of</td>
+                                <td colSpan="6">AN10. No. of pregnant women receiving atleast 30 Tablets of</td>
                             </tr>
-
-                            {/* Tablets Data */}
                             {tabletsData.map(item => (
                                 <tr key={`${item.hmis_code}`}>
                                     <td className="ps-4">{item.hmis_name}</td>
-                                    {["Below_15yrs", "15_19yrs", "20_24yrs", "25_50yrs", "50+yrs"].map(ageGroup => (
+                                    {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
                                         <td key={ageGroup} className="text-center">
                                             <input
                                                 type="number"
@@ -709,13 +626,23 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                             />
                                         </td>
                                     ))}
+                                    <td className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value={computeTotal(item, ["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"])}
+                                            readOnly
+                                            style={{ backgroundColor: '#f8f9fa' }} // Grey background for total cells
+                                        />
+                                    </td>
                                 </tr>
                             ))}
 
-                            {/* LLINs Data */}
+                            {/* AN11 - LLINs */}
                             <tr>
                                 <td>{llinsData.hmis_code}. {llinsData.hmis_name}</td>
-                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_50yrs", "50+yrs"].map(ageGroup => (
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
                                     <td key={ageGroup} className="text-center">
                                         <input
                                             type="number"
@@ -726,18 +653,26 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         />
                                     </td>
                                 ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value={computeTotal(llinsData, ["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"])}
+                                        readOnly
+                                        style={{ backgroundColor: '#f8f9fa' }} // Grey background for total cells
+                                    />
+                                </td>
                             </tr>
 
-                            {/* AN12 Header */}
+                            {/* AN12 - Ultrasound */}
                             <tr>
-                                <td colSpan="6" className="fw-bold">AN12. No. of pregnant women who received obstetric-ultra sound scan during any ANC visit in the reporting month</td>
+                                <td colSpan="6">AN12. No. of pregnant women who received obstetric-ultra sound scan during any ANC visit in the reporting month</td>
                             </tr>
-
-                            {/* Ultrasound Data */}
                             {ultrasoundData.map(item => (
                                 <tr key={`${item.hmis_code}`}>
                                     <td className="ps-4">{item.hmis_name}</td>
-                                    {["Below_15yrs", "15_19yrs", "20_24yrs", "25_50yrs", "50+yrs"].map(ageGroup => (
+                                    {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
                                         <td key={ageGroup} className="text-center">
                                             <input
                                                 type="number"
@@ -748,23 +683,36 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                             />
                                         </td>
                                     ))}
+                                    <td className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value={computeTotal(item, ["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"])}
+                                            readOnly
+                                            style={{ backgroundColor: '#f8f9fa' }} // Grey background for total cells
+                                        />
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
                 </div>
 
-                {/* Single Column Data Section */}
+                {/* Bottom Section - Side by Side Tables */}
                 <div className="mt-4">
+                    <div className="row">
+                        {/* Left Table - AN13 & AN14 */}
+                        <div className="col-md-6">
                     <table className="data-entry-table">
                         <thead>
                             <tr>
-                                <th>Category</th>
-                                <th className="text-center">Number</th>
+                                        <th style={{ fontWeight: 'normal' }}>Category</th>
+                                <th className="text-center" style={{ fontWeight: 'normal' }}>Number</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {/* Deworming Data */}
+                                    {/* AN13 - Deworming */}
                             <tr>
                                 <td>{dewormingData.hmis_code}. {dewormingData.hmis_name}</td>
                                 <td className="text-center">
@@ -778,12 +726,10 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                 </td>
                             </tr>
 
-                            {/* AN14 Header */}
+                                    {/* AN14 - Syphilis */}
                             <tr>
-                                <td colSpan="2" className="fw-bold">AN14. Pregnant Women tested for syphilis</td>
+                                        <td colSpan="2">{syphilisData.hmis_code}. {syphilisData.hmis_name}</td>
                             </tr>
-
-                            {/* Syphilis Data */}
                             <tr>
                                 <td className="ps-4">First time this pregnancy</td>
                                 <td className="text-center">
@@ -820,13 +766,24 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                     />
                                 </td>
                             </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                            {/* AN15 Header */}
+                        {/* Right Table - AN15 & AN16 */}
+                        <div className="col-md-6">
+                            <table className="data-entry-table">
+                                <thead>
                             <tr>
-                                <td colSpan="2" className="fw-bold">AN15. Male partner tested for syphilis</td>
+                                        <th style={{ fontWeight: 'normal' }}>Category</th>
+                                        <th className="text-center" style={{ fontWeight: 'normal' }}>Number</th>
                             </tr>
-
-                            {/* STIs Partner Data */}
+                                </thead>
+                                <tbody>
+                                    {/* AN15 - Male partner syphilis */}
+                                    <tr>
+                                        <td colSpan="2">{mockStisData.hmis_code}. {mockStisData.hmis_name}</td>
+                                    </tr>
                             <tr>
                                 <td className="ps-4">Total Tested</td>
                                 <td className="text-center">
@@ -834,7 +791,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={defaultStisData.total_tested}
+                                                value={mockStisData.total_tested}
                                         readOnly
                                     />
                                 </td>
@@ -846,18 +803,16 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={defaultStisData.tested_positive}
+                                                value={mockStisData.tested_positive}
                                         readOnly
                                     />
                                 </td>
                             </tr>
 
-                            {/* AN16 Header */}
+                                    {/* AN16 - Hepatitis B */}
                             <tr>
-                                <td colSpan="2" className="fw-bold">AN16. No. Pregnant women tested for Hepatitis B.</td>
+                                        <td colSpan="2">{hepatitisData.hmis_code}. {hepatitisData.hmis_name}</td>
                             </tr>
-
-                            {/* Hepatitis Data */}
                             <tr>
                                 <td className="ps-4">Total Tested</td>
                                 <td className="text-center">
@@ -884,56 +839,302 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                             </tr>
                         </tbody>
                     </table>
+                        </div>
+                    </div>
                 </div>
 
-                {/* HIV Testing Section */}
+                {/* HIV Testing and Management Section */}
                 <div className="mt-4">
                     <table className="data-entry-table">
                         <thead>
                             <tr>
-                                <th>Category</th>
-                                <th>Type</th>
-                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_50yrs", "50+yrs"].map((ag, i) => (
-                                    <th key={i} className="text-center">{ag}</th>
+                                <th style={{ fontWeight: 'normal' }}>Category</th>
+                                {["Below 15 Years", "15 - 19 Years", "20 - 24 Years", "25 - 49 Years", "50+ Years", "Total"].map((ag, i) => (
+                                    <th key={i} className="text-center" style={{ fontWeight: 'normal' }}>{ag}</th>
                                 ))}
                             </tr>
                         </thead>
                         <tbody>
-                            {/* HIV Data */}
-                            {hivData.map(item => (
-                                <tr key={`${item.hmis_code}-${item.type}`}>
-                                    <td>{item.hmis_name}</td>
-                                    <td>{item.type}</td>
-                                    {["Below_15yrs", "15_19yrs", "20_24yrs", "25_50yrs", "50+yrs"].map(ageGroup => (
+                            {/* AN17 - HIV Testing */}
+                            <tr>
+                                <td colSpan="6">AN17. Pregnant women newly tested for HIV in this pregnancy at any ANC visit (NEG & POS)</td>
+                            </tr>
+                            <tr>
+                                <td className="ps-4">Total</td>
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
                                         <td key={ageGroup} className="text-center">
                                             <input
                                                 type="number"
                                                 min="0"
                                                 className="form-control form-control-sm"
-                                                value={getValueForCell(item, ageGroup)}
+                                            value="0"
                                                 readOnly
                                             />
                                         </td>
                                     ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value="0"
+                                        readOnly
+                                    />
+                                </td>
                                 </tr>
-                            ))}
+                            <tr>
+                                <td className="ps-4">ANC 1</td>
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                    <td key={ageGroup} className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value="0"
+                                            readOnly
+                                        />
+                                    </td>
+                                ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value="0"
+                                        readOnly
+                                    />
+                                </td>
+                            </tr>
+
+                            {/* AN18 - HIV Positive Testing */}
+                            <tr>
+                                <td colSpan="6">AN18. Pregnant Women tested HIV POS for 1st time this pregnancy at any ANC Visit</td>
+                            </tr>
+                            <tr>
+                                <td className="ps-4">Total</td>
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                    <td key={ageGroup} className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value="0"
+                                            readOnly
+                                        />
+                                    </td>
+                                ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value="0"
+                                        readOnly
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="ps-4">ANC 1</td>
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                    <td key={ageGroup} className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value="0"
+                                            readOnly
+                                        />
+                                    </td>
+                                ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value="0"
+                                        readOnly
+                                    />
+                                </td>
+                            </tr>
+
+                            {/* AN19 - CD4 Assessment */}
+                            <tr>
+                                <td>AN19. HIV+ Pregnant women assessed by CD4</td>
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                    <td key={ageGroup} className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value="0"
+                                            readOnly
+                                            style={{ backgroundColor: '#f8f9fa' }} // Grey background for age cells
+                                        />
+                                    </td>
+                                ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value="0"
+                                        readOnly
+                                    />
+                                </td>
+                            </tr>
+
+                            {/* AN20 - ART Initiation */}
+                            <tr>
+                                <td>AN20. HIV+ pregnant women initiated on ART for eMTCT at any visit irrespective of when tested HIV POS and HIV POS not yet started ART</td>
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                    <td key={ageGroup} className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value="0"
+                                            readOnly
+                                            style={{ backgroundColor: '#f8f9fa' }} // Grey background for age cells
+                                        />
+                                    </td>
+                                ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value="0"
+                                        readOnly
+                                    />
+                                </td>
+                            </tr>
+
+                            {/* AN21 - Known Status Before ANC */}
+                            <tr>
+                                <td colSpan="6">AN21. Pregnant Women who knew status before 1st ANC</td>
+                            </tr>
+                            <tr>
+                                <td className="ps-4">NEG</td>
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                    <td key={ageGroup} className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value="0"
+                                            readOnly
+                                        />
+                                    </td>
+                                ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value="0"
+                                        readOnly
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="ps-4">POS</td>
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                    <td key={ageGroup} className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value="0"
+                                            readOnly
+                                        />
+                                    </td>
+                                ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value="0"
+                                        readOnly
+                                    />
+                                </td>
+                            </tr>
+
+                            {/* AN22 - Re-testing Later in Pregnancy */}
+                            <tr>
+                                <td colSpan="6">AN22. Pregnant women who re-tested later in pregnancy</td>
+                            </tr>
+                            <tr>
+                                <td className="ps-4">NEG</td>
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                    <td key={ageGroup} className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value="0"
+                                            readOnly
+                                        />
+                                    </td>
+                                ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value="0"
+                                        readOnly
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td className="ps-4">POS</td>
+                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                    <td key={ageGroup} className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value="0"
+                                            readOnly
+                                        />
+                                    </td>
+                                ))}
+                                <td className="text-center">
+                                    <input
+                                        type="number"
+                                        min="0"
+                                        className="form-control form-control-sm"
+                                        value="0"
+                                        readOnly
+                                    />
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
 
-                {/* HIV and Partner Testing Section */}
+                {/* Additional Antenatal Sections (AN23-AN31) */}
                 <div className="mt-4">
+                    <div className="section-subheader mb-3">
+                        ANTENATAL (Continued)
+                    </div>
+                    
+                    {/* Top Block - Single Column Sections */}
+                    <div className="row">
+                        {/* Left Table - AN23, AN24, AN25, AN26, AN27 */}
+                        <div className="col-md-6">
                     <table className="data-entry-table">
                         <thead>
                             <tr>
-                                <th>Category</th>
-                                <th className="text-center">Number</th>
+                                        <th style={{ fontWeight: 'normal' }}>Category</th>
+                                <th className="text-center" style={{ fontWeight: 'normal' }}>Number</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {/* AN23 Viral Load Section */}
+                                    {/* AN23 - HIV+ pregnant women */}
                             <tr>
-                                <td colSpan="2" className="fw-bold">AN23. HIV+ pregnant women</td>
+                                        <td colSpan="2">AN23. HIV+ pregnant women:</td>
                             </tr>
                             <tr>
                                 <td className="ps-4">Eligible for a Viral Load during the month</td>
@@ -942,7 +1143,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={viralLoadData.eligible_viral_load}
+                                                value="0"
                                         readOnly
                                     />
                                 </td>
@@ -954,7 +1155,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={viralLoadData.samples_collected}
+                                                value="0"
                                         readOnly
                                     />
                                 </td>
@@ -966,27 +1167,15 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={viralLoadData.viral_load_suppressed}
+                                                value="0"
                                         readOnly
                                     />
                                 </td>
                             </tr>
 
-                            {/* AN24 Self Testing Section */}
-                            <tr>
-                                <td colSpan="2" className="fw-bold">AN24. Pregnant women given self-testing kits for their male partners</td>
-                            </tr>
-                            <tr>
-                                <td className="ps-4">Total</td>
-                                <td className="text-center">
-                                    <input
-                                        type="number"
-                                        min="0"
-                                        className="form-control form-control-sm"
-                                        value={selfTestingData.total}
-                                        readOnly
-                                    />
-                                </td>
+                                    {/* AN24 - Self-testing kits */}
+                                    <tr>
+                                        <td colSpan="2">AN24. Pregnant women given self-testing kits for their male partners:</td>
                             </tr>
                             <tr>
                                 <td className="ps-4">Tests returned NEG</td>
@@ -995,7 +1184,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={selfTestingData.tests_returned_neg}
+                                                value="0"
                                         readOnly
                                     />
                                 </td>
@@ -1007,15 +1196,15 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={selfTestingData.tests_returned_pos}
+                                                value="0"
                                         readOnly
                                     />
                                 </td>
                             </tr>
 
-                            {/* AN25 Male Partner Results */}
+                                    {/* AN25 - Male partners HIV test results */}
                             <tr>
-                                <td colSpan="2" className="fw-bold">AN25. Male partners received HIV test results in eMTCT</td>
+                                        <td colSpan="2">AN25. Male partners received HIV test results in eMTCT:</td>
                             </tr>
                             <tr>
                                 <td className="ps-4">NEG</td>
@@ -1024,7 +1213,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={malePartnerData.neg}
+                                                value="0"
                                         readOnly
                                     />
                                 </td>
@@ -1036,15 +1225,15 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={malePartnerData.pos}
+                                                value="0"
                                         readOnly
                                     />
                                 </td>
                             </tr>
 
-                            {/* AN26 HIV+ Male Partners */}
+                                    {/* AN26 - HIV+ Male partners ART */}
                             <tr>
-                                <td colSpan="2" className="fw-bold">AN26. HIV+ Male partners initiated on ART in the ANC setting</td>
+                                        <td colSpan="2">AN26. HIV+ Male partners initiated on ART in the ANC setting:</td>
                             </tr>
                             <tr>
                                 <td className="ps-4">Known ART</td>
@@ -1053,7 +1242,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={hivMalePartnerData.known_art}
+                                                value="0"
                                         readOnly
                                     />
                                 </td>
@@ -1065,159 +1254,276 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={hivMalePartnerData.new}
+                                                value="0"
                                         readOnly
                                     />
                                 </td>
                             </tr>
 
-                            {/* AN27 Discordant Couples */}
+                                    {/* AN27 - Discordant couples */}
                             <tr>
-                                <td>{discordantData.hmis_code}. {discordantData.hmis_name}</td>
+                                        <td>AN27. No. of discordant couple identified in ANC</td>
                                 <td className="text-center">
                                     <input
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={discordantData.value}
+                                                value="0"
                                         readOnly
                                     />
                                 </td>
                             </tr>
+                                </tbody>
+                            </table>
+                        </div>
 
-                            {/* AN28 Nutrition Assessment */}
+                        {/* Right Table - AN28 */}
+                        <div className="col-md-6">
+                            <table className="data-entry-table">
+                                <thead>
                             <tr>
-                                <td colSpan="2" className="fw-bold">AN28. Women assessed for nutrition status</td>
+                                        <th style={{ fontWeight: 'normal' }}>Category</th>
+                                        <th className="text-center" style={{ fontWeight: 'normal' }}>Total</th>
+                                        <th colSpan="2" className="text-center" style={{ fontWeight: 'normal' }}>Identified malnourished</th>
                             </tr>
                             <tr>
-                                <td className="ps-4">Total</td>
+                                        <th></th>
+                                        <th></th>
+                                        <th className="text-center" style={{ fontWeight: 'normal' }}>MAM</th>
+                                        <th className="text-center" style={{ fontWeight: 'normal' }}>SAM</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {/* AN28 - Nutrition assessment */}
+                                    <tr>
+                                        <td>AN28. Women assessed for nutrition status</td>
                                 <td className="text-center">
                                     <input
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={nutritionData.total}
+                                                value="0"
                                         readOnly
                                     />
                                 </td>
-                            </tr>
-                            <tr>
-                                <td className="ps-4">Identified malnourished MAM</td>
                                 <td className="text-center">
                                     <input
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={nutritionData.mam}
+                                                value="0"
                                         readOnly
                                     />
                                 </td>
-                            </tr>
-                            <tr>
-                                <td className="ps-4">SAM</td>
                                 <td className="text-center">
                                     <input
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={nutritionData.sam}
+                                                value="0"
                                         readOnly
                                     />
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                        </div>
                 </div>
 
-                {/* TB Screening Section */}
+                    {/* Bottom Block - Age Group Breakdown Sections */}
                 <div className="mt-4">
+                        {/* AN29 - TB Screening */}
                     <table className="data-entry-table">
                         <thead>
                             <tr>
-                                <th>Category</th>
-                                {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs", "Total"].map((ag, i) => (
-                                    <th key={i} className="text-center">{ag}</th>
+                                    <th style={{ fontWeight: 'normal' }}>Category</th>
+                                    {["Below 15 Years", "15 - 19 Years", "20 - 24 Years", "25 - 49 Years", "50+ Years", "Total"].map((ag, i) => (
+                                        <th key={i} className="text-center" style={{ fontWeight: 'normal' }}>{ag}</th>
                                 ))}
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td colSpan="7" className="fw-bold">AN29. TB Screening for ANC Clients</td>
+                                    <td colSpan="6">AN29. TB Screening for ANC Clients:</td>
                             </tr>
-                            {tbScreeningData.map(item => (
-                                <tr key={`${item.hmis_code}`}>
-                                    <td className="ps-4">{item.hmis_name}</td>
-                                    {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs", "Total"].map(ageGroup => (
+                                <tr>
+                                    <td className="ps-4">Screened for TB</td>
+                                    {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
                                         <td key={ageGroup} className="text-center">
                                             <input
                                                 type="number"
                                                 min="0"
                                                 className="form-control form-control-sm"
-                                                value={getValueForCell(item, ageGroup)}
+                                                value="0"
                                                 readOnly
+                                                style={{ backgroundColor: '#f8f9fa' }} // Grey background for age cells
                                             />
                                         </td>
                                     ))}
+                                    <td className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value="0"
+                                            readOnly
+                                        />
+                                    </td>
                                 </tr>
-                            ))}
+                                <tr>
+                                    <td className="ps-4">Presumed to have TB</td>
+                                    {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                        <td key={ageGroup} className="text-center">
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                className="form-control form-control-sm"
+                                                value="0"
+                                                readOnly
+                                                style={{ backgroundColor: '#f8f9fa' }} // Grey background for age cells
+                                            />
+                                        </td>
+                                    ))}
+                                    <td className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value="0"
+                                            readOnly
+                                        />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td className="ps-4">Diagnosed with TB</td>
+                                    {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                        <td key={ageGroup} className="text-center">
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                className="form-control form-control-sm"
+                                                value="0"
+                                                readOnly
+                                                style={{ backgroundColor: '#f8f9fa' }} // Grey background for age cells
+                                            />
+                                        </td>
+                                    ))}
+                                    <td className="text-center">
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            className="form-control form-control-sm"
+                                            value="0"
+                                            readOnly
+                                        />
+                                    </td>
+                                </tr>
                         </tbody>
                     </table>
-                </div>
 
-                {/* ARV Prophylaxis and Partner Status Section */}
-                <div className="mt-4">
-                    <table className="data-entry-table">
+                        {/* AN30 - ARV Prophylaxis */}
+                        <table className="data-entry-table mt-3">
                         <thead>
                             <tr>
-                                <th>Category</th>
-                                <th className="text-center">Number</th>
+                                    <th style={{ fontWeight: 'normal' }}>Category</th>
+                                    {["Below 15 Years", "15 - 19 Years", "20 - 24 Years", "25 - 49 Years", "50+ Years", "Total"].map((ag, i) => (
+                                        <th key={i} className="text-center" style={{ fontWeight: 'normal' }}>{ag}</th>
+                                    ))}
                             </tr>
                         </thead>
                         <tbody>
-                            {/* AN30 ARV Prophylaxis */}
-                            <tr>
-                                <td>{arvProphylaxisData.hmis_code}. {arvProphylaxisData.hmis_name}</td>
+                                <tr>
+                                    <td>AN30. HIV+ pregnant women given ARV prophylaxis for the un born infants for the 1st time in ANC</td>
+                                    {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                        <td key={ageGroup} className="text-center">
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                className="form-control form-control-sm"
+                                                value="0"
+                                                readOnly
+                                                style={{ backgroundColor: '#f8f9fa' }} // Grey background for age cells
+                                            />
+                                        </td>
+                                    ))}
                                 <td className="text-center">
                                     <input
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={arvProphylaxisData.value}
+                                            value="0"
                                         readOnly
                                     />
                                 </td>
                             </tr>
+                            </tbody>
+                        </table>
 
-                            {/* AN31 Male Partner Status */}
-                            <tr>
-                                <td colSpan="2" className="fw-bold">AN31. Male partners with a known status at their first visit as couple in ANC</td>
+                        {/* AN31 - Male partners known status */}
+                        <table className="data-entry-table mt-3">
+                            <thead>
+                                <tr>
+                                    <th style={{ fontWeight: 'normal' }}>Category</th>
+                                    {["Below 15 Years", "15 - 19 Years", "20 - 24 Years", "25 - 49 Years", "50+ Years", "Total"].map((ag, i) => (
+                                        <th key={i} className="text-center" style={{ fontWeight: 'normal' }}>{ag}</th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colSpan="6">AN31. Male partners with a known status at their first visit as a couple in ANC:</td>
                             </tr>
                             <tr>
                                 <td className="ps-4">NEG</td>
+                                    {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                        <td key={ageGroup} className="text-center">
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                className="form-control form-control-sm"
+                                                value="0"
+                                                readOnly
+                                                style={{ backgroundColor: '#f8f9fa' }} // Grey background for age cells
+                                            />
+                                        </td>
+                                    ))}
                                 <td className="text-center">
                                     <input
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={malePartnerStatusData.neg}
+                                            value="0"
                                         readOnly
                                     />
                                 </td>
                             </tr>
                             <tr>
                                 <td className="ps-4">POS</td>
+                                    {["Below_15yrs", "15_19yrs", "20_24yrs", "25_49yrs", "50+yrs"].map(ageGroup => (
+                                        <td key={ageGroup} className="text-center">
+                                            <input
+                                                type="number"
+                                                min="0"
+                                                className="form-control form-control-sm"
+                                                value="0"
+                                                readOnly
+                                                style={{ backgroundColor: '#f8f9fa' }} // Grey background for age cells
+                                            />
+                                        </td>
+                                    ))}
                                 <td className="text-center">
                                     <input
                                         type="number"
                                         min="0"
                                         className="form-control form-control-sm"
-                                        value={malePartnerStatusData.pos}
+                                            value="0"
                                         readOnly
                                     />
                                 </td>
                             </tr>
                         </tbody>
                     </table>
+                    </div>
                 </div>
             </>
         </div>

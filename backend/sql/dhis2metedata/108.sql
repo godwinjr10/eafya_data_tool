@@ -1,13 +1,13 @@
-select
+SELECT 
 d.id, 
 d.dataelement, 
-s.dataelement_code ,
-s.dataelement_name ,
+e.dataelement_name,
 d.categoryoptioncombo,
-o."name" as optioncombo_name
+o."name" 
 FROM reporting.dhis2_dataelements_108 d
-inner join reporting.dhis2_datasets_elements s on s.dataelement_id = d.dataelement 
-inner join  reporting.dhis2_optioncombos o on o.code = d.categoryoptioncombo 
+inner join dhis2_datasets_elements e on e.dataelement_id = d.dataelement 
+inner join dhis2_optioncombos o on o.code = d.categoryoptioncombo 
+where d.dataelement = 'R9l3TcJpS5I'
 
 SELECT id, code, "name" FROM reporting.dhis2_optioncombos;
 
@@ -16,36 +16,22 @@ FROM reporting.dhis2_datasets_elements
 
 SELECT id, code, "name" FROM reporting.dhis2_datasets;
 
-
+----- DATA ELEMENTS FOR SECTION 108 -----
 SELECT 
-a.id, 
-a.code, 
-a.name, 
-a.status, 
-a."level", 
-a.objectives, 
-a.costugx, 
-a.costusd, 
-a.rate, 
-a.months, 
-a."pillarId", 
-p."name" as component,
-a."implementorId", 
-i."name" as implementor,
-a."grantId",
-g."name" as grant
-FROM  workplan.activity a
-inner join workplan.pillar p on p.id = a."grantId" 
-inner join workplan.grant g on g.id = a."grantId" 
-inner join workplan.implementor i on i.id = a."implementorId" 
+d.id, 
+e.dataset_code ,
+e.dataset_name,
+e.dataset_id ,
+d.dataelement, 
+SUBSTRING(e.dataelement_code FROM 5) AS dataelement_code,
+SUBSTRING(e.dataelement_name FROM 5) AS dataelement_name,
+d.categoryoptioncombo as optioncombo_code,
+o."name" as optioncombo_name
+FROM reporting.dhis2_dataelements_108 d
+inner join dhis2_datasets_elements e on e.dataelement_id = d.dataelement 
+inner join dhis2_optioncombos o on o.code = d.categoryoptioncombo 
+--where d.dataelement = 'R9l3TcJpS5I'
+order by e.dataelement_code
 
 
-select count(*) from workplan.activity;
-select sum(costusd) from workplan.activity;
-select sum(costugx) from workplan.activity;
 
-select 
-status, 
-count(name) 
-from workplan.activity
-group by status

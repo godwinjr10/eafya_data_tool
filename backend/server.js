@@ -47,8 +47,8 @@ const syncDatabase = async () => {
 		});
 		console.log("Database synced successfully");
 
-		// Initialize model associations after database sync
-		initializeAssociations();
+		// // Initialize model associations after database sync
+		// initializeAssociations();
 	} catch (error) {
 		console.error("Error syncing database:", error);
 	}
