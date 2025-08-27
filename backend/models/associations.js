@@ -42,5 +42,3 @@ export const initializeAssociations = () => {
 	console.log("Model associations initialized successfully");
 };
 
-export default initializeAssociations;
-

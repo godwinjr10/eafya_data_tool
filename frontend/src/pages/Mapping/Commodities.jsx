@@ -13,11 +13,13 @@ const Commodities = () => {
   const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
   const [productItems, setProductItems] = useState([]);
 
+
   const fetchMappings = async () => {
     setLoading(true);
     try {
       const res = await API.get("/eafya/commodities");
       setMappings(res.data || []);
+    
     } catch (e) {
       console.error("Error fetching commodity mappings", e);
       setMappings([]);
@@ -91,10 +93,7 @@ const Commodities = () => {
     if (!dialogState.row) return;
     const {
       section_id,
-      hmis_code,
-      hmis_name,
-      dhis2_data_element_id,
-      data_element_name,
+      hmis_code
     } = dialogState.row;
     const mappingsPayload = selectedIds
       .map((id) => {
@@ -109,9 +108,6 @@ const Commodities = () => {
       const res = await API.post("/eafya/commodities", {
         section_id,
         hmis_code,
-        hmis_name,
-        dhis2_data_element_id,
-        data_element_name,
         mappings: mappingsPayload,
       });
 
