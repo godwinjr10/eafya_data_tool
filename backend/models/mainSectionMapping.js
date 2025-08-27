@@ -25,6 +25,7 @@ const mainSectionMappingModel = sequelize.define(
 	}
 );
 
-mainSectionMappingModel.sync({ alter: true });
+// Remove the automatic sync to prevent conflicts
+// mainSectionMappingModel.sync({ alter: true });
 
 export default mainSectionMappingModel;

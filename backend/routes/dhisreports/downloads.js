@@ -1,13 +1,13 @@
-import express from 'express';
-import { pool } from '../../config/database.js';
+import express from "express";
+import { pool } from "../../config/database.js";
 
 const router = express.Router();
 
-router.get('/conditions', async (req, res) => {
-    try {
-        const { report_month } = req.query;
-        
-        let query = `
+router.get("/conditions", async (req, res) => {
+	try {
+		const { report_month } = req.query;
+
+		let query = `
             SELECT
                 c.report_month,
                 e.section_id,
@@ -25,24 +25,24 @@ router.get('/conditions', async (req, res) => {
                 SUM(COALESCE(c."20y+ Male", 0)) AS "20y_plus_male",
                 SUM(COALESCE(c."20y+ Female", 0)) AS "20y_plus_female"
                 FROM reporting."105_01_conditions" c
-                INNER JOIN reporting.dhis_eafya_mapping_conditions_final e ON e.eafya_disease_id = c.disease_id
+                INNER JOIN reporting.dhis_eafya_mapping_conditions_final e ON CAST(e.eafya_disease_id AS BIGINT) = c.disease_id
             WHERE c.report_month = $1
             GROUP by c.report_month, e.section_id, e.section_name, e.hmis_code, e.hmis_name
             ORDER by c.report_month, e.section_id`;
 
-        const params = [report_month];
-        const { rows } = await pool.query(query, params);
-        res.json(rows);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+		const params = [report_month];
+		const { rows } = await pool.query(query, params);
+		res.json(rows);
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
 });
 
-router.get('/commodities', async (req, res) => {
-    try {
-        const { report_month } = req.query;
-        
-        let query = `
+router.get("/commodities", async (req, res) => {
+	try {
+		const { report_month } = req.query;
+
+		let query = `
             SELECT 
                 a.report_month,
                 m.section_id,
@@ -59,24 +59,24 @@ router.get('/commodities', async (req, res) => {
                 FROM reporting.dhis_eafya_mapping_commodities
                 WHERE section_id = '6.1'
             ) m 
-            ON a.product_id = m.eafya_product_id
+            ON CAST(m.eafya_product_id AS BIGINT) = a.product_id
             WHERE a.report_month = $1
             ORDER BY m.section_id, m.hmis_code;
         `;
 
-        const params = [report_month];
-        const { rows } = await pool.query(query, params);
-        res.json(rows);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+		const params = [report_month];
+		const { rows } = await pool.query(query, params);
+		res.json(rows);
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
 });
 
-router.get('/labtests', async (req, res) => {
-    try {
-        const { report_month } = req.query;
-        
-        let query = `
+router.get("/labtests", async (req, res) => {
+	try {
+		const { report_month } = req.query;
+
+		let query = `
             SELECT 
                 t.report_month,
                 m.section_id,
@@ -92,17 +92,17 @@ router.get('/labtests', async (req, res) => {
                 FROM reporting.dhis_eafya_mapping_labtests
                 WHERE section_id = '10.2.1'
             ) m 
-            ON t.lab_test_id = m.eafya_labtest_id
+            ON CAST(m.eafya_labtest_id AS BIGINT) = t.lab_test_id
             WHERE t.report_month = $1
             ORDER BY m.section_id, m.hmis_code;
         `;
 
-        const params = [report_month];
-        const { rows } = await pool.query(query, params);
-        res.json(rows);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+		const params = [report_month];
+		const { rows } = await pool.query(query, params);
+		res.json(rows);
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
 });
 
 export default router;

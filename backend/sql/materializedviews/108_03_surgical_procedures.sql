@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting.108_surgical_procedures AS
+CREATE MATERIALIZED VIEW reporting."108_surgical_procedures" AS
 -- 3.1 Obstetrics
 SELECT 
     '3.1' AS section,
@@ -14,9 +14,7 @@ WHERE
 GROUP BY 
     EXTRACT(YEAR FROM date_created),
     EXTRACT(MONTH FROM date_created)
-
 UNION ALL
-
 SELECT 
     '3.1' AS section,
     'SP02' AS code,
@@ -1666,6 +1664,6 @@ GROUP BY
     EXTRACT(MONTH FROM date_created);
 
 -- Create indexes for better performance
-CREATE INDEX idx_hmis108_surgical_procedures_section ON reporting.hmis108_surgical_procedures_monthly(section);
-CREATE INDEX idx_hmis108_surgical_procedures_code ON reporting.hmis108_surgical_procedures_monthly(code);
-CREATE INDEX idx_hmis108_surgical_procedures_year_month ON reporting.hmis108_surgical_procedures_monthly(year, month);
+CREATE INDEX idx_hmis108_surgical_procedures_section ON reporting."108_surgical_procedures"(section);
+CREATE INDEX idx_hmis108_surgical_procedures_code ON reporting."108_surgical_procedures"(code);
+CREATE INDEX idx_hmis108_surgical_procedures_year_month ON reporting."108_surgical_procedures"(year, month);
