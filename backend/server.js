@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import { testConnection, sequelize } from "./config/database.js";
+import { initializeAssociations } from "./models/associations.js";
 import attendanceRoutes from "./routes/dhisreports/attendance.js";
 import conditionRoutes from "./routes/dhisreports/conditions.js";
 import commoditiesRoutes from "./routes/dhisreports/commodities.js";
@@ -42,7 +43,7 @@ testConnection();
 const syncDatabase = async () => {
 	try {
 		await sequelize.sync({
-			alter: process.env.NODE_ENV === "development",
+			alter: false, // Disable automatic schema alterations
 		});
 		console.log("Database synced successfully");
 	} catch (error) {
