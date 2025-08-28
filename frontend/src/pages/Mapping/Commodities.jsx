@@ -1,11 +1,13 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { FaPlus, FaTrash } from "react-icons/fa";
+import { FaPlus, FaTrash, FaEye } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 import API from "../../helpers/api";
 import MappingDialog from "./MappingDialog";
 
 import MappingTable from "../../components/MappingTable";
 
 const Commodities = () => {
+  const history = useHistory();
   const [mappings, setMappings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -13,13 +15,11 @@ const Commodities = () => {
   const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
   const [productItems, setProductItems] = useState([]);
 
-
   const fetchMappings = async () => {
     setLoading(true);
     try {
       const res = await API.get("/eafya/commodities");
       setMappings(res.data || []);
-    
     } catch (e) {
       console.error("Error fetching commodity mappings", e);
       setMappings([]);
@@ -70,6 +70,15 @@ const Commodities = () => {
     }
   };
 
+  const handleRowClick = (row) => {
+    history.push(`/mapping/commodities/${row.hmis_code}`);
+  };
+
+  const handleViewDetails = (e, row) => {
+    e.stopPropagation();
+    history.push(`/mapping/commodities/${row.hmis_code}`);
+  };
+
   const onEafyaItemsLoaded = (items) => setProductItems(items);
 
   // Get unique sections from mappings
@@ -91,10 +100,7 @@ const Commodities = () => {
 
   const onSave = async (selectedIds) => {
     if (!dialogState.row) return;
-    const {
-      section_id,
-      hmis_code
-    } = dialogState.row;
+    const { section_id, hmis_code } = dialogState.row;
     const mappingsPayload = selectedIds
       .map((id) => {
         const item = productItems.find((i) => i.id === id);
@@ -134,20 +140,9 @@ const Commodities = () => {
       sortable: true,
     },
     {
-      accessor: "data_element_name",
-      header: "Data Element",
+      accessor: "section_name",
+      header: "Section Name",
       sortable: true,
-    },
-    {
-      accessor: "eafya_product",
-      header: "eAFYA Product",
-      sortable: false,
-      render: (row) =>
-        row.eafya_product_id ? (
-          `${row.eafya_product_id} - ${row.eafya_product_name}`
-        ) : (
-          <span className="text-muted">-</span>
-        ),
     },
     {
       accessor: "actions",
@@ -156,8 +151,18 @@ const Commodities = () => {
       render: (row) => (
         <div className="item-mappings">
           <button
-            className="btn btn-outline-primary btn-sm"
-            onClick={() => handleAdd(row)}
+            className="btn btn-outline-info btn-sm me-2"
+            onClick={(e) => handleViewDetails(e, row)}
+            title="View Details"
+          >
+            <FaEye />
+          </button>
+          <button
+            className="btn btn-outline-primary btn-sm me-2"
+            onClick={(e) => {
+              e.stopPropagation();
+              setDialogState({ isOpen: true, row });
+            }}
           >
             <FaPlus /> Add Mapping
           </button>
@@ -186,6 +191,7 @@ const Commodities = () => {
         sortable={true}
         emptyMessage="No commodity mappings found"
         className="mapping-table"
+        onRowClick={handleRowClick}
       />
 
       <MappingDialog

@@ -1,26 +1,28 @@
 // Conditions.js
 import React, { useEffect, useMemo, useState } from "react";
-import { FaPlus, FaTrash } from "react-icons/fa";
+import { FaEye, FaPlus, FaTrash } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 import API from "../../helpers/api";
 import MappingDialog from "./MappingDialog";
 
 import MappingTable from "../../components/MappingTable";
 
 const Conditions = () => {
+  const history = useHistory();
   const [mappings, setMappings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedSection, setSelectedSection] = useState("");
   const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
   const [diseaseItems, setDiseaseItems] = useState([]);
-  const [count, setCount]= useState(0)
+  const [count, setCount] = useState(0);
 
   const fetchMappings = async () => {
     setLoading(true);
     try {
       const res = await API.get("/eafya/conditions");
       setMappings(res.data || []);
-      setCount(res?.data?.length)
+      setCount(res?.data?.length);
     } catch (e) {
       console.error("Error fetching condition mappings", e);
       setMappings([]);
@@ -72,6 +74,15 @@ const Conditions = () => {
   };
 
   const onEafyaItemsLoaded = (items) => setDiseaseItems(items);
+
+  const handleRowClick = (row) => {
+    history.push(`/mapping/conditions/${row.hmis_code}`);
+  };
+
+  const handleViewDetails = (e, row) => {
+    e.stopPropagation();
+    history.push(`/mapping/conditions/${row.hmis_code}`);
+  };
 
   // Get unique sections from mappings
   const uniqueSections = useMemo(() => {
@@ -139,22 +150,10 @@ const Conditions = () => {
       sortable: true,
     },
     {
-      accessor: "category_optioncombo_name",
-      header: "Category Option Combo",
+      accessor: "section_name",
+      header: "Section Name",
       sortable: true,
-      render: (row) => row.category_optioncombo_name || "-",
-    },
-    {
-      accessor: "eafya_disease_id",
-      header: "eAFYA Disease ID",
-      sortable: true,
-      render: (row) => row.eafya_disease_id || "-",
-    },
-    {
-      accessor: "eafya_disease_name",
-      header: "eAFYA Disease Name",
-      sortable: true,
-      render: (row) => row.eafya_disease_name || "-",
+      render: (row) => row.section_name || "-",
     },
     {
       accessor: "actions",
@@ -163,8 +162,18 @@ const Conditions = () => {
       render: (row) => (
         <div className="item-mappings">
           <button
-            className="btn btn-outline-primary btn-sm"
-            onClick={() => handleAdd(row)}
+            className="btn btn-outline-info btn-sm me-2"
+            onClick={(e) => handleViewDetails(e, row)}
+            title="View Details"
+          >
+            <FaEye />
+          </button>
+          <button
+            className="btn btn-primary btn-sm me-2"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleAdd(row);
+            }}
           >
             <FaPlus /> Add Mapping
           </button>
@@ -184,7 +193,7 @@ const Conditions = () => {
 
   return (
     <>
-    <a>Total : {count}</a>
+      <a>Total : {count}</a>
       <MappingTable
         data={filteredMappings}
         columns={columns}
@@ -194,6 +203,7 @@ const Conditions = () => {
         sortable={true}
         emptyMessage="No condition mappings found"
         className="mapping-table"
+        onRowClick={handleRowClick}
       />
 
       <MappingDialog
