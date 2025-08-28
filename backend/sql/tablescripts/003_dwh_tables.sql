@@ -186,20 +186,6 @@ CREATE TABLE IF NOT exists dwh.dim_eafya_disease
 )
 ;
 
-CREATE TABLE IF NOT EXISTS dwh.dim_eafya_family_planning
-(
-  last_created TIMESTAMP
-, id BIGINT
-, created_by_id BIGINT
-, date_created TIMESTAMP
-, description TEXT
-, family_planning_category_id BIGINT
-, is_system_defined BOOLEAN
-, last_updated TIMESTAMP
-, "name" VARCHAR(255)
-)
-;
-
 CREATE TABLE IF NOT EXISTS dwh.fact_eafya_vaccine
 (
   id BIGINT
@@ -1159,5 +1145,19 @@ CREATE TABLE IF NOT EXISTS dwh.fact_eafya_deceased_patient
 , patient_visit_id BIGINT
 , place_of_death VARCHAR(255)
 , time_of_death TIMESTAMP
+)
+;
+
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_family_planning
+(
+  last_created TIMESTAMP
+, id BIGINT
+, created_by_id BIGINT
+, date_created TIMESTAMP
+, description TEXT
+, family_planning_category_id BIGINT
+, is_system_defined BOOLEAN
+, last_updated TIMESTAMP
+, "name" VARCHAR(255)
 )
 ;

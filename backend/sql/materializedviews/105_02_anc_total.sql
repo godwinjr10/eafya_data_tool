@@ -1,6 +1,7 @@
 CREATE MATERIALIZED VIEW reporting."105_02_anc_total" AS
 SELECT 
   TO_CHAR(date_created, 'YYYYMM') AS report_month,
+  'AN04' as hmis_code,
   COUNT(CASE WHEN age_years < 15 THEN 1 END) AS "Below_15yrs",
   COUNT(CASE WHEN age_years BETWEEN 15 AND 19 THEN 1 END) AS "15_19yrs",
   COUNT(CASE WHEN age_years BETWEEN 20 AND 24 THEN 1 END) AS "20_24yrs",
