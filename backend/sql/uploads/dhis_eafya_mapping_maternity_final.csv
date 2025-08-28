@@ -1,0 +1,59 @@
+"section_id","section_name","hmis_code","hmis_name","dataelement_name","data_element_id","categoryoptioncombo_uid","name"
+"2.2",Maternity,MA01,Admissions,"105-MA01. Admissions",JY0M7eC2N42,HllvX50cXC0,default
+"2.2",Maternity,MA02,Referrals to maternity unit,"105-MA02a. Referrals to maternity unit - Total",AGmXoLiT89x,HllvX50cXC0,default
+"2.2",Maternity,MA02,Referrals to maternity unit,"105-MA02b: Referrals to maternity unit - From community",TMF6CkVvMuD,HllvX50cXC0,default
+"2.2",Maternity,MA03,Referrals from maternity,"105-MA03. Referrals from maternity",YNqGVS6GEyo,HllvX50cXC0,default
+"2.2",Maternity,MA04,Total deliveries in the unit,"105-MA04. Total deliveries in the unit",idXOxt69W0e,c9JPAeQh49R,"20-24Yrs"
+"2.2",Maternity,MA04,Total deliveries in the unit,"105-MA04. Total deliveries in the unit",idXOxt69W0e,JtoaNPpY2BF,<15Yrs
+"2.2",Maternity,MA04,Total deliveries in the unit,"105-MA04. Total deliveries in the unit",idXOxt69W0e,PwuKTzy4vLJ,"15-19Yrs"
+"2.2",Maternity,MA04,Total deliveries in the unit,"105-MA04. Total deliveries in the unit",idXOxt69W0e,QGprPUGJp4N,"25-49Yrs"
+"2.2",Maternity,MA04,Total deliveries in the unit,"105-MA04. Total deliveries in the unit",idXOxt69W0e,sxBbkmHxnBP,"50+Yrs"
+"2.2",Maternity,MA05a,Births in the unit - Live births,"105-MA05a1. Births in the unit - Live births Total",fEz9wGsA6YU,HllvX50cXC0,default
+"2.2",Maternity,MA05a,Births in the unit - Live births,"105-MA05a2. Births in the unit - Live births < 2.5 Kg",P1MyPWVxi5T,HllvX50cXC0,default
+"2.2",Maternity,MA05b,Births in the unit - Fresh still birth,"105-MA05b1. Births in the unit - Fresh Still birth Total",T8W0wbzErSF,HllvX50cXC0,default
+"2.2",Maternity,MA05b,Births in the unit - Fresh still birth,"105-MA05b2. Births in the unit - Fresh Still birth < 2.5 Kg",bl6lQqygEK1,HllvX50cXC0,default
+"2.2",Maternity,MA05c,Births in the unit - Macerated still birth,"105-MA05c1. Births in the unit - Macerated still birth Total",ULL9lX3DO7V,HllvX50cXC0,default
+"2.2",Maternity,MA05c,Births in the unit - Macerated still birth,"105-MA05c2. Births in the unit - Macerated still birth < 2.5 Kg",MzqiroyuhJh,HllvX50cXC0,default
+"2.2",Maternity,MA06,Mothers admitted with preterm labour,"105-MA06b. Mothers admitted with preterm labour - Given Corticosteroids",ggpPDJ3rI0X,HllvX50cXC0,default
+"2.2",Maternity,MA07,Pre-term births in the unit,"105-MA07b.Pre-terms births in the unit - ALive",ZxL2RoPyzOq,HllvX50cXC0,default
+"2.2",Maternity,MA08,No. of pre-term low birth weight babies (<2.5 Kg) initiated on kangaroo (KMC),"105-MA08. No. of low birth weight babies (<2.5 Kg) initiated on kangaroo (KMC)",X6rK1GHbLYp,HllvX50cXC0,default
+"2.2",Maternity,MA09,Live babies at discharge,"105-MA09. Live babies at discharge",H1oTelCAQry,HllvX50cXC0,default
+"2.2",Maternity,MA10,No. of Babies received LLINs,"105-MA10. Babies received LLIN",hflXW2kyPa9,HllvX50cXC0,default
+"2.2",Maternity,MA11,Total No. of Babies born with defects,"105-MA11a. Total number of Babies born with defects - Club Foot",vfpZ4FqOTwm,HllvX50cXC0,default
+"2.2",Maternity,MA11,Total No. of Babies born with defects,"105-MA11b. Total number of Babies born with defects - Other Defects",sGxfXHTmRGN,HllvX50cXC0,default
+"2.2",Maternity,MA12,Newborn deaths (0-7 days),"105-MA12_2019. Newborn deaths (0-7 days)",hrTskGHP0Av,HllvX50cXC0,default
+"2.2",Maternity,MA13,Maternal deaths,"105-MA13. Maternal deaths",F8Iz6QcexWB,c9JPAeQh49R,"20-24Yrs"
+"2.2",Maternity,MA13,Maternal deaths,"105-MA13. Maternal deaths",F8Iz6QcexWB,JtoaNPpY2BF,<15Yrs
+"2.2",Maternity,MA13,Maternal deaths,"105-MA13. Maternal deaths",F8Iz6QcexWB,PwuKTzy4vLJ,"15-19Yrs"
+"2.2",Maternity,MA13,Maternal deaths,"105-MA13. Maternal deaths",F8Iz6QcexWB,QGprPUGJp4N,"25-49Yrs"
+"2.2",Maternity,MA13,Maternal deaths,"105-MA13. Maternal deaths",F8Iz6QcexWB,sxBbkmHxnBP,"50+Yrs"
+"2.2",Maternity,MA14,No. of mothers who initiated breastfeeding within the 1st hour after delivery,"105-MA14a. Mothers who initiated breastfeeding within the 1st hour after delivery - Total",XXZZbU4B2N3,HllvX50cXC0,default
+"2.2",Maternity,MA14,No. of mothers who initiated breastfeeding within the 1st hour after delivery,"105-MA14b. Mothers who initiated breastfeeding within the 1st hour after delivery - HIV POS",PNG0YDb6dpy,HllvX50cXC0,default
+"2.2",Maternity,MA15,Women tested for HIV in labour 1st time this Pregnancy,"105-MA15. Women tested for HIV in labour 1st time this Pregnancy",SPctnmpC7W6,E7OcV5dLNeV,Negative
+"2.2",Maternity,MA15,Women tested for HIV in labour 1st time this Pregnancy,"105-MA15. Women tested for HIV in labour 1st time this Pregnancy",SPctnmpC7W6,gqp69grjFaC,Positive
+"2.2",Maternity,MA15,Women tested for HIV in labour 1st time this Pregnancy,"105-MA15. Women tested for HIV in labour 1st time this Pregnancy",SPctnmpC7W6,HllvX50cXC0,default
+"2.2",Maternity,MA15,Women tested for HIV in labour 1st time this Pregnancy,"105-MA15b_2019. Women tested for HIV in labour 1st time this Pregnancy - HIV+ (TRR)",AUfFbS7cWFd,HllvX50cXC0,default
+"2.2",Maternity,MA17,HIV+ women initiating ART in maternity,"105-MA17. HIV+ women initiating ART in maternity",KDoEmOjpYnL,HllvX50cXC0,default
+"2.2",Maternity,MA18,Male partners received HIV test results in the maternity setting,"105-MA18. Male partners received HIV test results in the maternity setting - Total",eHCrSEA2kSy,E7OcV5dLNeV,Negative
+"2.2",Maternity,MA18,Male partners received HIV test results in the maternity setting,"105-MA18. Male partners received HIV test results in the maternity setting - Total",eHCrSEA2kSy,gqp69grjFaC,Positive
+"2.2",Maternity,MA18,Male partners received HIV test results in the maternity setting,"105-MA18. Male partners received HIV test results in the maternity setting - Total",eHCrSEA2kSy,HllvX50cXC0,default
+"2.2",Maternity,MA18,Male partners received HIV test results in the maternity setting,"105-MA18b_2019. Male partners received HIV test results in the maternity setting - HIV+ (TRR)",BlJQ2P6kkQi,HllvX50cXC0,default
+"2.2",Maternity,MA19,HIV+ male partners initiated on ART in the maternity setting,"105-MA19. HIV+ male partners initiated on ART in the maternity setting",Z2baA5Kr5Uz,HllvX50cXC0,default
+"2.2",Maternity,MA20,No. of discordant couples identified in maternity,"105-MA20. Number of discordant couples identified in maternity",nLf9PdXCkDk,HllvX50cXC0,default
+"2.2",Maternity,MA21,Deliveries to HIV+ women in unit,"105-MA21a. Total Deliveries to HIV+ women in unit - Total",wOvonjgfh4b,HllvX50cXC0,default
+"2.2",Maternity,MA21,Deliveries to HIV+ women in unit,"105-MA21b. Deliveries to HIV+ women in unit - Live births",jHUIBmkOBZs,HllvX50cXC0,default
+"2.2",Maternity,MA22,HIV Exposed infants given ARVs,"105-MA22a. HIV Exposed infants given ARVs - Total",OUGMxrtXxri,HllvX50cXC0,default
+"2.2",Maternity,MA23,No. of babies with Birth asphyxia,"105-MA23. No.of babies with Birth asphyxia",nnmOsAUssg9,HllvX50cXC0,default
+"2.2",Maternity,MA24,No. of Live babies Successfully Resuscitated,"105-MA24. No. of Live babies Successfully Resuscitated",h5qpxtCVwAp,HllvX50cXC0,default
+"2.2",Maternity,MA25,No. received PNC check at 6 hours after birth,"105-MA25a. Received PNC check at 6 hours after birth - Baby",VBN3wvLEZjW,HllvX50cXC0,default
+"2.2",Maternity,MA25,No. received PNC check at 6 hours after birth,"105-MA25b. Received PNC check at 6 hours after birth - Mother",UrX15EcK8BZ,HllvX50cXC0,default
+"2.2",Maternity,MA26,No. received PNC within 24 hours after birth,"105-MA26a. Received PNC check within 24 hours after birth - Baby",WaiJyDDNwE7,HllvX50cXC0,default
+"2.2",Maternity,MA26,No. received PNC within 24 hours after birth,"105-MA26b. Received PNC check within 24 hours after birth - Mother",wPrRIRfODlP,HllvX50cXC0,default
+"2.2",Maternity,MA27,No. of women who received Uterotonics in management of 3rd stage of labour,"105-MA27a. Uterotonics used in management of 3rd stage of labour - Oxytocin",nA0w3UvRDpD,HllvX50cXC0,default
+"2.2",Maternity,MA27,No. of women who received Uterotonics in management of 3rd stage of labour,"105-MA27b. Uterotonics used in management of 3rd stage of labour - Misoprostol",IRfdGnNJzGW,HllvX50cXC0,default
+"2.2",Maternity,MA27,No. of women who received Uterotonics in management of 3rd stage of labour,"105-MA27c. Uterotonics used in management of 3rd stage of labour - Heat stable Carbetocin",qBXjgpcV5zX,HllvX50cXC0,default
+"2.2",Maternity,MA27,No. of women who received Uterotonics in management of 3rd stage of labour,"105-MA27d. Uterotonics used in management of 3rd stage of labour - Egometrine",SxPXVqUFskM,HllvX50cXC0,default
+"2.2",Maternity,MA28,No. of women who received Uterotonics as treatment of post partum haemorrhage (PPH),"105-MA28a. No. of women who received Uterotonics as treatment of post partum haemorrhage (PPH)-Oxytocin",PU4JyVtmAYY,HllvX50cXC0,default
+"2.2",Maternity,MA28,No. of women who received Uterotonics as treatment of post partum haemorrhage (PPH),"105-MA28b. No. of women who received Uterotonics as treatment of post partum haemorrhage (PPH)-Misoprostol",hawWpaDwa8v,HllvX50cXC0,default
+"2.2",Maternity,MA28,No. of women who received Uterotonics as treatment of post partum haemorrhage (PPH),"105-MA28c. No. of women who received Uterotonics as treatment of post partum haemorrhage (PPH)-Tranexamic",ziCT29DWKRC,HllvX50cXC0,default
+"2.2",Maternity,MA28,No. of women who received Uterotonics as treatment of post partum haemorrhage (PPH),"105-MA28d. No. of women who received Uterotonics as treatment of post partum haemorrhage (PPH)-Ergometrine",nTMjQrqEa8m,HllvX50cXC0,default

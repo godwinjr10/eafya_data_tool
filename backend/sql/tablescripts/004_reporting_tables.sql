@@ -27,11 +27,25 @@ CREATE TABLE IF NOT EXISTS reporting.patient_family_planning
 , birth_date TIMESTAMP
 , gender VARCHAR(6)
 , patient_visit_id BIGINT
-, clinic_id BIGINT
+, clinic_session_id BIGINT
+, patient_visit_id_1 BIGINT
+, visit_type_id BIGINT
 , encounter_id BIGINT
+, created_by_id BIGINT
+, user_first_name VARCHAR(255)
+, user_last_name VARCHAR(255)
+, user_other_name VARCHAR(255)
+, clinic_id BIGINT
+, clinic_name VARCHAR(255)
+, visit_type_name VARCHAR(255)
 , fp_administered_date TIMESTAMP
+, last_updated TIMESTAMP
+, patient_family_planning_id BIGINT
+, family_planning_category_id BIGINT
+, fp_category_name VARCHAR(255)
 , family_planning_id BIGINT
 , family_planning_name VARCHAR(255)
+, is_new_to_method BOOLEAN
 , treatment_stage VARCHAR(7)
 )
 ;
