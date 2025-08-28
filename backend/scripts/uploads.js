@@ -166,6 +166,80 @@ class CSVUploadService {
   }
 
   /**
+   * Drop table if it exists
+   */
+  async dropTableIfExists(tableName) {
+    const dropTableSQL = `
+      DROP TABLE IF EXISTS reporting."${tableName}";
+    `;
+    try {
+      await pool.query(dropTableSQL);
+      console.log(`Table ${tableName} dropped successfully`);
+    } catch (error) {
+      console.error(`Error dropping table ${tableName}:`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Clean and convert column data to integers
+   */
+  async cleanAndConvertColumn(tableName, columnName) {
+    const tempColumnName = `${columnName}_temp`;
+    const createTempColumnSQL = `
+      ALTER TABLE reporting."${tableName}"
+      ADD COLUMN ${tempColumnName} int;
+    `;
+    const updateNullsSQL = `
+      UPDATE reporting."${tableName}"
+      SET ${columnName} = 0
+      WHERE ${columnName} IS NULL;
+    `;
+    const updateTempColumnSQL = `
+      UPDATE reporting."${tableName}"
+      SET ${tempColumnName} = CAST(${columnName} AS int)
+      WHERE ${columnName} ~ '^[0-9]+$';
+    `;
+    const dropOldColumnSQL = `
+      ALTER TABLE reporting."${tableName}"
+      DROP COLUMN ${columnName};
+    `;
+    const renameTempColumnSQL = `
+      ALTER TABLE reporting."${tableName}"
+      RENAME COLUMN ${tempColumnName} TO ${columnName};
+    `;
+
+    try {
+      await pool.query(createTempColumnSQL);
+      await pool.query(updateNullsSQL);
+      await pool.query(updateTempColumnSQL);
+      await pool.query(dropOldColumnSQL);
+      await pool.query(renameTempColumnSQL);
+      console.log(`Column ${columnName} cleaned and converted to int for table ${tableName}`);
+    } catch (error) {
+      console.error(`Error cleaning and converting column ${columnName} for table ${tableName}:`, error);
+      throw error;
+    }
+  }
+
+  /**
+   * Alter column types for specific tables
+   */
+  async alterColumnTypes(tableName) {
+    const columnMappings = {
+      'dhis_eafya_mapping_commodities': 'eafya_product_id',
+      'dhis_eafya_mapping_conditions_final': 'eafya_disease_id',
+      'dhis_eafya_mapping_familyplanning': 'eafya_id',
+      'dhis_eafya_mapping_labtests': 'eafya_labtest_id',
+      'dhis_eafya_mapping_vaccines': 'eafya_vaccine_id'
+    };
+
+    if (columnMappings[tableName]) {
+      await this.cleanAndConvertColumn(tableName, columnMappings[tableName]);
+    }
+  }
+
+  /**
    * Upload single CSV file
    */
   async uploadCSVFile(fileName) {
@@ -174,6 +248,11 @@ class CSVUploadService {
 
     try {
       console.log(`\nProcessing file: ${fileName}`);
+      console.log(`Dropping table if exists: reporting.${tableName}`);
+
+      // Drop table if exists
+      await this.dropTableIfExists(tableName);
+
       console.log(`Creating table: reporting.${tableName}`);
 
       // Parse CSV data
@@ -182,6 +261,9 @@ class CSVUploadService {
 
       // Create table
       await this.createTableFromCSV(tableName, csvData);
+
+      // Alter column types
+      await this.alterColumnTypes(tableName);
 
       // Insert data
       const insertedRows = await this.insertData(tableName, csvData);
