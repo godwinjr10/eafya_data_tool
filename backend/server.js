@@ -20,6 +20,7 @@ import dhisIntegration from "./routes/dhisintegration/dhisroutes.js";
 import mappingRoutes from "./routes/mapping/hmis.js";
 import datasetRoutes from "./routes/mapping/datasets.js";
 import eafyaRoutes from "./routes/mapping/eafya.js";
+import maternityRoutes from "./routes/dhisreports/maternity.js";
 
 dotenv.config();
 
@@ -35,7 +36,6 @@ app.use(
 	})
 );
 
-// Test database connection
 testConnection();
 
 // Sync database models
@@ -45,9 +45,6 @@ const syncDatabase = async () => {
 			alter: process.env.NODE_ENV === "development",
 		});
 		console.log("Database synced successfully");
-
-		// // Initialize model associations after database sync
-		// initializeAssociations();
 	} catch (error) {
 		console.error("Error syncing database:", error);
 	}
@@ -73,6 +70,7 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/dhis", dhisIntegration);
 app.use("/api/mapping", mappingRoutes);
 app.use("/api/eafya", eafyaRoutes);
+app.use("/api/maternity", maternityRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
