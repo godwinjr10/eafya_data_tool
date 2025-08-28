@@ -69,7 +69,7 @@ const DhisEafyaMappingConditions = sequelize.define(
 	}
 );
 
-// Sync the model with database
-DhisEafyaMappingConditions.sync({ alter: true });
+// Remove the automatic sync to prevent conflicts
+// DhisEafyaMappingConditions.sync({ alter: true });
 
 export default DhisEafyaMappingConditions;

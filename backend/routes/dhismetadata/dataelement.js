@@ -19,7 +19,7 @@ const pool = new Pool({
 });
 
 // Updated to use the new DHIS2 API endpoint for datasets
-const DHIS2_URL = `${process.env.DHIS2_BASE_URL}/dataSets/quMWqLxzcfO?fields=id,uid,code,name,dataSetElements[dataElement[id,uid,code,name]]`;
+const DHIS2_URL = `${process.env.DHIS2_BASE_URL}/dataSets/onFoQ4ko74y?fields=id,uid,code,name,dataSetElements[dataElement[id,uid,code,name]]`;
 
 const AUTH = {
     username: process.env.DHIS2_USERNAME,
@@ -28,7 +28,7 @@ const AUTH = {
 
 // Updated table structure to store flattened dataset and data element information
 const createTableQuery = `
-CREATE TABLE IF NOT EXISTS reporting.dhis2_datasets_elements (
+CREATE TABLE IF NOT EXISTS reporting.dhis2_echis_elements (
     id SERIAL PRIMARY KEY,
     dataset_id VARCHAR(100),
     dataset_code VARCHAR(100),
@@ -109,7 +109,7 @@ const saveToDatabase = async (data) => {
         }
 
         const insertQuery = `
-      INSERT INTO reporting.dhis2_datasets_elements 
+      INSERT INTO reporting.dhis2_echis_elements
       (dataset_id, dataset_code, dataset_name, dataelement_id, dataelement_code, dataelement_name)
       VALUES ($1, $2, $3, $4, $5, $6)
       ON CONFLICT (dataset_id, dataelement_id) DO UPDATE 

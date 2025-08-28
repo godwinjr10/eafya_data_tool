@@ -1,18 +1,22 @@
-import express from 'express';
-import { pool } from '../../config/database.js';
+import express from "express";
+import { pool } from "../../config/database.js";
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    console.log("conditions");
-    try {
-        const { report_month, section_id } = req.query;
+router.get("/", async (req, res) => {
+	console.log("conditions");
+	try {
+		const { report_month, section_id } = req.query;
 
-        if (!section_id || !report_month) {
-            return res.status(400).json({ message: "section_id and report_month are required" });
-        }
+		if (!section_id || !report_month) {
+			return res
+				.status(400)
+				.json({
+					message: "section_id and report_month are required",
+				});
+		}
 
-        let query = `
+		let query = `
         SELECT
             c.report_month,
             e.section_id,
@@ -30,27 +34,27 @@ router.get('/', async (req, res) => {
             SUM(COALESCE(c."20y+ Male", 0)) AS "20y_plus_male",
             SUM(COALESCE(c."20y+ Female", 0)) AS "20y_plus_female"
         FROM reporting."105_01_conditions" c
-        INNER JOIN reporting.dhis_eafya_mapping_conditions_final e ON e.eafya_disease_id = c.disease_id 
+        INNER JOIN reporting.dhis_eafya_mapping_conditions_final e ON CAST(e.eafya_disease_id AS BIGINT) = c.disease_id 
         WHERE c.report_month = $2
         AND e.section_id = $1`;
 
-        const params = [section_id, report_month];
+		const params = [section_id, report_month];
 
-        query += ` GROUP BY c.report_month, e.section_id, e.section_name, e.hmis_code, e.hmis_name`;
+		query += ` GROUP BY c.report_month, e.section_id, e.section_name, e.hmis_code, e.hmis_name`;
 
-        query += ` ORDER BY c.report_month, e.section_id`;
+		query += ` ORDER BY c.report_month, e.section_id`;
 
-        console.log('Final Query:', query);
-        console.log('Parameters:', params);
-        
-        const { rows } = await pool.query(query, params);
-        console.log('Query Results:', rows);
-        
-        res.json(rows);
-    } catch (error) {
-        console.error('Query error:', error);
-        res.status(500).json({ message: error.message });
-    }
+		console.log("Final Query:", query);
+		console.log("Parameters:", params);
+
+		const { rows } = await pool.query(query, params);
+		console.log("Query Results:", rows);
+
+		res.json(rows);
+	} catch (error) {
+		console.error("Query error:", error);
+		res.status(500).json({ message: error.message });
+	}
 });
 
 export default router;

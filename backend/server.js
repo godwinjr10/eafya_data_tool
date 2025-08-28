@@ -20,6 +20,7 @@ import dhisIntegration from "./routes/dhisintegration/dhisroutes.js";
 import mappingRoutes from "./routes/mapping/hmis.js";
 import datasetRoutes from "./routes/mapping/datasets.js";
 import eafyaRoutes from "./routes/mapping/eafya.js";
+import maternityRoutes from "./routes/dhisreports/maternity.js";
 import eafyaDetailRoutes from "./routes/mapping/eafya-details.js";
 
 dotenv.config();
@@ -36,22 +37,18 @@ app.use(
   })
 );
 
-// Test database connection
 testConnection();
 
 // Sync database models
 const syncDatabase = async () => {
-  try {
-    await sequelize.sync({
-      alter: process.env.NODE_ENV === "development",
-    });
-    console.log("Database synced successfully");
-
-    // // Initialize model associations after database sync
-    // initializeAssociations();
-  } catch (error) {
-    console.error("Error syncing database:", error);
-  }
+	try {
+		await sequelize.sync({
+			alter: false, // Disable automatic schema alterations
+		});
+		console.log("Database synced successfully");
+	} catch (error) {
+		console.error("Error syncing database:", error);
+	}
 };
 
 syncDatabase();
@@ -74,8 +71,8 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/dhis", dhisIntegration);
 app.use("/api/mapping", mappingRoutes);
 app.use("/api/eafya", eafyaRoutes);
+app.use("/api/maternity", maternityRoutes);
 app.use("/api/eafya-details", eafyaDetailRoutes);
-
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

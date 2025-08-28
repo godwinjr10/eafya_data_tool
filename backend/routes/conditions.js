@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
             SUM(COALESCE(c."20y+ Male", 0)) AS "20y_plus_male",
             SUM(COALESCE(c."20y+ Female", 0)) AS "20y_plus_female"
         FROM reporting."105_01_conditions" c
-        INNER JOIN reporting.hmis_eafya_mapping m ON m.eafya_disease_id = c.disease_id
+        INNER JOIN reporting.hmis_eafya_mapping m ON CAST(m.eafya_disease_id AS BIGINT) = c.disease_id
         INNER JOIN reporting.dhis_eafya_mapping_conditions e ON e.section_id = $1 AND CAST(e.eafya_hmis_id AS int) = m.hmis_code
         WHERE 1=1`;
 
@@ -98,7 +98,7 @@ router.get("/", async (req, res) => {
                 e.section_id,
                 e.eafya_hmis_id
             FROM reporting."105_01_conditions" c
-            LEFT JOIN reporting.hmis_eafya_mapping m ON m.eafya_disease_id = c.disease_id
+            LEFT JOIN reporting.hmis_eafya_mapping m ON CAST(m.eafya_disease_id AS BIGINT) = c.disease_id
             LEFT JOIN reporting.dhis_eafya_mapping_conditions e ON CAST(e.eafya_hmis_id AS int) = m.hmis_code
             WHERE c.report_month = COALESCE($2, c.report_month)
             LIMIT 5`;

@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
                     section_name, 
                     hmis_code, 
                     hmis_name 
-                FROM reporting.dhis_eafya_mapping_conditions
+                FROM reporting.dhis_eafya_mapping_conditions_final
                 WHERE section_id = '1.1' 
                 AND hmis_code = 'OA01'
             ) m ON 1=1
@@ -85,7 +85,7 @@ router.get('/reattendance', async (req, res) => {
                     section_name, 
                     hmis_code, 
                     hmis_name 
-                FROM reporting.dhis_eafya_mapping_conditions
+                FROM reporting.dhis_eafya_mapping_conditions_final
                 WHERE section_id = '1.1' 
                 AND hmis_code = 'OA02'
             ) m ON 1=1
