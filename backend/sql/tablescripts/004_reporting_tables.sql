@@ -439,13 +439,14 @@ CREATE TABLE IF NOT EXISTS reporting."108_inpatient"
 (
   encounter_id BIGINT
 , patient_id VARCHAR(255)
+, disease_id BIGINT
 , diagnosis VARCHAR(255)
 , gender VARCHAR(6)
 , birth_date TIMESTAMP
 , admission_date TIMESTAMP
-, time_of_death TIMESTAMP
+, death_date TIMESTAMP
 )
-;
+;;
 
 CREATE TABLE IF NOT EXISTS reporting.eafya_mappings
 (
