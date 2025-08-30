@@ -3,7 +3,6 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import { testConnection, sequelize } from "./config/database.js";
-import { initializeAssociations } from "./models/associations.js";
 import attendanceRoutes from "./routes/dhisreports/attendance.js";
 import conditionRoutes from "./routes/dhisreports/conditions.js";
 import commoditiesRoutes from "./routes/dhisreports/commodities.js";
@@ -22,6 +21,7 @@ import mappingRoutes from "./routes/mapping/hmis.js";
 import datasetRoutes from "./routes/mapping/datasets.js";
 import eafyaRoutes from "./routes/mapping/eafya.js";
 import maternityRoutes from "./routes/dhisreports/maternity.js";
+import eafyaDetailRoutes from "./routes/mapping/eafya-details.js";
 
 dotenv.config();
 
@@ -32,9 +32,9 @@ app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(
-	express.urlencoded({
-		extended: true,
-	})
+  express.urlencoded({
+    extended: true,
+  })
 );
 
 testConnection();
@@ -72,16 +72,16 @@ app.use("/api/dhis", dhisIntegration);
 app.use("/api/mapping", mappingRoutes);
 app.use("/api/eafya", eafyaRoutes);
 app.use("/api/maternity", maternityRoutes);
-
+app.use("/api/eafya-details", eafyaDetailRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
-	console.error(err.stack);
-	res.status(500).json({
-		message: "Something went wrong!",
-	});
+  console.error(err.stack);
+  res.status(500).json({
+    message: "Something went wrong!",
+  });
 });
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-	console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

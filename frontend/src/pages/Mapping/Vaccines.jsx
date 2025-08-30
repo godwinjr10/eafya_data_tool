@@ -1,11 +1,13 @@
 // Vaccines.js
 import React, { useEffect, useMemo, useState } from "react";
-import { FaPlus, FaTrash } from "react-icons/fa";
+import { FaPlus, FaTrash, FaEye } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 import API from "../../helpers/api";
 import MappingDialog from "./MappingDialog";
 import MappingTable from "../../components/MappingTable";
 
 const Vaccines = () => {
+  const history = useHistory();
   const [mappings, setMappings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
@@ -69,6 +71,15 @@ const Vaccines = () => {
   };
 
   const onEafyaItemsLoaded = (items) => setVaccineItems(items);
+
+  const handleRowClick = (row) => {
+    history.push(`/mapping/vaccines/${row.hmis_code}`);
+  };
+
+  const handleViewDetails = (e, row) => {
+    e.stopPropagation();
+    history.push(`/mapping/vaccines/${row.hmis_code}`);
+  };
 
   // Get unique sections from mappings
   const uniqueSections = useMemo(() => {
@@ -140,8 +151,18 @@ const Vaccines = () => {
       render: (row) => (
         <div className="item-mappings">
           <button
-            className="btn btn-outline-primary btn-sm"
-            onClick={() => handleAdd(row)}
+            className="btn btn-outline-info btn-sm me-2"
+            onClick={(e) => handleViewDetails(e, row)}
+            title="View Details"
+          >
+            <FaEye />
+          </button>
+          <button
+            className="btn btn-outline-primary btn-sm me-2"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleAdd(row);
+            }}
           >
             <FaPlus /> Add Mapping
           </button>
@@ -170,6 +191,7 @@ const Vaccines = () => {
         sortable={true}
         emptyMessage="No vaccine mappings found"
         className="mapping-table"
+        onRowClick={handleRowClick}
       />
 
       <MappingDialog

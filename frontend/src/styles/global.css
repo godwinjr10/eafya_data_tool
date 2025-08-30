@@ -10,3 +10,52 @@
 .animate-spin {
   animation: spin 1s linear infinite;
 }
+
+/* Clickable table rows */
+.table-row-hover {
+  transition: background-color 0.2s ease;
+}
+
+.table-row-hover:hover {
+  background-color: rgba(13, 110, 253, 0.1) !important;
+  cursor: pointer;
+}
+
+/* Mapping table specific styles */
+.mapping-table .table tbody tr {
+  transition: all 0.2s ease;
+}
+
+.mapping-table .table tbody tr:hover {
+  background-color: rgba(13, 110, 253, 0.05);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Action buttons spacing */
+.item-mappings .btn {
+  margin-right: 0.5rem;
+}
+
+.item-mappings .btn:last-child {
+  margin-right: 0;
+}
+
+/* Timeline styles for mapping history */
+.timeline-item {
+  position: relative;
+}
+
+.timeline-marker {
+  flex-shrink: 0;
+}
+
+/* Card hover effects */
+.card {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
