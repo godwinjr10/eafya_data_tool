@@ -92,7 +92,7 @@ const LabTests = () => {
   const onSave = async (selectedIds) => {
     if (!dialogState.row) return;
     const {
-      section_id,
+      _section_id,
       category,
       hmis_code,
       hmis_name,
@@ -109,7 +109,7 @@ const LabTests = () => {
 
     try {
       const res = await API.post("/eafya/labtests", {
-        section_id,
+        section_id: _section_id,
         category,
         hmis_code,
         hmis_name,
@@ -131,7 +131,7 @@ const LabTests = () => {
     {
       accessor: "hmis_code",
       header: "HMIS Code",
-      width: "120px",
+      width: "180px",
       sortable: true,
     },
     {
@@ -140,8 +140,8 @@ const LabTests = () => {
       sortable: true,
     },
     {
-      accessor: "category",
-      header: "Category",
+      accessor: "section_name",
+      header: "Section Name",
       sortable: true,
     },
     {
@@ -151,21 +151,13 @@ const LabTests = () => {
       render: (row) => (
         <div className="item-mappings">
           <button
-            className="btn btn-outline-info btn-sm me-2"
+            className="btn btn-outline-primary btn-sm me-2"
             onClick={(e) => handleViewDetails(e, row)}
             title="View Details"
           >
-            <FaEye />
+            <FaEye /> View Mapping
           </button>
-          <button
-            className="btn btn-outline-primary btn-sm me-2"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleAdd(row);
-            }}
-          >
-            <FaPlus /> Add Mapping
-          </button>
+
           {row.id && (
             <a
               href="#"
@@ -187,7 +179,8 @@ const LabTests = () => {
         columns={columns}
         loading={loading}
         pageSize={10}
-        searchable={false} // We're using custom search above
+        searchable={true}
+        filterable={true}
         sortable={true}
         emptyMessage="No lab test mappings found"
         className="mapping-table"

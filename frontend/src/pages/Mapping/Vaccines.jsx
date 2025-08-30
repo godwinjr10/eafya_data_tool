@@ -91,7 +91,7 @@ const Vaccines = () => {
 
   const onSave = async (selectedIds) => {
     if (!dialogState.row) return;
-    const { section_id, section_name, hmis_code, hmis_name } = dialogState.row;
+    const { _section_id, section_name, hmis_code, hmis_name } = dialogState.row;
     const mappingsPayload = selectedIds
       .map((id) => {
         const item = vaccineItems.find((i) => i.id === id);
@@ -103,7 +103,7 @@ const Vaccines = () => {
 
     try {
       const res = await API.post("/eafya/vaccines", {
-        section_id,
+        _section_id,
         section_name,
         hmis_code,
         hmis_name,
@@ -124,7 +124,7 @@ const Vaccines = () => {
     {
       accessor: "hmis_code",
       header: "HMIS Code",
-      width: "120px",
+      width: "180px",
       sortable: true,
     },
     {
@@ -133,16 +133,9 @@ const Vaccines = () => {
       sortable: true,
     },
     {
-      accessor: "eafya_vaccine_id",
-      header: "eAFYA ID",
+      accessor: "section_name",
+      header: "Section Name",
       sortable: true,
-      render: (row) => row.eafya_vaccine_id || "-",
-    },
-    {
-      accessor: "eafya_vaccine_name",
-      header: "eAFYA Vaccine Name",
-      sortable: true,
-      render: (row) => row.eafya_vaccine_name || "-",
     },
     {
       accessor: "actions",
@@ -151,21 +144,13 @@ const Vaccines = () => {
       render: (row) => (
         <div className="item-mappings">
           <button
-            className="btn btn-outline-info btn-sm me-2"
+            className="btn btn-outline-primary btn-sm me-2"
             onClick={(e) => handleViewDetails(e, row)}
             title="View Details"
           >
-            <FaEye />
+            <FaEye /> View Mapping
           </button>
-          <button
-            className="btn btn-outline-primary btn-sm me-2"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleAdd(row);
-            }}
-          >
-            <FaPlus /> Add Mapping
-          </button>
+
           {row.id && (
             <a
               href="#"
@@ -187,7 +172,8 @@ const Vaccines = () => {
         columns={columns}
         loading={loading}
         pageSize={10}
-        searchable={false} // Using custom search above
+        searchable={true}
+        filterable={true}
         sortable={true}
         emptyMessage="No vaccine mappings found"
         className="mapping-table"

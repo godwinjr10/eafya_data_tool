@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 
 const MappingTable = ({
   data = [],
@@ -14,23 +14,49 @@ const MappingTable = ({
   hover = true,
   bordered = false,
   size = "md", // sm, md, lg
+  filterable = true,
+  sectionFilter = true, // New prop for section filtering
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
   const [itemsPerPage, setItemsPerPage] = useState(pageSize);
+  const [selectedSection, setSelectedSection] = useState("");
 
-  // Filter data based on search term
+  // Get unique sections from data
+  const uniqueSections = useMemo(() => {
+    const sections = [
+      ...new Set(
+        data.map((item) => item.section_name || item.section_id).filter(Boolean)
+      ),
+    ];
+    return sections.sort();
+  }, [data]);
+
+  // Filter data based on search term and section filter
   const filteredData = useMemo(() => {
-    if (!searchTerm.trim()) return data;
+    let filtered = data;
 
-    return data.filter((item) =>
-      columns.some((column) => {
-        const value = column.accessor ? item[column.accessor] : "";
-        return String(value).toLowerCase().includes(searchTerm.toLowerCase());
-      })
-    );
-  }, [data, searchTerm, columns]);
+    // Apply section filter
+    if (selectedSection && sectionFilter) {
+      filtered = filtered.filter((item) => {
+        const sectionValue = item.section_name || item.section_id;
+        return sectionValue === selectedSection;
+      });
+    }
+
+    // Apply global search
+    if (searchTerm.trim()) {
+      filtered = filtered.filter((item) =>
+        columns.some((column) => {
+          const value = column.accessor ? item[column.accessor] : "";
+          return String(value).toLowerCase().includes(searchTerm.toLowerCase());
+        })
+      );
+    }
+
+    return filtered;
+  }, [data, searchTerm, selectedSection, sectionFilter, columns]);
 
   // Sort data
   const sortedData = useMemo(() => {
@@ -76,6 +102,17 @@ const MappingTable = ({
 
   const handleItemsPerPageChange = (e) => {
     setItemsPerPage(Number(e.target.value));
+    setCurrentPage(1);
+  };
+
+  const handleSectionChange = (section) => {
+    setSelectedSection(section);
+    setCurrentPage(1);
+  };
+
+  const clearAllFilters = () => {
+    setSearchTerm("");
+    setSelectedSection("");
     setCurrentPage(1);
   };
 
@@ -195,75 +232,96 @@ const MappingTable = ({
     );
   };
 
-  const tableClasses = [
-    "table",
-    striped && "table-striped",
-    hover && "table-hover",
-    bordered && "table-bordered",
-    size === "md" && "table-md",
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+  const tableClasses = ["table", className].filter(Boolean).join(" ");
 
   return (
-    <div className="card bg-white p-4">
+    <div className="card border-0 shadow-sm p-3">
       {/* Header Controls */}
-
-      <div className="row mb-3 align-items-center">
-        <div className="col-md-6">
-          {searchable && (
-            <div className="input-group" style={{ maxWidth: "300px" }}>
-              <span className="input-group-text">
-                <svg
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
+      <div className="card-header border-0 bg-light bg-opacity-0  mb-4">
+        <div className="row align-items-center">
+          <div className="col-md-6">
+            {searchable && (
+              <div className="d-flex gap-2">
+                <div className="input-group">
+                  <span className="input-group-text">
+                    <svg
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    </svg>
+                  </span>
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Search across all data..."
+                    value={searchTerm}
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
+                      setCurrentPage(1);
+                    }}
+                  />
+                </div>
+                {filterable && sectionFilter && uniqueSections.length > 0 && (
+                  <select
+                    className="form-select"
+                    value={selectedSection}
+                    onChange={(e) => handleSectionChange(e.target.value)}
+                    style={{ minWidth: "150px" }}
+                  >
+                    <option value="">All Sections</option>
+                    {uniqueSections.map((section) => (
+                      <option key={section} value={section}>
+                        {section}
+                      </option>
+                    ))}
+                  </select>
+                )}
+              </div>
+            )}
+          </div>
+          <div className="col-md-6 text-end">
+            <div className="d-flex align-items-center justify-content-end gap-3">
+              <div className="d-flex align-items-center gap-2">
+                <label className="form-label mb-0 small">Show:</label>
+                <select
+                  className="form-select form-select-sm"
+                  value={itemsPerPage}
+                  onChange={handleItemsPerPageChange}
+                  style={{ width: "auto" }}
                 >
-                  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg>
-              </span>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Search..."
-                value={searchTerm}
-                onChange={(e) => {
-                  setSearchTerm(e.target.value);
-                  setCurrentPage(1);
-                }}
-              />
+                  <option value={5}>5</option>
+                  <option value={10}>10</option>
+                  <option value={25}>25</option>
+                  <option value={50}>50</option>
+                  <option value={100}>100</option>
+                </select>
+              </div>
+              {(searchTerm || selectedSection) && (
+                <button
+                  className="btn btn-outline-secondary btn-sm"
+                  onClick={clearAllFilters}
+                  title="Clear all filters"
+                >
+                  <svg
+                    width="14"
+                    height="14"
+                    fill="currentColor"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                  </svg>
+                </button>
+              )}
             </div>
-          )}
-        </div>
-        <div className="col-md-6 text-end">
-          <div className="d-flex justify-content-end align-items-center gap-3">
-            <div className="d-flex align-items-center">
-              <label className="form-label me-2 mb-0">Show:</label>
-              <select
-                className="form-select form-select-sm"
-                style={{ width: "auto" }}
-                value={itemsPerPage}
-                onChange={handleItemsPerPageChange}
-              >
-                <option value={5}>5</option>
-                <option value={10}>10</option>
-                <option value={25}>25</option>
-                <option value={50}>50</option>
-                <option value={100}>100</option>
-              </select>
-            </div>
-            <small className="text-muted">
-              Showing {startItem} to {endItem} of {sortedData.length} entries
-              {searchTerm && ` (filtered from ${data.length} total entries)`}
-            </small>
           </div>
         </div>
       </div>
 
       {/* Table */}
-      <div className="container">
+      <div className="card-body p-0">
         {loading ? (
           <div className="text-center py-5">
             <div className="spinner-border text-primary" role="status">
@@ -271,109 +329,89 @@ const MappingTable = ({
             </div>
           </div>
         ) : (
-          <table className={tableClasses}>
-            <thead className="table-primary">
-              <tr>
-                {columns.map((column) => (
-                  <th
-                    key={column.key || column.accessor}
-                    style={{
-                      width: column.width,
-                      cursor:
-                        sortable && column.sortable !== false
-                          ? "pointer"
-                          : "default",
-                      userSelect: "none",
-                    }}
-                    onClick={() =>
-                      column.sortable !== false && handleSort(column.accessor)
-                    }
-                  >
-                    <div className="d-flex align-items-center justify-content-between">
-                      <span>{column.header}</span>
-                      {sortable &&
-                        column.sortable !== false &&
-                        getSortIcon(column.accessor)}
-                    </div>
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {paginatedData.length > 0 ? (
-                paginatedData.map((item, index) => (
-                  <tr
-                    key={item.id || index}
-                    style={{
-                      cursor: onRowClick ? "pointer" : "default",
-                    }}
-                    onClick={() => onRowClick && onRowClick(item)}
-                    className={onRowClick ? "table-row-hover" : ""}
-                  >
-                    {columns.map((column) => (
-                      <td key={column.key || column.accessor}>
-                        {renderCell(item, column)}
-                      </td>
-                    ))}
-                  </tr>
-                ))
-              ) : (
+          <div className="table-responsive">
+            <table className="table table-bordered">
+              <thead className="table-light">
                 <tr>
-                  <td
-                    colSpan={columns.length}
-                    className="text-center py-4 text-muted"
-                  >
-                    {emptyMessage}
-                  </td>
+                  {columns.map((column) => (
+                    <th
+                      key={column.key || column.accessor}
+                      className="fw-semibold text-uppercase small"
+                      style={{
+                        width: column.width,
+                        cursor:
+                          sortable && column.sortable !== false
+                            ? "pointer"
+                            : "default",
+                        userSelect: "none",
+                      }}
+                      onClick={() =>
+                        column.sortable !== false && handleSort(column.accessor)
+                      }
+                    >
+                      <div className="d-flex align-items-center justify-content-between">
+                        <span>{column.header}</span>
+                        {sortable &&
+                          column.sortable !== false &&
+                          getSortIcon(column.accessor)}
+                      </div>
+                    </th>
+                  ))}
                 </tr>
-              )}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {paginatedData.length > 0 ? (
+                  paginatedData.map((item, index) => (
+                    <tr
+                      key={item.id || index}
+                      style={{
+                        cursor: onRowClick ? "pointer" : "default",
+                      }}
+                      onClick={() => onRowClick && onRowClick(item)}
+                    >
+                      {columns.map((column) => (
+                        <td
+                          key={column.key || column.accessor}
+                          className="align-middle"
+                        >
+                          {renderCell(item, column)}
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td
+                      colSpan={columns.length}
+                      className="text-center py-4 text-muted"
+                    >
+                      {emptyMessage}
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
 
       {/* Pagination */}
       {!loading && totalPages > 1 && (
-        <div className="row align-items-center mt-3">
-          <div className="col-md-6">
-            <small className="text-muted">
-              Page {currentPage} of {totalPages}
-            </small>
-          </div>
-          <div className="col-md-6">
+        <div className="card-footer border-0 bg-light bg-opacity-0 ">
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="text-muted small">
+              Showing {startItem} to {endItem} of {sortedData.length} entries
+              {(searchTerm || selectedSection) &&
+                ` (filtered from ${data.length} total entries)`}
+            </div>
             <nav aria-label="Table pagination">
-              <ul className="pagination pagination-sm justify-content-end mb-0">
+              <ul className="pagination pagination-sm mb-0">
                 {renderPaginationButtons()}
               </ul>
             </nav>
           </div>
         </div>
       )}
-
-      {/* <style jsx>{`
-        .table-row-hover:hover {
-          background-color: rgba(0, 123, 255, 0.1) !important;
-        }
-        .page-link {
-          border: 1px solid #dee2e6;
-        }
-        .page-item.active .page-link {
-          background-color: #0d6efd;
-          border-color: #0d6efd;
-        }
-        .table th {
-          font-weight: 600;
-          font-size: 0.875rem;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-        .data-table-container {
-          background: white;
-          border-radius: 0.5rem;
-          box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-          padding: 1.5rem;
-        }
-      `}</style> */}
     </div>
   );
 };

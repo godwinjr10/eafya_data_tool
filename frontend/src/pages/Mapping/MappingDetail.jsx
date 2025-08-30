@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useHistory, useLocation } from "react-router-dom";
-import { FaArrowLeft, FaHistory, FaInfoCircle } from "react-icons/fa";
+import { FaArrowLeft, FaHistory, FaInfoCircle, FaPlus } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import API from "../../helpers/api";
-
+import MappingTable from "../../components/MappingTable";
+import MappingDialog from "./MappingDialog";
 const MappingDetail = () => {
   const { mappingType, id } = useParams();
   const history = useHistory();
@@ -11,12 +13,17 @@ const MappingDetail = () => {
   const [mappingData, setMappingData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [mappingHistory, setMappingHistory] = useState([]);
+  const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
+  const [eafyaItems, setEafyaItems] = useState([]);
 
   // Mapping type configurations
   const MAPPING_CONFIGS = {
     commodities: {
       title: "Commodities Mapping",
       endpoint: "/eafya/commodities",
+      searchEndpoint: "/eafya/products",
+      sectionField: "section_id",
+      datasetCode: "HMIS1054",
       fields: [
         { key: "hmis_code", label: "HMIS Code" },
         { key: "hmis_name", label: "HMIS Name" },
@@ -26,15 +33,21 @@ const MappingDetail = () => {
     labtests: {
       title: "Lab Tests Mapping",
       endpoint: "/eafya/labtests",
+      searchEndpoint: "/eafya/lab",
+      sectionField: "_section_id",
+      datasetCode: "HMIS1055",
       fields: [
         { key: "hmis_code", label: "HMIS Code" },
         { key: "hmis_name", label: "HMIS Name" },
-        { key: "section_id", label: "Section ID" },
+        { key: "_section_id", label: "Section ID" },
       ],
     },
     conditions: {
       title: "Conditions Mapping",
       endpoint: "/eafya/conditions",
+      searchEndpoint: "/eafya/disease-items",
+      sectionField: "section_id",
+      datasetCode: "HMIS1052_CONDITIONS",
       fields: [
         { key: "hmis_code", label: "HMIS Code" },
         { key: "hmis_name", label: "HMIS Name" },
@@ -44,19 +57,25 @@ const MappingDetail = () => {
     familyplanning: {
       title: "Family Planning Mapping",
       endpoint: "/eafya/familyplanning",
+      searchEndpoint: "/eafya/familyplanning-items",
+      sectionField: "_section_id",
+      datasetCode: "HMIS1052_FP",
       fields: [
         { key: "hmis_code", label: "HMIS Code" },
         { key: "hmis_name", label: "HMIS Name" },
-        { key: "section_id", label: "Section ID" },
+        { key: "_section_id", label: "Section ID" },
       ],
     },
     vaccines: {
       title: "Vaccines Mapping",
       endpoint: "/eafya/vaccines",
+      searchEndpoint: "/eafya/vaccine-items",
+      sectionField: "_section_id",
+      datasetCode: "HMIS1052_VACCINE",
       fields: [
         { key: "hmis_code", label: "HMIS Code" },
         { key: "hmis_name", label: "HMIS Name" },
-        { key: "section_id", label: "Section ID" },
+        { key: "_section_id", label: "Section ID" },
       ],
     },
   };
@@ -102,221 +121,233 @@ const MappingDetail = () => {
     }
   };
 
-  const handleDelete = async () => {
+  const handleDelete = async (eafyaId) => {
     if (window.confirm("Are you sure you want to delete this mapping?")) {
       try {
-        // Since we don't have IDs, we'll need to delete by HMIS code and other identifying fields
-        // For now, redirect back to mapping list
-        console.log(
-          "Delete functionality needs to be implemented for HMIS code based deletion"
-        );
-        alert("Delete functionality will be implemented in the next update");
-        history.push("/mapping");
+        // Build the delete payload with the required fields
+        const hmis_code = id; // The ID from URL params is the hmis_code
+
+        // Get section value from the current mapping context
+        let sectionValue;
+        if (mappingData && mappingData[config.sectionField]) {
+          sectionValue = mappingData[config.sectionField];
+        } else if (mappingData && mappingData.section_id) {
+          sectionValue = mappingData.section_id;
+        } else if (mappingData && mappingData._section_id) {
+          sectionValue = mappingData._section_id;
+        } else {
+          sectionValue = "6.1"; // Default section
+        }
+
+        // Simple payload - just send what we need
+        const payload = {
+          eafya_id: eafyaId,
+        };
+
+        console.log("Deleting mapping with payload:", payload);
+
+        // Call the delete endpoint
+        const res = await API.delete(config.endpoint, { data: payload });
+
+        if (res.status === 200 || res.status === 204) {
+          // Refresh the mapping data to show updated list
+          fetchMappingDetail();
+          alert("Mapping deleted successfully!");
+        }
       } catch (error) {
         console.error("Error deleting mapping:", error);
-        alert("Failed to delete mapping");
+        alert("Failed to delete mapping. Please try again.");
       }
     }
   };
+  const handleAdd = (row) => {
+    setDialogState({ isOpen: true, row });
+  };
 
-  if (loading) {
-    return (
-      <div className="container-fluid py-4">
-        <div className="text-center">
-          <div className="spinner-border text-primary" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
+  const onEafyaItemsLoaded = (items) => setEafyaItems(items);
 
-  if (!mappingData) {
-    return (
-      <div className="container-fluid py-4">
-        <div className="alert alert-danger">
-          <h4>Mapping Not Found</h4>
-          <p>The requested mapping could not be found.</p>
+  const onSave = async (mappingData) => {
+    try {
+      console.log("onSave received mappingData:", mappingData);
+      console.log("Current mappingData from state:", mappingData);
+      console.log("Current config:", config);
+
+      // Get the required fields from the current mapping context
+      const hmis_code = id; // The ID from URL params is the hmis_code
+      const sectionField = config.sectionField;
+
+      // mappingData is an array of selected item IDs, convert to proper mappings format
+      const mappings = Array.isArray(mappingData)
+        ? mappingData
+            .map((id) => {
+              const item = eafyaItems.find((i) => i.id === id);
+              return item ? { id: item.id, name: item.name } : null;
+            })
+            .filter(Boolean)
+        : [];
+
+      // Get section value from the current mapping context (mappingData from state)
+      let sectionValue;
+      if (mappingData && mappingData[sectionField]) {
+        sectionValue = mappingData[sectionField];
+      } else if (mappingData && mappingData.section_id) {
+        sectionValue = mappingData.section_id;
+      } else if (mappingData && mappingData._section_id) {
+        sectionValue = mappingData._section_id;
+      } else {
+        // If we can't find section value in mappingData, we need to get it from the current context
+        // For now, let's use a default or get it from the URL/context
+        sectionValue = "6.1"; // Default section for commodities - you may need to adjust this
+      }
+
+      console.log("Extracted values:", {
+        hmis_code,
+        sectionValue,
+        sectionField,
+        mappings,
+      });
+
+      if (!sectionValue || !hmis_code || !mappings || mappings.length === 0) {
+        alert(
+          `Missing required fields: ${sectionField}=${sectionValue}, hmis_code=${hmis_code} and non-empty mappings array (length: ${mappings.length})`
+        );
+        return;
+      }
+
+      // Build the payload with the correct section field name
+      // For labtests, database uses _section_id but backend expects section_id
+      const payload = {
+        hmis_code,
+        mappings: mappings,
+        [mappingType === "labtests" ? "section_id" : sectionField]:
+          sectionValue,
+      };
+
+      console.log("Sending payload:", payload);
+
+      const res = await API.post(config.endpoint, payload);
+
+      if (res.status === 200 || res.status === 201) {
+        // Refresh the mapping data
+        fetchMappingDetail();
+        setDialogState({ isOpen: false, row: null });
+        alert("Mapping added successfully!");
+      }
+    } catch (error) {
+      console.error("Error saving mapping:", error);
+      alert("Failed to save mapping");
+    }
+  };
+
+  const columns = [
+    {
+      accessor: "eafya_id",
+      header: "Eafya ID",
+      width: "120px",
+      sortable: true,
+    },
+    {
+      accessor: "eafya_name",
+      header: "Eafya Name",
+      sortable: true,
+    },
+    {
+      accessor: "actions",
+      header: "Actions",
+      sortable: false,
+      render: (row) => (
+        <div className="item-mappings">
           <button
-            className="btn btn-primary"
-            onClick={() => history.push("/mapping")}
+            className="btn btn-outline-danger btn-sm"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDelete(row.eafya_id);
+            }}
+            title="Delete mapping"
           >
-            Back to Mappings
+            <FaTrash />
           </button>
         </div>
-      </div>
-    );
-  }
-
+      ),
+    },
+  ];
+  console.log("mapping data==", mappingData);
   return (
     <div className="container-fluid py-4">
       {/* Header */}
-      <div className="row align-items-center mb-4">
-        <div className="col-md-8">
-          <button
-            className="btn btn-outline-secondary btn-sm mb-2"
-            onClick={() => history.push("/mapping")}
-          >
-            <FaArrowLeft className="me-2" />
-            Back to Mappings
-          </button>
-          <h1 className="h3 mb-1 text-primary fw-bold">
-            {config.title} - Detail View
-          </h1>
-          <p className="text-muted mb-0">
-            HMIS Code: {mappingData.hmis_code} | {mappingData.hmis_name}
-          </p>
-        </div>
-        <div className="col-md-4 text-end">
-          {/* <div className="btn-group" role="group">
-            <button
-              className="btn btn-outline-primary btn-sm"
-              onClick={handleEdit}
-            >
-              <FaEdit className="me-2" />
-              Edit
-            </button>
-            <button
-              className="btn btn-outline-danger btn-sm"
-              onClick={handleDelete}
-            >
-              <FaTrash className="me-2" />
-              Delete
-            </button>
-          </div> */}
-        </div>
-      </div>
-
-      <div className="row">
-        {/* Main Content */}
-        <div className="col-md-8">
-          <div className="card mb-4">
-            <div className="card-header">
-              <h5 className="card-title mb-0">
-                <FaInfoCircle className="me-2 text-primary" />
-                Mapping Information
-              </h5>
-            </div>
-            <div className="card-body">
-              <div className="row">
-                {config.fields.map((field) => (
-                  <div key={field.key} className="col-md-6 mb-3">
-                    <label className="form-label fw-semibold text-muted small">
-                      {field.label}
-                    </label>
-                    <div className="form-control-plaintext">
-                      {mappingData[field.key] || "-"}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+      <div className="bg-primary bg-opacity-10 text-primary p-4 mb-4 rounded">
+        <div className="row align-items-center">
+          <div className="col-lg-8">
+            <nav aria-label="breadcrumb">
+              <ol className="breadcrumb mb-2">
+                <li className="breadcrumb-item">
+                  <button
+                    className="btn btn-link p-0 text-primary text-decoration-none"
+                    onClick={() => history.push("/mapping")}
+                  >
+                    <FaArrowLeft className="me-1" />
+                    Mapping
+                  </button>
+                </li>
+                <li
+                  className="breadcrumb-item active text-primary"
+                  aria-current="page"
+                >
+                  {config.title} Detail
+                </li>
+              </ol>
+            </nav>
+            <h1 className="display-6 text-primary fw-bold mb-2">
+              {mappingData?.hmis_name}
+            </h1>
+            <p className="lead mb-0 text-primary opacity-75">
+              <span className="fw-semibold">HMIS Code:</span>{" "}
+              {mappingData?.hmis_code} |{" "}
+              <span className="fw-semibold">Type:</span> {config.title}
+            </p>
           </div>
-
-          {/* Related Data Section */}
-          <div className="card">
-            <div className="card-header">
-              <h5 className="card-title mb-0">
-                <FaInfoCircle className="me-2 text-primary" />
-                Mappings (
-                {mappingData.mappings ? mappingData.mappings.length : 0})
-              </h5>
-            </div>
-            <div className="card-body">
-              {mappingData.mappings && mappingData.mappings.length > 0 ? (
-                <div className="table-responsive">
-                  <table className="table table-sm">
-                    <thead>
-                      <tr>
-                        <th>Eafya Id</th>
-                        <th>AAFYA Item</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {mappingData.mappings.map((mapping, index) => (
-                        <tr
-                          key={`${mapping.hmis_code}-${mapping.section_id}-${index}`}
-                        >
-                          <td>{mapping.eafya_product_id || mapping.eafya_labtest_id || "NULL"}</td>
-                          <td>{mapping.eafya_product_name || mapping.eafya_labtest_name|| "NULL"}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              ) : (
-                <p className="text-muted mb-0">
-                  No mappings found for this HMIS code.
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-
-        {/* Sidebar */}
-        <div className="col-md-4">
-          {/* Mapping History */}
-          <div className="card mb-4">
-            <div className="card-header">
-              <h5 className="card-title mb-0">
-                <FaHistory className="me-2 text-primary" />
-                Mapping History
-              </h5>
-            </div>
-            <div className="card-body">
-              {mappingHistory.length > 0 ? (
-                <div className="timeline">
-                  {mappingHistory.map((event) => (
-                    <div key={event.id} className="timeline-item mb-3">
-                      <div className="d-flex align-items-start">
-                        <div
-                          className="timeline-marker bg-primary rounded-circle me-3"
-                          style={{
-                            width: "8px",
-                            height: "8px",
-                            marginTop: "6px",
-                          }}
-                        ></div>
-                        <div className="flex-grow-1">
-                          <div className="fw-semibold small">
-                            {event.action}
-                          </div>
-                          <div className="text-muted small">{event.user}</div>
-                          <div className="text-muted small">
-                            {new Date(event.timestamp).toLocaleDateString()}
-                          </div>
-                          {event.details && (
-                            <div className="text-muted small mt-1">
-                              {event.details}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-muted mb-0">No history available.</p>
-              )}
-            </div>
-          </div>
-
-          {/* Quick Actions */}
-          <div className="card">
-            <div className="card-header">
-              <h5 className="card-title mb-0">Quick Actions</h5>
-            </div>
-            <div className="card-body">
+          <div className="col-lg-4 mt-3 mt-lg-0">
+            <div className="d-flex justify-content-end">
               <button
-                className="btn btn-outline-secondary w-100"
-                onClick={() => history.push("/mapping")}
+                className="btn btn-primary"
+                onClick={() => handleAdd(mappingData)}
               >
-                View All Mappings
+                <FaPlus className="me-2" />
+                Add Mapping
               </button>
             </div>
           </div>
         </div>
       </div>
+
+      <div className="row">
+        <div className="col-12">
+          <MappingTable
+            data={mappingData?.mappings}
+            columns={columns}
+            loading={loading}
+            pageSize={10}
+            searchable={true}
+            filterable={true}
+            sortable={true}
+            emptyMessage="No condition mappings found"
+            className="mapping-table"
+            onRowClick={() => {}}
+          />
+        </div>
+      </div>
+
+      <MappingDialog
+        isOpen={dialogState.isOpen}
+        onClose={() => setDialogState({ isOpen: false, row: null })}
+        onSave={onSave}
+        hmisName={dialogState.row?.hmis_name || ""}
+        section={dialogState.row?.[config.sectionField] || ""}
+        eafyaItems={eafyaItems}
+        onEafyaItemsLoaded={onEafyaItemsLoaded}
+        datasetCode={config.datasetCode}
+        searchEndpoint={config.searchEndpoint}
+      />
     </div>
   );
 };

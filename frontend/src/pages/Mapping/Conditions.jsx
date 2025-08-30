@@ -141,7 +141,7 @@ const Conditions = () => {
     {
       accessor: "hmis_code",
       header: "HMIS Code",
-      width: "120px",
+      width: "180px",
       sortable: true,
     },
     {
@@ -162,21 +162,13 @@ const Conditions = () => {
       render: (row) => (
         <div className="item-mappings">
           <button
-            className="btn btn-outline-info btn-sm me-2"
+            className="btn btn-outline-primary btn-sm me-2"
             onClick={(e) => handleViewDetails(e, row)}
             title="View Details"
           >
-            <FaEye />
+            <FaEye /> View Mapping
           </button>
-          <button
-            className="btn btn-primary btn-sm me-2"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleAdd(row);
-            }}
-          >
-            <FaPlus /> Add Mapping
-          </button>
+
           {row.id && (
             <a
               href="#"
@@ -193,13 +185,13 @@ const Conditions = () => {
 
   return (
     <>
-      <a>Total : {count}</a>
       <MappingTable
         data={filteredMappings}
         columns={columns}
         loading={loading}
         pageSize={10}
-        searchable={false} // Using custom search above
+        searchable={true}
+        filterable={true}
         sortable={true}
         emptyMessage="No condition mappings found"
         className="mapping-table"

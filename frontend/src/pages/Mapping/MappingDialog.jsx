@@ -38,6 +38,7 @@ const MappingDialog = ({
   eafyaItems,
   onEafyaItemsLoaded,
   datasetCode,
+  searchEndpoint,
 }) => {
   const [selectedDiseases, setSelectedDiseases] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -71,7 +72,8 @@ const MappingDialog = ({
   const fetchEafyaItems = async () => {
     setLoading(true);
     try {
-      const endpoint = getEndpointForDataset(datasetCode);
+      // Use searchEndpoint if provided, otherwise fall back to datasetCode mapping
+      const endpoint = searchEndpoint || getEndpointForDataset(datasetCode);
       const response = await API.get(endpoint);
       const items = response.data || [];
       onEafyaItemsLoaded(items);
@@ -134,8 +136,6 @@ const MappingDialog = ({
           gap: "20px",
         }}
       >
-     
-
         <div className="mb-3">
           <label className="form-label fw-semibold text-dark small mb-2">
             Search Items
