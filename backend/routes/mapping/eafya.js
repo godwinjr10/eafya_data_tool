@@ -44,14 +44,12 @@ router.get("/labtests", async (req, res) => {
   try {
     const query = `
         SELECT 
-            id, 
-            section_id, 
-            category, 
-            hmis_code, 
+          
+            distinct hmis_code, 
             hmis_name, 
-            eafya_labtest_id, 
-            eafya_labtest_name,
-            dhis2_data_element_id
+              section_id, 
+              section_name,
+              category
             FROM reporting.dhis_eafya_mapping_labtests
         `;
 

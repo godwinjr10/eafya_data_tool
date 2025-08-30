@@ -237,8 +237,8 @@ const MappingDetail = () => {
                         <tr
                           key={`${mapping.hmis_code}-${mapping.section_id}-${index}`}
                         >
-                          <td>{mapping.eafya_product_id || "NULL"}</td>
-                          <td>{mapping.eafya_product_name || "NULL"}</td>
+                          <td>{mapping.eafya_product_id || mapping.eafya_labtest_id || "NULL"}</td>
+                          <td>{mapping.eafya_product_name || mapping.eafya_labtest_name|| "NULL"}</td>
                         </tr>
                       ))}
                     </tbody>

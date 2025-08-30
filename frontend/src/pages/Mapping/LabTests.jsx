@@ -145,17 +145,6 @@ const LabTests = () => {
       sortable: true,
     },
     {
-      accessor: "eafya_labtest",
-      header: "eAFYA Lab Test",
-      sortable: false,
-      render: (row) =>
-        row.eafya_labtest_id ? (
-          `${row.eafya_labtest_id} - ${row.eafya_labtest_name}`
-        ) : (
-          <span className="text-muted">-</span>
-        ),
-    },
-    {
       accessor: "actions",
       header: "Actions",
       sortable: false,
