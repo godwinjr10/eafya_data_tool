@@ -2,6 +2,7 @@ CREATE MATERIALIZED VIEW reporting."108_mental_health" AS
 SELECT
     TO_CHAR(admission_date, 'YYYYMM') AS report_month,
     diagnosis,
+    disease_id,
 -- Age <5
     SUM(CASE WHEN DATE_PART('year', age(admission_date, birth_date)) < 5 AND LOWER(gender) = 'male' THEN 1 ELSE 0 END) AS "<5Y Male",
     SUM(CASE WHEN DATE_PART('year', age(admission_date, birth_date)) < 5 AND LOWER(gender) = 'female' THEN 1 ELSE 0 END) AS "<5Y Female",
@@ -21,6 +22,5 @@ SELECT
     SUM(CASE WHEN DATE_PART('year', age(admission_date, birth_date)) >= 60 AND LOWER(gender) = 'male' THEN 1 ELSE 0 END) AS "60+Y Male",
     SUM(CASE WHEN DATE_PART('year', age(admission_date, birth_date)) >= 60 AND LOWER(gender) = 'female' THEN 1 ELSE 0 END) AS "60+Y Female"
 FROM reporting."108_inpatient"
-WHERE diagnosis ILIKE '%mental health%'
-GROUP BY TO_CHAR(admission_date, 'YYYYMM'), diagnosis
+GROUP BY TO_CHAR(admission_date, 'YYYYMM'), diagnosis, disease_id
 ORDER BY report_month DESC, diagnosis;
