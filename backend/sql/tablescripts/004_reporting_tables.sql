@@ -517,10 +517,11 @@ CREATE TABLE IF NOT EXISTS reporting.census_death
 )
 ;
 
-CREATE TABLE IF NOT EXISTS reporting."108_maternal_neonatal"
+CREATE TABLE  IF NOT EXISTS reporting."108_maternal_neonatal"
 (
   encounter_id BIGINT
 , patient_id VARCHAR(255)
+, disease_id BIGINT
 , diagnosis VARCHAR(255)
 , gender VARCHAR(6)
 , birth_date TIMESTAMP
