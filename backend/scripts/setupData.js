@@ -75,7 +75,7 @@ const datasets = [
 const defaultUser = {
     username: "admin",
     role: "admin",
-    password: "admin123",
+    password: "admin1234",
     firstname: "System",
     lastname: "Administrator",
     phoneNo: "+254700000000",
