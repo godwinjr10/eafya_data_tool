@@ -65,13 +65,13 @@ const Conditions = () => {
   const columns = [
     {
       accessor: "hmis_code",
-      header: "HMIS Indicator Code",
+      header: "HMIS Code",
       width: "180px",
       sortable: true,
     },
     {
       accessor: "hmis_name",
-      header: "HMIS Indicator Name",
+      header: "HMIS Name",
       sortable: true,
     },
     {

@@ -84,7 +84,7 @@ const FamilyPlanning = () => {
     },
     {
       accessor: "hmis_name",
-      header: "HMIS Indicator Name",
+      header: "HMIS Name",
       sortable: true,
     },
     {

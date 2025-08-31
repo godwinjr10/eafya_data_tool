@@ -21,6 +21,11 @@ import mappingRoutes from "./routes/mapping/hmis.js";
 import datasetRoutes from "./routes/mapping/datasets.js";
 import eafyaRoutes from "./routes/mapping/eafya.js";
 import maternityRoutes from "./routes/dhisreports/maternity.js";
+import postnatalRoutes from "./routes/dhisreports/postnatal.js";
+import familyPlanningRoutes from "./routes/dhisreports/familyplanning.js";
+import childHealthRoutes from "./routes/dhisreports/childHealth.js";
+import tetanusVaccinationRoutes from "./routes/dhisreports/tetanusVaccination.js";
+import childImmunizationRoutes from "./routes/dhisreports/childImmunization.js";
 import eafyaDetailRoutes from "./routes/mapping/eafya-details.js";
 
 dotenv.config();
@@ -41,14 +46,14 @@ testConnection();
 
 // Sync database models
 const syncDatabase = async () => {
-	try {
-		await sequelize.sync({
-			alter: false, // Disable automatic schema alterations
-		});
-		console.log("Database synced successfully");
-	} catch (error) {
-		console.error("Error syncing database:", error);
-	}
+  try {
+    await sequelize.sync({
+      alter: false, // Disable automatic schema alterations
+    });
+    console.log("Database synced successfully");
+  } catch (error) {
+    console.error("Error syncing database:", error);
+  }
 };
 
 syncDatabase();
@@ -72,6 +77,11 @@ app.use("/api/dhis", dhisIntegration);
 app.use("/api/mapping", mappingRoutes);
 app.use("/api/eafya", eafyaRoutes);
 app.use("/api/maternity", maternityRoutes);
+app.use("/api/postnatal", postnatalRoutes);
+app.use("/api/family-planning", familyPlanningRoutes);
+app.use("/api/child-health", childHealthRoutes);
+app.use("/api/tetanus-vaccination", tetanusVaccinationRoutes);
+app.use("/api/child-immunization", childImmunizationRoutes);
 app.use("/api/eafya-details", eafyaDetailRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {

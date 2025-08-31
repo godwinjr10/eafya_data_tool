@@ -179,8 +179,11 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
             value={dataSetId}
             onChange={(e) => onDataSetChange(e.target.value)}
           >
-            {datasets.map((dataSet) => (
-              <option key={dataSet.id} value={dataSet.dataset_id}>
+            {Object.values(datasets).map((dataSet, index) => (
+              <option
+                key={`${dataSet.dataset_id}-${index}`}
+                value={dataSet.dataset_id}
+              >
                 {dataSet.dataset_name}
               </option>
             ))}

@@ -1,0 +1,8 @@
+"report_month","hmis_code","vaccine_id","vaccine_name","0-5m Male","0-5m Female","6-11m Male","6-11m Female","12-59m Male","12-59m Female","5-14y Male","5-14y Female"
+"202502",HM03,18,Vitamin A,0,0,0,0,4,5,0,0
+"202502",HM03,31,ROTA 3,0,0,0,1,0,0,0,0
+"202502",HM03,26,DEWORMING,0,0,0,0,3,5,0,0
+"202503",HM03,18,Vitamin A,0,0,1,0,0,0,0,0
+"202503",HM03,31,ROTA 3,1,0,7,9,0,0,0,0
+"202504",HM03,31,ROTA 3,0,0,3,2,0,0,0,0
+"202504",HM03,32,p,0,0,0,1,0,0,0,0
