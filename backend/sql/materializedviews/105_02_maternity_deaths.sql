@@ -1,7 +1,7 @@
 create materialized view reporting."105_02_maternity_maternal_deaths" as
 SELECT
 TO_CHAR(admission_date, 'YYYYMM') AS report_month,
-'MA13' as hmis_code,
+'ND01' as hmis_code,
 COUNT(CASE WHEN DATE_PART('year', AGE(admission_date, birth_date)) < 15 THEN 1 END) AS "under_15_years",
 COUNT(CASE WHEN DATE_PART('year', AGE(admission_date, birth_date)) BETWEEN 15 AND 19 THEN 1 END) AS "15_to_19_years",
 COUNT(CASE WHEN DATE_PART('year', AGE(admission_date, birth_date)) BETWEEN 20 AND 24 THEN 1 END) AS "20_to_24_years",
