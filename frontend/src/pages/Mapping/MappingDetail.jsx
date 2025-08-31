@@ -4,7 +4,7 @@ import { FaArrowLeft, FaHistory, FaInfoCircle, FaPlus } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import API from "../../helpers/api";
 import MappingTable from "../../components/MappingTable";
-import MappingDialog from "./MappingDialog";
+import MappingDialog from "../../components/MappingDialog";
 const MappingDetail = () => {
   const { mappingType, id } = useParams();
   const history = useHistory();

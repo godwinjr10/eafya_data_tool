@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import API from "../../helpers/api";
+import API from "../helpers/api";
 
 // Constants for endpoint mappings
 const ENDPOINT_MAPPINGS = {

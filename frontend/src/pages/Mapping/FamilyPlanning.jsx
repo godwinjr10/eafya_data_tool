@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { FaPlus, FaTrash, FaEye } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import API from "../../helpers/api";
-import MappingDialog from "./MappingDialog";
 
 import MappingTable from "../../components/MappingTable";
 
@@ -71,60 +70,8 @@ const FamilyPlanning = () => {
     }
   };
 
-  const onEafyaItemsLoaded = (items) => setFamilyPlanningItems(items);
-
-  const handleRowClick = (row) => {
+  const handleViewDetails = (row) => {
     history.push(`/mapping/familyplanning/${row.hmis_code}`);
-  };
-
-  const handleViewDetails = (e, row) => {
-    e.stopPropagation();
-    history.push(`/mapping/familyplanning/${row.hmis_code}`);
-  };
-
-  // Get unique sections from mappings
-  const uniqueSections = useMemo(() => {
-    const sections = [
-      ...new Set(mappings.map((m) => m.section_id).filter(Boolean)),
-    ];
-    return sections.sort();
-  }, [mappings]);
-
-  const onSave = async (selectedIds) => {
-    if (!dialogState.row) return;
-    const {
-      _section_id,
-      section_name,
-      hmis_code,
-      hmis_name,
-      categoryoptioncombo_name,
-    } = dialogState.row;
-    const mappingsPayload = selectedIds
-      .map((id) => {
-        const item = familyPlanningItems.find((i) => i.id === id);
-        return item ? { id: item.id, name: item.name } : null;
-      })
-      .filter(Boolean);
-
-    if (mappingsPayload.length === 0) return;
-
-    try {
-      const res = await API.post("/eafya/familyplanning", {
-        _section_id,
-        section_name,
-        hmis_code,
-        hmis_name,
-        categoryoptioncombo_name,
-        mappings: mappingsPayload,
-      });
-
-      if (res.status === 200) {
-        await fetchMappings();
-      }
-    } catch (e) {
-      console.error("Failed to save mappings", e);
-      alert("Failed to save mappings");
-    }
   };
 
   // Define columns for the reusable table
@@ -132,7 +79,7 @@ const FamilyPlanning = () => {
     {
       accessor: "hmis_code",
       header: "HMIS Code",
-      width: "180px",
+      width: "120px",
       sortable: true,
     },
     {
@@ -141,10 +88,12 @@ const FamilyPlanning = () => {
       sortable: true,
     },
     {
-      accessor: "section_name",
-      header: "Section Name",
+      accessor: "section",
+      header: "Section",
       sortable: true,
+      render: (row) => `${row.section_id} - ${row.section_name}`,
     },
+    
     {
       accessor: "actions",
       header: "Actions",
@@ -153,21 +102,12 @@ const FamilyPlanning = () => {
         <div className="item-mappings">
           <button
             className="btn btn-outline-primary btn-sm me-2"
-            onClick={(e) => handleViewDetails(e, row)}
+            onClick={() => handleViewDetails(row)}
             title="View Details"
           >
             <FaEye /> View Mapping
           </button>
-
-          {row.id && (
-            <a
-              href="#"
-              className="text-danger  px-4"
-              onClick={() => handleDelete(row.id)}
-            >
-              <FaTrash />
-            </a>
-          )}
+      
         </div>
       ),
     },
@@ -180,23 +120,11 @@ const FamilyPlanning = () => {
         columns={columns}
         loading={loading}
         pageSize={10}
-        searchable={true}
-        filterable={true}
+        searchable={false} // Using custom search above
         sortable={true}
         emptyMessage="No family planning mappings found"
         className="mapping-table"
-        onRowClick={handleRowClick}
-      />
-
-      <MappingDialog
-        isOpen={dialogState.isOpen}
-        onClose={() => setDialogState({ isOpen: false, row: null })}
-        onSave={onSave}
-        hmisName={dialogState.row?.hmis_name || ""}
-        section={"HMIS1052"}
-        eafyaItems={familyPlanningItems}
-        onEafyaItemsLoaded={onEafyaItemsLoaded}
-        datasetCode={"HMIS1052_FP"}
+        onRowClick={handleViewDetails}
       />
     </>
   );
