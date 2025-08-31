@@ -8,6 +8,8 @@ import MCHForm from "../pages/HMIS/MCH";
 import LabTestForm from "../pages/HMIS/LabTestForm";
 import MedicinesForm from "../pages/HMIS/MedicinesForm";
 import ConditionsForm from "../pages/HMIS/conditions";
+import HMIS108 from "../pages/HMIS/HMIS108";
+import HMIS108Report from "./HMIS108Report";
 
 const months = [
   "January",
@@ -52,6 +54,13 @@ const REPORT_CONFIGS = {
     component: LabReport,
     title: "Lab Tests Report",
     dataset: "RtEYsASU7PG",
+    dhisEndpoint: "/dhis/sync",
+  },
+  HMIS_108: {
+    endpoint: "/downloads/hmis108",
+    component: HMIS108Report,
+    title: "HMIS 108 - Inpatient Monthly Report",
+    dataset: "HMIS_108",
     dhisEndpoint: "/dhis/sync",
   },
 };
@@ -142,14 +151,19 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
       const formattedMonth = monthIndex.toString().padStart(2, "0");
       const reportMonth = `${selectedYear}${formattedMonth}`;
 
-      const response = await API.get(
-        `${reportConfig.endpoint}?report_month=${reportMonth}`
-      );
+      // For HMIS 108, don't send section parameter to get all sections
+      const endpoint =
+        dataSetId === "HMIS_108"
+          ? `${reportConfig.endpoint}?report_month=${reportMonth}`
+          : `${reportConfig.endpoint}?report_month=${reportMonth}&section=${section}`;
+
+      const response = await API.get(endpoint);
 
       setReportProps({
         data: response.data,
         reportMonth: reportMonth,
         type: dataSetId,
+        section: section,
       });
     } catch (error) {
       console.error("Error fetching report data:", error);
@@ -204,8 +218,21 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
               onClick={handlePrintReport}
               disabled={loading}
             >
-              <i className="bi bi-printer me-2"></i>
-              {loading ? "Generating..." : "Print Report"}
+              {loading ? (
+                <>
+                  <span
+                    className="spinner-border spinner-border-sm me-2"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Generating...
+                </>
+              ) : (
+                <>
+                  <i className="bi bi-printer me-2"></i>
+                  Print Report
+                </>
+              )}
             </button>
           </div>
         </div>
@@ -287,6 +314,14 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
             selectedMonth={selectedMonth}
             selectedYear={selectedYear}
             section_id="10.2.1"
+          />
+        );
+      case "HMIS_108":
+        return (
+          <HMIS108
+            section={section}
+            selectedMonth={selectedMonth}
+            selectedYear={selectedYear}
           />
         );
       default:
@@ -398,6 +433,7 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
         <ReportComponent
           data={reportProps.data}
           reportMonth={reportProps.reportMonth}
+          section={reportProps.section}
         />
       </div>
     );

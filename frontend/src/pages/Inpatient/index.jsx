@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Inpatient = () => {
   return (
-    <div>Inpatient</div>
-  )
-}
+    <div>
+      <h1>Inpatient</h1>
+    </div>
+  );
+};
 
-export default Inpatient
+export default Inpatient;
