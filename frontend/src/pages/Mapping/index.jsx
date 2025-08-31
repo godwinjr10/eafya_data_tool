@@ -38,8 +38,8 @@ const EafyaMapping = () => {
                 </li>
               </ol>
             </nav>
-            <h1 className="display-6 text-primary fw-bold mb-2">eAFYA HMIS Mapping</h1>
-            <p className="lead mb-0 text-primary-75">
+            <h1 className=" text-primary fw-bold mb-2" style={{fontSize: "1.3rem"}}>eAFYA HMIS Mapping</h1>
+            <p className=" mb-0 text-primary-75">
               {MAPPING_TYPE_OPTIONS.find(
                 (option) => option.value === selectedMappingType
               )?.label || "Select a mapping type to get started"}

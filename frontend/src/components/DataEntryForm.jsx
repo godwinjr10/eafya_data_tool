@@ -30,29 +30,29 @@ const REPORT_CONFIGS = {
     endpoint: "/downloads/conditions",
     component: ConditionsReport,
     title: "Conditions Report",
-    dataset: 'RtEYsASU7PG',
-    dhisEndpoint: '/dhis/sync'
+    dataset: "RtEYsASU7PG",
+    dhisEndpoint: "/dhis/sync",
   },
   HMIS_105_02: {
     endpoint: "/downloads/mch",
     component: null,
     title: "MCH Report",
-    dataset: 'RtEYsASU7PG',
-    dhisEndpoint: '/dhis/sync'
+    dataset: "RtEYsASU7PG",
+    dhisEndpoint: "/dhis/sync",
   },
   HMIS_105_06: {
     endpoint: "/downloads/commodities",
     component: CommoditiesReport,
     title: "Commodities Report",
-    dataset: 'VDhwrW9DiC1',
-    dhisEndpoint: '/dhis/commodities'
+    dataset: "VDhwrW9DiC1",
+    dhisEndpoint: "/dhis/commodities",
   },
   HMIS_105_10: {
     endpoint: "/downloads/labtests",
     component: LabReport,
     title: "Lab Tests Report",
-    dataset: 'RtEYsASU7PG',
-    dhisEndpoint: '/dhis/sync'
+    dataset: "RtEYsASU7PG",
+    dhisEndpoint: "/dhis/sync",
   },
 };
 
@@ -62,7 +62,7 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
   const [datasets, setDatasets] = useState([]);
   const [reportProps, setReportProps] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState({ type: '', text: '' });
+  const [modalMessage, setModalMessage] = useState({ type: "", text: "" });
 
   const currentDate = new Date();
   const [selectedMonth, setSelectedMonth] = useState(
@@ -89,7 +89,7 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
       const monthIndex = months.indexOf(selectedMonth) + 1;
       const formattedMonth = monthIndex.toString().padStart(2, "0");
       const period = `${selectedYear}${formattedMonth}`;
-      
+
       const reportConfig = REPORT_CONFIGS[dataSetId];
       if (!reportConfig) {
         throw new Error("Dataset configuration not found");
@@ -97,26 +97,30 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
 
       const response = await API.post(reportConfig.dhisEndpoint, {
         dataset: reportConfig.dataset,
-        period: period
+        period: period,
       });
 
-      if (response.data.status === 'success') {
+      if (response.data.status === "success") {
         setModalMessage({
-          type: 'success',
-          text: `Successfully pushed ${response.data.details?.total || 0} records to DHIS2`
+          type: "success",
+          text: `Successfully pushed ${
+            response.data.details?.total || 0
+          } records to DHIS2`,
         });
       } else {
         setModalMessage({
-          type: 'error',
-          text: response.data.failureDetails?.[0]?.error || "Unknown error occurred while pushing data"
+          type: "error",
+          text:
+            response.data.failureDetails?.[0]?.error ||
+            "Unknown error occurred while pushing data",
         });
       }
       setShowModal(true);
     } catch (error) {
       console.error("Error pushing to DHIS2:", error);
       setModalMessage({
-        type: 'error',
-        text: error.message || "Failed to push data to DHIS2"
+        type: "error",
+        text: error.message || "Failed to push data to DHIS2",
       });
       setShowModal(true);
     } finally {
@@ -175,8 +179,8 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
             value={dataSetId}
             onChange={(e) => onDataSetChange(e.target.value)}
           >
-            {Object.values(datasets).map((dataSet) => (
-              <option key={dataSet.dataset_id} value={dataSet.dataset_id}>
+            {datasets.map((dataSet) => (
+              <option key={dataSet.id} value={dataSet.dataset_id}>
                 {dataSet.dataset_name}
               </option>
             ))}
@@ -184,7 +188,7 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
         </div>
         <div className="col-md-6">
           <div className="d-flex justify-content-end gap-2 mt-4">
-            <button 
+            <button
               className="validation-button"
               onClick={handlePushToDHIS2}
               disabled={pushingToDHIS2}
@@ -287,85 +291,86 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
     }
   };
 
-
-
   const renderMessageModal = () => {
     if (!showModal) return null;
 
-    const isSuccess = modalMessage.type === 'success';
-    const icon = isSuccess ? 'check-circle-fill' : 'exclamation-circle-fill';
-    const themeColor = isSuccess ? '#28a745' : '#dc3545';
+    const isSuccess = modalMessage.type === "success";
+    const icon = isSuccess ? "check-circle-fill" : "exclamation-circle-fill";
+    const themeColor = isSuccess ? "#28a745" : "#dc3545";
 
     return (
-      <div className="modal show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-        <div 
-          className="modal-dialog modal-sm" 
-          style={{ 
-            marginTop: '20px',
-            maxWidth: '320px'
+      <div
+        className="modal show d-block"
+        style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+      >
+        <div
+          className="modal-dialog modal-sm"
+          style={{
+            marginTop: "20px",
+            maxWidth: "320px",
           }}
         >
-          <div 
-            className="modal-content border-0 shadow" 
-            style={{ 
-              borderRadius: '12px',
-              overflow: 'hidden'
+          <div
+            className="modal-content border-0 shadow"
+            style={{
+              borderRadius: "12px",
+              overflow: "hidden",
             }}
           >
-            <div 
+            <div
               className="modal-body p-0"
               style={{
-                backgroundColor: '#f8f9fa'
+                backgroundColor: "#f8f9fa",
               }}
             >
-              <div 
+              <div
                 className="d-flex flex-column align-items-center text-center p-4"
                 style={{
-                  backgroundColor: 'white',
-                  borderBottom: '1px solid #eee'
+                  backgroundColor: "white",
+                  borderBottom: "1px solid #eee",
                 }}
               >
-                <div 
-                  style={{ 
+                <div
+                  style={{
                     color: themeColor,
-                    fontSize: '3rem',
-                    marginBottom: '0.5rem',
-                    lineHeight: 1
+                    fontSize: "3rem",
+                    marginBottom: "0.5rem",
+                    lineHeight: 1,
                   }}
                 >
                   <i className={`bi bi-${icon}`}></i>
                 </div>
-                <h5 
-                  style={{ 
+                <h5
+                  style={{
                     color: themeColor,
-                    margin: '0.5rem 0',
-                    fontWeight: '600'
+                    margin: "0.5rem 0",
+                    fontWeight: "600",
                   }}
                 >
-                  {isSuccess ? 'Success!' : 'Error'}
+                  {isSuccess ? "Success!" : "Error"}
                 </h5>
               </div>
               <div className="p-3">
-                <p 
-                  className="mb-3 text-center" 
-                  style={{ 
-                    fontSize: '0.95rem',
-                    color: '#666'
+                <p
+                  className="mb-3 text-center"
+                  style={{
+                    fontSize: "0.95rem",
+                    color: "#666",
                   }}
                 >
                   {modalMessage.text}
                 </p>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className="btn w-100"
                   style={{
                     backgroundColor: themeColor,
-                    color: 'white',
-                    border: 'none',
-                    padding: '0.5rem',
-                    borderRadius: '6px',
-                    fontSize: '0.95rem',
-                    fontWeight: '500'
+                    color: "white",
+                    border: "none",
+                    padding: "0.5rem",
+                    borderRadius: "6px",
+                    fontSize: "0.95rem",
+                    fontWeight: "500",
                   }}
                   onClick={() => setShowModal(false)}
                 >

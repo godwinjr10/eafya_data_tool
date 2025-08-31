@@ -52,23 +52,21 @@ const Vaccines = () => {
     return filtered;
   }, [mappings, search, selectedSection]);
 
-
   const handleViewDetails = (row) => {
     history.push(`/mapping/vaccines/${row.hmis_code}`);
   };
-
 
   // Define columns for the reusable table
   const columns = [
     {
       accessor: "hmis_code",
-      header: "HMIS Code",
+      header: "HMIS Indicator Code",
       width: "180px",
       sortable: true,
     },
     {
       accessor: "hmis_name",
-      header: "HMIS Name",
+      header: "HMIS Indicator Name",
       sortable: true,
     },
     {
@@ -89,7 +87,6 @@ const Vaccines = () => {
           >
             <FaEye /> View Mapping
           </button>
-
         </div>
       ),
     },

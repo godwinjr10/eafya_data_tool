@@ -297,10 +297,10 @@ const MappingDetail = () => {
                 </li>
               </ol>
             </nav>
-            <h1 className="display-6 text-primary fw-bold mb-2">
+            <h1 className=" text-primary fw-bold mb-2" style={{fontSize: "1.3rem"}}>
               {mappingData?.hmis_name}
             </h1>
-            <p className="lead mb-0 text-primary opacity-75">
+            <p className=" mb-0 text-primary opacity-75">
               <span className="fw-semibold">HMIS Code:</span>{" "}
               {mappingData?.hmis_code} |{" "}
               <span className="fw-semibold">Type:</span> {config.title}

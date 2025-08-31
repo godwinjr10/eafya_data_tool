@@ -84,7 +84,7 @@ const FamilyPlanning = () => {
     },
     {
       accessor: "hmis_name",
-      header: "HMIS Name",
+      header: "HMIS Indicator Name",
       sortable: true,
     },
     {
@@ -93,7 +93,7 @@ const FamilyPlanning = () => {
       sortable: true,
       render: (row) => `${row.section_id} - ${row.section_name}`,
     },
-    
+
     {
       accessor: "actions",
       header: "Actions",
@@ -107,7 +107,6 @@ const FamilyPlanning = () => {
           >
             <FaEye /> View Mapping
           </button>
-      
         </div>
       ),
     },

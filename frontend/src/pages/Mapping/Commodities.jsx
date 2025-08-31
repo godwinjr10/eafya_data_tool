@@ -51,7 +51,6 @@ const Commodities = () => {
     return filtered;
   }, [mappings, search, selectedSection]);
 
-
   const handleViewDetails = (row) => {
     history.push(`/mapping/commodities/${row.hmis_code}`);
   };
@@ -60,13 +59,13 @@ const Commodities = () => {
   const columns = [
     {
       accessor: "hmis_code",
-      header: "HMIS Code",
+      header: "HMIS Indicator Code",
       width: "180px",
       sortable: true,
     },
     {
       accessor: "hmis_name",
-      header: "HMIS Name",
+      header: "HMIS Indicator Name",
       sortable: true,
     },
     {

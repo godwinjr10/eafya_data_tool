@@ -52,7 +52,8 @@ router.get("/commodities/:hmisCode", async (req, res) => {
       SELECT 
         distinct
         eafya_product_id as eafya_id,
-        eafya_product_name as eafya_name
+        eafya_product_name as eafya_name,
+        hmis_name
       FROM reporting.dhis_eafya_mapping_commodities
       WHERE hmis_code = $1
       ORDER BY  eafya_product_name
