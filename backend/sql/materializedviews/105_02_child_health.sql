@@ -1,7 +1,7 @@
 create materialized view reporting."105_02_child_health" as
 SELECT
   TO_CHAR(date_created, 'YYYYMM') AS report_month,
-  'HM03' as hmis_code
+  'HM03' as hmis_code,
     vaccine_id,
     vaccine_name,
   COUNT(CASE WHEN age_months BETWEEN 0 AND 5 AND gender = 'Male' THEN 1 END) AS "0-5m Male",
