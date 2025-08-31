@@ -12,8 +12,6 @@ const Vaccines = () => {
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedSection, setSelectedSection] = useState("");
-  const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
-  const [vaccineItems, setVaccineItems] = useState([]);
 
   const fetchMappings = async () => {
     setLoading(true);
@@ -86,7 +84,7 @@ const Vaccines = () => {
         <div className="item-mappings">
           <button
             className="btn btn-outline-primary btn-sm me-2"
-            onClick={(e) => handleViewDetails(row)}
+            onClick={() => handleViewDetails(row)}
             title="View Details"
           >
             <FaEye /> View Mapping
@@ -109,7 +107,7 @@ const Vaccines = () => {
         sortable={true}
         emptyMessage="No vaccine mappings found"
         className="mapping-table"
-        onRowClick={handleRowClick}
+        onRowClick={handleViewDetails}
       />
     </>
   );

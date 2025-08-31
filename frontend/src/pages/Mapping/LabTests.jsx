@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { FaPlus, FaTrash, FaEye } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import API from "../../helpers/api";
-import MappingDialog from "../../components/MappingDialog";
 import MappingTable from "../../components/MappingTable";
 
 const LabTests = () => {
@@ -107,7 +106,7 @@ const LabTests = () => {
         sortable={true}
         emptyMessage="No lab test mappings found"
         className="mapping-table"
-        onRowClick={handleRowClick}
+        onRowClick={handleViewDetails}
       />
     </>
   );

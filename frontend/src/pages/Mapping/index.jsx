@@ -59,7 +59,7 @@ const EafyaMapping = () => {
                 }
                 options={MAPPING_TYPE_OPTIONS}
                 placeholder="Choose mapping type..."
-                isSearchable={false}
+                isSearchable={true}
                 className="react-select-container"
                 classNamePrefix="react-select"
               />
