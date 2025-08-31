@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 function MainSideBar() {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const [showSettingsDropdown, setShowSettingsDropdown] = useState(false);
   const location = useLocation();
 
@@ -116,7 +116,7 @@ function MainSideBar() {
             </div>
             <button
               className="btn btn-sm  p-1 border-0 bg-transparent"
-              onClick={toggleSidebar}
+              // onClick={toggleSidebar}
               style={{ fontSize: "1.2rem" }}
             >
               <i
@@ -237,7 +237,7 @@ function MainSideBar() {
       </div>
 
       {/* Mobile Sidebar */}
-      <div
+      {/* <div
         className={`offcanvas offcanvas-start ${
           !isCollapsed ? "show" : ""
         } d-lg-none`}
@@ -331,7 +331,7 @@ function MainSideBar() {
             </ul>
           </nav>
         </div>
-      </div>
+      </div> */}
 
       {/* Mobile Toggle Button */}
       <button
