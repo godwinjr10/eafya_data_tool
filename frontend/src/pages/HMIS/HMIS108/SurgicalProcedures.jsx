@@ -47,7 +47,6 @@ const SurgicalProcedures = ({ section, selectedMonth, selectedYear }) => {
   if (loading) {
     return (
       <div className="card mb-4">
-       
         <div className="card-body">
           <div
             className="d-flex justify-content-center align-items-center"
@@ -65,7 +64,6 @@ const SurgicalProcedures = ({ section, selectedMonth, selectedYear }) => {
 
   return (
     <div className="card mb-4">
-      
       <div className="card-body">
         <div className="table-responsive">
           <table className="table table-bordered table-striped">
@@ -74,8 +72,7 @@ const SurgicalProcedures = ({ section, selectedMonth, selectedYear }) => {
                 <th>Section</th>
                 <th>Code</th>
                 <th>Procedure</th>
-                <th>Year</th>
-                <th>Month</th>
+                <th>Report Month</th>
                 <th>Procedure Count</th>
               </tr>
             </thead>
@@ -97,12 +94,7 @@ const SurgicalProcedures = ({ section, selectedMonth, selectedYear }) => {
                   </td>
                   <td>
                     <span className="form-control-plaintext">
-                      {procedure.year || 0}
-                    </span>
-                  </td>
-                  <td>
-                    <span className="form-control-plaintext">
-                      {procedure.month || 0}
+                      {procedure.report_month || 0}
                     </span>
                   </td>
                   <td>

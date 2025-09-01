@@ -173,15 +173,14 @@ router.get("/surgical-procedures", async (req, res) => {
     const { report_month } = req.query;
 
     let query = `
-      SELECT "section", code, "procedure", "year", "month", procedure_count
+      SELECT "section", code, "procedure", "report_month", procedure_count
       FROM reporting."108_surgical_procedures"
     `;
 
     const params = [];
     if (report_month) {
-      query += ` WHERE "year" = $1 AND "month" = $2`;
-      const [year, month] = report_month.match(/(\d{4})(\d{2})/).slice(1);
-      params.push(year, month);
+      query += ` WHERE report_month = $1`;
+      params.push(report_month);
     }
 
     query += ` ORDER BY "section", code`;

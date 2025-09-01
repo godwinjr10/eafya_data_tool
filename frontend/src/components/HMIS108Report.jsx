@@ -175,9 +175,10 @@ const HMIS108Report = ({ data, reportMonth }) => {
             <Text style={[styles.tableCell, { width: "15%" }]}>Section</Text>
             <Text style={[styles.tableCell, { width: "10%" }]}>Code</Text>
             <Text style={[styles.tableCell, { width: "40%" }]}>Procedure</Text>
-            <Text style={[styles.tableCell, { width: "10%" }]}>Year</Text>
-            <Text style={[styles.tableCell, { width: "10%" }]}>Month</Text>
-            <Text style={[styles.tableCell, { width: "15%" }]}>Count</Text>
+            <Text style={[styles.tableCell, { width: "15%" }]}>
+              Report Month
+            </Text>
+            <Text style={[styles.tableCell, { width: "20%" }]}>Count</Text>
           </View>
           {surgicalData.map((item, index) => (
             <View key={index} style={styles.tableRow}>
@@ -190,13 +191,10 @@ const HMIS108Report = ({ data, reportMonth }) => {
               <Text style={[styles.tableCellLeft, { width: "40%" }]}>
                 {item.procedure || ""}
               </Text>
-              <Text style={[styles.tableCell, { width: "10%" }]}>
-                {item.year || ""}
-              </Text>
-              <Text style={[styles.tableCell, { width: "10%" }]}>
-                {item.month || ""}
-              </Text>
               <Text style={[styles.tableCell, { width: "15%" }]}>
+                {item.report_month || ""}
+              </Text>
+              <Text style={[styles.tableCell, { width: "20%" }]}>
                 {item.procedure_count || 0}
               </Text>
             </View>
