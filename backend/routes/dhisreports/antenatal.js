@@ -1,167 +1,250 @@
-import express from 'express';
-import { pool } from '../../config/database.js';
+import express from "express";
+import { pool } from "../../config/database.js";
 
 const router = express.Router();
 
-// Get antenatal data for different sections
-router.get('/', async (req, res) => {
-    try {
-        const { report_month } = req.query;
-        
-        let query = `
-            SELECT 
-                a.report_month,
-                m.section_id,
-                m.section_name,
-                m.hmis_code,
-                m.hmis_name,
-                a."Below_15yrs", 
-                a."15_19yrs", 
-                a."20_24yrs", 
-                a."25_50yrs", 
-                a."50+yrs"
-            FROM reporting."105_02_anc_1" a
-            JOIN (SELECT DISTINCT section_id, section_name, hmis_code, hmis_name 
-            FROM reporting.dhis_eafya_mapping_antenatal WHERE section_id = '2.1' 
-            AND hmis_code = 'AN01') m ON 1=1 WHERE 1=1
-        `;
+router.get("/anc_1", async (req, res) => {
+  try {
+    const { report_month } = req.query;
 
-        const params = [];
-        let paramCount = 1;
+    let query = `
+      SELECT 
+        report_month,
+        hmis_code,
+        "Below_15yrs",
+        "15_19yrs",
+        "20_24yrs",
+        "25_50yrs",
+        "50+yrs"
+      FROM reporting."105_02_anc_1"
+      WHERE report_month = $1`;
 
-        if (report_month) {
-            query += ` AND a.report_month = $${paramCount}`;
-            params.push(report_month);
-            paramCount++;
-        }
+    const params = [report_month];
 
-        query += ` ORDER BY a.report_month DESC, m.section_id`;
+    query += ` ORDER BY hmis_code`;
 
-        const { rows } = await pool.query(query, params);
-        res.json(rows);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+    const { rows } = await pool.query(query, params);
+    console.log("Query Results:", rows);
+
+    res.json(rows);
+  } catch (error) {
+    console.error("Query error:", error);
+    res.status(500).json({ message: error.message });
+  }
 });
 
-router.get('/four', async (req, res) => {
-    try {
-        const { report_month } = req.query;
-        
-        let query = `
-            SELECT 
-                a.report_month,
-                m.section_id,
-                m.section_name,
-                m.hmis_code,
-                m.hmis_name,
-                a."Below_15yrs", 
-                a."15_19yrs", 
-                a."20_24yrs", 
-                a."25_50yrs", 
-                a."50+yrs"
-            FROM reporting."105_02_anc_4" a
-            JOIN (SELECT DISTINCT section_id, section_name, hmis_code, hmis_name 
-            FROM reporting.dhis_eafya_mapping_antenatal WHERE section_id = '2.1' 
-            AND hmis_code = 'AN02') m ON 1=1 WHERE 1=1
-        `;
+router.get("/anc_4", async (req, res) => {
+  try {
+    const { report_month } = req.query;
 
-        const params = [];
-        let paramCount = 1;
+    let query = `
+      SELECT 
+        report_month,
+        hmis_code,
+        "Below_15yrs",
+        "15_19yrs",
+        "20_24yrs",
+        "25_50yrs",
+        "50+yrs"
+      FROM reporting."105_02_anc_4"
+      WHERE report_month = $1`;
 
-        if (report_month) {
-            query += ` AND a.report_month = $${paramCount}`;
-            params.push(report_month);
-            paramCount++;
-        }
+    const params = [report_month];
 
-        query += ` ORDER BY a.report_month DESC, m.section_id`;
+    query += ` ORDER BY hmis_code`;
 
-        const { rows } = await pool.query(query, params);
-        res.json(rows);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+    const { rows } = await pool.query(query, params);
+    console.log("Query Results:", rows);
+
+    res.json(rows);
+  } catch (error) {
+    console.error("Query error:", error);
+    res.status(500).json({ message: error.message });
+  }
 });
 
-router.get('/eight', async (req, res) => {
-    try {
-        const { report_month } = req.query;
-        
-        let query = `
-            SELECT 
-                a.report_month,
-                m.section_id,
-                m.section_name,
-                m.hmis_code,
-                m.hmis_name,
-                a."Below_15yrs", 
-                a."15_19yrs", 
-                a."20_24yrs", 
-                a."25_50yrs", 
-                a."50+yrs"
-            FROM reporting."105_02_anc_8" a
-            JOIN (SELECT DISTINCT section_id, section_name, hmis_code, hmis_name 
-            FROM reporting.dhis_eafya_mapping_antenatal WHERE section_id = '2.1' 
-            AND hmis_code = 'AN03') m ON 1=1 WHERE 1=1
-        `;
+router.get("/anc_8", async (req, res) => {
+  try {
+    const { report_month } = req.query;
 
-        const params = [];
-        let paramCount = 1;
+    let query = `
+      SELECT 
+        report_month,
+        hmis_code,
+        "Below_15yrs",
+        "15_19yrs",
+        "20_24yrs",
+        "25_50yrs",
+        "50+yrs"
+      FROM reporting."105_02_anc_8"
+      WHERE report_month = $1`;
 
-        if (report_month) {
-            query += ` AND a.report_month = $${paramCount}`;
-            params.push(report_month);
-            paramCount++;
-        }
+    const params = [report_month];
 
-        query += ` ORDER BY a.report_month DESC, m.section_id`;
+    query += ` ORDER BY hmis_code`;
 
-        const { rows } = await pool.query(query, params);
-        res.json(rows);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+    const { rows } = await pool.query(query, params);
+    console.log("Query Results:", rows);
+
+    res.json(rows);
+  } catch (error) {
+    console.error("Query error:", error);
+    res.status(500).json({ message: error.message });
+  }
 });
 
-router.get('/total', async (req, res) => {
-    try {
-        const { report_month } = req.query;
-        
-        let query = `
-            SELECT 
-                a.report_month,
-                m.section_id,
-                m.section_name,
-                m.hmis_code,
-                m.hmis_name,
-                a."Below_15yrs", 
-                a."15_19yrs", 
-                a."20_24yrs", 
-                a."25_50yrs", 
-                a."50+yrs"
-            FROM reporting."105_02_anc_total" a
-            JOIN (SELECT DISTINCT section_id, section_name, hmis_code, hmis_name 
-            FROM reporting.dhis_eafya_mapping_antenatal WHERE section_id = '2.1' 
-            AND hmis_code = 'AN04') m ON 1=1 WHERE 1=1
-        `;
+router.get("/anc_total", async (req, res) => {
+  try {
+    const { report_month } = req.query;
 
-        const params = [];
-        let paramCount = 1;
+    let query = `
+      SELECT 
+        report_month,
+        hmis_code,
+        "Below_15yrs",
+        "15_19yrs",
+        "20_24yrs",
+        "25_50yrs",
+        "50+yrs"
+      FROM reporting."105_02_anc_total"
+      WHERE report_month = $1`;
 
-        if (report_month) {
-            query += ` AND a.report_month = $${paramCount}`;
-            params.push(report_month);
-            paramCount++;
-        }
+    const params = [report_month];
 
-        query += ` ORDER BY a.report_month DESC, m.section_id`;
+    query += ` ORDER BY hmis_code`;
 
-        const { rows } = await pool.query(query, params);
-        res.json(rows);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+    const { rows } = await pool.query(query, params);
+    console.log("Query Results:", rows);
+
+    res.json(rows);
+  } catch (error) {
+    console.error("Query error:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/antenatal_6", async (req, res) => {
+  try {
+    const { report_month } = req.query;
+
+    let query = `
+      SELECT 
+        report_month,
+        hmis_code,
+        ipt_dose_group,
+        below_15,
+        age_15_19,
+        age_20_24,
+        age_25_49,
+        age_50_plus
+      FROM reporting."105_02_antenantal_6"
+      WHERE report_month = $1`;
+
+    const params = [report_month];
+
+    query += ` ORDER BY hmis_code`;
+
+    const { rows } = await pool.query(query, params);
+    console.log("Query Results:", rows);
+
+    res.json(rows);
+  } catch (error) {
+    console.error("Query error:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/antenatal_8", async (req, res) => {
+  try {
+    const { report_month } = req.query;
+
+    let query = `
+      SELECT 
+        report_month,
+        hmis_code,
+        "Below 15 Years",
+        "15 - 19 Years",
+        "20 - 24 Years",
+        "25 - 49 Years",
+        "50+ Years",
+        "Total"
+      FROM reporting."105_02_antenantal_8"
+      WHERE report_month = $1`;
+
+    const params = [report_month];
+
+    query += ` ORDER BY hmis_code`;
+
+    const { rows } = await pool.query(query, params);
+    console.log("Query Results:", rows);
+
+    res.json(rows);
+  } catch (error) {
+    console.error("Query error:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/antenatal_9", async (req, res) => {
+  try {
+    const { report_month } = req.query;
+
+    let query = `
+        SELECT 
+        report_month,
+        hmis_code,
+        "Below 15 Years",
+        "15 - 19 Years",
+        "20 - 24 Years",
+        "25 - 49 Years",
+        "50+ Years",
+        "Total"
+      FROM reporting."105_02_antenantal_9"
+      WHERE report_month = $1`;
+
+    const params = [report_month];
+
+    query += ` ORDER BY hmis_code`;
+
+    const { rows } = await pool.query(query, params);
+    console.log("Query Results:", rows);
+
+    res.json(rows);
+  } catch (error) {
+    console.error("Query error:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/antenatal_10", async (req, res) => {
+  try {
+    const { report_month } = req.query;
+
+    let query = `
+      SELECT 
+        report_month,
+        hmis_code,
+        supplement_category,
+        below_15,
+        age_15_19,
+        age_20_24,
+        age_25_49,
+        age_50_plus
+      FROM reporting."105_02_antenatal_10"
+      WHERE report_month = $1`;
+
+    const params = [report_month];
+
+    query += ` ORDER BY hmis_code`;
+
+    const { rows } = await pool.query(query, params);
+    console.log("Query Results:", rows);
+
+    res.json(rows);
+  } catch (error) {
+    console.error("Query error:", error);
+    res.status(500).json({ message: error.message });
+  }
 });
 
 export default router;

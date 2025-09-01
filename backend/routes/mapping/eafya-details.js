@@ -3,172 +3,7 @@ import { pool } from "../../config/database.js";
 
 const router = express.Router();
 
-// Test route to check database connection
-router.get("/test", async (req, res) => {
-  try {
-    console.log("Testing database connection...");
-    const result = await pool.query("SELECT 1 as test");
-    console.log("Database connection successful:", result.rows);
-    res.json({
-      message: "Database connection successful",
-      test: result.rows[0],
-    });
-  } catch (error) {
-    console.error("Database connection test failed:", error);
-    res.status(500).json({
-      message: "Database connection failed",
-      error: error.message,
-      stack: error.stack,
-    });
-  }
-});
 
-// Route to check available tables
-router.get("/tables", async (req, res) => {
-  try {
-    console.log("Checking available tables...");
-    const result = await pool.query(`
-      SELECT table_name, table_schema 
-      FROM information_schema.tables 
-      WHERE table_schema IN ('reporting', 'dwh') 
-      AND table_name LIKE '%eafya%'
-      ORDER BY table_schema, table_name
-    `);
-    console.log("Available tables:", result.rows);
-
-    // Also check for tables with 'commodities' in the name
-    const commoditiesResult = await pool.query(`
-      SELECT table_name, table_schema 
-      FROM information_schema.tables 
-      WHERE table_schema IN ('reporting', 'dwh') 
-      AND table_name LIKE '%commodities%'
-      ORDER BY table_schema, table_name
-    `);
-    console.log("Commodities tables:", commoditiesResult.rows);
-
-    res.json({
-      message: "Tables found",
-      eafya_tables: result.rows,
-      commodities_tables: commoditiesResult.rows,
-    });
-  } catch (error) {
-    console.error("Error checking tables:", error);
-    res.status(500).json({
-      message: "Error checking tables",
-      error: error.message,
-      stack: error.stack,
-    });
-  }
-});
-
-// Route to check table structure
-router.get("/table-structure/:tableName", async (req, res) => {
-  try {
-    const { tableName } = req.params;
-    console.log("Checking structure for table:", tableName);
-
-    const result = await pool.query(
-      `
-      SELECT column_name, data_type, is_nullable
-      FROM information_schema.columns 
-      WHERE table_name = $1 
-      AND table_schema = 'reporting'
-      ORDER BY ordinal_position
-    `,
-      [tableName]
-    );
-
-    console.log("Table structure:", result.rows);
-    res.json({
-      message: `Structure for table ${tableName}`,
-      columns: result.rows,
-    });
-  } catch (error) {
-    console.error("Error checking table structure:", error);
-    res.status(500).json({
-      message: "Error checking table structure",
-      error: error.message,
-      stack: error.stack,
-    });
-  }
-});
-
-// Route to test simple query on commodities table
-router.get("/test-commodities", async (req, res) => {
-  try {
-    console.log("Testing simple query on commodities table...");
-
-    // First check if the table exists
-    const tableExists = await pool.query(`
-      SELECT EXISTS (
-        SELECT FROM information_schema.tables 
-        WHERE table_schema = 'reporting' 
-        AND table_name = 'dhis_eafya_mapping_commodities'
-      )
-    `);
-
-    if (!tableExists.rows[0].exists) {
-      console.log("Table 'dhis_eafya_mapping_commodities' does not exist");
-
-      // Try to find alternative tables
-      const altTables = await pool.query(`
-        SELECT table_name, table_schema 
-        FROM information_schema.tables 
-        WHERE table_schema IN ('reporting', 'dwh') 
-        AND (table_name LIKE '%commodities%' OR table_name LIKE '%eafya%')
-        ORDER BY table_schema, table_name
-      `);
-
-      return res.status(404).json({
-        message: "Commodities table not found",
-        table_exists: false,
-        alternative_tables: altTables.rows,
-        suggestion:
-          "Check if the table name is different or if it needs to be created",
-      });
-    }
-
-    // Test the actual query we'll use
-    const testQuery = `
-      SELECT 
-        section_id,
-        section_name,
-        hmis_code,
-        hmis_name,
-        eafya_product_id,
-        eafya_product_name,
-        dhis2_data_element_id,
-        data_element_name,
-        unit
-      FROM reporting.dhis_eafya_mapping_commodities
-      WHERE hmis_code = 'SS01'
-      LIMIT 1
-    `;
-
-    const testResult = await pool.query(testQuery);
-    console.log("Test query result:", testResult.rows);
-
-    const result = await pool.query(`
-      SELECT COUNT(*) as total_rows
-      FROM reporting.dhis_eafya_mapping_commodities
-    `);
-
-    console.log("Commodities table row count:", result.rows[0]);
-    res.json({
-      message: "Commodities table query successful",
-      total_rows: result.rows[0].total_rows,
-      table_exists: true,
-      test_query_result: testResult.rows,
-    });
-  } catch (error) {
-    console.error("Error testing commodities table:", error);
-    res.status(500).json({
-      message: "Error testing commodities table",
-      error: error.message,
-      stack: error.stack,
-    });
-  }
-});
 
 // Get commodity mapping details by HMIS code
 router.get("/commodities/:hmisCode", async (req, res) => {
@@ -216,8 +51,9 @@ router.get("/commodities/:hmisCode", async (req, res) => {
     const query = `
       SELECT 
         distinct
-        eafya_product_id,
-        eafya_product_name
+        eafya_product_id as eafya_id,
+        eafya_product_name as eafya_name,
+        hmis_name
       FROM reporting.dhis_eafya_mapping_commodities
       WHERE hmis_code = $1
       ORDER BY  eafya_product_name
@@ -261,16 +97,13 @@ router.get("/labtests/:hmisCode", async (req, res) => {
 
     const query = `
       SELECT 
-        section_id,
-        category,
-        hmis_code,
+        distinct hmis_code,
         hmis_name,
-        eafya_labtest_id,
-        eafya_labtest_name,
-        dhis2_data_element_id
+        eafya_labtest_id as eafya_id,
+        eafya_labtest_name as eafya_name
       FROM reporting.dhis_eafya_mapping_labtests
       WHERE hmis_code = $1
-      ORDER BY section_id, category, dhis2_data_element_id
+      ORDER BY hmis_code
     `;
 
     const { rows } = await pool.query(query, [hmisCode]);
@@ -300,16 +133,16 @@ router.get("/familyplanning/:hmisCode", async (req, res) => {
 
     const query = `
       SELECT 
-        section_id,
-        section_name,
-        hmis_code,
+      
+        distinct hmis_code,
         hmis_name,
+          _section_id,
+        section_name,
         eafya_id,
-        eafya_name,
-        categoryoptioncombo_name
+        eafya_name
       FROM reporting.dhis_eafya_mapping_familyplanning
       WHERE hmis_code = $1
-      ORDER BY section_id, categoryoptioncombo_name
+      ORDER BY hmis_code
     `;
 
     const { rows } = await pool.query(query, [hmisCode]);
@@ -339,15 +172,14 @@ router.get("/vaccines/:hmisCode", async (req, res) => {
 
     const query = `
       SELECT 
-        section_id,
-        section_name,
-        hmis_code,
+     
+        distinct hmis_code,
         hmis_name,
-        eafya_vaccine_id,
-        eafya_vaccine_name
+        eafya_vaccine_id as eafya_id,
+        eafya_vaccine_name as eafya_name
       FROM reporting.dhis_eafya_mapping_vaccines
       WHERE hmis_code = $1
-      ORDER BY section_id
+      ORDER BY hmis_code
     `;
 
     const { rows } = await pool.query(query, [hmisCode]);
@@ -377,11 +209,13 @@ router.get("/conditions/:hmisCode", async (req, res) => {
 
     const query = `
       SELECT 
-        distinct eafya_disease_id as eafya_product_id,
-        eafya_disease_name as eafya_product_name
+        distinct hmis_code,
+        hmis_name,
+         eafya_disease_id as eafya_id,
+        eafya_disease_name as eafya_name
       FROM reporting.dhis_eafya_mapping_conditions_final
       WHERE hmis_code ILIKE $1
-      ORDER BY eafya_disease_name
+      ORDER BY hmis_code
     `;
 
     const { rows } = await pool.query(query, [`%${hmisCode}%`]);

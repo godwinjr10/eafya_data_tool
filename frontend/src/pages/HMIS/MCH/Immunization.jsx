@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import API from '../../../helpers/api';
+import React, { useState, useEffect } from "react";
+import API from "../../../helpers/api";
 
 const Immunization = ({ selectedMonth, getMonthNumber, selectedYear }) => {
   const [loading, setLoading] = useState(false);
@@ -9,28 +9,36 @@ const Immunization = ({ selectedMonth, getMonthNumber, selectedYear }) => {
     try {
       setLoading(true);
       const monthNumber = getMonthNumber(selectedMonth);
-      const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
-      const response = await API.get(`/immunization?report_month=${formattedMonth}`);
-      
+      const formattedMonth = `${selectedYear}${monthNumber
+        .toString()
+        .padStart(2, "0")}`;
+      const response = await API.get(
+        `/child-immunization/child-immunization?report_month=${formattedMonth}`
+      );
+
       // Transform API data to match the required format
-      const transformedData = response.data.map(item => ({
-        code: item.hmis_code,
-        label: item.hmis_name,
+      const transformedData = response.data.map((item) => ({
+        code: item.vaccine_id,
+        label: item.vaccine_name,
         data: {
           under1: {
-            static: item.Under1y || "0",
-            outreach: "0"
+            static: item["Under1y"] || "0",
+            outreach: "0",
           },
           "1to4": {
             static: item["1-4y"] || "0",
-            outreach: "0"
-          }
-        }
+            outreach: "0",
+          },
+          "5to14": {
+            static: item["5-14y"] || "0",
+            outreach: "0",
+          },
+        },
       }));
-      
+
       setImmunizationData(transformedData);
     } catch (error) {
-      console.error('Error fetching immunization data:', error);
+      console.error("Error fetching immunization data:", error);
       // Set default data in case of error
       setImmunizationData([]);
     } finally {
@@ -48,9 +56,9 @@ const Immunization = ({ selectedMonth, getMonthNumber, selectedYear }) => {
   const [formData, setFormData] = useState({});
 
   const handleInputChange = (code, ageGroup, type, value) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [`${code}_${ageGroup}_${type}`]: value
+      [`${code}_${ageGroup}_${type}`]: value,
     }));
   };
 
@@ -58,9 +66,7 @@ const Immunization = ({ selectedMonth, getMonthNumber, selectedYear }) => {
 
   return (
     <div>
-      <div className="section-header">
-        2.6.3 CHILD IMMUNISATION
-      </div>
+      <div className="section-header">2.6.3 CHILD IMMUNISATION</div>
 
       <table className="data-entry-table">
         <thead>
@@ -68,9 +74,12 @@ const Immunization = ({ selectedMonth, getMonthNumber, selectedYear }) => {
             <th>Doses</th>
             <th colSpan={2}>Under 1</th>
             <th colSpan={2}>1-4 Years</th>
+            <th colSpan={2}>5-14 Years</th>
           </tr>
           <tr>
             <th></th>
+            <th className="text-center">Static</th>
+            <th className="text-center">Outreach</th>
             <th className="text-center">Static</th>
             <th className="text-center">Outreach</th>
             <th className="text-center">Static</th>
@@ -112,6 +121,22 @@ const Immunization = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                   type="number"
                   className="form-control form-control-sm"
                   value={vaccine.data["1to4"].outreach}
+                  readOnly
+                />
+              </td>
+              <td className="text-center">
+                <input
+                  type="number"
+                  className="form-control form-control-sm"
+                  value={vaccine.data["5to14"].static}
+                  readOnly
+                />
+              </td>
+              <td className="text-center">
+                <input
+                  type="number"
+                  className="form-control form-control-sm"
+                  value={vaccine.data["5to14"].outreach}
                   readOnly
                 />
               </td>

@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 		let query = `
             SELECT 
                 t.report_month,
-                m.section_id,
+                m._section_id,
                 m.category,
                 m.hmis_code,
                 m.hmis_name,
@@ -25,8 +25,8 @@ router.get("/", async (req, res) => {
                 t.positive_cases
             FROM reporting."105_10_labtests_done" t
             JOIN 
-            (SELECT DISTINCT section_id, category, hmis_code, hmis_name, eafya_labtest_id 
-            FROM reporting.dhis_eafya_mapping_labtests WHERE section_id = $1) m 
+            (SELECT DISTINCT _section_id, category, hmis_code, hmis_name, eafya_labtest_id 
+            FROM reporting.dhis_eafya_mapping_labtests WHERE _section_id = $1) m 
             ON CAST(m.eafya_labtest_id AS BIGINT) = t.lab_test_id 
         `;
 

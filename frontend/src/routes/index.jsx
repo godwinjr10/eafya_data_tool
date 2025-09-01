@@ -14,7 +14,7 @@ import MainLayout from "../components/MainLayout";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import ProtectedRoute from "../helpers/Protected";
 import Mapping from "../pages/Mapping";
-import EafyaMapping from "../pages/Mapping/EafyaMapping";
+import EafyaMapping from "../pages/Mapping";
 import MappingDetail from "../pages/Mapping/MappingDetail";
 
 const AppRoutes = () => {

@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { FaPlus, FaTrash, FaEye } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import API from "../../helpers/api";
-import MappingDialog from "./MappingDialog";
 
 import MappingTable from "../../components/MappingTable";
 
@@ -71,60 +70,8 @@ const FamilyPlanning = () => {
     }
   };
 
-  const onEafyaItemsLoaded = (items) => setFamilyPlanningItems(items);
-
-  const handleRowClick = (row) => {
+  const handleViewDetails = (row) => {
     history.push(`/mapping/familyplanning/${row.hmis_code}`);
-  };
-
-  const handleViewDetails = (e, row) => {
-    e.stopPropagation();
-    history.push(`/mapping/familyplanning/${row.hmis_code}`);
-  };
-
-  // Get unique sections from mappings
-  const uniqueSections = useMemo(() => {
-    const sections = [
-      ...new Set(mappings.map((m) => m.section_id).filter(Boolean)),
-    ];
-    return sections.sort();
-  }, [mappings]);
-
-  const onSave = async (selectedIds) => {
-    if (!dialogState.row) return;
-    const {
-      section_id,
-      section_name,
-      hmis_code,
-      hmis_name,
-      categoryoptioncombo_name,
-    } = dialogState.row;
-    const mappingsPayload = selectedIds
-      .map((id) => {
-        const item = familyPlanningItems.find((i) => i.id === id);
-        return item ? { id: item.id, name: item.name } : null;
-      })
-      .filter(Boolean);
-
-    if (mappingsPayload.length === 0) return;
-
-    try {
-      const res = await API.post("/eafya/familyplanning", {
-        section_id,
-        section_name,
-        hmis_code,
-        hmis_name,
-        categoryoptioncombo_name,
-        mappings: mappingsPayload,
-      });
-
-      if (res.status === 200) {
-        await fetchMappings();
-      }
-    } catch (e) {
-      console.error("Failed to save mappings", e);
-      alert("Failed to save mappings");
-    }
   };
 
   // Define columns for the reusable table
@@ -146,23 +93,7 @@ const FamilyPlanning = () => {
       sortable: true,
       render: (row) => `${row.section_id} - ${row.section_name}`,
     },
-    {
-      accessor: "categoryoptioncombo_name",
-      header: "Category Option Combo",
-      sortable: true,
-      render: (row) => row.categoryoptioncombo_name || "-",
-    },
-    {
-      accessor: "eafya_item",
-      header: "eAFYA Family Planning Item",
-      sortable: false,
-      render: (row) =>
-        row.eafya_id ? (
-          `${row.eafya_id} - ${row.eafya_name}`
-        ) : (
-          <span className="text-muted">-</span>
-        ),
-    },
+
     {
       accessor: "actions",
       header: "Actions",
@@ -170,30 +101,12 @@ const FamilyPlanning = () => {
       render: (row) => (
         <div className="item-mappings">
           <button
-            className="btn btn-outline-info btn-sm me-2"
-            onClick={(e) => handleViewDetails(e, row)}
+            className="btn btn-outline-primary btn-sm me-2"
+            onClick={() => handleViewDetails(row)}
             title="View Details"
           >
-            <FaEye />
+            <FaEye /> View Mapping
           </button>
-          <button
-            className="btn btn-outline-primary btn-sm me-2"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleAdd(row);
-            }}
-          >
-            <FaPlus /> Add Mapping
-          </button>
-          {row.id && (
-            <a
-              href="#"
-              className="text-danger  px-4"
-              onClick={() => handleDelete(row.id)}
-            >
-              <FaTrash />
-            </a>
-          )}
         </div>
       ),
     },
@@ -210,18 +123,7 @@ const FamilyPlanning = () => {
         sortable={true}
         emptyMessage="No family planning mappings found"
         className="mapping-table"
-        onRowClick={handleRowClick}
-      />
-
-      <MappingDialog
-        isOpen={dialogState.isOpen}
-        onClose={() => setDialogState({ isOpen: false, row: null })}
-        onSave={onSave}
-        hmisName={dialogState.row?.hmis_name || ""}
-        section={"HMIS1052"}
-        eafyaItems={familyPlanningItems}
-        onEafyaItemsLoaded={onEafyaItemsLoaded}
-        datasetCode={"HMIS1052_FP"}
+        onRowClick={handleViewDetails}
       />
     </>
   );

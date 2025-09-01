@@ -34,7 +34,7 @@ router.get("/", async (req, res) => {
             SUM(COALESCE(c."20y+ Male", 0)) AS "20y_plus_male",
             SUM(COALESCE(c."20y+ Female", 0)) AS "20y_plus_female"
         FROM reporting."105_01_conditions" c
-        INNER JOIN reporting.dhis_eafya_mapping_conditions_final e ON CAST(e.eafya_disease_id AS BIGINT) = c.disease_id 
+        INNER JOIN reporting.dhis_eafya_mapping_conditions_final e ON e.eafya_disease_id = c.disease_id 
         WHERE c.report_month = $2
         AND e.section_id = $1`;
 

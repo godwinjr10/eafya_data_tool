@@ -40,18 +40,43 @@ router.get("/products", async (req, res) => {
   }
 });
 
+// Delete a specific commodity mapping
+router.delete("/commodities", async (req, res) => {
+  try {
+    const { eafya_id } = req.body;
+
+    if (!eafya_id) {
+      return res.status(400).json({
+        message: "Missing required fields: eafya_id",
+      });
+    }
+
+    const result = await pool.query(
+      "DELETE FROM reporting.dhis_eafya_mapping_commodities WHERE eafya_product_id = $1",
+      [eafya_id]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "Mapping not found" });
+    }
+
+    res.json({ message: "Commodity mapping deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting commodity mapping:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
 router.get("/labtests", async (req, res) => {
   try {
     const query = `
         SELECT 
-            id, 
-            section_id, 
-            category, 
-            hmis_code, 
+          
+            distinct hmis_code, 
             hmis_name, 
-            eafya_labtest_id, 
-            eafya_labtest_name,
-            dhis2_data_element_id
+              _section_id, 
+              section_name,
+              category
             FROM reporting.dhis_eafya_mapping_labtests
         `;
 
@@ -66,7 +91,7 @@ router.get("/lab", async (req, res) => {
   try {
     const query = `
             SELECT 
-                id, 
+                distinct id, 
                 "name"
             FROM dwh.dim_eafya_lab_test
             ORDER BY "name"
@@ -79,20 +104,33 @@ router.get("/lab", async (req, res) => {
   }
 });
 
-// Delete a specific lab test mapping by id
-router.delete("/labtests/:id", async (req, res) => {
+// Delete a specific lab test mapping
+router.delete("/labtests", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { eafya_id } = req.body;
+
+    if (!eafya_id) {
+      return res.status(400).json({
+        message: "Missing required fields: eafya_id",
+      });
+    }
+
+    console.log("Deleting lab test mapping with:", {
+      eafya_id,
+    });
+
     const result = await pool.query(
-      "DELETE FROM reporting.dhis_eafya_mapping_labtests WHERE id = $1",
-      [id]
+      "DELETE FROM reporting.dhis_eafya_mapping_labtests WHERE eafya_labtest_id = $1",
+      [eafya_id]
     );
+
+    console.log("Delete result:", result.rowCount, "rows affected");
 
     if (result.rowCount === 0) {
       return res.status(404).json({ message: "Mapping not found" });
     }
 
-    res.json({ message: "Lab test mapping deleted" });
+    res.json({ message: "Lab test mapping deleted successfully" });
   } catch (error) {
     console.error("Error deleting lab test mapping:", error);
     res.status(500).json({ message: error.message });
@@ -104,14 +142,10 @@ router.get("/familyplanning", async (req, res) => {
   try {
     const query = `
         SELECT 
-            id,
-            section_id, 
-            section_name,
-            hmis_code,
+           distinct hmis_code,
             hmis_name,
-            eafya_id, 
-            eafya_name,
-            categoryoptioncombo_name
+            _section_id, 
+            section_name
         FROM reporting.dhis_eafya_mapping_familyplanning
         ORDER BY hmis_code
         `;
@@ -128,7 +162,7 @@ router.get("/familyplanning-items", async (req, res) => {
   try {
     const query = `
             SELECT 
-                id, 
+               distinct id, 
                 "name"
             FROM dwh.dim_eafya_family_planning
             ORDER BY "name"
@@ -141,20 +175,33 @@ router.get("/familyplanning-items", async (req, res) => {
   }
 });
 
-// Delete a specific family planning mapping by id
-router.delete("/familyplanning/:id", async (req, res) => {
+// Delete a specific family planning mapping
+router.delete("/familyplanning", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { eafya_id } = req.body;
+
+    if (!eafya_id) {
+      return res.status(400).json({
+        message: "Missing required fields: eafya_id",
+      });
+    }
+
+    console.log("Deleting family planning mapping with:", {
+      eafya_id,
+    });
+
     const result = await pool.query(
-      "DELETE FROM reporting.dhis_eafya_mapping_familyplanning WHERE id = $1",
-      [id]
+      "DELETE FROM reporting.dhis_eafya_mapping_familyplanning WHERE eafya_id = $1",
+      [eafya_id]
     );
+
+    console.log("Delete result:", result.rowCount, "rows affected");
 
     if (result.rowCount === 0) {
       return res.status(404).json({ message: "Mapping not found" });
     }
 
-    res.json({ message: "Family planning mapping deleted" });
+    res.json({ message: "Family planning mapping deleted successfully" });
   } catch (error) {
     console.error("Error deleting family planning mapping:", error);
     res.status(500).json({ message: error.message });
@@ -166,13 +213,11 @@ router.get("/vaccines", async (req, res) => {
   try {
     const query = `
         SELECT 
-            id,
-            section_id,
-            section_name,
-            hmis_code,
+            
+            distinct hmis_code,
             hmis_name,
-            eafya_vaccine_id, 
-            eafya_vaccine_name
+              _section_id,
+            section_name
         FROM reporting.dhis_eafya_mapping_vaccines
         ORDER BY hmis_code
         `;
@@ -202,20 +247,33 @@ router.get("/vaccine-items", async (req, res) => {
   }
 });
 
-// Delete a specific vaccine mapping by id
-router.delete("/vaccines/:id", async (req, res) => {
+// Delete a specific vaccine mapping
+router.delete("/vaccines", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { eafya_id } = req.body;
+
+    if (!eafya_id) {
+      return res.status(400).json({
+        message: "Missing required fields: eafya_id",
+      });
+    }
+
+    console.log("Deleting vaccine mapping with:", {
+      eafya_id,
+    });
+
     const result = await pool.query(
-      "DELETE FROM reporting.dhis_eafya_mapping_vaccines WHERE id = $1",
-      [id]
+      "DELETE FROM reporting.dhis_eafya_mapping_vaccines WHERE eafya_vaccine_id = $1",
+      [eafya_id]
     );
+
+    console.log("Delete result:", result.rowCount, "rows affected");
 
     if (result.rowCount === 0) {
       return res.status(404).json({ message: "Mapping not found" });
     }
 
-    res.json({ message: "Vaccine mapping deleted" });
+    res.json({ message: "Vaccine mapping deleted successfully" });
   } catch (error) {
     console.error("Error deleting vaccine mapping:", error);
     res.status(500).json({ message: error.message });
@@ -260,20 +318,33 @@ router.get("/disease-items", async (req, res) => {
   }
 });
 
-// Delete a specific condition mapping by id
-router.delete("/conditions/:id", async (req, res) => {
+// Delete a specific condition mapping
+router.delete("/conditions", async (req, res) => {
   try {
-    const { id } = req.params;
+    const { eafya_id } = req.body;
+
+    if (!eafya_id) {
+      return res.status(400).json({
+        message: "Missing required fields: eafya_id",
+      });
+    }
+
+    console.log("Deleting condition mapping with:", {
+      eafya_id,
+    });
+
     const result = await pool.query(
-      "DELETE FROM reporting.dhis_eafya_mapping_conditions_final WHERE id = $1",
-      [id]
+      "DELETE FROM reporting.dhis_eafya_mapping_conditions_final WHERE eafya_disease_id = $1",
+      [eafya_id]
     );
+
+    console.log("Delete result:", result.rowCount, "rows affected");
 
     if (result.rowCount === 0) {
       return res.status(404).json({ message: "Mapping not found" });
     }
 
-    res.json({ message: "Condition mapping deleted" });
+    res.json({ message: "Condition mapping deleted successfully" });
   } catch (error) {
     console.error("Error deleting condition mapping:", error);
     res.status(500).json({ message: error.message });
@@ -436,13 +507,13 @@ router.post("/labtests", async (req, res) => {
     const queryExisting = `
         SELECT 
           DISTINCT   
-          section_id,
+          _section_id,
           category,
           hmis_code,
           hmis_name,
           dhis2_data_element_id
         FROM reporting.dhis_eafya_mapping_labtests
-        WHERE hmis_code = $1 AND section_id = $2
+        WHERE hmis_code = $1 AND _section_id = $2
         AND dhis2_data_element_id IS NOT NULL
         ORDER BY dhis2_data_element_id
       `;
@@ -488,7 +559,7 @@ router.post("/labtests", async (req, res) => {
 
           await client.query(
             `INSERT INTO reporting.dhis_eafya_mapping_labtests (
-                section_id,
+                _section_id,
                 category,
                 hmis_code,
                 hmis_name,
@@ -497,7 +568,7 @@ router.post("/labtests", async (req, res) => {
                 dhis2_data_element_id
               ) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
             [
-              existingData.section_id,
+              existingData._section_id,
               existingData.category,
               existingData.hmis_code,
               existingData.hmis_name,
@@ -539,7 +610,7 @@ router.post("/labtests", async (req, res) => {
 router.post("/familyplanning", async (req, res) => {
   try {
     const {
-      section_id,
+      _section_id,
       hmis_code,
       mappings, // [{ id, name }] eAFYA family planning items
     } = req.body;
@@ -547,7 +618,7 @@ router.post("/familyplanning", async (req, res) => {
     // Simplified validation - only check for required fields
     if (
       !hmis_code ||
-      !section_id ||
+      !_section_id ||
       !Array.isArray(mappings) ||
       mappings.length === 0
     ) {
@@ -561,21 +632,21 @@ router.post("/familyplanning", async (req, res) => {
     const queryExisting = `
         SELECT 
           DISTINCT   
-          section_id,
+          _section_id,
           section_name,
           hmis_code,
           hmis_name,
           categoryoptioncombo_name
         FROM reporting.dhis_eafya_mapping_familyplanning
-        WHERE hmis_code = $1 AND section_id = $2
+        WHERE hmis_code = $1 
         ORDER BY categoryoptioncombo_name
       `;
 
     console.log("Executing familyplanning query with params:", [
       hmis_code,
-      section_id,
+      _section_id,
     ]);
-    const { rows } = await pool.query(queryExisting, [hmis_code, section_id]);
+    const { rows } = await pool.query(queryExisting, [hmis_code]);
 
     console.log(`Found ${rows.length} distinct family planning entries`);
 
@@ -608,7 +679,7 @@ router.post("/familyplanning", async (req, res) => {
 
           await client.query(
             `INSERT INTO reporting.dhis_eafya_mapping_familyplanning (
-                section_id,
+                _section_id,
                 section_name,
                 hmis_code,
                 hmis_name,
@@ -617,7 +688,7 @@ router.post("/familyplanning", async (req, res) => {
                 categoryoptioncombo_name
               ) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
             [
-              existingData.section_id,
+              existingData._section_id,
               existingData.section_name,
               existingData.hmis_code,
               existingData.hmis_name,
@@ -659,7 +730,7 @@ router.post("/familyplanning", async (req, res) => {
 router.post("/vaccines", async (req, res) => {
   try {
     const {
-      section_id,
+      _section_id,
       hmis_code,
       mappings, // [{ id, name }] eAFYA vaccines
     } = req.body;
@@ -667,7 +738,7 @@ router.post("/vaccines", async (req, res) => {
     // Simplified validation - only check for required fields
     if (
       !hmis_code ||
-      !section_id ||
+      !_section_id ||
       !Array.isArray(mappings) ||
       mappings.length === 0
     ) {
@@ -681,20 +752,20 @@ router.post("/vaccines", async (req, res) => {
     const queryExisting = `
         SELECT 
           DISTINCT   
-          section_id,
+          _section_id,
           section_name,
           hmis_code,
           hmis_name
         FROM reporting.dhis_eafya_mapping_vaccines
-        WHERE hmis_code = $1 AND section_id = $2
+        WHERE hmis_code = $1 
         ORDER BY hmis_code
       `;
 
     console.log("Executing vaccines query with params:", [
       hmis_code,
-      section_id,
+      _section_id,
     ]);
-    const { rows } = await pool.query(queryExisting, [hmis_code, section_id]);
+    const { rows } = await pool.query(queryExisting, [hmis_code]);
 
     console.log(`Found ${rows.length} distinct vaccine entries`);
 
@@ -727,7 +798,7 @@ router.post("/vaccines", async (req, res) => {
 
           await client.query(
             `INSERT INTO reporting.dhis_eafya_mapping_vaccines (
-                section_id,
+                _section_id,
                 section_name,
                 hmis_code,
                 hmis_name,
@@ -735,7 +806,7 @@ router.post("/vaccines", async (req, res) => {
                 eafya_vaccine_name
               ) VALUES ($1, $2, $3, $4, $5, $6)`,
             [
-              existingData.section_id,
+              existingData._section_id,
               existingData.section_name,
               existingData.hmis_code,
               existingData.hmis_name,
@@ -807,7 +878,7 @@ router.post("/conditions", async (req, res) => {
           category_optioncombo_id,
           category_optioncombo_name
         FROM reporting.dhis_eafya_mapping_conditions_final
-        WHERE hmis_code ILIKE $1 AND section_id = $2
+        WHERE hmis_code ILIKE $1 
         ORDER BY data_element_id
       `;
 
@@ -815,10 +886,7 @@ router.post("/conditions", async (req, res) => {
       hmis_code,
       section_id,
     ]);
-    const { rows } = await pool.query(queryExisting, [
-      `%${hmis_code}%`,
-      section_id,
-    ]);
+    const { rows } = await pool.query(queryExisting, [`%${hmis_code}%`]);
 
     console.log(`Found ${rows.length} distinct condition entries`);
 
