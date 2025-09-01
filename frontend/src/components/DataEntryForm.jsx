@@ -10,6 +10,7 @@ import MedicinesForm from "../pages/HMIS/MedicinesForm";
 import ConditionsForm from "../pages/HMIS/conditions";
 import HMIS108 from "../pages/HMIS/HMIS108";
 import HMIS108Report from "./HMIS108Report";
+import MCHReport from "./MCHReport";
 
 const months = [
   "January",
@@ -37,7 +38,7 @@ const REPORT_CONFIGS = {
   },
   HMIS_105_02: {
     endpoint: "/downloads/mch",
-    component: null,
+    component: MCHReport,
     title: "MCH Report",
     dataset: "RtEYsASU7PG",
     dhisEndpoint: "/dhis/sync",
@@ -151,9 +152,9 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
       const formattedMonth = monthIndex.toString().padStart(2, "0");
       const reportMonth = `${selectedYear}${formattedMonth}`;
 
-      // For HMIS 108, don't send section parameter to get all sections
+      // For HMIS 108 and MCH reports, don't send section parameter to get all sections
       const endpoint =
-        dataSetId === "HMIS_108"
+        dataSetId === "HMIS_108" || dataSetId === "HMIS_105_02"
           ? `${reportConfig.endpoint}?report_month=${reportMonth}`
           : `${reportConfig.endpoint}?report_month=${reportMonth}&section=${section}`;
 
