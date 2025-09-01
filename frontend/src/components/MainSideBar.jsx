@@ -9,12 +9,12 @@ function MainSideBar() {
   const location = useLocation();
 
   const menuItems = [
-    {
-      id: "dashboard",
-      label: "Dashboard",
-      icon: "speedometer2",
-      path: "/dashboard",
-    },
+    // {
+    //   id: "dashboard",
+    //   label: "Dashboard",
+    //   icon: "speedometer2",
+    //   path: "/dashboard",
+    // },
     {
       id: "hmis",
       label: "HMIS Reports",
