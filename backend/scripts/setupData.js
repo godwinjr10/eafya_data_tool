@@ -1,9 +1,7 @@
-import axios from "axios";
 import bcrypt from "bcrypt";
 import { pool } from "../config/database.js";
 
 // Configuration
-const API_BASE_URL = "http://localhost:5000/api";
 const datasets = [
   {
     dataset_id: "HMIS_105_01",
@@ -102,26 +100,56 @@ const defaultUser = {
   module: "all",
 };
 
-// Function to create datasets via API
+// Function to create datasets via direct database insert
 async function createDatasets() {
   console.log("🚀 Creating datasets...");
 
   try {
-    const response = await axios.post(
-      `${API_BASE_URL}/datasets/bulk`,
-      datasets
+    // Check if datasets already exist
+    const existingDatasets = await pool.query(
+      "SELECT dataset_id FROM reporting.datasets WHERE dataset_id = ANY($1)",
+      [datasets.map(d => d.dataset_id)]
     );
+    
+    const existingIds = existingDatasets.rows.map(row => row.dataset_id);
+    const newDatasets = datasets.filter(d => !existingIds.includes(d.dataset_id));
+    
+    if (newDatasets.length === 0) {
+      console.log("⚠️  All datasets already exist, skipping creation");
+      return true;
+    }
+
+    // Prepare bulk insert query
+    const values = [];
+    const placeholders = [];
+    let paramIndex = 1;
+
+    newDatasets.forEach((dataset) => {
+      placeholders.push(`($${paramIndex}, $${paramIndex + 1}, $${paramIndex + 2}, NOW(), NOW())`);
+      values.push(
+        dataset.dataset_id,
+        dataset.dataset_name,
+        JSON.stringify(dataset.sections)
+      );
+      paramIndex += 3;
+    });
+
+    const query = `
+      INSERT INTO reporting.datasets (dataset_id, dataset_name, sections, "createdAt", "updatedAt") 
+      VALUES ${placeholders.join(', ')} 
+      RETURNING id, dataset_id, dataset_name
+    `;
+
+    const result = await pool.query(query, values);
+    
     console.log("✅ Datasets created successfully!");
-    console.log(`📊 Created ${response.data.length} datasets:`);
-    response.data.forEach((dataset) => {
+    console.log(`📊 Created ${result.rows.length} datasets:`);
+    result.rows.forEach((dataset) => {
       console.log(`   - ${dataset.dataset_id}: ${dataset.dataset_name}`);
     });
     return true;
   } catch (error) {
-    console.error(
-      "❌ Error creating datasets:",
-      error.response?.data || error.message
-    );
+    console.error("❌ Error creating datasets:", error.message);
     return false;
   }
 }
@@ -177,32 +205,11 @@ async function createUser() {
   }
 }
 
-// Function to verify server is running
-async function checkServer() {
-  try {
-    await axios.get(`${API_BASE_URL}/datasets`);
-    console.log("✅ Server is running and accessible");
-    return true;
-  } catch (error) {
-    console.error(
-      "❌ Server is not accessible. Make sure the backend server is running on port 5000"
-    );
-    return false;
-  }
-}
+
 
 // Main execution function
 async function main() {
   console.log("🎯 Starting data setup...\n");
-
-  // Check if server is running
-  const serverRunning = await checkServer();
-  if (!serverRunning) {
-    console.log("\n💡 To start the server, run: npm start or node server.js");
-    process.exit(1);
-  }
-
-  console.log("");
 
   // Create datasets
   const datasetsCreated = await createDatasets();

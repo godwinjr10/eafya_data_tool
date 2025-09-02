@@ -30,7 +30,7 @@ const Login = () => {
         setLoading(false);
         localStorage.setItem("token", res.data.accessToken);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-        history.push('/dashboard');
+        history.push('/hmis');
       }
     } catch (error) {
       setLoading(false);
