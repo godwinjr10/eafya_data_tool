@@ -100,6 +100,52 @@ const defaultUser = {
   module: "all",
 };
 
+// Function to create schema and tables if they don't exist
+async function createTablesIfNotExists() {
+  console.log("🏗️  Ensuring database schema and tables exist...");
+
+  try {
+    // Create reporting schema if it doesn't exist
+    await pool.query('CREATE SCHEMA IF NOT EXISTS reporting');
+    console.log("✅ Reporting schema ensured");
+
+    // Create datasets table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS reporting.datasets (
+        id SERIAL PRIMARY KEY,
+        dataset_id VARCHAR(255) NOT NULL,
+        dataset_name VARCHAR(255) NOT NULL,
+        sections JSONB NOT NULL DEFAULT '[]'::jsonb,
+        "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+        "updatedAt" TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+      )
+    `);
+    console.log("✅ Datasets table ensured");
+
+    // Create users table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS reporting.users (
+        id SERIAL PRIMARY KEY,
+        username VARCHAR(255) NOT NULL,
+        role VARCHAR(255) NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        firstname VARCHAR(255) NOT NULL,
+        lastname VARCHAR(255) NOT NULL,
+        "phoneNo" VARCHAR(255),
+        module VARCHAR(255),
+        "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+        "updatedAt" TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+      )
+    `);
+    console.log("✅ Users table ensured");
+
+    return true;
+  } catch (error) {
+    console.error("❌ Error creating tables:", error.message);
+    return false;
+  }
+}
+
 // Function to create datasets via direct database insert
 async function createDatasets() {
   console.log("🚀 Creating datasets...");
@@ -211,6 +257,14 @@ async function createUser() {
 async function main() {
   console.log("🎯 Starting data setup...\n");
 
+  // Create tables if they don't exist
+  const tablesCreated = await createTablesIfNotExists();
+  if (!tablesCreated) {
+    console.log("❌ Failed to create required tables. Exiting.");
+    process.exit(1);
+  }
+  console.log("");
+
   // Create datasets
   const datasetsCreated = await createDatasets();
   console.log("");
@@ -220,9 +274,10 @@ async function main() {
   console.log("");
 
   // Summary
-  if (datasetsCreated && userCreated) {
+  if (tablesCreated && datasetsCreated && userCreated) {
     console.log("🎉 Setup completed successfully!");
     console.log("\n📋 Summary:");
+    console.log("   ✅ Database tables ensured");
     console.log("   ✅ Datasets created");
     console.log("   ✅ Default user created");
     console.log("\n🔑 Login credentials:");
