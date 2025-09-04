@@ -669,6 +669,7 @@ CREATE TABLE IF NOT EXISTS dwh.dim_eafya_moh_report
 , moh_report_section_id BIGINT
 , branch_id BIGINT
 , company_id BIGINT
+, moh_report_config_id BIGINT
 )
 ;
 
