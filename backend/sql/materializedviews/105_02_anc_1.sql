@@ -22,6 +22,7 @@ FROM (
       date_created
     FROM reporting.patient_antenatal
     WHERE gender = 'Female'
+    AND clinic_id IN ('1')
     ORDER BY patient_id, patient_visit_id, date_created
   ) AS distinct_visits
   ORDER BY patient_id, date_created

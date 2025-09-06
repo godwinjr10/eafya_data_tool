@@ -15,7 +15,8 @@ patient_admissions AS (
         CURRENT_DATE - admission_date::date AS days_since_admission,
         DATE_PART('year', AGE(admission_date::date, birth_date::date)) AS age_years
     FROM reporting.patient_postnatal
-    WHERE admission_date IS NOT NULL AND birth_date IS NOT NULL
+    WHERE admission_date IS NOT NULL AND birth_date IS NOT null
+    AND admission_ward_id IN ('2')
 ),
 timing_with_age AS (
     SELECT
@@ -33,7 +34,7 @@ timing_with_age AS (
         days_since_admission BETWEEN 0 AND 6
         OR days_since_admission BETWEEN 42 AND 49
         OR days_since_admission BETWEEN 180 AND 210
-),
+      ),
 aggregated AS (
     SELECT
         timing,

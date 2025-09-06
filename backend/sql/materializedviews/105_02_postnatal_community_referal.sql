@@ -8,6 +8,7 @@ SELECT
     COUNT(*) FILTER (WHERE EXTRACT(YEAR FROM age(date_created, birth_date)) > 50) AS "50yrs+",
     COUNT(*) AS total_patients
 FROM reporting.patient_postnatal
+where admission_ward_id IN ('2')
 GROUP BY TO_CHAR(date_created, 'YYYYMM')
 ORDER BY month;
 

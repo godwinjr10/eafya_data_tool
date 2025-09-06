@@ -17,6 +17,7 @@ FROM (
     DATE_PART('year', AGE(date_created, birth_date)) AS age_years
   FROM reporting.patient_antenatal
   WHERE gender = 'Female'
+  AND clinic_id IN ('1')
 ) AS all_visits
 GROUP BY TO_CHAR(date_created, 'YYYYMM')
 ORDER BY report_month DESC;

@@ -6,5 +6,6 @@ SELECT
 FROM reporting.patient_admissions h 
 INNER JOIN reporting.patient_diagnosis d ON h.encounter_id = d.encounter_id 
 WHERE d.disease_name ILIKE '%preterm labour%'
+AND admission_ward_id IN ('1')
 GROUP BY TO_CHAR(h.admission_date, 'YYYYMM')
 ORDER BY report_month;
