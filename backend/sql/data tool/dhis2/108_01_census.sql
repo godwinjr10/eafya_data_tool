@@ -1,3 +1,4 @@
+CREATE MATERIALIZED VIEW reporting.dhis2_census_information AS
 SELECT 
     "Report Month",
     "Wards",
