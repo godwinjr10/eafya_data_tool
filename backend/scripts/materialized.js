@@ -1,17 +1,23 @@
-import fs from 'fs';
-import path from 'path';
-import { Client } from 'pg';
-import dotenv from 'dotenv';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
+import fs from "fs";
+import path from "path";
+import { Client } from "pg";
+import dotenv from "dotenv";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-const envPath = path.join(__dirname, '..', '.env');
+const envPath = path.join(__dirname, "..", ".env");
 dotenv.config({ path: envPath });
 
-const calculatedPath = path.resolve(__dirname, '..', 'sql', 'materializedviews');
+const calculatedPath = path.resolve(
+  __dirname,
+  "..",
+  "sql",
+  "materializedviews"
+);
 const SQL_DIR = calculatedPath;
 
 const DB_CONFIG = {
@@ -22,26 +28,32 @@ const DB_CONFIG = {
   password: process.env.DB_PASSWORD,
 };
 
+
 // --- helpers ---
 function readSqlFiles(dir) {
-  const files = fs.readdirSync(dir)
-    .filter(f => f.toLowerCase().endsWith('.sql'))
+  const files = fs
+    .readdirSync(dir)
+    .filter((f) => f.toLowerCase().endsWith(".sql"))
     // sort with numeric awareness so 01_, 02_... run in order
-    .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
-  return files.map(f => ({ name: f, full: path.join(dir, f) }));
+    .sort((a, b) =>
+      a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" })
+    );
+  return files.map((f) => ({ name: f, full: path.join(dir, f) }));
 }
 
 function extractViews(sql) {
   const results = [];
-  const mvRe = /create\s+(?:or\s+replace\s+)?materialized\s+view\s+(?:if\s+not\s+exists\s+)?([^\s(]+)\s/ig;
-  const vRe  = /create\s+(?:or\s+replace\s+)?view\s+(?:if\s+not\s+exists\s+)?([^\s(]+)\s/ig;
+  const mvRe =
+    /create\s+(?:or\s+replace\s+)?materialized\s+view\s+(?:if\s+not\s+exists\s+)?([^\s(]+)\s/gi;
+  const vRe =
+    /create\s+(?:or\s+replace\s+)?view\s+(?:if\s+not\s+exists\s+)?([^\s(]+)\s/gi;
 
   let m;
   while ((m = mvRe.exec(sql)) !== null) {
-    results.push({ type: 'materialized', name: m[1] });
+    results.push({ type: "materialized", name: m[1] });
   }
   while ((m = vRe.exec(sql)) !== null) {
-    results.push({ type: 'view', name: m[1] });
+    results.push({ type: "view", name: m[1] });
   }
   return results;
 }
@@ -49,7 +61,7 @@ function extractViews(sql) {
 function isSafeIdentifier(id) {
   // Matches: schema.view or "Schema"."View Name", with optional dot
   const seg = /(?:[a-z_][a-z0-9_$]*|"[^"]+")/i.source;
-  const dotted = new RegExp(`^${seg}(\\.${seg})?$`, 'i');
+  const dotted = new RegExp(`^${seg}(\\.${seg})?$`, "i");
   return dotted.test(id.trim());
 }
 
@@ -59,7 +71,7 @@ async function dropViewsFirst(client, files) {
   const toDrop = [];
 
   for (let i = files.length - 1; i >= 0; i--) {
-    const sql = fs.readFileSync(files[i].full, 'utf8');
+    const sql = fs.readFileSync(files[i].full, "utf8");
     const views = extractViews(sql);
     for (const v of views) {
       const key = `${v.type}:${v.name}`;
@@ -71,13 +83,13 @@ async function dropViewsFirst(client, files) {
   }
 
   if (toDrop.length === 0) {
-    console.log('No views detected to drop.');
+    console.log("No views detected to drop.");
     return;
   }
 
   console.log(`Dropping ${toDrop.length} view(s) before recreate...`);
   for (const v of toDrop) {
-    const kind = v.type === 'materialized' ? 'MATERIALIZED VIEW' : 'VIEW';
+    const kind = v.type === "materialized" ? "MATERIALIZED VIEW" : "VIEW";
     if (!isSafeIdentifier(v.name)) {
       console.warn(`⚠️  Skipping suspicious identifier: ${v.name}`);
       continue;
@@ -101,7 +113,7 @@ async function run() {
 
   const files = readSqlFiles(SQL_DIR);
   if (files.length === 0) {
-    console.log('No .sql files found.');
+    console.log("No .sql files found.");
     return;
   }
 
@@ -113,14 +125,16 @@ async function run() {
 
     // 2) Recreate by executing each file in order
     for (const f of files) {
-      const sql = fs.readFileSync(f.full, 'utf8');
+      const sql = fs.readFileSync(f.full, "utf8");
       console.log(`---- Running: ${f.name}`);
       await client.query(sql);
     }
 
-    console.log('✅ Done: views dropped & recreated.');
+ 
+
+    console.log("✅ Done: views dropped & recreated.");
   } catch (err) {
-    console.error('❌ Execution failed:', err.message);
+    console.error("❌ Execution failed:", err.message);
     process.exit(1);
   } finally {
     await client.end();

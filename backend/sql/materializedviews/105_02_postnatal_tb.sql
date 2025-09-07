@@ -3,7 +3,9 @@ WITH months AS (
     SELECT DISTINCT TO_CHAR(admission_date, 'YYYYMM') AS report_month
     FROM reporting.patient_postnatal
     WHERE admission_date IS NOT null
-    AND admission_ward_id IN ('2')
+    AND admission_ward_id IN  (SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%postnantal ward%' and mapping_id > 0)
 ),
 statuses AS (
     SELECT unnest(ARRAY['screened', 'presumed', 'diagnosed']) AS status

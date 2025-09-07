@@ -16,7 +16,10 @@ ma08 AS (
     COUNT(*)::bigint AS value
   FROM reporting.maternity
   WHERE baby_weight IS NOT NULL AND baby_weight > 0 AND baby_weight < 2.5
-  AND admission_ward_id IN ('1')
+  AND admission_ward_id  IN (
+SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%maternity ward%' and mapping_id > 0)
   GROUP BY TO_CHAR(admission_date, 'YYYYMM')
 ),
 ma09 AS (
@@ -28,7 +31,10 @@ ma09 AS (
   FROM reporting.maternity
   WHERE admission_date IS NOT NULL
     AND baby_status = 'Live Birth'
-    AND admission_ward_id IN ('1')
+    AND admission_ward_id  IN (
+SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%maternity ward%' and mapping_id > 0)
   GROUP BY TO_CHAR(admission_date, 'YYYYMM')
 ),
 ma11 AS (
@@ -40,7 +46,10 @@ ma11 AS (
   FROM reporting.maternity
   WHERE admission_date IS NOT NULL
     AND baby_status = 'Birth with Deformities'
-    AND admission_ward_id IN ('1')
+    AND admission_ward_id  IN (
+SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%maternity ward%' and mapping_id > 0)
   GROUP BY TO_CHAR(admission_date, 'YYYYMM')
 ),
 ma12 AS (
@@ -51,7 +60,10 @@ ma12 AS (
     COUNT(*)::bigint AS value
   FROM reporting.maternity
   WHERE baby_status IN ('Fresh Still Birth', 'Macerated Still Birth')
-  AND admission_ward_id IN ('1')
+  AND admission_ward_id  IN (
+SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%maternity ward%' and mapping_id > 0)
   GROUP BY TO_CHAR(admission_date, 'YYYYMM')
 ),
 ma23 AS (
@@ -74,7 +86,10 @@ ma24 AS (
     COUNT(*)::bigint AS value
   FROM reporting.maternity
   WHERE resuscitation = true
-  AND admission_ward_id IN ('1')
+  AND admission_ward_id  IN (
+SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%maternity ward%' and mapping_id > 0)
   GROUP BY TO_CHAR(admission_date, 'YYYYMM')
 )
 SELECT * FROM ma01

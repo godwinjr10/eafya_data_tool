@@ -42,7 +42,10 @@ FROM (
         ELSE DATE_PART('year', AGE(CURRENT_DATE, birth_date::DATE))
       END AS age_years
     FROM reporting.patient_major_theater
-    WHERE major_theater_id = 126
+    WHERE major_theater_id IN (
+SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%major theatre%' and mapping_id > 0)
   ) sub
   GROUP BY report_month, major_theatre_name
 ) combined

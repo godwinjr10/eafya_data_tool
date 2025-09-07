@@ -16,6 +16,7 @@ import ProtectedRoute from "../helpers/Protected";
 import Mapping from "../pages/Mapping";
 import EafyaMapping from "../pages/Mapping";
 import MappingDetail from "../pages/Mapping/MappingDetail";
+import MaterializedViewIdsDetail from "../pages/Mapping/MaterializedViewIdsDetail";
 
 const AppRoutes = () => {
   return (
@@ -36,6 +37,10 @@ const AppRoutes = () => {
           <ProtectedRoute
             path="/mapping/:mappingType/:id"
             component={MappingDetail}
+          />
+          <ProtectedRoute
+            path="/materialized-ids/:name"
+            component={MaterializedViewIdsDetail}
           />
           <ProtectedRoute path="/mappingtest" exact component={Mapping} />
         </MainLayout>

@@ -263,11 +263,13 @@ CREATE TABLE IF NOT EXISTS reporting.patient_antenatal
 , birth_date TIMESTAMP
 , gender VARCHAR(6)
 , encounter_id BIGINT
+, clinic_id BIGINT
 , clinic VARCHAR(255)
 , patient_visit_id BIGINT
 , date_created TIMESTAMP
 )
 ;
+
 
 CREATE TABLE IF NOT EXISTS reporting.encounters
 (
