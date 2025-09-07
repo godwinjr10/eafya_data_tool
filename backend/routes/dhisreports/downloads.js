@@ -156,6 +156,44 @@ router.get("/hmis108", async (req, res) => {
         allSections.surgical = [];
       }
 
+      // Section 4: Blood Transfusion (4a summary, 4b by demographics)
+      try {
+        let query = `
+					SELECT report_month, "section", blood_product_type, units_requested, units_received, units_transfused, adverse_reactions, age_group, gender, unit
+					FROM reporting."108_blood_transfusion"
+				`;
+        let params = [];
+        if (report_month) {
+          query += ` WHERE report_month = $1`;
+          params.push(report_month);
+        }
+        query += ` ORDER BY "section", blood_product_type, age_group, gender`;
+        const { rows } = await pool.query(query, params);
+        allSections.bloodTransfusion = rows;
+      } catch (error) {
+        console.error("Error fetching blood transfusion data:", error);
+        allSections.bloodTransfusion = [];
+      }
+
+      // Section 2: Referrals
+      try {
+        let query = `
+					SELECT report_month, "Outgoing Referrals", "Incoming Referrals", "Self Referrals", "Runaway Patients"
+					FROM reporting."108_04_referrals"
+				`;
+        let params = [];
+        if (report_month) {
+          query += ` WHERE report_month = $1`;
+          params.push(report_month);
+        }
+        query += ` ORDER BY report_month`;
+        const { rows } = await pool.query(query, params);
+        allSections.referrals = rows;
+      } catch (error) {
+        console.error("Error fetching referrals data:", error);
+        allSections.referrals = [];
+      }
+
       // Section 5: Radiology and Imaging
       try {
         let query = `
@@ -285,6 +323,18 @@ router.get("/hmis108", async (req, res) => {
         query += ` ORDER BY "Wards"`;
         break;
 
+      case "2": // Referrals
+        query = `
+					SELECT report_month, "Outgoing Referrals", "Incoming Referrals", "Self Referrals", "Runaway Patients"
+					FROM reporting."108_04_referrals"
+				`;
+        if (report_month) {
+          query += ` WHERE report_month = $1`;
+          params.push(report_month);
+        }
+        query += ` ORDER BY report_month`;
+        break;
+
       case "3": // Surgical Procedures
         query = `
 					SELECT "section", code, "procedure", "year", "month", procedure_count
@@ -296,6 +346,18 @@ router.get("/hmis108", async (req, res) => {
           params.push(year, month);
         }
         query += ` ORDER BY "section", code`;
+        break;
+
+      case "4": // Blood Transfusion (both 4a and 4b)
+        query = `
+					SELECT report_month, "section", blood_product_type, units_requested, units_received, units_transfused, adverse_reactions, age_group, gender, unit
+					FROM reporting."108_blood_transfusion"
+				`;
+        if (report_month) {
+          query += ` WHERE report_month = $1`;
+          params.push(report_month);
+        }
+        query += ` ORDER BY "section", blood_product_type, age_group, gender`;
         break;
 
       case "5": // Radiology and Imaging

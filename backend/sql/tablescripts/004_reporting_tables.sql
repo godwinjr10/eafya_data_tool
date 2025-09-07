@@ -538,6 +538,39 @@ CREATE TABLE  IF NOT EXISTS reporting."108_maternal_neonatal"
 , newborn_date TIMESTAMP
 )
 ;
+CREATE TABLE  IF NOT EXISTS reporting.blood_transfusion_data
+(
+  encounter_id BIGINT
+, encounter_date TIMESTAMP
+, patient_id VARCHAR(255)
+, gender VARCHAR(6)
+, birth_date TIMESTAMP
+, age_years DOUBLE PRECISION
+, age_group TEXT
+, blood_product_type VARCHAR(255)
+, transfusion_date TIMESTAMP
+, validated VARCHAR(255)
+, degree_of_urgency VARCHAR(9)
+, number_of_pack INTEGER
+, disease_name VARCHAR(255)
+, five_character_icd_code VARCHAR(255)
+)
+;
+
+CREATE TABLE IF NOT EXISTS reporting.patient_referrals
+(
+  referral_id BIGINT
+, encounter_id BIGINT
+, encounter_date TIMESTAMP
+, patient_id VARCHAR(255)
+, gender VARCHAR(6)
+, birth_date TIMESTAMP
+, age_years DOUBLE PRECISION
+, referral_type VARCHAR(255)
+, referral_date TIMESTAMP
+, referral_reason TEXT
+)
+;
 
 -- Create index for better performance
 CREATE INDEX IF NOT EXISTS idx_eafya_mappings_dataelement ON reporting.eafya_mappings(hmis_dataelement_code);

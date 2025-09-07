@@ -193,4 +193,56 @@ router.get("/surgical-procedures", async (req, res) => {
   }
 });
 
+// Referrals Route (Section 2)
+router.get("/referrals", async (req, res) => {
+  try {
+    const { report_month } = req.query;
+
+    let query = `
+      SELECT report_month, "Outgoing Referrals", "Incoming Referrals", "Self Referrals", "Runaway Patients"
+      FROM reporting."108_04_referrals"
+    `;
+
+    const params = [];
+    if (report_month) {
+      query += ` WHERE report_month = $1`;
+      params.push(report_month);
+    }
+
+    query += ` ORDER BY report_month`;
+
+    const result = await pool.query(query, params);
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error fetching referrals:", error);
+    res.status(500).json({ error: "Failed to fetch referrals" });
+  }
+});
+
+// Blood Transfusion Route (Section 4a & 4b)
+router.get("/blood-transfusion", async (req, res) => {
+  try {
+    const { report_month } = req.query;
+
+    let query = `
+      SELECT report_month, "section", blood_product_type, units_requested, units_received, units_transfused, adverse_reactions, age_group, gender, unit
+      FROM reporting."108_blood_transfusion"
+    `;
+
+    const params = [];
+    if (report_month) {
+      query += ` WHERE report_month = $1`;
+      params.push(report_month);
+    }
+
+    query += ` ORDER BY "section", blood_product_type, age_group, gender`;
+
+    const result = await pool.query(query, params);
+    res.json(result.rows);
+  } catch (error) {
+    console.error("Error fetching blood transfusion:", error);
+    res.status(500).json({ error: "Failed to fetch blood transfusion" });
+  }
+});
+
 export default router;

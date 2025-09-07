@@ -79,8 +79,9 @@ const datasets = [
     dataset_name: "HMIS 108 - Inpatient Monthly Report",
     sections: [
       { section_id: "1", section_name: "Census Information" },
+      { section_id: "2", section_name: "Referrals" },
       { section_id: "3", section_name: "Surgical Procedures" },
-      { section_id: "4", section_name: "Utilization of Special Services" },
+      { section_id: "4", section_name: "Blood Transfusion Services" },
       { section_id: "5", section_name: "Radiology and Imaging" },
       { section_id: "6", section_name: "Admissions Deaths by Diagnosis" },
       { section_id: "7", section_name: "Mental Health, Risk Behaviour TB" },
@@ -106,7 +107,7 @@ async function createTablesIfNotExists() {
 
   try {
     // Create reporting schema if it doesn't exist
-    await pool.query('CREATE SCHEMA IF NOT EXISTS reporting');
+    await pool.query("CREATE SCHEMA IF NOT EXISTS reporting");
     console.log("✅ Reporting schema ensured");
 
     // Create datasets table
@@ -154,12 +155,14 @@ async function createDatasets() {
     // Check if datasets already exist
     const existingDatasets = await pool.query(
       "SELECT dataset_id FROM reporting.datasets WHERE dataset_id = ANY($1)",
-      [datasets.map(d => d.dataset_id)]
+      [datasets.map((d) => d.dataset_id)]
     );
-    
-    const existingIds = existingDatasets.rows.map(row => row.dataset_id);
-    const newDatasets = datasets.filter(d => !existingIds.includes(d.dataset_id));
-    
+
+    const existingIds = existingDatasets.rows.map((row) => row.dataset_id);
+    const newDatasets = datasets.filter(
+      (d) => !existingIds.includes(d.dataset_id)
+    );
+
     if (newDatasets.length === 0) {
       console.log("⚠️  All datasets already exist, skipping creation");
       return true;
@@ -171,7 +174,9 @@ async function createDatasets() {
     let paramIndex = 1;
 
     newDatasets.forEach((dataset) => {
-      placeholders.push(`($${paramIndex}, $${paramIndex + 1}, $${paramIndex + 2}, NOW(), NOW())`);
+      placeholders.push(
+        `($${paramIndex}, $${paramIndex + 1}, $${paramIndex + 2}, NOW(), NOW())`
+      );
       values.push(
         dataset.dataset_id,
         dataset.dataset_name,
@@ -182,12 +187,12 @@ async function createDatasets() {
 
     const query = `
       INSERT INTO reporting.datasets (dataset_id, dataset_name, sections, "createdAt", "updatedAt") 
-      VALUES ${placeholders.join(', ')} 
+      VALUES ${placeholders.join(", ")} 
       RETURNING id, dataset_id, dataset_name
     `;
 
     const result = await pool.query(query, values);
-    
+
     console.log("✅ Datasets created successfully!");
     console.log(`📊 Created ${result.rows.length} datasets:`);
     result.rows.forEach((dataset) => {
@@ -250,8 +255,6 @@ async function createUser() {
     return false;
   }
 }
-
-
 
 // Main execution function
 async function main() {
