@@ -60,7 +60,7 @@ const MainLayout = ({ children }) => {
       {/* Main Content Area */}
       <div className="flex-fill d-flex flex-column overflow-hidden">
         {/* Header */}
-        <header className=" bg-danger text-white d-flex justify-content-between align-items-center p-2">
+        <header className=" bg-primary text-white d-flex justify-content-between align-items-center p-2">
           <div className="text-white">
             <i className="bi bi-grid me-2"></i>
             Ministry of Health - eAFYA Data Mining Tool

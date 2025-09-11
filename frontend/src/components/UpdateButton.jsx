@@ -12,6 +12,9 @@ const UpdateButton = () => {
   const [lastChecked, setLastChecked] = useState(null);
   const [updateProgress, setUpdateProgress] = useState(0);
   const [currentStep, setCurrentStep] = useState("");
+  const [isUpgrading, setIsUpgrading] = useState(false);
+  const [upgradeProgress, setUpgradeProgress] = useState(0);
+  const [upgradeStep, setUpgradeStep] = useState("");
 
   const checkForUpdates = async () => {
     setIsChecking(true);
@@ -99,6 +102,63 @@ const UpdateButton = () => {
     }
   };
 
+  const triggerUpgrade = async () => {
+    setIsUpgrading(true);
+    setUpdateStatus("upgrading");
+    setUpgradeProgress(0);
+    setUpgradeStep("Starting full upgrade...");
+
+    // Full upgrade progress steps
+    const progressSteps = [
+      { step: "Pulling report scripts...", progress: 12 },
+      { step: "Pulling data tool...", progress: 25 },
+      { step: "Running setup scripts...", progress: 37 },
+      { step: "Running Pentaho ETL...", progress: 50 },
+      { step: "Deploying frontend...", progress: 62 },
+      { step: "Restarting backend service...", progress: 75 },
+      { step: "Running materialized views...", progress: 87 },
+      { step: "Upgrade completed!", progress: 100 },
+    ];
+
+    // Animate progress
+    let currentStepIndex = 0;
+    const progressInterval = setInterval(() => {
+      if (currentStepIndex < progressSteps.length) {
+        setUpgradeStep(progressSteps[currentStepIndex].step);
+        setUpgradeProgress(progressSteps[currentStepIndex].progress);
+        currentStepIndex++;
+      }
+    }, 3000);
+
+    try {
+      const response = await API.post("/upgrade", {
+        dryRun: false,
+      });
+
+      clearInterval(progressInterval);
+      setUpgradeProgress(100);
+      setUpgradeStep("Upgrade completed!");
+
+      setUpdateStatus("upgraded");
+      setIsUpgrading(false);
+
+      // Show success message
+      setTimeout(() => {
+        alert(
+          `Full upgrade completed successfully!\n\nAll systems have been updated and restarted.`
+        );
+        window.location.reload();
+      }, 2000);
+    } catch (error) {
+      clearInterval(progressInterval);
+      console.error("Error triggering upgrade:", error);
+      setUpdateStatus("error");
+      setIsUpgrading(false);
+      setUpgradeProgress(0);
+      setUpgradeStep("");
+    }
+  };
+
   const handleShowModal = () => {
     setShowModal(true);
     checkForUpdates();
@@ -109,6 +169,8 @@ const UpdateButton = () => {
     setUpdateStatus(null);
     setUpdateProgress(0);
     setCurrentStep("");
+    setUpgradeProgress(0);
+    setUpgradeStep("");
   };
 
   return (
@@ -142,80 +204,70 @@ const UpdateButton = () => {
 
           {updateStatus === "success" && versionInfo && (
             <div>
-              <Alert variant="info">
-                <h6>Current Version Information</h6>
-                <p>
-                  <strong>Version:</strong> {versionInfo.version}
-                </p>
-                <p>
-                  <strong>Name:</strong> {versionInfo.name}
-                </p>
-                <p>
-                  <strong>Last Updated:</strong>{" "}
-                  {new Date(versionInfo.lastUpdated).toLocaleString()}
-                </p>
-                <p>
-                  <strong>Uptime:</strong>{" "}
-                  {Math.floor(versionInfo.uptime / 3600)} hours
-                </p>
-                {versionInfo.git && !versionInfo.git.error && (
-                  <>
-                    <hr />
-                    <h6>Git Information</h6>
-                    <p>
-                      <strong>Current Commit:</strong>{" "}
-                      {versionInfo.git.currentCommit}
-                    </p>
-                    <p>
-                      <strong>Remote Commit:</strong>{" "}
-                      {versionInfo.git.remoteCommit}
-                    </p>
-                    <p>
-                      <strong>Last Commit:</strong>{" "}
-                      {versionInfo.git.lastCommitDate}
-                    </p>
-                    {versionInfo.git.hasUpdates ? (
-                      <Alert variant="warning" className="mt-2">
-                        <FaExclamationTriangle size={16} className="me-2" />
-                        <strong>Updates Available!</strong> New commits are
-                        available on GitHub.
-                      </Alert>
-                    ) : (
-                      <Alert variant="success" className="mt-2">
-                        <FaCheckCircle size={16} className="me-2" />
-                        <strong>Up to Date!</strong> You have the latest
-                        version.
-                      </Alert>
-                    )}
-                  </>
-                )}
-              </Alert>
+           
 
               <div className="text-center">
-                <Button
-                  variant={versionInfo.git?.hasUpdates ? "success" : "primary"}
-                  onClick={() => triggerUpdate()}
-                  disabled={isUpdating}
-                  className="d-flex align-items-center gap-2"
-                  size="lg"
-                >
-                  {isUpdating ? (
-                    <>
-                      <Spinner animation="border" size="sm" />
-                      Updating...
-                    </>
-                  ) : (
-                    <>
-                      <FaSync size={16} />
-                      {versionInfo.git?.hasUpdates
-                        ? "Update Now"
-                        : "Check Again"}
-                    </>
-                  )}
-                </Button>
-                <small className="text-muted mt-2 d-block">
-                  <strong>⚡ Fast Update:</strong> Backend only (~30 seconds)
-                </small>
+                <div className="d-flex gap-2 justify-content-center mb-3">
+                  <Button
+                    variant={
+                      versionInfo.git?.hasUpdates ? "success" : "primary"
+                    }
+                    onClick={() => triggerUpdate()}
+                    disabled={isUpdating || isUpgrading}
+                    className="d-flex align-items-center gap-2"
+                    size="lg"
+                  >
+                    {isUpdating ? (
+                      <>
+                        <Spinner animation="border" size="sm" />
+                        Updating...
+                      </>
+                    ) : (
+                      <>
+                        <FaSync size={16} />
+                        {versionInfo.git?.hasUpdates
+                          ? "Update Now"
+                          : "Check Again"}
+                      </>
+                    )}
+                  </Button>
+
+                  <Button
+                    variant="warning"
+                    onClick={() => triggerUpgrade()}
+                    disabled={isUpdating || isUpgrading}
+                    className="d-flex align-items-center gap-2"
+                    size="lg"
+                  >
+                    {isUpgrading ? (
+                      <>
+                        <Spinner animation="border" size="sm" />
+                        Upgrading...
+                      </>
+                    ) : (
+                      <>
+                        <FaSync size={16} />
+                        Full Upgrade
+                      </>
+                    )}
+                  </Button>
+                </div>
+                <div className="row text-center">
+                  <div className="col-6">
+                    <small className="text-muted">
+                      <strong>⚡ Fast Update:</strong>
+                      <br />
+                      Backend only (~30 seconds)
+                    </small>
+                  </div>
+                  <div className="col-6">
+                    <small className="text-muted">
+                      <strong>🔧 Full Upgrade:</strong>
+                      <br />
+                      Complete system (~5-10 min)
+                    </small>
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -248,11 +300,50 @@ const UpdateButton = () => {
             </div>
           )}
 
+          {updateStatus === "upgrading" && (
+            <div className="text-center py-3">
+              <div className="mb-3">
+                <ProgressBar
+                  now={upgradeProgress}
+                  label={`${upgradeProgress}%`}
+                  variant="danger"
+                  animated
+                  style={{ height: "25px" }}
+                />
+              </div>
+              <p className="mb-2">
+                <Spinner
+                  animation="border"
+                  variant="danger"
+                  size="sm"
+                  className="me-2"
+                />
+                {upgradeStep}
+              </p>
+              <small className="text-muted">
+                {isUpgrading
+                  ? "Full system upgrade in progress... This may take 5-10 minutes..."
+                  : ""}
+              </small>
+            </div>
+          )}
+
           {updateStatus === "updated" && (
             <Alert variant="success" className="text-center">
               <FaCheckCircle size={24} className="mb-2" />
               <h6>Update Successful!</h6>
               <p>The system will reload automatically...</p>
+            </Alert>
+          )}
+
+          {updateStatus === "upgraded" && (
+            <Alert variant="success" className="text-center">
+              <FaCheckCircle size={24} className="mb-2" />
+              <h6>Full Upgrade Successful!</h6>
+              <p>
+                All systems have been updated and restarted. The page will
+                reload automatically...
+              </p>
             </Alert>
           )}
 

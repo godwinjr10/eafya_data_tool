@@ -20,17 +20,39 @@ const updateRoutes = (app) => {
 
       let gitInfo = {};
       try {
+        // Ensure we have fresh remote refs
+        await execAsync("git fetch origin --prune");
+
+        // Determine branch and upstream tracking ref
+        const { stdout: currentBranch } = await execAsync(
+          "git branch --show-current"
+        );
+        const branchName = currentBranch.trim() || "master";
+
+        let upstreamRef = `origin/${branchName}`;
+        try {
+          const { stdout: upstream } = await execAsync(
+            "git rev-parse --abbrev-ref --symbolic-full-name @{u}"
+          );
+          upstreamRef = upstream.trim();
+        } catch {}
+
         const [currentHash, remoteHash, lastCommit] = await Promise.all([
           execAsync("git rev-parse HEAD"),
-          execAsync("git rev-parse origin/test_updates"),
+          execAsync(`git rev-parse ${upstreamRef}`),
           execAsync("git log -1 --format=%cd --date=iso"),
         ]);
 
+        const currentFull = currentHash.stdout.trim();
+        const remoteFull = remoteHash.stdout.trim();
+
         gitInfo = {
-          currentCommit: currentHash.stdout.trim().substring(0, 7),
-          remoteCommit: remoteHash.stdout.trim().substring(0, 7),
+          currentCommit: currentFull.substring(0, 7),
+          remoteCommit: remoteFull.substring(0, 7),
           lastCommitDate: lastCommit.stdout.trim(),
-          hasUpdates: currentHash.stdout.trim() !== remoteHash.stdout.trim(),
+          hasUpdates: currentFull !== remoteFull,
+          currentBranch: branchName,
+          upstream: upstreamRef,
         };
       } catch (gitError) {
         console.warn("Git information not available:", gitError.message);
@@ -67,9 +89,15 @@ const updateRoutes = (app) => {
       console.log("📥 Fetching latest changes from GitHub...");
       await execAsync("git fetch origin");
 
+      // Get current branch name for update
+      const { stdout: currentBranch } = await execAsync(
+        "git branch --show-current"
+      );
+      const branchName = currentBranch.trim();
+
       // Check if there are new commits
       const { stdout: remoteHash } = await execAsync(
-        "git rev-parse origin/test_updates"
+        `git rev-parse origin/${branchName}`
       );
       console.log("📋 Remote commit:", remoteHash.trim());
 
@@ -83,7 +111,7 @@ const updateRoutes = (app) => {
 
       // Pull latest changes
       console.log("⬇️ Pulling latest changes...");
-      await execAsync("git pull origin test_updates");
+      await execAsync(`git pull origin ${branchName}`);
 
       // Install backend dependencies
       console.log("📦 Installing backend dependencies...");

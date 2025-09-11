@@ -30,6 +30,7 @@ import eafyaDetailRoutes from "./routes/mapping/eafya-details.js";
 import hmis108Routes from "./routes/dhisreports/108Routes.js";
 import materializedViewIdsRoutes from "./routes/mapping/materializedViewIds.js";
 import updateRoutes from "./routes/update.js";
+import upgradeRoutes from "./routes/upgrade.js";
 
 dotenv.config();
 
@@ -91,6 +92,7 @@ app.use("/api/materialized-view-ids", materializedViewIdsRoutes);
 
 // Initialize update routes
 updateRoutes(app);
+upgradeRoutes(app);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
