@@ -1,5 +1,23 @@
 {
+  "name": "eafya-data-tool",
+  "version": "1.0.0",
+  "description": "EAFYA Data Tool - Healthcare Management Information System",
+  "scripts": {
+    "update": "powershell -ExecutionPolicy Bypass -File scripts/update-system.ps1",
+    "update:check": "powershell -ExecutionPolicy Bypass -File scripts/update-system.ps1 -Action check",
+    "update:backend": "powershell -ExecutionPolicy Bypass -File scripts/update-system.ps1 -Action backend",
+    "update:frontend": "powershell -ExecutionPolicy Bypass -File scripts/update-system.ps1 -Action frontend",
+    "update:verify": "powershell -ExecutionPolicy Bypass -File scripts/update-system.ps1 -Action verify",
+    "update:schedule": "node scripts/scheduled-update.js",
+    "dev": "concurrently \"cd backend && npm run server\" \"cd frontend && npm start\"",
+    "build": "cd frontend && npm run build",
+    "deploy": "cd frontend && npm run deploy"
+  },
   "dependencies": {
     "react-to-print": "^3.1.1"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "node-cron": "^3.0.3"
   }
 }

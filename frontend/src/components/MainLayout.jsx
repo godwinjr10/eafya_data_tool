@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import API from "../helpers/api";
 import { logout } from "../helpers/auth";
 import MainSideBar from "./MainSideBar";
+import UpdateButton from "./UpdateButton";
 
 const MainLayout = ({ children }) => {
   const [facilities, setFacilities] = useState([]);
@@ -80,6 +81,10 @@ const MainLayout = ({ children }) => {
                   className="dropdown-menu show"
                   style={{ position: "absolute", right: 0 }}
                 >
+                  <div className="dropdown-item-text">
+                    <UpdateButton />
+                  </div>
+                  <div className="dropdown-divider"></div>
                   <button className="dropdown-item" onClick={handleLogout}>
                     <i className="bi bi-box-arrow-right me-2"></i>
                     Logout
