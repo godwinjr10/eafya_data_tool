@@ -86,7 +86,7 @@ const Attedance = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups, gen
 
               return (
                 <tr key={`attendance-${item.hmis_code}`}>
-                  <td>{item.hmis_code}. {item.hmis_name}</td>
+                  <td>New Attendance</td>
                   {Object.keys(ageGroupMapping).map(ageKey =>
                     genders.map(gender => (
                       <td key={`${ageKey}-${gender}`} className="text-center">
@@ -120,7 +120,7 @@ const Attedance = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups, gen
 
               return (
                 <tr key={`reattendance-${item.hmis_code}`}>
-                  <td>{item.hmis_code}. {item.hmis_name}</td>
+                  <td>Re-attendance</td>
                   {Object.keys(ageGroupMapping).map(ageKey =>
                     genders.map(gender => (
                       <td key={`${ageKey}-${gender}`} className="text-center">
