@@ -65,10 +65,13 @@ const MainLayout = ({ children }) => {
             <i className="bi bi-grid me-2"></i>
             Ministry of Health - eAFYA Data Mining Tool
           </div>
-          <div>
-            <i className="bi bi-person-circle me-2"></i>
-            {facilities.length > 0 && facilities[0].facility_name}
-            <div className="dropdown d-inline-block ms-2">
+          <div className="d-flex align-items-center gap-3">
+            <UpdateButton />
+            <div>
+              <i className="bi bi-person-circle me-2"></i>
+              {facilities.length > 0 && facilities[0].facility_name}
+            </div>
+            <div className="dropdown d-inline-block">
               <button
                 className="btn btn-link text-white dropdown-toggle"
                 type="button"
@@ -81,10 +84,6 @@ const MainLayout = ({ children }) => {
                   className="dropdown-menu show"
                   style={{ position: "absolute", right: 0 }}
                 >
-                  <div className="dropdown-item-text">
-                    <UpdateButton />
-                  </div>
-                  <div className="dropdown-divider"></div>
                   <button className="dropdown-item" onClick={handleLogout}>
                     <i className="bi bi-box-arrow-right me-2"></i>
                     Logout

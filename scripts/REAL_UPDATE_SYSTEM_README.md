@@ -7,13 +7,13 @@ This document explains the **REAL** update system that pulls from your GitHub ma
 ### ✅ **Real GitHub Integration:**
 
 - Fetches latest commits from your GitHub repository
-- Compares current commit with remote master branch
+- Compares current commit with remote test_updates branch
 - Pulls actual code changes from GitHub
 - Deploys real updates to your application
 
 ### ✅ **Complete Deployment Process:**
 
-1. **Git Operations**: `git fetch origin` → `git pull origin main`
+1. **Git Operations**: `git fetch origin` → `git pull origin test_updates`
 2. **Backend Update**: Installs new dependencies with `npm install --production`
 3. **Frontend Build**: Runs `npm install && npm run build` in frontend
 4. **Frontend Deploy**: Uses your existing `npm run deploy` script
@@ -138,7 +138,7 @@ Executes the real update process:
 ### **Git Configuration:**
 
 - Remote origin pointing to your GitHub repository
-- Main branch named `main` (or update the script)
+- Test branch named `test_updates` (or update the script)
 - SSH keys or authentication configured
 
 ## 🚨 **Important Notes**
@@ -152,11 +152,11 @@ Executes the real update process:
    # Should show your GitHub repository
    ```
 
-2. Make sure you're on the main branch:
+2. Make sure you're on the test_updates branch:
 
    ```bash
    git branch
-   # Should show * main
+   # Should show * test_updates
    ```
 
 3. Test Git access:
@@ -231,7 +231,7 @@ Backend: git fetch origin
          ↓
 Backend: Compare commit hashes
          ↓
-Backend: git pull origin main
+Backend: git pull origin test_updates
          ↓
 Backend: npm install --production
          ↓

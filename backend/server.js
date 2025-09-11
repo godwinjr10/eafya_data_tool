@@ -110,7 +110,7 @@ app.get("/api/version", async (req, res) => {
     try {
       const [currentHash, remoteHash, lastCommit] = await Promise.all([
         execAsync("git rev-parse HEAD"),
-        execAsync("git rev-parse origin/main"),
+        execAsync("git rev-parse origin/test_updates"),
         execAsync("git log -1 --format=%cd --date=iso"),
       ]);
 
@@ -138,6 +138,7 @@ app.get("/api/version", async (req, res) => {
 });
 
 app.post("/api/update", async (req, res) => {
+  const { skipFrontendBuild = false } = req.body;
   try {
     const { exec } = await import("child_process");
     const { promisify } = await import("util");
@@ -154,7 +155,9 @@ app.post("/api/update", async (req, res) => {
     await execAsync("git fetch origin");
 
     // Check if there are new commits
-    const { stdout: remoteHash } = await execAsync("git rev-parse origin/main");
+    const { stdout: remoteHash } = await execAsync(
+      "git rev-parse origin/test_updates"
+    );
     console.log("📋 Remote commit:", remoteHash.trim());
 
     if (currentHash.trim() === remoteHash.trim()) {
@@ -167,19 +170,36 @@ app.post("/api/update", async (req, res) => {
 
     // Pull latest changes
     console.log("⬇️ Pulling latest changes...");
-    await execAsync("git pull origin main");
+    await execAsync("git pull origin test_updates");
 
     // Install backend dependencies
     console.log("📦 Installing backend dependencies...");
     await execAsync("npm install --production");
 
-    // Build frontend
-    console.log("🏗️ Building frontend...");
-    await execAsync("cd ../frontend && npm install && npm run build");
+    // Build frontend (skip if requested)
+    if (!skipFrontendBuild) {
+      console.log("🏗️ Building frontend...");
+      console.log("⏳ This may take a few minutes on first run...");
 
-    // Deploy frontend (using your existing deploy script)
-    console.log("🚀 Deploying frontend...");
-    await execAsync("cd ../frontend && npm run deploy");
+      // Set a timeout for the build process
+      const buildPromise = execAsync(
+        "cd ../frontend && npm install --silent && npm run build"
+      );
+      const timeoutPromise = new Promise((_, reject) =>
+        setTimeout(
+          () => reject(new Error("Build timeout after 5 minutes")),
+          5 * 60 * 1000
+        )
+      );
+
+      await Promise.race([buildPromise, timeoutPromise]);
+
+      // Deploy frontend (using your existing deploy script)
+      console.log("🚀 Deploying frontend...");
+      await execAsync("cd ../frontend && npm run deploy");
+    } else {
+      console.log("⏭️ Skipping frontend build (fast mode)");
+    }
 
     // Get new version info
     const { stdout: newHash } = await execAsync("git rev-parse HEAD");

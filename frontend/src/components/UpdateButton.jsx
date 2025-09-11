@@ -26,12 +26,14 @@ const UpdateButton = () => {
     }
   };
 
-  const triggerUpdate = async () => {
+  const triggerUpdate = async (fastMode = false) => {
     setIsUpdating(true);
     setUpdateStatus("updating");
 
     try {
-      const response = await API.post("/update");
+      const response = await API.post("/update", {
+        skipFrontendBuild: fastMode,
+      });
 
       if (response.data.message === "Already up to date") {
         setUpdateStatus("up-to-date");
@@ -81,12 +83,18 @@ const UpdateButton = () => {
   return (
     <>
       <Button
-        variant="outline-primary"
+        variant="outline-light"
         onClick={handleShowModal}
         className="d-flex align-items-center gap-2"
+        size="sm"
+        style={{
+          border: "1px solid rgba(255,255,255,0.5)",
+          color: "white",
+          backgroundColor: "rgba(255,255,255,0.1)",
+        }}
       >
-        <FaSync size={16} />
-        Check for Updates
+        <FaSync size={14} />
+        Updates
       </Button>
 
       <Modal show={showModal} onHide={handleCloseModal} centered>
@@ -153,26 +161,46 @@ const UpdateButton = () => {
               </Alert>
 
               <div className="text-center">
-                <Button
-                  variant={versionInfo.git?.hasUpdates ? "warning" : "success"}
-                  onClick={triggerUpdate}
-                  disabled={isUpdating}
-                  className="d-flex align-items-center gap-2 mx-auto"
-                >
-                  {isUpdating ? (
-                    <>
-                      <Spinner animation="border" size="sm" />
-                      Updating...
-                    </>
-                  ) : (
-                    <>
-                      <FaSync size={16} />
-                      {versionInfo.git?.hasUpdates
-                        ? "Update Now"
-                        : "Check Again"}
-                    </>
+                <div className="d-flex gap-2 justify-content-center">
+                  <Button
+                    variant={
+                      versionInfo.git?.hasUpdates ? "warning" : "success"
+                    }
+                    onClick={() => triggerUpdate(false)}
+                    disabled={isUpdating}
+                    className="d-flex align-items-center gap-2"
+                  >
+                    {isUpdating ? (
+                      <>
+                        <Spinner animation="border" size="sm" />
+                        Updating...
+                      </>
+                    ) : (
+                      <>
+                        <FaSync size={16} />
+                        {versionInfo.git?.hasUpdates
+                          ? "Full Update"
+                          : "Check Again"}
+                      </>
+                    )}
+                  </Button>
+
+                  {versionInfo.git?.hasUpdates && (
+                    <Button
+                      variant="outline-primary"
+                      onClick={() => triggerUpdate(true)}
+                      disabled={isUpdating}
+                      className="d-flex align-items-center gap-2"
+                      size="sm"
+                    >
+                      <FaSync size={14} />
+                      Fast Update
+                    </Button>
                   )}
-                </Button>
+                </div>
+                <small className="text-muted mt-2 d-block">
+                  Fast Update skips frontend build (backend only)
+                </small>
               </div>
             </div>
           )}
