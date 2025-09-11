@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Button, Modal, Spinner, Alert } from "react-bootstrap";
+import { Button, Modal, Spinner, Alert, ProgressBar } from "react-bootstrap";
 import { FaSync, FaCheckCircle, FaExclamationTriangle } from "react-icons/fa";
 import API from "../helpers/api";
 
@@ -10,6 +10,8 @@ const UpdateButton = () => {
   const [versionInfo, setVersionInfo] = useState(null);
   const [updateStatus, setUpdateStatus] = useState(null);
   const [lastChecked, setLastChecked] = useState(null);
+  const [updateProgress, setUpdateProgress] = useState(0);
+  const [currentStep, setCurrentStep] = useState("");
 
   const checkForUpdates = async () => {
     setIsChecking(true);
@@ -26,14 +28,38 @@ const UpdateButton = () => {
     }
   };
 
-  const triggerUpdate = async (fastMode = false) => {
+  const triggerUpdate = async () => {
     setIsUpdating(true);
     setUpdateStatus("updating");
+    setUpdateProgress(0);
+    setCurrentStep("Starting update...");
+
+    // Fast update progress steps (backend only)
+    const progressSteps = [
+      { step: "Fetching latest changes...", progress: 20 },
+      { step: "Pulling changes from GitHub...", progress: 40 },
+      { step: "Installing backend dependencies...", progress: 60 },
+      { step: "Preparing to restart server...", progress: 100 },
+    ];
+
+    // Animate progress with faster updates
+    let currentStepIndex = 0;
+    const progressInterval = setInterval(() => {
+      if (currentStepIndex < progressSteps.length) {
+        setCurrentStep(progressSteps[currentStepIndex].step);
+        setUpdateProgress(progressSteps[currentStepIndex].progress);
+        currentStepIndex++;
+      }
+    }, 1000);
 
     try {
       const response = await API.post("/update", {
-        skipFrontendBuild: fastMode,
+        skipFrontendBuild: true,
       });
+
+      clearInterval(progressInterval);
+      setUpdateProgress(100);
+      setCurrentStep("Update completed!");
 
       if (response.data.message === "Already up to date") {
         setUpdateStatus("up-to-date");
@@ -64,9 +90,12 @@ const UpdateButton = () => {
         }, 2000);
       }
     } catch (error) {
+      clearInterval(progressInterval);
       console.error("Error triggering update:", error);
       setUpdateStatus("error");
       setIsUpdating(false);
+      setUpdateProgress(0);
+      setCurrentStep("");
     }
   };
 
@@ -78,6 +107,8 @@ const UpdateButton = () => {
   const handleCloseModal = () => {
     setShowModal(false);
     setUpdateStatus(null);
+    setUpdateProgress(0);
+    setCurrentStep("");
   };
 
   return (
@@ -161,45 +192,29 @@ const UpdateButton = () => {
               </Alert>
 
               <div className="text-center">
-                <div className="d-flex gap-2 justify-content-center">
-                  <Button
-                    variant={
-                      versionInfo.git?.hasUpdates ? "warning" : "success"
-                    }
-                    onClick={() => triggerUpdate(false)}
-                    disabled={isUpdating}
-                    className="d-flex align-items-center gap-2"
-                  >
-                    {isUpdating ? (
-                      <>
-                        <Spinner animation="border" size="sm" />
-                        Updating...
-                      </>
-                    ) : (
-                      <>
-                        <FaSync size={16} />
-                        {versionInfo.git?.hasUpdates
-                          ? "Full Update"
-                          : "Check Again"}
-                      </>
-                    )}
-                  </Button>
-
-                  {versionInfo.git?.hasUpdates && (
-                    <Button
-                      variant="outline-primary"
-                      onClick={() => triggerUpdate(true)}
-                      disabled={isUpdating}
-                      className="d-flex align-items-center gap-2"
-                      size="sm"
-                    >
-                      <FaSync size={14} />
-                      Fast Update
-                    </Button>
+                <Button
+                  variant={versionInfo.git?.hasUpdates ? "success" : "primary"}
+                  onClick={() => triggerUpdate()}
+                  disabled={isUpdating}
+                  className="d-flex align-items-center gap-2"
+                  size="lg"
+                >
+                  {isUpdating ? (
+                    <>
+                      <Spinner animation="border" size="sm" />
+                      Updating...
+                    </>
+                  ) : (
+                    <>
+                      <FaSync size={16} />
+                      {versionInfo.git?.hasUpdates
+                        ? "Update Now"
+                        : "Check Again"}
+                    </>
                   )}
-                </div>
+                </Button>
                 <small className="text-muted mt-2 d-block">
-                  Fast Update skips frontend build (backend only)
+                  <strong>⚡ Fast Update:</strong> Backend only (~30 seconds)
                 </small>
               </div>
             </div>
@@ -207,8 +222,29 @@ const UpdateButton = () => {
 
           {updateStatus === "updating" && (
             <div className="text-center py-3">
-              <Spinner animation="border" variant="warning" />
-              <p className="mt-2">Updating system, please wait...</p>
+              <div className="mb-3">
+                <ProgressBar
+                  now={updateProgress}
+                  label={`${updateProgress}%`}
+                  variant="warning"
+                  animated
+                  style={{ height: "25px" }}
+                />
+              </div>
+              <p className="mb-2">
+                <Spinner
+                  animation="border"
+                  variant="warning"
+                  size="sm"
+                  className="me-2"
+                />
+                {currentStep}
+              </p>
+              <small className="text-muted">
+                {isUpdating
+                  ? "Please wait, this may take a few minutes..."
+                  : ""}
+              </small>
             </div>
           )}
 
