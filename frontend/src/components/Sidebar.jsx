@@ -53,8 +53,7 @@ const Sidebar = ({ selected, onSelect, dataSetId }) => {
     <div
       style={{
         minWidth: "200px",
-        // background: "#e6f2e6",
-        background: "red",
+        background: "#e6f2e6",
         padding: 10,
         height: "calc(100vh - 20px)", // This will make it full height minus padding
         overflowY: "auto", // This enables vertical scrolling
