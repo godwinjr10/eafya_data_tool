@@ -50,7 +50,7 @@ const Login = () => {
                 <div class="row">
                   <div class="col-12">
                     <div class="text-white p-4">
-                      <h5 class="text-white">eAFYA Data Reporting Platform</h5>
+                      <h5 class="text-white">eAFYA Data Mining Tool</h5>
                     </div>
                   </div>
                 </div>

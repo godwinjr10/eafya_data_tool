@@ -1,6 +1,7 @@
 CREATE MATERIALIZED VIEW reporting."105_01_reattendance" AS
 SELECT
     TO_CHAR(visit_date, 'YYYYMM') AS report_month,
+    'OA02' as hmis_code,
     COUNT(CASE WHEN age_days BETWEEN 0 AND 28 AND gender = 'Male' THEN 1 END) AS "0-28d Male",
     COUNT(CASE WHEN age_days BETWEEN 0 AND 28 AND gender = 'Female' THEN 1 END) AS "0-28d Female",
     COUNT(CASE WHEN age_days >= 29 AND age_years < 5 AND gender = 'Male' THEN 1 END) AS "29d-4y Male",
