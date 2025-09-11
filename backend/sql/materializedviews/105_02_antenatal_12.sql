@@ -19,7 +19,9 @@ SELECT
 FROM reporting.patient_imaging pi
 JOIN reporting.patient_antenatal pa 
     ON pa.patient_visit_id = pi.patient_visit_id
-WHERE pi.clinic_id IN (32)
+WHERE pi.clinic_id IN (SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%antenatal%' and mapping_id > 0)
   AND pi.imaging_id IN (303)   -- obstetric ultrasound
   AND pa.gender = 'Female'
 GROUP BY DATE_TRUNC('month', pi.date_created)

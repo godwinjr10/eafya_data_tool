@@ -9,5 +9,9 @@ COUNT(DISTINCT CASE WHEN drugs_given ILIKE ANY(ARRAY['%ergometrine%','%methylerg
 from reporting.maternity
 where drugs_given IS NOT NULL
 AND drugs_given != ''  -- Exclude empty entries
+AND admission_ward_id  IN (
+SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%maternity ward%' and mapping_id > 0)
 GROUP by TO_CHAR(admission_date, 'YYYYMM')
 ORDER by report_month;

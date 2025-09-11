@@ -7,6 +7,7 @@ import LabTests from "./LabTests";
 import Commodities from "./Commodities";
 import FamilyPlanning from "./FamilyPlanning";
 import Vaccines from "./Vaccines";
+import MaterializedViewIds from "./MaterializedViewIds";
 
 const EafyaMapping = () => {
   // State management
@@ -20,6 +21,7 @@ const EafyaMapping = () => {
     { value: "labtests", label: "Latest Lab Tests" },
     { value: "familyplanning", label: "Family Planning" },
     { value: "vaccines", label: "Vaccines" },
+    { value: "materializedViewIds", label: "Customization Set Ids" },
   ];
 
   const renderPageTitle = () => (
@@ -38,7 +40,12 @@ const EafyaMapping = () => {
                 </li>
               </ol>
             </nav>
-            <h1 className=" text-primary fw-bold mb-2" style={{fontSize: "1.3rem"}}>eAFYA HMIS Mapping</h1>
+            <h1
+              className=" text-primary fw-bold mb-2"
+              style={{ fontSize: "1.3rem" }}
+            >
+              eAFYA HMIS Mapping
+            </h1>
             <p className=" mb-0 text-primary-75">
               {MAPPING_TYPE_OPTIONS.find(
                 (option) => option.value === selectedMappingType
@@ -82,6 +89,8 @@ const EafyaMapping = () => {
         return <Vaccines />;
       case "conditions":
         return <Conditions />;
+      case "materializedViewIds":
+        return <MaterializedViewIds />;
       default:
         return <Commodities />;
     }

@@ -263,11 +263,13 @@ CREATE TABLE IF NOT EXISTS reporting.patient_antenatal
 , birth_date TIMESTAMP
 , gender VARCHAR(6)
 , encounter_id BIGINT
+, clinic_id BIGINT
 , clinic VARCHAR(255)
 , patient_visit_id BIGINT
 , date_created TIMESTAMP
 )
 ;
+
 
 CREATE TABLE IF NOT EXISTS reporting.encounters
 (
@@ -534,6 +536,39 @@ CREATE TABLE  IF NOT EXISTS reporting."108_maternal_neonatal"
 , baby_status VARCHAR(255)
 , baby_gender VARCHAR(255)
 , newborn_date TIMESTAMP
+)
+;
+CREATE TABLE  IF NOT EXISTS reporting.blood_transfusion_data
+(
+  encounter_id BIGINT
+, encounter_date TIMESTAMP
+, patient_id VARCHAR(255)
+, gender VARCHAR(6)
+, birth_date TIMESTAMP
+, age_years DOUBLE PRECISION
+, age_group TEXT
+, blood_product_type VARCHAR(255)
+, transfusion_date TIMESTAMP
+, validated VARCHAR(255)
+, degree_of_urgency VARCHAR(9)
+, number_of_pack INTEGER
+, disease_name VARCHAR(255)
+, five_character_icd_code VARCHAR(255)
+)
+;
+
+CREATE TABLE IF NOT EXISTS reporting.patient_referrals
+(
+  referral_id BIGINT
+, encounter_id BIGINT
+, encounter_date TIMESTAMP
+, patient_id VARCHAR(255)
+, gender VARCHAR(6)
+, birth_date TIMESTAMP
+, age_years DOUBLE PRECISION
+, referral_type VARCHAR(255)
+, referral_date TIMESTAMP
+, referral_reason TEXT
 )
 ;
 

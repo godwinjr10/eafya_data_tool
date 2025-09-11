@@ -204,6 +204,151 @@ const HMIS108Report = ({ data, reportMonth }) => {
     );
   };
 
+  const renderReferralsTable = (referralsData) => {
+    if (!referralsData || referralsData.length === 0) return null;
+
+    return (
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>Section 2: Referrals</Text>
+        <View style={styles.table}>
+          <View style={[styles.tableRow, styles.tableHeader]}>
+            <Text style={[styles.tableCell, { width: "20%" }]}>
+              Report Month
+            </Text>
+            <Text style={[styles.tableCell, { width: "20%" }]}>Outgoing</Text>
+            <Text style={[styles.tableCell, { width: "20%" }]}>Incoming</Text>
+            <Text style={[styles.tableCell, { width: "20%" }]}>Self</Text>
+            <Text style={[styles.tableCell, { width: "20%" }]}>Runaway</Text>
+          </View>
+          {referralsData.map((item, index) => (
+            <View key={index} style={styles.tableRow}>
+              <Text style={[styles.tableCell, { width: "20%" }]}>
+                {item.report_month || ""}
+              </Text>
+              <Text style={[styles.tableCell, { width: "20%" }]}>
+                {item["Outgoing Referrals"] || 0}
+              </Text>
+              <Text style={[styles.tableCell, { width: "20%" }]}>
+                {item["Incoming Referrals"] || 0}
+              </Text>
+              <Text style={[styles.tableCell, { width: "20%" }]}>
+                {item["Self Referrals"] || 0}
+              </Text>
+              <Text style={[styles.tableCell, { width: "20%" }]}>
+                {item["Runaway Patients"] || 0}
+              </Text>
+            </View>
+          ))}
+        </View>
+      </View>
+    );
+  };
+
+  const renderBloodTransfusionTable = (bloodData) => {
+    if (!bloodData || bloodData.length === 0) return null;
+
+    const section4a = bloodData.filter((r) => r.section === "4a");
+    const section4b = bloodData.filter((r) => r.section === "4b");
+
+    return (
+      <View style={styles.section}>
+        <Text style={styles.sectionTitle}>
+          Section 4: Blood Transfusion Services
+        </Text>
+
+        {/* 4a Summary */}
+        {section4a.length > 0 && (
+          <View style={{ marginBottom: 10 }}>
+            <Text style={[styles.sectionTitle, { fontSize: 12 }]}>
+              4a: Summary by Product
+            </Text>
+            <View style={styles.table}>
+              <View style={[styles.tableRow, styles.tableHeader]}>
+                <Text style={[styles.tableCell, { width: "28%" }]}>
+                  Product Type
+                </Text>
+                <Text style={[styles.tableCell, { width: "18%" }]}>
+                  Units Requested
+                </Text>
+                <Text style={[styles.tableCell, { width: "18%" }]}>
+                  Units Received
+                </Text>
+                <Text style={[styles.tableCell, { width: "18%" }]}>
+                  Units Transfused
+                </Text>
+                <Text style={[styles.tableCell, { width: "18%" }]}>
+                  Adverse Reactions
+                </Text>
+              </View>
+              {section4a.map((item, index) => (
+                <View key={index} style={styles.tableRow}>
+                  <Text style={[styles.tableCellLeft, { width: "28%" }]}>
+                    {item.blood_product_type || ""}
+                  </Text>
+                  <Text style={[styles.tableCell, { width: "18%" }]}>
+                    {item.units_requested || 0}
+                  </Text>
+                  <Text style={[styles.tableCell, { width: "18%" }]}>
+                    {item.units_received || 0}
+                  </Text>
+                  <Text style={[styles.tableCell, { width: "18%" }]}>
+                    {item.units_transfused || 0}
+                  </Text>
+                  <Text style={[styles.tableCell, { width: "18%" }]}>
+                    {item.adverse_reactions || 0}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        )}
+
+        {/* 4b Demographics */}
+        {section4b.length > 0 && (
+          <View>
+            <Text style={[styles.sectionTitle, { fontSize: 12 }]}>
+              4b: Units by Age and Gender
+            </Text>
+            <View style={styles.table}>
+              <View style={[styles.tableRow, styles.tableHeader]}>
+                <Text style={[styles.tableCell, { width: "28%" }]}>
+                  Product Type
+                </Text>
+                <Text style={[styles.tableCell, { width: "18%" }]}>
+                  Age Group
+                </Text>
+                <Text style={[styles.tableCell, { width: "18%" }]}>Gender</Text>
+                <Text style={[styles.tableCell, { width: "18%" }]}>Units</Text>
+                <Text style={[styles.tableCell, { width: "18%" }]}>
+                  Report Month
+                </Text>
+              </View>
+              {section4b.map((item, index) => (
+                <View key={index} style={styles.tableRow}>
+                  <Text style={[styles.tableCellLeft, { width: "28%" }]}>
+                    {item.blood_product_type || ""}
+                  </Text>
+                  <Text style={[styles.tableCell, { width: "18%" }]}>
+                    {item.age_group || ""}
+                  </Text>
+                  <Text style={[styles.tableCell, { width: "18%" }]}>
+                    {item.gender || ""}
+                  </Text>
+                  <Text style={[styles.tableCell, { width: "18%" }]}>
+                    {item.unit || 0}
+                  </Text>
+                  <Text style={[styles.tableCell, { width: "18%" }]}>
+                    {item.report_month || ""}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        )}
+      </View>
+    );
+  };
+
   const renderRadiologyTable = (radiologyData) => {
     if (!radiologyData || radiologyData.length === 0) return null;
 
@@ -565,8 +710,10 @@ const HMIS108Report = ({ data, reportMonth }) => {
         </View>
 
         {/* Render all sections with data */}
+        {renderReferralsTable(data.referrals)}
         {renderCensusTable(data.census)}
         {renderSurgicalTable(data.surgical)}
+        {renderBloodTransfusionTable(data.bloodTransfusion)}
         {renderRadiologyTable(data.radiology)}
         {renderAdmissionsTable(data.admissions)}
         {renderMentalHealthTable(data.mentalHealth)}
@@ -576,6 +723,7 @@ const HMIS108Report = ({ data, reportMonth }) => {
         {/* Placeholder sections for sections without data */}
         {(!data.census || data.census.length === 0) &&
           (!data.surgical || data.surgical.length === 0) &&
+          (!data.referrals || data.referrals.length === 0) &&
           (!data.radiology || data.radiology.length === 0) &&
           (!data.admissions || data.admissions.length === 0) &&
           (!data.mentalHealth || data.mentalHealth.length === 0) &&

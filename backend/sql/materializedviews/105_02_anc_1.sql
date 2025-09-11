@@ -22,6 +22,9 @@ FROM (
       date_created
     FROM reporting.patient_antenatal
     WHERE gender = 'Female'
+    AND clinic_id IN (SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%antenatal%' and mapping_id > 0)
     ORDER BY patient_id, patient_visit_id, date_created
   ) AS distinct_visits
   ORDER BY patient_id, date_created

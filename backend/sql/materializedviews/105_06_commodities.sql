@@ -18,7 +18,9 @@ FROM (
         COUNT(DISTINCT DATE(c.last_updated)) FILTER (WHERE c.level = 0) AS days_out_of_stock
     FROM reporting.commodities c
     WHERE c.last_updated IS NOT NULL
-      AND c.store_id = '32'
+      AND c.store_id IN (SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%main store%' and mapping_id > 0)
       AND c.level = 0
     GROUP BY TO_CHAR(DATE_TRUNC('month', c.last_updated), 'YYYYMM'), c.store_name, c.product_id, c.product_name
 ) d
@@ -32,7 +34,9 @@ FULL OUTER JOIN (
         SUM(c.decrement) AS qty_consumed
     FROM reporting.commodities c
     WHERE c.level <> 0
-      AND c.store_id = '32'
+      AND c.store_id IN (SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%main store%' and mapping_id > 0)
       AND c.decrement IS NOT NULL
     GROUP BY TO_CHAR(c.date_created, 'YYYYMM'), c.store_name, c.product_id, c.product_name
 ) q
@@ -54,7 +58,9 @@ FULL OUTER JOIN (
                 ORDER BY date_created DESC
             ) AS rn
         FROM reporting.commodities
-        WHERE store_id = '32'
+        WHERE store_id IN (SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%main store%' and mapping_id > 0)
     ) ranked
     WHERE rn = 1
 ) s
@@ -70,7 +76,9 @@ FULL OUTER JOIN (
         u.product_name,
         SUM(u.unit_in_stock) AS quantity_expired
     FROM reporting.inventory_batch u
-    WHERE u.store_id = '32'
+    WHERE u.store_id IN (SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%main store%' and mapping_id > 0)
       AND u.expiry_date IS NOT NULL
       AND u.unit_in_stock > 0
       AND u.expiry_date <= CURRENT_DATE

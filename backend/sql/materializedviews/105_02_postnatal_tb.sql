@@ -2,7 +2,10 @@ CREATE MATERIALIZED VIEW reporting.postnatal_tb AS
 WITH months AS (
     SELECT DISTINCT TO_CHAR(admission_date, 'YYYYMM') AS report_month
     FROM reporting.patient_postnatal
-    WHERE admission_date IS NOT NULL
+    WHERE admission_date IS NOT null
+    AND admission_ward_id IN  (SELECT mapping_id
+FROM reporting.materialized_view_ids
+where name ilike '%postnantal ward%' and mapping_id > 0)
 ),
 statuses AS (
     SELECT unnest(ARRAY['screened', 'presumed', 'diagnosed']) AS status
@@ -21,6 +24,7 @@ postnatal_patients AS (
     WHERE p.admission_date IS NOT NULL
       AND p.birth_date IS NOT NULL
       AND e.visit_type_name ILIKE '%postnatal%'
+      AND admission_ward_id IN ('2')
 ),
 tb_lab_tests AS (
     SELECT
@@ -113,3 +117,4 @@ ORDER BY bg.report_month,
 
 -- To refresh when data changes:
 -- REFRESH MATERIALIZED VIEW reporting.postnatal_tb_aggregation;
+
