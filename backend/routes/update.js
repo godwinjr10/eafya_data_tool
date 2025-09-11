@@ -109,10 +109,20 @@ const updateRoutes = (app) => {
       });
 
       // Restart the server after a short delay
-      setTimeout(() => {
+      setTimeout(async () => {
         console.log("🔄 Restarting server...");
-        console.log("💡 To restart manually, run: npm start");
-        process.exit(0);
+        console.log("💡 Server will restart automatically...");
+
+        try {
+          // Import and use the restart script
+          const restartServer = (await import("../scripts/restart-server.js"))
+            .default;
+          restartServer();
+        } catch (error) {
+          console.log("❌ Auto-restart failed, manual restart required");
+          console.log("💡 Please restart manually with: npm start");
+          process.exit(0);
+        }
       }, 2000);
     } catch (error) {
       console.error("❌ Update failed:", error);
