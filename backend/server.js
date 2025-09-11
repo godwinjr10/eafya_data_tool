@@ -176,29 +176,26 @@ app.post("/api/update", async (req, res) => {
     console.log("📦 Installing backend dependencies...");
     await execAsync("npm install --production");
 
-    // Build frontend (skip if requested)
+    // Build and deploy frontend (skip if requested)
     if (!skipFrontendBuild) {
-      console.log("🏗️ Building frontend...");
+      console.log("🏗️ Building and deploying frontend...");
       console.log("⏳ This may take a few minutes on first run...");
 
-      // Set a timeout for the build process
-      const buildPromise = execAsync(
-        "cd ../frontend && npm install --silent && npm run build"
+      // Set a timeout for the build and deploy process
+      const deployPromise = execAsync(
+        "cd ../frontend && yarn build && sudo cp -r ./build/* /var/www/eafya_data_tool/html"
       );
       const timeoutPromise = new Promise((_, reject) =>
         setTimeout(
-          () => reject(new Error("Build timeout after 5 minutes")),
+          () => reject(new Error("Deploy timeout after 5 minutes")),
           5 * 60 * 1000
         )
       );
 
-      await Promise.race([buildPromise, timeoutPromise]);
-
-      // Deploy frontend (using your existing deploy script)
-      console.log("🚀 Deploying frontend...");
-      await execAsync("cd ../frontend && npm run deploy");
+      await Promise.race([deployPromise, timeoutPromise]);
+      console.log("✅ Frontend deployed successfully!");
     } else {
-      console.log("⏭️ Skipping frontend build (fast mode)");
+      console.log("⏭️ Skipping frontend build and deploy (fast mode)");
     }
 
     // Get new version info

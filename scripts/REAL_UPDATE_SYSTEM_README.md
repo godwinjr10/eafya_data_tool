@@ -15,9 +15,8 @@ This document explains the **REAL** update system that pulls from your GitHub ma
 
 1. **Git Operations**: `git fetch origin` → `git pull origin test_updates`
 2. **Backend Update**: Installs new dependencies with `npm install --production`
-3. **Frontend Build**: Runs `npm install && npm run build` in frontend
-4. **Frontend Deploy**: Uses your existing `npm run deploy` script
-5. **Service Restart**: Automatically restarts the backend server
+3. **Frontend Build & Deploy**: Runs `yarn build && sudo cp -r ./build/* /var/www/eafya_data_tool/html`
+4. **Service Restart**: Automatically restarts the backend server
 
 ### ✅ **Smart Update Detection:**
 
@@ -235,9 +234,7 @@ Backend: git pull origin test_updates
          ↓
 Backend: npm install --production
          ↓
-Backend: cd frontend && npm install && npm run build
-         ↓
-Backend: cd frontend && npm run deploy
+Backend: cd frontend && yarn build && sudo cp -r ./build/* /var/www/eafya_data_tool/html
          ↓
 Backend: Restart server (process.exit)
          ↓
