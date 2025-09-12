@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import API from "../helpers/api";
 import { logout } from "../helpers/auth";
 import MainSideBar from "./MainSideBar";
+import UpdateButton from "./UpdateButton";
 
 const MainLayout = ({ children }) => {
   const [facilities, setFacilities] = useState([]);
@@ -64,10 +65,13 @@ const MainLayout = ({ children }) => {
             <i className="bi bi-grid me-2"></i>
             Ministry of Health - eAFYA Data Mining Tool
           </div>
-          <div>
-            <i className="bi bi-person-circle me-2"></i>
-            {facilities.length > 0 && facilities[0].facility_name}
-            <div className="dropdown d-inline-block ms-2">
+          <div className="d-flex align-items-center gap-3">
+            {/* <UpdateButton /> */}
+            <div>
+              <i className="bi bi-person-circle me-2"></i>
+              {facilities.length > 0 && facilities[0].facility_name}
+            </div>
+            <div className="dropdown d-inline-block">
               <button
                 className="btn btn-link text-white dropdown-toggle"
                 type="button"

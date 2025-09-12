@@ -28,7 +28,9 @@ import tetanusVaccinationRoutes from "./routes/dhisreports/tetanusVaccination.js
 import childImmunizationRoutes from "./routes/dhisreports/childImmunization.js";
 import eafyaDetailRoutes from "./routes/mapping/eafya-details.js";
 import hmis108Routes from "./routes/dhisreports/108Routes.js";
-import materializedViewIdsRoutes from "./routes/mapping/materializedViewIds.js"
+import materializedViewIdsRoutes from "./routes/mapping/materializedViewIds.js";
+import updateRoutes from "./routes/update.js";
+import upgradeRoutes from "./routes/upgrade.js";
 
 dotenv.config();
 
@@ -87,6 +89,11 @@ app.use("/api/child-immunization", childImmunizationRoutes);
 app.use("/api/eafya-details", eafyaDetailRoutes);
 app.use("/api/hmis108", hmis108Routes);
 app.use("/api/materialized-view-ids", materializedViewIdsRoutes);
+
+// Initialize update routes
+updateRoutes(app);
+upgradeRoutes(app);
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

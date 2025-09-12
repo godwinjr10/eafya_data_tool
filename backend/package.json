@@ -1,6 +1,6 @@
 {
   "name": "eafya-hmis-backend",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Backend API for EAFYA HMIS Data Tool",
   "main": "server.js",
   "type": "module",
