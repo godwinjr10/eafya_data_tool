@@ -66,7 +66,7 @@ const MainLayout = ({ children }) => {
             Ministry of Health - eAFYA Data Mining Tool
           </div>
           <div className="d-flex align-items-center gap-3">
-            <UpdateButton />
+            {/* <UpdateButton /> */}
             <div>
               <i className="bi bi-person-circle me-2"></i>
               {facilities.length > 0 && facilities[0].facility_name}
