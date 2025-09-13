@@ -2,13 +2,14 @@
 select
 d.id, 
 d.dataelement, 
-s.dataelement_code ,
+s.dataelement_id ,
 s.dataelement_name ,
 d.categoryoptioncombo,
 o."name" as optioncombo_name
 FROM reporting.dhis2_dataelements_1051 d
-inner join reporting.dhis2_datasets_elements s on s.dataelement_id = d.dataelement 
-inner join  reporting.dhis2_optioncombos o on o.code = d.categoryoptioncombo 
+inner join reporting.dhis_datasets_elements s on s.dataelement_id = d.dataelement 
+inner join  reporting.dhis_optioncombos o on o.code = d.categoryoptioncombo 
+where dataelement = 'sv6SeKroHPV'
 order by s.dataelement_name
 
 /*** 105_02 ***/
