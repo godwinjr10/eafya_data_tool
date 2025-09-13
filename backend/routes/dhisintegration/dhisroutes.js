@@ -19,7 +19,7 @@ router.post('/sync', async (req, res) => {
 
         const result3 = await pushHmis10506ToDHIS2('VDhwrW9DiC1', period);
 
-        const result4 = await pushHmis10510ToDHIS2('RtEYsASU7PG', period);
+        const result4 = await pushHmis10510ToDHIS2('quMWqLxzcfO', period);
 
 
         if (result.status === 'success' && result2.status === 'success' && result3.status === 'success' && result4.status === 'success' ) {
