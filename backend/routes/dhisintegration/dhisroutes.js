@@ -2,6 +2,8 @@ import express from 'express';
 import { pushToDHIS2 as pushConditionsToDHIS2 } from './conditions.js';
 import { pushToDHIS2 as pushCommoditiesToDHIS2 } from './commodities.js';
 import { pushToDHIS2 as pushHmis10502ToDHIS2 } from './hmis_105_02.js';
+import { pushToDHIS2 as pushHmis10506ToDHIS2 } from './hmis_105_06.js';
+import { pushToDHIS2 as pushHmis10510ToDHIS2 } from './hmis_105_10.js';
 
 const router = express.Router();
 
@@ -14,8 +16,13 @@ router.post('/sync', async (req, res) => {
         const result = await pushConditionsToDHIS2('RtEYsASU7PG', period);
 
         const result2 = await pushHmis10502ToDHIS2('ic1BSWhGOso', period);
-        
-        if (result.status === 'success' && result2.status === 'success') {
+
+        const result3 = await pushHmis10506ToDHIS2('VDhwrW9DiC1', period);
+
+        const result4 = await pushHmis10510ToDHIS2('RtEYsASU7PG', period);
+
+
+        if (result.status === 'success' && result2.status === 'success' && result3.status === 'success' && result4.status === 'success' ) {
             res.json({
                 status: 'success',
                 message: '✅ All data pushed to DHIS2 successfully',
