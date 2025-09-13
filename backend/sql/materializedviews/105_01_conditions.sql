@@ -1,24 +1,19 @@
 CREATE MATERIALIZED VIEW reporting."105_01_conditions" AS
-SELECT
-TO_CHAR(date_created, 'YYYYMM') AS report_month,
-disease_id,
-COUNT(CASE WHEN age_days BETWEEN 0 AND 28 AND gender = 'Male' THEN 1 END) AS "0-28d Male",
-COUNT(CASE WHEN age_days BETWEEN 0 AND 28 AND gender = 'Female' THEN 1 END) AS "0-28d Female",
-COUNT(CASE WHEN age_days >= 29 AND age_years < 5 AND gender = 'Male' THEN 1 END) AS "29d-4y Male",
-COUNT(CASE WHEN age_days >= 29 AND age_years < 5 AND gender = 'Female' THEN 1 END) AS "29d-4y Female",
-COUNT(CASE WHEN age_years BETWEEN 5 AND 9 AND gender = 'Male' THEN 1 END) AS "5-9y Male",
-COUNT(CASE WHEN age_years BETWEEN 5 AND 9 AND gender = 'Female' THEN 1 END) AS "5-9y Female",
-COUNT(CASE WHEN age_years BETWEEN 10 AND 19 AND gender = 'Male' THEN 1 END) AS "10-19y Male",
-COUNT(CASE WHEN age_years BETWEEN 10 AND 19 AND gender = 'Female' THEN 1 END) AS "10-19y Female",
-COUNT(CASE WHEN age_years >= 20 AND gender = 'Male' THEN 1 END) AS "20y+ Male",
-COUNT(CASE WHEN age_years >= 20 AND gender = 'Female' THEN 1 END) AS "20y+ Female"
-FROM (
-SELECT
-date_created,
-disease_id,
-gender,
-DATE_PART('year', AGE(date_created, birth_date)) AS age_years, (date_created::DATE - birth_date::DATE) AS age_days
-FROM reporting.patient_diagnosis
-) sub
-GROUP BY TO_CHAR(date_created, 'YYYYMM'), disease_id
-ORDER BY report_month DESC;
+select
+  to_char(diagnosised_date, 'YYYYMM') as report_month,
+  disease_id,
+  disease,
+  count(case when age(diagnosised_date, birth_date) < interval '29 days' and gender = 'Male' then 1 end) as "0-28d Male",
+  count(case when age(diagnosised_date, birth_date) < interval '29 days' and gender = 'Female' then 1 end) as "0-28d Female",
+  count(case when age(diagnosised_date, birth_date) >= interval '29 days' and age(diagnosised_date, birth_date) < interval '5 years' and gender = 'Male' then 1 end) as "29d-4y Male",
+  count(case when age(diagnosised_date, birth_date) >= interval '29 days' and age(diagnosised_date, birth_date) < interval '5 years' and gender = 'Female' then 1 end) as "29d-4y Female",
+  count(case when date_part('year', age(diagnosised_date, birth_date)) between 5 and 9 and gender = 'Male' then 1 end) as "5-9y Male",
+  count(case when date_part('year', age(diagnosised_date, birth_date)) between 5 and 9 and gender = 'Female' then 1 end) as "5-9y Female",
+  count(case when date_part('year', age(diagnosised_date, birth_date)) between 10 and 19 and gender = 'Male' then 1 end) as "10-19y Male",
+  count(case when date_part('year', age(diagnosised_date, birth_date)) between 10 and 19 and gender = 'Female' then 1 end) as "10-19y Female",
+  count(case when date_part('year', age(diagnosised_date, birth_date)) >= 20 and gender = 'Male' then 1 end) as "20y+ Male",
+  count(case when date_part('year', age(diagnosised_date, birth_date)) >= 20 and gender = 'Female' then 1 end) as "20y+ Female"
+from reporting.patient_conditions
+where origin = 'op'
+group by to_char(diagnosised_date, 'YYYYMM'), disease_id, disease
+order by report_month desc, disease_id;
