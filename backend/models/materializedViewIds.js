@@ -20,11 +20,18 @@ const MaterializedViewIdsModel = sequelize.define(
     mapping_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      
     },
     mapping_name: {
       type: DataTypes.STRING,
       allowNull: true,
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      field: "created_at",
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: "updated_at",
     },
   },
   { timestamps: true, schema: "reporting", tableName: "materialized_view_ids" }
