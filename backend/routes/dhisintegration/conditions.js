@@ -5,22 +5,22 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const dhis2Auth = {
-    username: process.env.DHIS2_USERNAME,
-    password: process.env.DHIS2_PASSWORD
+    username: process.env.ACTIVE_UA1_DHIS2_USERNAME,
+    password: process.env.ACTIVE_UA1_DHIS2_PASSWORD
 };
 
-//const ORG_UNIT = 'h40pKp93Mtc'; nagguru 
-const ORG_UNIT = 'vX6kcAwvaS0';
+//const ORG_UNIT = 'h40pKp93Mtc'; nagguru  
+const ORG_UNIT = 'h40pKp93Mtc';
 const ATTRIBUTE_OPTION_COMBO = 'Lf2Axb9E6B4';
 
 const fetchStructuredDataQuery = (period) => `
-    SELECT
+   SELECT
         c.report_month,
-        e.dataelement_id,
-        d.dataelement_name,
-        d.categoryoptioncombo,
-        d.optioncombo_name,
-        CASE d.categoryoptioncombo
+        d.data_element_id,
+        s.dataelement_name,
+        d.category_optioncombo_name as optioncombo_name,
+        d.category_optioncombo_id as categoryoptioncombo,
+        CASE d.category_optioncombo_id
             WHEN 'zh2zAaHyYQx'    THEN SUM(COALESCE(c."0-28d Male", 0))
             WHEN 'wDiX34aiw6i'  THEN SUM(COALESCE(c."0-28d Female", 0))
             WHEN 'V2OuNTRI6ua'   THEN SUM(COALESCE(c."29d-4y Male", 0))
@@ -34,11 +34,11 @@ const fetchStructuredDataQuery = (period) => `
             ELSE 0
         END AS value
     FROM reporting."105_01_conditions" c
-    JOIN reporting.eafya_mappings e ON e.eafya_item_id = c.disease_id
-    JOIN reporting.dhis2_1051_dataelements d ON d.dataelement = e.dataelement_id
-    WHERE c.report_month = '${period}'
-    GROUP BY c.report_month, e.dataelement_id, d.dataelement_name, d.categoryoptioncombo, d.optioncombo_name
-    ORDER BY c.report_month, e.dataelement_id, d.categoryoptioncombo
+    JOIN reporting.dhis_eafya_mapping_conditions_final d ON d.eafya_disease_id = c.disease_id 
+    join reporting.dhis_datasets_elements s on s.dataelement_id = d.data_element_id 
+    where c.report_month = '${period}'
+    GROUP BY c.report_month, d.data_element_id, s.dataelement_name, d.category_optioncombo_name, d.category_optioncombo_id
+    ORDER BY c.report_month, d.data_element_id, d.category_optioncombo_name
 `;
 
 export async function fetchStructuredData(period) {
@@ -57,7 +57,7 @@ export async function pushToDHIS2(dataset, period) {
         const dataValues = [];
         for (const row of rows) {
             dataValues.push({
-                dataElement: row.dataelement_id,
+                dataElement: row.data_element_id,
                 value: parseInt(row.value) || 0,  
                 categoryOptionCombo: row.categoryoptioncombo
             });
@@ -65,9 +65,9 @@ export async function pushToDHIS2(dataset, period) {
 
 
         // Ensure DHIS2 base URL is properly formatted
-        const baseUrl = process.env.DHIS2_BASE_URL?.trim();
+        const baseUrl = process.env.ACTIVE_DHIS2_URL?.trim();
         if (!baseUrl) {
-            throw new Error('DHIS2_BASE_URL is not configured');
+            throw new Error('ACTIVE_DHIS2_URL is not configured');
         }
 
         // Construct the full URL, ensuring no double slashes
@@ -75,7 +75,8 @@ export async function pushToDHIS2(dataset, period) {
         
         const dataValueSet = {
             dataSet: dataset,
-            period: period,
+            // period: period,
+            period: '202507',
             orgUnit: ORG_UNIT,
             attributeOptionCombo: ATTRIBUTE_OPTION_COMBO,
             dataValues: dataValues

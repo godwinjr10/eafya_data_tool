@@ -49,7 +49,7 @@ router.post("/bulk", async (req, res) => {
     for (const m of toAdd) {
       try {
         const result = await pool.query(
-          `INSERT INTO reporting.materialized_view_ids (name, category, mapping_id, mapping_name, "createdAt", "updatedAt")
+          `INSERT INTO reporting.materialized_view_ids (name, category, mapping_id, mapping_name, created_at, updated_at)
            VALUES ($1, $2, $3, $4, NOW(), NOW())
            ON CONFLICT DO NOTHING`,
           [name, category, Number(m.id), m.name || null]

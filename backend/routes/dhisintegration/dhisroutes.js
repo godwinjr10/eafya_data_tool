@@ -1,6 +1,7 @@
 import express from 'express';
 import { pushToDHIS2 as pushConditionsToDHIS2 } from './conditions.js';
 import { pushToDHIS2 as pushCommoditiesToDHIS2 } from './commodities.js';
+import { pushToDHIS2 as pushHmis10502ToDHIS2 } from './hmis_105_02.js';
 
 const router = express.Router();
 
@@ -10,9 +11,11 @@ router.post('/sync', async (req, res) => {
         if (!dataset || !period) {
             throw new Error('Dataset and period are required');
         }
-        const result = await pushConditionsToDHIS2(dataset, period);
+        const result = await pushConditionsToDHIS2('RtEYsASU7PG', period);
+
+        const result2 = await pushHmis10502ToDHIS2('ic1BSWhGOso', period);
         
-        if (result.status === 'success') {
+        if (result.status === 'success' && result2.status === 'success') {
             res.json({
                 status: 'success',
                 message: '✅ All data pushed to DHIS2 successfully',
@@ -22,7 +25,17 @@ router.post('/sync', async (req, res) => {
                 }
             });
         } else {
-            // Partial success
+                    // Partial success
+            if (result.status === 'success') {
+                res.json({
+                    status: 'success',
+                    message: '✅ All data pushed to DHIS2 successfully',
+                    details: {
+                        ...result.summary,
+                        successfulPeriods: result.successDetails.map(d => d.period)
+                    }
+                });
+            }
             res.status(207).json({
                 status: 'partial',
                 message: '⚠️ Some records failed to push to DHIS2',
