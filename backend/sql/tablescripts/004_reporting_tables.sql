@@ -278,6 +278,7 @@ CREATE TABLE IF NOT EXISTS reporting.encounters
 , gender VARCHAR(6)
 , encounter_id BIGINT
 , clinic_session_id BIGINT
+, origin VARCHAR(2)
 , clinic_id BIGINT
 , "name" VARCHAR(255)
 , patient_visit_id BIGINT

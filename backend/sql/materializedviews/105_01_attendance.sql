@@ -1,7 +1,7 @@
 CREATE MATERIALIZED VIEW reporting."105_01_attendance" AS
 SELECT 
 TO_CHAR(visit_date, 'YYYYMM') AS report_month,
-'OA01' as hmis_code,
+'sv6SeKroHPV' as dataelement,
 COUNT(CASE WHEN AGE(deduped.visit_date, deduped.birth_date) < interval '29 days' AND deduped.gender = 'Male' THEN 1 END) AS "0-28d Male",
 COUNT(CASE WHEN AGE(deduped.visit_date, deduped.birth_date) < interval '29 days' AND deduped.gender = 'Female' THEN 1 END) AS "0-28d Female",
 COUNT(CASE WHEN AGE(deduped.visit_date, deduped.birth_date) >= interval '29 days'AND AGE(deduped.visit_date, deduped.birth_date) < interval '5 years'AND deduped.gender = 'Male' THEN 1 END) AS "29d-4y Male",
