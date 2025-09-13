@@ -12,6 +12,7 @@ import HMIS108 from "../pages/HMIS/HMIS108";
 import HMIS108Report from "./HMIS108Report";
 import MCHReport from "./MCHReport";
 
+
 const months = [
   "January",
   "February",
@@ -105,7 +106,7 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
         throw new Error("Dataset configuration not found");
       }
 
-      const response = await API.post(reportConfig.dhisEndpoint, {
+      const response = await API.post('/dhis/sync', {
         dataset: reportConfig.dataset,
         period: period,
       });

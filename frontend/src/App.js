@@ -15,12 +15,12 @@ function App() {
   return (
     <BrowserRouter>
       <AppRoutes />
-      <UpdateNotification
+      {/* <UpdateNotification
         show={updateAvailable}
         onUpdate={triggerUpdate}
         onDismiss={dismissUpdate}
         isUpdating={isChecking}
-      />
+      /> */}
     </BrowserRouter>
   );
 }
