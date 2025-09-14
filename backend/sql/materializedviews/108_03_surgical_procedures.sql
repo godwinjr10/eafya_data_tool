@@ -1,299 +1,311 @@
 CREATE MATERIALIZED VIEW reporting."108_surgical_procedures" AS
-WITH surgical_data AS (
-    SELECT 
-        TO_CHAR(DATE_TRUNC('month', date_created), 'YYYYMM') AS report_month,
-        major_theater_id,
-        COUNT(*) AS procedure_count
-    FROM reporting.patient_major_theater
-    WHERE major_theater_id IN (
-        503,504,
-        500,501,502
-    )
-    GROUP BY TO_CHAR(DATE_TRUNC('month', date_created), 'YYYYMM'), major_theater_id
-)
 SELECT 
-    t.section,
-    t.code,
-    t.procedure,
-    t.report_month,
-    COALESCE(t.procedure_count,0) AS procedure_count
-FROM (
-    -- 3.1 Obstetrics
-    SELECT '3.1' AS section, 'SP01' AS code, 'Caesarean sections' AS procedure, report_month,
-           SUM(CASE WHEN major_theater_id IN (503,504) THEN procedure_count ELSE 0 END) AS procedure_count
-    FROM surgical_data GROUP BY report_month
+    TO_CHAR(DATE_TRUNC('month', date_created), 'YYYYMM') AS report_month,
+    major_theatre_name AS procedure,
+    COUNT(*) AS procedure_count
+FROM reporting.patient_major_theater
+WHERE major_theatre_name IS NOT NULL
+GROUP BY TO_CHAR(DATE_TRUNC('month', date_created), 'YYYYMM'), major_theatre_name
+ORDER BY report_month, major_theatre_name;
 
-    UNION ALL
-    -- 3.2 Gynaecology
-    SELECT '3.2','GN02','Abdominal hysterectomy',report_month,
-           SUM(CASE WHEN major_theater_id=602 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.2','GN03','Vaginal hysterectomy',report_month,
-           SUM(CASE WHEN major_theater_id=603 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.2','GN04','Myomectomy',report_month,
-           SUM(CASE WHEN major_theater_id=604 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.2','GN05','Repair of ruptured uterus',report_month,
-           SUM(CASE WHEN major_theater_id=605 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.2','GN06','Other gynaecological operations',report_month,
-           SUM(CASE WHEN major_theater_id=606 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.3 General Surgery
-    SELECT '3.3','GS01','Laparotomy',report_month,
-           SUM(CASE WHEN major_theater_id=701 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.3','GS02','Appendicectomy',report_month,
-           SUM(CASE WHEN major_theater_id=702 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.3','GS03','Herniorrhaphy/Hernioplasty',report_month,
-           SUM(CASE WHEN major_theater_id=703 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.3','GS04','Other general surgery',report_month,
-           SUM(CASE WHEN major_theater_id=704 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.4 Ophthalmology
-    SELECT '3.4','OP01','Cataract extraction',report_month,
-           SUM(CASE WHEN major_theater_id=801 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.4','OP02','Glaucoma surgery',report_month,
-           SUM(CASE WHEN major_theater_id=802 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.4','OP03','Trauma-related eye surgery',report_month,
-           SUM(CASE WHEN major_theater_id=803 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.4','OP04','Retinal surgery',report_month,
-           SUM(CASE WHEN major_theater_id=804 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.4','OP05','Other ophthalmic surgery',report_month,
-           SUM(CASE WHEN major_theater_id=805 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+-- CREATE MATERIALIZED VIEW reporting."108_surgical_procedures" AS
+-- WITH surgical_data AS (
+--     SELECT 
+--         TO_CHAR(DATE_TRUNC('month', date_created), 'YYYYMM') AS report_month,
+--         major_theater_id,
+--         COUNT(*) AS procedure_count
+--     FROM reporting.patient_major_theater
+--     WHERE major_theater_id IN (
+--         503,504,
+--         500,501,502
+--     )
+--     GROUP BY TO_CHAR(DATE_TRUNC('month', date_created), 'YYYYMM'), major_theater_id
+-- )
+-- SELECT 
+--     t.section,
+--     t.code,
+--     t.procedure,
+--     t.report_month,
+--     COALESCE(t.procedure_count,0) AS procedure_count
+-- FROM (
+--     -- 3.1 Obstetrics
+--     SELECT '3.1' AS section, 'SP01' AS code, 'Caesarean sections' AS procedure, report_month,
+--            SUM(CASE WHEN major_theater_id IN (503,504) THEN procedure_count ELSE 0 END) AS procedure_count
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.5 Orthopaedics
-    SELECT '3.5','OR01','Fracture fixation',report_month,
-           SUM(CASE WHEN major_theater_id=901 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.5','OR02','Amputation',report_month,
-           SUM(CASE WHEN major_theater_id=902 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.5','OR03','Other orthopaedic surgery',report_month,
-           SUM(CASE WHEN major_theater_id=903 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.2 Gynaecology
+--     SELECT '3.2','GN02','Abdominal hysterectomy',report_month,
+--            SUM(CASE WHEN major_theater_id=602 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.2','GN03','Vaginal hysterectomy',report_month,
+--            SUM(CASE WHEN major_theater_id=603 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.2','GN04','Myomectomy',report_month,
+--            SUM(CASE WHEN major_theater_id=604 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.2','GN05','Repair of ruptured uterus',report_month,
+--            SUM(CASE WHEN major_theater_id=605 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.2','GN06','Other gynaecological operations',report_month,
+--            SUM(CASE WHEN major_theater_id=606 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.6 ENT
-    SELECT '3.6','EN01','Mastoidectomy',report_month,
-           SUM(CASE WHEN major_theater_id=1101 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.6','EN02','Tonsillectomy/Adenoidectomy',report_month,
-           SUM(CASE WHEN major_theater_id=1102 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.6','EN03','Nasal surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1103 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.6','EN04','Tracheostomy',report_month,
-           SUM(CASE WHEN major_theater_id=1104 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.6','EN05','Other ENT surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1105 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.3 General Surgery
+--     SELECT '3.3','GS01','Laparotomy',report_month,
+--            SUM(CASE WHEN major_theater_id=701 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.3','GS02','Appendicectomy',report_month,
+--            SUM(CASE WHEN major_theater_id=702 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.3','GS03','Herniorrhaphy/Hernioplasty',report_month,
+--            SUM(CASE WHEN major_theater_id=703 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.3','GS04','Other general surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=704 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.7 Neurosurgery
-    SELECT '3.7','NS01','Craniotomy',report_month,
-           SUM(CASE WHEN major_theater_id=1301 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.7','NS02','Spinal surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1302 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.7','NS03','Other neurosurgery',report_month,
-           SUM(CASE WHEN major_theater_id=1303 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.4 Ophthalmology
+--     SELECT '3.4','OP01','Cataract extraction',report_month,
+--            SUM(CASE WHEN major_theater_id=801 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.4','OP02','Glaucoma surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=802 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.4','OP03','Trauma-related eye surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=803 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.4','OP04','Retinal surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=804 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.4','OP05','Other ophthalmic surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=805 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.8 Urology
-    SELECT '3.8','UR01','Prostatectomy',report_month,
-           SUM(CASE WHEN major_theater_id=1401 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.8','UR02','Cystectomy',report_month,
-           SUM(CASE WHEN major_theater_id=1402 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.8','UR03','Other urological surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1403 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.5 Orthopaedics
+--     SELECT '3.5','OR01','Fracture fixation',report_month,
+--            SUM(CASE WHEN major_theater_id=901 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.5','OR02','Amputation',report_month,
+--            SUM(CASE WHEN major_theater_id=902 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.5','OR03','Other orthopaedic surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=903 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.9 Paediatric Surgery
-    SELECT '3.9','PS01','Neonatal surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1501 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.9','PS02','Congenital malformation repair',report_month,
-           SUM(CASE WHEN major_theater_id=1502 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.9','PS03','Other paediatric surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1503 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.6 ENT
+--     SELECT '3.6','EN01','Mastoidectomy',report_month,
+--            SUM(CASE WHEN major_theater_id=1101 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.6','EN02','Tonsillectomy/Adenoidectomy',report_month,
+--            SUM(CASE WHEN major_theater_id=1102 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.6','EN03','Nasal surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1103 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.6','EN04','Tracheostomy',report_month,
+--            SUM(CASE WHEN major_theater_id=1104 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.6','EN05','Other ENT surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1105 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.10 Plastic Surgery
-    SELECT '3.10','PL01','Skin grafts',report_month,
-           SUM(CASE WHEN major_theater_id=1601 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.10','PL02','Cleft lip/palate repair',report_month,
-           SUM(CASE WHEN major_theater_id=1602 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.10','PL03','Other plastic surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1603 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.7 Neurosurgery
+--     SELECT '3.7','NS01','Craniotomy',report_month,
+--            SUM(CASE WHEN major_theater_id=1301 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.7','NS02','Spinal surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1302 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.7','NS03','Other neurosurgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1303 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.11 Cardiothoracic Surgery
-    SELECT '3.11','CT01','Open heart surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1604 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.11','CT02','Thoracotomy',report_month,
-           SUM(CASE WHEN major_theater_id=1605 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.11','CT03','Other cardiothoracic surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1606 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.8 Urology
+--     SELECT '3.8','UR01','Prostatectomy',report_month,
+--            SUM(CASE WHEN major_theater_id=1401 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.8','UR02','Cystectomy',report_month,
+--            SUM(CASE WHEN major_theater_id=1402 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.8','UR03','Other urological surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1403 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.12 Vascular Surgery
-    SELECT '3.12','VS01','Arterial surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1607 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.12','VS02','Venous surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1701 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.12','VS03','Other vascular surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1702 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.9 Paediatric Surgery
+--     SELECT '3.9','PS01','Neonatal surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1501 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.9','PS02','Congenital malformation repair',report_month,
+--            SUM(CASE WHEN major_theater_id=1502 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.9','PS03','Other paediatric surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1503 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.13 Endocrine Surgery
-    SELECT '3.13','ES01','Thyroidectomy',report_month,
-           SUM(CASE WHEN major_theater_id=1703 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.13','ES02','Parathyroid surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1704 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.13','ES03','Other endocrine surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1705 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.10 Plastic Surgery
+--     SELECT '3.10','PL01','Skin grafts',report_month,
+--            SUM(CASE WHEN major_theater_id=1601 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.10','PL02','Cleft lip/palate repair',report_month,
+--            SUM(CASE WHEN major_theater_id=1602 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.10','PL03','Other plastic surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1603 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.14 Colorectal Surgery
-    SELECT '3.14','CR01','Hemicolectomy',report_month,
-           SUM(CASE WHEN major_theater_id=1706 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.14','CR02','Anterior resection',report_month,
-           SUM(CASE WHEN major_theater_id=1707 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.14','CR03','Abdominoperineal resection',report_month,
-           SUM(CASE WHEN major_theater_id=1801 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.14','CR04','Other colorectal surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1802 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.11 Cardiothoracic Surgery
+--     SELECT '3.11','CT01','Open heart surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1604 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.11','CT02','Thoracotomy',report_month,
+--            SUM(CASE WHEN major_theater_id=1605 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.11','CT03','Other cardiothoracic surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1606 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.15 Hepatobiliary Surgery
-    SELECT '3.15','HB01','Cholecystectomy',report_month,
-           SUM(CASE WHEN major_theater_id=1901 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.15','HB02','Liver resection',report_month,
-           SUM(CASE WHEN major_theater_id=1902 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.15','HB03','Other hepatobiliary surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1903 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.12 Vascular Surgery
+--     SELECT '3.12','VS01','Arterial surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1607 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.12','VS02','Venous surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1701 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.12','VS03','Other vascular surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1702 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.16 Breast Surgery
-    SELECT '3.16','BR01','Mastectomy',report_month,
-           SUM(CASE WHEN major_theater_id=1904 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.16','BR02','Lumpectomy',report_month,
-           SUM(CASE WHEN major_theater_id=1905 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.13 Endocrine Surgery
+--     SELECT '3.13','ES01','Thyroidectomy',report_month,
+--            SUM(CASE WHEN major_theater_id=1703 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.13','ES02','Parathyroid surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1704 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.13','ES03','Other endocrine surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1705 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.17 Oral & Maxillofacial Surgery
-    SELECT '3.17','OM01','Cleft palate repair',report_month,
-           SUM(CASE WHEN major_theater_id=1906 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.17','OM02','Mandibular surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1907 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.17','OM03','Other oral/maxillofacial surgery',report_month,
-           SUM(CASE WHEN major_theater_id=1908 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.14 Colorectal Surgery
+--     SELECT '3.14','CR01','Hemicolectomy',report_month,
+--            SUM(CASE WHEN major_theater_id=1706 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.14','CR02','Anterior resection',report_month,
+--            SUM(CASE WHEN major_theater_id=1707 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.14','CR03','Abdominoperineal resection',report_month,
+--            SUM(CASE WHEN major_theater_id=1801 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.14','CR04','Other colorectal surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1802 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.18 Hernia Surgery
-    SELECT '3.18','HE01','Hernia repair',report_month,
-           SUM(CASE WHEN major_theater_id=2001 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     -- 3.15 Hepatobiliary Surgery
+--     SELECT '3.15','HB01','Cholecystectomy',report_month,
+--            SUM(CASE WHEN major_theater_id=1901 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.15','HB02','Liver resection',report_month,
+--            SUM(CASE WHEN major_theater_id=1902 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.15','HB03','Other hepatobiliary surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1903 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
 
-    UNION ALL
-    -- 3.19 Other Surgical Procedures
-    SELECT '3.19','OT01','Other major operations',report_month,
-           SUM(CASE WHEN major_theater_id=2002 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.19','OT02','Minor operations in major theatre',report_month,
-           SUM(CASE WHEN major_theater_id=2003 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-    UNION ALL
-    SELECT '3.19','OT03','Other specified procedures',report_month,
-           SUM(CASE WHEN major_theater_id=2004 THEN procedure_count ELSE 0 END)
-    FROM surgical_data GROUP BY report_month
-) t
-ORDER BY t.report_month, t.section, t.code;
+--     UNION ALL
+--     -- 3.16 Breast Surgery
+--     SELECT '3.16','BR01','Mastectomy',report_month,
+--            SUM(CASE WHEN major_theater_id=1904 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.16','BR02','Lumpectomy',report_month,
+--            SUM(CASE WHEN major_theater_id=1905 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+
+--     UNION ALL
+--     -- 3.17 Oral & Maxillofacial Surgery
+--     SELECT '3.17','OM01','Cleft palate repair',report_month,
+--            SUM(CASE WHEN major_theater_id=1906 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.17','OM02','Mandibular surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1907 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.17','OM03','Other oral/maxillofacial surgery',report_month,
+--            SUM(CASE WHEN major_theater_id=1908 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+
+--     UNION ALL
+--     -- 3.18 Hernia Surgery
+--     SELECT '3.18','HE01','Hernia repair',report_month,
+--            SUM(CASE WHEN major_theater_id=2001 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+
+--     UNION ALL
+--     -- 3.19 Other Surgical Procedures
+--     SELECT '3.19','OT01','Other major operations',report_month,
+--            SUM(CASE WHEN major_theater_id=2002 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.19','OT02','Minor operations in major theatre',report_month,
+--            SUM(CASE WHEN major_theater_id=2003 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+--     UNION ALL
+--     SELECT '3.19','OT03','Other specified procedures',report_month,
+--            SUM(CASE WHEN major_theater_id=2004 THEN procedure_count ELSE 0 END)
+--     FROM surgical_data GROUP BY report_month
+-- ) t
+-- ORDER BY t.report_month, t.section, t.code;
 

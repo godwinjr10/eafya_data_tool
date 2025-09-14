@@ -577,3 +577,32 @@ CREATE TABLE IF NOT EXISTS reporting.patient_referrals
 CREATE INDEX IF NOT EXISTS idx_eafya_mappings_dataelement ON reporting.eafya_mappings(hmis_dataelement_code);
 CREATE INDEX IF NOT EXISTS idx_eafya_mappings_dataset ON reporting.eafya_mappings(dataset_code);
 CREATE INDEX IF NOT EXISTS idx_eafya_mappings_item ON reporting.eafya_mappings(eafya_item_id);
+
+-- Create datasets table for HMIS dataset management
+CREATE TABLE IF NOT EXISTS reporting.datasets (
+    id SERIAL PRIMARY KEY,
+    dataset_id VARCHAR(255) NOT NULL UNIQUE,
+    dataset_name TEXT NOT NULL,
+    sections JSONB,
+    "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create users table for authentication and authorization
+CREATE TABLE IF NOT EXISTS reporting.users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    role VARCHAR(50) NOT NULL DEFAULT 'user',
+    password VARCHAR(255) NOT NULL,
+    firstname VARCHAR(255),
+    lastname VARCHAR(255),
+    "phoneNo" VARCHAR(20),
+    module VARCHAR(100) DEFAULT 'reports',
+    "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create indexes for better performance
+CREATE INDEX IF NOT EXISTS idx_datasets_dataset_id ON reporting.datasets(dataset_id);
+CREATE INDEX IF NOT EXISTS idx_users_username ON reporting.users(username);
+CREATE INDEX IF NOT EXISTS idx_users_role ON reporting.users(role);

@@ -173,7 +173,7 @@ router.get("/surgical-procedures", async (req, res) => {
     const { report_month } = req.query;
 
     let query = `
-      SELECT "section", code, "procedure", "report_month", procedure_count
+      SELECT report_month, procedure, procedure_count
       FROM reporting."108_surgical_procedures"
     `;
 
@@ -183,7 +183,7 @@ router.get("/surgical-procedures", async (req, res) => {
       params.push(report_month);
     }
 
-    query += ` ORDER BY "section", code`;
+    query += ` ORDER BY report_month, procedure`;
 
     const result = await pool.query(query, params);
     res.json(result.rows);

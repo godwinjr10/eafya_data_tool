@@ -16,7 +16,7 @@ import downloadRoutes from "./routes/dhisreports/downloads.js";
 import outpatientRoutes from "./routes/reports/outpatient.js";
 import commoditiesReportRoutes from "./routes/reports/commodities.js";
 import dashboardRoutes from "./routes/dhisreports/dashboard.js";
-import dhisIntegration from "./routes/dhisintegration/dhisroutes.js";
+import dhisIntegration from "./routes/dhisintegration/index.js";
 import mappingRoutes from "./routes/mapping/hmis.js";
 import datasetRoutes from "./routes/mapping/datasets.js";
 import eafyaRoutes from "./routes/mapping/eafya.js";
