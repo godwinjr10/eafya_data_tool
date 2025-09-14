@@ -1362,3 +1362,15 @@ CREATE TABLE IF NOT EXISTS import.eafya_deceased_patient
 , time_of_death TIMESTAMP
 )
 ;
+
+CREATE TABLE IF NOT EXISTS import."eafya_triage_type_vital_sign "
+(
+  id BIGINT
+, version BIGINT
+, branch_id BIGINT
+, company_id BIGINT
+, created_by_id BIGINT
+, triage_type_id BIGINT
+, vital_type_id BIGINT
+)
+;
