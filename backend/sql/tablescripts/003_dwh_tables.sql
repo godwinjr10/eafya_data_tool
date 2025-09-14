@@ -1023,17 +1023,6 @@ CREATE TABLE IF NOT EXISTS dwh.dim_eafya_ward
 )
 ;
 
-CREATE TABLE IF NOT EXISTS dwh.dim_eafya_family_planning_category
-(
-  id BIGINT
-, created_by_id BIGINT
-, date_created TIMESTAMP
-, is_system_defined BOOLEAN
-, last_updated TIMESTAMP
-, "name" VARCHAR(255)
-)
-;
-
 CREATE TABLE IF NOT EXISTS dwh.fact_eafya_triage
 (
   id BIGINT
@@ -1157,6 +1146,17 @@ CREATE TABLE IF NOT EXISTS dwh.dim_eafya_family_planning
 , date_created TIMESTAMP
 , description TEXT
 , family_planning_category_id BIGINT
+, is_system_defined BOOLEAN
+, last_updated TIMESTAMP
+, "name" VARCHAR(255)
+)
+;
+
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_family_planning_category
+(
+  id BIGINT
+, created_by_id BIGINT
+, date_created TIMESTAMP
 , is_system_defined BOOLEAN
 , last_updated TIMESTAMP
 , "name" VARCHAR(255)
