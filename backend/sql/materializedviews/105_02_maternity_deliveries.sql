@@ -7,10 +7,6 @@ COUNT(CASE WHEN DATE_PART('year', AGE(admission_date, birth_date::DATE)) BETWEEN
 COUNT(CASE WHEN DATE_PART('year', AGE(admission_date, birth_date::DATE)) BETWEEN 20 AND 24 THEN 1 END) AS "20-24_years",
 COUNT(CASE WHEN DATE_PART('year', AGE(admission_date, birth_date::DATE)) BETWEEN 25 AND 49 THEN 1 END) AS "25-49_years",
 COUNT(CASE WHEN DATE_PART('year', AGE(admission_date, birth_date::DATE)) >= 50 THEN 1 END) AS "50+_years"
-FROM reporting.maternity
-where admission_ward_id IN (
-SELECT mapping_id
-FROM reporting.materialized_view_ids
-where name ilike '%maternity ward%' and mapping_id > 0)
+FROM reporting.patient_maternity
 GROUP BY TO_CHAR(admission_date, 'YYYYMM')
 ORDER BY report_month;

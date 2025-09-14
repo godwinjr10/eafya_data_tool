@@ -1,5 +1,4 @@
 CREATE MATERIALIZED VIEW reporting.postnatal_attendance AS
-
 WITH timings AS (
     SELECT '6 Days' AS timing
     UNION ALL
@@ -17,9 +16,6 @@ patient_admissions AS (
         DATE_PART('year', AGE(admission_date::date, birth_date::date)) AS age_years
     FROM reporting.patient_postnatal
     WHERE admission_date IS NOT NULL AND birth_date IS NOT null
-    AND admission_ward_id IN (SELECT mapping_id
-FROM reporting.materialized_view_ids
-where name ilike '%postnantal ward%' and mapping_id > 0)
 ),
 timing_with_age AS (
     SELECT

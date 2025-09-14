@@ -8,12 +8,8 @@ CASE
 END AS hmis_code,
   COUNT(*) AS total_births,
   COUNT(CASE WHEN baby_weight IS NOT NULL AND baby_weight < 2.5 THEN 1 END) AS births_under_2_5kgs
-FROM reporting.maternity
+FROM reporting.patient_maternity
 WHERE admission_date IS NOT null
-AND admission_ward_id IN (
-SELECT mapping_id
-FROM reporting.materialized_view_ids
-where name ilike '%maternity ward%' and mapping_id > 0)
 AND baby_status IN ('Live Birth', 'Fresh Still Birth', 'Macerated Still Birth')
 GROUP BY TO_CHAR(admission_date, 'YYYYMM'),
   CASE 
