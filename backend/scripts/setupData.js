@@ -91,15 +91,26 @@ const datasets = [
   },
 ];
 
-const defaultUser = {
-  username: "admin",
-  role: "admin",
-  password: "admin1234",
-  firstname: "System",
-  lastname: "Administrator",
-  phoneNo: "+254700000000",
-  module: "all",
-};
+const defaultUsers = [
+  {
+    username: "admin",
+    role: "admin",
+    password: "admin1234",
+    firstname: "System",
+    lastname: "Administrator",
+    phoneNo: "+254700000000",
+    module: "all",
+  },
+  {
+    username: "user",
+    role: "user",
+    password: "user1234",
+    firstname: "Regular",
+    lastname: "User",
+    phoneNo: "+254700000001",
+    module: "reports",
+  },
+];
 
 // Function to create schema and tables if they don't exist
 async function createTablesIfNotExists() {
@@ -205,55 +216,65 @@ async function createDatasets() {
   }
 }
 
-// Function to create user directly in database
-async function createUser() {
-  console.log("👤 Creating default user...");
+// Function to create users directly in database
+async function createUsers() {
+  console.log("👤 Creating default users...");
 
-  try {
-    // Check if user already exists
-    const existingUser = await pool.query(
-      "SELECT id FROM reporting.users WHERE username = $1",
-      [defaultUser.username]
-    );
+  let allCreated = true;
 
-    if (existingUser.rows.length > 0) {
-      console.log("⚠️  User already exists, skipping creation");
-      return true;
+  for (const userData of defaultUsers) {
+    try {
+      // Check if user already exists
+      const existingUser = await pool.query(
+        "SELECT id FROM reporting.users WHERE username = $1",
+        [userData.username]
+      );
+
+      if (existingUser.rows.length > 0) {
+        console.log(
+          `   ✅ User '${userData.username}' already exists, skipping...`
+        );
+        continue;
+      }
+
+      // Hash password
+      const hashedPassword = await bcrypt.hash(userData.password, 10);
+
+      // Insert user
+      const result = await pool.query(
+        `INSERT INTO reporting.users (username, role, password, firstname, lastname, "phoneNo", module, "createdAt", "updatedAt") 
+               VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), NOW()) 
+               RETURNING id, username, role, firstname, lastname`,
+        [
+          userData.username,
+          userData.role,
+          hashedPassword,
+          userData.firstname,
+          userData.lastname,
+          userData.phoneNo,
+          userData.module,
+        ]
+      );
+
+      const user = result.rows[0];
+      console.log(`   ✅ User '${user.username}' created successfully`);
+      console.log(`   - ID: ${user.id}`);
+      console.log(`   - Role: ${user.role}`);
+      console.log(`   - Name: ${user.firstname} ${user.lastname}`);
+      console.log(
+        `   - Password: ${userData.password} (change this after first login)`
+      );
+      console.log("");
+    } catch (error) {
+      console.error(
+        `   ❌ Error creating user '${userData.username}':`,
+        error.message
+      );
+      allCreated = false;
     }
-
-    // Hash password
-    const hashedPassword = await bcrypt.hash(defaultUser.password, 10);
-
-    // Insert user
-    const result = await pool.query(
-      `INSERT INTO reporting.users (username, role, password, firstname, lastname, "phoneNo", module, "createdAt", "updatedAt") 
-             VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), NOW()) 
-             RETURNING id, username, role, firstname, lastname`,
-      [
-        defaultUser.username,
-        defaultUser.role,
-        hashedPassword,
-        defaultUser.firstname,
-        defaultUser.lastname,
-        defaultUser.phoneNo,
-        defaultUser.module,
-      ]
-    );
-
-    const user = result.rows[0];
-    console.log("✅ User created successfully!");
-    console.log(`   - Username: ${user.username}`);
-    console.log(`   - Role: ${user.role}`);
-    console.log(`   - Name: ${user.firstname} ${user.lastname}`);
-    console.log(
-      `   - Password: ${defaultUser.password} (change this after first login)`
-    );
-
-    return true;
-  } catch (error) {
-    console.error("❌ Error creating user:", error.message);
-    return false;
   }
+
+  return allCreated;
 }
 
 // Main execution function
@@ -272,22 +293,28 @@ async function main() {
   const datasetsCreated = await createDatasets();
   console.log("");
 
-  // Create user
-  const userCreated = await createUser();
+  // Create users
+  const usersCreated = await createUsers();
   console.log("");
 
   // Summary
-  if (tablesCreated && datasetsCreated && userCreated) {
+  if (tablesCreated && datasetsCreated && usersCreated) {
     console.log("🎉 Setup completed successfully!");
     console.log("\n📋 Summary:");
     console.log("   ✅ Database tables ensured");
     console.log("   ✅ Datasets created");
-    console.log("   ✅ Default user created");
+    console.log("   ✅ Default users created");
     console.log("\n🔑 Login credentials:");
-    console.log(`   Username: ${defaultUser.username}`);
-    console.log(`   Password: ${defaultUser.password}`);
+    console.log("\n👑 Admin User:");
+    console.log(`   Username: ${defaultUsers[0].username}`);
+    console.log(`   Password: ${defaultUsers[0].password}`);
+    console.log(`   Role: ${defaultUsers[0].role} (Full access)`);
+    console.log("\n👤 Regular User:");
+    console.log(`   Username: ${defaultUsers[1].username}`);
+    console.log(`   Password: ${defaultUsers[1].password}`);
+    console.log(`   Role: ${defaultUsers[1].role} (Limited access)`);
     console.log(
-      "\n⚠️  Remember to change the default password after first login!"
+      "\n⚠️  Remember to change the default passwords after first login!"
     );
   } else {
     console.log("❌ Setup completed with errors. Please check the logs above.");
