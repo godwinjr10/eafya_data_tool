@@ -1,3 +1,5 @@
+
+
 create view reporting.anc_visits as 
 WITH visits AS (
   -- one row per visit_no (pick the earliest encounter in that visit)
