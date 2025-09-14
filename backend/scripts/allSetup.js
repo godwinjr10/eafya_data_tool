@@ -301,6 +301,7 @@ class UnifiedSetup {
       "sql",
       "materializedviews"
     );
+    this.viewsDir = path.resolve(__dirname, "..", "sql", "views");
     this.csvResults = [];
     this.csvErrors = [];
     this.dbConfig = {
@@ -317,6 +318,7 @@ class UnifiedSetup {
       { id: 4, name: "Default Users Creation" },
       { id: 5, name: "Materialized View IDs Creation" },
       { id: 6, name: "CSV Files Upload" },
+      { id: 7, name: "Views Setup" },
     ];
   }
 
@@ -1210,19 +1212,38 @@ class UnifiedSetup {
     let skippedCount = 0;
 
     for (const v of toDrop) {
-      const kind = v.type === "materialized" ? "MATERIALIZED VIEW" : "VIEW";
       if (!this.isSafeIdentifier(v.name)) {
         this.logger.logWarning(`Skipping suspicious identifier: ${v.name}`);
         skippedCount++;
         continue;
       }
-      const dropSql = `DROP ${kind} IF EXISTS ${v.name} CASCADE;`;
-      this.logger.logInfo(`   DROP -> ${dropSql}`);
-      try {
-        await client.query(dropSql);
-        droppedCount++;
-      } catch (err) {
-        this.logger.logError(`   Drop failed for ${v.name}`, err);
+
+      // Try to drop as different types of objects
+      const dropCommands = [
+        `DROP VIEW IF EXISTS ${v.name} CASCADE;`,
+        `DROP TABLE IF EXISTS ${v.name} CASCADE;`,
+        `DROP MATERIALIZED VIEW IF EXISTS ${v.name} CASCADE;`,
+      ];
+
+      let dropped = false;
+      for (const dropSql of dropCommands) {
+        try {
+          await client.query(dropSql);
+          if (!dropped) {
+            this.logger.logInfo(`   DROP -> ${dropSql}`);
+            droppedCount++;
+            dropped = true;
+          }
+        } catch (err) {
+          // Ignore errors for commands that don't match the object type
+          // This is expected behavior when trying different DROP types
+        }
+      }
+
+      if (!dropped) {
+        this.logger.logWarning(
+          `   Could not drop ${v.name} - object may not exist or may be protected`
+        );
       }
     }
 
@@ -1308,6 +1329,79 @@ class UnifiedSetup {
     }
   }
 
+  // 8. Views functionality
+  async setupViews() {
+    this.logger.logInfo("Setting up views...");
+
+    const files = this.readSqlFiles(this.viewsDir);
+    if (files.length === 0) {
+      const details = "No view SQL files found - skipping views setup";
+      this.logger.logInfo(details);
+      return { success: true, details, filesProcessed: 0, errors: 0 };
+    }
+
+    const client = new Client(this.dbConfig);
+    try {
+      await client.connect();
+      this.logger.logInfo("Connected to database for views setup");
+
+      await this.dropViewsFirst(client, files);
+
+      let successCount = 0;
+      let errorCount = 0;
+      const fileResults = [];
+
+      for (const f of files) {
+        try {
+          const sql = fs.readFileSync(f.full, "utf8");
+          this.logger.logInfo(`   Executing: ${f.name}`);
+          await client.query(sql);
+          successCount++;
+          fileResults.push({ file: f.name, status: "success" });
+          this.logger.logInfo(`   ✅ ${f.name} executed successfully`);
+        } catch (error) {
+          errorCount++;
+          fileResults.push({
+            file: f.name,
+            status: "error",
+            error: error.message,
+          });
+          this.logger.logError(`   ❌ Error executing ${f.name}`, error);
+        }
+      }
+
+      const details = `Processed ${files.length} files: ${successCount} successful, ${errorCount} errors`;
+
+      if (errorCount > 0) {
+        this.logger.logWarning("Views setup completed with errors");
+        this.logger.logInfo(details);
+        return {
+          success: false,
+          details,
+          filesProcessed: files.length,
+          errors: errorCount,
+          fileResults,
+        };
+      } else {
+        this.logger.logSuccess("Views setup completed successfully!");
+        this.logger.logInfo(details);
+        return {
+          success: true,
+          details,
+          filesProcessed: files.length,
+          errors: 0,
+          fileResults,
+        };
+      }
+    } catch (err) {
+      this.logger.logError("Views setup failed", err);
+      throw err;
+    } finally {
+      await client.end();
+      this.logger.logInfo("Database connection closed for views");
+    }
+  }
+
   // Main execution function
   async run() {
     this.logger.logInfo("Starting unified database setup...");
@@ -1384,6 +1478,17 @@ class UnifiedSetup {
       );
       if (!csvResult.success) {
         this.logger.logWarning("CSV uploads had issues, but continuing...");
+      }
+
+      // Step 7: Setup views
+      const viewsResult = await this.executeWithTiming(
+        7,
+        "Views Setup",
+        () => this.setupViews(),
+        "Creating views for reporting"
+      );
+      if (!viewsResult.success) {
+        this.logger.logWarning("Views setup had issues, but continuing...");
       }
 
       // Print comprehensive summary
