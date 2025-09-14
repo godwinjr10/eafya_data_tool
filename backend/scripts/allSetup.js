@@ -289,6 +289,8 @@ const materializedViewIds = [
   { name: "HPV Vaccine", category: "Vaccines" },
   { name: "Antenatal Clinic", category: "Clinics" },
   { name: "Major Theatre", category: "Theatres" },
+  { name: "Family Planning", category: "Clinics" },
+  { name: "Nutrition", category: "Clinics" },
 ];
 
 class UnifiedSetup {

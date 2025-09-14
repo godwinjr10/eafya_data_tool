@@ -101,9 +101,23 @@ const updateRoutes = (app) => {
       );
       console.log("📋 Remote commit:", remoteHash.trim());
 
+      // Always run materialized views setup even if no code changes
+      console.log("🔧 Creating/updating materialized views...");
+      try {
+        const { stdout: mvOutput, stderr: mvError } = await execAsync(
+          "node scripts/materialized.js materialized"
+        );
+        console.log("✅ Materialized views setup output:", mvOutput);
+        if (mvError) console.log("Materialized views warnings:", mvError);
+        console.log("✅ Materialized views created/updated successfully");
+      } catch (mvError) {
+        console.error("❌ Materialized views setup failed:", mvError.message);
+        console.error("Full error:", mvError);
+      }
+
       if (currentHash.trim() === remoteHash.trim()) {
         return res.json({
-          message: "Already up to date",
+          message: "Already up to date, but materialized views updated",
           currentVersion: currentHash.trim().substring(0, 7),
           timestamp: new Date().toISOString(),
         });
