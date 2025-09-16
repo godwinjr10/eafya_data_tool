@@ -108,7 +108,7 @@ inner join dwh.fact_eafya_admissions a on a.id = m.patient_admission_id
 inner join dwh.fact_eafya_patient_visit v on v.id = a.patient_visit_id
 inner join dwh.fact_eafya_clinic_session s on s.patient_visit_id = v.id 
 inner join dwh.dim_eafya_clinic c on c.id = s.clinic_id 
-inner join dwh.fact_eafya_encounters e on e.clinic_session_id = s.id 
+inner join dwh.fact_eafya_encounters e on e.id = a.encounter_id
 inner join dwh.dim_eafya_registered_patients r on r.patient_id = v.patient_id 
 inner join dwh.dim_eafya_ward w on w.id = a.admission_ward_id
 where a.admission_ward_id in (SELECT mapping_id FROM reporting.materialized_view_ids where name ilike '%maternity ward%' and mapping_id > 0)
