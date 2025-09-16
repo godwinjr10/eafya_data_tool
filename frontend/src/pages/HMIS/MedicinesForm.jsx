@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import API from "../../helpers/api";
 
 const MedicinesForm = ({ selectedMonth, selectedYear, section_id }) => {
@@ -14,7 +14,7 @@ const MedicinesForm = ({ selectedMonth, selectedYear, section_id }) => {
     return months[monthName] || '01';
   };
 
-  const fetchCommodities = async () => {
+  const fetchCommodities = useCallback(async () => {
     try {
       setLoading(true);
       const monthNumber = getMonthNumber(selectedMonth);
@@ -22,7 +22,7 @@ const MedicinesForm = ({ selectedMonth, selectedYear, section_id }) => {
       const response = await API.get(`/commodities?report_month=${formattedMonth}&section_id=${section_id}`);
       
       // Format the numbers to remove decimal points and add thousand separators
-      const formattedData = response.data.map(item => ({
+      const formattedData = (response.data || []).map(item => ({
         ...item,
         "Quantity Consumed": Math.round(parseFloat(item["Quantity Consumed"] || 0)).toLocaleString(),
         "Days out Stock": Math.round(parseFloat(item["Days out Stock"] || 0)).toLocaleString(),
@@ -37,28 +37,61 @@ const MedicinesForm = ({ selectedMonth, selectedYear, section_id }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedMonth, selectedYear, section_id]);
 
   useEffect(() => {
     if (selectedMonth && section_id) {
       fetchCommodities();
     }
-  }, [selectedMonth, section_id]);
+  }, [selectedMonth, section_id, fetchCommodities]);
+
+  // Spinner component
+  const Spinner = () => (
+    <div className="d-flex justify-content-center align-items-center" style={{ padding: '2rem' }}>
+      <div className="spinner-border text-primary" role="status">
+      </div>
+    </div>
+  );
+
+  // No data card component
+  const NoDataCard = () => (
+    <div className="card" style={{ margin: '1rem 0', padding: '1rem' }}>
+      <div className="card-body text-center">
+        <div className="mb-3">
+          <i className="fas fa-chart-line fa-3x text-muted"></i>
+        </div>
+        <h5 className="card-title text-muted">No Commodities Data Available</h5>
+        <p className="card-text text-muted">
+          No commodities data found for the selected month ({selectedMonth} {selectedYear}). 
+          Please check if data has been uploaded for this period.
+        </p>
+      </div>
+    </div>
+  );
+
+  // Check if we have any data
+  const hasData = medicines.length > 0;
 
   return (
     <div className="">
-      <>
-        <div className="section-header">
-          6 ESSENTIAL MEDICINES AND HEALTH SUPPLIES
-        </div>
+      <div className="section-header">
+        6 ESSENTIAL MEDICINES AND HEALTH SUPPLIES
+      </div>
 
-        <div className="section-subheader mb-3">
-          6.1 STOCK STATUS (Out of stock means that there was NONE left in your health unit STORE)
-        </div>
+      <div className="section-subheader mb-3">
+        6.1 STOCK STATUS (Out of stock means that there was NONE left in your health unit STORE)
+      </div>
 
-        <div className="mb-3">
-          <strong>Note:</strong> The primary data sources for this sub-section are the Stock books and Stock Cards
-        </div>
+      <div className="mb-3">
+        <strong>Note:</strong> The primary data sources for this sub-section are the Stock books and Stock Cards
+      </div>
+
+      {loading ? (
+        <Spinner />
+      ) : !hasData ? (
+        <NoDataCard />
+      ) : (
+        <>
 
         <table className="data-entry-table">
           <thead>
@@ -108,9 +141,10 @@ const MedicinesForm = ({ selectedMonth, selectedYear, section_id }) => {
                 </td>
               </tr>
             ))}
-          </tbody>
-        </table>
-      </>
+        </tbody>
+      </table>
+        </>
+      )}
     </div>
   );
 };

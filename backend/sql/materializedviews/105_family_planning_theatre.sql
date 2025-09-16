@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."105_family_planning_theatre" AS
+CREATE  VIEW reporting."105_family_planning_theatre" AS
 SELECT 
   report_month,
   hmis_code,

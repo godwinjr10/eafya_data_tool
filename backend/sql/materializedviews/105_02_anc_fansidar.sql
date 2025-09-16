@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."105_02_anc_fansidar" AS
+CREATE VIEW reporting."105_02_anc_fansidar" AS
 WITH events AS (
   -- One row per patient × month × visit (earliest record per visit)
   SELECT DISTINCT ON (patient_id, report_month, visit_no)

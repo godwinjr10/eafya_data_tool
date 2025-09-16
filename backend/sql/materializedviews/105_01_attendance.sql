@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."105_01_attendance" AS
+CREATE VIEW reporting."105_01_attendance" AS
 SELECT
   TO_CHAR(report_month, 'YYYYMM') AS report_month,
 'sv6SeKroHPV' as dataelement,

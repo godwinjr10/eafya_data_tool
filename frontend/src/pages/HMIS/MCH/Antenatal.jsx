@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import API from "../../../helpers/api";
 
 const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
@@ -23,7 +23,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
   const [hivRetestData, setHivRetestData] = useState([]);
 
   // Fetch data from API
-  const fetchAntenatalData = async () => {
+  const fetchAntenatalData = useCallback(async () => {
     if (!selectedMonth || !selectedYear) return;
 
     setLoading(true);
@@ -124,12 +124,12 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedMonth, selectedYear, getMonthNumber]);
 
   // Fetch data when month/year changes
   useEffect(() => {
     fetchAntenatalData();
-  }, [selectedMonth, selectedYear]);
+  }, [selectedMonth, selectedYear, fetchAntenatalData]);
 
   const getValueForCell = (item, ageGroup) => {
     const key = `${ageGroup}`;
@@ -143,28 +143,48 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
     }, 0);
   };
 
-  if (loading) {
-    return (
-      <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ height: "200px" }}
-      >
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-        <span className="ms-3">Loading antenatal data...</span>
+  // Spinner component
+  const Spinner = () => (
+    <div className="d-flex justify-content-center align-items-center" style={{ padding: '2rem' }}>
+      <div className="spinner-border text-primary" role="status">
       </div>
-    );
-  }
+    </div>
+  );
+
+  // No data card component
+  const NoDataCard = () => (
+    <div className="card" style={{ margin: '1rem 0', padding: '1rem' }}>
+      <div className="card-body text-center">
+        <div className="mb-3">
+          <i className="fas fa-chart-line fa-3x text-muted"></i>
+        </div>
+        <h5 className="card-title text-muted">No Antenatal Data Available</h5>
+        <p className="card-text text-muted">
+          No antenatal data found for the selected month ({selectedMonth} {selectedYear}). 
+          Please check if data has been uploaded for this period.
+        </p>
+      </div>
+    </div>
+  );
+
+  // Check if we have any data
+  const hasData = firstData.length > 0 || fourthData.length > 0 || eighthData.length > 0 || 
+                  totalData.length > 0 || iptData.length > 0 || anaemiaData.length > 0;
 
   return (
     <div>
-      <>
-        <div className="section-header">
-          2.0 MATERNAL AND CHILD HEALTH SERVICES
-        </div>
+      <div className="section-header">
+        2.0 MATERNAL AND CHILD HEALTH SERVICES
+      </div>
 
-        <div className="section-subheader mb-3">2.1 ANTENATAL</div>
+      <div className="section-subheader mb-3">2.1 ANTENATAL</div>
+
+      {loading ? (
+        <Spinner />
+      ) : !hasData ? (
+        <NoDataCard />
+      ) : (
+        <>
 
         <table className="data-entry-table">
           <thead>
@@ -1945,7 +1965,8 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
             </table>
           </div>
         </div>
-      </>
+        </>
+      )}
     </div>
   );
 };

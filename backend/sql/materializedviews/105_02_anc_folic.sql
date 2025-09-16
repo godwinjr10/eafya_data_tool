@@ -1,5 +1,5 @@
 
-CREATE MATERIALIZED VIEW reporting."105_02_anc_folic" AS
+CREATE VIEW reporting."105_02_anc_folic" AS
 SELECT
   TO_CHAR(report_month, 'YYYYMM') AS report_month,
   COUNT(*) FILTER (WHERE age_years < 15)                   AS "below_15_years",

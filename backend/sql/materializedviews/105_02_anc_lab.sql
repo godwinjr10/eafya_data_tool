@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."105_02_anc_lab" AS
+CREATE VIEW reporting."105_02_anc_lab" AS
 SELECT 
 TO_CHAR(l.date_created, 'YYYYMM') AS report_month,
 l."result",

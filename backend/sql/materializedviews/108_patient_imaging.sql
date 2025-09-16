@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."108_patient_imaging" AS
+CREATE VIEW reporting."108_patient_imaging" AS
 WITH categorized AS (
     SELECT
         pi.patient_id,

@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting.postnatal_tb AS
+CREATE VIEW reporting.postnatal_tb AS
 WITH months AS (
     SELECT DISTINCT TO_CHAR(admission_date, 'YYYYMM') AS report_month
     FROM reporting.patient_postnatal
@@ -114,7 +114,4 @@ ORDER BY bg.report_month,
             WHEN 'screened' THEN 3
             ELSE 4 
          END;
-
--- To refresh when data changes:
--- REFRESH MATERIALIZED VIEW reporting.postnatal_tb_aggregation;
 

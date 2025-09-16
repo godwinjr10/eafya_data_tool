@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."105_06_commodities" AS
+CREATE VIEW reporting."105_06_commodities" AS
 SELECT
     COALESCE(d.report_month, q.report_month, s.report_month, e.report_month) AS report_month,
     COALESCE(d.store_name, q.store_name, s.store_name, e.store_name) AS store_name,

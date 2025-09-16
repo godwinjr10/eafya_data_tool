@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."108_maternal_conditions" AS
+CREATE VIEW reporting."108_maternal_conditions" AS
 SELECT
     TO_CHAR(admission_date, 'YYYYMM') AS report_month,
     disease_id,

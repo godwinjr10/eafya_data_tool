@@ -1,4 +1,4 @@
-create materialized view reporting."108_01_census_information" as
+create view reporting."108_01_census_information" as
 WITH 
 -- Get total beds per ward (static, not monthly)
 bed_counts AS (

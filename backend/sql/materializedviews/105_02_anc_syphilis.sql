@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."105_02_anc_syphilis" AS
+CREATE  VIEW reporting."105_02_anc_syphilis" AS
 SELECT
   TO_CHAR(DATE_TRUNC('month', lab_test_date), 'YYYYMM') AS report_month,
   gender,

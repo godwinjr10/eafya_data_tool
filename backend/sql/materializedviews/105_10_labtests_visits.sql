@@ -1,5 +1,5 @@
 -------------Number Of Out Patients' and In Patients' Lab Visits----------------------
-CREATE MATERIALIZED VIEW reporting."105_10_labtests_visits" AS
+CREATE VIEW reporting."105_10_labtests_visits" AS
 SELECT 
     TO_CHAR(DATE_TRUNC('month', r.date_created), 'YYYYMM') AS report_month,
     COUNT(CASE WHEN r.patient_id NOT IN (

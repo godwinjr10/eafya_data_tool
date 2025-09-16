@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting.postnatal_attendance AS
+CREATE VIEW reporting.postnatal_attendance AS
 WITH timings AS (
     SELECT '6 Days' AS timing
     UNION ALL

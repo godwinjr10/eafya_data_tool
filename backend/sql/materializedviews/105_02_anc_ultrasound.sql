@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."105_02_anc_ultrasound" AS
+CREATE VIEW reporting."105_02_anc_ultrasound" AS
 WITH x AS (
   SELECT
     patient_id,

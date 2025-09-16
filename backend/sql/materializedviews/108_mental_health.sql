@@ -2,7 +2,7 @@
 -- HMIS 108: Mental Health Services
 -- =====================================================
 
-CREATE MATERIALIZED VIEW reporting."108_03_mental_health" AS
+CREATE VIEW reporting."108_03_mental_health" AS
 SELECT 
     TO_CHAR(date_created, 'YYYYMM') AS report_month,
     disease_name,

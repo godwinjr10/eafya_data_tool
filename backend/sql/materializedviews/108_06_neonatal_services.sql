@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."108_neonatal_services" AS
+CREATE  VIEW reporting."108_neonatal_services" AS
 SELECT
     TO_CHAR(admission_date, 'YYYYMM') AS report_month,
 -- Cases 0-7 days

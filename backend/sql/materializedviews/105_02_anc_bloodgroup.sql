@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."105_02_anc_bloodgroup" AS
+CREATE VIEW reporting."105_02_anc_bloodgroup" AS
 SELECT
 TO_CHAR(DATE_TRUNC('month', lab_test_date), 'YYYYMM') AS report_month,
 "result"                                              AS blood_group,

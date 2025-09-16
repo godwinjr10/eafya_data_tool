@@ -1,4 +1,4 @@
-create materialized view reporting."105_02_tetanus_vaccination" as
+create view reporting."105_02_tetanus_vaccination" as
 SELECT
   TO_CHAR(DATE_TRUNC('month', date_created), 'YYYYMM') AS report_month,
   vaccine_id,

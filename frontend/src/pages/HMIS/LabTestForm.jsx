@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import API from "../../helpers/api";
 
 const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
@@ -16,7 +16,7 @@ const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
     return months[monthName] || '01';
   };
 
-  const fetchLabTests = async () => {
+  const fetchLabTests = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -24,11 +24,11 @@ const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
       const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
       const response = await API.get(`/labtests?report_month=${formattedMonth}&section_id=${section_id}`);
       
-      setLabTests(response.data);
+      setLabTests(response.data || []);
       
       // Initialize form data with fetched values
       const initialFormData = {};
-      response.data.forEach(test => {
+      (response.data || []).forEach(test => {
         initialFormData[test.hmis_code] = {
           total_cases: test.total_cases || 0,
           positive_cases: test.positive_cases || 0
@@ -43,13 +43,13 @@ const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedMonth, selectedYear, section_id]);
 
   useEffect(() => {
     if (selectedMonth && section_id) {
       fetchLabTests();
     }
-  }, [selectedMonth, section_id]);
+  }, [selectedMonth, section_id, fetchLabTests]);
 
   const handleInputChange = (hmisCode, field, value) => {
     setFormData(prev => ({
@@ -183,16 +183,48 @@ const LabTestForm = ({ selectedMonth, selectedYear, section_id }) => {
     </div>
   );
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // Spinner component
+  const Spinner = () => (
+    <div className="d-flex justify-content-center align-items-center" style={{ padding: '2rem' }}>
+      <div className="spinner-border text-primary" role="status">
+      </div>
+    </div>
+  );
+
+  // No data card component
+  const NoDataCard = () => (
+    <div className="card" style={{ margin: '1rem 0', padding: '1rem' }}>
+      <div className="card-body text-center">
+        <div className="mb-3">
+          <i className="fas fa-chart-line fa-3x text-muted"></i>
+        </div>
+        <h5 className="card-title text-muted">No Lab Tests Data Available</h5>
+        <p className="card-text text-muted">
+          No lab tests data found for the selected month ({selectedMonth} {selectedYear}). 
+          Please check if data has been uploaded for this period.
+        </p>
+      </div>
+    </div>
+  );
+
+  // Check if we have any data
+  const hasData = labTests.length > 0;
+
+  if (error) return <div>Error: {error}</div>;
 
   return (
     <div className="lab-test-container">
       {renderClientVisitsSection()}
-      <div className="row">
-        {renderLabTestsSection()}
-      </div>
+      
+      {loading ? (
+        <Spinner />
+      ) : !hasData ? (
+        <NoDataCard />
+      ) : (
+        <div className="row">
+          {renderLabTestsSection()}
+        </div>
+      )}
     </div>
   );
 };

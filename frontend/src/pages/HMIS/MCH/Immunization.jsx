@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import API from "../../../helpers/api";
 
 const Immunization = ({ selectedMonth, getMonthNumber, selectedYear }) => {
   const [loading, setLoading] = useState(false);
   const [immunizationData, setImmunizationData] = useState([]);
 
-  const fetchImmunizationData = async () => {
+  const fetchImmunizationData = useCallback(async () => {
     try {
       setLoading(true);
       const monthNumber = getMonthNumber(selectedMonth);
@@ -44,13 +44,13 @@ const Immunization = ({ selectedMonth, getMonthNumber, selectedYear }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedMonth, selectedYear, getMonthNumber]);
 
   useEffect(() => {
     if (selectedMonth && selectedYear) {
       fetchImmunizationData();
     }
-  }, [selectedMonth, selectedYear]);
+  }, [selectedMonth, selectedYear, fetchImmunizationData]);
 
   // State for form values
   const [formData, setFormData] = useState({});
@@ -62,11 +62,43 @@ const Immunization = ({ selectedMonth, getMonthNumber, selectedYear }) => {
     }));
   };
 
-  if (loading) return <div>Loading...</div>;
+  // Spinner component
+  const Spinner = () => (
+    <div className="d-flex justify-content-center align-items-center" style={{ padding: '2rem' }}>
+      <div className="spinner-border text-primary" role="status">
+      </div>
+    </div>
+  );
+
+  // No data card component
+  const NoDataCard = () => (
+    <div className="card" style={{ margin: '1rem 0', padding: '1rem' }}>
+      <div className="card-body text-center">
+        <div className="mb-3">
+          <i className="fas fa-chart-line fa-3x text-muted"></i>
+        </div>
+        <h5 className="card-title text-muted">No Immunization Data Available</h5>
+        <p className="card-text text-muted">
+          No immunization data found for the selected month ({selectedMonth} {selectedYear}). 
+          Please check if data has been uploaded for this period.
+        </p>
+      </div>
+    </div>
+  );
+
+  // Check if we have any data
+  const hasData = immunizationData.length > 0;
 
   return (
     <div>
       <div className="section-header">2.6.3 CHILD IMMUNISATION</div>
+
+      {loading ? (
+        <Spinner />
+      ) : !hasData ? (
+        <NoDataCard />
+      ) : (
+        <>
 
       <table className="data-entry-table">
         <thead>
@@ -144,6 +176,8 @@ const Immunization = ({ selectedMonth, getMonthNumber, selectedYear }) => {
           ))}
         </tbody>
       </table>
+        </>
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import API from "../../../helpers/api";
 
 const Tetanus = ({ selectedMonth, getMonthNumber, selectedYear }) => {
@@ -60,52 +60,79 @@ const Tetanus = ({ selectedMonth, getMonthNumber, selectedYear }) => {
     }));
   };
 
-  useEffect(() => {
-    const fetchTetanusData = async () => {
-      if (!selectedMonth) return;
+  const fetchTetanusData = useCallback(async () => {
+    if (!selectedMonth) return;
 
-      try {
-        setLoading(true);
-        const monthNumber = getMonthNumber(selectedMonth);
-        const formattedMonth = `${selectedYear}${monthNumber
-          .toString()
-          .padStart(2, "0")}`;
+    try {
+      setLoading(true);
+      const monthNumber = getMonthNumber(selectedMonth);
+      const formattedMonth = `${selectedYear}${monthNumber
+        .toString()
+        .padStart(2, "0")}`;
 
-        const response = await API.get(
-          `/tetanus-vaccination/tetanus-vaccination?report_month=${formattedMonth}`
-        );
+      const response = await API.get(
+        `/tetanus-vaccination/tetanus-vaccination?report_month=${formattedMonth}`
+      );
 
-        // Transform API data to match the component's structure
-        const transformedData = response.data.map((item) => ({
-          code: item.vaccine_id,
-          label: item.vaccine_name,
-          data: {
-            pregnant: {
-              Static: Number(item.pregnant || 0),
-              Outreach: 0,
-            },
-            nonPregnant: {
-              Static: Number(item.non_pregnant || 0),
-              Outreach: 0,
-              School: 0,
-            },
+      // Transform API data to match the component's structure
+      const transformedData = (response.data || []).map((item) => ({
+        code: item.vaccine_id,
+        label: item.vaccine_name,
+        data: {
+          pregnant: {
+            Static: Number(item.pregnant || 0),
+            Outreach: 0,
           },
-        }));
+          nonPregnant: {
+            Static: Number(item.non_pregnant || 0),
+            Outreach: 0,
+            School: 0,
+          },
+        },
+      }));
 
-        setTetanusData(transformedData);
-        setError(null);
-      } catch (err) {
-        console.error("Error fetching tetanus data:", err);
-        setError(err.message || "Error fetching tetanus data");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTetanusData();
+      setTetanusData(transformedData);
+      setError(null);
+    } catch (err) {
+      console.error("Error fetching tetanus data:", err);
+      setError(err.message || "Error fetching tetanus data");
+      setTetanusData([]);
+    } finally {
+      setLoading(false);
+    }
   }, [selectedMonth, selectedYear, getMonthNumber]);
 
-  if (loading) return <div>Loading...</div>;
+  useEffect(() => {
+    fetchTetanusData();
+  }, [fetchTetanusData]);
+
+  // Spinner component
+  const Spinner = () => (
+    <div className="d-flex justify-content-center align-items-center" style={{ padding: '2rem' }}>
+      <div className="spinner-border text-primary" role="status">
+      </div>
+    </div>
+  );
+
+  // No data card component
+  const NoDataCard = () => (
+    <div className="card" style={{ margin: '1rem 0', padding: '1rem' }}>
+      <div className="card-body text-center">
+        <div className="mb-3">
+          <i className="fas fa-chart-line fa-3x text-muted"></i>
+        </div>
+        <h5 className="card-title text-muted">No Tetanus Data Available</h5>
+        <p className="card-text text-muted">
+          No tetanus data found for the selected month ({selectedMonth} {selectedYear}). 
+          Please check if data has been uploaded for this period.
+        </p>
+      </div>
+    </div>
+  );
+
+  // Check if we have any data
+  const hasData = tetanusData.length > 0;
+
   if (error) return <div>Error: {error}</div>;
 
   return (
@@ -113,6 +140,13 @@ const Tetanus = ({ selectedMonth, getMonthNumber, selectedYear }) => {
       <div className="section-header">
         2.6.2 TETANUS VACCINATION (Td VACCINE)
       </div>
+
+      {loading ? (
+        <Spinner />
+      ) : !hasData ? (
+        <NoDataCard />
+      ) : (
+        <>
 
       <table className="data-entry-table">
         <thead>
@@ -181,6 +215,8 @@ const Tetanus = ({ selectedMonth, getMonthNumber, selectedYear }) => {
           ))}
         </tbody>
       </table>
+        </>
+      )}
     </div>
   );
 };

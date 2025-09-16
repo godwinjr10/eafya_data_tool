@@ -1,4 +1,4 @@
-create materialized view reporting."105_02_maternity_utero_treatment" as
+create view reporting."105_02_maternity_utero_treatment" as
 SELECT
 TO_CHAR(admission_date, 'YYYYMM') AS report_month,
 'MA28' as hmis_code,

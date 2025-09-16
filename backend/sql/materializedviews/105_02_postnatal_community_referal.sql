@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting.postnatal_community_referal AS
+CREATE VIEW reporting.postnatal_community_referal AS
 SELECT
     TO_CHAR(date_created, 'YYYYMM') AS month,
     COUNT(*) FILTER (WHERE EXTRACT(YEAR FROM age(date_created, birth_date)) < 15) AS below_15yrs,
