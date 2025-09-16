@@ -2,74 +2,95 @@
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { isAdmin } from "../helpers/auth";
 
 function MainSideBar() {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [showSettingsDropdown, setShowSettingsDropdown] = useState(false);
   const location = useLocation();
 
-  const menuItems = [
-    // {
-    //   id: "dashboard",
-    //   label: "Dashboard",
-    //   icon: "speedometer2",
-    //   path: "/dashboard",
-    // },
-    {
-      id: "hmis",
-      label: "HMIS Reports",
-      icon: "file-earmark-text",
-      path: "/hmis",
-    },
-    { id: "mapping", label: "DHIS2 Mapping", icon: "map", path: "/mapping" },
-    {
-      id: "opd",
-      label: "Outpatient",
-      icon: "person-walking",
-      path: "/outpatient",
-    },
-    {
-      id: "inpatient",
-      label: "Inpatient",
-      icon: "hospital",
-      path: "/inpatient",
-    },
-    { id: "laboratory", label: "Laboratory", icon: "flask", path: "/lab" },
-    {
-      id: "medicines",
-      label: "Supply Chain",
-      icon: "capsule",
-      path: "/supplychain",
-    },
-    {
-      id: "familyplanning",
-      label: "Family Planning",
-      icon: "person-hearts",
-      path: "/familyplanning",
-    },
-    { id: "imaging", label: "Imaging", icon: "camera", path: "/imaging" },
-    {
-      id: "theatre",
-      label: "Theatre",
-      icon: "hospital",
-      path: "/theatre",
-    },
-    {
-      id: "settings",
-      label: "Settings",
-      icon: "gear",
-      children: [
-        {
-          id: "facility",
-          label: "Facility",
-          icon: "building",
-          path: "/facility",
-        },
-        { id: "users", label: "Users", icon: "person-circle", path: "/users" },
-        { id: "reportmapping", label: "Report Mapping", icon: "person-circle", path: "/mappingtest" },
-      ],
-    },
-  ];
+  const getMenuItems = () => {
+    const baseItems = [
+      // {
+      //   id: "dashboard",
+      //   label: "Dashboard",
+      //   icon: "speedometer2",
+      //   path: "/dashboard",
+      // },
+      {
+        id: "hmis",
+        label: "HMIS Reports",
+        icon: "file-earmark-text",
+        path: "/hmis",
+      },
+      {
+        id: "opd",
+        label: "Outpatient",
+        icon: "person-walking",
+        path: "/outpatient",
+      },
+      {
+        id: "inpatient",
+        label: "Inpatient",
+        icon: "hospital",
+        path: "/inpatient",
+      },
+      { id: "laboratory", label: "Laboratory", icon: "flask", path: "/lab" },
+      {
+        id: "medicines",
+        label: "Supply Chain",
+        icon: "capsule",
+        path: "/supplychain",
+      },
+      {
+        id: "familyplanning",
+        label: "Family Planning",
+        icon: "person-hearts",
+        path: "/familyplanning",
+      },
+      { id: "imaging", label: "Imaging", icon: "camera", path: "/imaging" },
+      {
+        id: "theatre",
+        label: "Theatre",
+        icon: "hospital",
+        path: "/theatre",
+      },
+    ];
+
+    // Admin-only items
+    const adminItems = [
+      { id: "mapping", label: "DHIS2 Mapping", icon: "map", path: "/mapping" },
+      {
+        id: "settings",
+        label: "Settings",
+        icon: "gear",
+        children: [
+          {
+            id: "facility",
+            label: "Facility",
+            icon: "building",
+            path: "/facility",
+          },
+          {
+            id: "users",
+            label: "Users",
+            icon: "person-circle",
+            path: "/users",
+          },
+          {
+            id: "reportmapping",
+            label: "Report Mapping",
+            icon: "person-circle",
+            path: "/mappingtest",
+          },
+        ],
+      },
+    ];
+
+    return isAdmin() ? [...baseItems, ...adminItems] : baseItems;
+  };
+
+  const menuItems = getMenuItems();
 
   // Auto-collapse on mobile
   useEffect(() => {

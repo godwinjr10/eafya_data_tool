@@ -17,3 +17,6 @@ INNER JOIN dwh.fact_eafya_encounters e ON e.clinic_session_id = s.id
 INNER JOIN dwh.fact_eafya_patient_disease n ON n.encounter_id = e.id
 WHERE e.origin = 'op'
 ORDER BY d.patient_id, DATE_TRUNC('month', v.date_created), v.date_created;
+
+
+

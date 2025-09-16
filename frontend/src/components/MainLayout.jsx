@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import API from "../helpers/api";
-import { logout } from "../helpers/auth";
+import { logout, getCurrentUser, isAdmin } from "../helpers/auth";
 import MainSideBar from "./MainSideBar";
 import UpdateButton from "./UpdateButton";
 
@@ -48,8 +48,8 @@ const MainLayout = ({ children }) => {
 
   useEffect(() => {
     fetchFacilities();
-    // You might want to fetch user data here too
-    // setUser(getCurrentUser())
+    const user = getCurrentUser();
+    setUser(user);
   }, []);
 
   return (
@@ -66,10 +66,17 @@ const MainLayout = ({ children }) => {
             Ministry of Health - eAFYA Data Mining Tool
           </div>
           <div className="d-flex align-items-center gap-3">
-            {/* <UpdateButton /> */}
+            <UpdateButton />
             <div>
               <i className="bi bi-person-circle me-2"></i>
-              {facilities.length > 0 && facilities[0].facility_name}
+              {user && (
+                <>
+                  {user.firstname} {user.lastname}
+                  <small className="ms-2 badge bg-secondary">
+                    {user.role === "admin" ? "Admin" : "User"}
+                  </small>
+                </>
+              )}
             </div>
             <div className="dropdown d-inline-block">
               <button

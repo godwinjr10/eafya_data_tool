@@ -5,20 +5,24 @@ import dotenv from "dotenv";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const envPath = path.join(__dirname, "..", ".env");
 dotenv.config({ path: envPath });
 
-const calculatedPath = path.resolve(
+const materializedViewsPath = path.resolve(
   __dirname,
   "..",
   "sql",
   "materializedviews"
 );
-const SQL_DIR = calculatedPath;
+const viewsPath = path.resolve(__dirname, "..", "sql", "views");
+
+// Get the directory from command line argument or default to views
+const SQL_DIR =
+  process.argv[2] === "materialized" ? materializedViewsPath : viewsPath;
+const isMaterialized = process.argv[2] === "materialized";
 
 const DB_CONFIG = {
   host: process.env.DB_HOST,
@@ -27,7 +31,6 @@ const DB_CONFIG = {
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
 };
-
 
 // --- helpers ---
 function readSqlFiles(dir) {
@@ -89,18 +92,35 @@ async function dropViewsFirst(client, files) {
 
   console.log(`Dropping ${toDrop.length} view(s) before recreate...`);
   for (const v of toDrop) {
-    const kind = v.type === "materialized" ? "MATERIALIZED VIEW" : "VIEW";
     if (!isSafeIdentifier(v.name)) {
       console.warn(`⚠️  Skipping suspicious identifier: ${v.name}`);
       continue;
     }
-    const dropSql = `DROP ${kind} IF EXISTS ${v.name} CASCADE;`;
-    console.log(`DROP -> ${dropSql}`);
-    try {
-      await client.query(dropSql);
-    } catch (err) {
-      console.error(`Drop failed for ${v.name}: ${err.message}`);
-      // continue trying to drop others
+
+    // Try to drop as different types of objects
+    const dropCommands = [
+      `DROP VIEW IF EXISTS ${v.name} CASCADE;`,
+      `DROP TABLE IF EXISTS ${v.name} CASCADE;`,
+      `DROP MATERIALIZED VIEW IF EXISTS ${v.name} CASCADE;`,
+    ];
+
+    let dropped = false;
+    for (const dropSql of dropCommands) {
+      try {
+        console.log(`DROP -> ${dropSql}`);
+        await client.query(dropSql);
+        dropped = true;
+        break; // Successfully dropped, no need to try other commands
+      } catch (err) {
+        // Continue to next drop command
+        continue;
+      }
+    }
+
+    if (!dropped) {
+      console.warn(
+        `   Could not drop ${v.name} - object may not exist or may be protected`
+      );
     }
   }
 }
@@ -117,6 +137,13 @@ async function run() {
     return;
   }
 
+  console.log(
+    `🔧 Setting up ${
+      isMaterialized ? "materialized views" : "views"
+    } from: ${SQL_DIR}`
+  );
+  console.log(`📁 Found ${files.length} SQL files`);
+
   const client = new Client(DB_CONFIG);
   await client.connect();
   try {
@@ -124,20 +151,57 @@ async function run() {
     await dropViewsFirst(client, files);
 
     // 2) Recreate by executing each file in order
+    let successCount = 0;
+    let errorCount = 0;
+
     for (const f of files) {
       const sql = fs.readFileSync(f.full, "utf8");
-      console.log(`---- Running: ${f.name}`);
-      await client.query(sql);
+      console.log(`   Executing: ${f.name}`);
+      try {
+        // Handle "already exists" errors by using CREATE OR REPLACE
+        let modifiedSql = sql;
+        if (
+          sql.toLowerCase().includes("create view") &&
+          !sql.toLowerCase().includes("materialized")
+        ) {
+          modifiedSql = sql.replace(/CREATE VIEW/gi, "CREATE OR REPLACE VIEW");
+        } else if (sql.toLowerCase().includes("create table")) {
+          modifiedSql = sql.replace(
+            /CREATE TABLE/gi,
+            "CREATE OR REPLACE TABLE"
+          );
+        } else if (sql.toLowerCase().includes("create materialized view")) {
+          // For materialized views, we need to drop first then create
+          // Don't modify the SQL, just execute as-is since we already dropped it
+          modifiedSql = sql;
+        }
+
+        await client.query(modifiedSql);
+        console.log(`   ✅ ${f.name} executed successfully`);
+        successCount++;
+      } catch (err) {
+        console.error(`   ❌ Error executing ${f.name}`);
+        console.error(`   Error: ${err.message}`);
+        errorCount++;
+      }
     }
 
- 
-
-    console.log("✅ Done: views dropped & recreated.");
+    console.log(
+      `✅ ${isMaterialized ? "Materialized views" : "Views"} setup completed!`
+    );
+    console.log(
+      `📊 Processed ${files.length} files: ${successCount} successful, ${errorCount} errors`
+    );
   } catch (err) {
     console.error("❌ Execution failed:", err.message);
     process.exit(1);
   } finally {
     await client.end();
+    console.log(
+      `ℹ️  Database connection closed for ${
+        isMaterialized ? "materialized views" : "views"
+      }`
+    );
   }
 }
 

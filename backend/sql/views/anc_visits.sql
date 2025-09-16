@@ -5,7 +5,7 @@ WITH visits AS (
     pa.patient_id,
     pa.visit_no AS visit_id,
     pa.visit_date,
-    pa.encounter_date,        -- used only for choosing the earliest row per visit
+    pa.encounter_date,  
     pa.clinic,
     pa.visit_type,
     pa.first_name,
@@ -18,7 +18,7 @@ WITH visits AS (
   FROM reporting.patient_antenatal pa
   WHERE pa.clinic_id = 1
     AND pa.gender = 'Female'
-    AND pa.origin = 'op'              -- OPD only
+    AND pa.origin = 'op'          
   ORDER BY pa.visit_no, pa.encounter_date
 )
 select

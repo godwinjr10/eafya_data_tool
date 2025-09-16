@@ -139,16 +139,15 @@ router.get("/hmis108", async (req, res) => {
       // Section 3: Surgical Procedures
       try {
         let query = `
-					SELECT "section", code, "procedure", "year", "month", procedure_count
+					SELECT report_month, procedure, procedure_count
 					FROM reporting."108_surgical_procedures"
 				`;
         let params = [];
         if (report_month) {
-          query += ` WHERE "year" = $1 AND "month" = $2`;
-          const [year, month] = report_month.match(/(\d{4})(\d{2})/).slice(1);
-          params.push(year, month);
+          query += ` WHERE report_month = $1`;
+          params.push(report_month);
         }
-        query += ` ORDER BY "section", code`;
+        query += ` ORDER BY report_month, procedure`;
         const { rows } = await pool.query(query, params);
         allSections.surgical = rows;
       } catch (error) {
@@ -337,15 +336,14 @@ router.get("/hmis108", async (req, res) => {
 
       case "3": // Surgical Procedures
         query = `
-					SELECT "section", code, "procedure", "year", "month", procedure_count
+					SELECT report_month, procedure, procedure_count
 					FROM reporting."108_surgical_procedures"
 				`;
         if (report_month) {
-          query += ` WHERE "year" = $1 AND "month" = $2`;
-          const [year, month] = report_month.match(/(\d{4})(\d{2})/).slice(1);
-          params.push(year, month);
+          query += ` WHERE report_month = $1`;
+          params.push(report_month);
         }
-        query += ` ORDER BY "section", code`;
+        query += ` ORDER BY report_month, procedure`;
         break;
 
       case "4": // Blood Transfusion (both 4a and 4b)
