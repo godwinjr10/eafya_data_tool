@@ -1,6 +1,5 @@
 import express from "express";
 import { pool } from "../../config/database.js";
-import AdminAuth from "../../utils/adminAuth.js";
 
 const router = express.Router();
 
@@ -172,7 +171,7 @@ router.get("/mappings/:dataelementCode", async (req, res) => {
 });
 
 // Save new mappings for a data element
-router.post("/mappings", AdminAuth, async (req, res) => {
+router.post("/mappings", async (req, res) => {
   try {
     const {
       hmis_dataelement_code,
@@ -252,31 +251,27 @@ router.post("/mappings", AdminAuth, async (req, res) => {
 });
 
 // Delete a specific mapping
-router.delete(
-  "/mappings/:dataelementCode/:eafyaItemId",
-  AdminAuth,
-  async (req, res) => {
-    try {
-      const { dataelementCode, eafyaItemId } = req.params;
+router.delete("/mappings/:dataelementCode/:eafyaItemId", async (req, res) => {
+  try {
+    const { dataelementCode, eafyaItemId } = req.params;
 
-      const query = `
+    const query = `
             DELETE FROM reporting.eafya_mappings 
             WHERE hmis_dataelement_code = $1 AND eafya_item_id = $2
         `;
 
-      const result = await pool.query(query, [dataelementCode, eafyaItemId]);
+    const result = await pool.query(query, [dataelementCode, eafyaItemId]);
 
-      if (result.rowCount === 0) {
-        return res.status(404).json({ message: "Mapping not found" });
-      }
-
-      res.json({ message: "Mapping deleted successfully" });
-    } catch (error) {
-      console.error("Error deleting mapping:", error);
-      res.status(500).json({ message: error.message });
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "Mapping not found" });
     }
+
+    res.json({ message: "Mapping deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting mapping:", error);
+    res.status(500).json({ message: error.message });
   }
-);
+});
 
 // Get all mappings for a dataset
 router.get("/dataset/:datasetCode/mappings", async (req, res) => {

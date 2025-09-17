@@ -2,12 +2,11 @@ import express from "express";
 import { Op } from "sequelize";
 import { pool } from "../../config/database.js";
 import MaterializedViewIdsModel from "../../models/materializedViewIds.js";
-import AdminAuth from "../../utils/adminAuth.js";
 
 const router = express.Router();
 
 // Create a new materialized view id
-router.post("/", AdminAuth, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const { name, category, mapping_id, mapping_name } = req.body;
     if (!name) {
@@ -29,7 +28,7 @@ router.post("/", AdminAuth, async (req, res) => {
 });
 
 // Bulk add id_nos for a given name (no deletes; ignores existing pairs)
-router.post("/bulk", AdminAuth, async (req, res) => {
+router.post("/bulk", async (req, res) => {
   try {
     const { allData } = req.body;
     if (!allData || !allData.name || !Array.isArray(allData.mappings)) {
@@ -106,23 +105,18 @@ router.get("/by-name/:name", async (req, res) => {
 });
 
 // Remove a single mapping from the JSONB array by name and mapping id
-router.delete(
-  "/by-name/:name/mappings/:mappingId",
-  AdminAuth,
-  async (req, res) => {
-    try {
-      const { name, mappingId } = req.params;
-      const deleted = await MaterializedViewIdsModel.destroy({
-        where: { name, mapping_id: Number(mappingId) },
-      });
-      if (!deleted)
-        return res.status(404).json({ message: "Mapping not found" });
-      res.json({ message: "Deleted" });
-    } catch (error) {
-      res.status(500).json({ message: error.message });
-    }
+router.delete("/by-name/:name/mappings/:mappingId", async (req, res) => {
+  try {
+    const { name, mappingId } = req.params;
+    const deleted = await MaterializedViewIdsModel.destroy({
+      where: { name, mapping_id: Number(mappingId) },
+    });
+    if (!deleted) return res.status(404).json({ message: "Mapping not found" });
+    res.json({ message: "Deleted" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
-);
+});
 
 // Search helper endpoint for reference tables (must come before "/:id")
 router.get("/search", async (req, res) => {

@@ -175,20 +175,13 @@ const UpdateButton = () => {
 
   return (
     <>
-      <Button
-        variant="outline-light"
+      <button
         onClick={handleShowModal}
-        className="d-flex align-items-center gap-2"
-        size="sm"
-        style={{
-          border: "1px solid rgba(255,255,255,0.5)",
-          color: "white",
-          backgroundColor: "rgba(255,255,255,0.1)",
-        }}
+        className="btn btn-outline-primary btn-sm d-flex align-items-center gap-2"
       >
         <FaSync size={14} />
-        Updates
-      </Button>
+        Refresh
+      </button>
 
       <Modal show={showModal} onHide={handleCloseModal} centered>
         <Modal.Header closeButton>
@@ -204,8 +197,6 @@ const UpdateButton = () => {
 
           {updateStatus === "success" && versionInfo && (
             <div>
-           
-
               <div className="text-center">
                 <div className="d-flex gap-2 justify-content-center mb-3">
                   <Button
@@ -231,42 +222,16 @@ const UpdateButton = () => {
                       </>
                     )}
                   </Button>
-
-                  <Button
-                    variant="warning"
-                    onClick={() => triggerUpgrade()}
-                    disabled={isUpdating || isUpgrading}
-                    className="d-flex align-items-center gap-2"
-                    size="lg"
-                  >
-                    {isUpgrading ? (
-                      <>
-                        <Spinner animation="border" size="sm" />
-                        Upgrading...
-                      </>
-                    ) : (
-                      <>
-                        <FaSync size={16} />
-                        Full Upgrade
-                      </>
-                    )}
-                  </Button>
                 </div>
                 <div className="row text-center">
-                  <div className="col-6">
+                  <div className="col-12">
                     <small className="text-muted">
                       <strong>⚡ Fast Update:</strong>
                       <br />
                       Backend only (~30 seconds)
                     </small>
                   </div>
-                  <div className="col-6">
-                    <small className="text-muted">
-                      <strong>🔧 Full Upgrade:</strong>
-                      <br />
-                      Complete system (~5-10 min)
-                    </small>
-                  </div>
+            
                 </div>
               </div>
             </div>

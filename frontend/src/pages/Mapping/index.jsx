@@ -8,6 +8,8 @@ import Commodities from "./Commodities";
 import FamilyPlanning from "./FamilyPlanning";
 import Vaccines from "./Vaccines";
 import MaterializedViewIds from "./MaterializedViewIds";
+import UpdateButton from "../../components/UpdateButton";
+
 
 const EafyaMapping = () => {
   // State management
@@ -53,7 +55,8 @@ const EafyaMapping = () => {
             </p>
           </div>
           <div className="col-lg-4 mt-3 mt-lg-0">
-            <div className="d-flex flex-column">
+       <div className="d-flex align-items-center gap-2 bg-secondary ">
+       <div className="d-flex flex-column w-100">
               <label className="form-label text-primary fw-semibold mb-2 text-uppercase small">
                 Mapping Type
               </label>
@@ -61,6 +64,7 @@ const EafyaMapping = () => {
                 value={MAPPING_TYPE_OPTIONS.find(
                   (option) => option.value === selectedMappingType
                 )}
+            
                 onChange={(selectedOption) =>
                   setSelectedMappingType(selectedOption.value)
                 }
@@ -69,8 +73,14 @@ const EafyaMapping = () => {
                 isSearchable={true}
                 className="react-select-container"
                 classNamePrefix="react-select"
+             
               />
             </div>
+
+            <div className="d-flex flex-column gap-2">
+            <UpdateButton />
+            </div>
+       </div>
           </div>
         </div>
       </div>

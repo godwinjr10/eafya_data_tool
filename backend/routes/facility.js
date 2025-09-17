@@ -1,10 +1,9 @@
 import express from "express";
 import Facility from "../models/facility.js";
-import AdminAuth from "../utils/adminAuth.js";
 
 const router = express.Router();
 
-router.post("/", AdminAuth, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const facility = await Facility.create(req.body);
 
@@ -51,7 +50,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.patch("/:id", AdminAuth, async (req, res) => {
+router.patch("/:id", async (req, res) => {
   console.log("Received update request for ID:", req.params.id);
   console.log("Update data:", req.body);
   try {
@@ -108,7 +107,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", AdminAuth, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const result = await Facility.destroy({
       where: { id: req.params.id },
