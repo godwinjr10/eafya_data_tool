@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."105_10_labtests_done" AS
+CREATE VIEW reporting."105_10_labtests_done" AS
 select
 TO_CHAR(DATE_TRUNC('month', t.date_created), 'YYYYMM') AS report_month,
 t.lab_test_id as lab_test_id,

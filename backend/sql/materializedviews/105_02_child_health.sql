@@ -1,6 +1,6 @@
-create materialized view reporting."105_02_child_health" as
+create view reporting."105_02_child_health" as
 SELECT
-  TO_CHAR(date_created, 'YYYYMM') AS report_month,
+  TO_CHAR(administered_on, 'YYYYMM') AS report_month,
   'HM03' as hmis_code,
     vaccine_id,
     vaccine_name,
@@ -14,14 +14,14 @@ SELECT
   COUNT(CASE WHEN age_years BETWEEN 5 AND 14 AND gender = 'Female' THEN 1 END) AS "5-14y Female"
 FROM (
   SELECT 
-    date_created,
+    administered_on,
     vaccine_id,
     vaccine_name,
     gender,
-    DATE_PART('year', AGE(CURRENT_DATE, birth_date::DATE)) AS age_years,
-    (DATE_PART('year', AGE(CURRENT_DATE, birth_date::DATE)) * 12 + DATE_PART('month', AGE(CURRENT_DATE, birth_date::DATE))) AS age_months
+    DATE_PART('year', AGE(administered_on, birth_date::DATE)) AS age_years,
+    (DATE_PART('year', AGE(administered_on, birth_date::DATE)) * 12 + DATE_PART('month', AGE(administered_on, birth_date::DATE))) AS age_months
   FROM reporting.patient_vaccines
-  WHERE vaccine_id IN ('32', '33', '26', '34', '18', '31')
+  --WHERE vaccine_id IN ('32', '33', '26', '34', '18', '31')
 ) sub
-GROUP BY TO_CHAR(date_created, 'YYYYMM'), vaccine_id, vaccine_name
+GROUP BY TO_CHAR(administered_on, 'YYYYMM'), vaccine_id, vaccine_name
 ORDER BY report_month, vaccine_name DESC;

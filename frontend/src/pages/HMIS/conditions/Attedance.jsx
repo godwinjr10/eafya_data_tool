@@ -1,50 +1,78 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import API from "../../../helpers/api";
 
 const Attedance = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups, genders, ageGroupMapping }) => {
 
-  const [loading, setLoading] = useState(false);
   const [attendanceData, setAttendanceData] = useState([]);
   const [reattendanceData, setReAttendanceData] = useState([]);
+  const [attendanceLoading, setAttendanceLoading] = useState(false);
+  const [reattendanceLoading, setReAttendanceLoading] = useState(false);
 
-  const fetchAttendance = async () => {
+  const fetchAttendance = useCallback(async () => {
     try {
-      setLoading(true);
+      setAttendanceLoading(true);
       const monthNumber = getMonthNumber(selectedMonth);
 
       const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
       const response = await API.get(`/attendance?report_month=${formattedMonth}`);
-      console.log(response);
-      setAttendanceData(response.data);
+      setAttendanceData(response.data || []);
     } catch (error) {
       console.error('Error fetching attendance data:', error);
+      setAttendanceData([]);
     } finally {
-      setLoading(false);
+      setAttendanceLoading(false);
     }
-  };
+  }, [selectedMonth, selectedYear, getMonthNumber]);
 
-  const fetchReattendance = async () => {
+  const fetchReattendance = useCallback(async () => {
     try {
-      setLoading(true);
+      setReAttendanceLoading(true);
       const monthNumber = getMonthNumber(selectedMonth);
 
       const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
       const response = await API.get(`/attendance/reattendance?report_month=${formattedMonth}`);
-      console.log("Reattednace data", response);
-      setReAttendanceData(response.data);
+      setReAttendanceData(response.data || []);
     } catch (error) {
-      console.error('Error fetching attendance data:', error);
+      console.error('Error fetching reattendance data:', error);
+      setReAttendanceData([]);
     } finally {
-      setLoading(false);
+      setReAttendanceLoading(false);
     }
-  };
+  }, [selectedMonth, selectedYear, getMonthNumber]);
 
   useEffect(() => {
     if (selectedMonth) {
       fetchAttendance();
       fetchReattendance();
     }
-  }, [selectedMonth]);
+  }, [selectedMonth, fetchAttendance, fetchReattendance]);
+
+  // Spinner component
+  const Spinner = () => (
+    <div className="d-flex justify-content-center align-items-center" style={{ padding: '2rem' }}>
+      <div className="spinner-border text-primary" role="status">
+      </div>
+    </div>
+  );
+
+  // No data card component
+  const NoDataCard = () => (
+    <div className="card" style={{ margin: '1rem 0', padding: '1rem' }}>
+      <div className="card-body text-center">
+        <div className="mb-3">
+          <i className="fas fa-chart-line fa-3x text-muted"></i>
+        </div>
+        <h5 className="card-title text-muted">No Attendance Data Available</h5>
+        <p className="card-text text-muted">
+          No attendance data found for the selected month ({selectedMonth} {selectedYear}). 
+          Please check if data has been uploaded for this period.
+        </p>
+      </div>
+    </div>
+  );
+
+  const isLoading = attendanceLoading || reattendanceLoading;
+  const hasData = attendanceData.length > 0 || reattendanceData.length > 0;
 
   return (
     <div>
@@ -52,8 +80,10 @@ const Attedance = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups, gen
         1.1 OUTPATIENT ATTENDANCE
       </div>
 
-      {loading ? (
-        <div>Loading...</div>
+      {isLoading ? (
+        <Spinner />
+      ) : !hasData ? (
+        <NoDataCard />
       ) : (
         <table className="data-entry-table">
           <thead>

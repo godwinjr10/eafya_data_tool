@@ -1053,16 +1053,6 @@ CREATE TABLE IF NOT EXISTS dwh.fact_eafya_vitals_monitor
 )
 ;
 
-CREATE TABLE IF NOT EXISTS dwh.dim_eafya_vital_type
-(
-  id BIGINT
-, caption VARCHAR(255)
-, created_by_id BIGINT
-, date_created TIMESTAMP
-, vitals_value_type_id BIGINT
-)
-;
-
 CREATE TABLE IF NOT EXISTS dwh.dim_eafya_triage_type
 (
   id BIGINT
@@ -1162,3 +1152,34 @@ CREATE TABLE IF NOT EXISTS dwh.dim_eafya_family_planning_category
 , "name" VARCHAR(255)
 )
 ;
+
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_vital_type
+(
+  id BIGINT
+, version BIGINT
+, branch_id BIGINT
+, caption VARCHAR(255)
+, company_id BIGINT
+, created_by_id BIGINT
+, date_created TIMESTAMP
+, is_default BOOLEAN
+, is_mandatory BOOLEAN
+, is_system_defined BOOLEAN
+, last_updated TIMESTAMP
+, place_holder_hint VARCHAR(255)
+, validation_error_message VARCHAR(255)
+, validator_pattern VARCHAR(255)
+, vitals_value_type_id BIGINT
+)
+;
+
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_triage_type_vital_sign
+(
+  id BIGINT
+, version BIGINT
+, branch_id BIGINT
+, company_id BIGINT
+, created_by_id BIGINT
+, triage_type_id BIGINT
+, vital_type_id BIGINT
+)

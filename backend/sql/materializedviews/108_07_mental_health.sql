@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."108_mental_health" AS
+CREATE VIEW reporting."108_mental_health" AS
 SELECT
     TO_CHAR(admission_date, 'YYYYMM') AS report_month,
     diagnosis,

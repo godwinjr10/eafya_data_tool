@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."105_02_anc_visits" AS
+CREATE  VIEW reporting."105_02_anc_visits" AS
 SELECT
   reporting_month,
   visit_count,                              -- 1st, 4th, 8th visit

@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."105_family_planning_visits" AS
+CREATE VIEW reporting."105_family_planning_visits" AS
 WITH src AS (
   SELECT 
     TO_CHAR(fp_administered_date, 'YYYYMM') AS report_month,

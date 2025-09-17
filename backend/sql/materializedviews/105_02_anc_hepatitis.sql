@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting."105_02_anc_hepatitis" AS
+CREATE VIEW reporting."105_02_anc_hepatitis" AS
 SELECT
   TO_CHAR(DATE_TRUNC('month', lab_test_date), 'YYYYMM') AS report_month,
   COUNT(*)                                              AS total_tested,

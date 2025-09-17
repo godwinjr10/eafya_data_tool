@@ -3,7 +3,7 @@
 -- Section 4a & 4b: Blood Transfusion Services
 -- =====================================================
 
-CREATE MATERIALIZED VIEW reporting."108_blood_transfusion" AS
+CREATE VIEW reporting."108_blood_transfusion" AS
 
 WITH blood_product_categories AS (
     SELECT 

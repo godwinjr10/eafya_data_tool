@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import API from '../../../helpers/api';
 
 const Maternity = ({ selectedMonth, selectedYear }) => {
+    const [loading, setLoading] = useState(false);
     const [maternityData, setMaternityData] = useState({
         totals: [],
         deliveries: [],
@@ -16,36 +17,50 @@ const Maternity = ({ selectedMonth, selectedYear }) => {
         return months.indexOf(monthName) + 1;
     };
 
+    const fetchData = useCallback(async () => {
+        if (!selectedMonth || !selectedYear) return;
+
+        setLoading(true);
+        try {
+            const monthNumber = getMonthNumber(selectedMonth);
+            const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
+
+            const totals = await API.get(`/maternity/totals?report_month=${formattedMonth}`);
+            const deliveries = await API.get(`/maternity/deliveries?report_month=${formattedMonth}`);
+            const livebirths = await API.get(`/maternity/livebirths?report_month=${formattedMonth}`);
+            const deaths = await API.get(`/maternity/deaths?report_month=${formattedMonth}`);
+            const uterotonics = await API.get(`/maternity/uterotonics?report_month=${formattedMonth}`);
+            const uter_treatment = await API.get(`/maternity/uter_treatment?report_month=${formattedMonth}`);
+
+            setMaternityData({
+                totals: totals.data || [],
+                deliveries: deliveries.data || [],
+                livebirths: livebirths.data || [],
+                deaths: deaths.data || [],
+                uterotonics: uterotonics.data || [],
+                uter_treatment: uter_treatment.data || []
+            });
+        } catch (error) {
+            console.error('Error fetching maternity data:', error);
+            // Set empty data on error
+            setMaternityData({
+                totals: [],
+                deliveries: [],
+                livebirths: [],
+                deaths: [],
+                uterotonics: [],
+                uter_treatment: []
+            });
+        } finally {
+            setLoading(false);
+        }
+    }, [selectedMonth, selectedYear]);
+
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const monthNumber = getMonthNumber(selectedMonth);
-                const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
-
-                const totals = await API.get(`/maternity/totals?report_month=${formattedMonth}`);
-                const deliveries = await API.get(`/maternity/deliveries?report_month=${formattedMonth}`);
-                const livebirths = await API.get(`/maternity/livebirths?report_month=${formattedMonth}`);
-                const deaths = await API.get(`/maternity/deaths?report_month=${formattedMonth}`);
-                const uterotonics = await API.get(`/maternity/uterotonics?report_month=${formattedMonth}`);
-                const uter_treatment = await API.get(`/maternity/uter_treatment?report_month=${formattedMonth}`);
-
-                setMaternityData({
-                    totals: totals.data,
-                    deliveries: deliveries.data,
-                    livebirths: livebirths.data,
-                    deaths: deaths.data,
-                    uterotonics: uterotonics.data,
-                    uter_treatment: uter_treatment.data
-                });
-            } catch (error) {
-                console.error('Error fetching maternity data:', error);
-            }
-        };
-
         if (selectedMonth && selectedYear) {
             fetchData();
         }
-    }, [selectedMonth, selectedYear]);
+    }, [selectedMonth, selectedYear, fetchData]);
 
     const renderRow = (item) => (
         <tr>
@@ -197,11 +212,47 @@ const Maternity = ({ selectedMonth, selectedYear }) => {
         </table>
     );
 
+    // Spinner component
+    const Spinner = () => (
+        <div className="d-flex justify-content-center align-items-center" style={{ padding: '2rem' }}>
+            <div className="spinner-border text-primary" role="status">
+            </div>
+        </div>
+    );
+
+    // No data card component
+    const NoDataCard = () => (
+        <div className="card" style={{ margin: '1rem 0', padding: '1rem' }}>
+            <div className="card-body text-center">
+                <div className="mb-3">
+                    <i className="fas fa-chart-line fa-3x text-muted"></i>
+                </div>
+                <h5 className="card-title text-muted">No Maternity Data Available</h5>
+                <p className="card-text text-muted">
+                    No maternity data found for the selected month ({selectedMonth} {selectedYear}). 
+                    Please check if data has been uploaded for this period.
+                </p>
+            </div>
+        </div>
+    );
+
+    // Check if we have any data
+    const hasData = maternityData.totals.length > 0 || maternityData.deliveries.length > 0 || 
+                   maternityData.livebirths.length > 0 || maternityData.deaths.length > 0 ||
+                   maternityData.uterotonics.length > 0 || maternityData.uter_treatment.length > 0;
+
     return (
         <div>
             <div className="section-header mb-3">
                 2.2 MATERNITY
             </div>
+
+            {loading ? (
+                <Spinner />
+            ) : !hasData ? (
+                <NoDataCard />
+            ) : (
+                <>
 
             <div className="row">
                 <div className="col-6" style={{ paddingRight: '15px' }}>
@@ -215,6 +266,8 @@ const Maternity = ({ selectedMonth, selectedYear }) => {
                     {renderTable(maternityData.uter_treatment, 'Women Received Uterotonics (PPH)')}
                 </div>
             </div>
+                </>
+            )}
         </div>
     );
 }

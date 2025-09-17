@@ -1,5 +1,8 @@
 import bcrypt from "bcrypt";
 import { pool } from "../config/database.js";
+import { sequelize } from "../config/database.js";
+import Dataset from "../models/dataset.js";
+import UserModel from "../models/usermodel.js";
 import { readFile } from "fs/promises";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
@@ -283,14 +286,47 @@ const defaultUsers = [
 ];
 
 const materializedViewIds = [
+  // OPD Clinics
+  { name: "General Outpatient", category: "Clinics" },
+  { name: "Antenatal Clinic", category: "Clinics" },
+  { name: "Family Planning", category: "Clinics" },
+  { name: "YCC or Immunization Clinic", category: "Clinics" },
+  { name: "Eye Clinic", category: "Clinics" },
+  { name: "ENT", category: "Clinics" },
+  { name: "ART", category: "Clinics" },
+  { name: "Chronic Care Clinic", category: "Clinics" },
+  { name: "Dental Clinic", category: "Clinics" },
+
+  // Specialized Clinics
+  { name: "NICU OP REVIEWS", category: "Clinics" },
+  { name: "Accident & Emergency Clinic", category: "Clinics" },
+  { name: "Specialist Clinic", category: "Clinics" },
+  { name: "Cervical Cancer Screening", category: "Clinics" },
+  { name: "Elective Surgical Procedures", category: "Clinics" },
+  { name: "Postnatal Review OP Clinic", category: "Clinics" },
+  { name: "Nutrition Clinic", category: "Clinics" },
+  { name: "Adolescent Clinic", category: "Clinics" },
+  { name: "Mental Health Clinic", category: "Clinics" },
+  { name: "Immunisation/EPI", category: "Clinics" },
+
+  // Wards
+  { name: "Gynaecology Ward", category: "Wards" },
+  { name: "Paed Ward", category: "Wards" },
+  { name: "Surgical Ward", category: "Wards" },
+  { name: "Accident and Emergency Ward", category: "Wards" },
   { name: "Maternity Ward", category: "Wards" },
-  { name: "Postnantal Ward", category: "Wards" },
+  { name: "NICU", category: "Wards" },
+  { name: "ICU", category: "Wards" },
+  { name: "Postnatal Ward", category: "Wards" },
+
+  // Theatre Rooms
+  { name: "Main Theatre", category: "Theatres" },
+  { name: "Eye Theatre", category: "Theatres" },
+  { name: "ENT Theatre", category: "Theatres" },
+
+  // Stores and Vaccines
   { name: "Main Store", category: "Stores" },
   { name: "HPV Vaccine", category: "Vaccines" },
-  { name: "Antenatal Clinic", category: "Clinics" },
-  { name: "Major Theatre", category: "Theatres" },
-  { name: "Family Planning", category: "Clinics" },
-  { name: "Nutrition", category: "Clinics" },
 ];
 
 class UnifiedSetup {
@@ -576,27 +612,17 @@ class UnifiedSetup {
     this.logger.logInfo("Creating datasets...");
 
     try {
-      // Check if datasets table exists
-      const tableExists = await pool.query(`
-        SELECT EXISTS (
-          SELECT FROM information_schema.tables 
-          WHERE table_schema = 'reporting'
-          AND table_name = 'datasets'
-        );
-      `);
+      // Sync the Dataset model to ensure the table exists
+      await Dataset.sync({ force: false });
 
-      if (!tableExists.rows[0].exists) {
-        throw new Error(
-          "Datasets table does not exist. Please run database structure setup first."
-        );
-      }
+      // Check existing datasets using Sequelize
+      const existingDatasets = await Dataset.findAll({
+        where: {
+          dataset_id: datasets.map((d) => d.dataset_id),
+        },
+      });
 
-      const existingDatasets = await pool.query(
-        "SELECT dataset_id FROM reporting.datasets WHERE dataset_id = ANY($1)",
-        [datasets.map((d) => d.dataset_id)]
-      );
-
-      const existingIds = existingDatasets.rows.map((row) => row.dataset_id);
+      const existingIds = existingDatasets.map((dataset) => dataset.dataset_id);
       const newDatasets = datasets.filter(
         (d) => !existingIds.includes(d.dataset_id)
       );
@@ -612,43 +638,26 @@ class UnifiedSetup {
         };
       }
 
-      const values = [];
-      const placeholders = [];
-      let paramIndex = 1;
+      // Create new datasets using Sequelize
+      const createdDatasets = await Dataset.bulkCreate(
+        newDatasets.map((dataset) => ({
+          dataset_id: dataset.dataset_id,
+          dataset_name: dataset.dataset_name,
+          sections: dataset.sections,
+        }))
+      );
 
-      newDatasets.forEach((dataset) => {
-        placeholders.push(
-          `($${paramIndex}, $${paramIndex + 1}, $${
-            paramIndex + 2
-          }, NOW(), NOW())`
-        );
-        values.push(
-          dataset.dataset_id,
-          dataset.dataset_name,
-          JSON.stringify(dataset.sections)
-        );
-        paramIndex += 3;
-      });
-
-      const query = `
-        INSERT INTO reporting.datasets (dataset_id, dataset_name, sections, "createdAt", "updatedAt") 
-        VALUES ${placeholders.join(", ")} 
-        RETURNING id, dataset_id, dataset_name
-      `;
-
-      const result = await pool.query(query, values);
-
-      const details = `Created ${result.rows.length} new datasets. ${existingIds.length} already existed.`;
+      const details = `Created ${createdDatasets.length} new datasets. ${existingIds.length} already existed.`;
       this.logger.logSuccess("Datasets created successfully!");
-      this.logger.logInfo(`Created ${result.rows.length} new datasets`);
+      this.logger.logInfo(`Created ${createdDatasets.length} new datasets`);
       this.logger.logInfo(`Skipped ${existingIds.length} existing datasets`);
 
       return {
         success: true,
         details,
-        created: result.rows.length,
+        created: createdDatasets.length,
         existing: existingIds.length,
-        createdDatasets: result.rows.map((row) => row.dataset_id),
+        createdDatasets: createdDatasets.map((dataset) => dataset.dataset_id),
       };
     } catch (error) {
       this.logger.logError("Error creating datasets", error);
@@ -661,20 +670,8 @@ class UnifiedSetup {
     this.logger.logInfo("Creating default users...");
 
     try {
-      // Check if users table exists
-      const tableExists = await pool.query(`
-        SELECT EXISTS (
-          SELECT FROM information_schema.tables 
-          WHERE table_schema = 'reporting'
-          AND table_name = 'users'
-        );
-      `);
-
-      if (!tableExists.rows[0].exists) {
-        throw new Error(
-          "Users table does not exist. Please run database structure setup first."
-        );
-      }
+      // Sync the UserModel to ensure the table exists
+      await UserModel.sync({ force: false });
 
       let createdCount = 0;
       let existingCount = 0;
@@ -683,12 +680,11 @@ class UnifiedSetup {
 
       for (const userData of defaultUsers) {
         try {
-          const existingUser = await pool.query(
-            "SELECT id FROM reporting.users WHERE username = $1",
-            [userData.username]
-          );
+          const existingUser = await UserModel.findOne({
+            where: { username: userData.username },
+          });
 
-          if (existingUser.rows.length > 0) {
+          if (existingUser) {
             this.logger.logInfo(
               `   User '${userData.username}' already exists, skipping...`
             );
@@ -702,22 +698,15 @@ class UnifiedSetup {
 
           const hashedPassword = await bcrypt.hash(userData.password, 10);
 
-          const result = await pool.query(
-            `INSERT INTO reporting.users (username, role, password, firstname, lastname, "phoneNo", module, "createdAt", "updatedAt") 
-                 VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), NOW()) 
-                 RETURNING id, username, role, firstname, lastname`,
-            [
-              userData.username,
-              userData.role,
-              hashedPassword,
-              userData.firstname,
-              userData.lastname,
-              userData.phoneNo,
-              userData.module,
-            ]
-          );
-
-          const user = result.rows[0];
+          const user = await UserModel.create({
+            username: userData.username,
+            role: userData.role,
+            password: hashedPassword,
+            firstname: userData.firstname,
+            lastname: userData.lastname,
+            phoneNo: userData.phoneNo,
+            module: userData.module,
+          });
           this.logger.logSuccess(
             `   User '${user.username}' created successfully`
           );

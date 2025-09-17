@@ -1,4 +1,4 @@
-CREATE MATERIALIZED VIEW reporting.postnatal_community_referal AS
+CREATE VIEW reporting.postnatal_community_referal AS
 SELECT
     TO_CHAR(date_created, 'YYYYMM') AS month,
     COUNT(*) FILTER (WHERE EXTRACT(YEAR FROM age(date_created, birth_date)) < 15) AS below_15yrs,
@@ -8,9 +8,6 @@ SELECT
     COUNT(*) FILTER (WHERE EXTRACT(YEAR FROM age(date_created, birth_date)) > 50) AS "50yrs+",
     COUNT(*) AS total_patients
 FROM reporting.patient_postnatal
-where admission_ward_id IN  (SELECT mapping_id
-FROM reporting.materialized_view_ids
-where name ilike '%postnantal ward%' and mapping_id > 0)
 GROUP BY TO_CHAR(date_created, 'YYYYMM')
 ORDER BY month;
 

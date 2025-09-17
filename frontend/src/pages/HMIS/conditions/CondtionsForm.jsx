@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import API from "../../../helpers/api";
 
 const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups, 
@@ -7,7 +7,7 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
     const [loading, setLoading] = useState(false);
     const [conditions, setConditions] = useState([]);
 
-    const fetchConditions = async () => {
+    const fetchConditions = useCallback(async () => {
         try {
             setLoading(true);
             const monthNumber = getMonthNumber(selectedMonth);
@@ -15,19 +15,46 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
             const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
             const response = await API.get(`/conditions?report_month=${formattedMonth}&section_id=${section_id}`);
             console.log(response);
-            setConditions(response.data);
+            setConditions(response.data || []);
         } catch (error) {
-            console.error('Error fetching attendance data:', error);
+            console.error('Error fetching conditions data:', error);
+            setConditions([]);
         } finally {
             setLoading(false);
         }
-    };
+    }, [selectedMonth, selectedYear, getMonthNumber, section_id]);
 
     useEffect(() => {
         if (selectedMonth && section_id) {
             fetchConditions();
         }
-    }, [selectedMonth, section_id]);
+    }, [selectedMonth, section_id, fetchConditions]);
+
+    // Spinner component
+    const Spinner = () => (
+        <div className="d-flex justify-content-center align-items-center" style={{ padding: '2rem' }}>
+            <div className="spinner-border text-primary" role="status">
+            </div>
+        </div>
+    );
+
+    // No data card component
+    const NoDataCard = () => (
+        <div className="card" style={{ margin: '1rem 0', padding: '1rem' }}>
+            <div className="card-body text-center">
+                <div className="mb-3">
+                    <i className="fas fa-chart-line fa-3x text-muted"></i>
+                </div>
+                <h5 className="card-title text-muted">No {title} Data Available</h5>
+                <p className="card-text text-muted">
+                    No {title.toLowerCase()} data found for the selected month ({selectedMonth} {selectedYear}). 
+                    Please check if data has been uploaded for this period.
+                </p>
+            </div>
+        </div>
+    );
+
+    const hasData = conditions.length > 0;
 
     return (
         <div>
@@ -36,7 +63,9 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
             </div>
 
             {loading ? (
-                <div>Loading...</div>
+                <Spinner />
+            ) : !hasData ? (
+                <NoDataCard />
             ) : (
                 <table className="data-entry-table">
                     <thead>

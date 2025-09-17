@@ -1,5 +1,16 @@
-
-CREATE VIEW reporting."105_02_anc_folic" AS
+CREATE VIEW reporting."105_02_anc_ultrasound" AS
+WITH x AS (
+  SELECT
+    patient_id,
+    DATE_TRUNC('month', COALESCE(registered_date, date_created))::date AS report_month,
+    DATE_PART('year',
+      AGE(COALESCE(registered_date, date_created)::date, birth_date::date)
+    )::int AS age_years
+  FROM reporting.patient_imaging
+  WHERE category_id = 7
+    AND origin = 'op'
+    AND gender = 'Female'
+)
 SELECT
   TO_CHAR(report_month, 'YYYYMM') AS report_month,
   COUNT(*) FILTER (WHERE age_years < 15)                   AS "below_15_years",
@@ -8,20 +19,6 @@ SELECT
   COUNT(*) FILTER (WHERE age_years BETWEEN 25 AND 49)      AS "25-49_years",
   COUNT(*) FILTER (WHERE age_years >= 50)                  AS "50+_years",
   COUNT(*)                                                AS total
-FROM (
-  SELECT
-    patient_id,
-    DATE_TRUNC('month', COALESCE(treatment_date, visit_date))::date AS report_month,
-    DATE_PART('year',
-      AGE(COALESCE(treatment_date, visit_date)::date, birth_date::date)
-    )::int AS age_years
-  FROM reporting.patient_prescriptions
-  WHERE drug_name ILIKE '%folic%'
-    AND origin = 'op'
-    AND gender = 'Female'
-) x
+FROM x
 GROUP BY report_month
 ORDER BY report_month;
-
-
-

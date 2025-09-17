@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import API from "../../../helpers/api";
 
 const FamilyPlanning = ({ selectedMonth, getMonthNumber, selectedYear }) => {
@@ -7,13 +7,7 @@ const FamilyPlanning = ({ selectedMonth, getMonthNumber, selectedYear }) => {
   const [contraceptivesData, setContraceptivesData] = useState([]);
   const [theatreData, setTheatreData] = useState([]);
 
-  useEffect(() => {
-    if (selectedMonth && selectedYear) {
-      fetchData();
-    }
-  }, [selectedMonth, selectedYear]);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     if (!selectedMonth || !selectedYear) return;
 
     setLoading(true);
@@ -65,29 +59,55 @@ const FamilyPlanning = ({ selectedMonth, getMonthNumber, selectedYear }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedMonth, selectedYear, getMonthNumber]);
+
+  useEffect(() => {
+    if (selectedMonth && selectedYear) {
+      fetchData();
+    }
+  }, [selectedMonth, selectedYear, fetchData]);
 
   const getValueForCell = (item, field) => {
     return item[field] || "0";
   };
 
-  if (loading) {
-    return (
-      <div
-        className="d-flex justify-content-center align-items-center"
-        style={{ height: "200px" }}
-      >
-        <div className="spinner-border text-primary" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div>
-        <span className="ms-3">Loading family planning data...</span>
+  // Spinner component
+  const Spinner = () => (
+    <div className="d-flex justify-content-center align-items-center" style={{ padding: '2rem' }}>
+      <div className="spinner-border text-primary" role="status">
       </div>
-    );
-  }
+    </div>
+  );
+
+  // No data card component
+  const NoDataCard = () => (
+    <div className="card" style={{ margin: '1rem 0', padding: '1rem' }}>
+      <div className="card-body text-center">
+        <div className="mb-3">
+          <i className="fas fa-chart-line fa-3x text-muted"></i>
+        </div>
+        <h5 className="card-title text-muted">No Family Planning Data Available</h5>
+        <p className="card-text text-muted">
+          No family planning data found for the selected month ({selectedMonth} {selectedYear}). 
+          Please check if data has been uploaded for this period.
+        </p>
+      </div>
+    </div>
+  );
+
+  // Check if we have any data
+  const hasData = visitsData.length > 0 || contraceptivesData.length > 0 || theatreData.length > 0;
 
   return (
     <div>
       <div className="section-header">2.4 FAMILY PLANNING METHODS</div>
+
+      {loading ? (
+        <Spinner />
+      ) : !hasData ? (
+        <NoDataCard />
+      ) : (
+        <>
 
       {/* Family Planning Client Visits Table */}
       <table className="data-entry-table mb-4">
@@ -306,6 +326,8 @@ const FamilyPlanning = ({ selectedMonth, getMonthNumber, selectedYear }) => {
           )}
         </tbody>
       </table>
+        </>
+      )}
     </div>
   );
 };

@@ -3,8 +3,7 @@
 -- Section 2: Referrals
 -- =====================================================
 
-CREATE MATERIALIZED VIEW reporting."108_04_referrals" AS
-
+CREATE VIEW reporting."108_04_referrals" AS
 SELECT 
     TO_CHAR(encounter_date, 'YYYYMM') AS report_month,
     COUNT(CASE WHEN referral_type = 'OUTGOING' THEN 1 END) AS "Outgoing Referrals",
