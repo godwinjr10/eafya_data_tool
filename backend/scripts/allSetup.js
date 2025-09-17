@@ -171,8 +171,7 @@ const sqlFiles = [
   "deleteAllTables.sql",
   "001_import_tables.sql",
   "002_stage_tables.sql",
-  "003_dwh_tables.sql",
-  "004_reporting_tables.sql",
+  "003_dwh_tables.sql"
 ];
 
 const datasets = [

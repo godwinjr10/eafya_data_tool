@@ -151,6 +151,40 @@ async function createTablesIfNotExists() {
     `);
     console.log("✅ Users table ensured");
 
+    // Create facility table
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS reporting.facility (
+        id SERIAL PRIMARY KEY,
+        facility_name VARCHAR(255) NOT NULL,
+        dhis2_code VARCHAR(255) UNIQUE,
+        dhis2_uri VARCHAR(255),
+        dhis2_username VARCHAR(255),
+        dhis2_password VARCHAR(255),
+        "createdAt" TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+        "updatedAt" TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+      )
+    `);
+    console.log("✅ Facility table ensured");
+
+    // Add missing columns to facility table if they don't exist
+    try {
+      await pool.query(`
+        ALTER TABLE reporting.facility 
+        ADD COLUMN IF NOT EXISTS dhis2_uri VARCHAR(255)
+      `);
+      await pool.query(`
+        ALTER TABLE reporting.facility 
+        ADD COLUMN IF NOT EXISTS dhis2_username VARCHAR(255)
+      `);
+      await pool.query(`
+        ALTER TABLE reporting.facility 
+        ADD COLUMN IF NOT EXISTS dhis2_password VARCHAR(255)
+      `);
+      console.log("✅ Facility table columns updated");
+    } catch (error) {
+      console.log("⚠️  Note: Some facility columns may already exist");
+    }
+
     return true;
   } catch (error) {
     console.error("❌ Error creating tables:", error.message);
@@ -318,6 +352,19 @@ async function main() {
     );
   } else {
     console.log("❌ Setup completed with errors. Please check the logs above.");
+  }
+
+  // Close database connection pool to allow script to exit
+  console.log("\n🔌 Closing database connection...");
+  try {
+    await pool.end();
+    console.log("✅ Database connection closed successfully");
+  } catch (error) {
+    console.error("❌ Error closing database connection:", error.message);
+  }
+
+  // Exit with appropriate code
+  if (!(tablesCreated && datasetsCreated && usersCreated)) {
     process.exit(1);
   }
 }

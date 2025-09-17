@@ -443,7 +443,7 @@
     <database>${dwh_db}</database>
     <port>${dwh_port}</port>
     <username>${dwh_user}</username>
-    <password>${dwh_password}</password>
+    <password>${dwh_pw}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -1028,7 +1028,7 @@ FROM stage.fact_eafya_patient_lab_test
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
-    <specify_fields>N</specify_fields>
+    <specify_fields>Y</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field/>
     <partitioning_daily>N</partitioning_daily>
@@ -1039,6 +1039,86 @@ FROM stage.fact_eafya_patient_lab_test
     <return_keys>N</return_keys>
     <return_field/>
     <fields>
+      <field>
+        <column_name>id</column_name>
+        <stream_name>id</stream_name>
+      </field>
+      <field>
+        <column_name>created_by_id</column_name>
+        <stream_name>created_by_id</stream_name>
+      </field>
+      <field>
+        <column_name>encounter_id</column_name>
+        <stream_name>encounter_id</stream_name>
+      </field>
+      <field>
+        <column_name>is_default</column_name>
+        <stream_name>is_default</stream_name>
+      </field>
+      <field>
+        <column_name>lab_test_id</column_name>
+        <stream_name>lab_test_id</stream_name>
+      </field>
+      <field>
+        <column_name>linked_test_id</column_name>
+        <stream_name>linked_test_id</stream_name>
+      </field>
+      <field>
+        <column_name>parent_id</column_name>
+        <stream_name>parent_id</stream_name>
+      </field>
+      <field>
+        <column_name>result</column_name>
+        <stream_name>result</stream_name>
+      </field>
+      <field>
+        <column_name>sample_collected_by_id</column_name>
+        <stream_name>sample_collected_by_id</stream_name>
+      </field>
+      <field>
+        <column_name>sample_collection_time</column_name>
+        <stream_name>sample_collection_time</stream_name>
+      </field>
+      <field>
+        <column_name>sample_rejected_by_id</column_name>
+        <stream_name>sample_rejected_by_id</stream_name>
+      </field>
+      <field>
+        <column_name>sample_rejection_note</column_name>
+        <stream_name>sample_rejection_note</stream_name>
+      </field>
+      <field>
+        <column_name>sample_rejection_time</column_name>
+        <stream_name>sample_rejection_time</stream_name>
+      </field>
+      <field>
+        <column_name>status</column_name>
+        <stream_name>status</stream_name>
+      </field>
+      <field>
+        <column_name>technician_comment</column_name>
+        <stream_name>technician_comment</stream_name>
+      </field>
+      <field>
+        <column_name>verified_at</column_name>
+        <stream_name>verified_at</stream_name>
+      </field>
+      <field>
+        <column_name>verified_by_id</column_name>
+        <stream_name>verified_by_id</stream_name>
+      </field>
+      <field>
+        <column_name>visit_type</column_name>
+        <stream_name>visit_type</stream_name>
+      </field>
+      <field>
+        <column_name>date_created</column_name>
+        <stream_name>date_created</stream_name>
+      </field>
+      <field>
+        <column_name>last_updated</column_name>
+        <stream_name>last_updated</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
