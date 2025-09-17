@@ -71,6 +71,191 @@ const updateRoutes = (app) => {
     }
   });
 
+  // Materialized Views endpoint
+  app.post("/api/materialized-views", async (req, res) => {
+    try {
+      const { exec } = await import("child_process");
+      const { promisify } = await import("util");
+      const execAsync = promisify(exec);
+
+      console.log("🔧 Starting materialized views setup...");
+
+      // Set response headers for Server-Sent Events
+      res.writeHead(200, {
+        "Content-Type": "text/plain",
+        "Cache-Control": "no-cache",
+        Connection: "keep-alive",
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Cache-Control",
+      });
+
+      // Send initial progress
+      res.write(
+        `data: ${JSON.stringify({
+          status: "starting",
+          message: "Initializing materialized views setup...",
+          progress: 0,
+        })}\n\n`
+      );
+
+      try {
+        // Just run the working materialized.js script directly
+        const { spawn } = await import("child_process");
+        const child = spawn(
+          "node",
+          ["scripts/materialized.js", "materialized"],
+          {
+            cwd: process.cwd(),
+            stdio: ["pipe", "pipe", "pipe"],
+          }
+        );
+
+        let output = "";
+        let progress = 0;
+        let totalFiles = 0;
+        let processedFiles = 0;
+
+        child.stdout.on("data", (data) => {
+          const lines = data.toString().split("\n");
+          for (const line of lines) {
+            if (line.includes("Found") && line.includes("files")) {
+              res.write(
+                `data: ${JSON.stringify({
+                  status: "progress",
+                  message: line.trim(),
+                  progress: 10,
+                })}\n\n`
+              );
+            } else if (line.includes("Dropping existing")) {
+              res.write(
+                `data: ${JSON.stringify({
+                  status: "progress",
+                  message: line.trim(),
+                  progress: 20,
+                })}\n\n`
+              );
+            } else if (line.includes("Creating regular views")) {
+              res.write(
+                `data: ${JSON.stringify({
+                  status: "progress",
+                  message: "⚡ Creating regular views (fast)...",
+                  progress: 30,
+                })}\n\n`
+              );
+            } else if (line.includes("Creating materialized views")) {
+              res.write(
+                `data: ${JSON.stringify({
+                  status: "progress",
+                  message:
+                    "⚡ Creating materialized views (this takes time)...",
+                  progress: 60,
+                })}\n\n`
+              );
+            } else if (line.includes("Executing:")) {
+              const fileName = line.split("Executing:")[1]?.trim() || "";
+              res.write(
+                `data: ${JSON.stringify({
+                  status: "progress",
+                  message: `Processing ${fileName}...`,
+                  progress: Math.min(progress + 2, 90),
+                })}\n\n`
+              );
+              progress = Math.min(progress + 2, 90);
+            } else if (line.includes("executed successfully")) {
+              res.write(
+                `data: ${JSON.stringify({
+                  status: "success",
+                  message: `✅ ${line.trim()}`,
+                  progress: Math.min(progress + 1, 95),
+                })}\n\n`
+              );
+            } else if (line.includes("setup completed")) {
+              res.write(
+                `data: ${JSON.stringify({
+                  status: "progress",
+                  message: line.trim(),
+                  progress: 95,
+                })}\n\n`
+              );
+            } else if (line.includes("ALL VIEWS CREATED")) {
+              res.write(
+                `data: ${JSON.stringify({
+                  status: "progress",
+                  message: line.trim(),
+                  progress: 100,
+                })}\n\n`
+              );
+            } else if (line.includes("Time taken:")) {
+              res.write(
+                `data: ${JSON.stringify({
+                  status: "success",
+                  message: `⏱️ ${line.trim()}`,
+                  progress: 100,
+                })}\n\n`
+              );
+            }
+          }
+        });
+
+        child.stderr.on("data", (data) => {
+          res.write(
+            `data: ${JSON.stringify({
+              status: "warning",
+              message: data.toString().trim(),
+            })}\n\n`
+          );
+        });
+
+        child.on("close", (code) => {
+          if (code === 0) {
+            res.write(
+              `data: ${JSON.stringify({
+                status: "completed",
+                message:
+                  "✅ All views (materialized + regular) created successfully!",
+                progress: 100,
+              })}\n\n`
+            );
+          } else {
+            res.write(
+              `data: ${JSON.stringify({
+                status: "error",
+                message: `❌ Views setup failed with code ${code}`,
+                progress: 100,
+              })}\n\n`
+            );
+          }
+          res.end();
+        });
+
+        child.on("error", (error) => {
+          res.write(
+            `data: ${JSON.stringify({
+              status: "error",
+              message: `❌ Failed to start materialized views script: ${error.message}`,
+            })}\n\n`
+          );
+          res.end();
+        });
+      } catch (mvError) {
+        res.write(
+          `data: ${JSON.stringify({
+            status: "error",
+            message: `❌ Materialized views setup failed: ${mvError.message}`,
+          })}\n\n`
+        );
+        res.end();
+      }
+    } catch (error) {
+      console.error("❌ Materialized views endpoint failed:", error);
+      res.status(500).json({
+        error: "Materialized views setup failed",
+        details: error.message,
+        timestamp: new Date().toISOString(),
+      });
+    }
+  });
+
   // Update endpoint
   app.post("/api/update", async (req, res) => {
     const { skipFrontendBuild = true } = req.body;
@@ -100,20 +285,6 @@ const updateRoutes = (app) => {
         `git rev-parse origin/${branchName}`
       );
       console.log("📋 Remote commit:", remoteHash.trim());
-
-      // Always run materialized views setup even if no code changes
-      console.log("🔧 Creating/updating materialized views...");
-      try {
-        const { stdout: mvOutput, stderr: mvError } = await execAsync(
-          "node scripts/materialized.js materialized"
-        );
-        console.log("✅ Materialized views setup output:", mvOutput);
-        if (mvError) console.log("Materialized views warnings:", mvError);
-        console.log("✅ Materialized views created/updated successfully");
-      } catch (mvError) {
-        console.error("❌ Materialized views setup failed:", mvError.message);
-        console.error("Full error:", mvError);
-      }
 
       if (currentHash.trim() === remoteHash.trim()) {
         return res.json({

@@ -20,3 +20,6 @@ CREATE INDEX IF NOT EXISTS idx_facility_dhis2_uri ON reporting.facility(dhis2_ur
 
 
 
+
+
+

@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import API from "../helpers/api";
 import { logout, getCurrentUser, isAdmin } from "../helpers/auth";
 import MainSideBar from "./MainSideBar";
-import UpdateButton from "./UpdateButton";
 
 const MainLayout = ({ children }) => {
   const [facilities, setFacilities] = useState([]);
@@ -66,7 +65,7 @@ const MainLayout = ({ children }) => {
             Ministry of Health - eAFYA Data Mining Tool
           </div>
           <div className="d-flex align-items-center gap-3">
-            <UpdateButton />
+        
             <div>
               <i className="bi bi-person-circle me-2"></i>
               {user && (
