@@ -222,42 +222,16 @@ const UpdateButton = () => {
                       </>
                     )}
                   </Button>
-
-                  <Button
-                    variant="warning"
-                    onClick={() => triggerUpgrade()}
-                    disabled={isUpdating || isUpgrading}
-                    className="d-flex align-items-center gap-2"
-                    size="lg"
-                  >
-                    {isUpgrading ? (
-                      <>
-                        <Spinner animation="border" size="sm" />
-                        Upgrading...
-                      </>
-                    ) : (
-                      <>
-                        <FaSync size={16} />
-                        Full Upgrade
-                      </>
-                    )}
-                  </Button>
                 </div>
                 <div className="row text-center">
-                  <div className="col-6">
+                  <div className="col-12">
                     <small className="text-muted">
                       <strong>⚡ Fast Update:</strong>
                       <br />
                       Backend only (~30 seconds)
                     </small>
                   </div>
-                  <div className="col-6">
-                    <small className="text-muted">
-                      <strong>🔧 Full Upgrade:</strong>
-                      <br />
-                      Complete system (~5-10 min)
-                    </small>
-                  </div>
+            
                 </div>
               </div>
             </div>

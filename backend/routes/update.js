@@ -307,8 +307,9 @@ const updateRoutes = (app) => {
 
       // Get new version info
       const { stdout: newHash } = await execAsync("git rev-parse HEAD");
-      const { stdout: packageJson } = await execAsync("cat package.json");
-      const packageInfo = JSON.parse(packageJson);
+      const packageInfo = JSON.parse(
+        readFileSync(join(__dirname, "../package.json"), "utf8")
+      );
 
       console.log("✅ Update completed successfully!");
 

@@ -9,7 +9,7 @@ import FamilyPlanning from "./FamilyPlanning";
 import Vaccines from "./Vaccines";
 import MaterializedViewIds from "./MaterializedViewIds";
 import UpdateButton from "../../components/UpdateButton";
-import MaterializedViewsButton from "../../components/MaterializedViewsButton";
+
 
 const EafyaMapping = () => {
   // State management
@@ -79,7 +79,6 @@ const EafyaMapping = () => {
 
             <div className="d-flex flex-column gap-2">
             <UpdateButton />
-            <MaterializedViewsButton />
             </div>
        </div>
           </div>
