@@ -13,19 +13,6 @@ The data warehouse follows this schema structure:
 import - Raw imported data
 stage - Cleaned and standardized data
 dwh - Dimensional model for analytics
-reporting - Pre-aggregated report tables
-
-## 📋 Prerequisites
-
-Before deployment, ensure your server meets these requirements:
-
-- Ubuntu Server (20.04 LTS or newer recommended)
-- PostgreSQL 16 (with remote connections enabled)
-- Pentaho Data Integration (PDI) 9.x
-- Git
-- Unzip utility
-- 8GB+ RAM (16GB recommended for production)
-- 100GB+ free disk space
 
 ## 🚀 TASKS ON THE FACILITY SERVER: DEPLOYING TO FACILITY SERVER
 
@@ -44,19 +31,20 @@ GRANT ALL PRIVILEGES ON DATABASE reportingdb TO dwh_user;
 https://github.com/ambientelivre/legacy-pentaho-ce
 ```
 
+2. Copy the downloaded pentaho folder from your local PC to the Facility Server
 ```
-Copy the downloaded pentaho folder from your local PC to the Facility Server
 scp C:/Users/LENOVO/Downloads/pdi-ce-9.4.0.0-343.zip artson_admin@192.100.100.18:/home/artson_admin/
 ```
+
+3. on the Server unzip the folder
 ```
-unzip the file
 sudo apt update
 sudo apt install unzip -y
 unzip pdi-ce-9.4.0.0-343.zip -d pdi-ce
 ```
 
+4. Move the extracted folder from pdi-ce to this folder /home/artson_admin/
 ```
-Move the extracted folder from pdi-ce to this folder /home/artson_admin/
 mv /home/artson_admin/pdi-ce/data-integration /home/artson_admin/
 ```
 ### 3. Verify Java Installation and Install Java if not on the server
