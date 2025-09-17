@@ -27,6 +27,7 @@ GRANT ALL PRIVILEGES ON DATABASE reportingdb TO dwh_user;
 ```
 
 ### 2. Download the pentaho data integration tool from github onto your local PC using the AnyDesk PC
+On the github page Look For Download Pentaho Data Integration => 9.x => pdi-ce-9.4.0.0-343. This is the one you download
 ```
 https://github.com/ambientelivre/legacy-pentaho-ce
 ```
