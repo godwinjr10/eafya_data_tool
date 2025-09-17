@@ -22,8 +22,8 @@ const DB_CONFIG = {
 };
 
 // Paths to SQL directories
-const VIEWS_PATH = path.resolve(__dirname, "..", "sql", "views");
-const MATERIALIZED_VIEWS_PATH = path.resolve(__dirname, "..", "sql", "materializedviews");
+const VIEWS_PATH = path.resolve(__dirname, "..", "sql", "datasetviews");
+const MATERIALIZED_VIEWS_PATH = path.resolve(__dirname, "..", "sql", "dhis2views");
 
 async function createViews() {
   const client = new Client(DB_CONFIG);
@@ -33,10 +33,10 @@ async function createViews() {
     console.log("✅ Connected to database");
 
     // Process regular views
-    await processDirectory(client, VIEWS_PATH, "views");
+    await processDirectory(client, VIEWS_PATH, "dataset views");
     
     // Process materialized views
-    await processDirectory(client, MATERIALIZED_VIEWS_PATH, "materialized views");
+    await processDirectory(client, MATERIALIZED_VIEWS_PATH, "dhis2 views");
 
   } catch (error) {
     console.error("❌ Error:", error.message);
