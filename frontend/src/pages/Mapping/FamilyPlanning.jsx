@@ -1,6 +1,5 @@
 // FamilyPlanning.js
 import React, { useEffect, useMemo, useState } from "react";
-import { FaPlus, FaTrash, FaEye } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import API from "../../helpers/api";
 
@@ -94,22 +93,6 @@ const FamilyPlanning = () => {
       render: (row) => `${row.section_id} - ${row.section_name}`,
     },
 
-    {
-      accessor: "actions",
-      header: "Actions",
-      sortable: false,
-      render: (row) => (
-        <div className="item-mappings">
-          <button
-            className="btn btn-outline-primary btn-sm me-2"
-            onClick={() => handleViewDetails(row)}
-            title="View Details"
-          >
-            <FaEye /> View Mapping
-          </button>
-        </div>
-      ),
-    },
   ];
 
   return (

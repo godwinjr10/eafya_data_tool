@@ -1,6 +1,5 @@
 // Vaccines.js
 import React, { useEffect, useMemo, useState } from "react";
-import { FaPlus, FaTrash, FaEye } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import API from "../../helpers/api";
 import MappingDialog from "../../components/MappingDialog";
@@ -73,22 +72,6 @@ const Vaccines = () => {
       accessor: "section_name",
       header: "Section Name",
       sortable: true,
-    },
-    {
-      accessor: "actions",
-      header: "Actions",
-      sortable: false,
-      render: (row) => (
-        <div className="item-mappings">
-          <button
-            className="btn btn-outline-primary btn-sm me-2"
-            onClick={() => handleViewDetails(row)}
-            title="View Details"
-          >
-            <FaEye /> View Mapping
-          </button>
-        </div>
-      ),
     },
   ];
 

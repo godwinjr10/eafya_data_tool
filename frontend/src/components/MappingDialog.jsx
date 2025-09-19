@@ -125,7 +125,7 @@ const MappingDialog = ({
   return (
     <div
       className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
-      style={{ backgroundColor: "rgba(0, 0, 0, 0.6)", zIndex: 1000 }}
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.7)", zIndex: 9999 }}
     >
       <div
         className="bg-white rounded-3 shadow-lg p-4 d-flex flex-column"
@@ -247,7 +247,7 @@ const MappingDialog = ({
           </div>
           <div className="d-flex gap-2">
             <button
-              className="btn btn-outline-secondary px-4"
+              className="btn btn-secondary px-4"
               onClick={onClose}
             >
               Cancel

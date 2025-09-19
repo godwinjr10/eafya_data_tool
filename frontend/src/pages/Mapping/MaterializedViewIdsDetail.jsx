@@ -1,25 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import React, { useEffect, useState, useImperativeHandle, useCallback } from "react";
+import { useParams } from "react-router-dom";
 import {
   listMaterializedViewIdsByName,
   deleteMaterializedMapping,
   bulkAddMaterializedViewIds,
 } from "../../helpers/mappedItemsApi";
-import MappingDialog from "../../components/MappingDialog";
-import MappingTable from "../../components/MappingTable";
-import { FaArrowLeft, FaPlus } from "react-icons/fa";
 
-const MaterializedViewIdsDetail = () => {
-  const { name } = useParams();
-  const history = useHistory();
+const MaterializedViewIdsDetail = React.forwardRef(({ name: propName, onOpenDialog }, ref) => {
+  const { name: urlName } = useParams();
+  const name = propName || urlName;
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [dialogOpen, setDialogOpen] = useState(false);
   const [searchTable, setSearchTable] = useState("clinic");
   const [dialogItems, setDialogItems] = useState([]);
   const [replaceTargetId, setReplaceTargetId] = useState(null);
 
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     try {
       const data = await listMaterializedViewIdsByName(name);
@@ -27,7 +23,7 @@ const MaterializedViewIdsDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [name]);
 
   useEffect(() => {
     const infer = (text) => {
@@ -40,7 +36,7 @@ const MaterializedViewIdsDetail = () => {
     };
     setSearchTable(infer(name));
     load();
-  }, [name]);
+  }, [name, load]);
 
   const onDelete = async (id) => {
     await deleteMaterializedMapping(name, id);
@@ -49,12 +45,37 @@ const MaterializedViewIdsDetail = () => {
 
   const openAdd = () => {
     setReplaceTargetId(null);
-    setDialogOpen(true);
+    if (onOpenDialog) {
+      onOpenDialog({
+        hmisName: name,
+        section: "",
+        eafyaItems: dialogItems,
+        onEafyaItemsLoaded: setDialogItems,
+        datasetCode: "HMIS1052_CONDITIONS",
+        searchEndpoint: `/materialized-view-ids/items?category=${searchTable}`,
+        onSave: onSaveDialog
+      });
+    }
   };
+
+  // Expose openAdd function to parent component via ref
+  useImperativeHandle(ref, () => ({
+    openAdd
+  }));
 
   const openReplace = (rowId) => {
     setReplaceTargetId(rowId);
-    setDialogOpen(true);
+    if (onOpenDialog) {
+      onOpenDialog({
+        hmisName: name,
+        section: "",
+        eafyaItems: dialogItems,
+        onEafyaItemsLoaded: setDialogItems,
+        datasetCode: "HMIS1052_CONDITIONS",
+        searchEndpoint: `/materialized-view-ids/items?category=${searchTable}`,
+        onSave: onSaveDialog
+      });
+    }
   };
 
   const onSaveDialog = async (selectedIds) => {
@@ -84,7 +105,6 @@ const MaterializedViewIdsDetail = () => {
         mappings,
       },
     });
-    setDialogOpen(false);
     setReplaceTargetId(null);
     await load();
   };
@@ -118,75 +138,44 @@ const MaterializedViewIdsDetail = () => {
 
   return (
     <div className="container-fluid">
-      <div className="row">
-        <div className="bg-primary bg-opacity-10 text-primary p-4 mb-4 rounded col-12">
-          <div className="row align-items-center">
-            <div className="col-lg-8">
-              <nav aria-label="breadcrumb">
-                <ol className="breadcrumb mb-2">
-                  <li className="breadcrumb-item">
-                    <button
-                      className="btn btn-link p-0 text-primary text-decoration-none"
-                      onClick={() => history.push("/mapping")}
-                    >
-                      <FaArrowLeft className="me-1" />
-                      Materialized IDs
-                    </button>
-                  </li>
-                  <li
-                    className="breadcrumb-item active text-primary"
-                    aria-current="page"
-                  >
-                    {name} Detail
-                  </li>
-                </ol>
-              </nav>
-              <h1 className="display-6 text-primary fw-bold mb-2">{name}</h1>
-            </div>
-            <div className="col-lg-4 mt-3 mt-lg-0">
-              <div className="d-flex justify-content-end">
-                <button className="btn btn-primary" onClick={openAdd}>
-                  <FaPlus className="me-2" />
-                  Add Mapping
-                </button>
-              </div>
-            </div>
-          </div>
+      {loading ? (
+        <div className="text-center py-3">Loading...</div>
+      ) : (
+        <div className="table-responsive mt-3">
+          <table className="table table-bordered">
+            <thead className="table-light">
+              <tr>
+                {columns.map((column) => (
+                  <th key={column.accessor} className="fw-semibold">
+                    {column.header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.length > 0 ? (
+                rows.map((item, index) => (
+                  <tr key={item.id || index}>
+                    {columns.map((column) => (
+                      <td key={column.accessor}>
+                        {column.render ? column.render(item) : item[column.accessor] || "-"}
+                      </td>
+                    ))}
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={columns.length} className="text-center py-4 text-muted">
+                    No customized items found
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
         </div>
-      </div>
-      <>
-        {" "}
-        {loading ? (
-          <div>Loading...</div>
-        ) : (
-          <MappingTable
-            data={rows}
-            columns={columns}
-            loading={loading}
-            pageSize={10}
-            searchable={true}
-            filterable={true}
-            sortable={true}
-            emptyMessage="No customized items mappings found"
-            className="mapping-table"
-            onRowClick={() => {}}
-          />
-        )}
-      </>
-
-      <MappingDialog
-        isOpen={dialogOpen}
-        onClose={() => setDialogOpen(false)}
-        onSave={onSaveDialog}
-        hmisName={name}
-        section={""}
-        eafyaItems={dialogItems}
-        onEafyaItemsLoaded={setDialogItems}
-        datasetCode={"HMIS1052_CONDITIONS"}
-        searchEndpoint={`/materialized-view-ids/items?category=${searchTable}`}
-      />
+      )}
     </div>
   );
-};
+});
 
 export default MaterializedViewIdsDetail;

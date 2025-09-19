@@ -3,6 +3,7 @@ import { pool } from "../config/database.js";
 import { sequelize } from "../config/database.js";
 import Dataset from "../models/dataset.js";
 import UserModel from "../models/usermodel.js";
+import Facility from "../models/facility.js";
 import { readFile } from "fs/promises";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
@@ -19,144 +20,42 @@ const __dirname = dirname(__filename);
 const envPath = path.join(__dirname, "..", ".env");
 dotenv.config({ path: envPath });
 
-// Enhanced logging and tracking utilities
-class Logger {
+// Simple logger
+class SimpleLogger {
   constructor() {
     this.startTime = Date.now();
     this.steps = [];
-    this.errors = [];
-    this.warnings = [];
   }
 
-  logStep(stepNumber, stepName, status, details = "", duration = null) {
+  log(message, type = "info") {
     const timestamp = new Date().toISOString();
-    const step = {
-      stepNumber,
-      stepName,
-      status, // 'success', 'error', 'warning', 'info'
-      details,
-      timestamp,
-      duration,
+    const icon = this.getIcon(type);
+    console.log(`${icon} ${message}`);
+    this.steps.push({ message, type, timestamp });
+  }
+
+  getIcon(type) {
+    const icons = {
+      success: "✅",
+      error: "❌",
+      warning: "⚠️",
+      info: "ℹ️"
     };
-    this.steps.push(step);
-
-    const statusIcon = this.getStatusIcon(status);
-    const durationStr = duration ? ` (${duration}ms)` : "";
-    console.log(
-      `\n${statusIcon} Step ${stepNumber}: ${stepName}${durationStr}`
-    );
-
-    if (details) {
-      console.log(`   Details: ${details}`);
-    }
-
-    if (status === "error") {
-      this.errors.push(step);
-    } else if (status === "warning") {
-      this.warnings.push(step);
-    }
+    return icons[type] || "📋";
   }
 
-  getStatusIcon(status) {
-    switch (status) {
-      case "success":
-        return "✅";
-      case "error":
-        return "❌";
-      case "warning":
-        return "⚠️";
-      case "info":
-        return "ℹ️";
-      default:
-        return "📋";
-    }
-  }
-
-  logInfo(message) {
-    console.log(`ℹ️  ${message}`);
-  }
-
-  logError(message, error = null) {
-    console.error(`❌ ${message}`);
-    if (error) {
-      console.error(`   Error: ${error.message}`);
-      if (error.stack) {
-        console.error(`   Stack: ${error.stack.split("\n")[1]?.trim()}`);
-      }
-    }
-  }
-
-  logWarning(message) {
-    console.warn(`⚠️  ${message}`);
-  }
-
-  logSuccess(message) {
-    console.log(`✅ ${message}`);
-  }
-
-  printFinalSummary() {
-    const totalDuration = Date.now() - this.startTime;
-    const successCount = this.steps.filter(
-      (s) => s.status === "success"
-    ).length;
-    const errorCount = this.steps.filter((s) => s.status === "error").length;
-    const warningCount = this.steps.filter(
-      (s) => s.status === "warning"
-    ).length;
-
-    console.log("\n" + "=".repeat(80));
-    console.log("🏁 UNIFIED SETUP SUMMARY");
-    console.log("=".repeat(80));
-    console.log(`⏱️  Total Duration: ${this.formatDuration(totalDuration)}`);
-    console.log(`📊 Steps Completed: ${successCount}/${this.steps.length}`);
+  printSummary() {
+    const duration = Date.now() - this.startTime;
+    const successCount = this.steps.filter(s => s.type === "success").length;
+    const errorCount = this.steps.filter(s => s.type === "error").length;
+    
+    console.log("\n" + "=".repeat(60));
+    console.log("🏁 SETUP SUMMARY");
+    console.log("=".repeat(60));
+    console.log(`⏱️  Duration: ${this.formatDuration(duration)}`);
     console.log(`✅ Successful: ${successCount}`);
     console.log(`❌ Failed: ${errorCount}`);
-    console.log(`⚠️  Warnings: ${warningCount}`);
-    console.log("");
-
-    // Detailed step breakdown
-    console.log("📋 STEP-BY-STEP BREAKDOWN:");
-    console.log("-".repeat(80));
-    this.steps.forEach((step) => {
-      const icon = this.getStatusIcon(step.status);
-      const duration = step.duration ? ` (${step.duration}ms)` : "";
-      console.log(
-        `${icon} Step ${step.stepNumber}: ${step.stepName}${duration}`
-      );
-      if (step.details) {
-        console.log(`   ${step.details}`);
-      }
-    });
-
-    // Errors summary
-    if (this.errors.length > 0) {
-      console.log("\n❌ ERRORS ENCOUNTERED:");
-      console.log("-".repeat(80));
-      this.errors.forEach((error) => {
-        console.log(`❌ Step ${error.stepNumber}: ${error.stepName}`);
-        console.log(`   ${error.details}`);
-      });
-    }
-
-    // Warnings summary
-    if (this.warnings.length > 0) {
-      console.log("\n⚠️  WARNINGS:");
-      console.log("-".repeat(80));
-      this.warnings.forEach((warning) => {
-        console.log(`⚠️  Step ${warning.stepNumber}: ${warning.stepName}`);
-        console.log(`   ${warning.details}`);
-      });
-    }
-
-    console.log("\n" + "=".repeat(80));
-    if (errorCount === 0) {
-      console.log("🎉 SETUP COMPLETED SUCCESSFULLY!");
-    } else {
-      console.log(
-        "⚠️  SETUP COMPLETED WITH ERRORS - Please review and fix issues above"
-      );
-    }
-    console.log("=".repeat(80));
+    console.log("=".repeat(60));
   }
 
   formatDuration(ms) {
@@ -167,25 +66,22 @@ class Logger {
 }
 
 // Configuration
-const sqlFiles = [
+const CONFIG = {
+  sqlFiles: [
   "deleteAllTables.sql",
   "001_import_tables.sql",
   "002_stage_tables.sql",
   "003_dwh_tables.sql"
-];
+  ],
 
-const datasets = [
+  datasets: [
   {
     dataset_id: "HMIS_105_01",
-    dataset_name:
-      "HMIS 105:01 - OPD Monthly Report (Attendances, Referrals, Conditions)",
+      dataset_name: "HMIS 105:01 - OPD Monthly Report (Attendances, Referrals, Conditions)",
     sections: [
       { section_id: "1.1", section_name: "Attendance and Referral" },
       { section_id: "1.3.1", section_name: "Epidemic Prone Diseases" },
-      {
-        section_id: "1.3.2",
-        section_name: "Other Infectious / Communicable Diseases",
-      },
+        { section_id: "1.3.2", section_name: "Other Infectious / Communicable Diseases" },
       { section_id: "1.3.3", section_name: "Neonatal Diseases" },
       { section_id: "1.3.4", section_name: "Non-Communicable Diseases" },
       { section_id: "1.3.5", section_name: "Oral Diseases" },
@@ -210,8 +106,8 @@ const datasets = [
       { section_id: "1.3.26", section_name: "TB Screening" },
       { section_id: "1.3.27", section_name: "Leprosy Services" },
       { section_id: "1.3.28", section_name: "Nutrition Services" },
-      { section_id: "1.3.29", section_name: "Gender Based Violence Services" },
-    ],
+        { section_id: "1.3.29", section_name: "Gender Based Violence Services" }
+      ]
   },
   {
     dataset_id: "HMIS_105_02",
@@ -224,18 +120,15 @@ const datasets = [
       { section_id: "2.6", section_name: "Child Health Services" },
       { section_id: "2.6.2", section_name: "Tetanus Vaccination" },
       { section_id: "2.6.3", section_name: "Child Immunization" },
-      { section_id: "2.6.4", section_name: "Vaccine Availability" },
-    ],
+        { section_id: "2.6.4", section_name: "Vaccine Availability" }
+      ]
   },
   {
     dataset_id: "HMIS_105_06",
     dataset_name: "HMIS 105:06 - OPD Monthly Report (Essential Medicines)",
     sections: [
-      {
-        section_id: "6.1",
-        section_name: "Essential Medicines and Health Supplies",
-      },
-    ],
+        { section_id: "6.1", section_name: "Essential Medicines and Health Supplies" }
+      ]
   },
   {
     dataset_id: "HMIS_105_10",
@@ -243,8 +136,8 @@ const datasets = [
     sections: [
       { section_id: "10.1", section_name: "Total Laboratory Client Visits" },
       { section_id: "10.1.2", section_name: "Specimen Collected" },
-      { section_id: "10.2.1", section_name: "Laboratory Routine Tests" },
-    ],
+        { section_id: "10.2.1", section_name: "Laboratory Routine Tests" }
+      ]
   },
   {
     dataset_id: "HMIS_108",
@@ -258,12 +151,12 @@ const datasets = [
       { section_id: "6", section_name: "Admissions Deaths by Diagnosis" },
       { section_id: "7", section_name: "Mental Health, Risk Behaviour TB" },
       { section_id: "10", section_name: "Nutrition" },
-      { section_id: "11", section_name: "Rehabilitation" },
+        { section_id: "11", section_name: "Rehabilitation" }
+      ]
+    }
     ],
-  },
-];
 
-const defaultUsers = [
+  users: [
   {
     username: "admin",
     role: "admin",
@@ -271,7 +164,7 @@ const defaultUsers = [
     firstname: "System",
     lastname: "Administrator",
     phoneNo: "+254700000000",
-    module: "all",
+      module: "all"
   },
   {
     username: "user",
@@ -280,491 +173,235 @@ const defaultUsers = [
     firstname: "Regular",
     lastname: "User",
     phoneNo: "+254700000001",
-    module: "reports",
-  },
-];
+      module: "reports"
+    }
+  ],
 
-const materializedViewIds = [
-  // OPD Clinics
-  { name: "General Outpatient", category: "Clinics" },
+  materializedViews: [
   { name: "Antenatal Clinic", category: "Clinics" },
-  { name: "Family Planning", category: "Clinics" },
-  { name: "YCC or Immunization Clinic", category: "Clinics" },
-  { name: "Eye Clinic", category: "Clinics" },
-  { name: "ENT", category: "Clinics" },
-  { name: "ART", category: "Clinics" },
+  { name: "Family Planning Clinic", category: "Clinics" },
+  { name: "Immunization Clinic", category: "Clinics" },
   { name: "Chronic Care Clinic", category: "Clinics" },
   { name: "Dental Clinic", category: "Clinics" },
-
-  // Specialized Clinics
-  { name: "NICU OP REVIEWS", category: "Clinics" },
-  { name: "Accident & Emergency Clinic", category: "Clinics" },
   { name: "Specialist Clinic", category: "Clinics" },
-  { name: "Cervical Cancer Screening", category: "Clinics" },
-  { name: "Elective Surgical Procedures", category: "Clinics" },
-  { name: "Postnatal Review OP Clinic", category: "Clinics" },
   { name: "Nutrition Clinic", category: "Clinics" },
   { name: "Adolescent Clinic", category: "Clinics" },
   { name: "Mental Health Clinic", category: "Clinics" },
-  { name: "Immunisation/EPI", category: "Clinics" },
-
-  // Wards
-  { name: "Gynaecology Ward", category: "Wards" },
   { name: "Paed Ward", category: "Wards" },
-  { name: "Surgical Ward", category: "Wards" },
   { name: "Accident and Emergency Ward", category: "Wards" },
   { name: "Maternity Ward", category: "Wards" },
-  { name: "NICU", category: "Wards" },
-  { name: "ICU", category: "Wards" },
   { name: "Postnatal Ward", category: "Wards" },
-
-  // Theatre Rooms
-  { name: "Main Theatre", category: "Theatres" },
-  { name: "Eye Theatre", category: "Theatres" },
-  { name: "ENT Theatre", category: "Theatres" },
-
-  // Stores and Vaccines
   { name: "Main Store", category: "Stores" },
   { name: "HPV Vaccine", category: "Vaccines" },
-];
+  { name: "Tetanus Vaccine", category: "Vaccines" },
+  ]
+};
 
-class UnifiedSetup {
+class SimpleSetup {
   constructor() {
-    this.logger = new Logger();
+    this.logger = new SimpleLogger();
     this.uploadsDir = path.join(__dirname, "..", "sql", "uploads");
-    this.materializedViewsDir = path.resolve(
-      __dirname,
-      "..",
-      "sql",
-      "materializedviews"
-    );
-    this.viewsDir = path.resolve(__dirname, "..", "sql", "views");
-    this.csvResults = [];
-    this.csvErrors = [];
-    this.dbConfig = {
-      host: process.env.DB_HOST,
-      port: process.env.DB_PORT,
-      database: process.env.DB_NAME,
-      user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-    };
-    this.setupSteps = [
-      { id: 1, name: "Database Connection Test" },
-      { id: 2, name: "Database Structure Setup" },
-      { id: 3, name: "Datasets Creation" },
-      { id: 4, name: "Default Users Creation" },
-      { id: 5, name: "Materialized View IDs Creation" },
-      { id: 6, name: "CSV Files Upload" },
-      { id: 7, name: "Views Setup" },
-    ];
+    this.datasetViewsDir = path.resolve(__dirname, "..", "sql", "datasetviews");
+    this.dhis2ViewsDir = path.resolve(__dirname, "..", "sql", "dhis2views");
   }
 
-  async executeWithTiming(stepId, stepName, fn, details = "") {
-    const stepStartTime = Date.now();
+  // Test database connection
+  async testConnection() {
     try {
-      this.logger.logInfo(`Starting ${stepName}...`);
-      const result = await fn();
-      const duration = Date.now() - stepStartTime;
+      this.logger.log("Testing database connection...", "info");
+      
+      // Validate environment variables
+      const requiredVars = ["DB_HOST", "DB_PORT", "DB_NAME", "DB_USER", "DB_PASSWORD"];
+      const missingVars = requiredVars.filter(varName => !process.env[varName]);
 
-      if (result === true || result === undefined) {
-        this.logger.logStep(stepId, stepName, "success", details, duration);
-      } else if (result === false) {
-        this.logger.logStep(
-          stepId,
-          stepName,
-          "warning",
-          details || "Completed with warnings",
-          duration
-        );
-      } else {
-        this.logger.logStep(stepId, stepName, "success", details, duration);
+      if (missingVars.length > 0) {
+        throw new Error(`Missing environment variables: ${missingVars.join(", ")}`);
       }
-      return result;
+
+      const client = await pool.connect();
+      const result = await client.query("SELECT NOW() as current_time, current_database() as database_name, current_user as username");
+      const dbInfo = result.rows[0];
+      
+      this.logger.log(`Connected to database: ${dbInfo.database_name} as user: ${dbInfo.username}`, "success");
+      client.release();
+      return true;
     } catch (error) {
-      const duration = Date.now() - stepStartTime;
-      this.logger.logStep(stepId, stepName, "error", error.message, duration);
-      this.logger.logError(`Failed to execute ${stepName}`, error);
+      this.logger.log(`Database connection failed: ${error.message}`, "error");
       throw error;
     }
   }
 
-  // 1. Test database connection
-  async testConnection() {
-    try {
-      this.logger.logInfo("Testing database connection...");
-
-      // Validate environment variables first
-      const missingVars = [];
-      if (!process.env.DB_HOST) missingVars.push("DB_HOST");
-      if (!process.env.DB_PORT) missingVars.push("DB_PORT");
-      if (!process.env.DB_NAME) missingVars.push("DB_NAME");
-      if (!process.env.DB_USER) missingVars.push("DB_USER");
-      if (!process.env.DB_PASSWORD) missingVars.push("DB_PASSWORD");
-
-      if (missingVars.length > 0) {
-        throw new Error(
-          `Missing required environment variables: ${missingVars.join(", ")}`
-        );
-      }
-
-      const client = await pool.connect();
-
-      const result = await client.query(
-        "SELECT NOW() as current_time, current_database() as database_name, current_user as username"
-      );
-
-      const dbInfo = result.rows[0];
-      const details = `Connected to database: ${dbInfo.database_name} as user: ${dbInfo.username}`;
-
-      this.logger.logSuccess("Database connection established successfully!");
-      this.logger.logInfo(`   Database: ${dbInfo.database_name}`);
-      this.logger.logInfo(`   User: ${dbInfo.username}`);
-      this.logger.logInfo(`   Time: ${dbInfo.current_time}`);
-
-      client.release();
-      return { success: true, details };
-    } catch (error) {
-      let errorDetails = error.message;
-
-      if (error.message.includes("password")) {
-        errorDetails +=
-          ". Please check your .env file and ensure DB_PASSWORD is set correctly.";
-      } else if (error.message.includes("ECONNREFUSED")) {
-        errorDetails += ". Check if PostgreSQL is running and accessible.";
-      } else if (error.message.includes("ENOTFOUND")) {
-        errorDetails += ". Check if DB_HOST is correct and accessible.";
-      } else if (
-        error.message.includes("database") &&
-        error.message.includes("does not exist")
-      ) {
-        errorDetails += ". The specified database does not exist.";
-      }
-
-      this.logger.logError("Database connection failed", error);
-      throw new Error(errorDetails);
-    }
-  }
-
-  // 2. Execute SQL files for database structure
+  // Execute SQL file
   async executeSqlFile(filename) {
     try {
-      this.logger.logInfo(`Executing SQL file: ${filename}`);
+      this.logger.log(`Executing SQL file: ${filename}`, "info");
 
       const filePath = join(__dirname, "..", "sql", "tablescripts", filename);
 
-      // Check if file exists
       if (!fs.existsSync(filePath)) {
         throw new Error(`SQL file not found: ${filePath}`);
       }
 
       const sqlContent = await readFile(filePath, "utf8");
-
       if (!sqlContent || sqlContent.trim().length === 0) {
-        this.logger.logWarning(`SQL file is empty: ${filename}`);
-        return { success: true, statementsExecuted: 0, errors: 0 };
+        this.logger.log(`SQL file is empty: ${filename}`, "warning");
+        return { success: true, statementsExecuted: 0 };
       }
 
-      // Better SQL statement parsing that handles multi-line statements
-      const statements = [];
-      const lines = sqlContent.split("\n");
-      let currentStatement = "";
-      let inComment = false;
-
-      for (const line of lines) {
-        const trimmedLine = line.trim();
-
-        // Skip empty lines
-        if (!trimmedLine) continue;
-
-        // Handle comments
-        if (trimmedLine.startsWith("--")) {
-          continue; // Skip comment lines
-        }
-
-        // Add line to current statement
-        currentStatement += (currentStatement ? " " : "") + trimmedLine;
-
-        // Check if statement ends with semicolon
-        if (trimmedLine.endsWith(";")) {
-          const statement = currentStatement.slice(0, -1).trim(); // Remove trailing semicolon
-          if (statement.length > 0) {
-            statements.push(statement);
-          }
-          currentStatement = "";
-        }
-      }
-
-      // Add any remaining statement (in case file doesn't end with semicolon)
-      if (currentStatement.trim().length > 0) {
-        statements.push(currentStatement.trim());
-      }
-
-      this.logger.logInfo(
-        `   Found ${statements.length} SQL statements to execute`
-      );
+      // Parse SQL statements
+      const statements = sqlContent
+        .split(";")
+        .map(stmt => stmt.trim())
+        .filter(stmt => stmt.length > 0 && !stmt.startsWith("--"));
 
       let successCount = 0;
       let errorCount = 0;
-      const errors = [];
 
-      for (let i = 0; i < statements.length; i++) {
-        const statement = statements[i];
-        if (statement.trim()) {
+      for (const statement of statements) {
           try {
             await pool.query(statement);
             successCount++;
-            this.logger.logInfo(
-              `   ✅ Statement ${i + 1} executed successfully`
-            );
           } catch (error) {
             errorCount++;
-            const errorMsg = `Statement ${i + 1}: ${error.message}`;
-            errors.push(errorMsg);
-            this.logger.logError(`   ❌ ${errorMsg}`);
-
-            // Log the problematic statement for debugging
-            this.logger.logInfo(
-              `   Problematic statement: ${statement.substring(0, 100)}...`
-            );
-          }
+          this.logger.log(`Statement error: ${error.message}`, "error");
         }
       }
 
-      const details = `Executed ${successCount}/${statements.length} statements successfully. ${errorCount} errors.`;
-
-      if (errorCount > 0) {
-        this.logger.logWarning(
-          `Completed ${filename} with ${errorCount} errors`
-        );
-        return {
-          success: false,
-          statementsExecuted: successCount,
-          errors: errorCount,
-          errorDetails: errors,
-        };
-      } else {
-        this.logger.logSuccess(`Completed ${filename} successfully`);
-        return { success: true, statementsExecuted: successCount, errors: 0 };
-      }
+      const result = { success: errorCount === 0, statementsExecuted: successCount, errors: errorCount };
+      this.logger.log(`Completed ${filename}: ${successCount}/${statements.length} statements executed`, 
+        errorCount > 0 ? "warning" : "success");
+      return result;
     } catch (error) {
-      this.logger.logError(`Failed to process SQL file ${filename}`, error);
+      this.logger.log(`Failed to process SQL file ${filename}: ${error.message}`, "error");
       throw error;
     }
   }
 
-  // 3. Create database structure
+  // Setup database structure
   async setupDatabaseStructure() {
-    this.logger.logInfo("Setting up database structure...");
+    this.logger.log("Setting up database structure...", "info");
 
-    try {
       let totalStatements = 0;
       let totalErrors = 0;
-      let totalFiles = 0;
-      const fileResults = [];
 
-      for (const filename of sqlFiles) {
-        totalFiles++;
+    for (const filename of CONFIG.sqlFiles) {
         const result = await this.executeSqlFile(filename);
-        fileResults.push({ filename, ...result });
-
-        if (result.statementsExecuted !== undefined) {
           totalStatements += result.statementsExecuted;
-        }
-        if (result.errors !== undefined) {
           totalErrors += result.errors;
-        }
-      }
-
-      const details = `Processed ${totalFiles} SQL files. Executed ${totalStatements} statements with ${totalErrors} errors.`;
-
-      if (totalErrors > 0) {
-        this.logger.logWarning(
-          "Database structure setup completed with errors"
-        );
-        this.logger.logInfo(details);
-
-        // Log files with errors
-        const filesWithErrors = fileResults.filter((f) => f.errors > 0);
-        if (filesWithErrors.length > 0) {
-          this.logger.logWarning("Files with errors:");
-          filesWithErrors.forEach((f) => {
-            this.logger.logInfo(`   ${f.filename}: ${f.errors} errors`);
-          });
-        }
-
-        return { success: false, details, fileResults };
-      } else {
-        this.logger.logSuccess(
-          "Database structure setup completed successfully!"
-        );
-        this.logger.logInfo(details);
-        return { success: true, details, fileResults };
-      }
-    } catch (error) {
-      this.logger.logError("Database structure setup failed", error);
-      throw error;
     }
+
+    this.logger.log(`Database structure setup completed: ${totalStatements} statements executed, ${totalErrors} errors`, 
+      totalErrors > 0 ? "warning" : "success");
+    return { success: totalErrors === 0, totalStatements, totalErrors };
   }
 
-  // 4. Create datasets
+  // Create datasets
   async createDatasets() {
-    this.logger.logInfo("Creating datasets...");
-
     try {
-      // Sync the Dataset model to ensure the table exists
+      this.logger.log("Creating datasets...", "info");
+      
       await Dataset.sync({ force: false });
 
-      // Check existing datasets using Sequelize
       const existingDatasets = await Dataset.findAll({
-        where: {
-          dataset_id: datasets.map((d) => d.dataset_id),
-        },
+        where: { dataset_id: CONFIG.datasets.map(d => d.dataset_id) }
       });
-
-      const existingIds = existingDatasets.map((dataset) => dataset.dataset_id);
-      const newDatasets = datasets.filter(
-        (d) => !existingIds.includes(d.dataset_id)
-      );
+      
+      const existingIds = existingDatasets.map(dataset => dataset.dataset_id);
+      const newDatasets = CONFIG.datasets.filter(d => !existingIds.includes(d.dataset_id));
 
       if (newDatasets.length === 0) {
-        const details = `All ${datasets.length} datasets already exist`;
-        this.logger.logSuccess("All datasets already exist, skipping creation");
-        return {
-          success: true,
-          details,
-          created: 0,
-          existing: datasets.length,
-        };
+        this.logger.log(`All ${CONFIG.datasets.length} datasets already exist`, "success");
+        return { success: true, created: 0, existing: CONFIG.datasets.length };
       }
 
-      // Create new datasets using Sequelize
       const createdDatasets = await Dataset.bulkCreate(
-        newDatasets.map((dataset) => ({
+        newDatasets.map(dataset => ({
           dataset_id: dataset.dataset_id,
           dataset_name: dataset.dataset_name,
-          sections: dataset.sections,
+          sections: dataset.sections
         }))
       );
 
-      const details = `Created ${createdDatasets.length} new datasets. ${existingIds.length} already existed.`;
-      this.logger.logSuccess("Datasets created successfully!");
-      this.logger.logInfo(`Created ${createdDatasets.length} new datasets`);
-      this.logger.logInfo(`Skipped ${existingIds.length} existing datasets`);
-
-      return {
-        success: true,
-        details,
-        created: createdDatasets.length,
-        existing: existingIds.length,
-        createdDatasets: createdDatasets.map((dataset) => dataset.dataset_id),
-      };
+      this.logger.log(`Created ${createdDatasets.length} new datasets, ${existingIds.length} already existed`, "success");
+      return { success: true, created: createdDatasets.length, existing: existingIds.length };
     } catch (error) {
-      this.logger.logError("Error creating datasets", error);
+      this.logger.log(`Error creating datasets: ${error.message}`, "error");
       throw error;
     }
   }
 
-  // 5. Create users
+  // Create users
   async createUsers() {
-    this.logger.logInfo("Creating default users...");
-
     try {
-      // Sync the UserModel to ensure the table exists
+      this.logger.log("Creating default users...", "info");
+      
       await UserModel.sync({ force: false });
 
       let createdCount = 0;
       let existingCount = 0;
       let errorCount = 0;
-      const userResults = [];
 
-      for (const userData of defaultUsers) {
+      for (const userData of CONFIG.users) {
         try {
           const existingUser = await UserModel.findOne({
-            where: { username: userData.username },
+            where: { username: userData.username }
           });
 
           if (existingUser) {
-            this.logger.logInfo(
-              `   User '${userData.username}' already exists, skipping...`
-            );
+            this.logger.log(`User '${userData.username}' already exists`, "info");
             existingCount++;
-            userResults.push({
-              username: userData.username,
-              status: "existing",
-            });
             continue;
           }
 
           const hashedPassword = await bcrypt.hash(userData.password, 10);
-
-          const user = await UserModel.create({
+          await UserModel.create({
             username: userData.username,
             role: userData.role,
             password: hashedPassword,
             firstname: userData.firstname,
             lastname: userData.lastname,
             phoneNo: userData.phoneNo,
-            module: userData.module,
+            module: userData.module
           });
-          this.logger.logSuccess(
-            `   User '${user.username}' created successfully`
-          );
+          
+          this.logger.log(`User '${userData.username}' created successfully`, "success");
           createdCount++;
-          userResults.push({
-            username: userData.username,
-            status: "created",
-            role: userData.role,
-          });
         } catch (error) {
-          this.logger.logError(
-            `   Error creating user '${userData.username}'`,
-            error
-          );
+          this.logger.log(`Error creating user '${userData.username}': ${error.message}`, "error");
           errorCount++;
-          userResults.push({
-            username: userData.username,
-            status: "error",
-            error: error.message,
-          });
         }
       }
 
-      const details = `Created ${createdCount} users, ${existingCount} already existed, ${errorCount} errors.`;
-
-      if (errorCount > 0) {
-        this.logger.logWarning("User creation completed with errors");
-        this.logger.logInfo(details);
-        return {
-          success: false,
-          details,
-          created: createdCount,
-          existing: existingCount,
-          errors: errorCount,
-          userResults,
-        };
-      } else {
-        this.logger.logSuccess("Default users created successfully!");
-        this.logger.logInfo(details);
-        return {
-          success: true,
-          details,
-          created: createdCount,
-          existing: existingCount,
-          errors: 0,
-          userResults,
-        };
-      }
+      this.logger.log(`User creation completed: ${createdCount} created, ${existingCount} existing, ${errorCount} errors`, 
+        errorCount > 0 ? "warning" : "success");
+      return { success: errorCount === 0, created: createdCount, existing: existingCount, errors: errorCount };
     } catch (error) {
-      this.logger.logError("Error creating users", error);
+      this.logger.log(`Error creating users: ${error.message}`, "error");
       throw error;
     }
   }
 
-  // 6. Create materialized view IDs
-  async createMaterializedViewIds() {
-    this.logger.logInfo("Creating materialized view IDs...");
-
+  // Create facility table
+  async createFacilityTable() {
     try {
+      this.logger.log("Creating facility table...", "info");
+      
+      await Facility.sync({ force: false });
+      
+      this.logger.log("Facility table created/verified successfully", "success");
+      return { success: true };
+    } catch (error) {
+      this.logger.log(`Error creating facility table: ${error.message}`, "error");
+      throw error;
+    }
+  }
+
+  // Create materialized view IDs
+  async createMaterializedViewIds() {
+    try {
+      this.logger.log("Creating materialized view IDs...", "info");
+      
+      // Check if table exists
       const checkTableQuery = `
         SELECT EXISTS (
           SELECT FROM information_schema.tables 
@@ -774,9 +411,8 @@ class UnifiedSetup {
       `;
 
       const tableExists = await pool.query(checkTableQuery);
-      const tableAlreadyExists = tableExists.rows[0].exists;
 
-      if (!tableAlreadyExists) {
+      if (!tableExists.rows[0].exists) {
         const createTableQuery = `
           CREATE TABLE reporting.materialized_view_ids (
             id SERIAL PRIMARY KEY,
@@ -791,17 +427,15 @@ class UnifiedSetup {
         `;
 
         await pool.query(createTableQuery);
-        this.logger.logSuccess(
-          "Table 'materialized_view_ids' created successfully"
-        );
+        this.logger.log("Table 'materialized_view_ids' created successfully", "success");
       } else {
-        this.logger.logInfo("Table 'materialized_view_ids' already exists");
+        this.logger.log("Table 'materialized_view_ids' already exists", "info");
       }
 
       let insertedCount = 0;
       let skippedCount = 0;
 
-      for (const row of materializedViewIds) {
+      for (const row of CONFIG.materializedViews) {
         const insertQuery = `
           INSERT INTO reporting.materialized_view_ids (name, category, mapping_id, mapping_name)
           VALUES ($1, $2, $3, $4)
@@ -809,63 +443,99 @@ class UnifiedSetup {
           RETURNING id;
         `;
 
-        const result = await pool.query(insertQuery, [
-          row.name,
-          row.category,
-          0,
-          null,
-        ]);
+        const result = await pool.query(insertQuery, [row.name, row.category, 0, null]);
 
         if (result.rows.length > 0) {
           insertedCount++;
-          this.logger.logInfo(`   Inserted: ${row.name} (${row.category})`);
         } else {
           skippedCount++;
-          this.logger.logInfo(
-            `   Skipped (already exists): ${row.name} (${row.category})`
-          );
         }
       }
 
-      const details = `Inserted ${insertedCount} new entries, skipped ${skippedCount} existing entries`;
-      this.logger.logSuccess(
-        "Materialized view IDs setup completed successfully!"
-      );
-      this.logger.logInfo(details);
-
-      return {
-        success: true,
-        details,
-        inserted: insertedCount,
-        skipped: skippedCount,
-      };
+      this.logger.log(`Materialized view IDs setup completed: ${insertedCount} inserted, ${skippedCount} skipped`, "success");
+      return { success: true, inserted: insertedCount, skipped: skippedCount };
     } catch (error) {
-      this.logger.logError("Error creating materialized view IDs", error);
+      this.logger.log(`Error creating materialized view IDs: ${error.message}`, "error");
       throw error;
     }
   }
 
-  // 7. CSV Upload functionality
-  getCSVFiles() {
+  // Ensure reporting schema exists (from uploads.js)
+  async ensureReportingSchema() {
     try {
-      if (!fs.existsSync(this.uploadsDir)) {
-        this.logger.logWarning(
-          `Uploads directory not found: ${this.uploadsDir}`
-        );
-        return [];
-      }
-      const files = fs.readdirSync(this.uploadsDir);
-      const csvFiles = files.filter((file) => file.endsWith(".csv"));
-      this.logger.logInfo(
-        `Found ${csvFiles.length} CSV files in uploads directory`
-      );
-      return csvFiles;
+      const createSchemaSQL = `CREATE SCHEMA IF NOT EXISTS reporting;`;
+      await pool.query(createSchemaSQL);
+      this.logger.log("✅ Reporting schema ensured", "success");
+      return true;
     } catch (error) {
-      this.logger.logError("Error reading uploads directory", error);
-      return [];
+      this.logger.log(`Error creating reporting schema: ${error.message}`, "error");
+      throw error;
     }
   }
 
+  // Upload CSV files
+  async uploadCSVFiles() {
+    try {
+      this.logger.log("Processing CSV files...", "info");
+      
+      // Ensure reporting schema exists
+      await this.ensureReportingSchema();
+      
+      if (!fs.existsSync(this.uploadsDir)) {
+        this.logger.log(`Uploads directory not found: ${this.uploadsDir}`, "warning");
+        return { success: true, filesProcessed: 0 };
+      }
+
+      const files = fs.readdirSync(this.uploadsDir).filter(file => file.endsWith(".csv"));
+      
+      if (files.length === 0) {
+        this.logger.log("No CSV files found in uploads directory", "info");
+        return { success: true, filesProcessed: 0 };
+      }
+
+      let totalRows = 0;
+      let totalInserted = 0;
+      let errorCount = 0;
+
+      for (const file of files) {
+        try {
+          const filePath = path.join(this.uploadsDir, file);
+          const tableName = file.replace(".csv", "").toLowerCase();
+          
+          this.logger.log(`Processing file: ${file}`, "info");
+          
+          // Parse CSV
+          const csvData = await this.parseCSV(filePath);
+          this.logger.log(`Parsed ${csvData.length} rows from ${file}`, "info");
+          
+          // Create table and insert data
+          await this.createTableFromCSV(tableName, csvData);
+          
+          // Alter column types for specific tables
+          await this.alterColumnTypes(tableName);
+          
+          const insertedRows = await this.insertData(tableName, csvData);
+          
+          totalRows += csvData.length;
+          totalInserted += insertedRows;
+          
+          this.logger.log(`Successfully uploaded ${file}: ${insertedRows}/${csvData.length} rows`, "success");
+    } catch (error) {
+          this.logger.log(`Error uploading ${file}: ${error.message}`, "error");
+          errorCount++;
+        }
+      }
+
+      this.logger.log(`CSV upload completed: ${totalInserted}/${totalRows} rows inserted, ${errorCount} errors`, 
+        errorCount > 0 ? "warning" : "success");
+      return { success: errorCount === 0, filesProcessed: files.length, totalRows, totalInserted, errors: errorCount };
+    } catch (error) {
+      this.logger.log(`Error processing CSV files: ${error.message}`, "error");
+      throw error;
+    }
+  }
+
+  // Parse CSV file
   async parseCSV(filePath) {
     return new Promise((resolve, reject) => {
       const results = [];
@@ -877,13 +547,43 @@ class UnifiedSetup {
     });
   }
 
+  // Check if table already exists
+  async checkTableExists(tableName) {
+    try {
+      const checkTableSQL = `
+        SELECT EXISTS (
+          SELECT FROM information_schema.tables 
+          WHERE table_schema = 'reporting'
+          AND table_name = $1
+        );
+      `;
+      
+      const result = await pool.query(checkTableSQL, [tableName]);
+      return result.rows[0].exists;
+    } catch (error) {
+      this.logger.log(`Error checking if table ${tableName} exists: ${error.message}`, "error");
+      return false;
+    }
+  }
+
+  // Create table from CSV data
   async createTableFromCSV(tableName, data) {
     if (!data || data.length === 0) {
       throw new Error("No data provided to create table");
     }
 
+    // Check if table already exists
+    const tableExists = await this.checkTableExists(tableName);
+    
+    if (tableExists) {
+      this.logger.log(`Table ${tableName} already exists, skipping creation`, "info");
+      return;
+    }
+
+    this.logger.log(`Creating new table ${tableName}`, "info");
+
     const columns = Object.keys(data[0]);
-    const cleanColumns = columns.map((col) => {
+    const cleanColumns = columns.map(col => {
       let cleanCol = col.replace(/[^a-zA-Z0-9_]/g, "_").toLowerCase();
       if (cleanCol === "id") cleanCol = "csv_id";
       if (cleanCol === "created_at" || cleanCol === "updated_at") {
@@ -894,49 +594,24 @@ class UnifiedSetup {
 
     const uniqueColumns = [...new Set(cleanColumns)];
 
-    const dropTableSQL = `DROP TABLE IF EXISTS reporting."${tableName}" CASCADE;`;
-    try {
-      await pool.query(dropTableSQL);
-      this.logger.logInfo(
-        `   Dropped existing table ${tableName} if it existed`
-      );
-    } catch (error) {
-      this.logger.logError(`   Error dropping table ${tableName}`, error);
-    }
-
-    // Detect numeric columns and use appropriate data types
-    const columnDefinitions = uniqueColumns
-      .map((cleanCol) => {
-        // Check if this column contains only numeric values
-        const isNumeric = data.every((row) => {
+    // Detect column types
+    const columnDefinitions = uniqueColumns.map(cleanCol => {
+      const isNumeric = data.every(row => {
           const value = row[columns[uniqueColumns.indexOf(cleanCol)]];
-          return (
-            value === null ||
-            value === undefined ||
-            value === "" ||
-            /^\d+$/.test(value.toString())
-          );
-        });
+        return value === null || value === undefined || value === "" || /^\d+$/.test(value.toString());
+      });
 
-        // Check if this column contains big integers (larger than INT range)
-        const hasLargeNumbers = data.some((row) => {
+      const hasLargeNumbers = data.some(row => {
           const value = row[columns[uniqueColumns.indexOf(cleanCol)]];
-          return (
-            value &&
-            /^\d+$/.test(value.toString()) &&
-            parseInt(value) > 2147483647
-          );
+        return value && /^\d+$/.test(value.toString()) && parseInt(value) > 2147483647;
         });
 
         if (isNumeric) {
-          return hasLargeNumbers
-            ? `"${cleanCol}" BIGINT`
-            : `"${cleanCol}" INTEGER`;
+        return hasLargeNumbers ? `"${cleanCol}" BIGINT` : `"${cleanCol}" INTEGER`;
         } else {
           return `"${cleanCol}" TEXT`;
         }
-      })
-      .join(", ");
+    }).join(", ");
 
     const createTableSQL = `
       CREATE TABLE reporting."${tableName}" (
@@ -948,20 +623,24 @@ class UnifiedSetup {
     `;
 
     await pool.query(createTableSQL);
-    this.logger.logInfo(
-      `   Table ${tableName} created successfully with ${uniqueColumns.length} columns`
-    );
-    return true;
+    this.logger.log(`Table ${tableName} created with ${uniqueColumns.length} columns`, "success");
   }
 
+  // Insert data into table
   async insertData(tableName, data) {
     if (!data || data.length === 0) {
-      this.logger.logInfo(`   No data to insert for table ${tableName}`);
+      return 0;
+    }
+
+    // Check if table exists before trying to insert
+    const tableExists = await this.checkTableExists(tableName);
+    if (!tableExists) {
+      this.logger.log(`Table ${tableName} does not exist, skipping data insertion`, "warning");
       return 0;
     }
 
     const columns = Object.keys(data[0]);
-    const cleanColumns = columns.map((col) => {
+    const cleanColumns = columns.map(col => {
       let cleanCol = col.replace(/[^a-zA-Z0-9_]/g, "_").toLowerCase();
       if (cleanCol === "id") cleanCol = "csv_id";
       if (cleanCol === "created_at" || cleanCol === "updated_at") {
@@ -973,35 +652,23 @@ class UnifiedSetup {
     const uniqueColumns = [...new Set(cleanColumns)];
     const batchSize = 100;
     let totalInserted = 0;
-    let batchCount = 0;
-
-    this.logger.logInfo(
-      `   Inserting ${data.length} rows in batches of ${batchSize}...`
-    );
 
     for (let i = 0; i < data.length; i += batchSize) {
       const batch = data.slice(i, i + batchSize);
-      batchCount++;
-
-      const placeholders = batch
-        .map((_, rowIndex) => {
-          const rowPlaceholders = uniqueColumns.map(
-            (_, colIndex) =>
+      
+      const placeholders = batch.map((_, rowIndex) => {
+        const rowPlaceholders = uniqueColumns.map((_, colIndex) => 
               `$${rowIndex * uniqueColumns.length + colIndex + 1}`
           );
           return `(${rowPlaceholders.join(", ")})`;
-        })
-        .join(", ");
+      }).join(", ");
 
-      const values = batch.flatMap((row) =>
-        uniqueColumns.map((cleanCol) => {
+      const values = batch.flatMap(row =>
+        uniqueColumns.map(cleanCol => {
           const originalCol = columns.find((col, index) => {
             let testCleanCol = col.replace(/[^a-zA-Z0-9_]/g, "_").toLowerCase();
             if (testCleanCol === "id") testCleanCol = "csv_id";
-            if (
-              testCleanCol === "created_at" ||
-              testCleanCol === "updated_at"
-            ) {
+            if (testCleanCol === "created_at" || testCleanCol === "updated_at") {
               testCleanCol = `csv_${testCleanCol}`;
             }
             return testCleanCol === cleanCol;
@@ -1011,154 +678,130 @@ class UnifiedSetup {
       );
 
       const insertSQL = `
-        INSERT INTO reporting."${tableName}" (${uniqueColumns
-        .map((col) => `"${col}"`)
-        .join(", ")})
+        INSERT INTO reporting."${tableName}" (${uniqueColumns.map(col => `"${col}"`).join(", ")})
         VALUES ${placeholders}
         ON CONFLICT DO NOTHING;
       `;
 
       const result = await pool.query(insertSQL, values);
       totalInserted += result.rowCount;
-
-      if (
-        batchCount % 10 === 0 ||
-        batchCount === Math.ceil(data.length / batchSize)
-      ) {
-        this.logger.logInfo(
-          `   Batch ${batchCount}: Inserted ${result.rowCount} rows (${totalInserted}/${data.length} total)`
-        );
-      }
     }
 
-    this.logger.logInfo(
-      `   Completed: ${totalInserted} rows inserted into ${tableName}`
-    );
     return totalInserted;
   }
 
-  async uploadCSVFiles() {
-    this.logger.logInfo("Starting CSV upload process...");
-
-    const csvFiles = this.getCSVFiles();
-
-    if (csvFiles.length === 0) {
-      const details =
-        "No CSV files found in uploads directory - skipping CSV upload step";
-      this.logger.logInfo(details);
-      return {
-        success: true,
-        details,
-        filesProcessed: 0,
-        totalRows: 0,
-        errors: 0,
-      };
-    }
-
-    let totalRows = 0;
-    let totalInserted = 0;
-    let totalErrors = 0;
-    const fileResults = [];
-
-    for (const file of csvFiles) {
-      const filePath = path.join(this.uploadsDir, file);
-      const tableName = file.replace(".csv", "").toLowerCase();
-
-      try {
-        this.logger.logInfo(`Processing file: ${file}`);
-
-        const csvData = await this.parseCSV(filePath);
-        this.logger.logInfo(`   Parsed ${csvData.length} rows from CSV`);
-
-        await this.createTableFromCSV(tableName, csvData);
-        const insertedRows = await this.insertData(tableName, csvData);
-
-        totalRows += csvData.length;
-        totalInserted += insertedRows;
-
-        const fileResult = {
-          file: file,
-          table: `reporting.${tableName}`,
-          rows: csvData.length,
-          inserted: insertedRows,
-          status: "success",
-        };
-
-        fileResults.push(fileResult);
-        this.csvResults.push(fileResult);
-
-        this.logger.logSuccess(
-          `   Successfully uploaded ${file} to reporting.${tableName} (${insertedRows}/${csvData.length} rows)`
-        );
-      } catch (error) {
-        totalErrors++;
-        this.logger.logError(`   Error uploading ${file}`, error);
-
-        const fileError = {
-          file: file,
-          table: `reporting.${tableName}`,
-          error: error.message,
-          status: "error",
-        };
-
-        fileResults.push(fileError);
-        this.csvErrors.push(fileError);
+  // Clean and convert column data to integers (from uploads.js)
+  async cleanAndConvertColumn(tableName, columnName) {
+    try {
+      // First check if column exists and its current type
+      const checkColumnSQL = `
+        SELECT data_type 
+        FROM information_schema.columns 
+        WHERE table_schema = 'reporting' 
+        AND table_name = $1 
+        AND column_name = $2;
+      `;
+      
+      const columnInfo = await pool.query(checkColumnSQL, [tableName, columnName]);
+      
+      if (columnInfo.rows.length === 0) {
+        this.logger.log(`Column ${columnName} does not exist in table ${tableName}, skipping conversion`, "warning");
+        return;
       }
+      
+      const currentType = columnInfo.rows[0].data_type;
+      
+      // If already integer type, just clean nulls and invalid values
+      if (currentType === 'integer' || currentType === 'bigint') {
+        const cleanSQL = `
+          UPDATE reporting."${tableName}"
+          SET ${columnName} = CASE 
+            WHEN ${columnName} IS NULL THEN 0
+            WHEN ${columnName}::text ~ '^[0-9]+$' THEN ${columnName}
+            ELSE 0
+          END;
+        `;
+        await pool.query(cleanSQL);
+        this.logger.log(`Column ${columnName} cleaned (already integer type) for table ${tableName}`, "info");
+      return;
     }
 
-    const details = `Processed ${csvFiles.length} files: ${totalInserted}/${totalRows} rows inserted, ${totalErrors} errors`;
+      // If text type, convert to integer
+      const tempColumnName = `${columnName}_temp`;
+      const createTempColumnSQL = `
+        ALTER TABLE reporting."${tableName}"
+        ADD COLUMN ${tempColumnName} int;
+      `;
+      const updateTempColumnSQL = `
+        UPDATE reporting."${tableName}"
+        SET ${tempColumnName} = CASE 
+          WHEN ${columnName} IS NULL THEN 0
+          WHEN ${columnName} ~ '^[0-9]+$' THEN CAST(${columnName} AS int)
+          ELSE 0
+        END;
+      `;
+      const dropOldColumnSQL = `
+        ALTER TABLE reporting."${tableName}"
+        DROP COLUMN ${columnName};
+      `;
+      const renameTempColumnSQL = `
+        ALTER TABLE reporting."${tableName}"
+        RENAME COLUMN ${tempColumnName} TO ${columnName};
+      `;
 
-    if (totalErrors > 0) {
-      this.logger.logWarning(`CSV upload completed with ${totalErrors} errors`);
-      this.logger.logInfo(details);
-      return {
-        success: false,
-        details,
-        filesProcessed: csvFiles.length,
-        totalRows,
-        totalInserted,
-        errors: totalErrors,
-        fileResults,
-      };
-    } else {
-      this.logger.logSuccess("CSV upload completed successfully!");
-      this.logger.logInfo(details);
-      return {
-        success: true,
-        details,
-        filesProcessed: csvFiles.length,
-        totalRows,
-        totalInserted,
-        errors: 0,
-        fileResults,
-      };
+      await pool.query(createTempColumnSQL);
+      await pool.query(updateTempColumnSQL);
+      await pool.query(dropOldColumnSQL);
+      await pool.query(renameTempColumnSQL);
+      this.logger.log(`Column ${columnName} converted to int for table ${tableName}`, "info");
+        } catch (error) {
+      this.logger.log(`Error cleaning and converting column ${columnName} for table ${tableName}: ${error.message}`, "error");
+      throw error;
     }
   }
 
-  // 8. Materialized views functionality
+  // Alter column types for specific tables (from uploads.js)
+  async alterColumnTypes(tableName) {
+    const columnMappings = {
+      'dhis_eafya_mapping_commodities': 'eafya_product_id',
+      'dhis_eafya_mapping_conditions_final': 'eafya_disease_id',
+      'dhis_eafya_mapping_familyplanning': 'eafya_id',
+      'dhis_eafya_mapping_labtests': 'eafya_labtest_id',
+      'dhis_eafya_mapping_vaccines': 'eafya_vaccine_id'
+    };
+
+    if (columnMappings[tableName]) {
+      // Check if table exists before trying to alter columns
+      const tableExists = await this.checkTableExists(tableName);
+      if (tableExists) {
+        await this.cleanAndConvertColumn(tableName, columnMappings[tableName]);
+      } else {
+        this.logger.log(`Table ${tableName} does not exist, skipping column type conversion`, "warning");
+      }
+    }
+  }
+
+  // Read SQL files from directory
   readSqlFiles(dir) {
     if (!fs.existsSync(dir)) {
-      this.logger.logWarning(`Materialized views directory not found: ${dir}`);
+      this.logger.log(`Directory not found: ${dir}`, "warning");
       return [];
     }
 
     const files = fs
       .readdirSync(dir)
-      .filter((f) => f.toLowerCase().endsWith(".sql"))
-      .sort((a, b) =>
-        a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" })
-      );
+      .filter(f => f.toLowerCase().endsWith(".sql"))
+      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }));
 
-    this.logger.logInfo(`Found ${files.length} materialized view SQL files`);
-    return files.map((f) => ({ name: f, full: path.join(dir, f) }));
+    this.logger.log(`Found ${files.length} SQL files`, "info");
+    return files.map(f => ({ name: f, full: path.join(dir, f) }));
   }
 
-  extractViews(sql) {
+  // Extract view names from SQL content
+  extractViewNames(sql) {
     const results = [];
-    const mvRe =
-      /create\s+(?:or\s+replace\s+)?materialized\s+view\s+(?:if\s+not\s+exists\s+)?([^\s(]+)\s/gi;
-    const vRe =
-      /create\s+(?:or\s+replace\s+)?view\s+(?:if\s+not\s+exists\s+)?([^\s(]+)\s/gi;
+    const mvRe = /create\s+(?:or\s+replace\s+)?materialized\s+view\s+(?:if\s+not\s+exists\s+)?([^\s(]+)\s/gi;
+    const vRe = /create\s+(?:or\s+replace\s+)?view\s+(?:if\s+not\s+exists\s+)?([^\s(]+)\s/gi;
 
     let m;
     while ((m = mvRe.exec(sql)) !== null) {
@@ -1170,372 +813,201 @@ class UnifiedSetup {
     return results;
   }
 
-  isSafeIdentifier(id) {
-    const seg = /(?:[a-z_][a-z0-9_$]*|"[^"]+")/i.source;
-    const dotted = new RegExp(`^${seg}(\\.${seg})?$`, "i");
-    return dotted.test(id.trim());
-  }
+  // Drop views before recreating them
+  async dropViewsBeforeRecreate(client, files) {
+    this.logger.log("Dropping existing views before recreation...", "info");
+    
+    const allViews = [];
+    
+    // Collect all view names from all files
+    for (const file of files) {
+      const sql = fs.readFileSync(file.full, "utf8");
+      const views = this.extractViewNames(sql);
+      allViews.push(...views);
+    }
 
-  async dropViewsFirst(client, files) {
+    // Remove duplicates
+    const uniqueViews = [];
     const seen = new Set();
-    const toDrop = [];
-
-    for (let i = files.length - 1; i >= 0; i--) {
-      const sql = fs.readFileSync(files[i].full, "utf8");
-      const views = this.extractViews(sql);
-      for (const v of views) {
-        const key = `${v.type}:${v.name}`;
-        if (!seen.has(key)) {
-          seen.add(key);
-          toDrop.push(v);
-        }
+    for (const view of allViews) {
+      const key = `${view.type}:${view.name}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        uniqueViews.push(view);
       }
     }
 
-    if (toDrop.length === 0) {
-      this.logger.logInfo("No views detected to drop.");
-      return;
-    }
-
-    this.logger.logInfo(`Dropping ${toDrop.length} view(s) before recreate...`);
-    let droppedCount = 0;
-    let skippedCount = 0;
-
-    for (const v of toDrop) {
-      if (!this.isSafeIdentifier(v.name)) {
-        this.logger.logWarning(`Skipping suspicious identifier: ${v.name}`);
-        skippedCount++;
-        continue;
-      }
-
-      // Try to drop as different types of objects
+    // Drop views in reverse order
+    for (const view of uniqueViews.reverse()) {
       const dropCommands = [
-        `DROP VIEW IF EXISTS ${v.name} CASCADE;`,
-        `DROP TABLE IF EXISTS ${v.name} CASCADE;`,
-        `DROP MATERIALIZED VIEW IF EXISTS ${v.name} CASCADE;`,
+        `DROP VIEW IF EXISTS ${view.name} CASCADE;`,
+        `DROP TABLE IF EXISTS ${view.name} CASCADE;`,
+        `DROP MATERIALIZED VIEW IF EXISTS ${view.name} CASCADE;`
       ];
 
-      let dropped = false;
       for (const dropSql of dropCommands) {
         try {
           await client.query(dropSql);
-          if (!dropped) {
-            this.logger.logInfo(`   DROP -> ${dropSql}`);
-            droppedCount++;
-            dropped = true;
-          }
+          this.logger.log(`   Dropped ${view.type}: ${view.name}`, "info");
+          break; // If one command succeeds, no need to try others
         } catch (err) {
-          // Ignore errors for commands that don't match the object type
-          // This is expected behavior when trying different DROP types
+          // Continue to next command if this one fails
         }
       }
-
-      if (!dropped) {
-        this.logger.logWarning(
-          `   Could not drop ${v.name} - object may not exist or may be protected`
-        );
-      }
     }
-
-    this.logger.logInfo(
-      `Views cleanup completed: ${droppedCount} dropped, ${skippedCount} skipped`
-    );
   }
 
-  async setupMaterializedViews() {
-    this.logger.logInfo("Setting up materialized views...");
-
-    const files = this.readSqlFiles(this.materializedViewsDir);
-    if (files.length === 0) {
-      const details =
-        "No materialized view SQL files found - skipping materialized views setup";
-      this.logger.logInfo(details);
-      return { success: true, details, filesProcessed: 0, errors: 0 };
-    }
-
-    const client = new Client(this.dbConfig);
+  // Execute individual view file
+  async executeViewFile(client, file) {
     try {
-      await client.connect();
-      this.logger.logInfo("Connected to database for materialized views setup");
-
-      await this.dropViewsFirst(client, files);
-
-      let successCount = 0;
-      let errorCount = 0;
-      const fileResults = [];
-
-      for (const f of files) {
-        try {
-          const sql = fs.readFileSync(f.full, "utf8");
-          this.logger.logInfo(`   Executing: ${f.name}`);
-          await client.query(sql);
-          successCount++;
-          fileResults.push({ file: f.name, status: "success" });
-          this.logger.logInfo(`   ✅ ${f.name} executed successfully`);
-        } catch (error) {
-          errorCount++;
-          fileResults.push({
-            file: f.name,
-            status: "error",
-            error: error.message,
-          });
-          this.logger.logError(`   ❌ Error executing ${f.name}`, error);
-        }
-      }
-
-      const details = `Processed ${files.length} files: ${successCount} successful, ${errorCount} errors`;
-
-      if (errorCount > 0) {
-        this.logger.logWarning(
-          "Materialized views setup completed with errors"
-        );
-        this.logger.logInfo(details);
-        return {
-          success: false,
-          details,
-          filesProcessed: files.length,
-          errors: errorCount,
-          fileResults,
-        };
-      } else {
-        this.logger.logSuccess(
-          "Materialized views setup completed successfully!"
-        );
-        this.logger.logInfo(details);
-        return {
-          success: true,
-          details,
-          filesProcessed: files.length,
-          errors: 0,
-          fileResults,
-        };
-      }
-    } catch (err) {
-      this.logger.logError("Materialized views setup failed", err);
-      throw err;
-    } finally {
-      await client.end();
-      this.logger.logInfo("Database connection closed for materialized views");
+      const sql = fs.readFileSync(file.full, "utf8");
+      this.logger.log(`Executing: ${file.name}`, "info");
+      await client.query(sql);
+      this.logger.log(`✅ ${file.name} executed successfully`, "success");
+      return { success: true };
+    } catch (error) {
+      this.logger.log(`❌ Error executing ${file.name}: ${error.message}`, "error");
+      return { success: false, error: error.message };
     }
   }
 
-  // 8. Views functionality
+  // Setup views
   async setupViews() {
-    this.logger.logInfo("Setting up views...");
-
-    const files = this.readSqlFiles(this.viewsDir);
-    if (files.length === 0) {
-      const details = "No view SQL files found - skipping views setup";
-      this.logger.logInfo(details);
-      return { success: true, details, filesProcessed: 0, errors: 0 };
-    }
-
-    const client = new Client(this.dbConfig);
     try {
+      this.logger.log("Setting up views...", "info");
+      
+      const client = new Client({
+        host: process.env.DB_HOST,
+        port: process.env.DB_PORT,
+        database: process.env.DB_NAME,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD
+      });
+
       await client.connect();
-      this.logger.logInfo("Connected to database for views setup");
+      this.logger.log("Connected to database for views setup", "info");
 
-      await this.dropViewsFirst(client, files);
+      // Collect all files from existing directories only
+      const allViewFiles = [];
+      const datasetViewsFiles = this.readSqlFiles(this.datasetViewsDir);
+      const dhis2ViewsFiles = this.readSqlFiles(this.dhis2ViewsDir);
+      
+      allViewFiles.push(...datasetViewsFiles, ...dhis2ViewsFiles);
 
-      let successCount = 0;
-      let errorCount = 0;
-      const fileResults = [];
+      // Drop existing views before recreating them
+      if (allViewFiles.length > 0) {
+        await this.dropViewsBeforeRecreate(client, allViewFiles);
+      }
 
-      for (const f of files) {
-        try {
-          const sql = fs.readFileSync(f.full, "utf8");
-          this.logger.logInfo(`   Executing: ${f.name}`);
-          await client.query(sql);
-          successCount++;
-          fileResults.push({ file: f.name, status: "success" });
-          this.logger.logInfo(`   ✅ ${f.name} executed successfully`);
-        } catch (error) {
-          errorCount++;
-          fileResults.push({
-            file: f.name,
-            status: "error",
-            error: error.message,
-          });
-          this.logger.logError(`   ❌ Error executing ${f.name}`, error);
+      let totalSuccessCount = 0;
+      let totalErrorCount = 0;
+      let totalFilesProcessed = 0;
+
+      // Process dataset views directory first
+      if (datasetViewsFiles.length > 0) {
+        this.logger.log(`Processing dataset views from ${datasetViewsFiles.length} files...`, "info");
+        for (const file of datasetViewsFiles) {
+          const result = await this.executeViewFile(client, file);
+          totalSuccessCount += result.success ? 1 : 0;
+          totalErrorCount += result.success ? 0 : 1;
+          totalFilesProcessed++;
         }
       }
 
-      const details = `Processed ${files.length} files: ${successCount} successful, ${errorCount} errors`;
-
-      if (errorCount > 0) {
-        this.logger.logWarning("Views setup completed with errors");
-        this.logger.logInfo(details);
-        return {
-          success: false,
-          details,
-          filesProcessed: files.length,
-          errors: errorCount,
-          fileResults,
-        };
-      } else {
-        this.logger.logSuccess("Views setup completed successfully!");
-        this.logger.logInfo(details);
-        return {
-          success: true,
-          details,
-          filesProcessed: files.length,
-          errors: 0,
-          fileResults,
-        };
+      // Process DHIS2 views directory second
+      if (dhis2ViewsFiles.length > 0) {
+        this.logger.log(`Processing DHIS2 views from ${dhis2ViewsFiles.length} files...`, "info");
+        for (const file of dhis2ViewsFiles) {
+          const result = await this.executeViewFile(client, file);
+          totalSuccessCount += result.success ? 1 : 0;
+          totalErrorCount += result.success ? 0 : 1;
+          totalFilesProcessed++;
+        }
       }
-    } catch (err) {
-      this.logger.logError("Views setup failed", err);
-      throw err;
-    } finally {
+
       await client.end();
-      this.logger.logInfo("Database connection closed for views");
+      
+      if (totalFilesProcessed === 0) {
+        this.logger.log("No view SQL files found in any directory", "info");
+        return { success: true, filesProcessed: 0, errors: 0 };
+      }
+
+      this.logger.log(`Views setup completed: ${totalSuccessCount} successful, ${totalErrorCount} errors`, 
+        totalErrorCount > 0 ? "warning" : "success");
+      return { success: totalErrorCount === 0, filesProcessed: totalFilesProcessed, errors: totalErrorCount };
+    } catch (error) {
+      this.logger.log(`Error setting up views: ${error.message}`, "error");
+      throw error;
     }
   }
 
   // Main execution function
   async run() {
-    this.logger.logInfo("Starting unified database setup...");
-    this.logger.logInfo("=====================================");
+    this.logger.log("Starting database setup...", "info");
+    this.logger.log("=".repeat(40), "info");
 
     try {
-      // Step 1: Test database connection
-      const connectionResult = await this.executeWithTiming(
-        1,
-        "Database Connection Test",
-        () => this.testConnection(),
-        "Validating environment variables and establishing database connection"
-      );
-      if (!connectionResult.success) {
-        throw new Error("Database connection failed");
-      }
+      // Step 1: Test connection
+      await this.testConnection();
 
       // Step 2: Setup database structure
-      const structureResult = await this.executeWithTiming(
-        2,
-        "Database Structure Setup",
-        () => this.setupDatabaseStructure(),
-        "Creating tables, schemas, and database objects"
-      );
-      if (!structureResult.success) {
-        this.logger.logWarning(
-          "Database structure setup completed with errors, but continuing..."
-        );
-      }
+      await this.setupDatabaseStructure();
 
       // Step 3: Create datasets
-      const datasetsResult = await this.executeWithTiming(
-        3,
-        "Datasets Creation",
-        () => this.createDatasets(),
-        "Creating HMIS datasets and sections"
-      );
-      if (!datasetsResult.success) {
-        this.logger.logWarning(
-          "Datasets creation had issues, but continuing..."
-        );
-      }
+      await this.createDatasets();
 
       // Step 4: Create users
-      const usersResult = await this.executeWithTiming(
-        4,
-        "Default Users Creation",
-        () => this.createUsers(),
-        "Creating admin and regular user accounts"
-      );
-      if (!usersResult.success) {
-        this.logger.logWarning("Users creation had issues, but continuing...");
-      }
+      await this.createUsers();
 
-      // Step 5: Create materialized view IDs
-      const viewIdsResult = await this.executeWithTiming(
-        5,
-        "Materialized View IDs Creation",
-        () => this.createMaterializedViewIds(),
-        "Setting up materialized view identifiers"
-      );
-      if (!viewIdsResult.success) {
-        this.logger.logWarning(
-          "Materialized view IDs creation had issues, but continuing..."
-        );
-      }
+      // Step 5: Create facility table
+      await this.createFacilityTable();
 
-      // Step 6: Upload CSV files
-      const csvResult = await this.executeWithTiming(
-        6,
-        "CSV Files Upload",
-        () => this.uploadCSVFiles(),
-        "Processing and uploading CSV data files"
-      );
-      if (!csvResult.success) {
-        this.logger.logWarning("CSV uploads had issues, but continuing...");
-      }
+      // Step 6: Create materialized view IDs
+      await this.createMaterializedViewIds();
 
-      // Step 7: Setup views
-      const viewsResult = await this.executeWithTiming(
-        7,
-        "Views Setup",
-        () => this.setupViews(),
-        "Creating views for reporting"
-      );
-      if (!viewsResult.success) {
-        this.logger.logWarning("Views setup had issues, but continuing...");
-      }
+      // Step 7: Upload CSV files
+      await this.uploadCSVFiles();
 
-      // Print comprehensive summary
-      this.logger.printFinalSummary();
+      // Step 8: Setup views
+      await this.setupViews();
+
+      // Print summary
+      this.logger.printSummary();
       this.printCredentials();
+      
     } catch (error) {
-      this.logger.logError("Setup failed with fatal error", error);
-      this.logger.printFinalSummary();
+      this.logger.log(`Setup failed: ${error.message}`, "error");
+      this.logger.printSummary();
       throw error;
     } finally {
       await pool.end();
-      this.logger.logInfo("Database connection pool closed");
+      this.logger.log("Database connection closed", "info");
     }
   }
 
+  // Print login credentials
   printCredentials() {
-    console.log("\n" + "=".repeat(80));
+    console.log("\n" + "=".repeat(60));
     console.log("🔑 LOGIN CREDENTIALS");
-    console.log("=".repeat(80));
+    console.log("=".repeat(60));
 
     console.log("\n👤 Admin User:");
-    console.log(`   Username: ${defaultUsers[0].username}`);
-    console.log(`   Password: ${defaultUsers[0].password}`);
-    console.log(
-      `   Role: ${defaultUsers[0].role} (Full access to all modules)`
-    );
-    console.log(
-      `   Name: ${defaultUsers[0].firstname} ${defaultUsers[0].lastname}`
-    );
-    console.log(`   Module: ${defaultUsers[0].module}`);
+    console.log(`   Username: ${CONFIG.users[0].username}`);
+    console.log(`   Password: ${CONFIG.users[0].password}`);
+    console.log(`   Role: ${CONFIG.users[0].role} (Full access)`);
 
     console.log("\n👤 Regular User:");
-    console.log(`   Username: ${defaultUsers[1].username}`);
-    console.log(`   Password: ${defaultUsers[1].password}`);
-    console.log(
-      `   Role: ${defaultUsers[1].role} (Limited access to reports module)`
-    );
-    console.log(
-      `   Name: ${defaultUsers[1].firstname} ${defaultUsers[1].lastname}`
-    );
-    console.log(`   Module: ${defaultUsers[1].module}`);
-
-    console.log("\n⚠️  SECURITY NOTICE:");
-    console.log(
-      "   Remember to change the default passwords after first login!"
-    );
-    console.log("   These are temporary credentials for initial setup.");
-
-    console.log("\n" + "=".repeat(80));
+    console.log(`   Username: ${CONFIG.users[1].username}`);
+    console.log(`   Password: ${CONFIG.users[1].password}`);
+    console.log(`   Role: ${CONFIG.users[1].role} (Reports access)`);
   }
 }
 
-// Run the unified setup
-const setup = new UnifiedSetup();
+// Run the setup
+const setup = new SimpleSetup();
 setup.run().catch((error) => {
   console.error("Fatal error:", error);
   process.exit(1);
 });
 
-export { UnifiedSetup };
+export { SimpleSetup };

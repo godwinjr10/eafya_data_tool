@@ -52,15 +52,15 @@ ma12 AS (
 ),
 ma23 AS (
   SELECT
-    TO_CHAR(date_created, 'YYYYMM') AS report_month,
+    TO_CHAR(diagnosised_date, 'YYYYMM') AS report_month,
     'MA23'::text AS hmis_code,
     'babies_asphyxia' as indicator,
     COUNT(*)::bigint AS value
-  FROM reporting.patient_diagnosis
-  WHERE date_created IS NOT null
+  FROM reporting.patient_conditions
+  WHERE diagnosised_date IS NOT null
     AND classification = 'Confirmed'
     AND disease_name ILIKE '%asphyxia%'
-  GROUP BY TO_CHAR(date_created, 'YYYYMM')
+  GROUP BY TO_CHAR(diagnosised_date, 'YYYYMM')
 ),
 ma24 AS (
   SELECT

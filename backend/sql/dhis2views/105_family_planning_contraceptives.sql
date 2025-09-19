@@ -10,7 +10,7 @@
 -- ORDER BY report_month DESC;
 CREATE VIEW reporting."105_family_planning_contraceptives" AS
 SELECT
-    TO_CHAR(DATE_TRUNC('month', fp_administered_date), 'YYYYMM') AS report_month,
+    TO_CHAR(DATE_TRUNC('month', administered_on), 'YYYYMM') AS report_month,
     family_planning_name,
     CASE 
         WHEN family_planning_name ILIKE 'Oral Contraceptives' THEN '1.3.28'
@@ -26,5 +26,5 @@ SELECT
     COUNT(*) AS total_dispensed
 FROM reporting.patient_family_planning
 WHERE fp_administered_date IS NOT NULL
-GROUP BY DATE_TRUNC('month', fp_administered_date), family_planning_name, hmis_code
+GROUP BY DATE_TRUNC('month', fp_administered_on), family_planning_name, hmis_code
 ORDER BY report_month DESC;

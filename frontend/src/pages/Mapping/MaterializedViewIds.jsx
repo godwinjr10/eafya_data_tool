@@ -7,10 +7,8 @@ import {
 } from "../../helpers/mappedItemsApi";
 import MappingDialog from "../../components/MappingDialog";
 import MappingTable from "../../components/MappingTable";
-import { FaEye } from "react-icons/fa";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
-const MaterializedViewIds = () => {
+const MaterializedViewIds = ({ onItemSelect, selectedItem }) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({ name: "", id_no: "" });
@@ -80,21 +78,6 @@ const MaterializedViewIds = () => {
   const columns = [
     { accessor: "name", header: "Name" },
 
-    {
-      accessor: "actions",
-      header: "Actions",
-      width: '180px',
-      render: (row) => (
-        <div className="btn-group btn-group-sm" >
-          <Link
-            className="btn btn-outline-primary btn-sm me-2"
-            to={`/materialized-ids/${encodeURIComponent(row.name)}`}
-          >
-            <FaEye /> View Details
-          </Link>
-        </div>
-      ),
-    },
   ];
 
   return (
@@ -114,7 +97,7 @@ const MaterializedViewIds = () => {
               sortable={true}
               emptyMessage="No customized items mappings found"
               className="mapping-table"
-              onRowClick={() => {}}
+              onRowClick={(row) => onItemSelect ? onItemSelect(row.name) : window.location.href = `/materialized-ids/${encodeURIComponent(row.name)}`}
             />
           )}
         </>

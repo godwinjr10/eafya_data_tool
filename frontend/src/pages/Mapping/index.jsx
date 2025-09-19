@@ -1,92 +1,344 @@
-import React, { useState } from "react";
-import Select from "react-select";
+import React, { useState, useRef } from "react";
+import "./MappingInterface.css";
 
-// Import existing components
 import Conditions from "./Conditions";
 import LabTests from "./LabTests";
 import Commodities from "./Commodities";
 import FamilyPlanning from "./FamilyPlanning";
 import Vaccines from "./Vaccines";
 import MaterializedViewIds from "./MaterializedViewIds";
+import MaterializedViewIdsList from "./MaterializedViewIdsList";
+import MaterializedViewIdsDetail from "./MaterializedViewIdsDetail";
+import MappingDialog from "../../components/MappingDialog";
 import UpdateButton from "../../components/UpdateButton";
 
-
 const EafyaMapping = () => {
-  // State management
-  // Mapping type selector - for future component switching (each component manages its own endpoints)
+  const [activeTab, setActiveTab] = useState("dhis2");
   const [selectedMappingType, setSelectedMappingType] = useState("conditions");
+  const [selectedFacility, setSelectedFacility] = useState("Antenatal Clinic");
+  const [selectedMaterializedViewId, setSelectedMaterializedViewId] = useState(null);
+  const materializedViewDetailRef = useRef(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogData, setDialogData] = useState(null);
 
-  // Mapping type options - Each component will manage its own API endpoints
-  const MAPPING_TYPE_OPTIONS = [
-    { value: "conditions", label: "Conditions" },
-    { value: "commodities", label: "Commodities" },
-    { value: "labtests", label: "Latest Lab Tests" },
-    { value: "familyplanning", label: "Family Planning" },
-    { value: "vaccines", label: "Vaccines" },
-    { value: "materializedViewIds", label: "Customization Set Ids" },
+  const DHIS2_MAPPING_OPTIONS = [
+    { 
+      value: "conditions", 
+      label: "Conditions", 
+      icon: <i className="fas fa-heart me-2"></i>,
+      description: "Map HMIS condition codes to eAFYA diseases"
+    },
+    { 
+      value: "commodities", 
+      label: "Commodities", 
+      icon: <i className="fas fa-exchange-alt me-2"></i>,
+      description: "Map HMIS commodity codes to eAFYA products"
+    },
+    { 
+      value: "labtests", 
+      label: "Lab Tests", 
+      icon: <i className="fas fa-vial me-2"></i>,
+      description: "Map HMIS lab test codes to eAFYA laboratory tests"
+    },
+    { 
+      value: "familyplanning", 
+      label: "Family Planning", 
+      icon: <i className="fas fa-heart me-2"></i>,
+      description: "Map HMIS family planning codes to eAFYA items"
+    },
+    { 
+      value: "vaccines", 
+      label: "Vaccines", 
+      icon: <i className="fas fa-syringe me-2"></i>,
+      description: "Map HMIS vaccine codes to eAFYA vaccines"
+    },
   ];
 
-  const renderPageTitle = () => (
-    <div className="bg-primary bg-opacity-10 text-primary p-4 mb-4 rounded-bottom ">
-      <div className="container-fluid">
+  const FACILITY_OPTIONS = [
+    { name: "Antenatal Clinic", category: "Clinics" },
+    { name: "Family Planning Clinic", category: "Clinics" },
+    { name: "Immunization Clinic", category: "Clinics" },
+    { name: "Chronic Care Clinic", category: "Clinics" },
+    { name: "Dental Clinic", category: "Clinics" },
+    { name: "Specialist Clinic", category: "Clinics" },
+    { name: "Nutrition Clinic", category: "Clinics" },
+    { name: "Adolescent Clinic", category: "Clinics" },
+    { name: "Mental Health Clinic", category: "Clinics" },
+    { name: "Paed Ward", category: "Wards" },
+    { name: "Accident and Emergency Ward", category: "Wards" },
+    { name: "Maternity Ward", category: "Wards" },
+    { name: "Postnatal Ward", category: "Wards" },
+    { name: "Main Store", category: "Stores" },
+    { name: "HPV Vaccine", category: "Vaccines" },
+    { name: "Tetanus Vaccine", category: "Vaccines" },
+  ];
+
+  // Group facilities by category
+  const groupedFacilities = FACILITY_OPTIONS.reduce((acc, facility) => {
+    if (!acc[facility.category]) {
+      acc[facility.category] = [];
+    }
+    acc[facility.category].push(facility);
+    return acc;
+  }, {});
+
+  const getCategoryIcon = (category) => {
+    switch (category) {
+      case "Clinics":
+        return <i className="fas fa-stethoscope me-2"></i>;
+      case "Wards":
+        return <i className="fas fa-bed me-2"></i>;
+      case "Stores":
+        return <i className="fas fa-warehouse me-2"></i>;
+      case "Vaccines":
+        return <i className="fas fa-syringe me-2"></i>;
+      default:
+        return <i className="fas fa-hospital me-2"></i>;
+    }
+  };
+
+  const getFacilityIcon = (facilityName) => {
+    if (facilityName.includes("Antenatal")) return <i className="fas fa-heart me-2"></i>;
+    if (facilityName.includes("Family Planning")) return <i className="fas fa-heart me-2"></i>;
+    if (facilityName.includes("Immunization")) return <i className="fas fa-shield-alt me-2"></i>;
+    if (facilityName.includes("Chronic Care")) return <i className="fas fa-user-md me-2"></i>;
+    if (facilityName.includes("Dental")) return <i className="fas fa-tooth me-2"></i>;
+    if (facilityName.includes("Specialist")) return <i className="fas fa-user-md me-2"></i>;
+    if (facilityName.includes("Nutrition")) return <i className="fas fa-apple-alt me-2"></i>;
+    if (facilityName.includes("Adolescent")) return <i className="fas fa-child me-2"></i>;
+    if (facilityName.includes("Mental Health")) return <i className="fas fa-brain me-2"></i>;
+    if (facilityName.includes("Paed Ward")) return <i className="fas fa-baby me-2"></i>;
+    if (facilityName.includes("Accident and Emergency")) return <i className="fas fa-ambulance me-2"></i>;
+    if (facilityName.includes("Maternity Ward")) return <i className="fas fa-baby-carriage me-2"></i>;
+    if (facilityName.includes("Postnatal Ward")) return <i className="fas fa-baby me-2"></i>;
+    if (facilityName.includes("Main Store")) return <i className="fas fa-boxes me-2"></i>;
+    if (facilityName.includes("HPV Vaccine")) return <i className="fas fa-syringe me-2"></i>;
+    if (facilityName.includes("Tetanus Vaccine")) return <i className="fas fa-syringe me-2"></i>;
+    return <i className="fas fa-hospital me-2"></i>;
+  };
+
+  const handleOpenDialog = (dialogData) => {
+    setDialogData(dialogData);
+    setDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+    setDialogData(null);
+  };
+
+  const handleSaveDialog = (selectedIds) => {
+    if (dialogData && dialogData.onSave) {
+      dialogData.onSave(selectedIds);
+    }
+    handleCloseDialog();
+  };
+
+  const renderPageHeader = () => (
+    <div className="bg-light border-bottom">
+      <div className="container-fluid px-4 py-3">
         <div className="row align-items-center">
           <div className="col-lg-8">
-            <nav aria-label="breadcrumb">
-              <ol className="breadcrumb mb-2">
-                <li className="breadcrumb-item text-primary-50">Mapping</li>
-                <li
-                  className="breadcrumb-item active text-primary"
-                  aria-current="page"
-                >
-                  eAFYA HMIS
-                </li>
-              </ol>
-            </nav>
-            <h1
-              className=" text-primary fw-bold mb-2"
-              style={{ fontSize: "1.3rem" }}
-            >
+            <h1 className="display-6 fw-bold mb-2 text-dark">
+              <i className="fas fa-database me-3 text-primary"></i>
               eAFYA HMIS Mapping
             </h1>
-            <p className=" mb-0 text-primary-75">
-              {MAPPING_TYPE_OPTIONS.find(
-                (option) => option.value === selectedMappingType
-              )?.label || "Select a mapping type to get started"}
+            <p className="text-muted mb-0 fs-5">
+              Manage and configure data mappings between HMIS and eAFYA EMR
             </p>
           </div>
-          <div className="col-lg-4 mt-3 mt-lg-0">
-       <div className="d-flex align-items-center gap-2 bg-secondary ">
-       <div className="d-flex flex-column w-100">
-              <label className="form-label text-primary fw-semibold mb-2 text-uppercase small">
-                Mapping Type
-              </label>
-              <Select
-                value={MAPPING_TYPE_OPTIONS.find(
-                  (option) => option.value === selectedMappingType
-                )}
-            
-                onChange={(selectedOption) =>
-                  setSelectedMappingType(selectedOption.value)
-                }
-                options={MAPPING_TYPE_OPTIONS}
-                placeholder="Choose mapping type..."
-                isSearchable={true}
-                className="react-select-container"
-                classNamePrefix="react-select"
-             
-              />
+          {/* <div className="col-lg-4 mt-2 mt-lg-0">
+            <div className="d-flex justify-content-end">
+              <UpdateButton />
             </div>
+          </div> */}
+        </div>
+      </div>
+    </div>
+  );
 
-            <div className="d-flex flex-column gap-2">
-            <UpdateButton />
+  const renderTabNavigation = () => (
+    <div className="border-bottom">
+      <div className="container-fluid px-4 py-3">
+        <ul className="nav nav-tabs nav-tabs-custom border-0" role="tablist">
+          <li className="nav-item" role="presentation">
+            <button
+              className={`nav-link ${activeTab === "dhis2" ? "active" : ""}`}
+              onClick={() => setActiveTab("dhis2")}
+              type="button"
+              role="tab"
+            >
+              <i className="fas fa-database me-2"></i>
+              DHIS2 Mapping
+            </button>
+          </li>
+          <li className="nav-item" role="presentation">
+            <button
+              className={`nav-link ${activeTab === "customization" ? "active" : ""}`}
+              onClick={() => setActiveTab("customization")}
+              type="button"
+              role="tab"
+            >
+              <i className="fas fa-cogs me-2"></i>
+              Customization Sets
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  );
+
+  const renderDHIS2TabContent = () => (
+    <div className="container-fluid px-4 py-4">
+      <div className="row">
+        <div className="col-lg-3">
+          <div className="card border-0 shadow-sm h-100">
+            <div className="card-header bg-light border-0">
+              <h5 className="card-title mb-0 fw-semibold">
+                <i className="fas fa-exchange-alt me-2 text-primary"></i>
+                Mapping Type
+              </h5>
+              <p className="text-muted small mb-0 mt-1">
+                Select the type of data mapping to configure
+              </p>
             </div>
-       </div>
+            <div className="card-body p-3">
+              <div className="d-grid gap-2">
+                {DHIS2_MAPPING_OPTIONS.map((option) => (
+                  <button
+                    key={option.value}
+                    className={`btn text-start ${
+                      selectedMappingType === option.value 
+                        ? "btn-primary text-white" 
+                        : "btn-outline-primary"
+                    }`}
+                    onClick={() => setSelectedMappingType(option.value)}
+                    style={{ minHeight: "55px" }}
+                  >
+                    <div className="d-flex align-items-center">
+                      <span className={selectedMappingType === option.value ? "text-white" : "text-primary"}>
+                        {option.icon}
+                      </span>
+                      <div className="flex-grow-1">
+                        <div className={`fw-semibold ${
+                          selectedMappingType === option.value ? "text-white" : "text-dark"
+                        }`}>
+                          {option.label}
+                        </div>
+                        <small className={`d-block ${
+                          selectedMappingType === option.value ? "text-white-75" : "text-muted"
+                        }`}>
+                          {option.description}
+                        </small>
+                      </div>
+                      {selectedMappingType === option.value && (
+                        <i className="fas fa-check-circle text-white ms-2"></i>
+                      )}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="col-lg-9">
+          <div className="card border-0 shadow-sm">
+            <div className="card-header bg-light border-0 d-flex align-items-center justify-content-between">
+              <div>
+                <h5 className="card-title mb-0 fw-semibold">
+                  {DHIS2_MAPPING_OPTIONS.find(opt => opt.value === selectedMappingType)?.icon}
+                  <span className="ms-2">
+                    {DHIS2_MAPPING_OPTIONS.find(opt => opt.value === selectedMappingType)?.label} Mapping
+                  </span>
+                </h5>
+                <p className="text-muted small mb-0 mt-1">
+                  {DHIS2_MAPPING_OPTIONS.find(opt => opt.value === selectedMappingType)?.description}
+                </p>
+              </div>
+              <button 
+                className="btn btn-outline-primary btn-sm"
+                onClick={() => window.location.reload()}
+              >
+                <i className="fas fa-sync-alt me-1"></i>
+                Refresh
+              </button>
+            </div>
+            <div className="card-body p-0">
+              {renderSelectedComponent()}
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
-  // Render different components based on selected mapping type
+
+  const renderCustomizationTabContent = () => (
+    <div className="container-fluid px-4 py-4">
+      <div className="row">
+        <div className="col-lg-3">
+          <div className="card border-0 shadow-sm h-100">
+            <div className="card-header bg-light border-0">
+              <h5 className="card-title mb-0 fw-semibold">
+                <i className="fas fa-database me-2 text-primary"></i>
+                Materialized View IDs
+              </h5>
+              <p className="text-muted small mb-0 mt-1">
+                Select a materialized view ID to manage its mappings
+              </p>
+            </div>
+            <div className="card-body p-2" style={{ maxHeight: "600px", overflowY: "auto" }}>
+              <MaterializedViewIdsList 
+                onItemSelect={setSelectedMaterializedViewId}
+                selectedItem={selectedMaterializedViewId}
+              />
+            </div>
+          </div>
+        </div>
+        <div className="col-lg-9">
+          <div className="card border-0 shadow-sm">
+            <div className="card-header bg-light border-0 d-flex align-items-center justify-content-between">
+              <div>
+                <h5 className="card-title mb-0 fw-semibold">
+                  {selectedMaterializedViewId ? `${selectedMaterializedViewId}` : "Select a Materialized View ID"}
+                </h5>
+                <p className="text-muted small mb-0 mt-1">
+                  {selectedMaterializedViewId 
+                    ? `Manage details for ${selectedMaterializedViewId}` 
+                    : "Choose a materialized view ID from the left to view and manage its details"
+                  }
+                </p>
+              </div>
+              {selectedMaterializedViewId && (
+                <button 
+                  className="btn btn-primary btn-sm"
+                  onClick={() => materializedViewDetailRef.current?.openAdd()}
+                >
+                  <i className="fas fa-plus me-1"></i>
+                  Add Mapping
+                </button>
+              )}
+            </div>
+            <div className="card-body p-0">
+              {selectedMaterializedViewId ? (
+                <MaterializedViewIdsDetail 
+                  ref={materializedViewDetailRef}
+                  name={selectedMaterializedViewId}
+                  onOpenDialog={handleOpenDialog}
+                />
+              ) : (
+                <div className="text-center py-5">
+                  <i className="fas fa-database fa-3x text-muted mb-3"></i>
+                  <h5 className="text-muted">No Materialized View ID Selected</h5>
+                  <p className="text-muted">Please select a materialized view ID from the left panel to view its mappings.</p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   const renderSelectedComponent = () => {
     switch (selectedMappingType) {
       case "commodities":
@@ -99,17 +351,33 @@ const EafyaMapping = () => {
         return <Vaccines />;
       case "conditions":
         return <Conditions />;
-      case "materializedViewIds":
-        return <MaterializedViewIds />;
       default:
-        return <Commodities />;
+        return <Conditions />;
     }
   };
 
   return (
-    <div className="">
-      {renderPageTitle()}
-      {renderSelectedComponent()}
+    <div className="min-vh-100 bg-light">
+      {renderPageHeader()}
+      {renderTabNavigation()}
+      <div className="tab-content">
+        {activeTab === "dhis2" && renderDHIS2TabContent()}
+        {activeTab === "customization" && renderCustomizationTabContent()}
+      </div>
+      
+      {dialogOpen && dialogData && (
+        <MappingDialog
+          isOpen={dialogOpen}
+          onClose={handleCloseDialog}
+          onSave={handleSaveDialog}
+          hmisName={dialogData.hmisName}
+          section={dialogData.section}
+          eafyaItems={dialogData.eafyaItems}
+          onEafyaItemsLoaded={dialogData.onEafyaItemsLoaded}
+          datasetCode={dialogData.datasetCode}
+          searchEndpoint={dialogData.searchEndpoint}
+        />
+      )}
     </div>
   );
 };

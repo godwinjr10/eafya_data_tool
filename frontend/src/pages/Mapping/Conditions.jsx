@@ -1,9 +1,7 @@
 // Conditions.js
 import React, { useEffect, useMemo, useState } from "react";
-import { FaEye, FaPlus, FaTrash } from "react-icons/fa";
 import { useHistory } from "react-router-dom";
 import API from "../../helpers/api";
-import MappingDialog from "../../components/MappingDialog";
 
 import MappingTable from "../../components/MappingTable";
 
@@ -79,22 +77,6 @@ const Conditions = () => {
       header: "Section Name",
       sortable: true,
       render: (row) => row.section_name || "-",
-    },
-    {
-      accessor: "actions",
-      header: "Actions",
-      sortable: false,
-      render: (row) => (
-        <div className="item-mappings">
-          <button
-            className="btn btn-outline-primary btn-sm me-2"
-            onClick={() => handleViewDetails(row)}
-            title="View Details"
-          >
-            <FaEye /> View Mapping
-          </button>
-        </div>
-      ),
     },
   ];
 

@@ -1,20 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory, useLocation } from "react-router-dom";
-import { FaArrowLeft, FaHistory, FaInfoCircle, FaPlus } from "react-icons/fa";
-import { FaTrash } from "react-icons/fa";
+import { useParams, useHistory } from "react-router-dom";
 import API from "../../helpers/api";
-import MappingTable from "../../components/MappingTable";
 import MappingDialog from "../../components/MappingDialog";
+
 const MappingDetail = () => {
   const { mappingType, id } = useParams();
   const history = useHistory();
-  const location = useLocation();
 
   const [mappingData, setMappingData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [mappingHistory, setMappingHistory] = useState([]);
   const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
   const [eafyaItems, setEafyaItems] = useState([]);
+  const [confirmModal, setConfirmModal] = useState({ isOpen: false, mappingId: null, mappingName: "" });
 
   // Mapping type configurations
   const MAPPING_CONFIGS = {
@@ -121,44 +119,54 @@ const MappingDetail = () => {
     }
   };
 
-  const handleDelete = async (eafyaId) => {
-    if (window.confirm("Are you sure you want to delete this mapping?")) {
-      try {
-        // Build the delete payload with the required fields
-        const hmis_code = id; // The ID from URL params is the hmis_code
+  const handleDelete = (eafyaId, mappingName) => {
+    setConfirmModal({
+      isOpen: true,
+      mappingId: eafyaId,
+      mappingName: mappingName
+    });
+  };
 
-        // Get section value from the current mapping context
-        let sectionValue;
-        if (mappingData && mappingData[config.sectionField]) {
-          sectionValue = mappingData[config.sectionField];
-        } else if (mappingData && mappingData.section_id) {
-          sectionValue = mappingData.section_id;
-        } else if (mappingData && mappingData._section_id) {
-          sectionValue = mappingData._section_id;
-        } else {
-          sectionValue = "6.1"; // Default section
-        }
+  const confirmDelete = async () => {
+    try {
+      // Build the delete payload with the required fields
+      const hmis_code = id; // The ID from URL params is the hmis_code
 
-        // Simple payload - just send what we need
-        const payload = {
-          eafya_id: eafyaId,
-        };
-
-        console.log("Deleting mapping with payload:", payload);
-
-        // Call the delete endpoint
-        const res = await API.delete(config.endpoint, { data: payload });
-
-        if (res.status === 200 || res.status === 204) {
-          // Refresh the mapping data to show updated list
-          fetchMappingDetail();
-          alert("Mapping deleted successfully!");
-        }
-      } catch (error) {
-        console.error("Error deleting mapping:", error);
-        alert("Failed to delete mapping. Please try again.");
+      // Get section value from the current mapping context
+      let sectionValue;
+      if (mappingData && mappingData[config.sectionField]) {
+        sectionValue = mappingData[config.sectionField];
+      } else if (mappingData && mappingData.section_id) {
+        sectionValue = mappingData.section_id;
+      } else if (mappingData && mappingData._section_id) {
+        sectionValue = mappingData._section_id;
+      } else {
+        sectionValue = "6.1"; // Default section
       }
+
+      // Simple payload - just send what we need
+      const payload = {
+        eafya_id: confirmModal.mappingId,
+      };
+
+      console.log("Deleting mapping with payload:", payload);
+
+      // Call the delete endpoint
+      const res = await API.delete(config.endpoint, { data: payload });
+
+      if (res.status === 200 || res.status === 204) {
+        // Refresh the mapping data to show updated list
+        fetchMappingDetail();
+        setConfirmModal({ isOpen: false, mappingId: null, mappingName: "" });
+      }
+    } catch (error) {
+      console.error("Error deleting mapping:", error);
+      alert("Failed to delete mapping. Please try again.");
     }
+  };
+
+  const cancelDelete = () => {
+    setConfirmModal({ isOpen: false, mappingId: null, mappingName: "" });
   };
   const handleAdd = (row) => {
     setDialogState({ isOpen: true, row });
@@ -242,21 +250,22 @@ const MappingDetail = () => {
   const columns = [
     {
       accessor: "eafya_id",
-      header: "Eafya ID",
-      width: "120px",
+      header: "ID",
+      width: "80px",
       sortable: true,
     },
     {
       accessor: "eafya_name",
-      header: "Eafya Name",
+      header: "Name",
       sortable: true,
     },
     {
       accessor: "actions",
       header: "Actions",
+      width: "100px",
       sortable: false,
       render: (row) => (
-        <div className="item-mappings">
+        <div className="d-flex justify-content-center">
           <button
             className="btn btn-outline-danger btn-sm"
             onClick={(e) => {
@@ -265,7 +274,7 @@ const MappingDetail = () => {
             }}
             title="Delete mapping"
           >
-            <FaTrash />
+            <i className="fas fa-trash"></i>
           </button>
         </div>
       ),
@@ -273,67 +282,116 @@ const MappingDetail = () => {
   ];
   console.log("mapping data==", mappingData);
   return (
-    <div className="container-fluid py-4">
-      {/* Header */}
-      <div className="bg-primary bg-opacity-10 text-primary p-4 mb-4 rounded">
-        <div className="row align-items-center">
-          <div className="col-lg-8">
-            <nav aria-label="breadcrumb">
-              <ol className="breadcrumb mb-2">
-                <li className="breadcrumb-item">
-                  <button
-                    className="btn btn-link p-0 text-primary text-decoration-none"
-                    onClick={() => history.push("/mapping")}
-                  >
-                    <FaArrowLeft className="me-1" />
-                    Mapping
-                  </button>
-                </li>
-                <li
-                  className="breadcrumb-item active text-primary"
-                  aria-current="page"
+    <div className="container-fluid py-3">
+      {/* Modern Header */}
+      <div className="page-header-modern">
+        <div className="container-fluid">
+          <div className="row align-items-center">
+            <div className="col-lg-8">
+              <nav aria-label="breadcrumb" className="breadcrumb-modern">
+                <ol className="breadcrumb mb-3">
+                  <li className="breadcrumb-item">
+                    <button
+                      className="btn btn-outline-secondary btn-sm breadcrumb-back-btn"
+                      onClick={() => history.push("/mapping")}
+                    >
+                      <i className="fas fa-arrow-left me-2"></i>
+                      <span>Back to Mapping</span>
+                    </button>
+                  </li>
+                </ol>
+              </nav>
+              <div className="header-content">
+                <h1 className="page-title-modern">
+                  {mappingData?.hmis_name}
+                </h1>
+                <div className="page-meta-simple">
+                  <span className="meta-code">
+                    <i className="fas fa-code me-2"></i>
+                    {mappingData?.hmis_code}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-4">
+              <div className="header-actions">
+                <button
+                  className="btn btn-primary btn-modern"
+                  onClick={() => handleAdd(mappingData)}
                 >
-                  {config.title} Detail
-                </li>
-              </ol>
-            </nav>
-            <h1 className="display-6 text-primary fw-bold mb-2">
-              {mappingData?.hmis_name}
-            </h1>
-            <p className="lead mb-0 text-primary opacity-75">
-              <span className="fw-semibold">HMIS Code:</span>{" "}
-              {mappingData?.hmis_code} |{" "}
-              <span className="fw-semibold">Type:</span> {config.title}
-            </p>
-          </div>
-          <div className="col-lg-4 mt-3 mt-lg-0">
-            <div className="d-flex justify-content-end">
-              <button
-                className="btn btn-primary"
-                onClick={() => handleAdd(mappingData)}
-              >
-                <FaPlus className="me-2" />
-                Add Mapping
-              </button>
+                  <i className="fas fa-plus me-2"></i>
+                  Add New Mapping
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-12">
-          <MappingTable
-            data={mappingData?.mappings}
-            columns={columns}
-            loading={loading}
-            pageSize={10}
-            searchable={true}
-            filterable={true}
-            sortable={true}
-            emptyMessage="No condition mappings found"
-            className="mapping-table"
-            onRowClick={() => {}}
-          />
+      {/* Modern Content Section */}
+      <div className="content-section-modern">
+        <div className="container-fluid">
+          {loading ? (
+            <div className="loading-state-modern">
+              <div className="spinner-modern">
+                <div className="spinner-border text-primary" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
+              <p className="loading-text">Loading mappings...</p>
+            </div>
+          ) : mappingData?.mappings && mappingData.mappings.length > 0 ? (
+            <div className="mappings-grid-modern">
+              <div className="mappings-header">
+                <h3 className="mappings-title">
+                  <i className="fas fa-list-ul me-2"></i>
+                  Mappings ({mappingData.mappings.length})
+                </h3>
+                <p className="mappings-subtitle">Manage the eAFYA mappings for this condition</p>
+              </div>
+              <div className="mappings-list">
+                {mappingData.mappings.map((mapping, index) => (
+                  <div key={mapping.eafya_id || index} className="mapping-item-modern">
+                    <div className="mapping-content">
+                      <div className="mapping-id">
+                        <span className="id-badge-simple">{mapping.eafya_id}</span>
+                      </div>
+                      <div className="mapping-details">
+                        <h4 className="mapping-name">{mapping.eafya_name}</h4>
+                      </div>
+                    </div>
+                    <div className="mapping-actions">
+                        <button
+                          className="btn btn-danger btn-sm btn-modern"
+                          onClick={() => handleDelete(mapping.eafya_id, mapping.eafya_name)}
+                          title="Remove mapping"
+                        >
+                          <i className="fas fa-trash"></i>
+                          <span>Remove</span>
+                        </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="empty-state-modern">
+              <div className="empty-icon">
+                <i className="fas fa-inbox"></i>
+              </div>
+              <h3 className="empty-title">No mappings found</h3>
+              <p className="empty-description">
+                This condition doesn't have any eAFYA mappings yet. Click "Add New Mapping" to create one.
+              </p>
+              <button
+                className="btn btn-primary btn-modern"
+                onClick={() => handleAdd(mappingData)}
+              >
+                <i className="fas fa-plus me-2"></i>
+                Create First Mapping
+              </button>
+            </div>
+          )}
         </div>
       </div>
 
@@ -348,6 +406,65 @@ const MappingDetail = () => {
         datasetCode={config.datasetCode}
         searchEndpoint={config.searchEndpoint}
       />
+
+      {/* Confirmation Modal */}
+      {confirmModal.isOpen && (
+        <div
+          className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+          style={{ backgroundColor: "rgba(0, 0, 0, 0.7)", zIndex: 9999 }}
+          onClick={cancelDelete}
+        >
+          <div
+            className="bg-white rounded-3 shadow-lg p-4"
+            style={{
+              width: "450px",
+              maxWidth: "95vw",
+              maxHeight: "90vh",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-3">
+              <h5 className="fw-semibold text-dark mb-2 d-flex align-items-center">
+                <i className="fas fa-exclamation-triangle text-warning me-2"></i>
+                Confirm Removal
+              </h5>
+            </div>
+            
+            <div className="mb-4">
+              <p className="mb-3 text-muted">
+                Are you sure you want to remove this mapping?
+              </p>
+              <div className="alert alert-light border rounded-3">
+                <div className="d-flex align-items-center">
+                  <span className="id-badge-simple me-3">{confirmModal.mappingId}</span>
+                  <span className="text-dark">{confirmModal.mappingName}</span>
+                </div>
+              </div>
+              <p className="text-muted small mb-0 mt-2">
+                This action cannot be undone.
+              </p>
+            </div>
+            
+            <div className="d-flex gap-2 justify-content-end">
+              <button
+                type="button"
+                className="btn btn-secondary px-3"
+                onClick={cancelDelete}
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                className="btn btn-danger px-3"
+                onClick={confirmDelete}
+              >
+                <i className="fas fa-trash me-2"></i>
+                Remove Mapping
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
