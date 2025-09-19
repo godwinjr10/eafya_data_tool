@@ -31,6 +31,10 @@ import hmis108Routes from "./routes/dhisreports/108Routes.js";
 import materializedViewIdsRoutes from "./routes/mapping/materializedViewIds.js";
 import updateRoutes from "./routes/update.js";
 import upgradeRoutes from "./routes/upgrade.js";
+import labtestsPatientRoutes from "./routes/reports/labtestsPatient.js";
+import imagingRoutes from "./routes/reports/imaging.js";
+import theatreRoutes from "./routes/reports/theatre.js";
+import familyPlanningDetailsRoutes from "./routes/reports/familyPlanning.js";
 
 dotenv.config();
 
@@ -89,6 +93,10 @@ app.use("/api/child-immunization", childImmunizationRoutes);
 app.use("/api/eafya-details", eafyaDetailRoutes);
 app.use("/api/hmis108", hmis108Routes);
 app.use("/api/materialized-view-ids", materializedViewIdsRoutes);
+app.use("/api/labtests/patient", labtestsPatientRoutes);
+app.use("/api/imaging", imagingRoutes);
+app.use("/api/theatre", theatreRoutes);
+app.use("/api/familyplanning", familyPlanningDetailsRoutes);
 
 // Initialize update routes
 updateRoutes(app);
