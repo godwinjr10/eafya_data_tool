@@ -5,23 +5,23 @@ const defaultFilters = {
 	search: "",
 	gender: "",
 	clinic_id: "",
-	status: "",
-	result: "",
-	lab_test_id: "",
-	parent_id: "",
+	visit_type: "",
+	theater_id: "",
+	major_theater_id: "",
+	major_theater_room_id: "",
 	from_date: "",
 	to_date: "",
-	date_field: "lab_test_date",
+	date_field: "date_created",
 };
 
-const LabTests = () => {
+function Theatre() {
 	const [filters, setFilters] = useState(defaultFilters);
 	const [data, setData] = useState([]);
 	const [page, setPage] = useState(1);
 	const [limit, setLimit] = useState(25);
 	const [total, setTotal] = useState(0);
 	const [loading, setLoading] = useState(false);
-	const [orderBy, setOrderBy] = useState("lab_test_date");
+	const [orderBy, setOrderBy] = useState("date_created");
 	const [orderDir, setOrderDir] = useState("desc");
 
 	const totalPages = useMemo(() => Math.max(1, Math.ceil(total / limit)), [total, limit]);
@@ -30,11 +30,11 @@ const LabTests = () => {
 		try {
 			setLoading(true);
 			const params = { ...filters, page, limit, order_by: orderBy, order_dir: orderDir };
-			const { data: resp } = await API.get("/labtests/patient", { params });
+			const { data: resp } = await API.get("/theatre", { params });
 			setData(resp.data || []);
 			setTotal(resp.pagination?.total || 0);
 		} catch (e) {
-			console.error("Failed to load labtests data", e);
+			console.error("Failed to load theatre data", e);
 			setData([]);
 			setTotal(0);
 		} finally {
@@ -42,35 +42,27 @@ const LabTests = () => {
 		}
 	};
 
-	useEffect(() => {
-		fetchData();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [page, limit, orderBy, orderDir]);
+	useEffect(() => { fetchData(); /* eslint-disable-next-line */ }, [page, limit, orderBy, orderDir]);
 
-	const onFilterChange = (e) => {
-		const { name, value } = e.target;
-		setFilters((prev) => ({ ...prev, [name]: value }));
-	};
+	const onFilterChange = (e) => { const { name, value } = e.target; setFilters((p) => ({ ...p, [name]: value })); };
 	const applyFilters = () => { setPage(1); fetchData(); };
 	const resetFilters = () => { setFilters(defaultFilters); setPage(1); fetchData(); };
 
 	const download = (fmt) => {
 		const params = new URLSearchParams({ ...filters, format: fmt });
-		const url = `${API.defaults.baseURL}/labtests/patient/export?${params.toString()}`;
-		const a = document.createElement("a");
-		a.href = url; a.target = "_blank"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
+		const url = `${API.defaults.baseURL}/theatre/export?${params.toString()}`;
+		const a = document.createElement("a"); a.href = url; a.target = "_blank"; document.body.appendChild(a); a.click(); document.body.removeChild(a);
 	};
 
-	const toggleSort = (field) => {
-		if (orderBy === field) setOrderDir((d) => (d === "asc" ? "desc" : "asc"));
-		else { setOrderBy(field); setOrderDir("asc"); }
-	};
+	const toggleSort = (field) => { if (orderBy === field) setOrderDir((d) => (d === "asc" ? "desc" : "asc")); else { setOrderBy(field); setOrderDir("asc"); } };
+	const formatDate = (d) => (d ? new Date(d).toLocaleDateString() : "");
+	const formatDateTime = (d) => (d ? new Date(d).toLocaleString() : "");
 
 	return (
 		<div className="container-fluid">
 			<div className="card mb-3">
 				<div className="card-header d-flex justify-content-between align-items-center">
-					<h5 className="mb-0">Laboratory - Patient Lab Tests</h5>
+					<h5 className="mb-0">Theatre</h5>
 					<div>
 						<button className="btn btn-sm btn-info me-2" onClick={() => download("csv")}>Export CSV</button>
 						<button className="btn btn-sm btn-success" onClick={() => download("xlsx")}>Export Excel</button>
@@ -80,7 +72,7 @@ const LabTests = () => {
 					<div className="row g-2">
 						<div className="col-md-3">
 							<label className="form-label">Search</label>
-							<input name="search" value={filters.search} onChange={onFilterChange} className="form-control" placeholder="Name, test, clinic, notes..." />
+							<input name="search" value={filters.search} onChange={onFilterChange} className="form-control" placeholder="Name, theatre, category, room, notes..." />
 						</div>
 						<div className="col-md-2">
 							<label className="form-label">Gender</label>
@@ -91,16 +83,20 @@ const LabTests = () => {
 							</select>
 						</div>
 						<div className="col-md-2">
-							<label className="form-label">Status</label>
-							<input name="status" value={filters.status} onChange={onFilterChange} className="form-control" />
+							<label className="form-label">Visit Type</label>
+							<input name="visit_type" value={filters.visit_type} onChange={onFilterChange} className="form-control" />
 						</div>
 						<div className="col-md-2">
-							<label className="form-label">Result</label>
-							<input name="result" value={filters.result} onChange={onFilterChange} className="form-control" />
+							<label className="form-label">Theater ID</label>
+							<input name="theater_id" value={filters.theater_id} onChange={onFilterChange} className="form-control" />
 						</div>
 						<div className="col-md-2">
-							<label className="form-label">Clinic ID</label>
-							<input name="clinic_id" value={filters.clinic_id} onChange={onFilterChange} className="form-control" />
+							<label className="form-label">Major Theatre ID</label>
+							<input name="major_theater_id" value={filters.major_theater_id} onChange={onFilterChange} className="form-control" />
+						</div>
+						<div className="col-md-2">
+							<label className="form-label">Room ID</label>
+							<input name="major_theater_room_id" value={filters.major_theater_room_id} onChange={onFilterChange} className="form-control" />
 						</div>
 						<div className="col-md-2">
 							<label className="form-label">From date</label>
@@ -113,8 +109,9 @@ const LabTests = () => {
 						<div className="col-md-2">
 							<label className="form-label">Date field</label>
 							<select name="date_field" value={filters.date_field} onChange={onFilterChange} className="form-select">
-								<option value="lab_test_date">Lab test date</option>
-								<option value="visit_date">Visit date</option>
+								<option value="date_created">Date created</option>
+								<option value="registered_date">Registered date</option>
+								<option value="scheduled_date">Scheduled date</option>
 							</select>
 						</div>
 						<div className="col-md-2 d-flex align-items-end">
@@ -130,34 +127,68 @@ const LabTests = () => {
 					<table className="table table-striped table-hover">
 						<thead>
 							<tr>
-								<th onClick={() => toggleSort('lab_test_date')} role="button">Lab Test Date</th>
-								<th onClick={() => toggleSort('visit_date')} role="button">Visit Date</th>
-								<th onClick={() => toggleSort('first_name')} role="button">First Name</th>
-								<th onClick={() => toggleSort('last_name')} role="button">Last Name</th>
+								<th onClick={() => toggleSort('date_created')} role="button">Date Created</th>
+								<th onClick={() => toggleSort('registered_date')} role="button">Registered Date</th>
+								<th>Scheduled Date</th>
+								<th>Scheduled Time</th>
+								<th>Patient ID</th>
+								<th>Visit No</th>
+								<th>First Name</th>
+								<th>Last Name</th>
+								<th>Birth Date</th>
 								<th>Gender</th>
-								<th>Clinic</th>
-								<th>Lab Test</th>
-								<th>Result</th>
-								<th>Status</th>
+								<th>Clinic ID</th>
+								<th>Visit Type</th>
+								<th>Theater ID</th>
+								<th>Major Theatre</th>
+								<th>Category</th>
+								<th>Room</th>
+								<th>Patient Major Theatre ID</th>
+								<th>Major Theatre ID</th>
+								<th>Major Theatre Room ID</th>
+								<th>Encounter ID</th>
+								<th>Origin</th>
+								<th>Clinic Session ID</th>
+								<th>Administered By</th>
+								<th>Created By</th>
+								<th>Encounter Notes</th>
+								<th>Illness History</th>
 							</tr>
 						</thead>
 						<tbody>
 							{loading ? (
-								<tr><td colSpan="9">Loading...</td></tr>
+								<tr><td colSpan="28">Loading...</td></tr>
 							) : data.length === 0 ? (
-								<tr><td colSpan="9">No records found</td></tr>
+								<tr><td colSpan="28">No records found</td></tr>
 							) : (
 								data.map((row, idx) => (
 									<tr key={idx}>
-										<td>{row.lab_test_date ? new Date(row.lab_test_date).toLocaleString() : ''}</td>
-										<td>{row.visit_date ? new Date(row.visit_date).toLocaleDateString() : ''}</td>
+										<td>{formatDateTime(row.date_created)}</td>
+										<td>{formatDate(row.registered_date)}</td>
+										<td>{formatDate(row.scheduled_date)}</td>
+										<td>{row.scheduled_time}</td>
+										<td>{row.patient_id}</td>
+										<td>{row.visit_no}</td>
 										<td>{row.first_name}</td>
 										<td>{row.last_name}</td>
+										<td>{formatDate(row.birth_date)}</td>
 										<td>{row.gender}</td>
-										<td>{row.clinic_name}</td>
-										<td>{row.lab_test_name}</td>
-										<td>{row.result}</td>
-										<td>{row.status}</td>
+										<td>{row.clinic_id}</td>
+										<td>{row.visit_type}</td>
+										<td>{row.theater_id}</td>
+										<td>{row.major_theater_name}</td>
+										<td>{row.category}</td>
+										<td>{row.room}</td>
+										<td>{row.patient_major_theatre_id}</td>
+										<td>{row.major_theater_id}</td>
+										<td>{row.major_theater_room_id}</td>
+										<td>{row.enounter_id}</td>
+										<td>{row.origin}</td>
+										<td>{row.clinic_session_id}</td>
+										<td>{row.administered_by_id}</td>
+										<td>{row.created_by_id}</td>
+										<td style={{ maxWidth: 300, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{row.encounter_notes}</td>
+										<td style={{ maxWidth: 300, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{row.illness_history}</td>
 									</tr>
 								))
 							)}
@@ -183,6 +214,6 @@ const LabTests = () => {
 			</div>
 		</div>
 	);
-};
+}
 
-export default LabTests;
+export default Theatre; 

@@ -17,6 +17,9 @@ import Mapping from "../pages/Mapping";
 import EafyaMapping from "../pages/Mapping";
 import MappingDetail from "../pages/Mapping/MappingDetail";
 import MaterializedViewIdsDetail from "../pages/Mapping/MaterializedViewIdsDetail";
+import Imaging from "../pages/Imaging";
+import Theatre from "../pages/Theatre";
+import FamilyPlanning from "../pages/FamilyPlanning";
 
 const AppRoutes = () => {
   return (
@@ -43,6 +46,9 @@ const AppRoutes = () => {
             component={MaterializedViewIdsDetail}
           />
           <ProtectedRoute path="/mappingtest" exact component={Mapping} />
+          <ProtectedRoute path="/imaging" exact component={Imaging} />
+          <ProtectedRoute path="/theatre" exact component={Theatre} />
+          <ProtectedRoute path="/familyplanning" exact component={FamilyPlanning} />
         </MainLayout>
       </Switch>
     </Fragment>
