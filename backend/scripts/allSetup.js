@@ -151,7 +151,7 @@ const CONFIG = {
       { section_id: "6", section_name: "Admissions Deaths by Diagnosis" },
       { section_id: "7", section_name: "Mental Health, Risk Behaviour TB" },
       { section_id: "10", section_name: "Nutrition" },
-        { section_id: "11", section_name: "Rehabilitation" }
+      { section_id: "11", section_name: "Rehabilitation" }
       ]
     }
     ],

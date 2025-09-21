@@ -1,0 +1,102 @@
+﻿id,eafya_id,eafya_name,dataelement,dataelement_code,dataelement_name,Category,Section
+1,,,sDLD6q8wOCn,SP01,SP01. Caesarean sections,Obstetrics,3.1
+2,,,bXGtRI5c0lC,SP02,"SP02. Obstetric fistula repair (RVF, VVF, RVVF)",Obstetrics,3.1
+3,,,MkpBT2vT5Ea,SP03,SP03. Evacuations (incomplete abortion),Obstetrics,3.1
+4,,,IYWgEa8BVrm,SP04,SP04. Other Obstetric Surgery,Obstetrics,3.1
+5,,,v70YDEPYNmu,CS01,CS01. Thoracotomy,Cardiothoracic Surgery,3.4
+6,,,InpXo2p84TL,CS02,CS02. Coronary artery bypass graft,Cardiothoracic Surgery,3.4
+7,,,N3ZBSDlbCOB,CS03,CS03. Heart valve surgery,Cardiothoracic Surgery,3.4
+8,,,yzJGgK2gkKv,CS04,CS04. Atrio/ventricular septal defect surgery,Cardiothoracic Surgery,3.4
+9,,,bc3yiLh7BDD,CS05,CS05. Chest tube insertion,Cardiothoracic Surgery,3.4
+10,,,Wr9KVsGQLd4,GN01,GN01. Laparotomy for ovarian surgery,Gynaecology,3.2
+11,,,lR9X9RCGwNx,GN02,GN02. Abdominal hysterectomy,Gynaecology,3.2
+12,,,ucpSiMvW6WA,GN03,GN03. Vaginal hysterectomy,Gynaecology,3.2
+13,,,Ai45siHVs0U,GN04,GN04. Myomectomy,Gynaecology,3.2
+14,,,rrCNknVDR4M,GN05,GN05. Laparotomy for ectopic pregnancy,Gynaecology,3.2
+15,,,wSEiwbzS12h,GN06,GN06. Other gynaecological surgery,Gynaecology,3.2
+16,,,vNHfWrPtBdh,PR01,PR01. Skin grafting,Plastic Surgery,3.3
+17,,,WOIQPJ0Q4ch,PR02,PR02. Release of contractures (burns),Plastic Surgery,3.3
+18,,,vdt4YnvpmUd,PR03,PR03. Cleft lip and palate surgery,Plastic Surgery,3.3
+19,,,ohXcG1L3DqI,PR04,PR04. Burns management,Plastic Surgery,3.3
+20,,,kZwLRNvQnby,PR05,PR05. Scar revisions,Plastic Surgery,3.3
+21,,,GujGx9Ci89n,VS01,VS01. Varicose vein - ligation & stripping,Vascular Surgery,3.5
+22,,,LqiYBWdxeW7,VS02,VS02. Repair of abdominal aortic aneurysm,Vascular Surgery,3.5
+23,,,Pda0kNZCTbm,VS03,VS03. Other vascular surgery,Vascular Surgery,3.5
+24,,,SmFAlm1PgYQ,PS01,PS01. Laparotomy for intussusception,Paediatric Surgery,3.6
+25,,,K6TjpCYCC2t,PS02,PS02. Neonatal laparotomy,Paediatric Surgery,3.6
+26,,,iqQy1EQQXwA,PS03,PS03. Neonatal colostomy,Paediatric Surgery,3.6
+27,,,cZZzWLRMeph,PS04,PS04. Pull through,Paediatric Surgery,3.6
+28,,,U8YFuKAmbGO,PS05,PS05. Ramstedt's pyloromyotomy,Paediatric Surgery,3.6
+29,,,JcKxXChRZIn,PS06,PS06. Gastroschisis repair,Paediatric Surgery,3.6
+30,,,gvQM2vI6GKw,PS07,PS07.Stoma placement,Paediatric Surgery,3.6
+31,,,p7I8eXtvCtH,PS08,PS08. Other paediatric surgery,Paediatric Surgery,3.6
+32,,,XDyaUqmBzdI,OC01,OC01. Cataract Surgery,Ocular Surgery,3.7
+33,,,TOyterBj30O,OC02,OC02. Glaucoma Surgery,Ocular Surgery,3.7
+34,,,nu4DRHqmkeW,OC03,OC03. Orbital Surgery,Ocular Surgery,3.7
+35,,,rHp5CUB5WLX,OC04,OC04. Opthalmic laser Interventions,Ocular Surgery,3.7
+36,,,vnvuNpQaQwF,OC05,OC05. Surgery for penetrating eye injury,Ocular Surgery,3.7
+37,,,JmrZPitsaj1,OC06,OC06. Trachoma Surgery,Ocular Surgery,3.7
+38,,,JeALw6paf8K,OC07,OC07. Pterygium excision,Ocular Surgery,3.7
+39,,,NOT5Yw9h7CE,OC08,OC08. Other ocular surgery,Ocular Surgery,3.7
+40,,,zEqnsEWsIfy,OR01,OR01. Internal fixation,Trauma & Orthopaedic Surgery,3.8
+41,,,bvo3ZHoUvOe,OR02,OR02. External fixation,Trauma & Orthopaedic Surgery,3.8
+42,,,ZoPc492lncm,OR03,OR03. Arthroplasty,Trauma & Orthopaedic Surgery,3.8
+43,,,DGz8vjuaY5x,OR04,OR04. Amputation,Trauma & Orthopaedic Surgery,3.8
+44,,,AH2jKSkLju4,OR05,OR05. Spinal surgery,Trauma & Orthopaedic Surgery,3.8
+45,,,mLb7dxlEIrF,OR06,OR06. Arthroscopy,Trauma & Orthopaedic Surgery,3.8
+46,,,bshHls66K2a,OR07,OR07. Other trauma & orthopaedic surgery,Trauma & Orthopaedic Surgery,3.8
+47,,,QvlggWB62I9,ES01,ES01. Thyroidectomy,Endocrine Surgery,3.9
+48,,,opWJppbNZCF,ES02,ES02. Adrenalectomy,Endocrine Surgery,3.9
+49,,,HOhljVgTvSL,ES03,ES03. Other endocrine surgery,Endocrine Surgery,3.9
+50,,,d9GWZJJ2r9T,NS01,NS01. Brain surgery,Neuro surgery,3.10
+51,,,my8OSGk4Rdz,NS02,NS02. Burr Hole,Neuro surgery,3.10
+52,,,nMPHGMjMvZR,NS03,NS03. Craniotomy/craniectomy for trauma,Neuro surgery,3.10
+53,,,BB07cBjzx1Q,NS04,NS04. ETV/CPC (Endoscopic 3rd Ventriculostomy/ cauterisation) choroid plexus,Neuro surgery,3.10
+54,,,FjtjjiIA4Oq,NS05,NS05. Spina-bifida surgery,Neuro surgery,3.10
+55,,,oRztWjPFjbk,NS06,NS06. VP shunt,Neuro surgery,3.10
+56,,,dln07lFc7V9,NS07,NS07. Skull fracture elevation,Neuro surgery,3.10
+57,,,IK7m3dy69hJ,NS08,NS08. Other neurosurgery,Neuro surgery,3.10
+58,,,pZDIHyZOWK4,TS01,TS01. Tracheostomy,ENT Surgery,3.11
+59,,,vL5h1uh9FER,TS02,TS02. Adenotonsillectomy,ENT Surgery,3.11
+60,,,Oi25Tc9WDiL,TS03,TS03. Nasal surgery,ENT Surgery,3.11
+61,,,RFiAvKOyyiy,TS04,TS04. Laryngological surgery,ENT Surgery,3.11
+62,,,B7taodYrMCs,TS05,TS05. Otological surgery,ENT Surgery,3.11
+63,,,P0ClXAhllg9,TS06,TS06. ENT endoscopic surgery,ENT Surgery,3.11
+64,,,iXbejagWQ8S,TS07,TS07. Other ENT surgeries,ENT Surgery,3.11
+65,,,UWT7ufBkREK,BS01,BS01. Mastectomy,Breast Surgery,3.12
+66,,,HyGhE244Xpy,BS02,BS02. Other breast surgery,Breast Surgery,3.12
+67,,,QaduuMiuCqZ,UR01,UR01.Prostatectomy,Urology,3.13
+68,,,WLzv46Pa4si,UR02,UR02. Renal surgery ,Urology,3.13
+69,,,ZdTB8r8X8hA,UR03,UR03. Urethral surgery,Urology,3.13
+70,,,nwAiQ0eKbWk,UR04,"UR04. Testicular Surgery (Orchidopexy, ochidectomy,BSO)",Urology,3.13
+71,,,W64onHk9SXI,UR05,"UR05. Urine diversion (SPC, Nephrostomy)",Urology,3.13
+72,,,tNyVMeobfib,UR06,UR06. Kidney transplant,Urology,3.13
+73,,,kfnKksFMkj5,UR07,UR07. Hydrocelectomy(LF),Urology,3.13
+74,,,ubHq9cyJZdJ,UR08,UR08. Other urological surgery,Urology,3.13
+75,,,QWIfLFOY95Q,UG01,UG01. Gastric Surgery,Upper GI Surgery,3.14
+76,,,m1F0odI3nY6,UG02,UG02. Ileostomy surgery,Upper GI Surgery,3.14
+77,,,Oo6kbn4NLM8,UG03,UG03. Laparoscopic Surgery,Upper GI Surgery,3.14
+78,,,C5bLe7kUiVm,UG04,UG04. Other upper GI surgery,Upper GI Surgery,3.14
+79,,,VQ6E8ZmnNxp,HS01,HS01. Cholecystectomy,Hepatobilliary Surgery,3.15
+80,,,A9CZ0GJSpkN,HS02,HS02. Liver surgery,Hepatobilliary Surgery,3.15
+81,,,b7XWAQx1lJi,HS03,HS03. Pancreatic surgery,Hepatobilliary Surgery,3.15
+82,,,FRLjpKeP7wn,HS04,HS04. Splenic surgery,Hepatobilliary Surgery,3.15
+83,,,s9ZBdsfMwaA,HS05,HS05. Bilio-intestinal diversion,Hepatobilliary Surgery,3.15
+84,,,vyHBTXys1fJ,HS06,HS06. Other hepatobilliary surgery,Hepatobilliary Surgery,3.15
+85,,,fAz4wFqRUpJ,CR01,CR01. Colectomy,Colorectal Surgery,3.16
+86,,,idmpo87icoK,CR02,CR02. Rectal Cancer Surgery,Colorectal Surgery,3.16
+87,,,GHVSykYKkPK,CR03,CR03. Colostomy surgery,Colorectal Surgery,3.16
+88,,,V4e4taKv2AA,CR04,CR04. Appendicectomy,Colorectal Surgery,3.16
+89,,,OwmgCtG3qmU,CR05,CR05. Other colorectal surgery,Colorectal Surgery,3.16
+90,,,BXf9gxMRvYM,HE01,HE01. Hernia Repair,Hernia Surgery,3.17
+91,,,gBI7w5S06zy,OM01,OM01. Mandible surgery,Oral & Maxillofacial Surgery,3.18
+92,,,jRpz78CUX9D,OM02,OM02. Salivary gland surgery,Oral & Maxillofacial Surgery,3.18
+93,,,FeLnRH2vgP0,OM03,OM03. Neck dissection,Oral & Maxillofacial Surgery,3.18
+94,,,lOLb0CrqSf2,OM04,OM04. Internal fixation for facial trauma,Oral & Maxillofacial Surgery,3.18
+95,,,ZHB4D9EJfnd,OM05,OM05. Dental surgery,Oral & Maxillofacial Surgery,3.18
+96,,,ThcfDagtF5Z,OM06,OM06. Other oral & maxillofacial surgery,Oral & Maxillofacial Surgery,3.18
+97,,,weXCnTwNRdi,OT01,OT01. Debridement,Other surgical procedures,3.19
+98,,,tUrE7lLu5zM,OT02,OT02. Incision and drainage of abscesses,Other surgical procedures,3.19
+99,,,ZqjrJKp0kdu,OT03,OT03. Circumcision,Other surgical procedures,3.19
+100,,,uH4RGku7590,OT04,OT04. Other laparotomy,Other surgical procedures,3.19
+101,,,LBi9QhO72gt,OT05,OT05. Other surgical procedures not listed,Other surgical procedures,3.19

@@ -76,6 +76,30 @@ const MappingDetail = () => {
         { key: "_section_id", label: "Section ID" },
       ],
     },
+    procedures: {
+      title: "Procedures Mapping",
+      endpoint: "/eafya/procedures",
+      searchEndpoint: "/eafya/procedure-items",
+      sectionField: "_section_id",
+      datasetCode: "HMIS1052_VACCINE",
+      fields: [
+        { key: "hmis_code", label: "HMIS Code" },
+        { key: "hmis_name", label: "HMIS Name" },
+        { key: "_section_id", label: "Section ID" },
+      ],
+    },
+    imaging: {
+      title: "Imaging Mapping",
+      endpoint: "/eafya/imaging",
+      searchEndpoint: "/eafya/imaging-items",
+      sectionField: "_section_id",
+      datasetCode: "HMIS1052_VACCINE",
+      fields: [
+        { key: "hmis_code", label: "HMIS Code" },
+        { key: "hmis_name", label: "HMIS Name" },
+        { key: "_section_id", label: "Section ID" },
+      ],
+    },
   };
 
   const config = MAPPING_CONFIGS[mappingType] || MAPPING_CONFIGS.commodities;

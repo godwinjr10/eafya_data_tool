@@ -351,6 +351,151 @@ router.delete("/conditions", async (req, res) => {
   }
 });
 
+// Get procedures mappings
+router.get("/procedures", async (req, res) => {
+  try {
+    const query = `
+      select 
+        id,
+        hmis_code, 
+        SUBSTRING(hmis_name FROM 6) AS hmis_name,
+        section_id, 
+        section_name
+      FROM reporting.dhis2_dataelements_108_procedures
+      ORDER BY section_id
+        `;
+
+    const { rows } = await pool.query(query);
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get procedures  items for mapping
+router.get("/procedures-items", async (req, res) => {
+  try {
+    const query = `
+            SELECT 
+              id, 
+              major_theater_name as name
+            FROM dwh.dim_eafya_major_theatre;
+            ORDER BY "name"
+        `;
+
+    const { rows } = await pool.query(query);
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Delete a specific procedures  mapping
+router.delete("/procedures", async (req, res) => {
+  try {
+    const { eafya_id } = req.body;
+
+    if (!eafya_id) {
+      return res.status(400).json({
+        message: "Missing required fields: eafya_id",
+      });
+    }
+
+    console.log("Deleting condition mapping with:", {
+      eafya_id,
+    });
+
+    const result = await pool.query(
+      "DELETE FROM reporting.dhis2_dataelements_108_procedures WHERE eafya_id = $1",
+      [eafya_id]
+    );
+
+    console.log("Delete result:", result.rowCount, "rows affected");
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "Mapping not found" });
+    }
+
+    res.json({ message: "Condition mapping deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting condition mapping:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get Imaging mappings
+router.get("/imaging", async (req, res) => {
+  try {
+    const query = `
+      select 
+        id,
+        hmis_code, 
+        SUBSTRING(hmis_name FROM 6) AS hmis_name,
+        section_id, 
+        section_name
+      FROM reporting.dhis2_dataelements_108_imaging
+      ORDER BY section_id
+        `;
+
+    const { rows } = await pool.query(query);
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get Imaging items for mapping
+router.get("/imaging-items", async (req, res) => {
+  try {
+    const query = `
+            SELECT 
+              id, 
+              "name",
+              imaging_category_id, 
+            FROM dwh.dim_eafya_imaging;
+            ORDER BY "name"
+        `;
+
+    const { rows } = await pool.query(query);
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Delete a specific condition mapping
+router.delete("/imaging", async (req, res) => {
+  try {
+    const { eafya_id } = req.body;
+
+    if (!eafya_id) {
+      return res.status(400).json({
+        message: "Missing required fields: eafya_id",
+      });
+    }
+
+    console.log("Deleting condition mapping with:", {
+      eafya_id,
+    });
+
+    const result = await pool.query(
+      "DELETE FROM reporting.dhis2_dataelements_108_imaging WHERE eafya_id = $1",
+      [eafya_id]
+    );
+
+    console.log("Delete result:", result.rowCount, "rows affected");
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: "Mapping not found" });
+    }
+
+    res.json({ message: "Condition mapping deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting condition mapping:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
 //For creating the mappings
 
 router.post("/commodities", async (req, res) => {

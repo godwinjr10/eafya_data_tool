@@ -6,6 +6,8 @@ import LabTests from "./LabTests";
 import Commodities from "./Commodities";
 import FamilyPlanning from "./FamilyPlanning";
 import Vaccines from "./Vaccines";
+import Procedures from "./Procedures";
+import Imaging from "./Imaging";
 import MaterializedViewIds from "./MaterializedViewIds";
 import MaterializedViewIdsList from "./MaterializedViewIdsList";
 import MaterializedViewIdsDetail from "./MaterializedViewIdsDetail";
@@ -15,7 +17,6 @@ import UpdateButton from "../../components/UpdateButton";
 const EafyaMapping = () => {
   const [activeTab, setActiveTab] = useState("dhis2");
   const [selectedMappingType, setSelectedMappingType] = useState("conditions");
-  const [selectedFacility, setSelectedFacility] = useState("Antenatal Clinic");
   const [selectedMaterializedViewId, setSelectedMaterializedViewId] = useState(null);
   const materializedViewDetailRef = useRef(null);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -25,13 +26,13 @@ const EafyaMapping = () => {
     { 
       value: "conditions", 
       label: "Conditions", 
-      icon: <i className="fas fa-heart me-2"></i>,
+      icon: <i className="fas fa-heartbeat me-2"></i>,
       description: "Map HMIS condition codes to eAFYA diseases"
     },
     { 
       value: "commodities", 
-      label: "Commodities", 
-      icon: <i className="fas fa-exchange-alt me-2"></i>,
+      label: "Essential Commodities", 
+      icon: <i className="fas fa-boxes me-2"></i>,
       description: "Map HMIS commodity codes to eAFYA products"
     },
     { 
@@ -43,7 +44,7 @@ const EafyaMapping = () => {
     { 
       value: "familyplanning", 
       label: "Family Planning", 
-      icon: <i className="fas fa-heart me-2"></i>,
+      icon: <i className="fas fa-venus-mars me-2"></i>,
       description: "Map HMIS family planning codes to eAFYA items"
     },
     { 
@@ -52,70 +53,19 @@ const EafyaMapping = () => {
       icon: <i className="fas fa-syringe me-2"></i>,
       description: "Map HMIS vaccine codes to eAFYA vaccines"
     },
+    { 
+      value: "procedures", 
+      label: "Surgical Procedures", 
+      icon: <i className="fas fa-user-md me-2"></i>,
+      description: "Map HMIS Surgical Procedures to eAFYA Procedures"
+    },
+    { 
+      value: "imaging", 
+      label: "Radiology and Imaging", 
+      icon: <i className="fas fa-x-ray me-2"></i>,
+      description: "Map HMIS Radiology and Imaging to eAFYA Ids"
+    },
   ];
-
-  const FACILITY_OPTIONS = [
-    { name: "Antenatal Clinic", category: "Clinics" },
-    { name: "Family Planning Clinic", category: "Clinics" },
-    { name: "Immunization Clinic", category: "Clinics" },
-    { name: "Chronic Care Clinic", category: "Clinics" },
-    { name: "Dental Clinic", category: "Clinics" },
-    { name: "Specialist Clinic", category: "Clinics" },
-    { name: "Nutrition Clinic", category: "Clinics" },
-    { name: "Adolescent Clinic", category: "Clinics" },
-    { name: "Mental Health Clinic", category: "Clinics" },
-    { name: "Paed Ward", category: "Wards" },
-    { name: "Accident and Emergency Ward", category: "Wards" },
-    { name: "Maternity Ward", category: "Wards" },
-    { name: "Postnatal Ward", category: "Wards" },
-    { name: "Main Store", category: "Stores" },
-    { name: "HPV Vaccine", category: "Vaccines" },
-    { name: "Tetanus Vaccine", category: "Vaccines" },
-  ];
-
-  // Group facilities by category
-  const groupedFacilities = FACILITY_OPTIONS.reduce((acc, facility) => {
-    if (!acc[facility.category]) {
-      acc[facility.category] = [];
-    }
-    acc[facility.category].push(facility);
-    return acc;
-  }, {});
-
-  const getCategoryIcon = (category) => {
-    switch (category) {
-      case "Clinics":
-        return <i className="fas fa-stethoscope me-2"></i>;
-      case "Wards":
-        return <i className="fas fa-bed me-2"></i>;
-      case "Stores":
-        return <i className="fas fa-warehouse me-2"></i>;
-      case "Vaccines":
-        return <i className="fas fa-syringe me-2"></i>;
-      default:
-        return <i className="fas fa-hospital me-2"></i>;
-    }
-  };
-
-  const getFacilityIcon = (facilityName) => {
-    if (facilityName.includes("Antenatal")) return <i className="fas fa-heart me-2"></i>;
-    if (facilityName.includes("Family Planning")) return <i className="fas fa-heart me-2"></i>;
-    if (facilityName.includes("Immunization")) return <i className="fas fa-shield-alt me-2"></i>;
-    if (facilityName.includes("Chronic Care")) return <i className="fas fa-user-md me-2"></i>;
-    if (facilityName.includes("Dental")) return <i className="fas fa-tooth me-2"></i>;
-    if (facilityName.includes("Specialist")) return <i className="fas fa-user-md me-2"></i>;
-    if (facilityName.includes("Nutrition")) return <i className="fas fa-apple-alt me-2"></i>;
-    if (facilityName.includes("Adolescent")) return <i className="fas fa-child me-2"></i>;
-    if (facilityName.includes("Mental Health")) return <i className="fas fa-brain me-2"></i>;
-    if (facilityName.includes("Paed Ward")) return <i className="fas fa-baby me-2"></i>;
-    if (facilityName.includes("Accident and Emergency")) return <i className="fas fa-ambulance me-2"></i>;
-    if (facilityName.includes("Maternity Ward")) return <i className="fas fa-baby-carriage me-2"></i>;
-    if (facilityName.includes("Postnatal Ward")) return <i className="fas fa-baby me-2"></i>;
-    if (facilityName.includes("Main Store")) return <i className="fas fa-boxes me-2"></i>;
-    if (facilityName.includes("HPV Vaccine")) return <i className="fas fa-syringe me-2"></i>;
-    if (facilityName.includes("Tetanus Vaccine")) return <i className="fas fa-syringe me-2"></i>;
-    return <i className="fas fa-hospital me-2"></i>;
-  };
 
   const handleOpenDialog = (dialogData) => {
     setDialogData(dialogData);
@@ -255,13 +205,13 @@ const EafyaMapping = () => {
                   {DHIS2_MAPPING_OPTIONS.find(opt => opt.value === selectedMappingType)?.description}
                 </p>
               </div>
-              <button 
+              {/* <button 
                 className="btn btn-outline-primary btn-sm"
                 onClick={() => window.location.reload()}
               >
                 <i className="fas fa-sync-alt me-1"></i>
                 Refresh
-              </button>
+              </button> */}
             </div>
             <div className="card-body p-0">
               {renderSelectedComponent()}
@@ -351,6 +301,10 @@ const EafyaMapping = () => {
         return <Vaccines />;
       case "conditions":
         return <Conditions />;
+      case "procedures":
+        return <Procedures />;
+      case "imaging":
+        return <Imaging />;
       default:
         return <Conditions />;
     }
