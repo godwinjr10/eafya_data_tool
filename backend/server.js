@@ -35,6 +35,7 @@ import labtestsPatientRoutes from "./routes/reports/labtestsPatient.js";
 import imagingRoutes from "./routes/reports/imaging.js";
 import theatreRoutes from "./routes/reports/theatre.js";
 import familyPlanningDetailsRoutes from "./routes/reports/familyPlanning.js";
+import inpatientRoutes from "./routes/reports/inpatient.js";
 
 dotenv.config();
 
@@ -97,6 +98,7 @@ app.use("/api/labtests/patient", labtestsPatientRoutes);
 app.use("/api/imaging", imagingRoutes);
 app.use("/api/theatre", theatreRoutes);
 app.use("/api/familyplanning", familyPlanningDetailsRoutes);
+app.use("/api/inpatient", inpatientRoutes);
 
 // Initialize update routes
 updateRoutes(app);
