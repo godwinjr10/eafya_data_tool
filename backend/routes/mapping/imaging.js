@@ -8,12 +8,13 @@ router.get("/", async (req, res) => {
   try {
     const query = `
       select 
-        id,
+        MIN(id) as id,
         hmis_code, 
         SUBSTRING(hmis_name FROM 6) AS hmis_name,
         section_id, 
         section_name
       FROM reporting.dhis2_dataelements_108_imaging
+      GROUP BY hmis_code, hmis_name, section_id, section_name
       ORDER BY section_id
         `;
 
@@ -83,25 +84,12 @@ router.get("/:hmisCode", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const {
-      section_id,
       hmis_code,
       mappings, // [{ id, name }] eAFYA imaging
     } = req.body;
 
-    // Simplified validation - only check for required fields
-    if (
-      !hmis_code ||
-      !section_id ||
-      !Array.isArray(mappings) ||
-      mappings.length === 0
-    ) {
-      return res.status(400).json({
-        message:
-          "Missing required fields: hmis_code, section_id and non-empty mappings array",
-      });
-    }
 
-    // Fetch existing imaging data for the given hmis_code and section_id
+    // Fetch existing imaging data for the given hmis_code
     const queryExisting = `
         SELECT 
           DISTINCT   
@@ -109,24 +97,24 @@ router.post("/", async (req, res) => {
           hmis_code,
           hmis_name,
           section_id,
-          section_name
+          section_name,
+          dataelement
         FROM reporting.dhis2_dataelements_108_imaging
-        WHERE hmis_code = $1 AND section_id = $2
+        WHERE hmis_code = $1
         ORDER BY id
       `;
 
     console.log("Executing imaging query with params:", [
       hmis_code,
-      section_id,
     ]);
-    const { rows } = await pool.query(queryExisting, [hmis_code, section_id]);
+    const { rows } = await pool.query(queryExisting, [hmis_code]);
 
     console.log(`Found ${rows.length} distinct imaging entries`);
 
     if (rows.length === 0) {
       return res.status(404).json({
         message:
-          "No existing imaging data found for the provided hmis_code and section_id",
+          "No existing imaging data found for the provided hmis_code",
       });
     }
 
@@ -136,49 +124,45 @@ router.post("/", async (req, res) => {
 
       let totalInserted = 0;
 
-      // Outer loop: For each existing imaging entry
-      for (let i = 0; i < rows.length; i++) {
-        const existingData = rows[i];
+      // For each eAFYA imaging mapping, create one new record using the first existing imaging data
+      for (let j = 0; j < mappings.length; j++) {
+        const eafyaImaging = mappings[j];
+        const existingData = rows[0]; // Use the first existing imaging data
+        
         console.log(
-          `Processing imaging entry ${i + 1}/${rows.length}: ${
-            existingData.id
+          `Creating record for eAFYA imaging ${j + 1}/${mappings.length}: ${
+            eafyaImaging.id
           }`
         );
 
-        // Inner loop: For each eAFYA imaging mapping
-        for (let j = 0; j < mappings.length; j++) {
-          const eafyaImaging = mappings[j];
-          console.log(
-            `  - Mapping eAFYA imaging ${j + 1}/${mappings.length}: ${
-              eafyaImaging.id
-            }`
-          );
-
-          await client.query(
-            `UPDATE reporting.dhis2_dataelements_108_imaging 
-             SET eafya_id = $1, eafya_name = $2 
-             WHERE id = $3`,
-            [
-              eafyaImaging.id,
-              eafyaImaging.name || null,
-              existingData.id,
-            ]
-          );
-          totalInserted++;
-        }
+        await client.query(
+          `INSERT INTO reporting.dhis2_dataelements_108_imaging 
+           (hmis_code, hmis_name, section_id, section_name, dataelement, eafya_id, eafya_name) 
+           VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+          [
+            existingData.hmis_code,
+            existingData.hmis_name,
+            existingData.section_id,
+            existingData.section_name,
+            existingData.dataelement,
+            parseInt(eafyaImaging.id),
+            eafyaImaging.name || null,
+          ]
+        );
+        totalInserted++;
       }
 
       console.log(`Total imaging mappings created: ${totalInserted}`);
 
       await client.query("COMMIT");
       return res.json({
-        message: "Imaging mappings saved successfully",
+        message: "New imaging mapping records created successfully",
         count: totalInserted,
         details: {
           imaging_entries: rows.length,
           eafya_imaging: mappings.length,
           total_mappings_created: totalInserted,
-          calculation: `${rows.length} imaging entries × ${mappings.length} eAFYA imaging = ${totalInserted} mappings`,
+          calculation: `${mappings.length} eAFYA imaging = ${totalInserted} new records`,
         },
       });
     } catch (error) {

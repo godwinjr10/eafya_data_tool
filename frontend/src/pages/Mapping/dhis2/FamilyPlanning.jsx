@@ -1,9 +1,9 @@
 // FamilyPlanning.js
 import React, { useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import API from "../../helpers/api";
+import API from "../../../helpers/api";
 
-import MappingTable from "../../components/MappingTable";
+import MappingTable from "../../../components/MappingTable";
 
 const FamilyPlanning = () => {
   const history = useHistory();

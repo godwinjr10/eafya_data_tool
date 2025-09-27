@@ -1,28 +1,23 @@
-// Conditions.js
+// Vaccines.js
 import React, { useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import API from "../../helpers/api";
+import API from "../../../helpers/api";
+import MappingTable from "../../../components/MappingTable";
 
-import MappingTable from "../../components/MappingTable";
-
-const Conditions = () => {
+const Vaccines = () => {
   const history = useHistory();
   const [mappings, setMappings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedSection, setSelectedSection] = useState("");
-  const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
-  const [diseaseItems, setDiseaseItems] = useState([]);
-  const [count, setCount] = useState(0);
 
   const fetchMappings = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/mapping/conditions");
+      const res = await API.get("/mapping/vaccines");
       setMappings(res.data || []);
-      setCount(res?.data?.length);
     } catch (e) {
-      console.error("Error fetching condition mappings", e);
+      console.error("Error fetching vaccine mappings", e);
       setMappings([]);
     } finally {
       setLoading(false);
@@ -48,7 +43,7 @@ const Conditions = () => {
         (m) =>
           (m.hmis_code || "").toLowerCase().includes(term) ||
           (m.hmis_name || "").toLowerCase().includes(term) ||
-          (m.eafya_disease_name || "").toLowerCase().includes(term)
+          (m.eafya_vaccine_name || "").toLowerCase().includes(term)
       );
     }
 
@@ -56,7 +51,7 @@ const Conditions = () => {
   }, [mappings, search, selectedSection]);
 
   const handleViewDetails = (row) => {
-    history.push(`/mapping/conditions/${row.hmis_code}`);
+    history.push(`/mapping/vaccines/${row.hmis_code}`);
   };
 
   // Define columns for the reusable table
@@ -76,7 +71,6 @@ const Conditions = () => {
       accessor: "section_name",
       header: "Section Name",
       sortable: true,
-      render: (row) => row.section_name || "-",
     },
   ];
 
@@ -90,7 +84,7 @@ const Conditions = () => {
         searchable={true}
         filterable={true}
         sortable={true}
-        emptyMessage="No condition mappings found"
+        emptyMessage="No vaccine mappings found"
         className="mapping-table"
         onRowClick={handleViewDetails}
       />
@@ -98,4 +92,4 @@ const Conditions = () => {
   );
 };
 
-export default Conditions;
+export default Vaccines;

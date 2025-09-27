@@ -1,9 +1,9 @@
 // Procedures.js
 import React, { useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import API from "../../helpers/api";
+import API from "../../../helpers/api";
 
-import MappingTable from "../../components/MappingTable";
+import MappingTable from "../../../components/MappingTable";
 
 const Procedures = () => {
     const history = useHistory();
@@ -11,8 +11,6 @@ const Procedures = () => {
     const [loading, setLoading] = useState(false);
     const [search, setSearch] = useState("");
     const [selectedSection, setSelectedSection] = useState("");
-    const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
-    const [diseaseItems, setDiseaseItems] = useState([]);
     const [count, setCount] = useState(0);
 
     const fetchMappings = async () => {

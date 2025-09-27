@@ -1,24 +1,23 @@
+// LabTests.js
 import React, { useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import API from "../../helpers/api";
+import API from "../../../helpers/api";
+import MappingTable from "../../../components/MappingTable";
 
-import MappingTable from "../../components/MappingTable";
-
-const Commodities = () => {
+const LabTests = () => {
   const history = useHistory();
   const [mappings, setMappings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [selectedSection, setSelectedSection] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const fetchMappings = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/mapping/commodities");
-      console.log("Fetched commodity mappings", res.data);
+      const res = await API.get("/mapping/labtests");
       setMappings(res.data || []);
     } catch (e) {
-      console.error("Error fetching commodity mappings", e);
+      console.error("Error fetching labtest mappings", e);
       setMappings([]);
     } finally {
       setLoading(false);
@@ -32,9 +31,9 @@ const Commodities = () => {
   const filteredMappings = useMemo(() => {
     let filtered = mappings;
 
-    // Filter by section first
-    if (selectedSection) {
-      filtered = filtered.filter((m) => m.section_id === selectedSection);
+    // Filter by category first
+    if (selectedCategory) {
+      filtered = filtered.filter((m) => m.category === selectedCategory);
     }
 
     // Then filter by search term
@@ -44,15 +43,15 @@ const Commodities = () => {
         (m) =>
           (m.hmis_code || "").toLowerCase().includes(term) ||
           (m.hmis_name || "").toLowerCase().includes(term) ||
-          (m.eafya_product_name || "").toLowerCase().includes(term)
+          (m.eafya_labtest_name || "").toLowerCase().includes(term)
       );
     }
 
     return filtered;
-  }, [mappings, search, selectedSection]);
+  }, [mappings, search, selectedCategory]);
 
   const handleViewDetails = (row) => {
-    history.push(`/mapping/commodities/${row.hmis_code}`);
+    history.push(`/mapping/labtests/${row.hmis_code}`);
   };
 
   // Define columns for the reusable table
@@ -85,12 +84,11 @@ const Commodities = () => {
         searchable={true}
         filterable={true}
         sortable={true}
-        emptyMessage="No commodity mappings found"
+        emptyMessage="No lab test mappings found"
         className="mapping-table"
         onRowClick={handleViewDetails}
       />
     </>
   );
 };
-
-export default Commodities;
+export default LabTests;

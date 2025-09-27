@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import API from "../../helpers/api";
-import MappingDialog from "../../components/MappingDialog";
+import { toast } from "react-toastify";
+import API from "../../../helpers/api";
+import Dhis2MappingDialog from "./Dhis2MappingDialog";
 
 const MappingDetail = () => {
   const { mappingType, id } = useParams();
@@ -9,7 +10,6 @@ const MappingDetail = () => {
 
   const [mappingData, setMappingData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [mappingHistory, setMappingHistory] = useState([]);
   const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
   const [eafyaItems, setEafyaItems] = useState([]);
   const [confirmModal, setConfirmModal] = useState({ isOpen: false, mappingId: null, mappingName: "" });
@@ -18,7 +18,7 @@ const MappingDetail = () => {
   const MAPPING_CONFIGS = {
     commodities: {
       title: "Commodities Mapping",
-      endpoint: "/eafya/commodities",
+      endpoint: "/mapping/commodities",
       searchEndpoint: "/mapping/commodities/items",
       sectionField: "section_id",
       datasetCode: "HMIS1054",
@@ -30,7 +30,7 @@ const MappingDetail = () => {
     },
     labtests: {
       title: "Lab Tests Mapping",
-      endpoint: "/eafya/labtests",
+      endpoint: "/mapping/labtests",
       searchEndpoint: "/mapping/labtests/items",
       sectionField: "_section_id",
       datasetCode: "HMIS1055",
@@ -42,7 +42,7 @@ const MappingDetail = () => {
     },
     conditions: {
       title: "Conditions Mapping",
-      endpoint: "/eafya/conditions",
+      endpoint: "/mapping/conditions",
       searchEndpoint: "/mapping/conditions/items",
       sectionField: "section_id",
       datasetCode: "HMIS1052_CONDITIONS",
@@ -54,7 +54,7 @@ const MappingDetail = () => {
     },
     familyplanning: {
       title: "Family Planning Mapping",
-      endpoint: "/eafya/familyplanning",
+      endpoint: "/mapping/familyplanning",
       searchEndpoint: "/mapping/familyplanning/items",
       sectionField: "_section_id",
       datasetCode: "HMIS1052_FP",
@@ -66,7 +66,7 @@ const MappingDetail = () => {
     },
     vaccines: {
       title: "Vaccines Mapping",
-      endpoint: "/eafya/vaccines",
+      endpoint: "/mapping/vaccines",
       searchEndpoint: "/mapping/vaccines/items",
       sectionField: "_section_id",
       datasetCode: "HMIS1052_VACCINE",
@@ -78,40 +78,35 @@ const MappingDetail = () => {
     },
     procedures: {
       title: "Procedures Mapping",
-      endpoint: "/eafya/procedures",
+      endpoint: "/mapping/procedures",
       searchEndpoint: "/mapping/procedures/items",
-      sectionField: "_section_id",
-      datasetCode: "HMIS1052_VACCINE",
+      sectionField: "section_id",
+      datasetCode: "HMIS1058_PROCEDURES",
       fields: [
         { key: "hmis_code", label: "HMIS Code" },
         { key: "hmis_name", label: "HMIS Name" },
-        { key: "_section_id", label: "Section ID" },
+        { key: "section_name", label: "Section Name" },
+        { key: "section_id", label: "Section ID" },
       ],
     },
     imaging: {
       title: "Imaging Mapping",
-      endpoint: "/eafya/imaging",
+      endpoint: "/mapping/imaging",
       searchEndpoint: "/mapping/imaging/items",
-      sectionField: "_section_id",
-      datasetCode: "HMIS1052_VACCINE",
+      sectionField: "section_id",
+      datasetCode: "HMIS1052_IMAGING",
       fields: [
         { key: "hmis_code", label: "HMIS Code" },
         { key: "hmis_name", label: "HMIS Name" },
-        { key: "_section_id", label: "Section ID" },
+        { key: "section_name", label: "Section Name" },
+        { key: "section_id", label: "Section ID" },
       ],
     },
   };
 
   const config = MAPPING_CONFIGS[mappingType] || MAPPING_CONFIGS.commodities;
 
-  useEffect(() => {
-    if (id) {
-      fetchMappingDetail();
-      fetchMappingHistory();
-    }
-  }, [id, mappingType]);
-
-  const fetchMappingDetail = async () => {
+  const fetchMappingDetail = useCallback(async () => {
     setLoading(true);
     try {
       // Use the new detail endpoint with HMIS code
@@ -123,25 +118,14 @@ const MappingDetail = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [mappingType, id]);
 
-  const fetchMappingHistory = async () => {
-    try {
-      // This would fetch mapping history/audit trail
-      // For now, we'll simulate it
-      setMappingHistory([
-        {
-          id: 1,
-          action: "Created",
-          timestamp: new Date().toISOString(),
-          user: "System Admin",
-          details: "Initial mapping created",
-        },
-      ]);
-    } catch (error) {
-      console.error("Error fetching mapping history:", error);
+  useEffect(() => {
+    if (id) {
+      fetchMappingDetail();
     }
-  };
+  }, [id, mappingType, fetchMappingDetail]);
+
 
   const handleDelete = (eafyaId, mappingName) => {
     setConfirmModal({
@@ -153,20 +137,6 @@ const MappingDetail = () => {
 
   const confirmDelete = async () => {
     try {
-      // Build the delete payload with the required fields
-      const hmis_code = id; // The ID from URL params is the hmis_code
-
-      // Get section value from the current mapping context
-      let sectionValue;
-      if (mappingData && mappingData[config.sectionField]) {
-        sectionValue = mappingData[config.sectionField];
-      } else if (mappingData && mappingData.section_id) {
-        sectionValue = mappingData.section_id;
-      } else if (mappingData && mappingData._section_id) {
-        sectionValue = mappingData._section_id;
-      } else {
-        sectionValue = "6.1"; // Default section
-      }
 
       // Simple payload - just send what we need
       const payload = {
@@ -182,10 +152,11 @@ const MappingDetail = () => {
         // Refresh the mapping data to show updated list
         fetchMappingDetail();
         setConfirmModal({ isOpen: false, mappingId: null, mappingName: "" });
+        toast.success("Mapping deleted successfully!");
       }
     } catch (error) {
       console.error("Error deleting mapping:", error);
-      alert("Failed to delete mapping. Please try again.");
+      toast.error("Failed to delete mapping. Please try again.");
     }
   };
 
@@ -196,7 +167,7 @@ const MappingDetail = () => {
     setDialogState({ isOpen: true, row });
   };
 
-  const onEafyaItemsLoaded = (items) => setEafyaItems(items);
+  const onEafyaItemsLoaded = useCallback((items) => setEafyaItems(items), []);
 
   const onSave = async (mappingData) => {
     try {
@@ -218,16 +189,16 @@ const MappingDetail = () => {
             .filter(Boolean)
         : [];
 
-      // Get section value from the current mapping context (mappingData from state)
+      // Get section value from the current mapping context (dialogState.row)
       let sectionValue;
-      if (mappingData && mappingData[sectionField]) {
-        sectionValue = mappingData[sectionField];
-      } else if (mappingData && mappingData.section_id) {
-        sectionValue = mappingData.section_id;
-      } else if (mappingData && mappingData._section_id) {
-        sectionValue = mappingData._section_id;
+      if (dialogState.row && dialogState.row[sectionField]) {
+        sectionValue = dialogState.row[sectionField];
+      } else if (dialogState.row && dialogState.row.section_id) {
+        sectionValue = dialogState.row.section_id;
+      } else if (dialogState.row && dialogState.row._section_id) {
+        sectionValue = dialogState.row._section_id;
       } else {
-        // If we can't find section value in mappingData, we need to get it from the current context
+        // If we can't find section value in dialogState.row, we need to get it from the current context
         // For now, let's use a default or get it from the URL/context
         sectionValue = "6.1"; // Default section for commodities - you may need to adjust this
       }
@@ -240,7 +211,7 @@ const MappingDetail = () => {
       });
 
       if (!sectionValue || !hmis_code || !mappings || mappings.length === 0) {
-        alert(
+        toast.error(
           `Missing required fields: ${sectionField}=${sectionValue}, hmis_code=${hmis_code} and non-empty mappings array (length: ${mappings.length})`
         );
         return;
@@ -251,8 +222,7 @@ const MappingDetail = () => {
       const payload = {
         hmis_code,
         mappings: mappings,
-        [mappingType === "labtests" ? "section_id" : sectionField]:
-          sectionValue,
+        section_id: sectionValue,
       };
 
       console.log("Sending payload:", payload);
@@ -263,47 +233,14 @@ const MappingDetail = () => {
         // Refresh the mapping data
         fetchMappingDetail();
         setDialogState({ isOpen: false, row: null });
-        alert("Mapping added successfully!");
+        toast.success("Mapping added successfully!");
       }
     } catch (error) {
       console.error("Error saving mapping:", error);
-      alert("Failed to save mapping");
+      toast.error("Failed to save mapping");
     }
   };
 
-  const columns = [
-    {
-      accessor: "eafya_id",
-      header: "ID",
-      width: "80px",
-      sortable: true,
-    },
-    {
-      accessor: "eafya_name",
-      header: "Name",
-      sortable: true,
-    },
-    {
-      accessor: "actions",
-      header: "Actions",
-      width: "100px",
-      sortable: false,
-      render: (row) => (
-        <div className="d-flex justify-content-center">
-          <button
-            className="btn btn-outline-danger btn-sm"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleDelete(row.eafya_id);
-            }}
-            title="Delete mapping"
-          >
-            <i className="fas fa-trash"></i>
-          </button>
-        </div>
-      ),
-    },
-  ];
   console.log("mapping data==", mappingData);
   return (
     <div className="container-fluid py-3">
@@ -419,7 +356,7 @@ const MappingDetail = () => {
         </div>
       </div>
 
-      <MappingDialog
+      <Dhis2MappingDialog
         isOpen={dialogState.isOpen}
         onClose={() => setDialogState({ isOpen: false, row: null })}
         onSave={onSave}

@@ -236,4 +236,100 @@ router.get("/conditions/:hmisCode", async (req, res) => {
     }
 });
 
+// Get procedures mapping details by HMIS code
+router.get("/procedures/:hmisCode", async (req, res) => {
+    try {
+        const { hmisCode } = req.params;
+        console.log("Fetching procedures mappings for HMIS code:", hmisCode);
+
+        const query = `
+      SELECT 
+        distinct hmis_code,
+        hmis_name,
+        eafya_id,
+        eafya_name
+      FROM reporting.dhis2_dataelements_108_procedures
+      WHERE hmis_code = $1
+      ORDER BY hmis_code
+    `;
+
+        console.log("Executing query:", query);
+        console.log("Query parameters:", [hmisCode]);
+
+        const { rows } = await pool.query(query, [hmisCode]);
+        console.log("Query result rows:", rows.length);
+
+        if (rows.length === 0) {
+            console.log("No mappings found for HMIS code:", hmisCode);
+            return res.status(404).json({
+                message: "No procedures mappings found for this HMIS code",
+                hmis_code: hmisCode,
+            });
+        }
+
+        console.log("Sending response with", rows.length, "mappings");
+        res.json({
+            hmis_code: hmisCode,
+            hmis_name: rows[0].hmis_name,
+            mappings: rows,
+        });
+    } catch (error) {
+        console.error("Error fetching procedures mapping details:", error);
+        console.error("Error stack:", error.stack);
+        res.status(500).json({
+            message: error.message,
+            stack: error.stack,
+            hmis_code: req.params.hmisCode,
+        });
+    }
+});
+
+// Get imaging mapping details by HMIS code
+router.get("/imaging/:hmisCode", async (req, res) => {
+    try {
+        const { hmisCode } = req.params;
+        console.log("Fetching imaging mappings for HMIS code:", hmisCode);
+
+        const query = `
+      SELECT 
+        distinct hmis_code,
+        hmis_name,
+        eafya_id,
+        eafya_name
+      FROM reporting.dhis2_dataelements_108_imaging
+      WHERE hmis_code = $1
+      ORDER BY hmis_code
+    `;
+
+        console.log("Executing query:", query);
+        console.log("Query parameters:", [hmisCode]);
+
+        const { rows } = await pool.query(query, [hmisCode]);
+        console.log("Query result rows:", rows.length);
+
+        if (rows.length === 0) {
+            console.log("No mappings found for HMIS code:", hmisCode);
+            return res.status(404).json({
+                message: "No imaging mappings found for this HMIS code",
+                hmis_code: hmisCode,
+            });
+        }
+
+        console.log("Sending response with", rows.length, "mappings");
+        res.json({
+            hmis_code: hmisCode,
+            hmis_name: rows[0].hmis_name,
+            mappings: rows,
+        });
+    } catch (error) {
+        console.error("Error fetching imaging mapping details:", error);
+        console.error("Error stack:", error.stack);
+        res.status(500).json({
+            message: error.message,
+            stack: error.stack,
+            hmis_code: req.params.hmisCode,
+        });
+    }
+});
+
 export default router;

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { listMaterializedViewIds } from "../../helpers/mappedItemsApi";
+import { listCustomizationsets } from "../../../helpers/customizationsetApi";
 
-const MaterializedViewIdsList = ({ onItemSelect, selectedItem }) => {
+const CustomizationSets = ({ onItemSelect, selectedItem }) => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const load = async () => {
     setLoading(true);
     try {
-      const data = await listMaterializedViewIds();
+      const data = await listCustomizationsets();
       setItems(data);
     } finally {
       setLoading(false);
@@ -39,7 +39,7 @@ const MaterializedViewIdsList = ({ onItemSelect, selectedItem }) => {
               ? "btn-primary text-white" 
               : "btn-outline-primary"
           }`}
-          onClick={() => onItemSelect && onItemSelect(item.name)}
+          onClick={() => onItemSelect && onItemSelect({ name: item.name, category: item.category })}
           style={{ minHeight: "32px", fontSize: "0.8rem", padding: "0.25rem 0.5rem" }}
         >
           <div className="d-flex align-items-center">
@@ -60,4 +60,4 @@ const MaterializedViewIdsList = ({ onItemSelect, selectedItem }) => {
   );
 };
 
-export default MaterializedViewIdsList;
+export default CustomizationSets;

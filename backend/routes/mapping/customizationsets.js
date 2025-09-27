@@ -1,11 +1,10 @@
 import express from "express";
 import { Op } from "sequelize";
 import { pool } from "../../config/database.js";
-import MaterializedViewIdsModel from "../../models/materializedViewIds.js";
+import CustomizationSet from "../../models/customizationsets.js";
 
 const router = express.Router();
 
-// Create a new materialized view id
 router.post("/", async (req, res) => {
   try {
     const { name, category, mapping_id, mapping_name } = req.body;
@@ -15,7 +14,7 @@ router.post("/", async (req, res) => {
     if (!mapping_id) {
       return res.status(400).json({ message: "mapping_id is required" });
     }
-    const created = await MaterializedViewIdsModel.create({
+    const created = await CustomizationSet.create({
       name,
       category: category || null,
       mapping_id: Number(mapping_id),
@@ -27,7 +26,6 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Bulk add id_nos for a given name (no deletes; ignores existing pairs)
 router.post("/bulk", async (req, res) => {
   try {
     const { allData } = req.body;
@@ -49,7 +47,7 @@ router.post("/bulk", async (req, res) => {
     for (const m of toAdd) {
       try {
         const result = await pool.query(
-          `INSERT INTO reporting.materialized_view_ids (name, category, mapping_id, mapping_name, created_at, updated_at)
+          `INSERT INTO reporting.customizationset (name, category, mapping_id, mapping_name, "createdAt", "updatedAt")
            VALUES ($1, $2, $3, $4, NOW(), NOW())
            ON CONFLICT DO NOTHING`,
           [name, category, Number(m.id), m.name || null]
@@ -69,12 +67,11 @@ router.post("/bulk", async (req, res) => {
   }
 });
 
-// Read all materialized view ids
 router.get("/", async (req, res) => {
   try {
     const { rows } = await pool.query(
       `SELECT DISTINCT name, category
-       FROM reporting.materialized_view_ids
+       FROM reporting.customizationset
        ORDER BY name`
     );
     res.set("Cache-Control", "no-store");
@@ -86,11 +83,11 @@ router.get("/", async (req, res) => {
   }
 });
 
-// Read all mappings by name
-router.get("/by-name/:name", async (req, res) => {
+
+router.get("/:name", async (req, res) => {
   try {
     const { name } = req.params;
-    const rows = await MaterializedViewIdsModel.findAll({
+    const rows = await CustomizationSet.findAll({
       where: { name, mapping_id: { [Op.gt]: 0 } },
       order: [["mapping_id", "ASC"]],
     });
@@ -105,10 +102,10 @@ router.get("/by-name/:name", async (req, res) => {
 });
 
 // Remove a single mapping from the JSONB array by name and mapping id
-router.delete("/by-name/:name/mappings/:mappingId", async (req, res) => {
+router.delete("/:name/mappings/:mappingId", async (req, res) => {
   try {
     const { name, mappingId } = req.params;
-    const deleted = await MaterializedViewIdsModel.destroy({
+    const deleted = await CustomizationSet.destroy({
       where: { name, mapping_id: Number(mappingId) },
     });
     if (!deleted) return res.status(404).json({ message: "Mapping not found" });
@@ -118,84 +115,70 @@ router.delete("/by-name/:name/mappings/:mappingId", async (req, res) => {
   }
 });
 
-// Search helper endpoint for reference tables (must come before "/:id")
-router.get("/search", async (req, res) => {
+router.get("/items/clinics", async (req, res) => {
   try {
-    const { table, q } = req.query;
-    const allowed = {
-      clinic: "dwh.dim_eafya_clinic",
-      ward: "dwh.dim_eafya_ward",
-      vaccine: "dwh.dim_eafya_vaccine",
-      store: "dwh.dim_eafya_store",
-    };
-    if (!table || !allowed[table]) {
-      return res.status(400).json({
-        message:
-          "Invalid or missing table. Use one of: clinic, ward, vaccine, store",
-      });
-    }
-    // Ensure relation exists to avoid 500s if missing
-    const relation = allowed[table];
-    const regclassCheck = await pool.query("SELECT to_regclass($1) AS rel", [
-      relation,
-    ]);
-    if (!regclassCheck.rows[0].rel) {
-      return res.status(404).json({ message: `Table ${relation} not found` });
-    }
-    const text = `SELECT id, "name" FROM ${allowed[table]} ${
-      q ? 'WHERE "name" ILIKE $1' : ""
-    } ORDER BY "name" LIMIT 50`;
-    const params = q ? [`%${q}%`] : [];
-    const { rows } = await pool.query(text, params);
-    res.set("Cache-Control", "no-store");
-    res.set("Pragma", "no-cache");
-    res.set("Expires", "0");
-    return res.status(200).json(rows);
+    const query = `
+            SELECT 
+                id, 
+                "name"
+            FROM dwh.dim_eafya_clinic
+            ORDER BY "name"
+        `;
+
+    const { rows } = await pool.query(query);
+    res.json(rows);
   } catch (error) {
-    console.error("Search error:", error);
     res.status(500).json({ message: error.message });
   }
 });
 
-// List reference items by table (for modal loading like other mappings)
-router.get("/items", async (req, res) => {
+router.get("/items/wards", async (req, res) => {
   try {
-    const { table, category } = req.query;
+    const query = `
+            SELECT 
+                id, 
+                "name"
+            FROM dwh.dim_eafya_ward
+            ORDER BY "name"
+        `;
 
-    const allowed = {
-      clinic: "dwh.dim_eafya_clinic",
-      ward: "dwh.dim_eafya_ward",
-      vaccine: "dwh.dim_eafya_vaccine",
-      store: "dwh.dim_eafya_store",
-    };
-
-    const normalized = (table ? table : (category || "").toLowerCase()).replace(
-      /s$/,
-      ""
-    );
-    if (!normalized || !allowed[normalized]) {
-      return res.status(400).json({
-        message: "Provide table or category (clinic|ward|vaccine|store)",
-      });
-    }
-    const candidates = Array.isArray(allowed[normalized])
-      ? allowed[normalized]
-      : [allowed[normalized]];
-    let rows = [];
-    for (const rel of candidates) {
-      const reg = await pool.query("SELECT to_regclass($1) AS rel", [rel]);
-      if (!reg.rows[0].rel) continue;
-      const r = await pool.query(
-        `SELECT id, "name" FROM ${rel} ORDER BY "name" LIMIT 1000`
-      );
-      if (r.rows.length > 0) {
-        rows = r.rows;
-        break;
-      }
-    }
+    const { rows } = await pool.query(query);
     res.json(rows);
   } catch (error) {
-    console.error("Items error:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/items/vaccines", async (req, res) => {
+  try {
+    const query = `
+            SELECT 
+                id, 
+                "name"
+            FROM dwh.dim_eafya_vaccine
+            ORDER BY "name"
+        `;
+
+    const { rows } = await pool.query(query);
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.get("/items/store", async (req, res) => {
+  try {
+    const query = `
+            SELECT 
+                id, 
+                "name"
+            FROM dwh.dim_eafya_store
+            ORDER BY "name"
+        `;
+
+    const { rows } = await pool.query(query);
+    res.json(rows);
+  } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
@@ -203,7 +186,7 @@ router.get("/items", async (req, res) => {
 // Read one by id
 router.get("/:id", async (req, res) => {
   try {
-    const item = await MaterializedViewIdsModel.findByPk(req.params.id);
+    const item = await CustomizationSet.findByPk(req.params.id);
     if (!item) return res.status(404).json({ message: "Not found" });
     res.json(item);
   } catch (error) {
@@ -215,7 +198,7 @@ router.get("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { name, mapping_id, mapping_name } = req.body;
-    const item = await MaterializedViewIdsModel.findByPk(req.params.id);
+    const item = await CustomizationSet.findByPk(req.params.id);
     if (!item) return res.status(404).json({ message: "Not found" });
     const updateData = {};
     if (typeof name !== "undefined") updateData.name = name;
@@ -233,7 +216,7 @@ router.put("/:id", async (req, res) => {
 // Delete a mapping by id (allowed in details view)
 router.delete("/:id", async (req, res) => {
   try {
-    const deleted = await MaterializedViewIdsModel.destroy({
+    const deleted = await CustomizationSet.destroy({
       where: { id: req.params.id },
     });
     if (!deleted) return res.status(404).json({ message: "Not found" });
@@ -242,39 +225,5 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-// Search helper endpoint for reference tables
-router.get("/search", async (req, res) => {
-  try {
-    const { table, q } = req.query;
-    const allowed = {
-      clinic: "dwh.dim_eafya_clinic",
-      ward: "dwh.dim_eafya_ward",
-      vaccine: "dwh.dim_eafya_vaccine",
-      store: "dwh.dim_eafya_store",
-    };
-    if (!table || !allowed[table]) {
-      return res.status(400).json({
-        message:
-          "Invalid or missing table. Use one of: clinic, ward, vaccine, store",
-      });
-    }
-    // Ensure relation exists to avoid 500s if missing
-    const relation = allowed[table];
-    const regclassCheck = await pool.query("SELECT to_regclass($1) AS rel", [
-      relation,
-    ]);
-    if (!regclassCheck.rows[0].rel) {
-      return res.status(404).json({ message: `Table ${relation} not found` });
-    }
-    const text = `SELECT id, "name" FROM ${allowed[table]} ${
-      q ? 'WHERE "name" ILIKE $1' : ""
-    } ORDER BY "name" LIMIT 50`;
-    const params = q ? [`%${q}%`] : [];
-    const { rows } = await pool.query(text, params);
-    res.json(rows);
-  } catch (error) {
-    console.error("Search error:", error);
-    res.status(500).json({ message: error.message });
-  }
-});
+
 export default router;

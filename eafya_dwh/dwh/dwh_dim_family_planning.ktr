@@ -488,13 +488,13 @@
   </connection>
   <order>
     <hop>
-      <from>family planning_category</from>
-      <to>output family planning category</to>
+      <from>family planning</from>
+      <to>output family planning</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>family planning_category</name>
+    <name>family planning</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -506,13 +506,16 @@
     </partitioning>
     <connection>dwh_conn</connection>
     <sql>SELECT
-  id
+  last_created
+, id
 , created_by_id
 , date_created
+, description
+, family_planning_category_id
 , is_system_defined
 , last_updated
 , "name"
-FROM stage.dim_eafya_family_planning_category
+FROM stage.dim_eafya_family_planning
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -522,12 +525,35 @@ FROM stage.dim_eafya_family_planning_category
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
       <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>last_created</name>
+        <length>6</length>
+        <precision>-1</precision>
+        <origin>family planning_category</origin>
+        <comments>last_created</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
         <type>Integer</type>
         <storagetype>normal</storagetype>
         <name>id</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>family planning</origin>
+        <origin>family planning_category</origin>
         <comments>id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -550,7 +576,7 @@ FROM stage.dim_eafya_family_planning_category
         <name>created_by_id</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>family planning</origin>
+        <origin>family planning_category</origin>
         <comments>created_by_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -573,9 +599,55 @@ FROM stage.dim_eafya_family_planning_category
         <name>date_created</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>family planning</origin>
+        <origin>family planning_category</origin>
         <comments>date_created</comments>
         <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>description</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>family planning_category</origin>
+        <comments>description</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>family_planning_category_id</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>family planning_category</origin>
+        <comments>family_planning_category_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -596,7 +668,7 @@ FROM stage.dim_eafya_family_planning_category
         <name>is_system_defined</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>family planning</origin>
+        <origin>family planning_category</origin>
         <comments>is_system_defined</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -619,7 +691,7 @@ FROM stage.dim_eafya_family_planning_category
         <name>last_updated</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>family planning</origin>
+        <origin>family planning_category</origin>
         <comments>last_updated</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -642,7 +714,7 @@ FROM stage.dim_eafya_family_planning_category
         <name>name</name>
         <length>255</length>
         <precision>-1</precision>
-        <origin>family planning</origin>
+        <origin>family planning_category</origin>
         <comments>name</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -675,7 +747,7 @@ FROM stage.dim_eafya_family_planning_category
     </GUI>
   </step>
   <step>
-    <name>output family planning category</name>
+    <name>output family planning</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -687,7 +759,7 @@ FROM stage.dim_eafya_family_planning_category
     </partitioning>
     <connection>dwh_conn</connection>
     <schema>dwh</schema>
-    <table>dim_eafya_family_planning_category</table>
+    <table>dim_eafya_family_planning</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
@@ -704,6 +776,10 @@ FROM stage.dim_eafya_family_planning_category
     <return_field/>
     <fields>
       <field>
+        <column_name>last_created</column_name>
+        <stream_name>last_created</stream_name>
+      </field>
+      <field>
         <column_name>id</column_name>
         <stream_name>id</stream_name>
       </field>
@@ -714,6 +790,14 @@ FROM stage.dim_eafya_family_planning_category
       <field>
         <column_name>date_created</column_name>
         <stream_name>date_created</stream_name>
+      </field>
+      <field>
+        <column_name>description</column_name>
+        <stream_name>description</stream_name>
+      </field>
+      <field>
+        <column_name>family_planning_category_id</column_name>
+        <stream_name>family_planning_category_id</stream_name>
       </field>
       <field>
         <column_name>is_system_defined</column_name>

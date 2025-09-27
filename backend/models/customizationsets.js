@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import { sequelize } from "../config/database.js";
 
-const MaterializedViewIdsModel = sequelize.define(
-  "materialized_view_ids",
+const CustomizationSet = sequelize.define(
+  "customizationset",
   {
     id: {
       type: DataTypes.INTEGER,
@@ -24,19 +24,9 @@ const MaterializedViewIdsModel = sequelize.define(
     mapping_name: {
       type: DataTypes.STRING,
       allowNull: true,
-    },
-    createdAt: {
-      type: DataTypes.DATE,
-      field: "created_at",
-    },
-    updatedAt: {
-      type: DataTypes.DATE,
-      field: "updated_at",
-    },
+    }
   },
-  { timestamps: true, schema: "reporting", tableName: "materialized_view_ids" }
+  { timestamps: true, schema: "reporting", tableName: "customizationset" }
 );
 
-//MaterializedViewIdsModel.sync({ alter: true });
-
-export default MaterializedViewIdsModel;
+export default CustomizationSet;

@@ -29,6 +29,7 @@ import conditionsMappingRoutes from "./routes/mapping/conditions.js";
 import proceduresMappingRoutes from "./routes/mapping/procedures.js";
 import imagingMappingRoutes from "./routes/mapping/imaging.js";
 import productsMappingRoutes from "./routes/mapping/products.js";
+import customizationsets from "./routes/mapping/customizationsets.js";
 
 /*** DHIS2 Report ****/
 import maternityRoutes from "./routes/dhisreports/maternity.js";
@@ -38,7 +39,6 @@ import childHealthRoutes from "./routes/dhisreports/childHealth.js";
 import tetanusVaccinationRoutes from "./routes/dhisreports/tetanusVaccination.js";
 import childImmunizationRoutes from "./routes/dhisreports/childImmunization.js";
 import hmis108Routes from "./routes/dhisreports/108Routes.js";
-import materializedViewIdsRoutes from "./routes/mapping/materializedViewIds.js";
 import updateRoutes from "./routes/update.js";
 import upgradeRoutes from "./routes/upgrade.js";
 import labtestsPatientRoutes from "./routes/reports/labtestsPatient.js";
@@ -104,6 +104,7 @@ app.use("/api/mapping/conditions", conditionsMappingRoutes);
 app.use("/api/mapping/procedures", proceduresMappingRoutes);
 app.use("/api/mapping/imaging", imagingMappingRoutes);
 app.use("/api/mapping/products", productsMappingRoutes);
+app.use("/api/customizationsets", customizationsets);
 
 /*** DHIS2 Report ****/
 app.use("/api/maternity", maternityRoutes);
@@ -113,7 +114,6 @@ app.use("/api/child-health", childHealthRoutes);
 app.use("/api/tetanus-vaccination", tetanusVaccinationRoutes);
 app.use("/api/child-immunization", childImmunizationRoutes);
 app.use("/api/hmis108", hmis108Routes);
-app.use("/api/materialized-view-ids", materializedViewIdsRoutes);
 app.use("/api/labtests/patient", labtestsPatientRoutes);
 app.use("/api/imaging", imagingRoutes);
 app.use("/api/theatre", theatreRoutes);

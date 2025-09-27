@@ -1,4 +1,4 @@
-﻿id,eafya_id,eafya_name,dataelement,dataelement_code,dataelement_name,Category,Section
+﻿id,eafya_id,eafya_name,dataelement,hmis_code,hmis_name,section_name,section_id
 1,,,MX5ze6e9iP2,RA01,RA01. Plain radiography (X-ray),x-ray,5.1
 2,,,yLX4o9peOsQ,RA02,RA02. CXR (chest x-ray),x-ray,5.1
 3,,,OeGeSyYymj2,RA03,RA03. Plain abdomen,x-ray,5.1
@@ -54,8 +54,8 @@
 53,,,RArmWwpOZKC,UL06,UL06. Cranial,Ultrasound,5.9
 54,,,v0hfRlfkriq,UL07,"UL07. Endocavitary ultrasound (transvaginal, transrectal, transesophageal )",Ultrasound,5.9
 55,,,HQ6yO2v07qc,UL08,UL08. Vascular,Ultrasound,5.9
-56,,,jMCeB9KiH4n,IP01,IP01. Diagnostic,Intervention procedure Types,5.10
-57,,,F0J4YKJGDDG,IP02,IP02. Therapeutic,Intervention procedure Types,5.10
+56,,,jMCeB9KiH4n,IP01,IP01. Diagnostic,Intervention procedure Types,5.1
+57,,,F0J4YKJGDDG,IP02,IP02. Therapeutic,Intervention procedure Types,5.1
 58,,,PS1LPVl81S9,IM01,IM01. Ultrasound guided,Imaging modality,5.11
 59,,,yMSYuGrhzXI,IM02,IM02. CT guided,Imaging modality,5.11
 60,,,zTP8AouOl6o,IM03,IM03. Fluoroscopy,Imaging modality,5.11

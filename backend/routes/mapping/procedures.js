@@ -8,12 +8,13 @@ router.get("/", async (req, res) => {
   try {
     const query = `
       select 
-        id,
+        MIN(id) as id,
         hmis_code, 
         SUBSTRING(hmis_name FROM 6) AS hmis_name,
         section_id, 
         section_name
       FROM reporting.dhis2_dataelements_108_procedures
+      GROUP BY hmis_code, hmis_name, section_id, section_name
       ORDER BY section_id
         `;
 
@@ -82,25 +83,11 @@ router.get("/:hmisCode", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const {
-      section_id,
       hmis_code,
       mappings, // [{ id, name }] eAFYA procedures
     } = req.body;
 
-    // Simplified validation - only check for required fields
-    if (
-      !hmis_code ||
-      !section_id ||
-      !Array.isArray(mappings) ||
-      mappings.length === 0
-    ) {
-      return res.status(400).json({
-        message:
-          "Missing required fields: hmis_code, section_id and non-empty mappings array",
-      });
-    }
-
-    // Fetch existing procedures data for the given hmis_code and section_id
+    // Fetch existing procedures data for the given hmis_code
     const queryExisting = `
         SELECT 
           DISTINCT   
@@ -108,24 +95,24 @@ router.post("/", async (req, res) => {
           hmis_code,
           hmis_name,
           section_id,
-          section_name
+          section_name,
+          dataelement
         FROM reporting.dhis2_dataelements_108_procedures
-        WHERE hmis_code = $1 AND section_id = $2
+        WHERE hmis_code = $1
         ORDER BY id
       `;
 
     console.log("Executing procedures query with params:", [
       hmis_code,
-      section_id,
     ]);
-    const { rows } = await pool.query(queryExisting, [hmis_code, section_id]);
+    const { rows } = await pool.query(queryExisting, [hmis_code]);
 
     console.log(`Found ${rows.length} distinct procedures entries`);
 
     if (rows.length === 0) {
       return res.status(404).json({
         message:
-          "No existing procedures data found for the provided hmis_code and section_id",
+          "No existing procedures data found for the provided hmis_code",
       });
     }
 
@@ -135,49 +122,45 @@ router.post("/", async (req, res) => {
 
       let totalInserted = 0;
 
-      // Outer loop: For each existing procedures entry
-      for (let i = 0; i < rows.length; i++) {
-        const existingData = rows[i];
+      // For each eAFYA procedure mapping, create one new record using the first existing procedure data
+      for (let j = 0; j < mappings.length; j++) {
+        const eafyaProcedure = mappings[j];
+        const existingData = rows[0]; // Use the first existing procedure data
+        
         console.log(
-          `Processing procedures entry ${i + 1}/${rows.length}: ${
-            existingData.id
+          `Creating record for eAFYA procedure ${j + 1}/${mappings.length}: ${
+            eafyaProcedure.id
           }`
         );
 
-        // Inner loop: For each eAFYA procedure mapping
-        for (let j = 0; j < mappings.length; j++) {
-          const eafyaProcedure = mappings[j];
-          console.log(
-            `  - Mapping eAFYA procedure ${j + 1}/${mappings.length}: ${
-              eafyaProcedure.id
-            }`
-          );
-
-          await client.query(
-            `UPDATE reporting.dhis2_dataelements_108_procedures 
-             SET eafya_id = $1, eafya_name = $2 
-             WHERE id = $3`,
-            [
-              eafyaProcedure.id,
-              eafyaProcedure.name || null,
-              existingData.id,
-            ]
-          );
-          totalInserted++;
-        }
+        await client.query(
+          `INSERT INTO reporting.dhis2_dataelements_108_procedures 
+           (hmis_code, hmis_name, section_id, section_name, dataelement, eafya_id, eafya_name) 
+           VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+          [
+            existingData.hmis_code,
+            existingData.hmis_name,
+            existingData.section_id,
+            existingData.section_name,
+            existingData.dataelement,
+            parseInt(eafyaProcedure.id),
+            eafyaProcedure.name || null,
+          ]
+        );
+        totalInserted++;
       }
 
       console.log(`Total procedures mappings created: ${totalInserted}`);
 
       await client.query("COMMIT");
       return res.json({
-        message: "Procedures mappings saved successfully",
+        message: "New procedures mapping records created successfully",
         count: totalInserted,
         details: {
           procedures_entries: rows.length,
           eafya_procedures: mappings.length,
           total_mappings_created: totalInserted,
-          calculation: `${rows.length} procedures entries × ${mappings.length} eAFYA procedures = ${totalInserted} mappings`,
+          calculation: `${mappings.length} eAFYA procedures = ${totalInserted} new records`,
         },
       });
     } catch (error) {

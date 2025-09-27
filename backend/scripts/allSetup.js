@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 import { pool } from "../config/database.js";
-import { sequelize } from "../config/database.js";
 import Dataset from "../models/dataset.js";
 import UserModel from "../models/usermodel.js";
 import Facility from "../models/facility.js";
+import CustomizationSet from "../models/customizationsets.js";
 import { readFile } from "fs/promises";
 import { join, dirname } from "path";
 import { fileURLToPath } from "url";
@@ -177,7 +177,7 @@ const CONFIG = {
     }
   ],
 
-  materializedViews: [
+  customizationSets: [
   { name: "Antenatal Clinic", category: "Clinics" },
   { name: "Family Planning Clinic", category: "Clinics" },
   { name: "Immunization Clinic", category: "Clinics" },
@@ -396,66 +396,44 @@ class SimpleSetup {
     }
   }
 
-  // Create materialized view IDs
-  async createMaterializedViewIds() {
+  // Create customization sets
+  async createCustomizationSets() {
     try {
-      this.logger.log("Creating materialized view IDs...", "info");
-      
-      // Check if table exists
-      const checkTableQuery = `
-        SELECT EXISTS (
-          SELECT FROM information_schema.tables 
-          WHERE table_schema = 'reporting'
-          AND table_name = 'materialized_view_ids'
-        );
-      `;
+      this.logger.log("Creating CustomizationSets...", "info");
 
-      const tableExists = await pool.query(checkTableQuery);
-
-      if (!tableExists.rows[0].exists) {
-        const createTableQuery = `
-          CREATE TABLE reporting.materialized_view_ids (
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(255) NOT NULL,
-            category VARCHAR(255),
-            mapping_id INTEGER,
-            mapping_name VARCHAR(255),
-            created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-            updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-            UNIQUE(name, mapping_id)
-          );
-        `;
-
-        await pool.query(createTableQuery);
-        this.logger.log("Table 'materialized_view_ids' created successfully", "success");
-      } else {
-        this.logger.log("Table 'materialized_view_ids' already exists", "info");
-      }
+      await CustomizationSet.sync({ force: false });
 
       let insertedCount = 0;
       let skippedCount = 0;
 
-      for (const row of CONFIG.materializedViews) {
-        const insertQuery = `
-          INSERT INTO reporting.materialized_view_ids (name, category, mapping_id, mapping_name)
-          VALUES ($1, $2, $3, $4)
-          ON CONFLICT (name, mapping_id) DO NOTHING
-          RETURNING id;
+      for (const row of CONFIG.customizationSets) {
+        // Check if the customization set already exists
+        const checkQuery = `
+          SELECT id FROM reporting.customizationset 
+          WHERE name = $1 AND mapping_id = $2
         `;
+        
+        const existingRecord = await pool.query(checkQuery, [row.name, 0]);
 
-        const result = await pool.query(insertQuery, [row.name, row.category, 0, null]);
+        if (existingRecord.rows.length === 0) {
+          // Insert new record
+          const insertQuery = `
+            INSERT INTO reporting.customizationset (name, category, mapping_id, mapping_name, "createdAt", "updatedAt")
+            VALUES ($1, $2, $3, $4, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
+            RETURNING id;
+          `;
 
-        if (result.rows.length > 0) {
+          const result = await pool.query(insertQuery, [row.name, row.category, 0, null]);
           insertedCount++;
         } else {
           skippedCount++;
         }
       }
 
-      this.logger.log(`Materialized view IDs setup completed: ${insertedCount} inserted, ${skippedCount} skipped`, "success");
+      this.logger.log(`CustomizationSets setup completed: ${insertedCount} inserted, ${skippedCount} skipped`, "success");
       return { success: true, inserted: insertedCount, skipped: skippedCount };
     } catch (error) {
-      this.logger.log(`Error creating materialized view IDs: ${error.message}`, "error");
+      this.logger.log(`Error creating CustomizationSets: ${error.message}`, "error");
       throw error;
     }
   }
@@ -800,13 +778,9 @@ class SimpleSetup {
   // Extract view names from SQL content
   extractViewNames(sql) {
     const results = [];
-    const mvRe = /create\s+(?:or\s+replace\s+)?materialized\s+view\s+(?:if\s+not\s+exists\s+)?([^\s(]+)\s/gi;
     const vRe = /create\s+(?:or\s+replace\s+)?view\s+(?:if\s+not\s+exists\s+)?([^\s(]+)\s/gi;
 
     let m;
-    while ((m = mvRe.exec(sql)) !== null) {
-      results.push({ type: "materialized", name: m[1] });
-    }
     while ((m = vRe.exec(sql)) !== null) {
       results.push({ type: "view", name: m[1] });
     }
@@ -842,7 +816,6 @@ class SimpleSetup {
       const dropCommands = [
         `DROP VIEW IF EXISTS ${view.name} CASCADE;`,
         `DROP TABLE IF EXISTS ${view.name} CASCADE;`,
-        `DROP MATERIALIZED VIEW IF EXISTS ${view.name} CASCADE;`
       ];
 
       for (const dropSql of dropCommands) {
@@ -962,8 +935,8 @@ class SimpleSetup {
       // Step 5: Create facility table
       await this.createFacilityTable();
 
-      // Step 6: Create materialized view IDs
-      await this.createMaterializedViewIds();
+      // Step 6: Create CustomizationSets
+      await this.createCustomizationSets();
 
       // Step 7: Upload CSV files
       await this.uploadCSVFiles();

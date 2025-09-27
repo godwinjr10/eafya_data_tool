@@ -1,28 +1,24 @@
-// Imaging.js
 import React, { useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import API from "../../helpers/api";
+import API from "../../../helpers/api";
 
-import MappingTable from "../../components/MappingTable";
+import MappingTable from "../../../components/MappingTable";
 
-const Imaging = () => {
+const Commodities = () => {
   const history = useHistory();
   const [mappings, setMappings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedSection, setSelectedSection] = useState("");
-  const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
-  const [diseaseItems, setDiseaseItems] = useState([]);
-  const [count, setCount] = useState(0);
 
   const fetchMappings = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/mapping/imaging");
+      const res = await API.get("/mapping/commodities");
+      console.log("Fetched commodity mappings", res.data);
       setMappings(res.data || []);
-      setCount(res?.data?.length);
     } catch (e) {
-      console.error("Error fetching imaging mappings", e);
+      console.error("Error fetching commodity mappings", e);
       setMappings([]);
     } finally {
       setLoading(false);
@@ -48,7 +44,7 @@ const Imaging = () => {
         (m) =>
           (m.hmis_code || "").toLowerCase().includes(term) ||
           (m.hmis_name || "").toLowerCase().includes(term) ||
-          (m.eafya_name || "").toLowerCase().includes(term)
+          (m.eafya_product_name || "").toLowerCase().includes(term)
       );
     }
 
@@ -56,7 +52,7 @@ const Imaging = () => {
   }, [mappings, search, selectedSection]);
 
   const handleViewDetails = (row) => {
-    history.push(`/mapping/imaging/${row.hmis_code}`);
+    history.push(`/mapping/commodities/${row.hmis_code}`);
   };
 
   // Define columns for the reusable table
@@ -76,7 +72,6 @@ const Imaging = () => {
       accessor: "section_name",
       header: "Section Name",
       sortable: true,
-      render: (row) => row.section_name || "-",
     },
   ];
 
@@ -90,7 +85,7 @@ const Imaging = () => {
         searchable={true}
         filterable={true}
         sortable={true}
-        emptyMessage="No imaging mappings found"
+        emptyMessage="No commodity mappings found"
         className="mapping-table"
         onRowClick={handleViewDetails}
       />
@@ -98,4 +93,4 @@ const Imaging = () => {
   );
 };
 
-export default Imaging;
+export default Commodities;

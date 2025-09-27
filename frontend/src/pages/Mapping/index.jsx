@@ -1,24 +1,23 @@
 import React, { useState, useRef } from "react";
 import "./MappingInterface.css";
 
-import Conditions from "./Conditions";
-import LabTests from "./LabTests";
-import Commodities from "./Commodities";
-import FamilyPlanning from "./FamilyPlanning";
-import Vaccines from "./Vaccines";
-import Procedures from "./Procedures";
-import Imaging from "./Imaging";
-import MaterializedViewIds from "./MaterializedViewIds";
-import MaterializedViewIdsList from "./MaterializedViewIdsList";
-import MaterializedViewIdsDetail from "./MaterializedViewIdsDetail";
-import MappingDialog from "../../components/MappingDialog";
-import UpdateButton from "../../components/UpdateButton";
+import Conditions from "./dhis2/Conditions";
+import LabTests from "./dhis2/LabTests";
+import Commodities from "./dhis2/Commodities";
+import FamilyPlanning from "./dhis2/FamilyPlanning";
+import Vaccines from "./dhis2/Vaccines";
+import Procedures from "./dhis2/Procedures";
+import Imaging from "./dhis2/Imaging";
+import CustomizationSets from "./customizationsets/CustomizationSets";
+import CustomizationSetDetails from "./customizationsets/CustomizationSetDetails";
+import Dhis2MappingDialog from "./dhis2/Dhis2MappingDialog";
+import CustomizationMappingDialog from "./customizationsets/CustomizationMappingDialog";
 
 const EafyaMapping = () => {
   const [activeTab, setActiveTab] = useState("dhis2");
   const [selectedMappingType, setSelectedMappingType] = useState("conditions");
-  const [selectedMaterializedViewId, setSelectedMaterializedViewId] = useState(null);
-  const materializedViewDetailRef = useRef(null);
+  const [selectedCustomizationSet, setSelectedCustomizationSet] = useState(null);
+  const CustomizationSetRef = useRef(null);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [dialogData, setDialogData] = useState(null);
 
@@ -130,7 +129,7 @@ const EafyaMapping = () => {
               role="tab"
             >
               <i className="fas fa-cogs me-2"></i>
-              Customization Sets
+              Customization Set Mapping
             </button>
           </li>
         </ul>
@@ -230,16 +229,16 @@ const EafyaMapping = () => {
             <div className="card-header bg-light border-0">
               <h5 className="card-title mb-0 fw-semibold">
                 <i className="fas fa-database me-2 text-primary"></i>
-                Materialized View IDs
+                Customization Set IDs
               </h5>
               <p className="text-muted small mb-0 mt-1">
-                Select a materialized view ID to manage its mappings
+                Select a Customization set to map its eafya ID to Data Tool ID
               </p>
             </div>
             <div className="card-body p-2" style={{ maxHeight: "600px", overflowY: "auto" }}>
-              <MaterializedViewIdsList 
-                onItemSelect={setSelectedMaterializedViewId}
-                selectedItem={selectedMaterializedViewId}
+              <CustomizationSets 
+                onItemSelect={setSelectedCustomizationSet}
+                selectedItem={selectedCustomizationSet?.name}
               />
             </div>
           </div>
@@ -249,19 +248,19 @@ const EafyaMapping = () => {
             <div className="card-header bg-light border-0 d-flex align-items-center justify-content-between">
               <div>
                 <h5 className="card-title mb-0 fw-semibold">
-                  {selectedMaterializedViewId ? `${selectedMaterializedViewId}` : "Select a Materialized View ID"}
+                  {selectedCustomizationSet ? `${selectedCustomizationSet.name}` : "Select a Customization Set"}
                 </h5>
                 <p className="text-muted small mb-0 mt-1">
-                  {selectedMaterializedViewId 
-                    ? `Manage details for ${selectedMaterializedViewId}` 
-                    : "Choose a materialized view ID from the left to view and manage its details"
+                  {selectedCustomizationSet 
+                    ? `Manage details for ${selectedCustomizationSet.name}` 
+                    : "Choose a Customization Set from the left to view and manage its details"
                   }
                 </p>
               </div>
-              {selectedMaterializedViewId && (
+              {selectedCustomizationSet && (
                 <button 
                   className="btn btn-primary btn-sm"
-                  onClick={() => materializedViewDetailRef.current?.openAdd()}
+                  onClick={() => CustomizationSetRef.current?.openAdd()}
                 >
                   <i className="fas fa-plus me-1"></i>
                   Add Mapping
@@ -269,17 +268,18 @@ const EafyaMapping = () => {
               )}
             </div>
             <div className="card-body p-0">
-              {selectedMaterializedViewId ? (
-                <MaterializedViewIdsDetail 
-                  ref={materializedViewDetailRef}
-                  name={selectedMaterializedViewId}
+              {selectedCustomizationSet ? (
+                <CustomizationSetDetails 
+                  ref={CustomizationSetRef}
+                  name={selectedCustomizationSet.name}
+                  category={selectedCustomizationSet.category}
                   onOpenDialog={handleOpenDialog}
                 />
               ) : (
                 <div className="text-center py-5">
                   <i className="fas fa-database fa-3x text-muted mb-3"></i>
-                  <h5 className="text-muted">No Materialized View ID Selected</h5>
-                  <p className="text-muted">Please select a materialized view ID from the left panel to view its mappings.</p>
+                  <h5 className="text-muted">No Customization Set Selected</h5>
+                  <p className="text-muted">Please select a Customization Set from the left panel to start the mapping process.</p>
                 </div>
               )}
             </div>
@@ -320,17 +320,31 @@ const EafyaMapping = () => {
       </div>
       
       {dialogOpen && dialogData && (
-        <MappingDialog
-          isOpen={dialogOpen}
-          onClose={handleCloseDialog}
-          onSave={handleSaveDialog}
-          hmisName={dialogData.hmisName}
-          section={dialogData.section}
-          eafyaItems={dialogData.eafyaItems}
-          onEafyaItemsLoaded={dialogData.onEafyaItemsLoaded}
-          datasetCode={dialogData.datasetCode}
-          searchEndpoint={dialogData.searchEndpoint}
-        />
+        <>
+          {activeTab === "dhis2" && (
+            <Dhis2MappingDialog
+              isOpen={dialogOpen}
+              onClose={handleCloseDialog}
+              onSave={handleSaveDialog}
+              hmisName={dialogData.hmisName}
+              section={dialogData.section}
+              eafyaItems={dialogData.eafyaItems}
+              onEafyaItemsLoaded={dialogData.onEafyaItemsLoaded}
+              datasetCode={dialogData.datasetCode}
+              searchEndpoint={dialogData.searchEndpoint}
+            />
+          )}
+          {activeTab === "customization" && (
+            <CustomizationMappingDialog
+              isOpen={dialogOpen}
+              onClose={handleCloseDialog}
+              onSave={handleSaveDialog}
+              hmisName={dialogData.hmisName}
+              category={dialogData.category}
+              searchEndpoint={dialogData.searchEndpoint}
+            />
+          )}
+        </>
       )}
     </div>
   );

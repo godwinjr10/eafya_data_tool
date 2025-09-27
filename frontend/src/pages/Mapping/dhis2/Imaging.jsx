@@ -1,24 +1,28 @@
-// Vaccines.js
+// Imaging.js
 import React, { useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import API from "../../helpers/api";
-import MappingDialog from "../../components/MappingDialog";
-import MappingTable from "../../components/MappingTable";
+import API from "../../../helpers/api";
 
-const Vaccines = () => {
+import MappingTable from "../../../components/MappingTable";
+
+const Imaging = () => {
   const history = useHistory();
   const [mappings, setMappings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
   const [selectedSection, setSelectedSection] = useState("");
+  const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
+  const [diseaseItems, setDiseaseItems] = useState([]);
+  const [count, setCount] = useState(0);
 
   const fetchMappings = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/mapping/vaccines");
+      const res = await API.get("/mapping/imaging");
       setMappings(res.data || []);
+      setCount(res?.data?.length);
     } catch (e) {
-      console.error("Error fetching vaccine mappings", e);
+      console.error("Error fetching imaging mappings", e);
       setMappings([]);
     } finally {
       setLoading(false);
@@ -44,7 +48,7 @@ const Vaccines = () => {
         (m) =>
           (m.hmis_code || "").toLowerCase().includes(term) ||
           (m.hmis_name || "").toLowerCase().includes(term) ||
-          (m.eafya_vaccine_name || "").toLowerCase().includes(term)
+          (m.eafya_name || "").toLowerCase().includes(term)
       );
     }
 
@@ -52,7 +56,7 @@ const Vaccines = () => {
   }, [mappings, search, selectedSection]);
 
   const handleViewDetails = (row) => {
-    history.push(`/mapping/vaccines/${row.hmis_code}`);
+    history.push(`/mapping/imaging/${row.hmis_code}`);
   };
 
   // Define columns for the reusable table
@@ -72,6 +76,7 @@ const Vaccines = () => {
       accessor: "section_name",
       header: "Section Name",
       sortable: true,
+      render: (row) => row.section_name || "-",
     },
   ];
 
@@ -85,7 +90,7 @@ const Vaccines = () => {
         searchable={true}
         filterable={true}
         sortable={true}
-        emptyMessage="No vaccine mappings found"
+        emptyMessage="No imaging mappings found"
         className="mapping-table"
         onRowClick={handleViewDetails}
       />
@@ -93,4 +98,4 @@ const Vaccines = () => {
   );
 };
 
-export default Vaccines;
+export default Imaging;

@@ -1,23 +1,28 @@
-// LabTests.js
+// Conditions.js
 import React, { useEffect, useMemo, useState } from "react";
 import { useHistory } from "react-router-dom";
-import API from "../../helpers/api";
-import MappingTable from "../../components/MappingTable";
+import API from "../../../helpers/api";
 
-const LabTests = () => {
+import MappingTable from "../../../components/MappingTable";
+
+const Conditions = () => {
   const history = useHistory();
   const [mappings, setMappings] = useState([]);
   const [loading, setLoading] = useState(false);
   const [search, setSearch] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSection, setSelectedSection] = useState("");
+  const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
+  const [diseaseItems, setDiseaseItems] = useState([]);
+  const [count, setCount] = useState(0);
 
   const fetchMappings = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/mapping/labtests");
+      const res = await API.get("/mapping/conditions");
       setMappings(res.data || []);
+      setCount(res?.data?.length);
     } catch (e) {
-      console.error("Error fetching labtest mappings", e);
+      console.error("Error fetching condition mappings", e);
       setMappings([]);
     } finally {
       setLoading(false);
@@ -31,9 +36,9 @@ const LabTests = () => {
   const filteredMappings = useMemo(() => {
     let filtered = mappings;
 
-    // Filter by category first
-    if (selectedCategory) {
-      filtered = filtered.filter((m) => m.category === selectedCategory);
+    // Filter by section first
+    if (selectedSection) {
+      filtered = filtered.filter((m) => m.section_id === selectedSection);
     }
 
     // Then filter by search term
@@ -43,15 +48,15 @@ const LabTests = () => {
         (m) =>
           (m.hmis_code || "").toLowerCase().includes(term) ||
           (m.hmis_name || "").toLowerCase().includes(term) ||
-          (m.eafya_labtest_name || "").toLowerCase().includes(term)
+          (m.eafya_disease_name || "").toLowerCase().includes(term)
       );
     }
 
     return filtered;
-  }, [mappings, search, selectedCategory]);
+  }, [mappings, search, selectedSection]);
 
   const handleViewDetails = (row) => {
-    history.push(`/mapping/labtests/${row.hmis_code}`);
+    history.push(`/mapping/conditions/${row.hmis_code}`);
   };
 
   // Define columns for the reusable table
@@ -71,6 +76,7 @@ const LabTests = () => {
       accessor: "section_name",
       header: "Section Name",
       sortable: true,
+      render: (row) => row.section_name || "-",
     },
   ];
 
@@ -84,11 +90,12 @@ const LabTests = () => {
         searchable={true}
         filterable={true}
         sortable={true}
-        emptyMessage="No lab test mappings found"
+        emptyMessage="No condition mappings found"
         className="mapping-table"
         onRowClick={handleViewDetails}
       />
     </>
   );
 };
-export default LabTests;
+
+export default Conditions;
