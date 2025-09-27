@@ -14,7 +14,7 @@ const LabTests = () => {
   const fetchMappings = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/eafya/labtests");
+      const res = await API.get("/mapping/labtests");
       setMappings(res.data || []);
     } catch (e) {
       console.error("Error fetching labtest mappings", e);

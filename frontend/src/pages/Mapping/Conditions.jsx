@@ -18,7 +18,7 @@ const Conditions = () => {
   const fetchMappings = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/eafya/conditions");
+      const res = await API.get("/mapping/conditions");
       setMappings(res.data || []);
       setCount(res?.data?.length);
     } catch (e) {

@@ -17,7 +17,8 @@ import outpatientRoutes from "./routes/reports/outpatient.js";
 import commoditiesReportRoutes from "./routes/reports/commodities.js";
 import dashboardRoutes from "./routes/dhisreports/dashboard.js";
 import dhisIntegration from "./routes/dhisintegration/index.js";
-import mappingRoutes from "./routes/mapping/hmis.js";
+
+/***Mapping Routes ****/
 import datasetRoutes from "./routes/mapping/datasets.js";
 import eafyaRoutes from "./routes/mapping/eafya.js";
 import commoditiesMappingRoutes from "./routes/mapping/commodities.js";
@@ -28,6 +29,8 @@ import conditionsMappingRoutes from "./routes/mapping/conditions.js";
 import proceduresMappingRoutes from "./routes/mapping/procedures.js";
 import imagingMappingRoutes from "./routes/mapping/imaging.js";
 import productsMappingRoutes from "./routes/mapping/products.js";
+
+/*** DHIS2 Report ****/
 import maternityRoutes from "./routes/dhisreports/maternity.js";
 import postnatalRoutes from "./routes/dhisreports/postnatal.js";
 import familyPlanningRoutes from "./routes/dhisreports/familyplanning.js";
@@ -90,16 +93,20 @@ app.use("/api/outpatient", outpatientRoutes);
 app.use("/api/commodities/report", commoditiesReportRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/dhis", dhisIntegration);
-app.use("/api/mapping", mappingRoutes);
-app.use("/api/eafya", eafyaRoutes);
-app.use("/api/eafya/commodities", commoditiesMappingRoutes);
-app.use("/api/eafya/labtests", labtestsMappingRoutes);
-app.use("/api/eafya/familyplanning", familyplanningMappingRoutes);
-app.use("/api/eafya/vaccines", vaccinesMappingRoutes);
-app.use("/api/eafya/conditions", conditionsMappingRoutes);
-app.use("/api/eafya/procedures", proceduresMappingRoutes);
-app.use("/api/eafya/imaging", imagingMappingRoutes);
-app.use("/api/eafya/products", productsMappingRoutes);
+
+/***Mapping Routes ****/
+// Register specific routes first to avoid conflicts
+app.use("/api/mapping/commodities", commoditiesMappingRoutes);
+app.use("/api/mapping/labtests", labtestsMappingRoutes);
+app.use("/api/mapping/familyplanning", familyplanningMappingRoutes);
+app.use("/api/mapping/vaccines", vaccinesMappingRoutes);
+app.use("/api/mapping/conditions", conditionsMappingRoutes);
+app.use("/api/mapping/procedures", proceduresMappingRoutes);
+app.use("/api/mapping/imaging", imagingMappingRoutes);
+app.use("/api/mapping/products", productsMappingRoutes);
+// app.use("/api/eafya", eafyaRoutes);
+
+/*** DHIS2 Report ****/
 app.use("/api/maternity", maternityRoutes);
 app.use("/api/postnatal", postnatalRoutes);
 app.use("/api/family-planning", familyPlanningRoutes);

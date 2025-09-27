@@ -18,7 +18,7 @@ const Procedures = () => {
     const fetchMappings = async () => {
         setLoading(true);
         try {
-            const res = await API.get("/eafya/procedures");
+            const res = await API.get("/mapping/procedures");
             setMappings(res.data || []);
             setCount(res?.data?.length);
         } catch (e) {

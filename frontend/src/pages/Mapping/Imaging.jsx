@@ -18,7 +18,7 @@ const Imaging = () => {
   const fetchMappings = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/eafya/imaging");
+      const res = await API.get("/mapping/imaging");
       setMappings(res.data || []);
       setCount(res?.data?.length);
     } catch (e) {

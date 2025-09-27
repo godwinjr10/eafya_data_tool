@@ -17,7 +17,7 @@ const FamilyPlanning = () => {
   const fetchMappings = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/eafya/familyplanning");
+      const res = await API.get("/mapping/familyplanning");
       setMappings(res.data || []);
     } catch (e) {
       console.error("Error fetching family planning mappings", e);

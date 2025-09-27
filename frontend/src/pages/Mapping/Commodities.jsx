@@ -14,7 +14,8 @@ const Commodities = () => {
   const fetchMappings = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/eafya/commodities");
+      const res = await API.get("/mapping/commodities");
+      console.log("Fetched commodity mappings", res.data);
       setMappings(res.data || []);
     } catch (e) {
       console.error("Error fetching commodity mappings", e);

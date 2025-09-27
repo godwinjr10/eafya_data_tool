@@ -15,7 +15,7 @@ const Vaccines = () => {
   const fetchMappings = async () => {
     setLoading(true);
     try {
-      const res = await API.get("/eafya/vaccines");
+      const res = await API.get("/mapping/vaccines");
       setMappings(res.data || []);
     } catch (e) {
       console.error("Error fetching vaccine mappings", e);

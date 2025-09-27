@@ -24,7 +24,7 @@ router.get("/", async (req, res) => {
 });
 
 // Get products for mapping
-router.get("/products", async (req, res) => {
+router.get("/items", async (req, res) => {
   try {
     const query = `
             SELECT 
