@@ -18,7 +18,7 @@ const MappingDetail = () => {
   const MAPPING_CONFIGS = {
     commodities: {
       title: "Commodities Mapping",
-      endpoint: "/mapping/commodities",
+      endpoint: "/eafya/commodities",
       searchEndpoint: "/mapping/commodities/items",
       sectionField: "section_id",
       datasetCode: "HMIS1054",
@@ -30,7 +30,7 @@ const MappingDetail = () => {
     },
     labtests: {
       title: "Lab Tests Mapping",
-      endpoint: "/mapping/labtests",
+      endpoint: "/eafya/labtests",
       searchEndpoint: "/mapping/labtests/items",
       sectionField: "_section_id",
       datasetCode: "HMIS1055",
@@ -42,7 +42,7 @@ const MappingDetail = () => {
     },
     conditions: {
       title: "Conditions Mapping",
-      endpoint: "/mapping/conditions",
+      endpoint: "/eafya/conditions",
       searchEndpoint: "/mapping/conditions/items",
       sectionField: "section_id",
       datasetCode: "HMIS1052_CONDITIONS",
@@ -54,7 +54,7 @@ const MappingDetail = () => {
     },
     familyplanning: {
       title: "Family Planning Mapping",
-      endpoint: "/mapping/familyplanning",
+      endpoint: "/eafya/familyplanning",
       searchEndpoint: "/mapping/familyplanning/items",
       sectionField: "_section_id",
       datasetCode: "HMIS1052_FP",
@@ -66,7 +66,7 @@ const MappingDetail = () => {
     },
     vaccines: {
       title: "Vaccines Mapping",
-      endpoint: "/mapping/vaccines",
+      endpoint: "/eafya/vaccines",
       searchEndpoint: "/mapping/vaccines/items",
       sectionField: "_section_id",
       datasetCode: "HMIS1052_VACCINE",
@@ -78,7 +78,7 @@ const MappingDetail = () => {
     },
     procedures: {
       title: "Procedures Mapping",
-      endpoint: "/mapping/procedures",
+      endpoint: "/eafya/procedures",
       searchEndpoint: "/mapping/procedures/items",
       sectionField: "_section_id",
       datasetCode: "HMIS1052_VACCINE",
@@ -90,7 +90,7 @@ const MappingDetail = () => {
     },
     imaging: {
       title: "Imaging Mapping",
-      endpoint: "/mapping/imaging",
+      endpoint: "/eafya/imaging",
       searchEndpoint: "/mapping/imaging/items",
       sectionField: "_section_id",
       datasetCode: "HMIS1052_VACCINE",
