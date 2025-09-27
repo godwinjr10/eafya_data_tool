@@ -16,7 +16,7 @@ FROM (
     DATE_PART('year', AGE(administered_on, birth_date::DATE)) AS age_years,
     (DATE_PART('year', AGE(administered_on, birth_date::DATE)) * 12 + DATE_PART('month', AGE(administered_on, birth_date::DATE))) AS age_months
   FROM reporting.patient_vaccines 
-  WHERE vaccine_id IN (SELECT mapping_id FROM reporting.materialized_view_ids where name ilike '%hpv vaccine%' and mapping_id > 0)
+  WHERE vaccine_id IN (SELECT mapping_id FROM reporting.customizationset where name ilike '%hpv vaccine%' and mapping_id > 0)
   and administered_on notnull
 ) sub
 GROUP BY TO_CHAR(administered_on, 'YYYYMM'), vaccine_id, vaccine_name

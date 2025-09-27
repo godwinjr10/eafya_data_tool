@@ -10,7 +10,7 @@ SELECT
     WHERE vaccine_name ILIKE '%NONE PREG%'
   ) AS non_pregnant
 FROM reporting.patient_vaccines
-WHERE vaccine_id IN ('19', '20', '21', '22', '23', '40', '41', '42', '43', '44')
+WHERE vaccine_id IN (SELECT mapping_id FROM reporting.customizationset where name ilike '%Tetanus Vaccine%' and mapping_id > 0)
 GROUP BY
   TO_CHAR(DATE_TRUNC('month', administered_on), 'YYYYMM'),
   vaccine_id,
