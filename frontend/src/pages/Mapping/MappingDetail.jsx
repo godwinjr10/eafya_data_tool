@@ -115,7 +115,7 @@ const MappingDetail = () => {
     setLoading(true);
     try {
       // Use the new detail endpoint with HMIS code
-      const res = await API.get(`/eafya-details/${mappingType}/${id}`);
+      const res = await API.get(`/mapping/eafyadetails/${mappingType}/${id}`);
       setMappingData(res.data);
     } catch (error) {
       console.error("Error fetching mapping detail:", error);

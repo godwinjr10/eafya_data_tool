@@ -19,8 +19,8 @@ import dashboardRoutes from "./routes/dhisreports/dashboard.js";
 import dhisIntegration from "./routes/dhisintegration/index.js";
 
 /***Mapping Routes ****/
+import eafyadetails from "./routes/mapping/eafyadetails.js";
 import datasetRoutes from "./routes/mapping/datasets.js";
-import eafyaRoutes from "./routes/mapping/eafya.js";
 import commoditiesMappingRoutes from "./routes/mapping/commodities.js";
 import labtestsMappingRoutes from "./routes/mapping/labtests.js";
 import familyplanningMappingRoutes from "./routes/mapping/familyplanning.js";
@@ -95,7 +95,7 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/dhis", dhisIntegration);
 
 /***Mapping Routes ****/
-// Register specific routes first to avoid conflicts
+app.use("/api/mapping/eafyadetails", eafyadetails);
 app.use("/api/mapping/commodities", commoditiesMappingRoutes);
 app.use("/api/mapping/labtests", labtestsMappingRoutes);
 app.use("/api/mapping/familyplanning", familyplanningMappingRoutes);
@@ -104,7 +104,6 @@ app.use("/api/mapping/conditions", conditionsMappingRoutes);
 app.use("/api/mapping/procedures", proceduresMappingRoutes);
 app.use("/api/mapping/imaging", imagingMappingRoutes);
 app.use("/api/mapping/products", productsMappingRoutes);
-// app.use("/api/eafya", eafyaRoutes);
 
 /*** DHIS2 Report ****/
 app.use("/api/maternity", maternityRoutes);
