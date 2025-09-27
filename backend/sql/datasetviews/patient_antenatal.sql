@@ -25,7 +25,7 @@ inner join dwh.fact_eafya_clinic_session s on s.patient_visit_id = v.id
 inner join dwh.dim_eafya_visit_type t on t.id = s.visit_type_id
 inner join dwh.dim_eafya_clinic c on c.id = s.clinic_id 
 inner join dwh.fact_eafya_encounters e on e.clinic_session_id = s.id
-where c.id IN (SELECT mapping_id FROM reporting.materialized_view_ids where name ilike '%antenatal%' and mapping_id > 0)
+where c.id IN (SELECT mapping_id FROM reporting.customizationset where name ilike '%antenatal%' and mapping_id > 0)
 and e.origin = 'op'
 and d.gender = 'Female'
 order by v.date_created, v.patient_id

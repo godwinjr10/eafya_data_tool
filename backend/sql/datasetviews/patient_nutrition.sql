@@ -19,4 +19,4 @@ inner join dwh.fact_eafya_patient_visit v on v.patient_id = r.patient_id
 inner join dwh.fact_eafya_clinic_session c on c.patient_visit_id = v.id
 inner join dwh.dim_eafya_clinic l on l.id = c.clinic_id 
 inner join dwh.fact_eafya_encounters e on e.clinic_session_id = c.id
-where l.id = 9
+where l.id IN (SELECT mapping_id FROM reporting.customizationset where name ilike '%Nutrition Clinic%' and mapping_id > 0)

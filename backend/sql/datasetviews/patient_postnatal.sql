@@ -25,4 +25,4 @@ inner join dwh.dim_eafya_clinic l on l.id = c.clinic_id
 inner join dwh.fact_eafya_encounters e on e.clinic_session_id = c.id
 inner join dwh.fact_eafya_admissions s on s.encounter_id = e.id
 inner join dwh.dim_eafya_ward w on w.id = s.admission_ward_id
-where w.id in (SELECT mapping_id FROM reporting.materialized_view_ids where name ilike '%postnantal ward%' and mapping_id > 0)
+where w.id in (SELECT mapping_id FROM reporting.customizationset where name ilike '%postnantal ward%' and mapping_id > 0)

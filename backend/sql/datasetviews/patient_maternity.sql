@@ -111,4 +111,4 @@ inner join dwh.dim_eafya_clinic c on c.id = s.clinic_id
 inner join dwh.fact_eafya_encounters e on e.id = a.encounter_id
 inner join dwh.dim_eafya_registered_patients r on r.patient_id = v.patient_id 
 inner join dwh.dim_eafya_ward w on w.id = a.admission_ward_id
-where a.admission_ward_id in (SELECT mapping_id FROM reporting.materialized_view_ids where name ilike '%maternity ward%' and mapping_id > 0)
+where a.admission_ward_id in (SELECT mapping_id FROM reporting.customizationset where name ilike '%Maternity Ward%' and mapping_id > 0)

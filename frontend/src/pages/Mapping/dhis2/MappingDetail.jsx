@@ -81,7 +81,7 @@ const MappingDetail = () => {
       endpoint: "/mapping/procedures",
       searchEndpoint: "/mapping/procedures/items",
       sectionField: "section_id",
-      datasetCode: "HMIS1058_PROCEDURES",
+      datasetCode: "HMIS1052_PROCEDURES",
       fields: [
         { key: "hmis_code", label: "HMIS Code" },
         { key: "hmis_name", label: "HMIS Name" },
