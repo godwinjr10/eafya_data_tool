@@ -59,7 +59,7 @@ const FamilyPlanning = () => {
 
   const handleDelete = async (id) => {
     try {
-      const res = await API.delete(`/eafya/familyplanning/${id}`);
+      const res = await API.delete("/eafya/familyplanning", { data: { eafya_id: id } });
       if (res.status === 200) {
         setMappings((prev) => prev.filter((m) => m.id !== id));
       }

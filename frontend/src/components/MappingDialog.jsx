@@ -4,11 +4,13 @@ import API from "../helpers/api";
 // Constants for endpoint mappings
 const ENDPOINT_MAPPINGS = {
   HMIS1054: "/eafya/products",
-  HMIS1055: "/eafya/lab",
-  HMIS1052: "/eafya/vaccines",
-  HMIS1052_FP: "/eafya/familyplanning-items",
-  HMIS1052_VACCINE: "/eafya/vaccine-items",
-  HMIS1052_CONDITIONS: "/eafya/disease-items",
+  HMIS1055: "/eafya/labtests/items",
+  HMIS1052: "/eafya/vaccines/items",
+  HMIS1052_FP: "/eafya/familyplanning/items",
+  HMIS1052_VACCINE: "/eafya/vaccines/items",
+  HMIS1052_CONDITIONS: "/eafya/conditions/items",
+  HMIS1052_PROCEDURES: "/eafya/procedures/items",
+  HMIS1052_IMAGING: "/eafya/imaging/items",
   default: "/mapping/diseases",
 };
 
@@ -25,6 +27,8 @@ const getItemTypeForDataset = (datasetCode) => {
     HMIS1052_FP: "family planning item",
     HMIS1052_VACCINE: "vaccine",
     HMIS1052_CONDITIONS: "disease",
+    HMIS1052_PROCEDURES: "procedure",
+    HMIS1052_IMAGING: "imaging",
   };
   return typeMap[datasetCode] || "disease";
 };
@@ -52,6 +56,8 @@ const MappingDialog = ({
     "HMIS1052_FP",
     "HMIS1052_VACCINE",
     "HMIS1052_CONDITIONS",
+    "HMIS1052_PROCEDURES",
+    "HMIS1052_IMAGING",
   ].includes(datasetCode);
 
   // Reset state when dialog closes

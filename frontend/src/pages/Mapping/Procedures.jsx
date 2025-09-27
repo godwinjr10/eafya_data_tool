@@ -22,7 +22,7 @@ const Procedures = () => {
             setMappings(res.data || []);
             setCount(res?.data?.length);
         } catch (e) {
-            console.error("Error fetching condition mappings", e);
+            console.error("Error fetching procedures mappings", e);
             setMappings([]);
         } finally {
             setLoading(false);
@@ -48,7 +48,7 @@ const Procedures = () => {
                 (m) =>
                     (m.hmis_code || "").toLowerCase().includes(term) ||
                     (m.hmis_name || "").toLowerCase().includes(term) ||
-                    (m.eafya_disease_name || "").toLowerCase().includes(term)
+                    (m.eafya_name || "").toLowerCase().includes(term)
             );
         }
 
@@ -56,7 +56,7 @@ const Procedures = () => {
     }, [mappings, search, selectedSection]);
 
     const handleViewDetails = (row) => {
-        history.push(`/mapping/conditions/${row.hmis_code}`);
+        history.push(`/mapping/procedures/${row.hmis_code}`);
     };
 
     // Define columns for the reusable table
@@ -90,7 +90,7 @@ const Procedures = () => {
                 searchable={true}
                 filterable={true}
                 sortable={true}
-                emptyMessage="No condition mappings found"
+                emptyMessage="No procedures mappings found"
                 className="mapping-table"
                 onRowClick={handleViewDetails}
             />
