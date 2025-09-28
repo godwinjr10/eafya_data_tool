@@ -10,9 +10,11 @@ WITH x AS (
   WHERE category_id = 7
     AND origin = 'op'
     AND gender = 'Female'
+  and clinic_id IN (SELECT mapping_id FROM reporting.customizationset where name ilike '%antenatal%' and mapping_id > 0)
 )
 SELECT
   TO_CHAR(report_month, 'YYYYMM') AS report_month,
+  'AN12' as hmis_code,
   COUNT(*) FILTER (WHERE age_years < 15)                   AS "below_15_years",
   COUNT(*) FILTER (WHERE age_years BETWEEN 15 AND 19)      AS "15-19_years",
   COUNT(*) FILTER (WHERE age_years BETWEEN 20 AND 24)      AS "20-24_years",

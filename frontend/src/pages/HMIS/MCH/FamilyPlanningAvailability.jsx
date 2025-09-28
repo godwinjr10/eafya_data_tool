@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 
-const VaccinesAvailability = () => {
+const FamilyPlanningAvailability = () => {
   // State for form data
-  const [vaccineData, setVaccineData] = useState({
-    WT01: { name: 'BCG', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
-    WT02: { name: 'Hep B zero doze', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
-    WT03: { name: 'Polio (OPV)', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
-    WT04: { name: 'IPV', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
-    WT05: { name: 'DPT+Hep B+Hib', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
-    WT06: { name: 'PCV', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
-    WT07: { name: 'Rotavirus', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
-    WT08: { name: 'Measles', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
-    WT09: { name: 'Yellow Fever', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
-    WT10: { name: 'Td', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
-    WT11: { name: 'HPV', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
-    WT12: { name: 'Malaria', opening: '', received: '', closing: '', closedVials: '', openVials: '' }
+  const [contraceptiveData, setContraceptiveData] = useState({
+    FP01: { name: 'Oral Contraceptives (Pills)', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
+    FP02: { name: 'Injectable Contraceptives', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
+    FP03: { name: 'Condoms (Male)', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
+    FP04: { name: 'Condoms (Female)', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
+    FP05: { name: 'IUD (Copper T)', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
+    FP06: { name: 'Implant (Jadelle)', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
+    FP07: { name: 'Implant (Implanon)', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
+    FP08: { name: 'Emergency Contraceptives', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
+    FP09: { name: 'Diaphragm', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
+    FP10: { name: 'Cervical Cap', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
+    FP11: { name: 'Spermicides', opening: '', received: '', closing: '', closedVials: '', openVials: '' },
+    FP12: { name: 'Fertility Awareness Methods', opening: '', received: '', closing: '', closedVials: '', openVials: '' }
   });
 
   // Handle input change
   const handleInputChange = (code, field, value) => {
-    setVaccineData(prev => ({
+    setContraceptiveData(prev => ({
       ...prev,
       [code]: {
         ...prev[code],
@@ -111,59 +111,59 @@ const VaccinesAvailability = () => {
       `}</style>
 
       <div className="section-header mb-3">
-        2.6.4 VACCINE AVAILABILITY AND WASTAGE
+        2.4.7 CONTRACEPTIVES AVAILABILITY AND WASTAGE
       </div>
 
       <div className="table-container mb-4">
         <table className="data-entry-table compact-table full-width-table">
           <thead>
             <tr className="table-header-bg">
-              <th style={{ fontWeight: "normal" }}>Antigen</th>
+              <th style={{ fontWeight: "normal" }}>Contraceptive Method</th>
               <th className="text-center" style={{ fontWeight: "normal" }}>Opening Balance (A)</th>
               <th className="text-center" style={{ fontWeight: "normal" }}>Received (B)</th>
               <th className="text-center" style={{ fontWeight: "normal" }}>Closing Balance (C)</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>Doses wasted</th>
+              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>Units wasted</th>
             </tr>
             <tr className="table-header-bg">
               <th style={{ fontWeight: "normal" }}></th>
               <th style={{ fontWeight: "normal" }}></th>
               <th style={{ fontWeight: "normal" }}></th>
               <th style={{ fontWeight: "normal" }}></th>
-              <th className="text-center" style={{ fontWeight: "normal" }}>Doses in Closed Vials (CV)</th>
-              <th className="text-center" style={{ fontWeight: "normal" }}>Doses in Open Vials (OV)</th>
+              <th className="text-center" style={{ fontWeight: "normal" }}>Units in Closed Packages (CP)</th>
+              <th className="text-center" style={{ fontWeight: "normal" }}>Units in Open Packages (OP)</th>
             </tr>
           </thead>
           <tbody>
-            {Object.entries(vaccineData).map(([code, vaccine]) => (
+            {Object.entries(contraceptiveData).map(([code, contraceptive]) => (
               <tr key={code}>
-                <td>{code}. {vaccine.name}</td>
+                <td>{code}. {contraceptive.name}</td>
                 <td className="text-center">
                   <FormInput 
-                    value={vaccine.opening}
+                    value={contraceptive.opening}
                     onChange={(e) => handleInputChange(code, 'opening', e.target.value)}
                   />
                 </td>
                 <td className="text-center">
                   <FormInput 
-                    value={vaccine.received}
+                    value={contraceptive.received}
                     onChange={(e) => handleInputChange(code, 'received', e.target.value)}
                   />
                 </td>
                 <td className="text-center">
                   <FormInput 
-                    value={vaccine.closing}
+                    value={contraceptive.closing}
                     onChange={(e) => handleInputChange(code, 'closing', e.target.value)}
                   />
                 </td>
                 <td className="text-center">
                   <FormInput 
-                    value={vaccine.closedVials}
+                    value={contraceptive.closedVials}
                     onChange={(e) => handleInputChange(code, 'closedVials', e.target.value)}
                   />
                 </td>
                 <td className="text-center">
                   <FormInput 
-                    value={vaccine.openVials}
+                    value={contraceptive.openVials}
                     onChange={(e) => handleInputChange(code, 'openVials', e.target.value)}
                   />
                 </td>
@@ -176,4 +176,4 @@ const VaccinesAvailability = () => {
   );
 };
 
-export default VaccinesAvailability;
+export default FamilyPlanningAvailability;

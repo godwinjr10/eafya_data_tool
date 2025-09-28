@@ -1,6 +1,7 @@
 CREATE VIEW reporting."105_02_anc_hepatitis" AS
 SELECT
   TO_CHAR(DATE_TRUNC('month', lab_test_date), 'YYYYMM') AS report_month,
+  'AN15' as hmis_code
   COUNT(*)                                              AS total_tested,
   COUNT(*) FILTER (WHERE "result" ILIKE ANY (ARRAY['%positive%']))  AS total_positive
 FROM reporting.patient_labtests

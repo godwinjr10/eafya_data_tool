@@ -3,65 +3,11 @@ import API from "../../../helpers/api";
 
 const Tetanus = ({ selectedMonth, getMonthNumber, selectedYear }) => {
   const [tetanusData, setTetanusData] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const transformApiData = (apiData) => {
-    const doses = [
-      {
-        code: "TD01",
-        label: "Td1-Dose 1",
-        pregKey: "td1_preg",
-        nonPregKey: "td1_non_preg",
-      },
-      {
-        code: "TD02",
-        label: "Td2-Dose 2",
-        pregKey: "td2_preg",
-        nonPregKey: "td2_non_preg",
-      },
-      {
-        code: "TD03",
-        label: "Td3-Dose 3",
-        pregKey: "td3_preg",
-        nonPregKey: "td3_non_preg",
-      },
-      {
-        code: "TD04",
-        label: "Td4-Dose 4",
-        pregKey: "td4_preg",
-        nonPregKey: "td4_non_preg",
-      },
-      {
-        code: "TD05",
-        label: "Td5-Dose 5",
-        pregKey: "td5_preg",
-        nonPregKey: "td5_non_preg",
-      },
-    ];
-
-    // Use the most recent month's data
-    const latestData = apiData[0] || {};
-
-    return doses.map((dose) => ({
-      code: dose.code,
-      label: dose.label,
-      data: {
-        pregnant: {
-          Static: Number(latestData[dose.pregKey] || 0),
-          Outreach: 0,
-        },
-        nonPregnant: {
-          Static: Number(latestData[dose.nonPregKey] || 0),
-          Outreach: 0,
-          School: 0,
-        },
-      },
-    }));
-  };
-
   const fetchTetanusData = useCallback(async () => {
-    if (!selectedMonth) return;
+    if (!selectedMonth || !selectedYear) return;
 
     try {
       setLoading(true);
@@ -103,8 +49,23 @@ const Tetanus = ({ selectedMonth, getMonthNumber, selectedYear }) => {
   }, [selectedMonth, selectedYear, getMonthNumber]);
 
   useEffect(() => {
-    fetchTetanusData();
-  }, [fetchTetanusData]);
+    if (selectedMonth && selectedYear) {
+      fetchTetanusData();
+    }
+  }, [selectedMonth, selectedYear, fetchTetanusData]);
+
+  // Form input component with consistent styling
+  const FormInput = ({ value, onChange, placeholder = "0" }) => (
+    <input
+      type="number"
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      className="form-control form-control-sm compact-input"
+      min="0"
+      readOnly
+    />
+  );
 
   // Spinner component
   const Spinner = () => (
@@ -114,108 +75,114 @@ const Tetanus = ({ selectedMonth, getMonthNumber, selectedYear }) => {
     </div>
   );
 
-  // No data card component
-  const NoDataCard = () => (
-    <div className="card" style={{ margin: '1rem 0', padding: '1rem' }}>
-      <div className="card-body text-center">
-        <div className="mb-3">
-          <i className="fas fa-chart-line fa-3x text-muted"></i>
-        </div>
-        <h5 className="card-title text-muted">No Tetanus Data Available</h5>
-        <p className="card-text text-muted">
-          No tetanus data found for the selected month ({selectedMonth} {selectedYear}). 
-          Please check if data has been uploaded for this period.
-        </p>
-      </div>
-    </div>
-  );
-
-  // Check if we have any data
-  const hasData = tetanusData.length > 0;
-
   if (error) return <div>Error: {error}</div>;
 
   return (
     <div>
-      <div className="section-header">
+      <style jsx>{`
+        .compact-input {
+          font-size: 0.65rem !important;
+          padding: 0.2rem 0.3rem !important;
+          height: 24px !important;
+          text-align: center !important;
+          border: 1px solid #ced4da !important;
+        }
+        .compact-table td {
+          padding: 0.25rem 0.3rem !important;
+          vertical-align: middle !important;
+          font-size: 0.7rem !important;
+          line-height: 1.1 !important;
+        }
+        .compact-table th {
+          padding: 0.3rem 0.3rem !important;
+          font-size: 0.7rem !important;
+          font-weight: 500 !important;
+        }
+        .compact-table {
+          font-size: 0.7rem !important;
+          width: 100% !important;
+          table-layout: fixed !important;
+        }
+        .section-header {
+          font-size: 0.9rem !important;
+          font-weight: 600 !important;
+        }
+        .data-entry-table {
+          font-size: 0.7rem !important;
+          width: 100% !important;
+          table-layout: fixed !important;
+        }
+        .table-header-bg {
+          background-color: #f8f9fa !important;
+        }
+        .full-width-table {
+          width: 100% !important;
+          min-width: 100% !important;
+        }
+        .table-container {
+          width: 100% !important;
+          overflow-x: auto !important;
+        }
+        .compact-table th:first-child,
+        .compact-table td:first-child {
+          width: 25% !important;
+        }
+        .compact-table th:not(:first-child),
+        .compact-table td:not(:first-child) {
+          width: auto !important;
+        }
+      `}</style>
+      
+      <div className="section-header mb-3">
         2.6.2 TETANUS VACCINATION (Td VACCINE)
       </div>
 
       {loading ? (
         <Spinner />
-      ) : !hasData ? (
-        <NoDataCard />
       ) : (
-        <>
-
-      <table className="data-entry-table">
-        <thead>
-          <tr>
-            <th rowSpan="1">Doses</th>
-            <th colSpan="2">Pregnant women</th>
-            <th colSpan="2">Non-pregnant women</th>
-            <th rowSpan="1">Immunization in School</th>
-          </tr>
-          <tr>
-            <th></th>
-            <th>Static</th>
-            <th>Outreach</th>
-            <th>Static</th>
-            <th>Outreach</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {tetanusData.map((dose) => (
-            <tr key={dose.code}>
-              <td>
-                {dose.code}. {dose.label}
-              </td>
-              <td>
-                <input
-                  type="number"
-                  className="form-control form-control-sm"
-                  value={dose.data.pregnant.Static || 0}
-                  readOnly
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  className="form-control form-control-sm"
-                  value={dose.data.pregnant.Outreach || 0}
-                  readOnly
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  className="form-control form-control-sm"
-                  value={dose.data.nonPregnant.Static || 0}
-                  readOnly
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  className="form-control form-control-sm"
-                  value={dose.data.nonPregnant.Outreach || 0}
-                  readOnly
-                />
-              </td>
-              <td>
-                <input
-                  type="number"
-                  className="form-control form-control-sm"
-                  value={dose.data.nonPregnant.School || 0}
-                  readOnly
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-        </>
+        <div>
+          <div className="table-container mb-4">
+            <table className="data-entry-table compact-table full-width-table">
+              <thead>
+                <tr className="table-header-bg">
+                  <th style={{ fontWeight: "normal" }}>Doses</th>
+                  <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>Pregnant women</th>
+                  <th colSpan="3" className="text-center" style={{ fontWeight: "normal" }}>Non-pregnant women</th>
+                </tr>
+                <tr className="table-header-bg">
+                  <th style={{ fontWeight: "normal" }}></th>
+                  <th className="text-center" style={{ fontWeight: "normal" }}>Static</th>
+                  <th className="text-center" style={{ fontWeight: "normal" }}>Outreach</th>
+                  <th className="text-center" style={{ fontWeight: "normal" }}>Static</th>
+                  <th className="text-center" style={{ fontWeight: "normal" }}>Outreach</th>
+                  <th className="text-center" style={{ fontWeight: "normal" }}>Immunization in School</th>
+                </tr>
+              </thead>
+              <tbody>
+                {tetanusData.map((dose) => (
+                  <tr key={dose.code}>
+                    <td>{dose.code}. {dose.label}</td>
+                    <td className="text-center">
+                      <FormInput value={dose.data.pregnant.Static || "0"} />
+                    </td>
+                    <td className="text-center">
+                      <FormInput value={dose.data.pregnant.Outreach || "0"} />
+                    </td>
+                    <td className="text-center">
+                      <FormInput value={dose.data.nonPregnant.Static || "0"} />
+                    </td>
+                    <td className="text-center">
+                      <FormInput value={dose.data.nonPregnant.Outreach || "0"} />
+                    </td>
+                    <td className="text-center">
+                      <FormInput value={dose.data.nonPregnant.School || "0"} />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       )}
     </div>
   );

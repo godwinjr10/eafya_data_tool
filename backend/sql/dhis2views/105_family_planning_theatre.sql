@@ -22,7 +22,7 @@ FROM (
         ELSE DATE_PART('year', AGE(CURRENT_DATE, birth_date::DATE))
       END AS age_years
     FROM reporting.patient_major_theater
-    WHERE major_theater_id IN (372, 355, 354)
+    WHERE WHERE major_theater_name ILIKE ANY (ARRAY['%vasectomy%','%tubal%'])
   ) sub
   GROUP BY report_month, major_theater_name
   UNION ALL

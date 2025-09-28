@@ -1,7 +1,6 @@
 import React from "react";
 import CensusInformation from "./CensusInformation";
 import SurgicalProcedures from "./SurgicalProcedures";
-import UtilizationSpecialServices from "./UtilizationSpecialServices";
 import Referrals from "./referrals";
 import BloodTransfusion from "./bloodTransfusion";
 import RadiologyImaging from "./RadiologyImaging";
@@ -9,6 +8,7 @@ import AdmissionsDeaths from "./AdmissionsDeaths";
 import MentalHealth from "./MentalHealth";
 import Nutrition from "./Nutrition";
 import Rehabilitation from "./Rehabilitation";
+import MaternalConditions from "./MaternalConditions";
 
 const HMIS108 = ({ section, selectedMonth, selectedYear }) => {
   return (
@@ -72,6 +72,13 @@ const HMIS108 = ({ section, selectedMonth, selectedYear }) => {
       )}
       {section === "11" && (
         <Rehabilitation
+          section={section}
+          selectedMonth={selectedMonth}
+          selectedYear={selectedYear}
+        />
+      )}
+      {section === "12" && (
+        <MaternalConditions
           section={section}
           selectedMonth={selectedMonth}
           selectedYear={selectedYear}

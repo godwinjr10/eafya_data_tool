@@ -8,34 +8,18 @@ router.get("/contraceptives", async (req, res) => {
   try {
     const { report_month } = req.query;
 
-    // Check if the table exists first
-    const tableCheckQuery = `
-      SELECT EXISTS (
-        SELECT FROM information_schema.tables 
-        WHERE table_schema = 'reporting' 
-        AND table_name = '105_family_planning_contraceptives'
-      );
-    `;
-
-    const tableExists = await pool.query(tableCheckQuery);
-    
-    if (!tableExists.rows[0].exists) {
-      console.log("Table reporting.105_family_planning_contraceptives does not exist, returning empty data");
-      return res.json([]);
-    }
-
     let query = `
       SELECT 
-        report_month,
-        family_planning_name,
-        hmis_code,
+        report_month, 
+        category, 
+        hmis_code, 
         total_dispensed
       FROM reporting."105_family_planning_contraceptives"
       WHERE report_month = $1`;
 
     const params = [report_month];
 
-    query += ` ORDER BY family_planning_name`;
+    query += ` ORDER BY category`;
 
     const { rows } = await pool.query(query, params);
     console.log("Family Planning Contraceptives Query Results:", rows);
@@ -43,13 +27,6 @@ router.get("/contraceptives", async (req, res) => {
     res.json(rows);
   } catch (error) {
     console.error("Family Planning Contraceptives Query error:", error);
-    
-    // If it's a table doesn't exist error, return empty array instead of 500
-    if (error.message.includes('does not exist') || error.message.includes('relation') || error.code === '42P01') {
-      console.log("Table does not exist, returning empty data");
-      return res.json([]);
-    }
-    
     res.status(500).json({ message: error.message });
   }
 });
@@ -59,36 +36,20 @@ router.get("/theatre", async (req, res) => {
   try {
     const { report_month } = req.query;
 
-    // Check if the table exists first
-    const tableCheckQuery = `
-      SELECT EXISTS (
-        SELECT FROM information_schema.tables 
-        WHERE table_schema = 'reporting' 
-        AND table_name = '105_family_planning_theatre'
-      );
-    `;
-
-    const tableExists = await pool.query(tableCheckQuery);
-    
-    if (!tableExists.rows[0].exists) {
-      console.log("Table reporting.105_family_planning_theatre does not exist, returning empty data");
-      return res.json([]);
-    }
-
     let query = `
       SELECT 
-        report_month,
-        major_theatre_name,
-        "25_49_female_tubal",
-        "50plus_female_tubal",
-        "25_49_male_vasectomy",
-        "50plus_male_vasectomy"
+        report_month, 
+        hmis_code, 
+        major_theater_name, 
+        "25_49yrs", 
+        "50plus_yrs"
       FROM reporting."105_family_planning_theatre"
-      WHERE report_month = $1`;
+      WHERE major_theater_name ILIKE ANY (ARRAY['%vasectomy%','%tubal%'])
+      and report_month = $1`;
 
     const params = [report_month];
 
-    query += ` ORDER BY major_theatre_name`;
+    query += ` ORDER BY major_theater_name`;
 
     const { rows } = await pool.query(query, params);
     console.log("Family Planning Theatre Query Results:", rows);
@@ -96,13 +57,6 @@ router.get("/theatre", async (req, res) => {
     res.json(rows);
   } catch (error) {
     console.error("Family Planning Theatre Query error:", error);
-    
-    // If it's a table doesn't exist error, return empty array instead of 500
-    if (error.message.includes('does not exist') || error.message.includes('relation') || error.code === '42P01') {
-      console.log("Table does not exist, returning empty data");
-      return res.json([]);
-    }
-    
     res.status(500).json({ message: error.message });
   }
 });
@@ -112,26 +66,10 @@ router.get("/visits", async (req, res) => {
   try {
     const { report_month } = req.query;
 
-    // Check if the table exists first
-    const tableCheckQuery = `
-      SELECT EXISTS (
-        SELECT FROM information_schema.tables 
-        WHERE table_schema = 'reporting' 
-        AND table_name = '105_family_planning_visits'
-      );
-    `;
-
-    const tableExists = await pool.query(tableCheckQuery);
-    
-    if (!tableExists.rows[0].exists) {
-      console.log("Table reporting.105_family_planning_visits does not exist, returning empty data");
-      return res.json([]);
-    }
-
     let query = `
-      SELECT 
+       SELECT 
         report_month,
-        family_planning_name,
+        family_planning_method,
         hmis_code,
         under_15_new,
         under_15_revisit,
@@ -148,21 +86,13 @@ router.get("/visits", async (req, res) => {
 
     const params = [report_month];
 
-    query += ` ORDER BY family_planning_name`;
+    query += ` ORDER BY family_planning_method`;
 
-    const { rows } = await pool.query(query, params);
-    console.log("Family Planning Visits Query Results:", rows);
+      const { rows } = await pool.query(query, params);
 
     res.json(rows);
   } catch (error) {
     console.error("Family Planning Visits Query error:", error);
-    
-    // If it's a table doesn't exist error, return empty array instead of 500
-    if (error.message.includes('does not exist') || error.message.includes('relation') || error.code === '42P01') {
-      console.log("Table does not exist, returning empty data");
-      return res.json([]);
-    }
-    
     res.status(500).json({ message: error.message });
   }
 });

@@ -109,7 +109,7 @@ app.use("/api/customizationsets", customizationsets);
 /*** DHIS2 Report ****/
 app.use("/api/maternity", maternityRoutes);
 app.use("/api/postnatal", postnatalRoutes);
-app.use("/api/family-planning", familyPlanningRoutes);
+app.use("/api/familyplanning", familyPlanningRoutes);
 app.use("/api/child-health", childHealthRoutes);
 app.use("/api/tetanus-vaccination", tetanusVaccinationRoutes);
 app.use("/api/child-immunization", childImmunizationRoutes);

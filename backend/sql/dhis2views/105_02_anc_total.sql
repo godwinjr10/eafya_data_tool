@@ -1,6 +1,7 @@
 CREATE VIEW reporting."105_02_anc_total" AS
 SELECT
-  reporting_month,
+  reporting_month as report_month,
+  'AN04' as hmis_code,
   COUNT(*) FILTER (WHERE age_years < 15)              AS "Below_15yrs",
   COUNT(*) FILTER (WHERE age_years BETWEEN 15 AND 19) AS "15_19yrs",
   COUNT(*) FILTER (WHERE age_years BETWEEN 20 AND 24) AS "20_24yrs",
@@ -13,5 +14,5 @@ FROM (
     DATE_PART('year', AGE(visit_date::date, birth_date::date))::int AS age_years
   FROM reporting.anc_visits
 ) x
-GROUP BY reporting_month
+GROUP BY reporting_month, hmis_code
 ORDER BY reporting_month;

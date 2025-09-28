@@ -1,7 +1,7 @@
-
 CREATE VIEW reporting."105_02_anc_folic" AS
 SELECT
   TO_CHAR(report_month, 'YYYYMM') AS report_month,
+  'AN10' as hmis_code,
   COUNT(*) FILTER (WHERE age_years < 15)                   AS "below_15_years",
   COUNT(*) FILTER (WHERE age_years BETWEEN 15 AND 19)      AS "15-19_years",
   COUNT(*) FILTER (WHERE age_years BETWEEN 20 AND 24)      AS "20-24_years",

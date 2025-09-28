@@ -2,109 +2,121 @@ import React, { useState, useEffect, useCallback } from "react";
 import API from "../../../helpers/api";
 
 const ChildHealth = ({ selectedMonth, getMonthNumber, selectedYear }) => {
-  const [vaccines, setVaccines] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [childHealthData, setChildHealthData] = useState([]);
 
-  const ageGroups = [
-    { label: "0-5 Months", key: "0-5m" },
-    { label: "6-11 Months", key: "6-11m" },
-    { label: "12-59 Months", key: "12-59m" },
-    { label: "5-14 Years", key: "5-14y" },
-  ];
-
-  const servicePoints = ["Static", "Outreach", "In school"];
+  // Map backend data to frontend display format
+  const mapChildHealthData = (data) => {
+    return data.map((item, index) => ({
+      hmis_code: item.hmis_code || `CH${String(index + 1).padStart(2, '0')}`,
+      intervention_name: item.intervention_name || item.vaccine_name,
+      static_0_5m_male: item["0-5m Male"] || "0",
+      static_0_5m_female: item["0-5m Female"] || "0",
+      static_6_11m_male: item["6-11m Male"] || "0",
+      static_6_11m_female: item["6-11m Female"] || "0",
+      static_12_59m_male: item["12-59m Male"] || "0",
+      static_12_59m_female: item["12-59m Female"] || "0",
+      static_5_14y_male: item["5-14y Male"] || "0",
+      static_5_14y_female: item["5-14y Female"] || "0",
+      outreach_0_5m_male: "0",
+      outreach_0_5m_female: "0",
+      outreach_6_11m_male: "0",
+      outreach_6_11m_female: "0",
+      outreach_12_59m_male: "0",
+      outreach_12_59m_female: "0",
+      outreach_5_14y_male: "0",
+      outreach_5_14y_female: "0",
+      inschool_0_5m_male: "0",
+      inschool_0_5m_female: "0",
+      inschool_6_11m_male: "0",
+      inschool_6_11m_female: "0",
+      inschool_12_59m_male: "0",
+      inschool_12_59m_female: "0",
+      inschool_5_14y_male: "0",
+      inschool_5_14y_female: "0"
+    }));
+  };
 
   const fetchData = useCallback(async () => {
     if (!selectedMonth || !selectedYear) return;
 
+    setLoading(true);
     try {
-      setLoading(true);
       const monthNumber = getMonthNumber(selectedMonth);
-      const formattedMonth = `${selectedYear}${monthNumber
+      const reportMonth = `${selectedYear}${monthNumber
         .toString()
         .padStart(2, "0")}`;
 
       const response = await API.get(
-        `/child-health/child-health?report_month=${formattedMonth}`
+        `/child-health/child-health?report_month=${reportMonth}`
       );
 
-      // Transform API data to match the component's structure
-      const transformedData = (response.data || []).map((item) => ({
-        code: item.vaccine_id,
-        label: item.vaccine_name,
-        data: {
-          Static: {
-            "0-5m_male": item["0-5m Male"] || "0",
-            "0-5m_female": item["0-5m Female"] || "0",
-            "6-11m_male": item["6-11m Male"] || "0",
-            "6-11m_female": item["6-11m Female"] || "0",
-            "12-59m_male": item["12-59m Male"] || "0",
-            "12-59m_female": item["12-59m Female"] || "0",
-            "5-14y_male": item["5-14y Male"] || "0",
-            "5-14y_female": item["5-14y Female"] || "0",
-          },
-          Outreach: {
-            "0-5m_male": "0",
-            "0-5m_female": "0",
-            "6-11m_male": "0",
-            "6-11m_female": "0",
-            "12-59m_male": "0",
-            "12-59m_female": "0",
-            "5-14y_male": "0",
-            "5-14y_female": "0",
-          },
-          "In school": {
-            "0-5m_male": "0",
-            "0-5m_female": "0",
-            "6-11m_male": "0",
-            "6-11m_female": "0",
-            "12-59m_male": "0",
-            "12-59m_female": "0",
-            "5-14y_male": "0",
-            "5-14y_female": "0",
-          },
-        },
-      }));
-
-      setVaccines(transformedData);
-      setError(null);
-    } catch (err) {
-      console.error("Error fetching child health data:", err);
-      setError("Error fetching data");
-      setVaccines([]);
+      // Update data with mapping
+      const mappedData = mapChildHealthData(response.data || []);
+      setChildHealthData(mappedData);
+    } catch (error) {
+      console.error("Error fetching child health data:", error);
+      setChildHealthData([]);
     } finally {
       setLoading(false);
     }
   }, [selectedMonth, selectedYear, getMonthNumber]);
 
   useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+    if (selectedMonth && selectedYear) {
+      fetchData();
+    }
+  }, [selectedMonth, selectedYear, fetchData]);
 
-  const handleInputChange = (
-    vaccineCode,
-    servicePoint,
-    ageGroup,
-    gender,
-    value
-  ) => {
-    setVaccines((prevVaccines) => {
-      return prevVaccines.map((vaccine) => {
-        if (vaccine.code === vaccineCode) {
-          const updatedData = {
-            ...vaccine.data,
-            [servicePoint]: {
-              ...vaccine.data[servicePoint],
-              [`${ageGroup}_${gender}`]: value,
-            },
-          };
-          return { ...vaccine, data: updatedData };
-        }
-        return vaccine;
-      });
-    });
+  const getValueForCell = (item, field) => {
+    return item[field] || "0";
   };
+
+  // Check if a cell should be shaded based on the matrix logic
+  const shouldShadeCell = (interventionIndex, servicePoint, ageGroup) => {
+    // Based on the screenshot matrix logic:
+    // CH01 (Vit A supplement 1st dose) - not applicable (white)
+    // CH02 (Vit A supplement 2nd dose) - shaded for 6-11m, 12-59m, 5-14y (except inschool for 6-11m, 12-59m)
+    // CH03 (Dewormed 1st dose) - shaded for 6-11m, 12-59m (except 5-14y for static/outreach, and 5-14y for inschool)
+    // CH04 (Dewormed 2nd dose) - same as CH03
+    
+    if (interventionIndex === 0) return false; // CH01 - not applicable
+    
+    if (interventionIndex === 1) { // CH02 - Vit A supplement 2nd dose
+      if (ageGroup === "0-5m") return false;
+      if (ageGroup === "5-14y" && servicePoint === "inschool") return true;
+      if (ageGroup === "6-11m" || ageGroup === "12-59m") {
+        return servicePoint !== "inschool";
+      }
+      return true;
+    }
+    
+    if (interventionIndex === 2 || interventionIndex === 3) { // CH03, CH04 - Dewormed
+      if (ageGroup === "0-5m") return false;
+      if (ageGroup === "5-14y") {
+        return servicePoint === "inschool";
+      }
+      if (ageGroup === "6-11m" || ageGroup === "12-59m") {
+        return servicePoint !== "inschool";
+      }
+      return false;
+    }
+    
+    return false;
+  };
+
+  // Form input component with consistent styling
+  const FormInput = ({ value, onChange, placeholder = "0", isShaded = false }) => (
+    <input
+      type="number"
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      className={`form-control form-control-sm compact-input ${isShaded ? 'shaded-cell' : ''}`}
+      min="0"
+      readOnly
+    />
+  );
 
   // Spinner component
   const Spinner = () => (
@@ -114,117 +126,257 @@ const ChildHealth = ({ selectedMonth, getMonthNumber, selectedYear }) => {
     </div>
   );
 
-  // No data card component
-  const NoDataCard = () => (
-    <div className="card" style={{ margin: '1rem 0', padding: '1rem' }}>
-      <div className="card-body text-center">
-        <div className="mb-3">
-          <i className="fas fa-chart-line fa-3x text-muted"></i>
-        </div>
-        <h5 className="card-title text-muted">No Child Health Data Available</h5>
-        <p className="card-text text-muted">
-          No child health data found for the selected month ({selectedMonth} {selectedYear}). 
-          Please check if data has been uploaded for this period.
-        </p>
-      </div>
-    </div>
-  );
-
-  // Check if we have any data
-  const hasData = vaccines.length > 0;
-
-  if (error) return <div>Error: {error}</div>;
-
   return (
     <div>
-      <div className="section-header">2.3 CHILD HEALTH</div>
+      <style jsx>{`
+        .compact-input {
+          font-size: 0.65rem !important;
+          padding: 0.2rem 0.3rem !important;
+          height: 24px !important;
+          text-align: center !important;
+          border: 1px solid #ced4da !important;
+        }
+        .shaded-cell {
+          background-color: #e9ecef !important;
+        }
+        .compact-table td {
+          padding: 0.25rem 0.3rem !important;
+          vertical-align: middle !important;
+          font-size: 0.7rem !important;
+          line-height: 1.1 !important;
+        }
+        .compact-table th {
+          padding: 0.3rem 0.3rem !important;
+          font-size: 0.7rem !important;
+          font-weight: 500 !important;
+        }
+        .compact-table {
+          font-size: 0.7rem !important;
+          width: 100% !important;
+          table-layout: fixed !important;
+        }
+        .section-header {
+          font-size: 0.9rem !important;
+          font-weight: 600 !important;
+        }
+        .data-entry-table {
+          font-size: 0.7rem !important;
+          width: 100% !important;
+          table-layout: fixed !important;
+        }
+        .table-header-bg {
+          background-color: #f8f9fa !important;
+        }
+        .full-width-table {
+          width: 100% !important;
+          min-width: 100% !important;
+        }
+        .table-container {
+          width: 100% !important;
+          overflow-x: auto !important;
+        }
+        .intervention-row {
+          background-color: #f8f9fa !important;
+          font-weight: 500 !important;
+        }
+        .service-point-cell {
+          padding-left: 1rem !important;
+        }
+      `}</style>
+      
+      <div className="section-header mb-3">
+        2.3 CHILD HEALTH INTERVENTIONS
+      </div>
 
       {loading ? (
         <Spinner />
-      ) : !hasData ? (
-        <NoDataCard />
       ) : (
-        <>
-
-      <table className="data-entry-table">
-        <thead>
-          <tr>
-            <th></th>
-            {ageGroups.map((group) => (
-              <th key={group.label} colSpan="2" className="text-center">
-                {group.label}
-              </th>
-            ))}
-          </tr>
-          <tr>
-            <th>Service Point</th>
-            {ageGroups.map(() => (
-              <>
-                <th className="text-center">M</th>
-                <th className="text-center">F</th>
-              </>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {vaccines.map((vaccine) => (
-            <>
-              <tr>
-                <td colSpan={ageGroups.length * 2 + 1} className="bg-light">
-                  {vaccine.code}. {vaccine.label}
-                </td>
+        <div className="table-container">
+          <table className="data-entry-table compact-table full-width-table">
+            <thead>
+              <tr className="table-header-bg">
+                <th style={{ fontWeight: "normal" }}>Intervention</th>
+                <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>0-5 Months</th>
+                <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>6-11 Months</th>
+                <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>12-59 Months</th>
+                <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>5-14 Years</th>
               </tr>
-              {servicePoints.map((point) => (
-                <tr key={`${vaccine.code}-${point}`}>
-                  <td>{point}</td>
-                  {ageGroups.map((group) => {
-                    const data = vaccine.data[point] || {};
-                    return (
-                      <>
-                        <td className="text-center">
-                          <input
-                            type="number"
-                            min="0"
-                            className="form-control form-control-sm"
-                            value={data[`${group.key}_male`] || ""}
-                            onChange={(e) =>
-                              handleInputChange(
-                                vaccine.code,
-                                point,
-                                group.key,
-                                "male",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </td>
-                        <td className="text-center">
-                          <input
-                            type="number"
-                            min="0"
-                            className="form-control form-control-sm"
-                            value={data[`${group.key}_female`] || ""}
-                            onChange={(e) =>
-                              handleInputChange(
-                                vaccine.code,
-                                point,
-                                group.key,
-                                "female",
-                                e.target.value
-                              )
-                            }
-                          />
-                        </td>
-                      </>
-                    );
-                  })}
-                </tr>
+              <tr className="table-header-bg">
+                <th style={{ fontWeight: "normal" }}></th>
+                <th className="text-center" style={{ fontWeight: "normal" }}>M</th>
+                <th className="text-center" style={{ fontWeight: "normal" }}>F</th>
+                <th className="text-center" style={{ fontWeight: "normal" }}>M</th>
+                <th className="text-center" style={{ fontWeight: "normal" }}>F</th>
+                <th className="text-center" style={{ fontWeight: "normal" }}>M</th>
+                <th className="text-center" style={{ fontWeight: "normal" }}>F</th>
+                <th className="text-center" style={{ fontWeight: "normal" }}>M</th>
+                <th className="text-center" style={{ fontWeight: "normal" }}>F</th>
+              </tr>
+            </thead>
+            <tbody>
+              {childHealthData.map((intervention, interventionIndex) => (
+                <React.Fragment key={interventionIndex}>
+                  <tr className="intervention-row">
+                    <td colSpan="9">{intervention.hmis_code}. {intervention.intervention_name}</td>
+                  </tr>
+                  <tr>
+                    <td className="service-point-cell">Static</td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "static_0_5m_male")} 
+                        isShaded={shouldShadeCell(interventionIndex, "static", "0-5m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "static_0_5m_female")} 
+                        isShaded={shouldShadeCell(interventionIndex, "static", "0-5m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "static_6_11m_male")} 
+                        isShaded={shouldShadeCell(interventionIndex, "static", "6-11m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "static_6_11m_female")} 
+                        isShaded={shouldShadeCell(interventionIndex, "static", "6-11m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "static_12_59m_male")} 
+                        isShaded={shouldShadeCell(interventionIndex, "static", "12-59m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "static_12_59m_female")} 
+                        isShaded={shouldShadeCell(interventionIndex, "static", "12-59m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "static_5_14y_male")} 
+                        isShaded={shouldShadeCell(interventionIndex, "static", "5-14y")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "static_5_14y_female")} 
+                        isShaded={shouldShadeCell(interventionIndex, "static", "5-14y")}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="service-point-cell">Outreach</td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "outreach_0_5m_male")} 
+                        isShaded={shouldShadeCell(interventionIndex, "outreach", "0-5m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "outreach_0_5m_female")} 
+                        isShaded={shouldShadeCell(interventionIndex, "outreach", "0-5m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "outreach_6_11m_male")} 
+                        isShaded={shouldShadeCell(interventionIndex, "outreach", "6-11m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "outreach_6_11m_female")} 
+                        isShaded={shouldShadeCell(interventionIndex, "outreach", "6-11m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "outreach_12_59m_male")} 
+                        isShaded={shouldShadeCell(interventionIndex, "outreach", "12-59m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "outreach_12_59m_female")} 
+                        isShaded={shouldShadeCell(interventionIndex, "outreach", "12-59m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "outreach_5_14y_male")} 
+                        isShaded={shouldShadeCell(interventionIndex, "outreach", "5-14y")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "outreach_5_14y_female")} 
+                        isShaded={shouldShadeCell(interventionIndex, "outreach", "5-14y")}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="service-point-cell">In school</td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "inschool_0_5m_male")} 
+                        isShaded={shouldShadeCell(interventionIndex, "inschool", "0-5m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "inschool_0_5m_female")} 
+                        isShaded={shouldShadeCell(interventionIndex, "inschool", "0-5m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "inschool_6_11m_male")} 
+                        isShaded={shouldShadeCell(interventionIndex, "inschool", "6-11m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "inschool_6_11m_female")} 
+                        isShaded={shouldShadeCell(interventionIndex, "inschool", "6-11m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "inschool_12_59m_male")} 
+                        isShaded={shouldShadeCell(interventionIndex, "inschool", "12-59m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "inschool_12_59m_female")} 
+                        isShaded={shouldShadeCell(interventionIndex, "inschool", "12-59m")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "inschool_5_14y_male")} 
+                        isShaded={shouldShadeCell(interventionIndex, "inschool", "5-14y")}
+                      />
+                    </td>
+                    <td className="text-center">
+                      <FormInput 
+                        value={getValueForCell(intervention, "inschool_5_14y_female")} 
+                        isShaded={shouldShadeCell(interventionIndex, "inschool", "5-14y")}
+                      />
+                    </td>
+                  </tr>
+                </React.Fragment>
               ))}
-            </>
-          ))}
-        </tbody>
-      </table>
-        </>
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

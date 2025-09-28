@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import API from "../../../helpers/api";
 
 const AdmissionsDeaths = ({ section, selectedMonth, selectedYear }) => {
+  const [admissionsData, setAdmissionsData] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const fetchAdmissionsData = useCallback(async () => {
@@ -28,10 +29,10 @@ const AdmissionsDeaths = ({ section, selectedMonth, selectedYear }) => {
       const response = await API.get(
         `/hmis108/admission-deaths?report_month=${reportMonth}`
       );
-      // Data is fetched but not used in the current static layout
-      console.log("Admission deaths data:", response.data);
+      setAdmissionsData(response.data);
     } catch (error) {
       console.error("Error fetching admission deaths data:", error);
+      setAdmissionsData([]);
     } finally {
       setLoading(false);
     }
@@ -59,10 +60,10 @@ const AdmissionsDeaths = ({ section, selectedMonth, selectedYear }) => {
   // Spinner component
   const Spinner = () => (
     <div className="d-flex justify-content-center align-items-center" style={{ padding: '2rem' }}>
-            <div className="spinner-border text-primary" role="status">
-        </div>
+      <div className="spinner-border text-primary" role="status">
       </div>
-    );
+    </div>
+  );
 
   if (loading) {
     return <Spinner />;
@@ -90,16 +91,15 @@ const AdmissionsDeaths = ({ section, selectedMonth, selectedYear }) => {
           font-weight: 500 !important;
         }
         .compact-table .ps-4 {
-          padding-left: 0.4rem !important;
+          padding-left: 0.8rem !important;
         }
         .compact-table .ps-5 {
-          padding-left: 0.6rem !important;
+          padding-left: 1.2rem !important;
         }
         .compact-table {
           font-size: 0.7rem !important;
           width: 100% !important;
           table-layout: fixed !important;
-          min-width: 100% !important;
         }
         .section-subheader {
           font-size: 0.8rem !important;
@@ -133,34 +133,17 @@ const AdmissionsDeaths = ({ section, selectedMonth, selectedYear }) => {
         }
         .compact-table th:first-child,
         .compact-table td:first-child {
-          width: 50% !important;
+          width: 80% !important;
           text-align: left !important;
-          padding-left: 0.5rem !important;
         }
         .compact-table th:not(:first-child),
         .compact-table td:not(:first-child) {
-          width: 6.25% !important;
+          width: 20% !important;
           text-align: center !important;
         }
         .compact-table th[colspan],
         .compact-table td[colspan] {
           width: auto !important;
-        }
-        .diagnosis-col {
-          width: 50% !important;
-          min-width: 300px !important;
-        }
-        .data-col {
-          width: 6.25% !important;
-          min-width: 60px !important;
-        }
-        .compact-table td:not(.diagnosis-col):not(.ps-4):not(.ps-5):not([colspan]) {
-          width: 6.25% !important;
-          min-width: 60px !important;
-        }
-        .compact-table td:first-child:not([colspan]) {
-          width: 50% !important;
-          min-width: 300px !important;
         }
       `}</style>
       
@@ -168,50 +151,54 @@ const AdmissionsDeaths = ({ section, selectedMonth, selectedYear }) => {
         ADMISSIONS & DEATHS
       </div>
 
-      <div className="table-container mb-4">
-        <table className="data-entry-table compact-table full-width-table" style={{ width: '100%', tableLayout: 'fixed' }}>
-          <thead>
-            <tr className="table-header-bg">
-              <th rowSpan="2" className="diagnosis-col" style={{ fontWeight: "normal" }}>Diagnosis</th>
-              <th colSpan="4" className="text-center" style={{ fontWeight: "normal" }}>Cases</th>
-              <th colSpan="4" className="text-center" style={{ fontWeight: "normal" }}>Deaths</th>
-            </tr>
-            <tr className="table-header-bg">
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>0-4 years</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>5 years & above</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>0-4 years</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>5 years & above</th>
-              </tr>
-            <tr className="table-header-bg">
-              <th></th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
-              </tr>
-            </thead>
-            <tbody>
+      <div className="row">
+        {/* Left Column */}
+        <div className="col-md-6">
+          <div className="table-container mb-4">
+            <table className="data-entry-table compact-table full-width-table">
+              <thead>
+                <tr className="table-header-bg">
+                  <th style={{ fontWeight: "normal" }}>Diagnosis</th>
+                  <th className="text-center" style={{ fontWeight: "normal" }}>Cases</th>
+                  <th className="text-center" style={{ fontWeight: "normal" }}>Deaths</th>
+                </tr>
+                <tr className="table-header-bg">
+                  <th></th>
+                  <th className="text-center" colSpan="2">0-4 years</th>
+                  <th className="text-center" colSpan="2">5 years & above</th>
+                  <th className="text-center" colSpan="2">0-4 years</th>
+                  <th className="text-center" colSpan="2">5 years & above</th>
+                </tr>
+                <tr className="table-header-bg">
+                  <th></th>
+                  <th className="text-center">Male</th>
+                  <th className="text-center">Female</th>
+                  <th className="text-center">Male</th>
+                  <th className="text-center">Female</th>
+                  <th className="text-center">Male</th>
+                  <th className="text-center">Female</th>
+                  <th className="text-center">Male</th>
+                  <th className="text-center">Female</th>
+                </tr>
+              </thead>
+              <tbody>
                 {/* 6.1.1 Epidemic-Prone Diseases/Notifiable Diseases */}
                 <tr className="section-title-bg">
                   <td colSpan="9"><strong>6.1.1 Epidemic-Prone Diseases/Notifiable Diseases</strong></td>
                 </tr>
                 <tr>
-                  <td className="diagnosis-col">EP01. Malaria</td>
-                  <td className="text-center data-col"><FormInput value="0" /></td>
-                  <td className="text-center data-col"><FormInput value="0" /></td>
-                  <td className="text-center data-col"><FormInput value="0" /></td>
-                  <td className="text-center data-col"><FormInput value="0" /></td>
-                  <td className="text-center data-col"><FormInput value="0" /></td>
-                  <td className="text-center data-col"><FormInput value="0" /></td>
-                  <td className="text-center data-col"><FormInput value="0" /></td>
-                  <td className="text-center data-col"><FormInput value="0" /></td>
+                  <td>EP01. Malaria</td>
+                  <td className="text-center"><FormInput value="0" /></td>
+                  <td className="text-center"><FormInput value="0" /></td>
+                  <td className="text-center"><FormInput value="0" /></td>
+                  <td className="text-center"><FormInput value="0" /></td>
+                  <td className="text-center"><FormInput value="0" /></td>
+                  <td className="text-center"><FormInput value="0" /></td>
+                  <td className="text-center"><FormInput value="0" /></td>
+                  <td className="text-center"><FormInput value="0" /></td>
                 </tr>
                 <tr>
-                  <td className="diagnosis-col ps-4">EP01a. Total</td>
+                  <td className="ps-4">EP01a. Total</td>
                   <td className="text-center"><FormInput value="0" /></td>
                   <td className="text-center"><FormInput value="0" /></td>
                   <td className="text-center"><FormInput value="0" /></td>
@@ -468,7 +455,41 @@ const AdmissionsDeaths = ({ section, selectedMonth, selectedYear }) => {
                   <td className="text-center"><FormInput value="0" /></td>
                   <td className="text-center"><FormInput value="0" /></td>
                 </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
+        {/* Right Column */}
+        <div className="col-md-6">
+          <div className="table-container mb-4">
+            <table className="data-entry-table compact-table full-width-table">
+              <thead>
+                <tr className="table-header-bg">
+                  <th style={{ fontWeight: "normal" }}>Diagnosis</th>
+                  <th className="text-center" style={{ fontWeight: "normal" }}>Cases</th>
+                  <th className="text-center" style={{ fontWeight: "normal" }}>Deaths</th>
+                </tr>
+                <tr className="table-header-bg">
+                  <th></th>
+                  <th className="text-center" colSpan="2">0-4 years</th>
+                  <th className="text-center" colSpan="2">5 years & above</th>
+                  <th className="text-center" colSpan="2">0-4 years</th>
+                  <th className="text-center" colSpan="2">5 years & above</th>
+                </tr>
+                <tr className="table-header-bg">
+                  <th></th>
+                  <th className="text-center">Male</th>
+                  <th className="text-center">Female</th>
+                  <th className="text-center">Male</th>
+                  <th className="text-center">Female</th>
+                  <th className="text-center">Male</th>
+                  <th className="text-center">Female</th>
+                  <th className="text-center">Male</th>
+                  <th className="text-center">Female</th>
+                </tr>
+              </thead>
+              <tbody>
                 {/* 6.1.3 Liver Diseases */}
                 <tr className="section-title-bg">
                   <td colSpan="9"><strong>6.1.3 Liver Diseases</strong></td>
@@ -730,8 +751,10 @@ const AdmissionsDeaths = ({ section, selectedMonth, selectedYear }) => {
                   <td className="text-center"><FormInput value="0" /></td>
                   <td className="text-center"><FormInput value="0" /></td>
                 </tr>
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );

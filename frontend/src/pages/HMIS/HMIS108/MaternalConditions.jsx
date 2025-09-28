@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import API from "../../../helpers/api";
 
-const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
+const MaternalConditions = ({ section, selectedMonth, selectedYear }) => {
   const [loading, setLoading] = useState(false);
 
-  const fetchMentalHealthData = useCallback(async () => {
+  const fetchMaternalData = useCallback(async () => {
     try {
       setLoading(true);
       const monthIndex =
@@ -26,12 +26,12 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
       const reportMonth = `${selectedYear}${formattedMonth}`;
 
       const response = await API.get(
-        `/hmis108/mental-health?report_month=${reportMonth}`
+        `/hmis108/maternal-conditions?report_month=${reportMonth}`
       );
       // Data is fetched but not used in the current static layout
-      console.log("Mental health data:", response.data);
+      console.log("Maternal conditions data:", response.data);
     } catch (error) {
-      console.error("Error fetching mental health data:", error);
+      console.error("Error fetching maternal conditions data:", error);
     } finally {
       setLoading(false);
     }
@@ -39,9 +39,9 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
 
   useEffect(() => {
     if (selectedMonth && selectedYear) {
-      fetchMentalHealthData();
+      fetchMaternalData();
     }
-  }, [selectedMonth, selectedYear, fetchMentalHealthData]);
+  }, [selectedMonth, selectedYear, fetchMaternalData]);
 
   // Form input component with consistent styling
   const FormInput = ({ value, onChange, placeholder = "0" }) => (
@@ -133,7 +133,7 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
         }
         .compact-table th:first-child,
         .compact-table td:first-child {
-          width: 40% !important;
+          width: 50% !important;
           text-align: left !important;
           padding-left: 0.5rem !important;
         }
@@ -147,63 +147,55 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
           width: auto !important;
         }
         .diagnosis-col {
-          width: 40% !important;
-          min-width: 250px !important;
+          width: 50% !important;
+          min-width: 300px !important;
         }
         .data-col {
           width: 5% !important;
-          min-width: 50px !important;
+          min-width: 60px !important;
         }
         .compact-table td:not(.diagnosis-col):not(.ps-4):not(.ps-5):not([colspan]) {
           width: 5% !important;
-          min-width: 50px !important;
+          min-width: 60px !important;
         }
         .compact-table td:first-child:not([colspan]) {
-          width: 40% !important;
-          min-width: 250px !important;
+          width: 50% !important;
+          min-width: 300px !important;
         }
       `}</style>
       
       <div className="section-header mb-3">
-        MENTAL HEALTH
+        MATERNAL & GYNAECOLOGICAL CONDITIONS
       </div>
 
       <div className="table-container mb-4">
         <table className="data-entry-table compact-table full-width-table" style={{ width: '100%', tableLayout: 'fixed' }}>
           <thead>
             <tr className="table-header-bg">
-              <th rowSpan="2" className="diagnosis-col" style={{ fontWeight: "normal" }}>Diagnosis</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>&lt;5Yrs</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>5-9Yrs</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>10-19 Yrs</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>20-34Yrs</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>35-59Yrs</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>60+Yrs</th>
+              <th rowSpan="2" className="diagnosis-col" style={{ fontWeight: "normal" }}>Category</th>
+              <th colSpan="5" className="text-center" style={{ fontWeight: "normal" }}>Cases</th>
+              <th colSpan="5" className="text-center" style={{ fontWeight: "normal" }}>Deaths</th>
             </tr>
             <tr className="table-header-bg">
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
+              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Below 15 Years</th>
+              <th className="text-center data-col" style={{ fontWeight: "normal" }}>15-19 Years</th>
+              <th className="text-center data-col" style={{ fontWeight: "normal" }}>20-24 Years</th>
+              <th className="text-center data-col" style={{ fontWeight: "normal" }}>25-49 Years</th>
+              <th className="text-center data-col" style={{ fontWeight: "normal" }}>50+ Years</th>
+              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Below 15 Years</th>
+              <th className="text-center data-col" style={{ fontWeight: "normal" }}>15-19 Years</th>
+              <th className="text-center data-col" style={{ fontWeight: "normal" }}>20-24 Years</th>
+              <th className="text-center data-col" style={{ fontWeight: "normal" }}>25-49 Years</th>
+              <th className="text-center data-col" style={{ fontWeight: "normal" }}>50+ Years</th>
             </tr>
           </thead>
           <tbody>
-            {/* 7. Mental Health */}
+            {/* 6.2.16 Maternal conditions */}
             <tr className="section-title-bg">
-              <td colSpan="13"><strong>7. Mental Health</strong></td>
+              <td colSpan="11"><strong>6.2.16 Maternal conditions</strong></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">MH01. Anxiety Disorders</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="diagnosis-col">MC01. Abortions due to Gender Based Violence (GBV)</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -216,24 +208,7 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">MH02. Unipolar Depressive Disorder</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-            </tr>
-            <tr>
-              <td className="diagnosis-col">MH03. Bipolar disorder</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="diagnosis-col">MC02. Abortions due to other causes</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -246,24 +221,7 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">MH04. Schizophrenia</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-            </tr>
-            <tr>
-              <td className="diagnosis-col">MH05. Post-Traumatic Stress Disorder</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="diagnosis-col">MC03. Malaria in pregnancy</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -276,24 +234,7 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">MH06. Epilepsy</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-            </tr>
-            <tr>
-              <td className="diagnosis-col">MH07. HIV related psychosis</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="diagnosis-col">MC04. High blood pressure in pregnancy</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -306,24 +247,7 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">MH08. Alzheimer's disease</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-            </tr>
-            <tr>
-              <td className="diagnosis-col">MH09. HIV related dementia</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="diagnosis-col">MC05. Obstructed labour</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -336,24 +260,7 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">MH10. Alcohol related Dementia</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-            </tr>
-            <tr>
-              <td className="diagnosis-col">MH11. Dementia due to Cerebral Vascular Disease (Diabetes, Hypertension)</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="diagnosis-col">MC06. Haemorrhage related to pregnancy (APH or PPH)</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -366,24 +273,7 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">MH12. Other form of Dementia</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-            </tr>
-            <tr>
-              <td className="diagnosis-col">MH13. Other Adult Mental Health Conditions</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="diagnosis-col">MC07. Sepsis related to pregnancy e.g. puerperal sepsis, abortion sepsis etc</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -396,24 +286,7 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">MH14. Internet addiction</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-            </tr>
-            <tr>
-              <td className="diagnosis-col">MH15. Alcohol Use Disorder</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="diagnosis-col">MC08. Obstetric Fistula</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -426,24 +299,7 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">MH16. Substance (Drug) use Disorder</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-            </tr>
-            <tr>
-              <td className="diagnosis-col">MH17. Delirium</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="diagnosis-col">MC09. Number of women diagnosed with fistula and treated by catheter</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -456,24 +312,7 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">MH18. Intellectual disability</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-            </tr>
-            <tr>
-              <td className="diagnosis-col">MH19. Autism spectrum disorders</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="diagnosis-col">MC10. Number of fistulas closed and dry at discharge</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -486,24 +325,7 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">MH20. Child abuse and Neglect</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-            </tr>
-            <tr>
-              <td className="diagnosis-col">MH21. Attention Deficit Hyperactivity disorder (ADHD)</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="diagnosis-col">MC11. Number of Women repaired for Fistula who receive a modern contraceptive Method</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -516,9 +338,7 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">MH22. Learning Disability</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="diagnosis-col">MC12. Other Complications of pregnancy</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -530,95 +350,14 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
-          </tbody>
-        </table>
-      </div>
 
-      {/* Risk Behaviour Section */}
-      <div className="table-container mb-4">
-        <table className="data-entry-table compact-table full-width-table" style={{ width: '100%', tableLayout: 'fixed' }}>
-          <thead>
-            <tr className="table-header-bg">
-              <th rowSpan="2" className="diagnosis-col" style={{ fontWeight: "normal" }}>Risk Behaviour</th>
-              <th colSpan="3" className="text-center" style={{ fontWeight: "normal" }}>Male</th>
-              <th colSpan="3" className="text-center" style={{ fontWeight: "normal" }}>Female</th>
-            </tr>
-            <tr className="table-header-bg">
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>10-19yrs</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>20-24yrs</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>&gt;=25yrs</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>10-19yrs</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>20-24yrs</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>&gt;=25yrs</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* 8. Risk Behaviour */}
+            {/* 6.2.17 Gynaecological conditions */}
             <tr className="section-title-bg">
-              <td colSpan="7"><strong>8. Risk Behaviour</strong></td>
+              <td colSpan="11"><strong>6.2.17 Gynaecological conditions</strong></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">RB01. Alcohol use</td>
+              <td className="diagnosis-col">GC01. Cancer of the cervix (newly diagnosed cases)</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-            </tr>
-            <tr>
-              <td className="diagnosis-col">RB02. Tobacco use</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-            </tr>
-            <tr>
-              <td className="diagnosis-col">RB03. Use of other Substances</td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-              <td className="text-center data-col"><FormInput value="0" /></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      {/* TB Services Section */}
-      <div className="table-container mb-4">
-        <table className="data-entry-table compact-table full-width-table" style={{ width: '100%', tableLayout: 'fixed' }}>
-          <thead>
-            <tr className="table-header-bg">
-              <th rowSpan="2" className="diagnosis-col" style={{ fontWeight: "normal" }}>TB Screening</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>0-9 Years</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>10-14 Years</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>15-19 Years</th>
-              <th colSpan="2" className="text-center" style={{ fontWeight: "normal" }}>20+ Years</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Total</th>
-            </tr>
-            <tr className="table-header-bg">
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Male</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Female</th>
-              <th className="text-center data-col" style={{ fontWeight: "normal" }}>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* 9. Tuberculosis (TB) Services */}
-            <tr className="section-title-bg">
-              <td colSpan="10"><strong>9. Tuberculosis (TB) Services</strong></td>
-            </tr>
-            <tr>
-              <td className="diagnosis-col">TB01. No. screened for TB in IPD</td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -630,7 +369,8 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">TB02. No. of presumptive TB cases identified</td>
+              <td className="diagnosis-col">GC02. Cancer of the cervix (re-attendance)</td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -642,7 +382,60 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
               <td className="text-center data-col"><FormInput value="0" /></td>
             </tr>
             <tr>
-              <td className="diagnosis-col">TB03. No. of presumptive cases diagnosed with TB</td>
+              <td className="diagnosis-col">GC03. Cancer of the breast</td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+            </tr>
+            <tr>
+              <td className="diagnosis-col">GC04. Tubal Ovarian mass/cancer</td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+            </tr>
+            <tr>
+              <td className="diagnosis-col">GC05. Pelvic Inflammatory Disease (PID)</td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+            </tr>
+            <tr>
+              <td className="diagnosis-col">GC06. Uterine Fibroids</td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
+            </tr>
+            <tr>
+              <td className="diagnosis-col">GC07. Other Gynaecological conditions</td>
+              <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
               <td className="text-center data-col"><FormInput value="0" /></td>
@@ -660,4 +453,4 @@ const MentalHealth = ({ section, selectedMonth, selectedYear }) => {
   );
 };
 
-export default MentalHealth;
+export default MaternalConditions;

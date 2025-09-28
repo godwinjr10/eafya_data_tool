@@ -27,7 +27,7 @@ router.get("/child-health", async (req, res) => {
 
     const params = [report_month];
 
-    query += ` ORDER BY vaccine_name`;
+    query += ` ORDER BY vaccine_id`;
 
     const { rows } = await pool.query(query, params);
     console.log("Child Health Query Results:", rows);
