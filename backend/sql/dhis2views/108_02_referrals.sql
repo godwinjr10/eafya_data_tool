@@ -1,8 +1,3 @@
--- =====================================================
--- HMIS 108: Referrals Report
--- Section 2: Referrals
--- =====================================================
-
 CREATE VIEW reporting."108_04_referrals" AS
 SELECT 
     TO_CHAR(encounter_date, 'YYYYMM') AS report_month,

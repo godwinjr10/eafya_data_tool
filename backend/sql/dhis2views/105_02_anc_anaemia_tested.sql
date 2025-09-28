@@ -14,7 +14,7 @@ FROM (
     DATE_TRUNC('month', lab_test_date)::date AS report_month,
     DATE_PART('year', AGE(lab_test_date::date, birth_date::date))::int AS age_years
   FROM reporting.patient_labtests
-  WHERE clinic_id IN (SELECT mapping_id FROM reporting.materialized_view_ids WHERE name ILIKE '%antenatal%' AND mapping_id > 0)
+  WHERE clinic_id IN (SELECT mapping_id FROM reporting.customizationset where name ilike '%antenatal%' and mapping_id > 0)
     AND gender = 'Female'
     AND origin = 'op'
     AND lab_test_name ILIKE '%HB%'

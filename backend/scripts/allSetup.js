@@ -194,6 +194,7 @@ const CONFIG = {
   { name: "Main Store", category: "Stores" },
   { name: "HPV Vaccine", category: "Vaccines" },
   { name: "Tetanus Vaccine", category: "Vaccines" },
+  { name: "Blood Group", category: "LabTest" },
   ]
 };
 

@@ -6,6 +6,6 @@ COUNT(DISTINCT d.patient_id) as total_preterm_labour
 from reporting.patient_conditions d
 inner join reporting.patient_admissions h on h.encounter_id = d.encounter_id
 where d.disease ilike '%preterm%'
-AND h.admission_ward_id IN (SELECT mapping_id FROM reporting.materialized_view_ids where name ilike '%maternity ward%' and mapping_id > 0)
+AND h.admission_ward_id IN (SELECT mapping_id FROM reporting.customizationset where name ilike '%maternity ward%' and mapping_id > 0)
 GROUP BY TO_CHAR(d.diagnosised_date, 'YYYYMM')
 ORDER BY report_month;

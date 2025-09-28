@@ -9,5 +9,6 @@ WHERE lab_test_name ILIKE '%syphilis%'
   AND origin = 'op'
   AND gender IN ('Male','Female')
   AND status = 'Tested'
+  And clinic_id IN (SELECT mapping_id FROM reporting.customizationset where name ilike '%antenatal%' and mapping_id > 0)
 GROUP BY 1, 2
 ORDER BY 1, 2;

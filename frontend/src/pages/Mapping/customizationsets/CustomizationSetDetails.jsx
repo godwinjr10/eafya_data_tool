@@ -26,6 +26,8 @@ const CustomizationSetDetail = React.forwardRef(({ name: propName, category, onO
         return '/customizationsets/items/vaccines';
       case 'Stores':
         return '/customizationsets/items/store';
+      case 'LabTest':
+        return '/customizationsets/items/labtest';
         default:
           return '/customizationsets/items/clinics';
     }

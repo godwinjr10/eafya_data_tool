@@ -8,5 +8,6 @@ WHERE lab_test_name ILIKE '%Hepatitis%'
   AND origin = 'op'
   AND gender ='Female'
   AND status = 'Tested'
+  And clinic_id IN (SELECT mapping_id FROM reporting.customizationset where name ilike '%antenatal%' and mapping_id > 0)
 GROUP BY 1
 ORDER BY 1;

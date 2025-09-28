@@ -183,6 +183,23 @@ router.get("/items/store", async (req, res) => {
   }
 });
 
+router.get("/items/labtest", async (req, res) => {
+  try {
+    const query = `
+            SELECT 
+                id, 
+                "name"
+            FROM dwh.dim_eafya_lab_test
+            ORDER BY "name"
+        `;
+
+    const { rows } = await pool.query(query);
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 // Read one by id
 router.get("/:id", async (req, res) => {
   try {

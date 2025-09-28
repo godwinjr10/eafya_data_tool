@@ -8,7 +8,7 @@ WITH events AS (
     COALESCE(treatment_date, visit_date) AS event_ts,
     visit_no
   FROM reporting.patient_prescriptions
-  WHERE clinic_id IN (SELECT mapping_id FROM reporting.materialized_view_ids where name ilike '%antenatal%' and mapping_id > 0)
+  WHERE clinic_id IN (SELECT mapping_id FROM reporting.customizationset where name ilike '%antenatal%' and mapping_id > 0)
     AND origin    = 'op'
     AND gender    = 'Female'
     AND drug_name ILIKE '%FANSIDAR%' 

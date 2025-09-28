@@ -1,4 +1,4 @@
-create view reporting.patient_admissions as 
+create view reporting.patient_admissions as
 SELECT
     r.patient_id,
     r.gender,
@@ -6,6 +6,7 @@ SELECT
     r.first_name ,
     r.last_name ,
     d.admission_date,
+    d.id as admission_id,
     d.admission_ward_id,
     c.id as cinic_id,
     c."name" as clinic_name,
@@ -40,4 +41,4 @@ INNER JOIN dwh.dim_eafya_ward w ON w.id = d.admission_ward_id
 inner join dwh.fact_eafya_patient_visit v on v.id = d.patient_visit_id
 inner join dwh.fact_eafya_clinic_session s on s.patient_visit_id = v.id 
 inner join dwh.dim_eafya_clinic c on c.id = s.clinic_id 
-inner join dwh.dim_eafya_registered_patients r on r.patient_id = v.patient_id 
+inner join dwh.dim_eafya_registered_patients r on r.patient_id = v.patient_id  

@@ -14,30 +14,27 @@ postnatal_patients AS (
         p.admission_date,
         p.birth_date,
         TO_CHAR(p.admission_date, 'YYYYMM') AS report_month,
-        DATE_PART('year', AGE(p.admission_date::date, p.birth_date::date)) AS age_years,
-        e.visit_type_name
+        DATE_PART('year', AGE(p.admission_date::date, p.birth_date::date)) AS age_years
     FROM reporting.patient_postnatal p
-    INNER JOIN reporting.encounters e ON p.encounter_id = e.encounter_id
     WHERE p.admission_date IS NOT NULL
-      AND p.birth_date IS NOT NULL
-      AND e.visit_type_name ILIKE '%postnatal%'
+    AND p.birth_date IS NOT null
 ),
 tb_lab_tests AS (
     SELECT
         plt.patient_id,
         plt.encounter_id,
-        plt.lab_test,
+        plt.lab_test_name,
         plt.result,
         plt.status
-    FROM reporting.patient_lab_test plt
-    WHERE plt.lab_test ILIKE '%TB%'
+    FROM reporting.patient_labtests plt
+    WHERE plt.lab_test_name ILIKE '%TB%'
 ),
 tb_diagnoses AS (
     SELECT DISTINCT
         pd.patient_id,
         pd.encounter_id
-    FROM reporting.patient_diagnosis pd
-    WHERE pd.disease_name ILIKE '%Tuberculosis%'
+    FROM reporting.patient_conditions pd
+    WHERE pd.disease ILIKE '%Tuberculosis%'
 ),
 tb_status AS (
     SELECT

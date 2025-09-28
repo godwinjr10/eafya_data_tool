@@ -59,7 +59,7 @@ ma23 AS (
   FROM reporting.patient_conditions
   WHERE diagnosised_date IS NOT null
     AND classification = 'Confirmed'
-    AND disease_name ILIKE '%asphyxia%'
+    AND disease ILIKE '%asphyxia%'
   GROUP BY TO_CHAR(diagnosised_date, 'YYYYMM')
 ),
 ma24 AS (
@@ -70,6 +70,7 @@ ma24 AS (
     COUNT(*)::bigint AS value
   FROM reporting.patient_maternity
   WHERE resuscitation = true
+  GROUP BY TO_CHAR(admission_date, 'YYYYMM')
 )
 SELECT * FROM ma01
 UNION ALL SELECT * FROM ma08

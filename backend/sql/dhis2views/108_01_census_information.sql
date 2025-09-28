@@ -23,7 +23,7 @@ death_counts AS (
         ward_name,
         TO_CHAR(admission_date, 'YYYYMM') AS report_month,
         COUNT(DISTINCT patient_id) AS total_deaths
-    FROM reporting.census_death
+    FROM reporting.patient_deceased
     GROUP BY ward_name, TO_CHAR(admission_date, 'YYYYMM')
 ),
 -- Get patient days per ward per month

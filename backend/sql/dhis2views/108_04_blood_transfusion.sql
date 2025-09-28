@@ -4,7 +4,6 @@
 -- =====================================================
 
 CREATE VIEW reporting."108_blood_transfusion" AS
-
 WITH blood_product_categories AS (
     SELECT 
         blood_product_type,
@@ -25,7 +24,6 @@ WITH blood_product_categories AS (
     FROM reporting.blood_transfusion_data
     WHERE blood_product_type IS NOT NULL
 )
-
 -- Section 4a: Blood Transfusion Services Summary
 SELECT 
     TO_CHAR(encounter_date, 'YYYYMM') AS report_month,
@@ -40,9 +38,7 @@ SELECT
     NULL::int as unit
 FROM blood_product_categories
 GROUP BY TO_CHAR(encounter_date, 'YYYYMM'), standardized_product_type
-
 UNION ALL
-
 SELECT 
     TO_CHAR(encounter_date, 'YYYYMM') AS report_month,
     '4b' as section,
