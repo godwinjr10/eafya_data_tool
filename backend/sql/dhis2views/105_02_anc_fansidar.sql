@@ -21,7 +21,7 @@ ranked AS (
     DATE_PART('year', AGE(event_ts::date, birth_date::date))::int AS age_years,
     ROW_NUMBER() OVER (
       PARTITION BY patient_id, report_month
-      ORDER BY event_ts, visit_no
+      ORDER BY visit_no, event_ts
     ) AS visit_rank
   FROM events
 ),
@@ -52,12 +52,18 @@ SELECT
     WHEN 2 THEN 'IPT2'
     WHEN 3 THEN 'IPT3'
     WHEN 4 THEN 'IPT4'
+  END AS hmis_code,
+  CASE r.visit_rank
+    WHEN 1 THEN 'IPT1'
+    WHEN 2 THEN 'IPT2'
+    WHEN 3 THEN 'IPT3'
+    WHEN 4 THEN 'IPT4'
   END AS ipt_dose,
-  COALESCE(a.below_15_years, 0) AS "below_15_years",
-  COALESCE(a."15_19_years", 0)  AS "15_19_years",
-  COALESCE(a."20_24_years", 0)  AS "20_24_years",
-  COALESCE(a."25_49_years", 0)  AS "25_49_years",
-  COALESCE(a."50+_years", 0)    AS "50+_years",
+  COALESCE(a.below_15_years, 0) AS below_15,
+  COALESCE(a."15_19_years", 0)  AS age_15_19,
+  COALESCE(a."20_24_years", 0)  AS age_20_24,
+  COALESCE(a."25_49_years", 0)  AS age_25_49,
+  COALESCE(a."50+_years", 0)    AS age_50_plus,
   COALESCE(a.total, 0)          AS total
 FROM months m
 CROSS JOIN ranks r

@@ -16,7 +16,7 @@ WITH visits AS (
     pa.origin,
     pa.clinic_id
   FROM reporting.patient_antenatal pa
-  WHERE pa.clinic_id = 1
+  WHERE pa.clinic_id = 32
     AND pa.gender = 'Female'
     AND pa.origin = 'op'          
   ORDER BY pa.visit_no, pa.encounter_date
