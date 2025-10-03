@@ -14,4 +14,4 @@ inner join patient_visit v on v.patient_id = r.patient_id
 inner join clinic_session c on c.patient_visit_id = v.id
 inner join clinic l on l.id = c.clinic_id 
 inner join encounter e on e.clinic_session_id = c.id
-where l.id = 41
+where l.id = 32

@@ -16,7 +16,11 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
 
   // Fetch data from API
   const fetchAntenatalData = useCallback(async () => {
-    if (!selectedMonth || !selectedYear) return;
+    console.log('Antenatal fetchAntenatalData called with:', { selectedMonth, selectedYear });
+    if (!selectedMonth || !selectedYear) {
+      console.log('Missing selectedMonth or selectedYear, returning early');
+      return;
+    }
 
     setLoading(true);
     try {
@@ -25,68 +29,190 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
         .toString()
         .padStart(2, "0")}`;
 
+      console.log('Calculated reportMonth:', reportMonth);
+
       // Fetch data from the new visits and totals endpoints
-      const [visitsResponse, fansidarResponse, bloodgroupResponse, anaemiaTestedResponse, anaemiaConfirmedResponse, syphilisResponse, hepatitisResponse, antenatal10Response] = await Promise.all([
-        API.get(`/antenatal/visits?report_month=${reportMonth}`),
-        API.get(`/antenatal/fansidar?report_month=${reportMonth}`),
-        API.get(`/antenatal/bloodgroup?report_month=${reportMonth}`),
-        API.get(`/antenatal/anaemia_tested?report_month=${reportMonth}`),
-        API.get(`/antenatal/anaemia_confirmed?report_month=${reportMonth}`),
-        API.get(`/antenatal/syphilis?report_month=${reportMonth}`),
-        API.get(`/antenatal/hepatitis?report_month=${reportMonth}`),
-        API.get(`/antenatal/antenatal_10?report_month=${reportMonth}`),
-      ]);
+      console.log('Making API calls for reportMonth:', reportMonth);
 
-      // Process visits data (AN01-AN04)
-      const visitsData = visitsResponse.data || [];
-      const firstData = visitsData.filter(item => item.hmis_code === 'AN01');
-      const fourthData = visitsData.filter(item => item.hmis_code === 'AN02');
-      const eighthData = visitsData.filter(item => item.hmis_code === 'AN03');
-      const totalData = visitsData.filter(item => item.hmis_code === 'AN04');
+      // Declare variables outside try-catch blocks
+      let visitsResponse, totalsResponse, fansidarResponse, bloodgroupResponse;
+      let anaemiaTestedResponse, anaemiaConfirmedResponse, syphilisResponse, hepatitisResponse, antenatal10Response;
 
-      // Process totals data (AN05) - keeping for future use
+      try {
+        // Call each API individually with individual error handling
+        try {
+          console.log('Making visits API call...');
+          visitsResponse = await API.get(`/antenatal/visits?report_month=${reportMonth}`);
+          console.log('✅ Visits Response:', visitsResponse.data);
+        } catch (error) {
+          console.error('❌ Visits API failed:', error);
+          visitsResponse = { data: [] };
+        }
 
-      setFirstData(firstData);
-      setFourthData(fourthData);
-      setEighthData(eighthData);
-      setTotalData(totalData);
-      setIptData(fansidarResponse.data || []);
-      setTabletsData(antenatal10Response.data || []);
+        try {
+          console.log('Making totals API call...');
+          totalsResponse = await API.get(`/antenatal/totals?report_month=${reportMonth}`);
+          console.log('✅ Totals Response:', totalsResponse.data);
+        } catch (error) {
+          console.error('❌ Totals API failed:', error);
+          totalsResponse = { data: [] };
+        }
 
-      // Set blood grouping data from bloodgroup endpoint
-      setBloodGroupingData(bloodgroupResponse.data || []);
+        try {
+          console.log('Making fansidar API call...');
+          fansidarResponse = await API.get(`/antenatal/fansidar?report_month=${reportMonth}`);
+          console.log('✅ Fansidar Response:', fansidarResponse.data);
+        } catch (error) {
+          console.error('❌ Fansidar API failed:', error);
+          fansidarResponse = { data: [] };
+        }
 
-      // Set anaemia data from new endpoints
-      const anaemiaData = [];
-      if (anaemiaTestedResponse.data && anaemiaTestedResponse.data.length > 0) {
-        anaemiaData.push({
-          hmis_code: "AN08",
-          hmis_name:
-            "No. of pregnant women who were tested for Anaemia using Hb Test at ANC 1st Contact / visit",
-          Below_15yrs: anaemiaTestedResponse.data[0]["Below 15 Years"] || 0,
-          "15_19yrs": anaemiaTestedResponse.data[0]["15 - 19 Years"] || 0,
-          "20_24yrs": anaemiaTestedResponse.data[0]["20 - 24 Years"] || 0,
-          "25_49yrs": anaemiaTestedResponse.data[0]["25 - 49 Years"] || 0,
-          "50+yrs": anaemiaTestedResponse.data[0]["50+ Years"] || 0,
-        });
+        try {
+          console.log('Making bloodgroup API call...');
+          bloodgroupResponse = await API.get(`/antenatal/bloodgroup?report_month=${reportMonth}`);
+          console.log('✅ Bloodgroup Response:', bloodgroupResponse.data);
+        } catch (error) {
+          console.error('❌ Bloodgroup API failed:', error);
+          bloodgroupResponse = { data: [] };
+        }
+
+        try {
+          console.log('Making anaemia tested API call...');
+          anaemiaTestedResponse = await API.get(`/antenatal/anaemia_tested?report_month=${reportMonth}`);
+          console.log('✅ Anaemia Tested Response:', anaemiaTestedResponse.data);
+        } catch (error) {
+          console.error('❌ Anaemia Tested API failed:', error);
+          anaemiaTestedResponse = { data: [] };
+        }
+
+        try {
+          console.log('Making anaemia confirmed API call...');
+          anaemiaConfirmedResponse = await API.get(`/antenatal/anaemia_confirmed?report_month=${reportMonth}`);
+          console.log('✅ Anaemia Confirmed Response:', anaemiaConfirmedResponse.data);
+        } catch (error) {
+          console.error('❌ Anaemia Confirmed API failed:', error);
+          anaemiaConfirmedResponse = { data: [] };
+        }
+
+        try {
+          console.log('Making syphilis API call...');
+          syphilisResponse = await API.get(`/antenatal/syphilis?report_month=${reportMonth}`);
+          console.log('✅ Syphilis Response:', syphilisResponse.data);
+        } catch (error) {
+          console.error('❌ Syphilis API failed:', error);
+          syphilisResponse = { data: {} };
+        }
+
+        try {
+          console.log('Making hepatitis API call...');
+          hepatitisResponse = await API.get(`/antenatal/hepatitis?report_month=${reportMonth}`);
+          console.log('✅ Hepatitis Response:', hepatitisResponse.data);
+        } catch (error) {
+          console.error('❌ Hepatitis API failed:', error);
+          hepatitisResponse = { data: {} };
+        }
+
+        try {
+          console.log('Making antenatal10 API call...');
+          antenatal10Response = await API.get(`/antenatal/antenatal_10?report_month=${reportMonth}`);
+          console.log('✅ Antenatal 10 Response:', antenatal10Response.data);
+        } catch (error) {
+          console.error('❌ Antenatal 10 API failed:', error);
+          antenatal10Response = { data: [] };
+        }
+
+        console.log('=== ALL API CALLS COMPLETED ===');
+      } catch (apiError) {
+        console.error('Error in API calls section:', apiError);
+        throw apiError;
       }
-      if (anaemiaConfirmedResponse.data && anaemiaConfirmedResponse.data.length > 0) {
-        anaemiaData.push({
-          hmis_code: "AN09",
-          hmis_name:
-            "No. of pregnant women with Anaemia (Hb <10g/dl) at ANC 1st Contact / visit",
-          Below_15yrs: anaemiaConfirmedResponse.data[0]["Below 15 Years"] || 0,
-          "15_19yrs": anaemiaConfirmedResponse.data[0]["15 - 19 Years"] || 0,
-          "20_24yrs": anaemiaConfirmedResponse.data[0]["20 - 24 Years"] || 0,
-          "25_49yrs": anaemiaConfirmedResponse.data[0]["25 - 49 Years"] || 0,
-          "50+yrs": anaemiaConfirmedResponse.data[0]["50+ Years"] || 0,
-        });
-      }
-      setAnaemiaData(anaemiaData);
 
-      // Set syphilis and hepatitis data from new endpoints
-      setSyphilisData(syphilisResponse.data || {});
-      setHepatitisData(hepatitisResponse.data || {});
+      try {
+        // Process visits data (AN01-AN03)
+        console.log('+++++++++++++++++++Processing visits data...++++++++++++++++++++++');
+        const visitsData = visitsResponse.data || [];
+        console.log('visitsData+++++++++++++++++++:', visitsData);
+
+        const firstData = visitsData.filter(item => item.hmis_code === 'AN01');
+        console.log('firstData after filter:', firstData);
+
+        const fourthData = visitsData.filter(item => item.hmis_code === 'AN02');
+        console.log('fourthData after filter:', fourthData);
+
+        const eighthData = visitsData.filter(item => item.hmis_code === 'AN03');
+        console.log('eighthData after filter:', eighthData);
+
+        // Process totals data (AN04) from separate endpoint
+        const totalData = totalsResponse.data || [];
+        console.log('totalData:', totalData);
+
+
+
+        console.log('=== SETTING STATE ===');
+        console.log('firstData length:', firstData.length, 'data:', firstData);
+        console.log('fourthData length:', fourthData.length, 'data:', fourthData);
+        console.log('eighthData length:', eighthData.length, 'data:', eighthData);
+        console.log('totalData length:', totalData.length, 'data:', totalData);
+        console.log('fansidarData length:', (fansidarResponse?.data || []).length, 'data:', fansidarResponse?.data);
+        console.log('antenatal10Data length:', (antenatal10Response?.data || []).length, 'data:', antenatal10Response?.data);
+        console.log('=== END SETTING STATE ===');
+
+        setFirstData(firstData);
+        setFourthData(fourthData);
+        setEighthData(eighthData);
+        setTotalData(totalData);
+        setIptData(fansidarResponse?.data || []);
+        setTabletsData(antenatal10Response?.data || []);
+
+        // Set blood grouping data from bloodgroup endpoint
+        setBloodGroupingData(bloodgroupResponse?.data || []);
+
+        // Set anaemia data from new endpoints
+        console.log('=== PROCESSING ANAEMIA DATA ===');
+        const anaemiaData = [];
+        console.log('anaemiaTestedResponse.data:', anaemiaTestedResponse?.data);
+        console.log('anaemiaConfirmedResponse.data:', anaemiaConfirmedResponse?.data);
+
+        if (anaemiaTestedResponse?.data && anaemiaTestedResponse.data.length > 0) {
+          console.log('Processing anaemia tested data...');
+          anaemiaData.push({
+            hmis_code: "AN08",
+            hmis_name:
+              "No. of pregnant women who were tested for Anaemia using Hb Test at ANC 1st Contact / visit",
+            Below_15yrs: anaemiaTestedResponse.data[0]["below_15_years"] || 0,
+            "15_19yrs": anaemiaTestedResponse.data[0]["15_19_years"] || 0,
+            "20_24yrs": anaemiaTestedResponse.data[0]["20_24_years"] || 0,
+            "25_50yrs": anaemiaTestedResponse.data[0]["25_50yrs"] || 0,
+            "50+yrs": anaemiaTestedResponse.data[0]["50+_years"] || 0,
+          });
+        }
+        if (anaemiaConfirmedResponse?.data && anaemiaConfirmedResponse.data.length > 0) {
+          console.log('Processing anaemia confirmed data...');
+          anaemiaData.push({
+            hmis_code: "AN09",
+            hmis_name:
+              "No. of pregnant women with Anaemia (Hb <10g/dl) at ANC 1st Contact / visit",
+            Below_15yrs: anaemiaConfirmedResponse.data[0]["below_15_years"] || 0,
+            "15_19yrs": anaemiaConfirmedResponse.data[0]["15_19_years"] || 0,
+            "20_24yrs": anaemiaConfirmedResponse.data[0]["20_24_years"] || 0,
+            "25_50yrs": anaemiaConfirmedResponse.data[0]["25_50yrs"] || 0,
+            "50+yrs": anaemiaConfirmedResponse.data[0]["50+_years"] || 0,
+          });
+        }
+        console.log('Final anaemiaData:', anaemiaData);
+        setAnaemiaData(anaemiaData);
+        console.log('=== END PROCESSING ANAEMIA DATA ===');
+
+        // Set syphilis and hepatitis data from new endpoints
+        setSyphilisData(syphilisResponse?.data || {});
+        setHepatitisData(hepatitisResponse?.data || {});
+
+        console.log('=== FETCH ANTENATAL DATA COMPLETED SUCCESSFULLY ===');
+
+      } catch (dataProcessingError) {
+        console.error('Error in data processing:', dataProcessingError);
+        throw dataProcessingError;
+      }
 
     } catch (error) {
       console.error("Error fetching antenatal data:", error);
@@ -102,6 +228,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
       setSyphilisData({});
       setHepatitisData({});
     } finally {
+      console.log('+++++++++++++++++++Loading set to false++++++++++++++++++++++');
       setLoading(false);
     }
   }, [selectedMonth, selectedYear, getMonthNumber]);
@@ -109,11 +236,13 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
   // Fetch data when month/year changes
   useEffect(() => {
     fetchAntenatalData();
-  }, [selectedMonth, selectedYear, fetchAntenatalData]);
+  }, [fetchAntenatalData, selectedMonth, selectedYear]);
 
   const getValueForCell = (item, ageGroup) => {
     const key = `${ageGroup}`;
-    return item[key] || "0";
+    const value = item[key] || "0";
+    console.log(`getValueForCell: item=${JSON.stringify(item)}, ageGroup=${ageGroup}, key=${key}, value=${value}`);
+    return value;
   };
 
   const computeTotal = (item, ageKeys) => {
@@ -135,6 +264,21 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
   // Check if we have any data
   // const hasData = firstData.length > 0 || fourthData.length > 0 || eighthData.length > 0 || 
   //                 totalData.length > 0 || iptData.length > 0 || anaemiaData.length > 0;
+
+  // Debug current state values
+  console.log('=== RENDER STATE DEBUG ===');
+  console.log('loading:', loading);
+  console.log('firstData length:', firstData.length, 'data:', firstData);
+  console.log('fourthData length:', fourthData.length, 'data:', fourthData);
+  console.log('eighthData length:', eighthData.length, 'data:', eighthData);
+  console.log('totalData length:', totalData.length, 'data:', totalData);
+  console.log('iptData length:', iptData.length, 'data:', iptData);
+  console.log('anaemiaData length:', anaemiaData.length, 'data:', anaemiaData);
+  console.log('bloodGroupingData length:', bloodGroupingData.length, 'data:', bloodGroupingData);
+  console.log('tabletsData length:', tabletsData.length, 'data:', tabletsData);
+  console.log('syphilisData:', syphilisData);
+  console.log('hepatitisData:', hepatitisData);
+  console.log('=== END RENDER STATE DEBUG ===');
 
   return (
     <div>
@@ -187,891 +331,9 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
 
       {loading ? (
         <Spinner />
-      ) :  (
+      ) : (
         <>
 
-        <table className="data-entry-table compact-table">
-          <thead>
-            <tr>
-              <th style={{ fontWeight: "normal" }}>Category</th>
-              {[
-                "Below 15 Years",
-                "15 - 19 Years",
-                "20 - 24 Years",
-                "25 - 49 Years",
-                "50+ Years",
-                "Total",
-              ].map((ag, i) => (
-                <th
-                  key={i}
-                  className="text-center"
-                  style={{ fontWeight: "normal" }}
-                >
-                  {ag}
-                </th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {/* AN01 - ANC 1st contacts with sub-rows */}
-            <tr>
-              <td>AN01. ANC 1st contacts/visits for women</td>
-              {[
-                "Below_15yrs",
-                "15_19yrs",
-                "20_24yrs",
-                "25_50yrs",
-                "50+yrs",
-              ].map((ageGroup) => (
-                <td key={ageGroup} className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value={firstData.length > 0 ? getValueForCell(firstData[0], ageGroup) : "0"}
-                      readOnly
-                    />
-                </td>
-              ))}
-              <td className="text-center">
-                <input
-                  type="number"
-                  min="0"
-                  className="form-control form-control-sm compact-input"
-                  value={firstData.length > 0 ? computeTotal(firstData[0], [
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_50yrs",
-                    "50+yrs",
-                  ]) : "0"}
-                  readOnly
-                />
-              </td>
-            </tr>
-            {/* AN01 Sub-row: No. in 1st Trimester */}
-            <tr>
-              <td className="ps-4">No. in 1st Trimester</td>
-              {[
-                "Below_15yrs",
-                "15_19yrs",
-                "20_24yrs",
-                "25_50yrs",
-                "50+yrs",
-              ].map((ageGroup) => (
-                <td key={ageGroup} className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value="0"
-                    readOnly
-                  />
-                </td>
-              ))}
-              <td className="text-center">
-                <input
-                  type="number"
-                  min="0"
-                  className="form-control form-control-sm compact-input"
-                  value="0"
-                  readOnly
-                />
-              </td>
-            </tr>
-
-            {/* AN02 - ANC 4th contacts */}
-            <tr>
-              <td>AN02. ANC 4th contacts/visits for women</td>
-              {[
-                "Below_15yrs",
-                "15_19yrs",
-                "20_24yrs",
-                "25_50yrs",
-                "50+yrs",
-              ].map((ageGroup) => (
-                <td key={ageGroup} className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value={fourthData.length > 0 ? getValueForCell(fourthData[0], ageGroup) : "0"}
-                    readOnly
-                  />
-                </td>
-              ))}
-              <td className="text-center">
-                <input
-                  type="number"
-                  min="0"
-                  className="form-control form-control-sm compact-input"
-                  value={fourthData.length > 0 ? computeTotal(fourthData[0], [
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_50yrs",
-                    "50+yrs",
-                  ]) : "0"}
-                  readOnly
-                />
-              </td>
-            </tr>
-
-            {/* AN03 - ANC 8th contacts */}
-            <tr>
-              <td>AN03. ANC 8th contacts/visits for women</td>
-              {[
-                "Below_15yrs",
-                "15_19yrs",
-                "20_24yrs",
-                "25_50yrs",
-                "50+yrs",
-              ].map((ageGroup) => (
-                <td key={ageGroup} className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value={eighthData.length > 0 ? getValueForCell(eighthData[0], ageGroup) : "0"}
-                    readOnly
-                  />
-                </td>
-              ))}
-              <td className="text-center">
-                <input
-                  type="number"
-                  min="0"
-                  className="form-control form-control-sm compact-input"
-                  value={eighthData.length > 0 ? computeTotal(eighthData[0], [
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_50yrs",
-                    "50+yrs",
-                  ]) : "0"}
-                  readOnly
-                />
-              </td>
-            </tr>
-
-            {/* AN04 - Total ANC contacts */}
-            <tr>
-              <td>AN04. Total ANC contacts/visits</td>
-              {[
-                "Below_15yrs",
-                "15_19yrs",
-                "20_24yrs",
-                "25_50yrs",
-                "50+yrs",
-              ].map((ageGroup) => (
-                <td key={ageGroup} className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value={totalData.length > 0 ? getValueForCell(totalData[0], ageGroup) : "0"}
-                    readOnly
-                  />
-                </td>
-              ))}
-              <td className="text-center">
-                <input
-                  type="number"
-                  min="0"
-                  className="form-control form-control-sm compact-input"
-                  value={totalData.length > 0 ? computeTotal(totalData[0], [
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_50yrs",
-                    "50+yrs",
-                  ]) : "0"}
-                  readOnly
-                />
-              </td>
-            </tr>
-
-            {/* AN05 - Referrals from community */}
-            <tr>
-              <td>AN05. Referrals from community</td>
-              {[
-                "Below_15yrs",
-                "15_19yrs",
-                "20_24yrs",
-                "25_50yrs",
-                "50+yrs",
-              ].map((ageGroup) => (
-                <td key={ageGroup} className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value="0"
-                    readOnly
-                  />
-                </td>
-              ))}
-              <td className="text-center">
-                <input
-                  type="number"
-                  min="0"
-                  className="form-control form-control-sm compact-input"
-                  value="0"
-                  readOnly
-                />
-              </td>
-            </tr>
-
-            {/* AN06 - IPT Header Row */}
-            <tr>
-              <td colSpan="6">AN06. No. of pregnant women who received IPT</td>
-            </tr>
-
-            {/* IPT1 - First dose IPT */}
-            <tr>
-              <td className="ps-4">First dose IPT (IPT1)</td>
-              {[
-                "Below_15yrs",
-                "15_19yrs",
-                "20_24yrs",
-                "25_50yrs",
-                "50+yrs",
-              ].map((ageGroup) => (
-                <td key={ageGroup} className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value={iptData.find(item => item.ipt_dose_group === "First dose IPT (IPT1)") ? getValueForCell(iptData.find(item => item.ipt_dose_group === "First dose IPT (IPT1)"), ageGroup === "Below_15yrs" ? "below_15" : ageGroup === "15_19yrs" ? "age_15_19" : ageGroup === "20_24yrs" ? "age_20_24" : ageGroup === "25_50yrs" ? "age_25_49" : "age_50_plus") : "0"}
-                    readOnly
-                    style={{ backgroundColor: "white" }} // White background for age cells
-                  />
-                </td>
-              ))}
-              <td className="text-center">
-                <input
-                  type="number"
-                  min="0"
-                  className="form-control form-control-sm compact-input"
-                  value={iptData.find(item => item.ipt_dose_group === "First dose IPT (IPT1)") ? computeTotal(iptData.find(item => item.ipt_dose_group === "First dose IPT (IPT1)"), ["below_15", "age_15_19", "age_20_24", "age_25_49", "age_50_plus"]) : "0"}
-                  readOnly
-                  style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
-                />
-              </td>
-            </tr>
-
-            {/* IPT2 - Second dose IPT */}
-            <tr>
-              <td className="ps-4">Second dose IPT (IPT2)</td>
-              {[
-                "Below_15yrs",
-                "15_19yrs",
-                "20_24yrs",
-                "25_50yrs",
-                "50+yrs",
-              ].map((ageGroup) => (
-                <td key={ageGroup} className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value={iptData.find(item => item.ipt_dose_group === "Second dose IPT (IPT2)") ? getValueForCell(iptData.find(item => item.ipt_dose_group === "Second dose IPT (IPT2)"), ageGroup === "Below_15yrs" ? "below_15" : ageGroup === "15_19yrs" ? "age_15_19" : ageGroup === "20_24yrs" ? "age_20_24" : ageGroup === "25_50yrs" ? "age_25_49" : "age_50_plus") : "0"}
-                    readOnly
-                    style={{ backgroundColor: "white" }} // White background for age cells
-                  />
-                </td>
-              ))}
-              <td className="text-center">
-                <input
-                  type="number"
-                  min="0"
-                  className="form-control form-control-sm compact-input"
-                  value={iptData.find(item => item.ipt_dose_group === "Second dose IPT (IPT2)") ? computeTotal(iptData.find(item => item.ipt_dose_group === "Second dose IPT (IPT2)"), ["below_15", "age_15_19", "age_20_24", "age_25_49", "age_50_plus"]) : "0"}
-                  readOnly
-                  style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
-                />
-              </td>
-            </tr>
-
-            {/* IPT3 - Third dose IPT */}
-            <tr>
-              <td className="ps-4">Third dose IPT (IPT3)</td>
-              {[
-                "Below_15yrs",
-                "15_19yrs",
-                "20_24yrs",
-                "25_50yrs",
-                "50+yrs",
-              ].map((ageGroup) => (
-                <td key={ageGroup} className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value={iptData.find(item => item.ipt_dose_group === "Third dose IPT (IPT3)") ? getValueForCell(iptData.find(item => item.ipt_dose_group === "Third dose IPT (IPT3)"), ageGroup === "Below_15yrs" ? "below_15" : ageGroup === "15_19yrs" ? "age_15_19" : ageGroup === "20_24yrs" ? "age_20_24" : ageGroup === "25_50yrs" ? "age_25_49" : "age_50_plus") : "0"}
-                    readOnly
-                    style={{ backgroundColor: "white" }} // White background for age cells
-                  />
-                </td>
-              ))}
-              <td className="text-center">
-                <input
-                  type="number"
-                  min="0"
-                  className="form-control form-control-sm compact-input"
-                  value={iptData.find(item => item.ipt_dose_group === "Third dose IPT (IPT3)") ? computeTotal(iptData.find(item => item.ipt_dose_group === "Third dose IPT (IPT3)"), ["below_15", "age_15_19", "age_20_24", "age_25_49", "age_50_plus"]) : "0"}
-                  readOnly
-                  style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
-                />
-              </td>
-            </tr>
-
-            {/* IPT4 - IPT 4 & 4+ Dose */}
-            <tr>
-              <td className="ps-4">IPT 4 & 4+ Dose</td>
-              {[
-                "Below_15yrs",
-                "15_19yrs",
-                "20_24yrs",
-                "25_50yrs",
-                "50+yrs",
-              ].map((ageGroup) => (
-                <td key={ageGroup} className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value={iptData.find(item => item.ipt_dose_group === "IPT 4 & 4+ Dose") ? getValueForCell(iptData.find(item => item.ipt_dose_group === "IPT 4 & 4+ Dose"), ageGroup === "Below_15yrs" ? "below_15" : ageGroup === "15_19yrs" ? "age_15_19" : ageGroup === "20_24yrs" ? "age_20_24" : ageGroup === "25_50yrs" ? "age_25_49" : "age_50_plus") : "0"}
-                    readOnly
-                    style={{ backgroundColor: "white" }} // White background for age cells
-                  />
-                </td>
-              ))}
-              <td className="text-center">
-                <input
-                  type="number"
-                  min="0"
-                  className="form-control form-control-sm compact-input"
-                  value={iptData.find(item => item.ipt_dose_group === "IPT 4 & 4+ Dose") ? computeTotal(iptData.find(item => item.ipt_dose_group === "IPT 4 & 4+ Dose"), ["below_15", "age_15_19", "age_20_24", "age_25_49", "age_50_plus"]) : "0"}
-                  readOnly
-                  style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
-                />
-              </td>
-            </tr>
-
-            {/* AN07 Blood Grouping */}
-            <tr>
-              <td colSpan="6">
-                AN07. No. of pregnant women who were tested for blood grouping
-              </td>
-            </tr>
-            {/* Blood Grouping Data from API */}
-            {bloodGroupingData.length > 0 ? (
-              bloodGroupingData.map((item, idx) => (
-                <tr key={`AN07-${idx}`}>
-                  <td className="ps-4">{item.blood_group} {item.rhesus_factor}</td>
-                  {[
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ].map((ageGroup) => (
-                    <td key={ageGroup} className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value={getValueForCell(item, ageGroup)}
-                        readOnly
-                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                      />
-                    </td>
-                  ))}
-                  <td className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value={computeTotal(item, [
-                        "Below_15yrs",
-                        "15_19yrs",
-                        "20_24yrs",
-                        "25_49yrs",
-                        "50+yrs",
-                      ])}
-                      readOnly
-                      style={{ backgroundColor: "white" }} // White background for total cells
-                    />
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <>
-                {/* Blood Group (O) */}
-                <tr>
-                  <td className="ps-4">Blood Group (O)</td>
-                  {[
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ].map((ageGroup) => (
-                    <td key={ageGroup} className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                      />
-                    </td>
-                  ))}
-                  <td className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "white" }} // White background for total cells
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="ps-5">Rhesus O+</td>
-                  {[
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ].map((ageGroup) => (
-                    <td key={ageGroup} className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                      />
-                    </td>
-                  ))}
-                  <td className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "white" }} // White background for total cells
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="ps-5">Rhesus O-</td>
-                  {[
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ].map((ageGroup) => (
-                    <td key={ageGroup} className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                      />
-                    </td>
-                  ))}
-                  <td className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "white" }} // White background for total cells
-                    />
-                  </td>
-                </tr>
-                {/* Blood Group (A) */}
-                <tr>
-                  <td className="ps-4">Blood Group (A)</td>
-                  {[
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ].map((ageGroup) => (
-                    <td key={ageGroup} className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                      />
-                    </td>
-                  ))}
-                  <td className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "white" }} // White background for total cells
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="ps-5">Rhesus A+</td>
-                  {[
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ].map((ageGroup) => (
-                    <td key={ageGroup} className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                      />
-                    </td>
-                  ))}
-                  <td className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "white" }} // White background for total cells
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="ps-5">Rhesus A-</td>
-                  {[
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ].map((ageGroup) => (
-                    <td key={ageGroup} className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                      />
-                    </td>
-                  ))}
-                  <td className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "white" }} // White background for total cells
-                    />
-                  </td>
-                </tr>
-                {/* Blood Group (B) */}
-                <tr>
-                  <td className="ps-4">Blood Group (B)</td>
-                  {[
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ].map((ageGroup) => (
-                    <td key={ageGroup} className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                      />
-                    </td>
-                  ))}
-                  <td className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "white" }} // White background for total cells
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="ps-5">Rhesus B+</td>
-                  {[
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ].map((ageGroup) => (
-                    <td key={ageGroup} className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                      />
-                    </td>
-                  ))}
-                  <td className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "white" }} // White background for total cells
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="ps-5">Rhesus B-</td>
-                  {[
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ].map((ageGroup) => (
-                    <td key={ageGroup} className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                      />
-                    </td>
-                  ))}
-                  <td className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "white" }} // White background for total cells
-                    />
-                  </td>
-                </tr>
-                {/* Blood Group (AB) */}
-                <tr>
-                  <td className="ps-4">Blood Group (AB)</td>
-                  {[
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ].map((ageGroup) => (
-                    <td key={ageGroup} className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                      />
-                    </td>
-                  ))}
-                  <td className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "white" }} // White background for total cells
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="ps-5">Rhesus AB+</td>
-                  {[
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ].map((ageGroup) => (
-                    <td key={ageGroup} className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                      />
-                    </td>
-                  ))}
-                  <td className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "white" }} // White background for total cells
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td className="ps-5">Rhesus AB-</td>
-                  {[
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ].map((ageGroup) => (
-                    <td key={ageGroup} className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                      />
-                    </td>
-                  ))}
-                  <td className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "white" }} // White background for total cells
-                    />
-                  </td>
-                </tr>
-              </>
-            )}
-
-            {/* AN08 - Anaemia Testing */}
-            <tr>
-              <td>
-                AN08. No. of pregnant women who were tested for Anaemia using Hb Test at ANC 1st Contact / visit
-              </td>
-              {[
-                "Below_15yrs",
-                "15_19yrs",
-                "20_24yrs",
-                "25_49yrs",
-                "50+yrs",
-              ].map((ageGroup) => (
-                <td key={ageGroup} className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value={anaemiaData.length > 0 && anaemiaData[0].hmis_code === "AN08" ? getValueForCell(anaemiaData[0], ageGroup) : "0"}
-                    readOnly
-                  />
-                </td>
-              ))}
-              <td className="text-center">
-                <input
-                  type="number"
-                  min="0"
-                  className="form-control form-control-sm compact-input"
-                  value={anaemiaData.length > 0 && anaemiaData[0].hmis_code === "AN08" ? computeTotal(anaemiaData[0], [
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ]) : "0"}
-                  readOnly
-                />
-              </td>
-            </tr>
-
-            {/* AN09 - Anaemia Cases */}
-            <tr>
-              <td>
-                AN09. No. of pregnant women with Anaemia (Hb &lt;10g/dl) at ANC 1st Contact / visit
-              </td>
-              {[
-                "Below_15yrs",
-                "15_19yrs",
-                "20_24yrs",
-                "25_49yrs",
-                "50+yrs",
-              ].map((ageGroup) => (
-                <td key={ageGroup} className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value={anaemiaData.length > 1 && anaemiaData[1].hmis_code === "AN09" ? getValueForCell(anaemiaData[1], ageGroup) : "0"}
-                    readOnly
-                  />
-                </td>
-              ))}
-              <td className="text-center">
-                <input
-                  type="number"
-                  min="0"
-                  className="form-control form-control-sm compact-input"
-                  value={anaemiaData.length > 1 && anaemiaData[1].hmis_code === "AN09" ? computeTotal(anaemiaData[1], [
-                    "Below_15yrs",
-                    "15_19yrs",
-                    "20_24yrs",
-                    "25_49yrs",
-                    "50+yrs",
-                  ]) : "0"}
-                  readOnly
-                />
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
-        {/* ANTENATAL (Continued) Section */}
-        <div className="mt-4">
-          <div className="section-subheader mb-3">ANTENATAL (Continued)</div>
-
-          {/* Section 1: Age Group & Total Columns (AN10 - AN12) */}
           <table className="data-entry-table compact-table">
             <thead>
               <tr>
@@ -1095,14 +357,9 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
               </tr>
             </thead>
             <tbody>
-              {/* AN10 - Tablets */}
+              {/* AN01 - ANC 1st contacts with sub-rows */}
               <tr>
-                <td colSpan="6">
-                  AN10. No. of pregnant women receiving atleast 30 Tablets of
-                </td>
-              </tr>
-              <tr>
-                <td className="ps-4">Folic Acid 0-12 wks of gestation</td>
+                <td>AN01. ANC 1st contacts/visits for women</td>
                 {[
                   "Below_15yrs",
                   "15_19yrs",
@@ -1115,7 +372,7 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                       type="number"
                       min="0"
                       className="form-control form-control-sm compact-input"
-                      value={tabletsData.find(item => item.supplement_category === "Folic Acid 0-12 wks of gestation") ? getValueForCell(tabletsData.find(item => item.supplement_category === "Folic Acid 0-12 wks of gestation"), ageGroup === "Below_15yrs" ? "below_15" : ageGroup === "15_19yrs" ? "age_15_19" : ageGroup === "20_24yrs" ? "age_20_24" : ageGroup === "25_50yrs" ? "age_25_49" : "age_50_plus") : "0"}
+                      value={firstData.length > 0 ? getValueForCell(firstData[0], ageGroup) : "0"}
                       readOnly
                     />
                   </td>
@@ -1125,44 +382,20 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                     type="number"
                     min="0"
                     className="form-control form-control-sm compact-input"
-                    value={tabletsData.find(item => item.supplement_category === "Folic Acid 0-12 wks of gestation") ? computeTotal(tabletsData.find(item => item.supplement_category === "Folic Acid 0-12 wks of gestation"), ["below_15", "age_15_19", "age_20_24", "age_25_49", "age_50_plus"]) : "0"}
+                    value={firstData.length > 0 ? computeTotal(firstData[0], [
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ]) : "0"}
                     readOnly
                   />
                 </td>
               </tr>
+              {/* AN01 Sub-row: No. in 1st Trimester */}
               <tr>
-                <td className="ps-4">Iron & Folic Acid 13+ wks of gestation</td>
-                {[
-                  "Below_15yrs",
-                  "15_19yrs",
-                  "20_24yrs",
-                  "25_50yrs",
-                  "50+yrs",
-                ].map((ageGroup) => (
-                  <td key={ageGroup} className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value={tabletsData.find(item => item.supplement_category === "Iron & Folic Acid 13+ wks of gestation") ? getValueForCell(tabletsData.find(item => item.supplement_category === "Iron & Folic Acid 13+ wks of gestation"), ageGroup === "Below_15yrs" ? "below_15" : ageGroup === "15_19yrs" ? "age_15_19" : ageGroup === "20_24yrs" ? "age_20_24" : ageGroup === "25_50yrs" ? "age_25_49" : "age_50_plus") : "0"}
-                      readOnly
-                    />
-                  </td>
-                ))}
-                <td className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value={tabletsData.find(item => item.supplement_category === "Iron & Folic Acid 13+ wks of gestation") ? computeTotal(tabletsData.find(item => item.supplement_category === "Iron & Folic Acid 13+ wks of gestation"), ["below_15", "age_15_19", "age_20_24", "age_25_49", "age_50_plus"]) : "0"}
-                    readOnly
-                  />
-                </td>
-              </tr>
-
-              {/* AN11 - LLINs */}
-              <tr>
-                <td>AN11. Pregnant Women receiving LLINs at ANC 1st visit</td>
+                <td className="ps-4">No. in 1st Trimester</td>
                 {[
                   "Below_15yrs",
                   "15_19yrs",
@@ -1191,15 +424,120 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                 </td>
               </tr>
 
-              {/* AN12 - Ultrasound */}
+              {/* AN02 - ANC 4th contacts */}
               <tr>
-                <td colSpan="6">
-                  AN12. No. of pregnant women who received obstetric-ultra sound
-                  scan during any ANC visit in the reporting month
+                <td>AN02. ANC 4th contacts/visits for women</td>
+                {[
+                  "Below_15yrs",
+                  "15_19yrs",
+                  "20_24yrs",
+                  "25_50yrs",
+                  "50+yrs",
+                ].map((ageGroup) => (
+                  <td key={ageGroup} className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value={fourthData.length > 0 ? getValueForCell(fourthData[0], ageGroup) : "0"}
+                      readOnly
+                    />
+                  </td>
+                ))}
+                <td className="text-center">
+                  <input
+                    type="number"
+                    min="0"
+                    className="form-control form-control-sm compact-input"
+                    value={fourthData.length > 0 ? computeTotal(fourthData[0], [
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ]) : "0"}
+                    readOnly
+                  />
                 </td>
               </tr>
+
+              {/* AN03 - ANC 8th contacts */}
               <tr>
-                <td className="ps-4">Total U/S Scan done</td>
+                <td>AN03. ANC 8th contacts/visits for women</td>
+                {[
+                  "Below_15yrs",
+                  "15_19yrs",
+                  "20_24yrs",
+                  "25_50yrs",
+                  "50+yrs",
+                ].map((ageGroup) => (
+                  <td key={ageGroup} className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value={eighthData.length > 0 ? getValueForCell(eighthData[0], ageGroup) : "0"}
+                      readOnly
+                    />
+                  </td>
+                ))}
+                <td className="text-center">
+                  <input
+                    type="number"
+                    min="0"
+                    className="form-control form-control-sm compact-input"
+                    value={eighthData.length > 0 ? computeTotal(eighthData[0], [
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ]) : "0"}
+                    readOnly
+                  />
+                </td>
+              </tr>
+
+              {/* AN04 - Total ANC contacts */}
+              <tr>
+                <td>AN04. Total ANC contacts/visits</td>
+                {[
+                  "Below_15yrs",
+                  "15_19yrs",
+                  "20_24yrs",
+                  "25_50yrs",
+                  "50+yrs",
+                ].map((ageGroup) => (
+                  <td key={ageGroup} className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value={totalData.length > 0 ? getValueForCell(totalData[0], ageGroup) : "0"}
+                      readOnly
+                    />
+                  </td>
+                ))}
+                <td className="text-center">
+                  <input
+                    type="number"
+                    min="0"
+                    className="form-control form-control-sm compact-input"
+                    value={totalData.length > 0 ? computeTotal(totalData[0], [
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ]) : "0"}
+                    readOnly
+                  />
+                </td>
+              </tr>
+
+              {/* AN05 - Referrals from community */}
+              <tr>
+                <td>AN05. Referrals from community</td>
                 {[
                   "Below_15yrs",
                   "15_19yrs",
@@ -1227,8 +565,15 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                   />
                 </td>
               </tr>
+
+              {/* AN06 - IPT Header Row */}
               <tr>
-                <td className="ps-4">No. done before 24 weeks of gestation</td>
+                <td colSpan="6">AN06. No. of pregnant women who received IPT</td>
+              </tr>
+
+              {/* IPT1 - First dose IPT */}
+              <tr>
+                <td className="ps-4">First dose IPT (IPT1)</td>
                 {[
                   "Below_15yrs",
                   "15_19yrs",
@@ -1241,8 +586,9 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                       type="number"
                       min="0"
                       className="form-control form-control-sm compact-input"
-                      value="0"
+                      value={iptData.find(item => item.ipt_dose === "IPT1") ? getValueForCell(iptData.find(item => item.ipt_dose === "IPT1"), ageGroup === "Below_15yrs" ? "below_15" : ageGroup === "15_19yrs" ? "age_15_19" : ageGroup === "20_24yrs" ? "age_20_24" : ageGroup === "25_50yrs" ? "age_25_49" : "age_50_plus") : "0"}
                       readOnly
+                      style={{ backgroundColor: "white" }} // White background for age cells
                     />
                   </td>
                 ))}
@@ -1251,377 +597,550 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                     type="number"
                     min="0"
                     className="form-control form-control-sm compact-input"
-                    value="0"
-                    readOnly
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          {/* Section 2: Category & Number Columns (AN13 - AN16) */}
-          <div className="row mt-4">
-            <div className="col-md-6">
-              <table className="data-entry-table compact-table">
-                <thead>
-                  <tr>
-                    <th style={{ fontWeight: "normal" }}>Category</th>
-                    <th
-                      className="text-center"
-                      style={{ fontWeight: "normal" }}
-                    >
-                      Number
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* AN13 - Deworming */}
-                  <tr>
-                    <td>AN13. No. of pregnant women dewormed</td>
-                    <td className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                      />
-                    </td>
-                  </tr>
-
-                  {/* AN14 - Syphilis */}
-                  <tr>
-                    <td colSpan="2">
-                      AN14. Pregnant Women tested for syphilis
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">First time this pregnancy</td>
-                    <td className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value={syphilisData.first_time || "0"}
-                        readOnly
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">Newly tested Positive</td>
-                    <td className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value={syphilisData.newly_tested_positive || "0"}
-                        readOnly
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">Started on syphilis treatment</td>
-                    <td className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value={syphilisData.started_treatment || "0"}
-                        readOnly
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div className="col-md-6">
-              <table className="data-entry-table compact-table">
-                <thead>
-                  <tr>
-                    <th style={{ fontWeight: "normal" }}>Category</th>
-                    <th
-                      className="text-center"
-                      style={{ fontWeight: "normal" }}
-                    >
-                      Number
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* AN15 - Male partner syphilis */}
-                  <tr>
-                    <td colSpan="2">AN15. Male partner tested for syphilis</td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">Total Tested</td>
-                    <td className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">Tested Positive</td>
-                    <td className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                      />
-                    </td>
-                  </tr>
-
-                  {/* AN16 - Hepatitis B */}
-                  <tr>
-                    <td colSpan="2">
-                      AN16. No. Pregnant women tested for Hepatitis B.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">Total Tested</td>
-                    <td className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value={hepatitisData.total_tested || "0"}
-                        readOnly
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">Tested Positive</td>
-                    <td className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value={hepatitisData.tested_positive || "0"}
-                        readOnly
-                      />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          {/* Section 3: Age Group & Total Columns with Shading (AN17 - AN21) */}
-          <table className="data-entry-table mt-4">
-            <thead>
-              <tr>
-                <th style={{ fontWeight: "normal" }}>Category</th>
-                {[
-                  "Below 15 Years",
-                  "15 - 19 Years",
-                  "20 - 24 Years",
-                  "25 - 49 Years",
-                  "50+ Years",
-                  "Total",
-                ].map((ag, i) => (
-                  <th
-                    key={i}
-                    className="text-center"
-                    style={{ fontWeight: "normal" }}
-                  >
-                    {ag}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {/* AN17 - HIV Testing */}
-              <tr>
-                <td colSpan="6">
-                  AN17. Pregnant women newly tested for HIV in this pregnancy at
-                  any ANC visit (NEG & POS)
-                </td>
-              </tr>
-              <tr>
-                <td className="ps-4">Total</td>
-                {[
-                  "Below_15yrs",
-                  "15_19yrs",
-                  "20_24yrs",
-                  "25_50yrs",
-                  "50+yrs",
-                ].map((ageGroup) => (
-                  <td key={ageGroup} className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                    />
-                  </td>
-                ))}
-                <td className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value="0"
-                    readOnly
-                    style={{ backgroundColor: "white" }} // White background for total cells
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td className="ps-4">ANC 1</td>
-                {[
-                  "Below_15yrs",
-                  "15_19yrs",
-                  "20_24yrs",
-                  "25_50yrs",
-                  "50+yrs",
-                ].map((ageGroup) => (
-                  <td key={ageGroup} className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                    />
-                  </td>
-                ))}
-                <td className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value="0"
-                    readOnly
-                    style={{ backgroundColor: "white" }} // White background for total cells
-                  />
-                </td>
-              </tr>
-
-              {/* AN18 - HIV Positive Testing */}
-              <tr>
-                <td colSpan="6">
-                  AN18. Pregnant Women tested HIV POS for 1st time this
-                  pregnancy at any ANC Visit
-                </td>
-              </tr>
-              <tr>
-                <td className="ps-4">Total</td>
-                {[
-                  "Below_15yrs",
-                  "15_19yrs",
-                  "20_24yrs",
-                  "25_50yrs",
-                  "50+yrs",
-                ].map((ageGroup) => (
-                  <td key={ageGroup} className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                    />
-                  </td>
-                ))}
-                <td className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value="0"
-                    readOnly
-                    style={{ backgroundColor: "white" }} // White background for total cells
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td className="ps-4">ANC 1</td>
-                {[
-                  "Below_15yrs",
-                  "15_19yrs",
-                  "20_24yrs",
-                  "25_50yrs",
-                  "50+yrs",
-                ].map((ageGroup) => (
-                  <td key={ageGroup} className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                    />
-                  </td>
-                ))}
-                <td className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value="0"
-                    readOnly
-                    style={{ backgroundColor: "white" }} // White background for total cells
-                  />
-                </td>
-              </tr>
-
-              {/* AN19 - CD4 Assessment */}
-              <tr>
-                <td>AN19. HIV+ Pregnant women assessed by CD4</td>
-                {[
-                  "Below_15yrs",
-                  "15_19yrs",
-                  "20_24yrs",
-                  "25_50yrs",
-                  "50+yrs",
-                ].map((ageGroup) => (
-                  <td key={ageGroup} className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                    />
-                  </td>
-                ))}
-                <td className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value="0"
+                    value={iptData.find(item => item.ipt_dose === "IPT1") ? computeTotal(iptData.find(item => item.ipt_dose === "IPT1"), ["below_15", "age_15_19", "age_20_24", "age_25_49", "age_50_plus"]) : "0"}
                     readOnly
                     style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
                   />
                 </td>
               </tr>
 
-              {/* AN20 - ART Initiation */}
+              {/* IPT2 - Second dose IPT */}
+              <tr>
+                <td className="ps-4">Second dose IPT (IPT2)</td>
+                {[
+                  "Below_15yrs",
+                  "15_19yrs",
+                  "20_24yrs",
+                  "25_50yrs",
+                  "50+yrs",
+                ].map((ageGroup) => (
+                  <td key={ageGroup} className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value={iptData.find(item => item.ipt_dose === "IPT2") ? getValueForCell(iptData.find(item => item.ipt_dose === "IPT2"), ageGroup === "Below_15yrs" ? "below_15" : ageGroup === "15_19yrs" ? "age_15_19" : ageGroup === "20_24yrs" ? "age_20_24" : ageGroup === "25_50yrs" ? "age_25_49" : "age_50_plus") : "0"}
+                      readOnly
+                      style={{ backgroundColor: "white" }} // White background for age cells
+                    />
+                  </td>
+                ))}
+                <td className="text-center">
+                  <input
+                    type="number"
+                    min="0"
+                    className="form-control form-control-sm compact-input"
+                    value={iptData.find(item => item.ipt_dose === "IPT2") ? computeTotal(iptData.find(item => item.ipt_dose === "IPT2"), ["below_15", "age_15_19", "age_20_24", "age_25_49", "age_50_plus"]) : "0"}
+                    readOnly
+                    style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
+                  />
+                </td>
+              </tr>
+
+              {/* IPT3 - Third dose IPT */}
+              <tr>
+                <td className="ps-4">Third dose IPT (IPT3)</td>
+                {[
+                  "Below_15yrs",
+                  "15_19yrs",
+                  "20_24yrs",
+                  "25_50yrs",
+                  "50+yrs",
+                ].map((ageGroup) => (
+                  <td key={ageGroup} className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value={iptData.find(item => item.ipt_dose === "IPT3") ? getValueForCell(iptData.find(item => item.ipt_dose === "IPT3"), ageGroup === "Below_15yrs" ? "below_15" : ageGroup === "15_19yrs" ? "age_15_19" : ageGroup === "20_24yrs" ? "age_20_24" : ageGroup === "25_50yrs" ? "age_25_49" : "age_50_plus") : "0"}
+                      readOnly
+                      style={{ backgroundColor: "white" }} // White background for age cells
+                    />
+                  </td>
+                ))}
+                <td className="text-center">
+                  <input
+                    type="number"
+                    min="0"
+                    className="form-control form-control-sm compact-input"
+                    value={iptData.find(item => item.ipt_dose === "IPT3") ? computeTotal(iptData.find(item => item.ipt_dose === "IPT3"), ["below_15", "age_15_19", "age_20_24", "age_25_49", "age_50_plus"]) : "0"}
+                    readOnly
+                    style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
+                  />
+                </td>
+              </tr>
+
+              {/* IPT4 - IPT 4 & 4+ Dose */}
+              <tr>
+                <td className="ps-4">IPT 4 & 4+ Dose</td>
+                {[
+                  "Below_15yrs",
+                  "15_19yrs",
+                  "20_24yrs",
+                  "25_50yrs",
+                  "50+yrs",
+                ].map((ageGroup) => (
+                  <td key={ageGroup} className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value={iptData.find(item => item.ipt_dose === "IPT4") ? getValueForCell(iptData.find(item => item.ipt_dose === "IPT4"), ageGroup === "Below_15yrs" ? "below_15" : ageGroup === "15_19yrs" ? "age_15_19" : ageGroup === "20_24yrs" ? "age_20_24" : ageGroup === "25_50yrs" ? "age_25_49" : "age_50_plus") : "0"}
+                      readOnly
+                      style={{ backgroundColor: "white" }} // White background for age cells
+                    />
+                  </td>
+                ))}
+                <td className="text-center">
+                  <input
+                    type="number"
+                    min="0"
+                    className="form-control form-control-sm compact-input"
+                    value={iptData.find(item => item.ipt_dose === "IPT4") ? computeTotal(iptData.find(item => item.ipt_dose === "IPT4"), ["below_15", "age_15_19", "age_20_24", "age_25_49", "age_50_plus"]) : "0"}
+                    readOnly
+                    style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
+                  />
+                </td>
+              </tr>
+
+              {/* AN07 Blood Grouping */}
+              <tr>
+                <td colSpan="6">
+                  AN07. No. of pregnant women who were tested for blood grouping
+                </td>
+              </tr>
+              {/* Blood Grouping Data from API */}
+              {bloodGroupingData.length > 0 ? (
+                bloodGroupingData.map((item, idx) => (
+                  <tr key={`AN07-${idx}`}>
+                    <td className="ps-4">{item.blood_group} {item.rhesus_factor}</td>
+                    {[
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ].map((ageGroup) => (
+                      <td key={ageGroup} className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value={getValueForCell(item, ageGroup)}
+                          readOnly
+                          style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                        />
+                      </td>
+                    ))}
+                    <td className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value={computeTotal(item, [
+                          "Below_15yrs",
+                          "15_19yrs",
+                          "20_24yrs",
+                          "25_50yrs",
+                          "50+yrs",
+                        ])}
+                        readOnly
+                        style={{ backgroundColor: "white" }} // White background for total cells
+                      />
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <>
+                  {/* Blood Group (O) */}
+                  <tr>
+                    <td className="ps-4">Blood Group (O)</td>
+                    {[
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ].map((ageGroup) => (
+                      <td key={ageGroup} className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                          style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                        />
+                      </td>
+                    ))}
+                    <td className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value="0"
+                        readOnly
+                        style={{ backgroundColor: "white" }} // White background for total cells
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="ps-5">Rhesus O+</td>
+                    {[
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ].map((ageGroup) => (
+                      <td key={ageGroup} className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                          style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                        />
+                      </td>
+                    ))}
+                    <td className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value="0"
+                        readOnly
+                        style={{ backgroundColor: "white" }} // White background for total cells
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="ps-5">Rhesus O-</td>
+                    {[
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ].map((ageGroup) => (
+                      <td key={ageGroup} className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                          style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                        />
+                      </td>
+                    ))}
+                    <td className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value="0"
+                        readOnly
+                        style={{ backgroundColor: "white" }} // White background for total cells
+                      />
+                    </td>
+                  </tr>
+                  {/* Blood Group (A) */}
+                  <tr>
+                    <td className="ps-4">Blood Group (A)</td>
+                    {[
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ].map((ageGroup) => (
+                      <td key={ageGroup} className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                          style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                        />
+                      </td>
+                    ))}
+                    <td className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value="0"
+                        readOnly
+                        style={{ backgroundColor: "white" }} // White background for total cells
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="ps-5">Rhesus A+</td>
+                    {[
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ].map((ageGroup) => (
+                      <td key={ageGroup} className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                          style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                        />
+                      </td>
+                    ))}
+                    <td className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value="0"
+                        readOnly
+                        style={{ backgroundColor: "white" }} // White background for total cells
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="ps-5">Rhesus A-</td>
+                    {[
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ].map((ageGroup) => (
+                      <td key={ageGroup} className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                          style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                        />
+                      </td>
+                    ))}
+                    <td className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value="0"
+                        readOnly
+                        style={{ backgroundColor: "white" }} // White background for total cells
+                      />
+                    </td>
+                  </tr>
+                  {/* Blood Group (B) */}
+                  <tr>
+                    <td className="ps-4">Blood Group (B)</td>
+                    {[
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ].map((ageGroup) => (
+                      <td key={ageGroup} className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                          style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                        />
+                      </td>
+                    ))}
+                    <td className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value="0"
+                        readOnly
+                        style={{ backgroundColor: "white" }} // White background for total cells
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="ps-5">Rhesus B+</td>
+                    {[
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ].map((ageGroup) => (
+                      <td key={ageGroup} className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                          style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                        />
+                      </td>
+                    ))}
+                    <td className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value="0"
+                        readOnly
+                        style={{ backgroundColor: "white" }} // White background for total cells
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="ps-5">Rhesus B-</td>
+                    {[
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ].map((ageGroup) => (
+                      <td key={ageGroup} className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                          style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                        />
+                      </td>
+                    ))}
+                    <td className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value="0"
+                        readOnly
+                        style={{ backgroundColor: "white" }} // White background for total cells
+                      />
+                    </td>
+                  </tr>
+                  {/* Blood Group (AB) */}
+                  <tr>
+                    <td className="ps-4">Blood Group (AB)</td>
+                    {[
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ].map((ageGroup) => (
+                      <td key={ageGroup} className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                          style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                        />
+                      </td>
+                    ))}
+                    <td className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value="0"
+                        readOnly
+                        style={{ backgroundColor: "white" }} // White background for total cells
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="ps-5">Rhesus AB+</td>
+                    {[
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ].map((ageGroup) => (
+                      <td key={ageGroup} className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                          style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                        />
+                      </td>
+                    ))}
+                    <td className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value="0"
+                        readOnly
+                        style={{ backgroundColor: "white" }} // White background for total cells
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="ps-5">Rhesus AB-</td>
+                    {[
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ].map((ageGroup) => (
+                      <td key={ageGroup} className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                          style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                        />
+                      </td>
+                    ))}
+                    <td className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value="0"
+                        readOnly
+                        style={{ backgroundColor: "white" }} // White background for total cells
+                      />
+                    </td>
+                  </tr>
+                </>
+              )}
+
+              {/* AN08 - Anaemia Testing */}
               <tr>
                 <td>
-                  AN20. HIV+ pregnant women initiated on ART for eMTCT at any
-                  visit irrespective of when tested HIV POS and HIV POS not yet
-                  started ART
+                  AN08. No. of pregnant women who were tested for Anaemia using Hb Test at ANC 1st Contact / visit
                 </td>
                 {[
                   "Below_15yrs",
                   "15_19yrs",
                   "20_24yrs",
-                  "25_50yrs",
+                  "25_49yrs",
                   "50+yrs",
                 ].map((ageGroup) => (
                   <td key={ageGroup} className="text-center">
@@ -1629,9 +1148,8 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                       type="number"
                       min="0"
                       className="form-control form-control-sm compact-input"
-                      value="0"
+                      value={anaemiaData.length > 0 && anaemiaData[0].hmis_code === "AN08" ? getValueForCell(anaemiaData[0], ageGroup) : "0"}
                       readOnly
-                      style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
                     />
                   </td>
                 ))}
@@ -1640,26 +1158,28 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                     type="number"
                     min="0"
                     className="form-control form-control-sm compact-input"
-                    value="0"
+                    value={anaemiaData.length > 0 && anaemiaData[0].hmis_code === "AN08" ? computeTotal(anaemiaData[0], [
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ]) : "0"}
                     readOnly
-                    style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
                   />
                 </td>
               </tr>
 
-              {/* AN21 - Known Status Before ANC */}
+              {/* AN09 - Anaemia Cases */}
               <tr>
-                <td colSpan="6">
-                  AN21. Pregnant Women who knew status before 1st ANC
+                <td>
+                  AN09. No. of pregnant women with Anaemia (Hb &lt;10g/dl) at ANC 1st Contact / visit
                 </td>
-              </tr>
-              <tr>
-                <td className="ps-4">NEG</td>
                 {[
                   "Below_15yrs",
                   "15_19yrs",
                   "20_24yrs",
-                  "25_50yrs",
+                  "25_49yrs",
                   "50+yrs",
                 ].map((ageGroup) => (
                   <td key={ageGroup} className="text-center">
@@ -1667,9 +1187,8 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                       type="number"
                       min="0"
                       className="form-control form-control-sm compact-input"
-                      value="0"
+                      value={anaemiaData.length > 1 && anaemiaData[1].hmis_code === "AN09" ? getValueForCell(anaemiaData[1], ageGroup) : "0"}
                       readOnly
-                      style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
                     />
                   </td>
                 ))}
@@ -1678,125 +1197,124 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                     type="number"
                     min="0"
                     className="form-control form-control-sm compact-input"
-                    value="0"
+                    value={anaemiaData.length > 1 && anaemiaData[1].hmis_code === "AN09" ? computeTotal(anaemiaData[1], [
+                      "Below_15yrs",
+                      "15_19yrs",
+                      "20_24yrs",
+                      "25_50yrs",
+                      "50+yrs",
+                    ]) : "0"}
                     readOnly
-                    style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td className="ps-4">POS</td>
-                {[
-                  "Below_15yrs",
-                  "15_19yrs",
-                  "20_24yrs",
-                  "25_50yrs",
-                  "50+yrs",
-                ].map((ageGroup) => (
-                  <td key={ageGroup} className="text-center">
-                    <input
-                      type="number"
-                      min="0"
-                      className="form-control form-control-sm compact-input"
-                      value="0"
-                      readOnly
-                      style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
-                    />
-                  </td>
-                ))}
-                <td className="text-center">
-                  <input
-                    type="number"
-                    min="0"
-                    className="form-control form-control-sm compact-input"
-                    value="0"
-                    readOnly
-                    style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
                   />
                 </td>
               </tr>
             </tbody>
           </table>
-        </div>
 
-        {/* Additional Antenatal Sections (AN23-AN28) */}
-        <div className="mt-4">
-          <div className="section-subheader mb-3">ANTENATAL (Continued)</div>
+          {/* ANTENATAL (Continued) Section */}
+          <div className="mt-4">
+            <div className="section-subheader mb-3">ANTENATAL (Continued)</div>
 
-          {/* Top Block - Single Column Sections */}
-          <div className="row">
-            {/* Left Table - AN23, AN24, AN25 */}
-            <div className="col-md-6">
-              <table className="data-entry-table compact-table">
-                <thead>
-                  <tr>
-                    <th style={{ fontWeight: "normal" }}>Category</th>
+            {/* Section 1: Age Group & Total Columns (AN10 - AN12) */}
+            <table className="data-entry-table compact-table">
+              <thead>
+                <tr>
+                  <th style={{ fontWeight: "normal" }}>Category</th>
+                  {[
+                    "Below 15 Years",
+                    "15 - 19 Years",
+                    "20 - 24 Years",
+                    "25 - 49 Years",
+                    "50+ Years",
+                    "Total",
+                  ].map((ag, i) => (
                     <th
+                      key={i}
                       className="text-center"
                       style={{ fontWeight: "normal" }}
                     >
-                      Number
+                      {ag}
                     </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* AN23 - HIV+ pregnant women */}
-                  <tr>
-                    <td colSpan="2">AN23. HIV+ pregnant women:</td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">
-                      Eligible for a Viral Load during the month
-                    </td>
-                    <td className="text-center">
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {/* AN10 - Tablets */}
+                <tr>
+                  <td colSpan="6">
+                    AN10. No. of pregnant women receiving atleast 30 Tablets of
+                  </td>
+                </tr>
+                <tr>
+                  <td className="ps-4">Folic Acid 0-12 wks of gestation</td>
+                  {[
+                    "Below_15yrs",
+                    "15_19yrs",
+                    "20_24yrs",
+                    "25_50yrs",
+                    "50+yrs",
+                  ].map((ageGroup) => (
+                    <td key={ageGroup} className="text-center">
                       <input
                         type="number"
                         min="0"
                         className="form-control form-control-sm compact-input"
-                        value="0"
+                        value={tabletsData.find(item => item.supplement_category === "Folic Acid 0-12 wks of gestation") ? getValueForCell(tabletsData.find(item => item.supplement_category === "Folic Acid 0-12 wks of gestation"), ageGroup === "Below_15yrs" ? "below_15" : ageGroup === "15_19yrs" ? "age_15_19" : ageGroup === "20_24yrs" ? "age_20_24" : ageGroup === "25_50yrs" ? "age_25_49" : "age_50_plus") : "0"}
                         readOnly
                       />
                     </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">
-                      Viral Load Samples collected during the month
-                    </td>
-                    <td className="text-center">
+                  ))}
+                  <td className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value={tabletsData.find(item => item.supplement_category === "Folic Acid 0-12 wks of gestation") ? computeTotal(tabletsData.find(item => item.supplement_category === "Folic Acid 0-12 wks of gestation"), ["below_15", "age_15_19", "age_20_24", "age_25_49", "age_50_plus"]) : "0"}
+                      readOnly
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="ps-4">Iron & Folic Acid 13+ wks of gestation</td>
+                  {[
+                    "Below_15yrs",
+                    "15_19yrs",
+                    "20_24yrs",
+                    "25_50yrs",
+                    "50+yrs",
+                  ].map((ageGroup) => (
+                    <td key={ageGroup} className="text-center">
                       <input
                         type="number"
                         min="0"
                         className="form-control form-control-sm compact-input"
-                        value="0"
+                        value={tabletsData.find(item => item.supplement_category === "Iron & Folic Acid 13+ wks of gestation") ? getValueForCell(tabletsData.find(item => item.supplement_category === "Iron & Folic Acid 13+ wks of gestation"), ageGroup === "Below_15yrs" ? "below_15" : ageGroup === "15_19yrs" ? "age_15_19" : ageGroup === "20_24yrs" ? "age_20_24" : ageGroup === "25_50yrs" ? "age_25_49" : "age_50_plus") : "0"}
                         readOnly
                       />
                     </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">
-                      Viral Load Suppressed during the month
-                    </td>
-                    <td className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                      />
-                    </td>
-                  </tr>
+                  ))}
+                  <td className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value={tabletsData.find(item => item.supplement_category === "Iron & Folic Acid 13+ wks of gestation") ? computeTotal(tabletsData.find(item => item.supplement_category === "Iron & Folic Acid 13+ wks of gestation"), ["below_15", "age_15_19", "age_20_24", "age_25_49", "age_50_plus"]) : "0"}
+                      readOnly
+                    />
+                  </td>
+                </tr>
 
-                  {/* AN24 - Self-testing kits */}
-                  <tr>
-                    <td colSpan="2">
-                      AN24. Pregnant women given self-testing kits for their
-                      male partners:
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">Total</td>
-                    <td className="text-center">
+                {/* AN11 - LLINs */}
+                <tr>
+                  <td>AN11. Pregnant Women receiving LLINs at ANC 1st visit</td>
+                  {[
+                    "Below_15yrs",
+                    "15_19yrs",
+                    "20_24yrs",
+                    "25_50yrs",
+                    "50+yrs",
+                  ].map((ageGroup) => (
+                    <td key={ageGroup} className="text-center">
                       <input
                         type="number"
                         min="0"
@@ -1805,41 +1323,35 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                         readOnly
                       />
                     </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">Tests returned NEG</td>
-                    <td className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                      />
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">Tests returned POS</td>
-                    <td className="text-center">
-                      <input
-                        type="number"
-                        min="0"
-                        className="form-control form-control-sm compact-input"
-                        value="0"
-                        readOnly
-                      />
-                    </td>
-                  </tr>
+                  ))}
+                  <td className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value="0"
+                      readOnly
+                    />
+                  </td>
+                </tr>
 
-                  {/* AN25 - Male partners HIV test results */}
-                  <tr>
-                    <td colSpan="2">
-                      AN25. Male partners received HIV test results in eMTCT:
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">NEG</td>
-                    <td className="text-center">
+                {/* AN12 - Ultrasound */}
+                <tr>
+                  <td colSpan="6">
+                    AN12. No. of pregnant women who received obstetric-ultra sound
+                    scan during any ANC visit in the reporting month
+                  </td>
+                </tr>
+                <tr>
+                  <td className="ps-4">Total U/S Scan done</td>
+                  {[
+                    "Below_15yrs",
+                    "15_19yrs",
+                    "20_24yrs",
+                    "25_50yrs",
+                    "50+yrs",
+                  ].map((ageGroup) => (
+                    <td key={ageGroup} className="text-center">
                       <input
                         type="number"
                         min="0"
@@ -1848,10 +1360,27 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                         readOnly
                       />
                     </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">POS</td>
-                    <td className="text-center">
+                  ))}
+                  <td className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value="0"
+                      readOnly
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="ps-4">No. done before 24 weeks of gestation</td>
+                  {[
+                    "Below_15yrs",
+                    "15_19yrs",
+                    "20_24yrs",
+                    "25_50yrs",
+                    "50+yrs",
+                  ].map((ageGroup) => (
+                    <td key={ageGroup} className="text-center">
                       <input
                         type="number"
                         min="0"
@@ -1860,129 +1389,744 @@ const Antenatal = ({ selectedMonth, getMonthNumber, selectedYear }) => {
                         readOnly
                       />
                     </td>
-                  </tr>
-                </tbody>
-              </table>
+                  ))}
+                  <td className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value="0"
+                      readOnly
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            {/* Section 2: Category & Number Columns (AN13 - AN16) */}
+            <div className="row mt-4">
+              <div className="col-md-6">
+                <table className="data-entry-table compact-table">
+                  <thead>
+                    <tr>
+                      <th style={{ fontWeight: "normal" }}>Category</th>
+                      <th
+                        className="text-center"
+                        style={{ fontWeight: "normal" }}
+                      >
+                        Number
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* AN13 - Deworming */}
+                    <tr>
+                      <td>AN13. No. of pregnant women dewormed</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+
+                    {/* AN14 - Syphilis */}
+                    <tr>
+                      <td colSpan="2">
+                        AN14. Pregnant Women tested for syphilis
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">First time this pregnancy</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value={syphilisData.first_time || "0"}
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">Newly tested Positive</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value={syphilisData.newly_tested_positive || "0"}
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">Started on syphilis treatment</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value={syphilisData.started_treatment || "0"}
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="col-md-6">
+                <table className="data-entry-table compact-table">
+                  <thead>
+                    <tr>
+                      <th style={{ fontWeight: "normal" }}>Category</th>
+                      <th
+                        className="text-center"
+                        style={{ fontWeight: "normal" }}
+                      >
+                        Number
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* AN15 - Male partner syphilis */}
+                    <tr>
+                      <td colSpan="2">AN15. Male partner tested for syphilis</td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">Total Tested</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">Tested Positive</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+
+                    {/* AN16 - Hepatitis B */}
+                    <tr>
+                      <td colSpan="2">
+                        AN16. No. Pregnant women tested for Hepatitis B.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">Total Tested</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value={hepatitisData.total_tested || "0"}
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">Tested Positive</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value={hepatitisData.tested_positive || "0"}
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
 
-            {/* Right Table - AN26, AN27, AN28 */}
-            <div className="col-md-6">
-              <table className="data-entry-table compact-table">
-                <thead>
-                  <tr>
-                    <th style={{ fontWeight: "normal" }}>Category</th>
+            {/* Section 3: Age Group & Total Columns with Shading (AN17 - AN21) */}
+            <table className="data-entry-table mt-4">
+              <thead>
+                <tr>
+                  <th style={{ fontWeight: "normal" }}>Category</th>
+                  {[
+                    "Below 15 Years",
+                    "15 - 19 Years",
+                    "20 - 24 Years",
+                    "25 - 49 Years",
+                    "50+ Years",
+                    "Total",
+                  ].map((ag, i) => (
                     <th
+                      key={i}
                       className="text-center"
                       style={{ fontWeight: "normal" }}
                     >
-                      Number
+                      {ag}
                     </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* AN26 - HIV+ Male partners ART */}
-                  <tr>
-                    <td colSpan="2">
-                      AN26. HIV+ Male partners initiated on ART in the ANC
-                      setting:
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">Known ART</td>
-                    <td className="text-center">
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {/* AN17 - HIV Testing */}
+                <tr>
+                  <td colSpan="6">
+                    AN17. Pregnant women newly tested for HIV in this pregnancy at
+                    any ANC visit (NEG & POS)
+                  </td>
+                </tr>
+                <tr>
+                  <td className="ps-4">Total</td>
+                  {[
+                    "Below_15yrs",
+                    "15_19yrs",
+                    "20_24yrs",
+                    "25_50yrs",
+                    "50+yrs",
+                  ].map((ageGroup) => (
+                    <td key={ageGroup} className="text-center">
                       <input
                         type="number"
                         min="0"
                         className="form-control form-control-sm compact-input"
                         value="0"
                         readOnly
+                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
                       />
                     </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">New</td>
-                    <td className="text-center">
+                  ))}
+                  <td className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value="0"
+                      readOnly
+                      style={{ backgroundColor: "white" }} // White background for total cells
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="ps-4">ANC 1</td>
+                  {[
+                    "Below_15yrs",
+                    "15_19yrs",
+                    "20_24yrs",
+                    "25_50yrs",
+                    "50+yrs",
+                  ].map((ageGroup) => (
+                    <td key={ageGroup} className="text-center">
                       <input
                         type="number"
                         min="0"
                         className="form-control form-control-sm compact-input"
                         value="0"
                         readOnly
+                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
                       />
                     </td>
-                  </tr>
+                  ))}
+                  <td className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value="0"
+                      readOnly
+                      style={{ backgroundColor: "white" }} // White background for total cells
+                    />
+                  </td>
+                </tr>
 
-                  {/* AN27 - Discordant couples */}
-                  <tr>
-                    <td>AN27. No. of discordant couple identified in ANC</td>
-                    <td className="text-center">
+                {/* AN18 - HIV Positive Testing */}
+                <tr>
+                  <td colSpan="6">
+                    AN18. Pregnant Women tested HIV POS for 1st time this
+                    pregnancy at any ANC Visit
+                  </td>
+                </tr>
+                <tr>
+                  <td className="ps-4">Total</td>
+                  {[
+                    "Below_15yrs",
+                    "15_19yrs",
+                    "20_24yrs",
+                    "25_50yrs",
+                    "50+yrs",
+                  ].map((ageGroup) => (
+                    <td key={ageGroup} className="text-center">
                       <input
                         type="number"
                         min="0"
                         className="form-control form-control-sm compact-input"
                         value="0"
                         readOnly
+                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
                       />
                     </td>
-                  </tr>
+                  ))}
+                  <td className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value="0"
+                      readOnly
+                      style={{ backgroundColor: "white" }} // White background for total cells
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="ps-4">ANC 1</td>
+                  {[
+                    "Below_15yrs",
+                    "15_19yrs",
+                    "20_24yrs",
+                    "25_50yrs",
+                    "50+yrs",
+                  ].map((ageGroup) => (
+                    <td key={ageGroup} className="text-center">
+                      <input
+                        type="number"
+                        min="0"
+                        className="form-control form-control-sm compact-input"
+                        value="0"
+                        readOnly
+                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
+                      />
+                    </td>
+                  ))}
+                  <td className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value="0"
+                      readOnly
+                      style={{ backgroundColor: "white" }} // White background for total cells
+                    />
+                  </td>
+                </tr>
 
-                  {/* AN28 - Nutrition assessment */}
-                  <tr>
-                    <td colSpan="2">AN28. Women assessed for nutrition status</td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">Total</td>
-                    <td className="text-center">
+                {/* AN19 - CD4 Assessment */}
+                <tr>
+                  <td>AN19. HIV+ Pregnant women assessed by CD4</td>
+                  {[
+                    "Below_15yrs",
+                    "15_19yrs",
+                    "20_24yrs",
+                    "25_50yrs",
+                    "50+yrs",
+                  ].map((ageGroup) => (
+                    <td key={ageGroup} className="text-center">
                       <input
                         type="number"
                         min="0"
                         className="form-control form-control-sm compact-input"
                         value="0"
                         readOnly
+                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
                       />
                     </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-4">Identified malnourished</td>
-                    <td className="text-center">
+                  ))}
+                  <td className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value="0"
+                      readOnly
+                      style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
+                    />
+                  </td>
+                </tr>
+
+                {/* AN20 - ART Initiation */}
+                <tr>
+                  <td>
+                    AN20. HIV+ pregnant women initiated on ART for eMTCT at any
+                    visit irrespective of when tested HIV POS and HIV POS not yet
+                    started ART
+                  </td>
+                  {[
+                    "Below_15yrs",
+                    "15_19yrs",
+                    "20_24yrs",
+                    "25_50yrs",
+                    "50+yrs",
+                  ].map((ageGroup) => (
+                    <td key={ageGroup} className="text-center">
                       <input
                         type="number"
                         min="0"
                         className="form-control form-control-sm compact-input"
                         value="0"
                         readOnly
+                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
                       />
                     </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-5">MAM</td>
-                    <td className="text-center">
+                  ))}
+                  <td className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value="0"
+                      readOnly
+                      style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
+                    />
+                  </td>
+                </tr>
+
+                {/* AN21 - Known Status Before ANC */}
+                <tr>
+                  <td colSpan="6">
+                    AN21. Pregnant Women who knew status before 1st ANC
+                  </td>
+                </tr>
+                <tr>
+                  <td className="ps-4">NEG</td>
+                  {[
+                    "Below_15yrs",
+                    "15_19yrs",
+                    "20_24yrs",
+                    "25_50yrs",
+                    "50+yrs",
+                  ].map((ageGroup) => (
+                    <td key={ageGroup} className="text-center">
                       <input
                         type="number"
                         min="0"
                         className="form-control form-control-sm compact-input"
                         value="0"
                         readOnly
+                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
                       />
                     </td>
-                  </tr>
-                  <tr>
-                    <td className="ps-5">SAM</td>
-                    <td className="text-center">
+                  ))}
+                  <td className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value="0"
+                      readOnly
+                      style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td className="ps-4">POS</td>
+                  {[
+                    "Below_15yrs",
+                    "15_19yrs",
+                    "20_24yrs",
+                    "25_50yrs",
+                    "50+yrs",
+                  ].map((ageGroup) => (
+                    <td key={ageGroup} className="text-center">
                       <input
                         type="number"
                         min="0"
                         className="form-control form-control-sm compact-input"
                         value="0"
                         readOnly
+                        style={{ backgroundColor: "#f8f9fa" }} // Grey background for age cells
                       />
                     </td>
-                  </tr>
-                </tbody>
-              </table>
+                  ))}
+                  <td className="text-center">
+                    <input
+                      type="number"
+                      min="0"
+                      className="form-control form-control-sm compact-input"
+                      value="0"
+                      readOnly
+                      style={{ backgroundColor: "#f8f9fa" }} // Grey background for total cells
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          {/* Additional Antenatal Sections (AN23-AN28) */}
+          <div className="mt-4">
+            <div className="section-subheader mb-3">ANTENATAL (Continued)</div>
+
+            {/* Top Block - Single Column Sections */}
+            <div className="row">
+              {/* Left Table - AN23, AN24, AN25 */}
+              <div className="col-md-6">
+                <table className="data-entry-table compact-table">
+                  <thead>
+                    <tr>
+                      <th style={{ fontWeight: "normal" }}>Category</th>
+                      <th
+                        className="text-center"
+                        style={{ fontWeight: "normal" }}
+                      >
+                        Number
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* AN23 - HIV+ pregnant women */}
+                    <tr>
+                      <td colSpan="2">AN23. HIV+ pregnant women:</td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">
+                        Eligible for a Viral Load during the month
+                      </td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">
+                        Viral Load Samples collected during the month
+                      </td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">
+                        Viral Load Suppressed during the month
+                      </td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+
+                    {/* AN24 - Self-testing kits */}
+                    <tr>
+                      <td colSpan="2">
+                        AN24. Pregnant women given self-testing kits for their
+                        male partners:
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">Total</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">Tests returned NEG</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">Tests returned POS</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+
+                    {/* AN25 - Male partners HIV test results */}
+                    <tr>
+                      <td colSpan="2">
+                        AN25. Male partners received HIV test results in eMTCT:
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">NEG</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">POS</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Right Table - AN26, AN27, AN28 */}
+              <div className="col-md-6">
+                <table className="data-entry-table compact-table">
+                  <thead>
+                    <tr>
+                      <th style={{ fontWeight: "normal" }}>Category</th>
+                      <th
+                        className="text-center"
+                        style={{ fontWeight: "normal" }}
+                      >
+                        Number
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {/* AN26 - HIV+ Male partners ART */}
+                    <tr>
+                      <td colSpan="2">
+                        AN26. HIV+ Male partners initiated on ART in the ANC
+                        setting:
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">Known ART</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">New</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+
+                    {/* AN27 - Discordant couples */}
+                    <tr>
+                      <td>AN27. No. of discordant couple identified in ANC</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+
+                    {/* AN28 - Nutrition assessment */}
+                    <tr>
+                      <td colSpan="2">AN28. Women assessed for nutrition status</td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">Total</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-4">Identified malnourished</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-5">MAM</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="ps-5">SAM</td>
+                      <td className="text-center">
+                        <input
+                          type="number"
+                          min="0"
+                          className="form-control form-control-sm compact-input"
+                          value="0"
+                          readOnly
+                        />
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
-        </div>
         </>
       )}
     </div>
