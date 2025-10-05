@@ -37,7 +37,7 @@ const AppRoutes = () => {
           <ProtectedRoute path="/supplychain" component={Supplychain} />
           <ProtectedRoute path="/dashboard" exact component={Dashboard} />
           <ProtectedRoute path="/mapping" exact component={EafyaMapping} />
-          <ProtectedRoute path="/mapping/:mappingType/:id" component={MappingDetail} />
+          <ProtectedRoute path="/mapping/details" component={MappingDetail} />
           <ProtectedRoute path="/materialized-ids/:name" component={CustomizationSetDetails} />
           <ProtectedRoute path="/mappingtest" exact component={Mapping} />
           <ProtectedRoute path="/imaging" exact component={Imaging} />

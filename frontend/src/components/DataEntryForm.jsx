@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import API from "../helpers/api";
 import ConditionsReport from "./ConditionsReport";
 import CommoditiesReport from "./CommoditiesReport";
 import LabReport from "./LabReport";
+import ConditionsPrintReport from "./ConditionsPrintReport";
 
 import MCHForm from "../pages/HMIS/MCH";
 import LabTestForm from "../pages/HMIS/LabTestForm";
@@ -67,10 +68,11 @@ const REPORT_CONFIGS = {
   },
 };
 
-const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
+const DataEntryForm = ({ section, dataSetId, onDataSetChange, onSectionChange }) => {
   const [loading, setLoading] = useState(false);
   const [pushingToDHIS2, setPushingToDHIS2] = useState(false);
   const [datasets, setDatasets] = useState([]);
+  const [sections, setSections] = useState([]);
   const [reportProps, setReportProps] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [modalMessage, setModalMessage] = useState({ type: "", text: "" });
@@ -90,9 +92,27 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
     }
   };
 
+  const fetchSections = useCallback(async () => {
+    try {
+      const response = await API.get("/datasets");
+      const currentDataset = response.data.datasets.find(dataset => dataset.dataset_id === dataSetId);
+      if (currentDataset && currentDataset.sections) {
+        setSections(currentDataset.sections);
+      }
+    } catch (error) {
+      console.error("Error fetching sections:", error);
+    }
+  }, [dataSetId]);
+
   useEffect(() => {
     fetchDatasets();
   }, []);
+
+  useEffect(() => {
+    if (dataSetId) {
+      fetchSections();
+    }
+  }, [dataSetId, fetchSections]);
 
   const handlePushToDHIS2 = async () => {
     try {
@@ -142,6 +162,12 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
   const handlePrintReport = async () => {
     const reportConfig = REPORT_CONFIGS[dataSetId];
 
+    if (dataSetId === "HMIS_105_01") {
+      // Handle conditions report with custom print functionality
+      await handleConditionsPrint();
+      return;
+    }
+
     if (!reportConfig || !reportConfig.component) {
       alert("Report generation not yet implemented for this section");
       return;
@@ -175,6 +201,189 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
     }
   };
 
+  const handleConditionsPrint = async () => {
+    try {
+      setLoading(true);
+      const monthIndex = months.indexOf(selectedMonth) + 1;
+      const formattedMonth = monthIndex.toString().padStart(2, "0");
+      const period = `${selectedYear}${formattedMonth}`;
+
+      const promises = [];
+      let printData = {
+        attendance: [],
+        reattendance: [],
+        conditions: [],
+        allSections: []
+      };
+
+      // Fetch attendance data
+      promises.push(
+        API.get(`/attendance?report_month=${period}`).then(response => {
+          printData.attendance = response.data || [];
+        }).catch(error => {
+          console.error('Error fetching attendance:', error);
+          printData.attendance = [];
+        })
+      );
+
+      // Fetch reattendance data
+      promises.push(
+        API.get(`/attendance/reattendance?report_month=${period}`).then(response => {
+          printData.reattendance = response.data || [];
+        }).catch(error => {
+          console.error('Error fetching reattendance:', error);
+          printData.reattendance = [];
+        })
+      );
+
+      if (!section || section === '') {
+        // Fetch all sections data
+        const conditionsPromises = sections.filter(s => s.section_id !== '1.1').map(async (sectionItem) => {
+          try {
+            const response = await API.get(`/conditions?report_month=${period}&section_id=${sectionItem.section_id}`);
+            return {
+              sectionId: sectionItem.section_id,
+              sectionName: sectionItem.section_name,
+              data: response.data || []
+            };
+          } catch (error) {
+            console.error(`Error fetching data for section ${sectionItem.section_id}:`, error);
+            return {
+              sectionId: sectionItem.section_id,
+              sectionName: sectionItem.section_name,
+              data: []
+            };
+          }
+        });
+        promises.push(Promise.all(conditionsPromises).then(results => {
+          printData.allSections = results;
+        }));
+      } else if (section === '1.1') {
+        // Only attendance data for section 1.1
+        printData.allSections = [];
+      } else {
+        // Fetch specific section data
+        promises.push(
+          API.get(`/conditions?report_month=${period}&section_id=${section}`).then(response => {
+            printData.conditions = response.data || [];
+          }).catch(error => {
+            console.error('Error fetching conditions:', error);
+            printData.conditions = [];
+          })
+        );
+      }
+
+      await Promise.all(promises);
+      
+      // Create a temporary ConditionsPrintReport component to generate PDF directly
+      const tempPrintData = {
+        ...printData,
+        reportMonth: `${selectedMonth} ${selectedYear}`,
+        section: section,
+        facilityName: "Health Facility",
+        printedBy: "System User",
+        printDate: new Date().toLocaleDateString()
+      };
+
+      // Generate PDF directly without modal
+      await generateConditionsPDF(tempPrintData);
+    } catch (error) {
+      console.error("Error preparing conditions print data:", error);
+      alert("Failed to prepare print data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Function to generate PDF directly without modal
+  const generateConditionsPDF = async (data) => {
+    try {
+      // Create a temporary div to render the print component
+      const tempDiv = document.createElement('div');
+      tempDiv.style.position = 'absolute';
+      tempDiv.style.left = '-9999px';
+      tempDiv.style.top = '-9999px';
+      document.body.appendChild(tempDiv);
+
+      // Render the print component temporarily
+      const { createRoot } = await import('react-dom/client');
+      const root = createRoot(tempDiv);
+      
+      const React = await import('react');
+      root.render(React.createElement(ConditionsPrintReport, {
+        data: data,
+        reportMonth: data.reportMonth,
+        section: data.section,
+        facilityName: data.facilityName,
+        printedBy: data.printedBy,
+        printDate: data.printDate,
+        onGeneratePDF: () => {
+          // Clean up after PDF generation
+          root.unmount();
+          document.body.removeChild(tempDiv);
+        }
+      }));
+
+      // Wait a bit for the component to render, then trigger PDF generation
+      setTimeout(() => {
+        const printComponent = tempDiv.querySelector('.print-report');
+        if (printComponent) {
+          generatePDFFromElement(printComponent, data);
+        }
+      }, 1000);
+    } catch (error) {
+      console.error('Error generating PDF directly:', error);
+      alert('Error generating PDF. Please try again.');
+    }
+  };
+
+  // Function to generate PDF from HTML element
+  const generatePDFFromElement = async (element, data) => {
+    try {
+      const html2canvas = (await import('html2canvas')).default;
+      const jsPDF = (await import('jspdf')).default;
+
+      const canvas = await html2canvas(element, {
+        scale: 1.25,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        width: element.scrollWidth,
+        height: element.scrollHeight
+      });
+
+      if (canvas.width === 0 || canvas.height === 0) {
+        alert('Failed to capture report content. Please try again.');
+        return;
+      }
+
+      const imgData = canvas.toDataURL('image/png', 0.8);
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      
+      const imgWidth = 210;
+      const pageHeight = 295;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 0;
+
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      const fileName = `HMIS_105_01_Conditions_Report_${data.reportMonth.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+      pdf.save(fileName);
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Error generating PDF. Please try again.');
+    }
+  };
+
   // Effect to clean up reportProps after PDF is generated
   useEffect(() => {
     if (reportProps) {
@@ -188,14 +397,14 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
   const renderFormHeader = () => (
     <div className="p-4 border rounded mb-4">
       <div className="row g-2 ">
-        <div className="col-md-6">
+        <div className="col-md-4">
           <label className="form-label">Data Set</label>
           <select
             className="form-select"
             value={dataSetId}
             onChange={(e) => onDataSetChange(e.target.value)}
           >
-            {Object.values(datasets).map((dataSet, index) => (
+            {datasets.map((dataSet, index) => (
               <option
                 key={`${dataSet.dataset_id}-${index}`}
                 value={dataSet.dataset_id}
@@ -205,7 +414,37 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
             ))}
           </select>
         </div>
-        <div className="col-md-6">
+        <div className="col-md-4">
+          <label className="form-label">Section</label>
+          <div className="d-flex gap-2">
+            <select
+              className="form-select"
+              value={section}
+              onChange={(e) => onSectionChange(e.target.value)}
+            >
+              <option value="">All Sections</option>
+              {sections.map((sectionItem, index) => (
+                <option
+                  key={`${sectionItem.section_id}-${index}`}
+                  value={sectionItem.section_id}
+                >
+                  {sectionItem.section_id} - {sectionItem.section_name}
+                </option>
+              ))}
+            </select>
+            {section && (
+              <button
+                type="button"
+                className="btn btn-outline-secondary"
+                onClick={() => onSectionChange("")}
+                title="Clear selection to show all sections"
+              >
+                <i className="bi bi-x-lg"></i>
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="col-md-4">
           <div className="d-flex justify-content-end gap-2 mt-4">
             <button
               className="validation-button"
@@ -287,9 +526,9 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
       case "HMIS_105_01":
         return (
           <ConditionsForm
-            section={section}
             selectedMonth={selectedMonth}
             selectedYear={selectedYear}
+            section={section}
           />
         );
       case "HMIS_105_02":
@@ -440,6 +679,7 @@ const DataEntryForm = ({ section, dataSetId, onDataSetChange }) => {
       </div>
     );
   };
+
 
   return (
     <div>

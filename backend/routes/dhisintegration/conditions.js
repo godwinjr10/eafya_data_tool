@@ -5,41 +5,61 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const dhis2Auth = {
-  username: process.env.ACTIVE_UA1_DHIS2_USERNAME,
-  password: process.env.ACTIVE_UA1_DHIS2_PASSWORD,
+  username: process.env.DHIS2_USERNAME,
+  password: process.env.DHIS2_PASSWORD,
 };
 
 //const ORG_UNIT = 'h40pKp93Mtc'; nagguru
-const ORG_UNIT = "h40pKp93Mtc";
+const ORG_UNIT = "vX6kcAwvaS0";
 const ATTRIBUTE_OPTION_COMBO = "Lf2Axb9E6B4";
 
 const fetchStructuredDataQuery = (period) => `
-   SELECT
+WITH c_agg AS (
+    SELECT 
+        h.hmis_code,
         c.report_month,
-        d.data_element_id,
-        s.dataelement_name,
-        d.category_optioncombo_name as optioncombo_name,
-        d.category_optioncombo_id as categoryoptioncombo,
-        CASE d.category_optioncombo_id
-            WHEN 'zh2zAaHyYQx'    THEN SUM(COALESCE(c."0-28d Male", 0))
-            WHEN 'wDiX34aiw6i'  THEN SUM(COALESCE(c."0-28d Female", 0))
-            WHEN 'V2OuNTRI6ua'   THEN SUM(COALESCE(c."29d-4y Male", 0))
-            WHEN 'huBy3W5qiD2' THEN SUM(COALESCE(c."29d-4y Female", 0))
-            WHEN 'F1rms8f9I9a'     THEN SUM(COALESCE(c."5-9y Male", 0))
-            WHEN 'Crc5reUlspd'   THEN SUM(COALESCE(c."5-9y Female", 0))
-            WHEN 'c7gvocRdg0f'   THEN SUM(COALESCE(c."10-19y Male", 0))
-            WHEN 'u3CkZqMHfHP' THEN SUM(COALESCE(c."10-19y Female", 0))
-            WHEN 'dCKzhhINakS'     THEN SUM(COALESCE(c."20y+ Male", 0))
-            WHEN 'XVHTeecEOM3'   THEN SUM(COALESCE(c."20y+ Female", 0))
-            ELSE 0
-        END AS value
+        SUM(COALESCE(c."0-28d Male",0))   AS m_0_28d_male,
+        SUM(COALESCE(c."0-28d Female",0)) AS m_0_28d_female,
+        SUM(COALESCE(c."29d-4y Male",0))  AS m_29d_4y_male,
+        SUM(COALESCE(c."29d-4y Female",0))AS m_29d_4y_female,
+        SUM(COALESCE(c."5-9y Male",0))    AS m_5_9y_male,
+        SUM(COALESCE(c."5-9y Female",0))  AS m_5_9y_female,
+        SUM(COALESCE(c."10-19y Male",0))  AS m_10_19y_male,
+        SUM(COALESCE(c."10-19y Female",0))AS m_10_19y_female,
+        SUM(COALESCE(c."20y+ Male",0))    AS m_20y_plus_male,
+        SUM(COALESCE(c."20y+ Female",0))  AS m_20y_plus_female
     FROM reporting."105_01_conditions" c
-    JOIN reporting.dhis_eafya_mapping_conditions_final d ON d.eafya_disease_id::BIGINT = c.disease_id 
-    join reporting.dhis_datasets_elements s on s.dataelement_id = d.data_element_id 
-    where c.report_month = '${period}'
-    GROUP BY c.report_month, d.data_element_id, s.dataelement_name, d.category_optioncombo_name, d.category_optioncombo_id
-    ORDER BY c.report_month, d.data_element_id, d.category_optioncombo_name
-`;
+    LEFT JOIN reporting.hmis_eafya_conditions_mapping h 
+           ON h.disease_id = c.disease_id
+    WHERE c.report_month = '${period}'
+    GROUP BY h.hmis_code, c.report_month
+)
+SELECT 
+    c_agg.report_month,
+    m.section_id,
+    m.section_name,
+    m.hmis_code,
+    m.hmis_name,
+    m.dataelement AS data_element_id,
+    d.categoryoptioncombo, 
+    COALESCE(
+        CASE d.categoryoptioncombo
+            WHEN 'zh2zAaHyYQx' THEN c_agg.m_0_28d_male
+            WHEN 'wDiX34aiw6i' THEN c_agg.m_0_28d_female
+            WHEN 'V2OuNTRI6ua' THEN c_agg.m_29d_4y_male
+            WHEN 'huBy3W5qiD2' THEN c_agg.m_29d_4y_female
+            WHEN 'F1rms8f9I9a' THEN c_agg.m_5_9y_male
+            WHEN 'Crc5reUlspd' THEN c_agg.m_5_9y_female
+            WHEN 'c7gvocRdg0f' THEN c_agg.m_10_19y_male
+            WHEN 'u3CkZqMHfHP' THEN c_agg.m_10_19y_female
+            WHEN 'dCKzhhINakS' THEN c_agg.m_20y_plus_male
+            WHEN 'XVHTeecEOM3' THEN c_agg.m_20y_plus_female
+        END,
+    0) AS value
+FROM reporting.dataelements_conditions m
+LEFT JOIN c_agg ON c_agg.hmis_code = m.hmis_code
+LEFT JOIN reporting.dhis2_dataelements_1051 d ON d.dataelement = m.dataelement
+ORDER BY string_to_array(m.section_id, '.')::int[], m.hmis_code`;
 
 export async function fetchStructuredData(period) {
   const { rows } = await pool.query(fetchStructuredDataQuery(period));
@@ -64,9 +84,9 @@ export async function pushToDHIS2(dataset, period) {
     }
 
     // Ensure DHIS2 base URL is properly formatted
-    const baseUrl = process.env.ACTIVE_DHIS2_URL?.trim();
+    const baseUrl = process.env.DHIS2_BASE_URL?.trim();
     if (!baseUrl) {
-      throw new Error("ACTIVE_DHIS2_URL is not configured");
+      throw new Error("DHIS2_BASE_URL is not configured");
     }
 
     // Construct the full URL, ensuring no double slashes
@@ -74,8 +94,7 @@ export async function pushToDHIS2(dataset, period) {
 
     const dataValueSet = {
       dataSet: dataset,
-      // period: period,
-      period: "202507",
+      period: period,
       orgUnit: ORG_UNIT,
       attributeOptionCombo: ATTRIBUTE_OPTION_COMBO,
       dataValues: dataValues,

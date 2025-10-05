@@ -6,18 +6,50 @@ const router = express.Router();
 // Get conditions mappings
 router.get("/", async (req, res) => {
   try {
-    const query = `
-      select 
-       distinct  hmis_code, 
-       hmis_name,  
-       section_id, 
-       section_name
-      FROM reporting.dhis_eafya_mapping_conditions_final
-        ORDER BY hmis_code
-        `;
+    const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 25, 1), 500);
+    const offset = (page - 1) * limit;
+    const sectionName = (req.query.sectionName || "").trim();
 
-    const { rows } = await pool.query(query);
-    res.json(rows);
+    const whereSql = sectionName ? `WHERE section_name = $1` : "";
+    const countQuery = `SELECT COUNT(*)::int AS total FROM reporting.dataelements_conditions ${whereSql}`;
+    const dataQuery = `
+      SELECT 
+        section_id, 
+        section_name, 
+        hmis_code, 
+        hmis_name
+      FROM reporting.dataelements_conditions
+      ${whereSql}
+      ORDER BY section_id, hmis_name
+      LIMIT $${sectionName ? 2 : 1} OFFSET $${sectionName ? 3 : 2}
+    `;
+
+    const [countResult, dataResult] = await Promise.all([
+      pool.query(countQuery, sectionName ? [sectionName] : []),
+      pool.query(dataQuery, sectionName ? [sectionName, limit, offset] : [limit, offset])
+    ]);
+
+    const total = countResult.rows[0]?.total || 0;
+    const rows = dataResult.rows;
+    const totalPages = Math.max(Math.ceil(total / limit), 1);
+
+    res.json({ data: rows, page, limit, total, totalPages });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Distinct section names for dropdown
+router.get("/sections", async (_req, res) => {
+  try {
+    const sql = `
+      SELECT DISTINCT section_name
+      FROM reporting.dataelements_conditions
+      ORDER BY section_name
+    `;
+    const { rows } = await pool.query(sql);
+    res.json(rows.map(r => r.section_name));
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -26,50 +58,64 @@ router.get("/", async (req, res) => {
 // Get disease items for mapping
 router.get("/items", async (req, res) => {
   try {
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 100, 1), 500);
+    const offset = parseInt(req.query.offset, 10) || 0;
+    const search = (req.query.search || "").trim();
+
+    let whereClause = "";
+    let params = [];
+    let paramCount = 0;
+
+    if (search) {
+      paramCount++;
+      whereClause = `WHERE "name" ILIKE $${paramCount} OR five_character_icd_code ILIKE $${paramCount} OR four_character_icd_code ILIKE $${paramCount}`;
+      params.push(`%${search}%`);
+    }
+
     const query = `
             SELECT 
-                id, 
-                "name"
+              id as disease_id,
+              "name" as disease_name,
+              five_character_icd_code,
+              four_character_icd_code,
+              disease_block_id
             FROM dwh.dim_eafya_disease
+            ${whereClause}
             ORDER BY "name"
+            LIMIT $${paramCount + 1} OFFSET $${paramCount + 2}
         `;
 
-    const { rows } = await pool.query(query);
+    params.push(limit, offset);
+
+    const { rows } = await pool.query(query, params);
     res.json(rows);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Delete a specific condition mapping
+// Delete a single condition mapping by id
 router.delete("/", async (req, res) => {
   try {
-    const { eafya_id } = req.body;
-
-    if (!eafya_id) {
-      return res.status(400).json({
-        message: "Missing required fields: eafya_id",
-      });
-    }
-
-    console.log("Deleting condition mapping with:", {
-      eafya_id,
-    });
-
-    const result = await pool.query(
-      "DELETE FROM reporting.dhis_eafya_mapping_conditions_final WHERE eafya_disease_id = $1",
-      [eafya_id]
-    );
-
-    console.log("Delete result:", result.rowCount, "rows affected");
-
-    if (result.rowCount === 0) {
-      return res.status(404).json({ message: "Mapping not found" });
-    }
-
-    res.json({ message: "Condition mapping deleted successfully" });
+    const { id } = req.body;
+    const sql = `DELETE FROM reporting.hmis_eafya_conditions_mapping WHERE id = $1`;
+    const result = await pool.query(sql, [id]);
+    return res.json({ message: "Condition mapping deleted", count: result.rowCount });
   } catch (error) {
     console.error("Error deleting condition mapping:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Delete a single condition mapping by id via URL param
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const sql = `DELETE FROM reporting.hmis_eafya_conditions_mapping WHERE id = $1`;
+    const result = await pool.query(sql, [id]);
+    return res.json({ message: "Condition mapping deleted", count: result.rowCount });
+  } catch (error) {
+    console.error("Error deleting condition mapping by id:", error);
     res.status(500).json({ message: error.message });
   }
 });
@@ -78,167 +124,78 @@ router.delete("/", async (req, res) => {
 router.get("/:hmisCode", async (req, res) => {
   try {
     const { hmisCode } = req.params;
-
     const query = `
       SELECT 
-        distinct hmis_code,
-        hmis_name,
-         eafya_disease_id as eafya_id,
-        eafya_disease_name as eafya_name
-      FROM reporting.dhis_eafya_mapping_conditions_final
-      WHERE hmis_code ILIKE $1
-      ORDER BY hmis_code
+        id,
+        hmis_code, 
+        hmis_name, 
+        disease_id, 
+        five_character_icd_code, 
+        four_character_icd_code, 
+        disease_name
+      FROM reporting.hmis_eafya_conditions_mapping
+      WHERE hmis_code = $1
     `;
 
-    const { rows } = await pool.query(query, [`%${hmisCode}%`]);
-
-    if (rows.length === 0) {
-      return res.status(404).json({
-        message: "No condition mappings found for this HMIS code",
-        hmis_code: hmisCode,
-      });
-    }
-
-    res.json({
-      hmis_code: hmisCode,
-      hmis_name: rows[0].hmis_name,
-      mappings: rows,
-    });
+    const { rows } = await pool.query(query, [hmisCode]);
+    res.json(rows);
   } catch (error) {
     console.error("Error fetching condition mapping details:", error);
     res.status(500).json({ message: error.message });
   }
 });
 
-// Create condition mappings
+// Create condition mapping entries
 router.post("/", async (req, res) => {
   try {
-    const {
-      section_id,
-      hmis_code,
-      mappings, // [{ id, name }] eAFYA diseases
-    } = req.body;
-
-    // Simplified validation - only check for required fields
-    if (
-      !hmis_code ||
-      !section_id ||
-      !Array.isArray(mappings) ||
-      mappings.length === 0
-    ) {
-      return res.status(400).json({
-        message:
-          "Missing required fields: hmis_code, section_id and non-empty mappings array",
+    const { hmis_code, hmis_name, diseases } = req.body;
+    
+    // Validate required fields
+    if (!hmis_code || !diseases || !Array.isArray(diseases)) {
+      return res.status(400).json({ 
+        message: "Missing required fields: hmis_code and diseases array" 
       });
     }
+    
+    // Get section_id from the HMIS code (assuming it's the first part)
+    const section_id = hmis_code.substring(0, 2); // Extract first 2 characters as section_id
+    
+    const columns = `section_id, hmis_code, hmis_name, disease_id, five_character_icd_code, four_character_icd_code, disease_name`;
+    const valuesPlaceholders = [];
+    const params = [];
 
-    // Fetch existing condition data for the given hmis_code and section_id
-    const queryExisting = `
-        SELECT 
-          DISTINCT   
-          csv_id,
-          section_id,
-          section_name,
-          hmis_code,
-          hmis_name,
-          data_element_id,
-          category_optioncombo_id,
-          category_optioncombo_name
-        FROM reporting.dhis_eafya_mapping_conditions_final
-        WHERE hmis_code ILIKE $1 
-        ORDER BY data_element_id
-      `;
-
-    console.log("Executing conditions query with params:", [
-      hmis_code,
-      section_id,
-    ]);
-    const { rows } = await pool.query(queryExisting, [`%${hmis_code}%`]);
-
-    console.log(`Found ${rows.length} distinct condition entries`);
-
-    if (rows.length === 0) {
-      return res.status(404).json({
-        message:
-          "No existing condition data found for the provided hmis_code and section_id",
-      });
+    for (let i = 0; i < diseases.length; i++) {
+      const base = i * 7;
+      valuesPlaceholders.push(
+        `($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5}, $${base + 6}, $${base + 7})`
+      );
+      const disease = diseases[i];
+      params.push(
+        section_id,
+        hmis_code,
+        hmis_name || '',
+        disease.disease_id,
+        disease.five_character_icd_code,
+        disease.four_character_icd_code,
+        disease.disease_name
+      );
     }
 
-    const client = await pool.connect();
-    try {
-      await client.query("BEGIN");
+    const insertQuery = `
+      INSERT INTO reporting.hmis_eafya_conditions_mapping (${columns})
+      VALUES ${valuesPlaceholders.join(", ")}
+      RETURNING *
+    `;
 
-      let totalInserted = 0;
+    const { rows } = await pool.query(insertQuery, params);
 
-      // Outer loop: For each existing condition entry
-      for (let i = 0; i < rows.length; i++) {
-        const existingData = rows[i];
-        console.log(
-          `Processing condition entry ${i + 1}/${rows.length}: ${
-            existingData.data_element_id
-          }`
-        );
-
-        // Inner loop: For each eAFYA disease
-        for (let j = 0; j < mappings.length; j++) {
-          const eafyaDisease = mappings[j];
-          console.log(
-            `  - Mapping eAFYA disease ${j + 1}/${mappings.length}: ${
-              eafyaDisease.id
-            }`
-          );
-
-          await client.query(
-            `INSERT INTO reporting.dhis_eafya_mapping_conditions_final (
-                csv_id,
-                section_id,
-                section_name,
-                hmis_code,
-                hmis_name,
-                eafya_disease_id,
-                eafya_disease_name,
-                data_element_id,
-                category_optioncombo_id,
-                category_optioncombo_name
-              ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
-            [
-              existingData.csv_id,
-              existingData.section_id,
-              existingData.section_name,
-              existingData.hmis_code,
-              existingData.hmis_name,
-              eafyaDisease.id,
-              eafyaDisease.name || null,
-              existingData.data_element_id,
-              existingData.category_optioncombo_id,
-              existingData.category_optioncombo_name,
-            ]
-          );
-          totalInserted++;
-        }
-      }
-
-      console.log(`Total condition mappings created: ${totalInserted}`);
-
-      await client.query("COMMIT");
-      return res.json({
-        message: "Condition mappings saved successfully",
-        count: totalInserted,
-        details: {
-          condition_entries: rows.length,
-          eafya_diseases: mappings.length,
-          total_mappings_created: totalInserted,
-          calculation: `${rows.length} condition entries × ${mappings.length} eAFYA diseases = ${totalInserted} mappings`,
-        },
-      });
-    } catch (error) {
-      await client.query("ROLLBACK");
-      throw error;
-    } finally {
-      client.release();
-    }
+    return res.status(201).json({
+      message: "Condition mapping(s) created",
+      count: rows.length,
+      records: rows,
+    });
   } catch (error) {
-    console.error("Error saving condition mappings:", error);
+    console.error("Error creating condition mapping:", error);
     res.status(500).json({ message: error.message });
   }
 });

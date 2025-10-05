@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import Sidebar from "../../components/Sidebar";
 import DataEntryForm from "../../components/DataEntryForm";
 
 const HMIS = () => {
-  const [selectedSection, setSelectedSection] = useState("1.1");
+  const [selectedSection, setSelectedSection] = useState("");
   const [selectedDataSet, setSelectedDataSet] = useState("HMIS_105_01");
 
   const handleDataSetChange = (dataSetId) => {
@@ -13,26 +12,20 @@ const HMIS = () => {
       setSelectedSection("2.1");
     } else if (dataSetId === "HMIS_108") {
       setSelectedSection("1");
+    } else if (dataSetId === "HMIS_105_01") {
+      setSelectedSection(""); // Show all sections for conditions
     } else {
       setSelectedSection("1.1");
     }
   };
 
   return (
-    <div className="d-flex gap-2">
-      <Sidebar
-        selected={selectedSection}
-        onSelect={setSelectedSection}
-        dataSetId={selectedDataSet}
-      />
-      <div style={{ flex: 1 }}>
-        <DataEntryForm
-          section={selectedSection}
-          dataSetId={selectedDataSet}
-          onDataSetChange={handleDataSetChange}
-        />
-      </div>
-    </div>
+    <DataEntryForm
+      section={selectedSection}
+      dataSetId={selectedDataSet}
+      onDataSetChange={handleDataSetChange}
+      onSectionChange={setSelectedSection}
+    />
   );
 };
 
