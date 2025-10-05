@@ -4,10 +4,10 @@ import { pool } from "../../config/database.js";
 const router = express.Router();
 
 router.get("/visits", async (req, res) => {
-  try {
-    const { report_month } = req.query;
+	try {
+		const { report_month } = req.query;
 
-    let query = `
+		let query = `
       SELECT 
         report_month, 
         visit_count, 
@@ -17,27 +17,27 @@ router.get("/visits", async (req, res) => {
         "20_24yrs", 
         "25_50yrs", 
         "50+yrs", total
-      FROM reporting."105_02_anc_visits";
+      FROM reporting."105_02_anc_visits"
       WHERE report_month = $1`;
 
-    const params = [report_month];
-    query += ` ORDER BY hmis_code`;
+		const params = [report_month];
+		query += ` ORDER BY hmis_code`;
 
-    const { rows } = await pool.query(query, params);
-    console.log("Query Results:", rows);
+		const { rows } = await pool.query(query, params);
+		console.log("Query Results:", rows);
 
-    res.json(rows);
-  } catch (error) {
-    console.error("Query error:", error);
-    res.status(500).json({ message: error.message });
-  }
+		res.json(rows);
+	} catch (error) {
+		console.error("Query error:", error);
+		res.status(500).json({ message: error.message });
+	}
 });
 
 router.get("/totals", async (req, res) => {
-  try {
-    const { report_month } = req.query;
+	try {
+		const { report_month } = req.query;
 
-    let query = `
+		let query = `
       SELECT 
         report_month,
         hmis_code,
@@ -49,25 +49,25 @@ router.get("/totals", async (req, res) => {
       FROM reporting."105_02_anc_total"
       WHERE report_month = $1`;
 
-    const params = [report_month];
+		const params = [report_month];
 
-    query += ` ORDER BY hmis_code`;
+		query += ` ORDER BY hmis_code`;
 
-    const { rows } = await pool.query(query, params);
-    console.log("Query Results:", rows);
+		const { rows } = await pool.query(query, params);
+		console.log("Query Results:", rows);
 
-    res.json(rows);
-  } catch (error) {
-    console.error("Query error:", error);
-    res.status(500).json({ message: error.message });
-  }
+		res.json(rows);
+	} catch (error) {
+		console.error("Query error:", error);
+		res.status(500).json({ message: error.message });
+	}
 });
 
 router.get("/fansidar", async (req, res) => {
-  try {
-    const { report_month } = req.query;
+	try {
+		const { report_month } = req.query;
 
-    let query = `
+		let query = `
       SELECT 
         report_month,
         hmis_code,
@@ -80,25 +80,25 @@ router.get("/fansidar", async (req, res) => {
       FROM reporting."105_02_anc_fansidar"
       WHERE report_month = $1`;
 
-    const params = [report_month];
+		const params = [report_month];
 
-    query += ` ORDER BY hmis_code`;
+		query += ` ORDER BY hmis_code`;
 
-    const { rows } = await pool.query(query, params);
-    console.log("Query Results:", rows);
+		const { rows } = await pool.query(query, params);
+		console.log("Query Results:", rows);
 
-    res.json(rows);
-  } catch (error) {
-    console.error("Query error:", error);
-    res.status(500).json({ message: error.message });
-  }
+		res.json(rows);
+	} catch (error) {
+		console.error("Query error:", error);
+		res.status(500).json({ message: error.message });
+	}
 });
 
 router.get("/bloodgroup", async (req, res) => {
-  try {
-    const { report_month } = req.query;
+	try {
+		const { report_month } = req.query;
 
-    let query = `
+		let query = `
       SELECT 
         report_month,
         hmis_code,
@@ -107,25 +107,25 @@ router.get("/bloodgroup", async (req, res) => {
       FROM reporting."105_02_anc_bloodgroup"
       WHERE report_month = $1`;
 
-    const params = [report_month];
+		const params = [report_month];
 
-    query += ` ORDER BY hmis_code`;
+		query += ` ORDER BY hmis_code`;
 
-    const { rows } = await pool.query(query, params);
-    console.log("Query Results:", rows);
+		const { rows } = await pool.query(query, params);
+		console.log("Query Results:", rows);
 
-    res.json(rows);
-  } catch (error) {
-    console.error("Query error:", error);
-    res.status(500).json({ message: error.message });
-  }
+		res.json(rows);
+	} catch (error) {
+		console.error("Query error:", error);
+		res.status(500).json({ message: error.message });
+	}
 });
 
 router.get("/anaemia_tested", async (req, res) => {
-  try {
-    const { report_month } = req.query;
+	try {
+		const { report_month } = req.query;
 
-    let query = `
+		let query = `
         SELECT 
           report_month, 
           hmis_code, 
@@ -135,28 +135,28 @@ router.get("/anaemia_tested", async (req, res) => {
           "25-49_years", 
           "50+_years", 
           total_tests
-        FROM reporting."105_02_anc_anaemia_tested";
+        FROM reporting."105_02_anc_anaemia_tested"
         WHERE report_month = $1`;
 
-    const params = [report_month];
+		const params = [report_month];
 
-    query += ` ORDER BY hmis_code`;
+		query += ` ORDER BY hmis_code`;
 
-    const { rows } = await pool.query(query, params);
-    console.log("Query Results:", rows);
+		const { rows } = await pool.query(query, params);
+		console.log("Query Results:", rows);
 
-    res.json(rows);
-  } catch (error) {
-    console.error("Query error:", error);
-    res.status(500).json({ message: error.message });
-  }
+		res.json(rows);
+	} catch (error) {
+		console.error("Query error:", error);
+		res.status(500).json({ message: error.message });
+	}
 });
 
 router.get("/anaemia_confirmed", async (req, res) => {
-  try {
-    const { report_month } = req.query;
+	try {
+		const { report_month } = req.query;
 
-    let query = `
+		let query = `
         SELECT 
         report_month, 
         hmis_code, 
@@ -166,28 +166,28 @@ router.get("/anaemia_confirmed", async (req, res) => {
         "25-49_years", 
         "50+_years", 
         total_cases
-      FROM reporting."105_02_anc_anaemia_confirmed";
+      FROM reporting."105_02_anc_anaemia_confirmed"
       WHERE report_month = $1`;
 
-    const params = [report_month];
+		const params = [report_month];
 
-    query += ` ORDER BY hmis_code`;
+		query += ` ORDER BY hmis_code`;
 
-    const { rows } = await pool.query(query, params);
-    console.log("Query Results:", rows);
+		const { rows } = await pool.query(query, params);
+		console.log("Query Results:", rows);
 
-    res.json(rows);
-  } catch (error) {
-    console.error("Query error:", error);
-    res.status(500).json({ message: error.message });
-  }
+		res.json(rows);
+	} catch (error) {
+		console.error("Query error:", error);
+		res.status(500).json({ message: error.message });
+	}
 });
 
 router.get("/folic", async (req, res) => {
-  try {
-    const { report_month } = req.query;
+	try {
+		const { report_month } = req.query;
 
-    let query = `
+		let query = `
       SELECT 
         report_month, 
         hmis_code, 
@@ -196,28 +196,28 @@ router.get("/folic", async (req, res) => {
         "20-24_years", 
         "25-49_years", 
         "50+_years", total
-      FROM reporting."105_02_anc_folic";
+      FROM reporting."105_02_anc_folic"
       WHERE report_month = $1`;
 
-    const params = [report_month];
+		const params = [report_month];
 
-    query += ` ORDER BY hmis_code`;
+		query += ` ORDER BY hmis_code`;
 
-    const { rows } = await pool.query(query, params);
-    console.log("Query Results:", rows);
+		const { rows } = await pool.query(query, params);
+		console.log("Query Results:", rows);
 
-    res.json(rows);
-  } catch (error) {
-    console.error("Query error:", error);
-    res.status(500).json({ message: error.message });
-  }
+		res.json(rows);
+	} catch (error) {
+		console.error("Query error:", error);
+		res.status(500).json({ message: error.message });
+	}
 });
 
 router.get("/ultrasound", async (req, res) => {
-  try {
-    const { report_month } = req.query;
+	try {
+		const { report_month } = req.query;
 
-    let query = `
+		let query = `
       SELECT 
         report_month, 
         hmis_code, 
@@ -227,76 +227,76 @@ router.get("/ultrasound", async (req, res) => {
         "25-49_years", 
         "50+_years", 
         total
-      FROM reporting."105_02_anc_ultrasound";
+      FROM reporting."105_02_anc_ultrasound"
       WHERE report_month = $1`;
 
-    const params = [report_month];
+		const params = [report_month];
 
-    query += ` ORDER BY hmis_code`;
+		query += ` ORDER BY hmis_code`;
 
-    const { rows } = await pool.query(query, params);
-    console.log("Query Results:", rows);
+		const { rows } = await pool.query(query, params);
+		console.log("Query Results:", rows);
 
-    res.json(rows);
-  } catch (error) {
-    console.error("Query error:", error);
-    res.status(500).json({ message: error.message });
-  }
+		res.json(rows);
+	} catch (error) {
+		console.error("Query error:", error);
+		res.status(500).json({ message: error.message });
+	}
 });
 
 router.get("/syphilis", async (req, res) => {
-  try {
-    const { report_month } = req.query;
+	try {
+		const { report_month } = req.query;
 
-    let query = `
+		let query = `
       SELECT 
         report_month, 
         hmis_code, 
         gender, 
         total_tested, 
         total_positive
-      FROM reporting."105_02_anc_syphilis";
+      FROM reporting."105_02_anc_syphilis"
       WHERE report_month = $1`;
 
-    const params = [report_month];
+		const params = [report_month];
 
-    query += ` ORDER BY hmis_code`;
+		query += ` ORDER BY hmis_code`;
 
-    const { rows } = await pool.query(query, params);
-    console.log("Query Results:", rows);
+		const { rows } = await pool.query(query, params);
+		console.log("Query Results:", rows);
 
-    res.json(rows);
-  } catch (error) {
-    console.error("Query error:", error);
-    res.status(500).json({ message: error.message });
-  }
+		res.json(rows);
+	} catch (error) {
+		console.error("Query error:", error);
+		res.status(500).json({ message: error.message });
+	}
 });
 
 router.get("/hepatitis", async (req, res) => {
-  try {
-    const { report_month } = req.query;
+	try {
+		const { report_month } = req.query;
 
-    let query = `
+		let query = `
       SELECT 
         report_month, 
         hmis_code, 
         total_tested, 
         total_positive
-      FROM reporting."105_02_anc_hepatitis";
+      FROM reporting."105_02_anc_hepatitis"
       WHERE report_month = $1`;
 
-    const params = [report_month];
+		const params = [report_month];
 
-    query += ` ORDER BY hmis_code`;
+		query += ` ORDER BY hmis_code`;
 
-    const { rows } = await pool.query(query, params);
-    console.log("Query Results:", rows);
+		const { rows } = await pool.query(query, params);
+		console.log("Query Results:", rows);
 
-    res.json(rows);
-  } catch (error) {
-    console.error("Query error:", error);
-    res.status(500).json({ message: error.message });
-  }
+		res.json(rows);
+	} catch (error) {
+		console.error("Query error:", error);
+		res.status(500).json({ message: error.message });
+	}
 });
 
 export default router;

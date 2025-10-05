@@ -1,247 +1,79 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { useParams, useHistory } from "react-router-dom";
-import { toast } from "react-toastify";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import API from "../../../helpers/api";
 import Dhis2MappingDialog from "./Dhis2MappingDialog";
 
 const MappingDetail = () => {
-  const { mappingType, id } = useParams();
   const history = useHistory();
+  const location = useLocation();
+  const { hmisName: stateHmisName, hmisCode: stateHmisCode } = location.state || {};
 
-  const [mappingData, setMappingData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [dialogState, setDialogState] = useState({ isOpen: false, row: null });
-  const [eafyaItems, setEafyaItems] = useState([]);
-  const [confirmModal, setConfirmModal] = useState({ isOpen: false, mappingId: null, mappingName: "" });
+  const selection = useMemo(() => {
+    if (stateHmisCode) {
+      return {
+        hmisCode: stateHmisCode,
+        hmisName: stateHmisName || "",
+      };
+    }
+    try {
+      const raw = sessionStorage.getItem("mappingSelection");
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        return {
+          hmisCode: parsed?.hmisCode || "",
+          hmisName: parsed?.hmisName || "",
+        };
+      }
+    } catch (_) {}
+    return { hmisCode: "", hmisName: "" };
+  }, [stateHmisCode, stateHmisName]);
 
-  // Mapping type configurations
-  const MAPPING_CONFIGS = {
-    commodities: {
-      title: "Commodities Mapping",
-      endpoint: "/mapping/commodities",
-      searchEndpoint: "/mapping/commodities/items",
-      sectionField: "section_id",
-      datasetCode: "HMIS1054",
-      fields: [
-        { key: "hmis_code", label: "HMIS Code" },
-        { key: "hmis_name", label: "HMIS Name" },
-        { key: "section_id", label: "Section ID" },
-      ],
-    },
-    labtests: {
-      title: "Lab Tests Mapping",
-      endpoint: "/mapping/labtests",
-      searchEndpoint: "/mapping/labtests/items",
-      sectionField: "_section_id",
-      datasetCode: "HMIS1055",
-      fields: [
-        { key: "hmis_code", label: "HMIS Code" },
-        { key: "hmis_name", label: "HMIS Name" },
-        { key: "_section_id", label: "Section ID" },
-      ],
-    },
-    conditions: {
-      title: "Conditions Mapping",
-      endpoint: "/mapping/conditions",
-      searchEndpoint: "/mapping/conditions/items",
-      sectionField: "section_id",
-      datasetCode: "HMIS1052_CONDITIONS",
-      fields: [
-        { key: "hmis_code", label: "HMIS Code" },
-        { key: "hmis_name", label: "HMIS Name" },
-        { key: "section_id", label: "Section ID" },
-      ],
-    },
-    familyplanning: {
-      title: "Family Planning Mapping",
-      endpoint: "/mapping/familyplanning",
-      searchEndpoint: "/mapping/familyplanning/items",
-      sectionField: "_section_id",
-      datasetCode: "HMIS1052_FP",
-      fields: [
-        { key: "hmis_code", label: "HMIS Code" },
-        { key: "hmis_name", label: "HMIS Name" },
-        { key: "_section_id", label: "Section ID" },
-      ],
-    },
-    vaccines: {
-      title: "Vaccines Mapping",
-      endpoint: "/mapping/vaccines",
-      searchEndpoint: "/mapping/vaccines/items",
-      sectionField: "_section_id",
-      datasetCode: "HMIS1052_VACCINE",
-      fields: [
-        { key: "hmis_code", label: "HMIS Code" },
-        { key: "hmis_name", label: "HMIS Name" },
-        { key: "_section_id", label: "Section ID" },
-      ],
-    },
-    procedures: {
-      title: "Procedures Mapping",
-      endpoint: "/mapping/procedures",
-      searchEndpoint: "/mapping/procedures/items",
-      sectionField: "section_id",
-      datasetCode: "HMIS1052_PROCEDURES",
-      fields: [
-        { key: "hmis_code", label: "HMIS Code" },
-        { key: "hmis_name", label: "HMIS Name" },
-        { key: "section_name", label: "Section Name" },
-        { key: "section_id", label: "Section ID" },
-      ],
-    },
-    imaging: {
-      title: "Imaging Mapping",
-      endpoint: "/mapping/imaging",
-      searchEndpoint: "/mapping/imaging/items",
-      sectionField: "section_id",
-      datasetCode: "HMIS1052_IMAGING",
-      fields: [
-        { key: "hmis_code", label: "HMIS Code" },
-        { key: "hmis_name", label: "HMIS Name" },
-        { key: "section_name", label: "Section Name" },
-        { key: "section_id", label: "Section ID" },
-      ],
-    },
-  };
-
-  const config = MAPPING_CONFIGS[mappingType] || MAPPING_CONFIGS.commodities;
+  const [mappingData, setMappingData] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const hmisCode = selection.hmisCode;
+  const hmisName = selection.hmisName;
 
   const fetchMappingDetail = useCallback(async () => {
-    setLoading(true);
     try {
-      // Use the new detail endpoint with HMIS code
-      const res = await API.get(`/mapping/eafyadetails/${mappingType}/${id}`);
+      const res = await API.get(`/mapping/conditions/${hmisCode}`);
       setMappingData(res.data);
     } catch (error) {
       console.error("Error fetching mapping detail:", error);
-      setMappingData(null);
-    } finally {
-      setLoading(false);
+      setMappingData([]);
     }
-  }, [mappingType, id]);
+  }, [hmisCode]);
 
-  useEffect(() => {
-    if (id) {
-      fetchMappingDetail();
-    }
-  }, [id, mappingType, fetchMappingDetail]);
-
-
-  const handleDelete = (eafyaId, mappingName) => {
-    setConfirmModal({
-      isOpen: true,
-      mappingId: eafyaId,
-      mappingName: mappingName
-    });
-  };
-
-  const confirmDelete = async () => {
+  const handleDelete = async (id) => {
     try {
-
-      // Simple payload - just send what we need
-      const payload = {
-        eafya_id: confirmModal.mappingId,
-      };
-
-      console.log("Deleting mapping with payload:", payload);
-
-      // Call the delete endpoint
-      const res = await API.delete(config.endpoint, { data: payload });
-
-      if (res.status === 200 || res.status === 204) {
-        // Refresh the mapping data to show updated list
-        fetchMappingDetail();
-        setConfirmModal({ isOpen: false, mappingId: null, mappingName: "" });
-        toast.success("Mapping deleted successfully!");
-      }
+      await API.delete(`/mapping/conditions/${id}`);
+      await fetchMappingDetail();
     } catch (error) {
       console.error("Error deleting mapping:", error);
-      toast.error("Failed to delete mapping. Please try again.");
     }
   };
 
-  const cancelDelete = () => {
-    setConfirmModal({ isOpen: false, mappingId: null, mappingName: "" });
-  };
-  const handleAdd = (row) => {
-    setDialogState({ isOpen: true, row });
-  };
-
-  const onEafyaItemsLoaded = useCallback((items) => setEafyaItems(items), []);
-
-  const onSave = async (mappingData) => {
-    try {
-      console.log("onSave received mappingData:", mappingData);
-      console.log("Current mappingData from state:", mappingData);
-      console.log("Current config:", config);
-
-      // Get the required fields from the current mapping context
-      const hmis_code = id; // The ID from URL params is the hmis_code
-      const sectionField = config.sectionField;
-
-      // mappingData is an array of selected item IDs, convert to proper mappings format
-      const mappings = Array.isArray(mappingData)
-        ? mappingData
-            .map((id) => {
-              const item = eafyaItems.find((i) => i.id === id);
-              return item ? { id: item.id, name: item.name } : null;
-            })
-            .filter(Boolean)
-        : [];
-
-      // Get section value from the current mapping context (dialogState.row)
-      let sectionValue;
-      if (dialogState.row && dialogState.row[sectionField]) {
-        sectionValue = dialogState.row[sectionField];
-      } else if (dialogState.row && dialogState.row.section_id) {
-        sectionValue = dialogState.row.section_id;
-      } else if (dialogState.row && dialogState.row._section_id) {
-        sectionValue = dialogState.row._section_id;
-      } else {
-        // If we can't find section value in dialogState.row, we need to get it from the current context
-        // For now, let's use a default or get it from the URL/context
-        sectionValue = "6.1"; // Default section for commodities - you may need to adjust this
-      }
-
-      console.log("Extracted values:", {
-        hmis_code,
-        sectionValue,
-        sectionField,
-        mappings,
-      });
-
-      if (!sectionValue || !hmis_code || !mappings || mappings.length === 0) {
-        toast.error(
-          `Missing required fields: ${sectionField}=${sectionValue}, hmis_code=${hmis_code} and non-empty mappings array (length: ${mappings.length})`
-        );
-        return;
-      }
-
-      // Build the payload with the correct section field name
-      // For labtests, database uses _section_id but backend expects section_id
-      const payload = {
-        hmis_code,
-        mappings: mappings,
-        section_id: sectionValue,
-      };
-
-      console.log("Sending payload:", payload);
-
-      const res = await API.post(config.endpoint, payload);
-
-      if (res.status === 200 || res.status === 201) {
-        // Refresh the mapping data
-        fetchMappingDetail();
-        setDialogState({ isOpen: false, row: null });
-        toast.success("Mapping added successfully!");
-      }
-    } catch (error) {
-      console.error("Error saving mapping:", error);
-      toast.error("Failed to save mapping");
+  useEffect(() => {
+    if (!hmisCode) {
+      history.push("/mapping");
+      return;
     }
+    fetchMappingDetail();
+  }, [hmisCode, fetchMappingDetail, history]);
+
+  const handleAdd = () => {
+    setIsModalOpen(true);
   };
 
-  console.log("mapping data==", mappingData);
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleModalSubmit = () => {
+    // Refresh the mapping data after successful submission
+    fetchMappingDetail();
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="container-fluid py-3">
       {/* Modern Header */}
@@ -264,12 +96,12 @@ const MappingDetail = () => {
               </nav>
               <div className="header-content">
                 <h1 className="page-title-modern">
-                  {mappingData?.hmis_name}
+                  {hmisName}
                 </h1>
                 <div className="page-meta-simple">
                   <span className="meta-code">
                     <i className="fas fa-code me-2"></i>
-                    {mappingData?.hmis_code}
+                    {hmisCode}
                   </span>
                 </div>
               </div>
@@ -289,143 +121,60 @@ const MappingDetail = () => {
         </div>
       </div>
 
-      {/* Modern Content Section */}
-      <div className="content-section-modern">
-        <div className="container-fluid">
-          {loading ? (
-            <div className="loading-state-modern">
-              <div className="spinner-modern">
-                <div className="spinner-border text-primary" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
-              </div>
-              <p className="loading-text">Loading mappings...</p>
-            </div>
-          ) : mappingData?.mappings && mappingData.mappings.length > 0 ? (
-            <div className="mappings-grid-modern">
-              <div className="mappings-header">
-                <h3 className="mappings-title">
-                  <i className="fas fa-list-ul me-2"></i>
-                  Mappings ({mappingData.mappings.length})
-                </h3>
-                <p className="mappings-subtitle">Manage the eAFYA mappings for this condition</p>
-              </div>
-              <div className="mappings-list">
-                {mappingData.mappings.map((mapping, index) => (
-                  <div key={mapping.eafya_id || index} className="mapping-item-modern">
-                    <div className="mapping-content">
-                      <div className="mapping-id">
-                        <span className="id-badge-simple">{mapping.eafya_id}</span>
-                      </div>
-                      <div className="mapping-details">
-                        <h4 className="mapping-name">{mapping.eafya_name}</h4>
-                      </div>
-                    </div>
-                    <div className="mapping-actions">
+      <div className="card mt-3">
+        <div className="card-body p-0">
+          <div className="table-responsive">
+            <table className="table table-bordered mb-0">
+              <thead className="table-light">
+                <tr>
+                  <th>Disease ID</th>
+                  <th>Disease Name</th>
+                  <th>ICD-4 Code</th>
+                  <th>ICD-5 Code</th>
+                   <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {mappingData.length === 0 ? (
+                  <tr>
+                    <td colSpan={6} className="text-center py-3 text-muted">No mappings found for this HMIS code.</td>
+                  </tr>
+                ) : (
+                  mappingData.map((row) => (
+                    <tr key={row.id}>
+                      <td>{row.disease_id}</td>
+                      <td>{row.disease_name}</td>
+                      <td>{row.four_character_icd_code}</td>
+                      <td>{row.five_character_icd_code}</td>
+                      <td>
                         <button
-                          className="btn btn-danger btn-sm btn-modern"
-                          onClick={() => handleDelete(mapping.eafya_id, mapping.eafya_name)}
-                          title="Remove mapping"
+                          className="btn btn-sm btn-outline-danger"
+                          onClick={() => handleDelete(row.id)}
+                          title="Delete mapping"
                         >
-                          <i className="fas fa-trash"></i>
-                          <span>Remove</span>
+                          Delete
                         </button>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <div className="empty-state-modern">
-              <div className="empty-icon">
-                <i className="fas fa-inbox"></i>
-              </div>
-              <h3 className="empty-title">No mappings found</h3>
-              <p className="empty-description">
-                This condition doesn't have any eAFYA mappings yet. Click "Add New Mapping" to create one.
-              </p>
-              <button
-                className="btn btn-primary btn-modern"
-                onClick={() => handleAdd(mappingData)}
-              >
-                <i className="fas fa-plus me-2"></i>
-                Create First Mapping
-              </button>
-            </div>
-          )}
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 
-      <Dhis2MappingDialog
-        isOpen={dialogState.isOpen}
-        onClose={() => setDialogState({ isOpen: false, row: null })}
-        onSave={onSave}
-        hmisName={dialogState.row?.hmis_name || ""}
-        section={dialogState.row?.[config.sectionField] || ""}
-        eafyaItems={eafyaItems}
-        onEafyaItemsLoaded={onEafyaItemsLoaded}
-        datasetCode={config.datasetCode}
-        searchEndpoint={config.searchEndpoint}
-      />
-
-      {/* Confirmation Modal */}
-      {confirmModal.isOpen && (
-        <div
-          className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.7)", zIndex: 9999 }}
-          onClick={cancelDelete}
-        >
-          <div
-            className="bg-white rounded-3 shadow-lg p-4"
-            style={{
-              width: "450px",
-              maxWidth: "95vw",
-              maxHeight: "90vh",
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="mb-3">
-              <h5 className="fw-semibold text-dark mb-2 d-flex align-items-center">
-                <i className="fas fa-exclamation-triangle text-warning me-2"></i>
-                Confirm Removal
-              </h5>
-            </div>
-            
-            <div className="mb-4">
-              <p className="mb-3 text-muted">
-                Are you sure you want to remove this mapping?
-              </p>
-              <div className="alert alert-light border rounded-3">
-                <div className="d-flex align-items-center">
-                  <span className="id-badge-simple me-3">{confirmModal.mappingId}</span>
-                  <span className="text-dark">{confirmModal.mappingName}</span>
-                </div>
-              </div>
-              <p className="text-muted small mb-0 mt-2">
-                This action cannot be undone.
-              </p>
-            </div>
-            
-            <div className="d-flex gap-2 justify-content-end">
-              <button
-                type="button"
-                className="btn btn-secondary px-3"
-                onClick={cancelDelete}
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                className="btn btn-danger px-3"
-                onClick={confirmDelete}
-              >
-                <i className="fas fa-trash me-2"></i>
-                Remove Mapping
-              </button>
-            </div>
-          </div>
-        </div>
+      {/* Modal Dialog */}
+      {isModalOpen && (
+        <Dhis2MappingDialog
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          onSubmit={handleModalSubmit}
+          hmisCode={hmisCode}
+          hmisName={hmisName}
+        />
       )}
+
     </div>
   );
 };

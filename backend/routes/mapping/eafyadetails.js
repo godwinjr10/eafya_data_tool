@@ -207,29 +207,19 @@ router.get("/conditions/:hmisCode", async (req, res) => {
 
         const query = `
       SELECT 
-        distinct hmis_code,
-        hmis_name,
-         eafya_disease_id as eafya_id,
-        eafya_disease_name as eafya_name
-      FROM reporting.dhis_eafya_mapping_conditions_final
-      WHERE hmis_code ILIKE $1
-      ORDER BY hmis_code
+        id,
+        hmis_code, 
+        hmis_name, 
+        disease_id, 
+        five_character_icd_code, 
+        four_character_icd_code, 
+        disease_name
+      FROM reporting.hmis_eafya_conditions_mapping
+      WHERE hmis_code = $1
     `;
 
-        const { rows } = await pool.query(query, [`%${hmisCode}%`]);
-
-        if (rows.length === 0) {
-            return res.status(404).json({
-                message: "No condition mappings found for this HMIS code",
-                hmis_code: hmisCode,
-            });
-        }
-
-        res.json({
-            hmis_code: hmisCode,
-            hmis_name: rows[0].hmis_name,
-            mappings: rows,
-        });
+        const { rows } = await pool.query(query, [hmisCode]);
+        res.json(rows);
     } catch (error) {
         console.error("Error fetching condition mapping details:", error);
         res.status(500).json({ message: error.message });

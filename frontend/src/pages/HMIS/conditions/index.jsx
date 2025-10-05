@@ -1,5 +1,4 @@
 import React from "react";
-import Attedance from "./Attedance";
 import ConditionsForm from "./CondtionsForm";
 
 const ageGroups = [
@@ -25,82 +24,17 @@ const getMonthNumber = (monthName) => {
     return months.indexOf(monthName) + 1;
 };
 
-const sectionTitles = {
-    '1.1': 'Outpatient Attendance',
-    '1.2': 'Outpatient Referals',
-    '1.3.1': 'Edpidemic & Referals',
-    '1.3.2': 'Other Infectious / Communicable Diseases',
-    '1.3.3': 'Neonatal Diseases',
-    '1.3.4': 'Non-Communicable Diseases',
-    '1.3.5': 'Oral Diseases',
-    '1.3.6': 'ENT Conditions',
-    '1.3.7': 'Eye Conditions',
-    '1.3.8': 'Mental Health',
-    '1.3.9': 'Neourlogical Disorders',
-    '1.3.10': 'Chronic Respiratory',
-    '1.3.11': 'Cancers',
-    '1.3.12': 'Palliative',
-    '1.3.14': 'Disabilities',
-    '1.3.15': 'Cardiovasular Diseases',
-    '1.3.16': 'Renal Diseases',
-    '1.3.17': 'Liver Diseases',
-    '1.3.18': 'Endocrine Metabolic Disorders',
-    '1.3.19': 'Injuries',
-    '1.3.20': 'Minor Operations OPD',
-    '1.3.21': 'Neglected Tropical Diseases',
-    '1.3.22': 'Maternal Conditions',
-    '1.3.24': 'Deaths in OPD',
-    '1.3.25': 'Emergency Medical Services',
-    '1.3.26': 'TB Screening',
-    '1.3.27': 'Leprosy Services',
-    '1.3.28': 'Nutrition Services',
-    '1.3.29': 'Gender Based Violence Services',
-    '2.1': 'Antenatal',
-    '2.2': 'Maternity',
-    '2.3': 'Postnatal',
-    '2.4.1': 'Family Planning Client Visits',
-    '2.4.2': 'Contraceptives Dispensed',
-    '2.4.3': 'Minor Operations Family Planning',
-    '2.4.4': 'Postpartum Family Planning',
-    '2.4.5': 'Post Abortion Family Planning',
-    '2.4.6': 'Removal of Long Acting',
-    '2.4.7': 'Integrated Family Planning'
-};
-
-const Conditions = ({ section, selectedMonth, selectedYear }) => {
+const Conditions = ({ selectedMonth, selectedYear, section }) => {
     return (
-        <>
-            {section === '1.1' &&
-                <Attedance
-                    section={section}
-                    selectedMonth={selectedMonth}
-                    selectedYear={selectedYear}
-                    ageGroupMapping={ageGroupMapping}
-                    ageGroups={ageGroups}
-                    genders={genders}
-                    getMonthNumber={getMonthNumber}
-                />
-            }
-            {Object.entries(sectionTitles).map(([sectionId, title]) => {
-                if (sectionId !== '1.1' && sectionId === section) {
-                    return (
-                        <ConditionsForm
-                            key={sectionId}
-                            section={section}
-                            selectedMonth={selectedMonth}
-                            selectedYear={selectedYear}
-                            ageGroupMapping={ageGroupMapping}
-                            ageGroups={ageGroups}
-                            genders={genders}
-                            getMonthNumber={getMonthNumber}
-                            section_id={sectionId}
-                            title={`${sectionId} ${title}`}
-                        />
-                    );
-                }
-                return null;
-            })}
-        </>
+        <ConditionsForm
+            selectedMonth={selectedMonth}
+            selectedYear={selectedYear}
+            ageGroupMapping={ageGroupMapping}
+            ageGroups={ageGroups}
+            genders={genders}
+            getMonthNumber={getMonthNumber}
+            section_id={section}
+        />
     );
 };
 
