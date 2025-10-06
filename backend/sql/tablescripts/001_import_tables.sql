@@ -972,64 +972,6 @@ CREATE TABLE IF NOT EXISTS import.eafya_family_planning
 , "name" VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS import.eafya_patient_lab_test
-(
-  id BIGINT
-, version BIGINT
-, annulled_at TIMESTAMP
-, annulled_by_id BIGINT
-, attended_by_id BIGINT
-, branch_id BIGINT
-, clinical_note TEXT
-, company_id BIGINT
-, conclusion TEXT
-, created_by_id BIGINT
-, date_created TIMESTAMP
-, encounter_id BIGINT
-, is_default BOOLEAN
-, is_first_time_test BOOLEAN
-, is_urgent BOOLEAN
-, lab_test_id BIGINT
-, last_updated TIMESTAMP
-, linked_test_id BIGINT
-, parent_id BIGINT
-, performed_at TIMESTAMP
-, posted_to_external_system BOOLEAN
-, posting_attempts INTEGER
-, posting_failure_message VARCHAR(255)
-, procedure_notes TEXT
-, requires_urgent_action BOOLEAN
-, "result" VARCHAR(255)
-, sample_collected_by_id BIGINT
-, sample_collection_time TIMESTAMP
-, sample_rejected_by_id BIGINT
-, sample_rejection_note VARCHAR(255)
-, sample_rejection_time TIMESTAMP
-, status VARCHAR(255)
-, technician_comment TEXT
-, verified_at TIMESTAMP
-, verified_by_id BIGINT
-, visit_type VARCHAR(28)
-, additional_processing_time NUMERIC(21, 2)
-, annullment_location VARCHAR(255)
-, annullment_reason TEXT
-, ap_number VARCHAR(255)
-, emailed_at TIMESTAMP
-, is_leaf BOOLEAN
-, outsourcing_facility_id BIGINT
-, printed_at TIMESTAMP
-, request_location VARCHAR(255)
-, result_alteration_reason TEXT
-, sample_collection_location VARCHAR(255)
-, sample_rejection_location VARCHAR(255)
-, test_unit VARCHAR(255)
-, testing_location VARCHAR(255)
-, maximum_range VARCHAR(255)
-, minimum_range VARCHAR(255)
-, report VARCHAR(255)
-)
-;
-
 CREATE TABLE IF NOT EXISTS import.eafya_disease
 (
   id BIGINT
@@ -1372,5 +1314,22 @@ CREATE TABLE IF NOT EXISTS import."eafya_triage_type_vital_sign "
 , created_by_id BIGINT
 , triage_type_id BIGINT
 , vital_type_id BIGINT
+)
+;
+
+CREATE TABLE import.eafya_patient_lab_test
+(
+  id BIGINT
+, created_by_id BIGINT
+, encounter_id BIGINT
+, is_default BOOLEAN
+, lab_test_id BIGINT
+, date_created TIMESTAMP
+, last_updated TIMESTAMP
+, parent_id BIGINT
+, performed_at TIMESTAMP
+, "result" VARCHAR(255)
+, status VARCHAR(255)
+, visit_type VARCHAR(28)
 )
 ;
