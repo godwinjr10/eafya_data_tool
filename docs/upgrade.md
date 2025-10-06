@@ -48,20 +48,20 @@ sudo yarn install
 ## Step 5. Stop and Restart the Backend Service
 
 ```bash
-sudo systemctl stop eafya-dwh.service
-sudo systemctl start eafya-dwh.service
-sudo systemctl status eafya-dwh.service
+sudo npm install -g pm2
+cd /home/artson_admin/eafya_data_tool/backend/
+pm2 start index.js --name dwh-backend
+pm2 startup systemd
+pm2 start 
+pm2 status dwh-backend
+pm2 restart dwh-backend
 ```
 
 ## Step 6. Run the following scripts to create the tables and upload the csvs
 
 ```bash
 cd /home/artson_admin/eafya_data_tool/backend/scripts
-node addtables.js
-node uploads.js
-node setupData.js
-node addIds.js
-node views.js
+node allSetup.js
 ```
 ## Step 7. Install the Frontend Packages by running yarn install
 
