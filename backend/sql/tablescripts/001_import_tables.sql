@@ -1317,7 +1317,7 @@ CREATE TABLE IF NOT EXISTS import."eafya_triage_type_vital_sign "
 )
 ;
 
-CREATE TABLE import.eafya_patient_lab_test
+CREATE TABLE IF NOT EXISTS import.eafya_patient_lab_test
 (
   id BIGINT
 , created_by_id BIGINT
