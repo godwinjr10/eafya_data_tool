@@ -1132,7 +1132,7 @@ CREATE TABLE IF NOT EXISTS dwh.dim_eafya_triage_type_vital_sign
 , created_by_id BIGINT
 , triage_type_id BIGINT
 , vital_type_id BIGINT
-)
+);
 
 CREATE TABLE IF NOT EXISTS dwh.fact_eafya_patient_lab_test
 (
