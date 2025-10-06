@@ -511,21 +511,13 @@
 , encounter_id
 , is_default
 , lab_test_id
-, linked_test_id
-, parent_id
-, "result"
-, sample_collected_by_id
-, sample_collection_time
-, sample_rejected_by_id
-, sample_rejection_note
-, sample_rejection_time
-, status
-, technician_comment
-, verified_at
-, verified_by_id
-, visit_type
 , date_created
 , last_updated
+, parent_id
+, performed_at
+, "result"
+, status
+, visit_type
 FROM stage.fact_eafya_patient_lab_test
 </sql>
     <limit>0</limit>
@@ -651,14 +643,37 @@ FROM stage.fact_eafya_patient_lab_test
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>Timestamp</type>
         <storagetype>normal</storagetype>
-        <name>linked_test_id</name>
-        <length>15</length>
-        <precision>0</precision>
+        <name>date_created</name>
+        <length>6</length>
+        <precision>-1</precision>
         <origin>input patient lab test</origin>
-        <comments>linked_test_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <comments>date_created</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>last_updated</name>
+        <length>6</length>
+        <precision>-1</precision>
+        <origin>input patient lab test</origin>
+        <comments>last_updated</comments>
+        <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -697,83 +712,14 @@ FROM stage.fact_eafya_patient_lab_test
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>result</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient lab test</origin>
-        <comments>result</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>sample_collected_by_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient lab test</origin>
-        <comments>sample_collected_by_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
         <type>Timestamp</type>
         <storagetype>normal</storagetype>
-        <name>sample_collection_time</name>
+        <name>performed_at</name>
         <length>6</length>
         <precision>-1</precision>
         <origin>input patient lab test</origin>
-        <comments>sample_collection_time</comments>
+        <comments>performed_at</comments>
         <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>sample_rejected_by_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient lab test</origin>
-        <comments>sample_rejected_by_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -791,34 +737,11 @@ FROM stage.fact_eafya_patient_lab_test
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>sample_rejection_note</name>
+        <name>result</name>
         <length>255</length>
         <precision>-1</precision>
         <origin>input patient lab test</origin>
-        <comments>sample_rejection_note</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>sample_rejection_time</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>input patient lab test</origin>
-        <comments>sample_rejection_time</comments>
+        <comments>result</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -860,126 +783,11 @@ FROM stage.fact_eafya_patient_lab_test
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>technician_comment</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>input patient lab test</origin>
-        <comments>technician_comment</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>verified_at</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>input patient lab test</origin>
-        <comments>verified_at</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>verified_by_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient lab test</origin>
-        <comments>verified_by_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
         <name>visit_type</name>
         <length>28</length>
         <precision>-1</precision>
         <origin>input patient lab test</origin>
         <comments>visit_type</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>date_created</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>input patient lab test</origin>
-        <comments>date_created</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>last_updated</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>input patient lab test</origin>
-        <comments>last_updated</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>

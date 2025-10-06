@@ -442,8 +442,8 @@
     <access>Native</access>
     <database>${dwh_db}</database>
     <port>${dwh_port}</port>
-    <username>${dwh_username}</username>
-    <password>${dwh_password}</password>
+    <username>${dwh_user}</username>
+    <password>${dwh_pw}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -556,8 +556,20 @@
       <schema_name/>
     </partitioning>
     <connection>local_conn</connection>
-    <sql>SELECT *
-FROM "public".patient_lab_test 
+    <sql>SELECT 
+l.id ,
+l.created_by_id ,
+l.encounter_id ,
+l.is_default ,
+l.lab_test_id ,
+l.date_created,
+l.last_updated ,
+l.parent_id ,
+l.performed_at ,
+l."result" ,
+l.status,
+l.visit_type
+FROM "public".patient_lab_test l 
 WHERE date_created > '${LAST_RUN_DATE}'
 
 </sql>
@@ -588,191 +600,7 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>version</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>version</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>annulled_at</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>annulled_at</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>annulled_by_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>annulled_by_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>attended_by_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>attended_by_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>branch_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>branch_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>clinical_note</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>clinical_note</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>company_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>company_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>conclusion</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>conclusion</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -795,30 +623,7 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>date_created</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>date_created</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -841,7 +646,7 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -864,53 +669,7 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Boolean</type>
-        <storagetype>normal</storagetype>
-        <name>is_first_time_test</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>is_first_time_test</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Boolean</type>
-        <storagetype>normal</storagetype>
-        <name>is_urgent</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>is_urgent</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -933,7 +692,30 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Timestamp</type>
+        <storagetype>normal</storagetype>
+        <name>date_created</name>
+        <length>6</length>
+        <precision>-1</precision>
+        <origin>input patient_lab_test</origin>
+        <comments>date_created</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -956,30 +738,7 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>linked_test_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>linked_test_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -1002,7 +761,7 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -1025,122 +784,7 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Boolean</type>
-        <storagetype>normal</storagetype>
-        <name>posted_to_external_system</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>posted_to_external_system</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>posting_attempts</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>posting_attempts</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>posting_failure_message</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>posting_failure_message</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>procedure_notes</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>procedure_notes</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Boolean</type>
-        <storagetype>normal</storagetype>
-        <name>requires_urgent_action</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>requires_urgent_action</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -1163,122 +807,7 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>sample_collected_by_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>sample_collected_by_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>sample_collection_time</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>sample_collection_time</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>sample_rejected_by_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>sample_rejected_by_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>sample_rejection_note</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>sample_rejection_note</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>sample_rejection_time</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>sample_rejection_time</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -1301,76 +830,7 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>technician_comment</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>technician_comment</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>verified_at</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>verified_at</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>verified_by_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>verified_by_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
@@ -1393,513 +853,7 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
         <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>BigNumber</type>
-        <storagetype>normal</storagetype>
-        <name>additional_processing_time</name>
-        <length>19</length>
-        <precision>2</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>additional_processing_time</comments>
-        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>annullment_location</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>annullment_location</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>annullment_reason</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>annullment_reason</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>ap_number</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>ap_number</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>emailed_at</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>emailed_at</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Boolean</type>
-        <storagetype>normal</storagetype>
-        <name>is_leaf</name>
-        <length>-1</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>is_leaf</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>outsourcing_facility_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>outsourcing_facility_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Timestamp</type>
-        <storagetype>normal</storagetype>
-        <name>printed_at</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>printed_at</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>request_location</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>request_location</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>result_alteration_reason</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>result_alteration_reason</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>sample_collection_location</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>sample_collection_location</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>sample_rejection_location</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>sample_rejection_location</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>test_unit</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>test_unit</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>testing_location</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>testing_location</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>sample_type</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>sample_type</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>code</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>code</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>code_name</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>code_name</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>code_url</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>code_url</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>lab_ext_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>lab_ext_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>BigNumber</type>
-        <storagetype>normal</storagetype>
-        <name>maximum_range</name>
-        <length>19</length>
-        <precision>2</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>maximum_range</comments>
-        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>BigNumber</type>
-        <storagetype>normal</storagetype>
-        <name>minimum_range</name>
-        <length>19</length>
-        <precision>2</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>minimum_range</comments>
-        <conversion_Mask>######0.0###################;-######0.0###################</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>report</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>input patient_lab_test</origin>
-        <comments>report</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Kampala</date_format_timezone>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
     </row-meta>
@@ -1951,44 +905,8 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <stream_name>id</stream_name>
       </field>
       <field>
-        <column_name>version</column_name>
-        <stream_name>version</stream_name>
-      </field>
-      <field>
-        <column_name>annulled_at</column_name>
-        <stream_name>annulled_at</stream_name>
-      </field>
-      <field>
-        <column_name>annulled_by_id</column_name>
-        <stream_name>annulled_by_id</stream_name>
-      </field>
-      <field>
-        <column_name>attended_by_id</column_name>
-        <stream_name>attended_by_id</stream_name>
-      </field>
-      <field>
-        <column_name>branch_id</column_name>
-        <stream_name>branch_id</stream_name>
-      </field>
-      <field>
-        <column_name>clinical_note</column_name>
-        <stream_name>clinical_note</stream_name>
-      </field>
-      <field>
-        <column_name>company_id</column_name>
-        <stream_name>company_id</stream_name>
-      </field>
-      <field>
-        <column_name>conclusion</column_name>
-        <stream_name>conclusion</stream_name>
-      </field>
-      <field>
         <column_name>created_by_id</column_name>
         <stream_name>created_by_id</stream_name>
-      </field>
-      <field>
-        <column_name>date_created</column_name>
-        <stream_name>date_created</stream_name>
       </field>
       <field>
         <column_name>encounter_id</column_name>
@@ -1999,24 +917,16 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <stream_name>is_default</stream_name>
       </field>
       <field>
-        <column_name>is_first_time_test</column_name>
-        <stream_name>is_first_time_test</stream_name>
-      </field>
-      <field>
-        <column_name>is_urgent</column_name>
-        <stream_name>is_urgent</stream_name>
-      </field>
-      <field>
         <column_name>lab_test_id</column_name>
         <stream_name>lab_test_id</stream_name>
       </field>
       <field>
-        <column_name>last_updated</column_name>
-        <stream_name>last_updated</stream_name>
+        <column_name>date_created</column_name>
+        <stream_name>date_created</stream_name>
       </field>
       <field>
-        <column_name>linked_test_id</column_name>
-        <stream_name>linked_test_id</stream_name>
+        <column_name>last_updated</column_name>
+        <stream_name>last_updated</stream_name>
       </field>
       <field>
         <column_name>parent_id</column_name>
@@ -2027,136 +937,16 @@ WHERE date_created > '${LAST_RUN_DATE}'
         <stream_name>performed_at</stream_name>
       </field>
       <field>
-        <column_name>posted_to_external_system</column_name>
-        <stream_name>posted_to_external_system</stream_name>
-      </field>
-      <field>
-        <column_name>posting_attempts</column_name>
-        <stream_name>posting_attempts</stream_name>
-      </field>
-      <field>
-        <column_name>posting_failure_message</column_name>
-        <stream_name>posting_failure_message</stream_name>
-      </field>
-      <field>
-        <column_name>procedure_notes</column_name>
-        <stream_name>procedure_notes</stream_name>
-      </field>
-      <field>
-        <column_name>requires_urgent_action</column_name>
-        <stream_name>requires_urgent_action</stream_name>
-      </field>
-      <field>
         <column_name>result</column_name>
         <stream_name>result</stream_name>
-      </field>
-      <field>
-        <column_name>sample_collected_by_id</column_name>
-        <stream_name>sample_collected_by_id</stream_name>
-      </field>
-      <field>
-        <column_name>sample_collection_time</column_name>
-        <stream_name>sample_collection_time</stream_name>
-      </field>
-      <field>
-        <column_name>sample_rejected_by_id</column_name>
-        <stream_name>sample_rejected_by_id</stream_name>
-      </field>
-      <field>
-        <column_name>sample_rejection_note</column_name>
-        <stream_name>sample_rejection_note</stream_name>
-      </field>
-      <field>
-        <column_name>sample_rejection_time</column_name>
-        <stream_name>sample_rejection_time</stream_name>
       </field>
       <field>
         <column_name>status</column_name>
         <stream_name>status</stream_name>
       </field>
       <field>
-        <column_name>technician_comment</column_name>
-        <stream_name>technician_comment</stream_name>
-      </field>
-      <field>
-        <column_name>verified_at</column_name>
-        <stream_name>verified_at</stream_name>
-      </field>
-      <field>
-        <column_name>verified_by_id</column_name>
-        <stream_name>verified_by_id</stream_name>
-      </field>
-      <field>
         <column_name>visit_type</column_name>
         <stream_name>visit_type</stream_name>
-      </field>
-      <field>
-        <column_name>additional_processing_time</column_name>
-        <stream_name>additional_processing_time</stream_name>
-      </field>
-      <field>
-        <column_name>annullment_location</column_name>
-        <stream_name>annullment_location</stream_name>
-      </field>
-      <field>
-        <column_name>annullment_reason</column_name>
-        <stream_name>annullment_reason</stream_name>
-      </field>
-      <field>
-        <column_name>ap_number</column_name>
-        <stream_name>ap_number</stream_name>
-      </field>
-      <field>
-        <column_name>emailed_at</column_name>
-        <stream_name>emailed_at</stream_name>
-      </field>
-      <field>
-        <column_name>is_leaf</column_name>
-        <stream_name>is_leaf</stream_name>
-      </field>
-      <field>
-        <column_name>outsourcing_facility_id</column_name>
-        <stream_name>outsourcing_facility_id</stream_name>
-      </field>
-      <field>
-        <column_name>printed_at</column_name>
-        <stream_name>printed_at</stream_name>
-      </field>
-      <field>
-        <column_name>request_location</column_name>
-        <stream_name>request_location</stream_name>
-      </field>
-      <field>
-        <column_name>result_alteration_reason</column_name>
-        <stream_name>result_alteration_reason</stream_name>
-      </field>
-      <field>
-        <column_name>sample_collection_location</column_name>
-        <stream_name>sample_collection_location</stream_name>
-      </field>
-      <field>
-        <column_name>sample_rejection_location</column_name>
-        <stream_name>sample_rejection_location</stream_name>
-      </field>
-      <field>
-        <column_name>test_unit</column_name>
-        <stream_name>test_unit</stream_name>
-      </field>
-      <field>
-        <column_name>testing_location</column_name>
-        <stream_name>testing_location</stream_name>
-      </field>
-      <field>
-        <column_name>maximum_range</column_name>
-        <stream_name>maximum_range</stream_name>
-      </field>
-      <field>
-        <column_name>minimum_range</column_name>
-        <stream_name>minimum_range</stream_name>
-      </field>
-      <field>
-        <column_name>report</column_name>
-        <stream_name>report</stream_name>
       </field>
     </fields>
     <attributes/>
