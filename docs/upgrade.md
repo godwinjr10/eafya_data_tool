@@ -57,11 +57,7 @@ sudo systemctl status eafya-dwh.service
 
 ```bash
 cd /home/artson_admin/eafya_data_tool/backend/scripts
-node addtables.js
-node uploads.js
-node setupData.js
-node addIds.js
-node views.js
+node allSetup.js
 ```
 ## Step 7. Install the Frontend Packages by running yarn install
 
