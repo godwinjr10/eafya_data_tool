@@ -463,10 +463,10 @@
     <server>${dwh_host}</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>${dwh_name}</database>
+    <database>${dwh_db}</database>
     <port>${dwh_port}</port>
-    <username>${dwh_username}</username>
-    <password>${dwh_password}</password>
+    <username>${dwh_user}</username>
+    <password>${dwh_pw}</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -964,7 +964,7 @@
       <schema_name/>
     </partitioning>
     <connection>dwh_conn</connection>
-    <schema>import</schema>
+    <schema>stage</schema>
     <table>eafya_patients</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
@@ -1561,7 +1561,7 @@ where date_created >'${LAST_RUN_DATE}'</sql>
       <schema_name/>
     </partitioning>
     <connection>dwh_conn</connection>
-    <schema>import</schema>
+    <schema>stage</schema>
     <table>eafya_patients_bio</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
