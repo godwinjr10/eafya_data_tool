@@ -1333,3 +1333,48 @@ CREATE TABLE IF NOT EXISTS import.eafya_patient_lab_test
 , visit_type VARCHAR(28)
 )
 ;
+
+CREATE TABLE IF NOT EXISTS import.eafya_clinical_profile_clinic
+(
+  clinical_profile_id BIGINT
+, clinic_id BIGINT
+)
+;
+
+CREATE TABLE IF NOT EXISTS import.eafya_clinical_profile
+(
+  id BIGINT
+, version BIGINT
+, branch_id BIGINT
+, clinical_profile_category_id BIGINT
+, company_id BIGINT
+, created_by_id BIGINT
+, date_created TIMESTAMP
+, hint TEXT
+, is_active BOOLEAN
+, is_mandatory BOOLEAN
+, is_system_defined BOOLEAN
+, last_updated TIMESTAMP
+, "name" TEXT
+, response_type VARCHAR(15)
+)
+;
+
+CREATE TABLE IF NOT EXISTS import.eafya_patient_clinical_profile
+(
+  id BIGINT
+, version BIGINT
+, branch_id BIGINT
+, clinical_profile_category_id BIGINT
+, company_id BIGINT
+, created_by_id BIGINT
+, date_created TIMESTAMP
+, hint TEXT
+, is_active BOOLEAN
+, is_mandatory BOOLEAN
+, is_system_defined BOOLEAN
+, last_updated TIMESTAMP
+, "name" TEXT
+, response_type VARCHAR(15)
+)
+;
