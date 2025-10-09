@@ -1,4 +1,4 @@
-id,dataelement_code,dataelement_name
+id,hmis_code,hmis_name
 1,SS01,Artemether/Lumefantrine 120/20 mg 
 2,SS02,Artesunate 60mg 
 3,SS03,Long Lasting Insecticidal Nets (LLINs) 
