@@ -1,0 +1,183 @@
+id,hmis_code,Section_id,Section_name,hmis_name
+1,BT01,10.2.1,Blood Transfusion,AHG 
+2,BT02,10.2.1,Blood Transfusion,ABO Grouping 
+3,BT03,10.2.1,Blood Transfusion,Rhesus Grouping 
+4,BT04,10.2.1,Blood Transfusion,Cross Matching 
+5,BT05,10.2.1,Blood Transfusion,Auto immune antibodies 
+6,CS01,10.2.2,Culture & Sensitivty,Blood 
+7,CS02,10.2.2,Culture & Sensitivty,Urine 
+8,CS03,10.2.2,Culture & Sensitivty,Stool 
+9,CS04,10.2.2,Culture & Sensitivty,Urogenital Swabs 
+10,CS05,10.2.2,Culture & Sensitivty,Sputum 
+11,CS06 ,10.2.2,Culture & Sensitivty,CSF 
+12,CS07 ,10.2.2,Culture & Sensitivty,Pus/wound swabs 
+13,CS08 ,10.2.2,Culture & Sensitivty,Other swabs 
+14,CS09 ,10.2.2,Culture & Sensitivty,Others 
+15,CX01,10.2.3,Other Clinical Chemistry Tests,Alkaline Phosphate 
+16,CX02,10.2.3,Other Clinical Chemistry Tests,Amylase 
+17,CX03,10.2.3,Other Clinical Chemistry Tests,Glucose 
+18,CX04,10.2.3,Other Clinical Chemistry Tests,Total Bilirubin 
+19,CX05,10.2.3,Other Clinical Chemistry Tests,Lipase 
+20,CX06,10.2.3,Other Clinical Chemistry Tests,AFPCX
+21,CX07,10.2.3,Other Clinical Chemistry Tests,LDH 
+22,CX08,10.2.3,Other Clinical Chemistry Tests,Lactate 
+23,CX09,10.2.3,Other Clinical Chemistry Tests,Uric Acid 
+24,CX10,10.2.3,Other Clinical Chemistry Tests,CRP 
+25,CX11,10.2.3,Other Clinical Chemistry Tests,Others 
+26,HE01,10.2.4,Hematology (Blood),Hb (non automated) 
+27,HE02,10.2.4,Hematology (Blood),Film Comment
+28,HE03,10.2.4,Hematology (Blood),CBC 
+29,HE04,10.2.4,Hematology (Blood),Reticulocyte count
+30,HE05,10.2.4,Hematology (Blood),ESR 
+31,HE06,10.2.4,Hematology (Blood),Bleeding time 
+32,HE07,10.2.4,Hematology (Blood),Prothrombin time 
+33,HE08,10.2.4,Hematology (Blood),Clotting time 
+34,HE09,10.2.4,Hematology (Blood),PT/INR
+35,HE10,10.2.4,Hematology (Blood),APTT
+36,HE11,10.2.4,Hematology (Blood),Sickle Cell 
+37,HE12,10.2.4,Hematology (Blood),Others
+38,HP01,10.2.5,Summary of HIV Tests By Purpose,Determine
+39,HP02,10.2.5,Summary of HIV Tests By Purpose,Statpak
+40,HP03,10.2.5,Summary of HIV Tests By Purpose,SD Bioline
+41,HP04,10.2.5,Summary of HIV Tests By Purpose,HIV Syphilis DUO
+42,HP05,10.2.5,Summary of HIV Tests By Purpose,Oraquick (Self Testing)
+43,HP06,10.2.5,Summary of HIV Tests By Purpose,HIV Recency Testing
+44,IG01,10.2.6,Immunology,CD4 test 
+45,IG02,10.2.6,Immunology,TB LAM 
+46,IG03,10.2.6,Immunology,CRP 
+47,IG04,10.2.6,Immunology,Others 
+48,LP01,10.2.7,Liver Profile,ALT 
+49,LP02,10.2.7,Liver Profile,AST 
+50,LP03,10.2.7,Liver Profile,ALP 
+51,LP04,10.2.7,Liver Profile,GGT 
+52,LP05,10.2.7,Liver Profile,Protein 
+53,LP06,10.2.7,Liver Profile,Albumin 
+54,LP07,10.2.7,Liver Profile,Bilirubin 
+55,LP08,10.2.7,Liver Profile,Bilirubin 
+56,LR01,10.2.8,Lipid Profile,Triglycerides
+57,LR02,10.2.8,Lipid Profile,Cholesterol 
+58,LR03,10.2.8,Lipid Profile,HDL
+59,LR04,10.2.8,Lipid Profile,LDL
+60,MB010,10.2.9,"Microbiology (CSF, Urine, Stool, Blood, Sputum, Swabs)",Stool for Gene xpert 
+61,MB01,10.2.9,"Microbiology (CSF, Urine, Stool, Blood, Sputum, Swabs)",Auramine (FM) 
+62,MB02,10.2.9,"Microbiology (CSF, Urine, Stool, Blood, Sputum, Swabs)",ZN for AFBs 
+63,MB03,10.2.9,"Microbiology (CSF, Urine, Stool, Blood, Sputum, Swabs)",Leishman Stain 
+64,MB04,10.2.9,"Microbiology (CSF, Urine, Stool, Blood, Sputum, Swabs)",Gram 
+65,MB05,10.2.9,"Microbiology (CSF, Urine, Stool, Blood, Sputum, Swabs)",India Ink 
+66,MB06,10.2.9,"Microbiology (CSF, Urine, Stool, Blood, Sputum, Swabs)",Urine Microscopy 
+67,MB07,10.2.9,"Microbiology (CSF, Urine, Stool, Blood, Sputum, Swabs)",Urine Protein
+68,MB08,10.2.9,"Microbiology (CSF, Urine, Stool, Blood, Sputum, Swabs)",Urine Glucose
+69,MB09,10.2.9,"Microbiology (CSF, Urine, Stool, Blood, Sputum, Swabs)",Wet Preps 
+70,MB11,10.2.9,"Microbiology (CSF, Urine, Stool, Blood, Sputum, Swabs)",Skin Smear 
+71,MB12,10.2.9,"Microbiology (CSF, Urine, Stool, Blood, Sputum, Swabs)",Others
+72,ML01,10.2.10,Molecular,"NAAT (Xpert, Trunat, TB LAMP)"
+73,ML02,10.2.10,Molecular,Latent TB Infection test
+74,ML03,10.2.10,Molecular,HPV 
+75,ML04,10.2.10,Molecular,HIV viral load (PCR)
+76,ML05,10.2.10,Molecular,Hep B Viral Load 
+77,ML06,10.2.10,Molecular,EID (PCR) 
+78,ML07,10.2.10,Molecular,Covid19 (GXP / mRDT) 
+79,ML08,10.2.10,Molecular,Others  Number 
+80,MS01,10.2.11,Stool Microscopy,Entamoeba  
+81,MS02,10.2.11,Stool Microscopy,Giardia Lumblia 
+82,MS03,10.2.11,Stool Microscopy,Cryptosporidium  
+83,MS04,10.2.11,Stool Microscopy,Isospora  
+84,MS05,10.2.11,Stool Microscopy,Cyclospora  
+85,MS06,10.2.11,Stool Microscopy,Strongyloides  
+86,MS07,10.2.11,Stool Microscopy,Schistosoma  
+87,MS08,10.2.11,Stool Microscopy,Taenia  
+88,MS09,10.2.11,Stool Microscopy,Askaris  
+89,MS10,10.2.11,Stool Microscopy,Hookworm  
+90,MS11,10.2.11,Stool Microscopy,Trichuris  
+91,MS12,10.2.11,Stool Microscopy,Other_Parasities  
+92,MS13,10.2.11,Stool Microscopy,Total Tests  for Stool Microscopy
+93,PP01,10.2.12,Pacreatics Profile,Amylase  
+94,PP02,10.2.12,Pacreatics Profile,Lipase  
+95,PP03 ,10.2.12,Pacreatics Profile,Extended Electrolytes  
+96,PP04 ,10.2.12,Pacreatics Profile,Calcium  
+97,PP05,10.2.12,Pacreatics Profile,Magnessium  
+98,PS01,10.2.13,Parasitology,Malaria Microscopy  
+99,PS02,10.2.13,Parasitology,Malaria RDTs  
+100,PS03,10.2.13,Parasitology,Trypanosoma  
+101,PS04,10.2.13,Parasitology,Microfilaria  
+102,PS05,10.2.13,Parasitology,Trichinella  
+103,PS06,10.2.13,Parasitology,Borrellia  
+104,RP01,10.2.14,Renal Profile,Urea  
+105,RP02,10.2.14,Renal Profile,Chloride  
+106,RP03,10.2.14,Renal Profile,Potassium  
+107,RP04,10.2.14,Renal Profile,Sodium  
+108,RP05,10.2.14,Renal Profile,Creatinine  
+109,RS01,10.2.15,Reasons for Specimen Rejection,Inadequate specimen volume
+110,RS02,10.2.15,Reasons for Specimen Rejection,Heamolyzed specimen
+111,RS03,10.2.15,Reasons for Specimen Rejection,Specimen without lab request form
+112,RS04,10.2.15,Reasons for Specimen Rejection,No test specified on lab request form accompanying specimen
+113,RS05,10.2.15,Reasons for Specimen Rejection,Specimen without label or identifier
+114,RS06,10.2.15,Reasons for Specimen Rejection,Wrong specimen label
+115,RS07,10.2.15,Reasons for Specimen Rejection,Unclear specimen label
+116,RS08,10.2.15,Reasons for Specimen Rejection,Wrong specimen container
+117,RS09,10.2.15,Reasons for Specimen Rejection,Damaged specimen container
+118,RS10,10.2.15,Reasons for Specimen Rejection,Too old specimen
+119,RS11,10.2.15,Reasons for Specimen Rejection,Date of specimen collection not specified
+120,RS12,10.2.15,Reasons for Specimen Rejection,Time of specimen collection not specified
+121,RS13,10.2.15,Reasons for Specimen Rejection,Specimen type unacceptable for required test
+122,RS14,10.2.15,Reasons for Specimen Rejection,Other reasons
+123,RT01,10.2.16,Routine Test Type,Routine tests that could not be conducted at facility  Chemistry
+124,RT02,10.2.16,Routine Test Type,Routine tests that could not be conducted at facility  Microbiology
+125,RT03,10.2.16,Routine Test Type,Routine tests that could not be conducted at facility  HIV screening
+126,RT04,10.2.16,Routine Test Type,Routine tests that could not be conducted at facility  Haematology
+127,RT05,10.2.16,Routine Test Type,Routine tests that could not be conducted at facility  Parasitology
+128,RT07,10.2.16,Routine Test Type,Routine tests that could not be conducted at facility  Serology
+129,SR01,10.2.17,Serology,VDRL/ RPR  
+130,SR02,10.2.17,Serology,TPHA  
+131,SR03,10.2.17,Serology,Shigella Dysentery  
+132,SR04,10.2.17,Serology,Hepatitis BsAg 
+133,SR05,10.2.17,Serology,Brucella  
+134,SR06,10.2.17,Serology,Pregnancy Test (HCG)  
+135,SR07,10.2.17,Serology,CrAg 
+136,SR08,10.2.17,Serology,Rheumatoid factor  
+137,SR09,10.2.17,Serology,Hep B Core Ag  
+138,SR10,10.2.17,Serology,Hep C  
+139,SR11,10.2.17,Serology,Hep A  
+140,SR12,10.2.17,Serology,Hep BsAg 
+141,SR13,10.2.17,Serology,H. pylori 
+142,SR14,10.2.17,Serology,Occult blood 
+143,SR15,10.2.17,Serology,Toxoplasma IgG 
+144,SR16,10.2.17,Serology,Toxoplasma IgM 
+145,SR17,10.2.17,Serology,Rubella 
+146,SR18,10.2.17,Serology,Others 
+147,TP01,10.2.18,Thyroids Profile,T3 
+148,TP02,10.2.18,Thyroids Profile,T4 
+149,TP03,10.2.18,Thyroids Profile,TSH  
+150,TP04,10.2.18,Thyroids Profile,Free T3  
+151,TP05,10.2.18,Thyroids Profile,Free T4  
+152,VS01,10.2.19,Virology,EID  Samples Referred
+153,VS02,10.2.19,Virology,Viral Load for HIV  Samples Referred
+154,VS03,10.2.19,Virology,CD4  Samples Referred
+155,VS04,10.2.19,Virology,Sickle Cell Disease Confirmation  Samples Referred
+156,VS05,10.2.19,Virology,Histology  Samples Referred
+157,VS06,10.2.19,Virology,Polio/ or Acute Flaccid Paralysis  Samples Referred
+158,VS07,10.2.19,Virology,Severe Acute Respiratory Syndrome/Infection (SARS/SARI)  Samples Referred
+159,VS08,10.2.19,Virology,TB Genexpert  Samples Referred
+160,VS09,10.2.19,Virology,DST for Multi Drug Resistance TB (MDR TB)  Samples Referred
+161,VS10,10.2.19,Virology,Hepatitis B Viral load  Samples Referred
+162,VS11,10.2.19,Virology,Hepatitis C Viral load  Samples Referred
+163,VS12,10.2.19,Virology,"Hep BcAg,  Samples Referred"
+164,VS13,10.2.19,Virology,"HIV MDR,  Samples Referred"
+165,VS14,10.2.19,Virology,"VHFs (EBOLA, MARBUG)   Samples Referred"
+166,VS15,10.2.19,Virology,"Cytology,  Samples Referred"
+167,VS16,10.2.19,Virology,"Measles / Rubella,  Samples Referred"
+168,VS17,10.2.19,Virology,Yellow fever  Samples Referred
+169,VS18,10.2.19,Virology,Rabies  Samples Referred
+170,VS19,10.2.19,Virology,Typhoid Fever  Samples Referred
+171,VS20,10.2.19,Virology,Cholera  Samples Referred
+172,VS21,10.2.19,Virology,Dysentery  Samples Referred
+173,VS22,10.2.19,Virology,Rota Virus  Samples Referred
+174,VS23,10.2.19,Virology,Meningitis  Samples Referred
+175,VS24,10.2.19,Virology,Neonatal tetanus  Samples Referred
+176,VS25,10.2.19,Virology,Plague  Samples Referred
+177,VS26,10.2.19,Virology,Isolates  Samples Referred
+178,VS27,10.2.19,Virology,Viral Haemorrhagic Fevers (VHF)  Samples Referred
+179,VS28,10.2.19,Virology,Animal Bites (suspected rabies)  Samples Referred
+180,VS29,10.2.19,Virology,Haemoparasites  Samples Referred
+181,VS30,10.2.19,Virology,Intestinal parasites  Samples Referred
+182,VS31,10.2.19,Virology,Tissue parasites  Samples Referred
