@@ -1,0 +1,120 @@
+id,dataset_id,dataset_code,dataset_name,dataelement_id,dataelement_code,dataelement_name,section_name,section_id,hmis_code
+1,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,sDLD6q8wOCn,SP01,Caesarean sections,obstetrics,3.1.1,SP01
+2,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,bXGtRI5c0lC,SP02,"Obstetric fistula repair (RVF, VVF, RVVF)",obstetrics,3.1.1,SP02
+3,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,MkpBT2vT5Ea,SP03,Evacuations (incomplete abortion),obstetrics,3.1.1,SP03
+4,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,IYWgEa8BVrm,SP04,Other Obstetric Surgery,obstetrics,3.1.1,SP04
+5,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,Wr9KVsGQLd4,GN01,Laparotomy for ovarian surgery,Gynaecology,3.1.2,GN01
+6,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,lR9X9RCGwNx,GN02,Abdominal hysterectomy,Gynaecology,3.1.2,GN02
+7,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,ucpSiMvW6WA,GN03,Vaginal hysterectomy,Gynaecology,3.1.2,GN03
+8,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,Ai45siHVs0U,GN04,Myomectomy,Gynaecology,3.1.2,GN04
+9,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,rrCNknVDR4M,GN05,Laparotomy for ectopic pregnancy,Gynaecology,3.1.2,GN05
+10,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,wSEiwbzS12h,GN06,Other gynaecological surgery,Gynaecology,3.1.2,GN06
+11,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,vNHfWrPtBdh,PR01,Skin grafting,Plastic Surgery,3.1.3,PR01
+12,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,WOIQPJ0Q4ch,PR02,Release of contractures (burns),Plastic Surgery,3.1.3,PR02
+13,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,vdt4YnvpmUd,PR03,Cleft lip and palate surgery,Plastic Surgery,3.1.3,PR03
+14,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,ohXcG1L3DqI,PR04,Burns management,Plastic Surgery,3.1.3,PR04
+15,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,kZwLRNvQnby,PR05,Scar revisions,Plastic Surgery,3.1.3,PR05
+16,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,FwNJD2RlyfX,PR078,Breast reconstruction,Plastic Surgery,3.1.3,PR078
+17,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,r6EHRaatenm,PR08,Other plastic surgery,Plastic Surgery,3.1.3,PR08
+18,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,v70YDEPYNmu,CS01,Thoracotomy,Cardiothoracic Surgery,3.1.4,CS01
+19,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,InpXo2p84TL,CS02,Coronary artery bypass graft,Cardiothoracic Surgery,3.1.4,CS02
+20,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,N3ZBSDlbCOB,CS03,Heart valve surgery,Cardiothoracic Surgery,3.1.4,CS03
+21,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,yzJGgK2gkKv,CS04,Atrio/ventricular septal defect surgery,Cardiothoracic Surgery,3.1.4,CS04
+22,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,bc3yiLh7BDD,CS05,Chest tube insertion,Cardiothoracic Surgery,3.1.4,CS05
+23,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,OgsO6jkh0UF,CS06,Feeding Gastrostomy,Cardiothoracic Surgery,3.1.4,CS06
+24,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,Jhj6UP6572d,CS07,Thrombectomy,Cardiothoracic Surgery,3.1.4,CS07
+25,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,k2V7ZVpazLK,CS08,Other cardiothoracic surgery,Cardiothoracic Surgery,3.1.4,CS08
+26,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,GujGx9Ci89n,VS01,Varicose vein - ligation & stripping,Vascular Surgery,3.1.5,VS01
+27,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,LqiYBWdxeW7,VS02,Repair of abdominal aortic aneurysm,Vascular Surgery,3.1.5,VS02
+28,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,Pda0kNZCTbm,VS03,Other vascular surgery,Vascular Surgery,3.1.5,VS03
+29,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,SmFAlm1PgYQ,PS01,Laparotomy for intussusception,Paediatric Surgery,3.1.6,PS01
+30,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,K6TjpCYCC2t,PS02,Neonatal laparotomy,Paediatric Surgery,3.1.6,PS02
+31,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,iqQy1EQQXwA,PS03,Neonatal colostomy,Paediatric Surgery,3.1.6,PS03
+32,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,cZZzWLRMeph,PS04,Pull through,Paediatric Surgery,3.1.6,PS04
+33,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,U8YFuKAmbGO,PS05,Ramstedt's pyloromyotomy,Paediatric Surgery,3.1.6,PS05
+34,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,JcKxXChRZIn,PS06,Gastroschisis repair,Paediatric Surgery,3.1.6,PS06
+35,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,gvQM2vI6GKw,PS07,placement,Paediatric Surgery,3.1.6,PS07
+36,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,p7I8eXtvCtH,PS08,Other paediatric surgery,Paediatric Surgery,3.1.6,PS08
+37,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,XDyaUqmBzdI,OC01,Cataract Surgery,Ocular Surgery,3.1.7,OC01
+38,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,TOyterBj30O,OC02,Glaucoma Surgery,Ocular Surgery,3.1.7,OC02
+39,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,nu4DRHqmkeW,OC03,Orbital Surgery,Ocular Surgery,3.1.7,OC03
+40,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,rHp5CUB5WLX,OC04,Opthalmic laser Interventions,Ocular Surgery,3.1.7,OC04
+41,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,vnvuNpQaQwF,OC05,Surgery for penetrating eye injury,Ocular Surgery,3.1.7,OC05
+42,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,JmrZPitsaj1,OC06,Trachoma Surgery,Ocular Surgery,3.1.7,OC06
+43,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,JeALw6paf8K,OC07,Pterygium excision,Ocular Surgery,3.1.7,OC07
+44,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,NOT5Yw9h7CE,OC08,Other ocular surgery,Ocular Surgery,3.1.7,OC08
+45,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,zEqnsEWsIfy,OR01,Internal fixation,Trauma & Orthopaedic Surgery,3.1.8,OR01
+46,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,bvo3ZHoUvOe,OR02,External fixation,Trauma & Orthopaedic Surgery,3.1.8,OR02
+47,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,ZoPc492lncm,OR03,Arthroplasty,Trauma & Orthopaedic Surgery,3.1.8,OR03
+48,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,DGz8vjuaY5x,OR04,Amputation,Trauma & Orthopaedic Surgery,3.1.8,OR04
+49,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,AH2jKSkLju4,OR05,Spinal surgery,Trauma & Orthopaedic Surgery,3.1.8,OR05
+50,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,mLb7dxlEIrF,OR06,Arthroscopy,Trauma & Orthopaedic Surgery,3.1.8,OR06
+51,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,bshHls66K2a,OR07,Other trauma & orthopaedic surgery,Trauma & Orthopaedic Surgery,3.1.8,OR07
+52,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,QvlggWB62I9,ES01,Thyroidectomy,Endocrine Surgery,3.1.9,ES01
+53,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,opWJppbNZCF,ES02,Adrenalectomy,Endocrine Surgery,3.1.9,ES02
+54,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,HOhljVgTvSL,ES03,Other endocrine surgery,Endocrine Surgery,3.1.9,ES03
+55,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,d9GWZJJ2r9T,NS01,Brain surgery,Neuro surgery,3.1.10,NS01
+56,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,my8OSGk4Rdz,NS02,Burr Hole,Neuro surgery,3.1.10,NS02
+57,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,nMPHGMjMvZR,NS03,Craniotomy/craniectomy for trauma,Neuro surgery,3.1.10,NS03
+58,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,BB07cBjzx1Q,NS04,ETV/CPC (Endoscopic 3rd Ventriculostomy/ cauterisation) choroid plexus,Neuro surgery,3.1.10,NS04
+59,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,FjtjjiIA4Oq,NS05,Spina-bifida surgery,Neuro surgery,3.1.10,NS05
+60,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,oRztWjPFjbk,NS06,VP shunt,Neuro surgery,3.1.10,NS06
+61,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,dln07lFc7V9,NS07,Skull fracture elevation,Neuro surgery,3.1.10,NS07
+62,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,IK7m3dy69hJ,NS08,Other neurosurgery,Neuro surgery,3.1.10,NS08
+63,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,pZDIHyZOWK4,TS01,Tracheostomy,ENT Surgery,3.1.11,TS01
+64,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,vL5h1uh9FER,TS02,Adenotonsillectomy,ENT Surgery,3.1.11,TS02
+65,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,Oi25Tc9WDiL,TS03,Nasal surgery,ENT Surgery,3.1.11,TS03
+66,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,RFiAvKOyyiy,TS04,Laryngological surgery,ENT Surgery,3.1.11,TS04
+67,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,B7taodYrMCs,TS05,Otological surgery,ENT Surgery,3.1.11,TS05
+68,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,P0ClXAhllg9,TS06,ENT endoscopic surgery,ENT Surgery,3.1.11,TS06
+69,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,iXbejagWQ8S,TS07,FB esophagus,ENT Surgery,3.1.11,TS07
+70,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,DzHeCMVkkX9,TS08,FB bronchus,ENT Surgery,3.1.11,TS08
+71,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,b4BpYiSOpJk,TS09,Tonsillectomy,ENT Surgery,3.1.11,TS09
+72,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,RsEkchIdMIf,TS10,Nasal fractures,ENT Surgery,3.1.11,TS10
+73,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,jKvViwMuURP,TS11,Benign neck masses excisions,ENT Surgery,3.1.11,TS11
+74,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,EKucWpRdbRL,TS12,Other ENT surgeries,ENT Surgery,3.1.11,TS12
+75,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,UWT7ufBkREK,BS01,Mastectomy,Breast Surgery,3.1.12,BS01
+76,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,HyGhE244Xpy,BS02,Other breast surgery,Breast Surgery,3.1.12,BS02
+77,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,QaduuMiuCqZ,UR01,Prostatectomy,Urology,3.1.13,UR01
+78,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,WLzv46Pa4si,UR02,Renal surgery ,Urology,3.1.13,UR02
+79,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,ZdTB8r8X8hA,UR03,Urethral surgery,Urology,3.1.13,UR03
+80,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,nwAiQ0eKbWk,UR04,"Testicular Surgery (Orchidopexy, ochidectomy,BSO)",Urology,3.1.13,UR04
+81,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,W64onHk9SXI,UR05,"Urine diversion (SPC, Nephrostomy)",Urology,3.1.13,UR05
+82,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,tNyVMeobfib,UR06,Kidney transplant,Urology,3.1.13,UR06
+83,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,kfnKksFMkj5,UR07,Hydrocelectomy(LF),Urology,3.1.13,UR07
+84,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,ZjntwzGg2Xr,UR08,Trauma (urethral),Urology,3.1.13,UR08
+85,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,NCgaw5FEJXO,UR09,Bladder tumor excision,Urology,3.1.13,UR09
+86,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,yZNuDyBfsJc,UR10,Cystoscopy,Urology,3.1.13,UR10
+87,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,RSojLgY4g9M,UR11,Torsion,Urology,3.1.13,UR11
+88,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,ubHq9cyJZdJ,UR12,Other urological surgery,Urology,3.1.13,UR12
+89,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,QWIfLFOY95Q,UG01,Gastric Surgery,Upper GI Surgery,3.1.14,UG01
+90,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,m1F0odI3nY6,UG02,Ileostomy surgery,Upper GI Surgery,3.1.14,UG02
+91,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,Oo6kbn4NLM8,UG03,Laparoscopic Surgery,Upper GI Surgery,3.1.14,UG03
+92,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,C5bLe7kUiVm,UG04,Other upper GI surgery,Upper GI Surgery,3.1.14,UG04
+93,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,VQ6E8ZmnNxp,HS01,Cholecystectomy,Hepatobilliary Surgery,3.1.15,HS01
+94,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,A9CZ0GJSpkN,HS02,Liver surgery,Hepatobilliary Surgery,3.1.15,HS02
+95,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,b7XWAQx1lJi,HS03,Pancreatic surgery,Hepatobilliary Surgery,3.1.15,HS03
+96,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,FRLjpKeP7wn,HS04,Splenic surgery,Hepatobilliary Surgery,3.1.15,HS04
+97,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,s9ZBdsfMwaA,HS05,Bilio-intestinal diversion,Hepatobilliary Surgery,3.1.15,HS05
+98,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,vyHBTXys1fJ,HS06,Other hepatobilliary surgery,Hepatobilliary Surgery,3.1.15,HS06
+99,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,fAz4wFqRUpJ,CR01,Colectomy,Colorectal Surgery,3.1.16,CR01
+100,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,idmpo87icoK,CR02,Rectal Cancer Surgery,Colorectal Surgery,3.1.16,CR02
+101,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,GHVSykYKkPK,CR03,Colostomy surgery,Colorectal Surgery,3.1.16,CR03
+102,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,V4e4taKv2AA,CR04,Appendicectomy,Colorectal Surgery,3.1.16,CR04
+103,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,OwmgCtG3qmU,CR05,Other colorectal surgery,Colorectal Surgery,3.1.16,CR05
+104,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,BXf9gxMRvYM,HE01,Hernia Repair,Hernia Surgery,3.1.17,HE01
+105,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,gBI7w5S06zy,OM01,Mandible surgery,Oral & Maxillofacial Surgery,3.1.18,OM01
+106,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,jRpz78CUX9D,OM02,Salivary gland surgery,Oral & Maxillofacial Surgery,3.1.18,OM02
+107,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,FeLnRH2vgP0,OM03,Neck dissection,Oral & Maxillofacial Surgery,3.1.18,OM03
+108,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,lOLb0CrqSf2,OM04,Internal fixation for facial trauma,Oral & Maxillofacial Surgery,3.1.18,OM04
+109,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,ZHB4D9EJfnd,OM05,Dental surgery,Oral & Maxillofacial Surgery,3.1.18,OM05
+110,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,NfmGGzB8lxx,OM06,Facial fracture,Oral & Maxillofacial Surgery,3.1.18,OM06
+111,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,bNiJfmcpKn9,OM07,Tooth extraction,Oral & Maxillofacial Surgery,3.1.18,OM07
+112,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,EU0aQlGIPSJ,OM08,Oral tumors,Oral & Maxillofacial Surgery,3.1.18,OM08
+113,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,ThcfDagtF5Z,OM09,Other oral & maxillofacial surgery,Oral & Maxillofacial Surgery,3.1.18,OM09
+114,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,KC2IGeMOyQg,OM10,Other benign Neck masses,Oral & Maxillofacial Surgery,3.1.18,OM10
+115,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,weXCnTwNRdi,OT01,Debridement,Other surgical procedures,3.1.19,OT01
+116,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,tUrE7lLu5zM,OT02,Incision and drainage of abscesses,Other surgical procedures,3.1.19,OT02
+117,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,ZqjrJKp0kdu,OT03,Circumcision,Other surgical procedures,3.1.19,OT03
+118,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,uH4RGku7590,OT04,Other laparotomy,Other surgical procedures,3.1.19,OT04
+119,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,LBi9QhO72gt,OT05,Other surgical procedures not listed,Other surgical procedures,3.1.19,OT05
