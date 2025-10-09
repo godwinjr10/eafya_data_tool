@@ -1,0 +1,38 @@
+id,dataset_id,dataset_code,dataset_name,dataelement_id,dataelement_code,dataelement_name,section_name,section_code,hmis_code
+1,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",KyRHSYKxihH,FP01,Combined Oral Contraceptives Pills (COCs),Family Planning Client Visits,2.4.1,FP01
+2,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",dyfJZ2Llr6F,FP02,Progesterone Only Pills (POP),Family Planning Client Visits,2.4.1,FP02
+3,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",qSe7OiDB18A,FP03,Emergency Contraceptive Pills (ECP),Family Planning Client Visits,2.4.1,FP03
+4,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",ZVKD2XRg6Ab,FP04,Injectable DMPA Intramuscular (3 months),Family Planning Client Visits,2.4.1,FP04
+5,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",oAqoPQkEf2z,FP05,Injectable DMPA Subcutaneous (3 months),Family Planning Client Visits,2.4.1,FP05
+6,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",fCj5K4Xqy7T,FP06,3-year Implant,Family Planning Client Visits,2.4.1,FP06
+7,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",pGndkat5h9s,FP07,5-year Implant,Family Planning Client Visits,2.4.1,FP07
+8,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",jSQRBvez5Pq,FP08,IUD Copper-T,Family Planning Client Visits,2.4.1,FP08
+9,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",zhTC6HT9No1,FP09,IUD Hormonal,Family Planning Client Visits,2.4.1,FP09
+10,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",VHi82Mcd77w,FP10,FAM-SDM(Cycle Beads),Family Planning Client Visits,2.4.1,FP10
+11,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",ibfLXaygcNS,FP11,FAM-LAM,Family Planning Client Visits,2.4.1,FP11
+12,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",HnSiI2XX2Sy,FP12,FAM Two Days Method,Family Planning Client Visits,2.4.1,FP12
+13,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",Onpo1O1A7jr,FP13,Female condoms,Family Planning Client Visits,2.4.1,FP13
+14,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",bkCFVYMFMed,FP14,Male condoms,Family Planning Client Visits,2.4.1,FP14
+15,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",HPEnpD0uWkV,CT01,Combined Oral Contraceptive Pills (Cycles),Contraceptives Dispensed,2.4.2,CT01
+16,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",a2VY34cntG4,CT02,Progesterone only Oral pills (Cycles),Contraceptives Dispensed,2.4.2,CT02
+17,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",b2mZpqmL8VB,CT03,Contraceptive Pills (Cycles),Contraceptives Dispensed,2.4.2,CT03
+18,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",MRnxUVJpfrB,CT04,Injectable DMPA_Intramuscular (Doses),Contraceptives Dispensed,2.4.2,CT04
+19,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",SOUqnrsSlfn,CT05,Injectable DMPA_ Subcutaneous (Doses),Contraceptives Dispensed,2.4.2,CT05
+20,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",RhSXgCUwfyL,CT05A,Injectable DMPA Subcutaneous (Doses) Provider Administered (PA),Contraceptives Dispensed,2.4.2,CT05A
+21,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",imToa79K9dT,CT05B,Injectable DMPA Subcutaneous (Doses) Self-Injected (SI),Contraceptives Dispensed,2.4.2,CT05B
+22,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",fevOSp4U5Tj,CT06,3 year Implant,Contraceptives Dispensed,2.4.2,CT06
+23,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",ZQGsYguDxjW,CT07,5 year Implant,Contraceptives Dispensed,2.4.2,CT07
+24,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",tN2himdDz2h,CT08,IUD-Copper-T,Contraceptives Dispensed,2.4.2,CT08
+25,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",jj4MpXK0lfd,CT09,IUD-Hormonal,Contraceptives Dispensed,2.4.2,CT09
+26,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",dImnFEwHqXL,CT10,FAM-SDM (Cycle Bead Pieces),Contraceptives Dispensed,2.4.2,CT10
+27,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",IrhyhbiN3iR,CT11,Female condoms (Pieces),Contraceptives Dispensed,2.4.2,CT11
+28,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",vekyej0FHoz,CT12,Male condoms (Pieces),Contraceptives Dispensed,2.4.2,CT12
+29,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",jNpa9MJhPZm,PM01 ,Female sterilization (tubal ligation),Minor Operations in Family Planning,2.4.3,PM01 
+30,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",lUH7AWlsExq,PM02 ,Male sterilization (vasectomy),Minor Operations in Family Planning,2.4.3,PM02 
+31,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",nB8riSN0Et8,PPFP01,No. of Mothers who received Family Planning in Postpartum period,Postpartum Family Planning,2.4.4,PPFP01
+32,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",Z7bibzzO0sz,PAFP01 ,No. of women who received Post Abortion Family Planning,Post Abortion Family Planning,2.4.5,PAFP01 
+33,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",Zwa7Jhjo9Uk,FH01A,Cervical Cancer Screening-Total screened,Integrated Services in Family Planning,2.4.7,FH01A
+34,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",X6G2WoGb4r3,FH01B,Cervical Cancer Screening-Number with pre-malignant cancer of the cervix,Integrated Services in Family Planning,2.4.7,FH01B
+35,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",ZhYPYskD4y8,FH02A ,STI Screening in Family Planning - Total Screened,Integrated Services in Family Planning,2.4.7,FH02A 
+36,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",pDvYO6T6klX,FH02B ,STI Screening in family Planning - Positive,Integrated Services in Family Planning,2.4.7,FH02B 
+37,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",gtWYJAUCW5C,FH03,Number of HIV+ FP Users,Integrated Services in Family Planning,2.4.7,FH03
