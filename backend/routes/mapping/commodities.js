@@ -19,9 +19,9 @@ router.get("/", async (req, res) => {
         section_name, 
         hmis_code, 
         hmis_name
-      FROM reporting.dataelements_commodities
+      FROM reporting.hmis_commodities
       ${whereSql}
-      ORDER BY section_id, hmis_name
+      ORDER BY section_id, hmis_code
       LIMIT $${sectionName ? 2 : 1} OFFSET $${sectionName ? 3 : 2}
     `;
 
@@ -45,7 +45,7 @@ router.get("/sections", async (_req, res) => {
   try {
     const sql = `
       SELECT DISTINCT section_name
-      FROM reporting.dataelements_commodities
+      FROM reporting.hmis_commodities
       ORDER BY section_name
     `;
     const { rows } = await pool.query(sql);
@@ -55,7 +55,7 @@ router.get("/sections", async (_req, res) => {
   }
 });
 
-// Get disease items for mapping
+// Get product items for mapping
 router.get("/items", async (req, res) => {
   try {
     const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 100, 1), 500);
@@ -65,12 +65,6 @@ router.get("/items", async (req, res) => {
     let whereClause = "";
     let params = [];
     let paramCount = 0;
-
-    if (search) {
-      paramCount++;
-      whereClause = `WHERE "name" ILIKE $${paramCount} OR five_character_icd_code ILIKE $${paramCount} OR four_character_icd_code ILIKE $${paramCount}`;
-      params.push(`%${search}%`);
-    }
 
     const query = `
             SELECT 
@@ -96,7 +90,7 @@ router.get("/items", async (req, res) => {
 router.delete("/", async (req, res) => {
   try {
     const { id } = req.body;
-    const sql = `DELETE FROM reporting.hmis_eafya_conditions_mapping WHERE id = $1`;
+    const sql = `DELETE FROM reporting.hmis_eafya_commodities_mapping WHERE id = $1`;
     const result = await pool.query(sql, [id]);
     return res.json({ message: "Condition mapping deleted", count: result.rowCount });
   } catch (error) {
@@ -109,7 +103,7 @@ router.delete("/", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const sql = `DELETE FROM reporting.hmis_eafya_conditions_mapping WHERE id = $1`;
+    const sql = `DELETE FROM reporting.hmis_eafya_commodities_mapping WHERE id = $1`;
     const result = await pool.query(sql, [id]);
     return res.json({ message: "Condition mapping deleted", count: result.rowCount });
   } catch (error) {
@@ -127,11 +121,9 @@ router.get("/:hmisCode", async (req, res) => {
         id,
         hmis_code, 
         hmis_name, 
-        disease_id, 
-        five_character_icd_code, 
-        four_character_icd_code, 
-        disease_name
-      FROM reporting.hmis_eafya_conditions_mapping
+        product_id, 
+        product_name
+      FROM reporting.hmis_eafya_commodities_mapping
       WHERE hmis_code = $1
     `;
 
@@ -146,41 +138,33 @@ router.get("/:hmisCode", async (req, res) => {
 // Create condition mapping entries
 router.post("/", async (req, res) => {
   try {
-    const { hmis_code, hmis_name, diseases } = req.body;
+    const { hmis_code, hmis_name, products } = req.body;
     
-    // Validate required fields
-    if (!hmis_code || !diseases || !Array.isArray(diseases)) {
-      return res.status(400).json({ 
-        message: "Missing required fields: hmis_code and diseases array" 
-      });
-    }
     
     // Get section_id from the HMIS code (assuming it's the first part)
     const section_id = hmis_code.substring(0, 2); // Extract first 2 characters as section_id
     
-    const columns = `section_id, hmis_code, hmis_name, disease_id, five_character_icd_code, four_character_icd_code, disease_name`;
+    const columns = `section_id, hmis_code, hmis_name, product_id, product_name`;
     const valuesPlaceholders = [];
     const params = [];
 
-    for (let i = 0; i < diseases.length; i++) {
+    for (let i = 0; i < products.length; i++) {
       const base = i * 7;
       valuesPlaceholders.push(
-        `($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5}, $${base + 6}, $${base + 7})`
+        `($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5})`
       );
-      const disease = diseases[i];
+      const product = products[i];
       params.push(
         section_id,
         hmis_code,
         hmis_name || '',
-        disease.disease_id,
-        disease.five_character_icd_code,
-        disease.four_character_icd_code,
-        disease.disease_name
+        product.product_id,
+        product.product_name
       );
     }
 
     const insertQuery = `
-      INSERT INTO reporting.hmis_eafya_conditions_mapping (${columns})
+      INSERT INTO reporting.hmis_eafya_commodities_mapping (${columns})
       VALUES ${valuesPlaceholders.join(", ")}
       RETURNING *
     `;
