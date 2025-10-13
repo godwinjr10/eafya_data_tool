@@ -1,0 +1,286 @@
+id,dataset_id,dataset_code,dataset_name,dataelement_id,dataelement_code,dataelement_name,hmis_code
+1,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),nAPg66rGeOq,VS09C,DST for Multi Drug Resistance TB (MDR TB) - Pending Results/Feedback,VS09
+2,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),QJpefO3BuLI,BT01A,AHG - Done,BT01
+3,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),cxhuYzdHB5s,BT01B,AHG - Positive,BT01
+4,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),ozre5Ynz0z6,BT02,ABO Grouping - Done,BT02
+5,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),PSR0ZkLuXZc,BT03,Rhesus Grouping - Done,BT03
+6,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),asWZcgcckzZ,BT04,Cross Matching - Done,BT04
+7,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),oWp3y7CArEU,BT05A,Auto immune antibodies - Number Done,BT05
+8,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Wtl3AK0zl7K,BT05B,Auto immune antibodies - Number Positive,BT05
+9,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),C6bn6zPbQCz,CS01,Blood - Done,CS01
+10,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Z6fz0YSRNWq,CS02,Urine - Done,CS02
+11,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Z74IqKrAu2R,CS03,Stool - Done,CS03
+12,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),eUm4aLsUREy,CS04,Urogenital Swabs - Done,CS04
+13,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),tKa9eCTAuTa,CS05,Sputum - Done,CS05
+14,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Y311j0z9uy7,CS06 ,CSF - Done,CS06 
+15,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),P8wR4WH0xvv,CS07 ,Pus/wound swabs - Done,CS07 
+16,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),BhJKRTRxKeA,CS08 ,Other swabs - Done,CS08 
+17,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),F9yAAAMOFIW,CS09 ,Others - Done,CS09 
+18,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),XgjY88WyEvw,CX01,Alkaline Phosphate - Done,CX01
+19,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),i83XCw9TZoy,CX02,Amylase - Done,CX02
+20,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),hvSAoW7JMVT,CX03,Glucose - Done,CX03
+21,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),WWPOwDdMfqS,CX04,Total Bilirubin - Done,CX04
+22,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),tqarc2TinGp,CX05,Lipase - Done,CX05
+23,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),RLVHiuIIcsi,CX06,AFPCX,CX06
+24,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),h6VEWpbIw5j,CX07,LDH - Done,CX07
+25,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),R1i21ipKUvI,CX08,Lactate - Done,CX08
+26,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),YJS6tdhuN61,CX09,Uric Acid - Done,CX09
+27,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),DORqImfxgss,CX10,CRP - Done,CX10
+28,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),U0HoNLueK9m,CX11,Others - Done,CX11
+29,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),ZYwSMDa5lRO,HE01,Hb (non automated) - Done,HE01
+30,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),uy82zDUjjCl,HE02,Film Comment,HE02
+31,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),EHyI7eYeoH1,HE03,CBC ,HE03
+32,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),a59ozSxc5Nf,HE04,Reticulocyte count,HE04
+33,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),NfIVbWjrJgg,HE05,ESR - Done,HE05
+34,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),fSqxW8rnjPJ,HE06,Bleeding time - Done,HE06
+35,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),CXW0ReX8CGY,HE07,Prothrombin time - Done,HE07
+36,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),hERmSDObVoo,HE08,Clotting time - Done,HE08
+37,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Ad83DJKiDcq,HE09A,PT/INR-Done,HE09
+38,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),dgS5bQLXlnl,HE09B,PT/INR-Positive,HE09
+39,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),yZo1ZXzFVTx,HE10A,APTT Number Done,HE10
+40,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),gMKw8wWc6IH,HE10B,APTT-Positive,HE10
+41,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),LpM6ADG2duN,HE11A,Sickle Cell - Done,HE11
+42,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),zMcPisBKSZM,HE11B,Sickle Cell - Positive,HE11
+43,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),FvpSeAddsKQ,HE12A,Others - Done,HE12
+44,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),TjA2XpEWM5B,HE12B,Others - Positive,HE12
+45,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),qPPkRwNbQLK,HP01,Determine,HP01
+46,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),gt4nnXmktFt,HP01A,Determine - Inconclusive Results,HP01
+47,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),WFWo6gd8q84,HP01B,Determine - Repeat Testers,HP01
+48,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),xSWi87nPvsg,HP01C,Determine - DNA Confirmed Tests,HP01
+49,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),dmlmELeuSyP,HP02,Statpak,HP02
+50,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),vUni7HncD5H,HP02A,Statpak - Inconclusive Results,HP02
+51,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),R6Hab5TGlDx,HP02B,Statpak - Repeat Testers,HP02
+52,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),rKVy7AdYoFB,HP02C,Statpak - DNA Confirmed Tests,HP02
+53,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),SaePW1w1INK,HP03,SD Bioline,HP03
+54,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),yCFhLSgtm2V,HP03A,SD Bioline - Inconclusive Results,HP03
+55,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),YBf6aiFlFzr,HP03B,SD Bioline - Repeat Testers ,HP03
+56,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),A3tyalJbIgS,HP03C,SD Bioline - DNA Confirmed Tests,HP03
+57,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),FKsdBDFpAuu,HP04,HIV Syphilis DUO,HP04
+58,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),fhApW96IgLz,HP04A,HIV Syphilis DUO - Inconclusive Results,HP04
+59,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),jkLKbugzh9s,HP04B,HIV Syphilis DUO - Repeat Testers,HP04
+60,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Qi7G1rpttno,HP04C,HIV Syphilis DUO - DNA Confirmed Tests,HP04
+61,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),RLuOjNZaq0k,HP05,Oraquick (Self Testing),HP05
+62,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Ts4EfBkJa8V,HP05A,Oraquick (Self Testing) - Inconclusive Results,HP05
+63,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),LV7Qudb9E7J,HP05B,Oraquick (Self Testing) - Repeat Testers,HP05
+64,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),qQ7RtdPhGcU,HP05C,Oraquick (Self Testing) - DNA Confirmed Tests,HP05
+65,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),EgvsCowqr2w,HP06,HIV Recency Testing,HP06
+66,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),JXhZmNPaNKV,HP06A,HIV Recency Testing - Inconclusive Results,HP06
+67,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),tpHKA3yqaIl,HP06B,HIV Recency Testing - Repeat Testers,HP06
+68,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),MNnG5aukNOu,HP06C,HIV Recency Testing - DNA Confirmed Tests,HP06
+69,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),uPzFvnylwxF,IG01,CD4 test - Done,IG01
+70,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),V3pwu7dz5bE,IG02A,TB LAM - Done,IG02
+71,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),k7ut0wuDciZ,IG02B,TB LAM - Number Positive,IG02
+72,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),d9f2PISTS6A,IG03A,CRP - Number Done,IG03
+73,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Gdsh69w1ULd,IG03B,CRP - Number Positive,IG03
+74,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),ioFXvXGyrFY,IG04A,Others - Number Done,IG04
+75,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Sllv4L02jGv,IG04B,Others - Number Positive,IG04
+76,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),mj9EwT0PIF5,LP01,ALT - Done,LP01
+77,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),aaGYInATRwj,LP02,AST - Done,LP02
+78,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),rPhjTy1Vovv,LP03,ALP - Done,LP03
+79,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),YlTN6XqlCmW,LP04,GGT - Done,LP04
+80,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),wj8rSCxEd9e,LP05,Protein - Total - Done,LP05
+81,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),PL5GgsqbGr7,LP06,Albumin - Done,LP06
+82,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),UoaGo2p2XSa,LP07,Bilirubin - Total - Done,LP07
+83,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),ejqKJTZBJd6,LP08.,Bilirubin - Direct - Done,LP08
+84,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),zyMJoyTBAPg,LR01,Triglycerides- Done,LR01
+85,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),fpzhsuLYZ5b,LR02,Cholesterol - Total- Done,LR02
+86,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),wx0vmw3ieey,LR03.,HDL- Done,LR03
+87,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),MQkfVna7ir2,LR04.,LDL- Done,LR04
+88,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),KfQ1gcLszOB,MB010,Stool for Gene x-pert - Done,MB010
+89,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),HHKeuwKNIVs,MB010B,Stool for Gene x-pert - Positive,MB010
+90,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),N2tdd2oVD7j,MB01A,Auramine (FM) - Done,MB01
+91,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),HEVh1IAiSns,MB01B,Auramine (FM) - Positive,MB01
+92,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Rc9Rhl5IzHB,MB02A,ZN for AFBs - Done,MB02
+93,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),ERiU13xMW1o,MB02B,ZN for AFBs - Positive,MB02
+94,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),nOBfsFT3Phs,MB03A,Leishman Stain - Done,MB03
+95,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),PS2RpCXHCda,MB03B,Leishman Stain - Positive,MB03
+96,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),YtRhG7MI5Ls,MB04A,Gram - Done,MB04
+97,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),tYC3HDL512l,MB04B,Gram - Positive,MB04
+98,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),qvKuzu2i7ul,MB05A,India Ink - Done,MB05
+99,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),RbzDr6tksXF,MB05B,India Ink - Positive,MB05
+100,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),tUnMWSsmire,MB06A,Urine Microscopy - Done,MB06
+101,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),zfGWuExNfc7,MB06B,Urine Microscopy - Positive,MB06
+102,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),UrW2mViO9dP,MB07a,Urine Protein- Done,MB07
+103,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),TyScVue0q2V,MB07b,Urine Protein- Positive,MB07
+104,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),XfUP592funq,MB08a,Urine Glucose- Done,MB08
+105,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),rNbbIYr9Aua,MB08b,Urine Glucose- Positive,MB08
+106,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),wDU2VlALGnN,MB09A,Wet Preps - Done,MB09
+107,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),FNKrq1mhRgo,MB09B,Wet Preps - Positive,MB09
+108,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),qwwGSP1B5QN,MB11a,Skin Smear - Done,MB11
+109,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),TGUAulMmWi1,MB11b,Skin Smear - Positive,MB11
+110,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),D1cZoWEpVZr,MB12A,Others - Done,MB12
+111,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),PHzHQU8XPae,MB12B,Others - Positive,MB12
+112,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),zkzJZxS01UL,ML01A,"NAAT (Xpert, Trunat, TB LAMP)- Total",ML01
+113,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),HCSpaYVtSQo,ML01B,"NAAT (Xpert, Trunat, TB LAMP) - MTB+",ML01
+114,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),bf1COdgT1ut,ML01C,"NAAT (Xpert, Trunat, TB LAMP)- RR",ML01
+115,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),nY1Zl8YQZwa,ML02A,Latent TB Infection test - Total,ML02
+116,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),z3p7CQxWkum,ML02B,Latent TB Infection test - Positive,ML02
+117,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),VJjezz2WAqu,ML03A,HPV - Number Done,ML03
+118,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),ta0abIWR00o,ML03B,HPV - Number Positive,ML03
+119,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),I9mOZypWPiC,ML04A,HIV viral load (PCR) - Number Done,ML04
+120,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),gLc0j9gZ3Hz,ML04B,HIV viral load (PCR) - Number Positive,ML04
+121,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Bax9SZ4nvPw,ML05A,Hep B Viral Load - Number Done,ML05
+122,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),TN0mmttzxnd,ML05B,Hep B Viral Load - Number Positive,ML05
+123,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),EoapWImZrpK,ML06A,EID (PCR) - Number Done,ML06
+124,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),xPtOdRdjbze,ML06B,EID (PCR) - Number Positive,ML06
+125,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Lta7wvGeMcV,ML07A,Covid-19 (GXP / mRDT) - Number Done,ML07
+126,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),lnhQcD8kNEe,ML07B,Covid-19 (GXP / mRDT) - Number Positive,ML07
+127,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),uczoHBurJod,ML08A,Others - Number Done,ML08
+128,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),wV8nR3BE26Q,ML08B,Others - Number Positive,ML08
+129,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),wTdG6nnYMj4,MS01,Entamoeba - Positive,MS01
+130,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),u1Rv1mxNmJn,MS02,Giardia Lumblia- Positive,MS02
+131,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),jd8YHK81EYe,MS03,Cryptosporidium - Positive,MS03
+132,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),sMYJWV46KrX,MS04,Isospora - Positive,MS04
+133,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),z7bnAKXSWFL,MS05,Cyclospora - Positive,MS05
+134,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),mZ2HwpIgf9U,MS06,Strongyloides - Positive,MS06
+135,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),dmm7XMg6XCK,MS07,Schistosoma - Positive,MS07
+136,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),h4awJUYZXxR,MS08,Taenia - Positive,MS08
+137,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),xD0bQSWLu2t,MS09,Askaris - Positive,MS09
+138,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),dHBQ4tnISlq,MS10,Hookworm - Positive,MS10
+139,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),zkhvWfk1aNF,MS11,Trichuris - Positive,MS11
+140,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Z4w3OOLA6MU,MS12,Other_Parasities - Positives,MS12
+141,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),OMq2TLc3nt0,MS13,Total Tests Done for Stool Microscopy,MS13
+142,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),lyKbbP7LeTH,PP01,Amylase - Done,PP01
+143,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),QGgeoySty6L,PP02,Lipase - Done,PP02
+144,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),XxiY4tHbl2Z,PP03 ,Extended Electrolytes - Done,PP03 
+145,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),vyKwpmxmgl5,PP04 ,Calcium - Done,PP04 
+146,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),uhto05XLPSr,PP05,Magnessium - Done,PP05
+147,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),jmpvzaJi5c0,PS01A,Malaria Microscopy - Done,PS01
+148,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),OwLbdAphoNp,PS01B,Malaria Microscopy - Positive,PS01
+149,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),JfOGWtiSj1J,PS02A,Malaria RDTs - Done,PS02
+150,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),OOsYcFK5YbS,PS02B,Malaria RDTs - Positive,PS02
+151,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),NrNzNOidiE8,PS03A,Trypanosoma - Done,PS03
+152,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),b97pHj26X0h,PS03B,Trypanosoma - Positive,PS03
+153,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),S8VpnPS89ZJ,PS04A,Microfilaria - Done,PS04
+154,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),aTpLorJB8OX,PS04B,Microfilaria - Positive,PS04
+155,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),jVBv8a8sTby,PS05A,Trichinella - Done,PS05
+156,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),PFTxDUPFBuc,PS05B,Trichinella - Positive,PS05
+157,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),TZkw6GmubnT,PS06A,Borrellia - Done,PS06
+158,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),iRQWRvBzyXl,PS06B,Borrellia - Positive,PS06
+159,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),zGgvWmAoA26,RP01,Urea - Done,RP01
+160,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),V4F9DIaEfke,RP02,Chloride - Done,RP02
+161,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Q5NfznovGC7,RP03,Potassium - Done,RP03
+162,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),UnoKFNaPlS4,RP04,Sodium - Done,RP04
+163,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),yijGYWqLK3L,RP05,Creatinine - Done,RP05
+164,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),eSF3SXwU7Vj,RS01,Inadequate specimen volume,RS01
+165,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),TIkGhlmaAxY,RS02,Heamolyzed specimen,RS02
+166,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),UlJGkeEmV4S,RS03,Specimen without lab request form,RS03
+167,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),WKV9sj5Chfn,RS04,No test specified on lab request form accompanying specimen,RS04
+168,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),CRGdmgZ42dW,RS05,Specimen without label or identifier,RS05
+169,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),DyCyRhBfsxT,RS06,Wrong specimen label,RS06
+170,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),hN1rHraRHo1,RS07,Unclear specimen label,RS07
+171,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),EOBdlb6pkLx,RS08,Wrong specimen container,RS08
+172,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),GwNyBcwsx5X,RS09,Damaged specimen container,RS09
+173,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),bQgPxazzwDh,RS10,Too old specimen,RS10
+174,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),LhpfB8nVkzA,RS11,Date of specimen collection not specified,RS11
+175,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),w71YrG6FYtY,RS12,Time of specimen collection not specified,RS12
+176,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),toZpoxPTChY,RS13,Specimen type unacceptable for required test,RS13
+177,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),LBveCUC8bJ1,RS14,Other reasons,RS14
+178,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),reB03ib2geA,RT01,Routine tests that could not be conducted at facility - Chemistry,RT01
+179,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),slsXAv1Jqtc,RT02,Routine tests that could not be conducted at facility - Microbiology,RT02
+180,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),YMJHKWJRY22,RT03,Routine tests that could not be conducted at facility - HIV screening,RT03
+181,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),N7iozDIRDH6,RT04,Routine tests that could not be conducted at facility - Haematology,RT04
+182,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),IDkHHcf2Fdx,RT05,Routine tests that could not be conducted at facility - Parasitology,RT05
+183,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),DC0x3PfbDCB,RT07,Routine tests that could not be conducted at facility - Serology,RT07
+184,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),G5MxyfW7dH5,SR01A,VDRL/ RPR - Done,SR01
+185,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),mIJFz3kAhAw,SR01B,VDRL/ RPR - Positive,SR01
+186,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),YW1LKh5m22o,SR02A,TPHA - Done,SR02
+187,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),SpoSb2vUZTB,SR02B,TPHA - Positive,SR02
+188,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),oLHkxHBpunK,SR03A,Shigella Dysentery - Done,SR03
+189,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),eW4FVOhEeCP,SR03B,Shigella Dysentery - Positive,SR03
+190,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),HLSOl6fGZbm,SR04,Hepatitis BsAg- Done,SR04
+191,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),hnz5wHFaX0w,SR04B,Hepatitis BsAg- Positive,SR04
+192,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),lAY0XbxnemJ,SR05A,Brucella - Done,SR05
+193,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),zGkWywUtcXm,SR05B,Brucella - Positive,SR05
+194,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),lLCw5i5eoQn,SR06A,Pregnancy Test (HCG) - Done,SR06
+195,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),SxFU9oxVzDk,SR06B,Pregnancy Test (HCG) - Positive,SR06
+196,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),hTO7GyKw5eu,SR07A,CrAg- Done,SR07
+197,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),A7AQ3brLmR4,SR07B,CrAg- Positive,SR07
+198,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),nlQ2XHHaB5L,SR08A,Rheumatoid factor - Done,SR08
+199,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),awNr3PBxRtR,SR08B,Rheumatoid factor - Positive,SR08
+200,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),HguwEg0juDT,SR09A,Hep B Core Ag - Done,SR09
+201,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),wopTt6jkxVE,SR09B,Hep B Core Ag - Positive,SR09
+202,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),pa4KlOWImIA,SR10A,Hep C - Done,SR10
+203,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),bO6ATLeZUl4,SR10B,Hep C - Positive,SR10
+204,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),pGDRIjvl39Q,SR11A,Hep A - Done,SR11
+205,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),JBdnQRzdetM,SR11B,Hep A - Positive,SR11
+206,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),u6bn84xJh9Z,SR12a,Hep BsAg- Done,SR12
+207,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),fZNxozMEuqd,SR12b,Hep BsAg - Positive,SR12
+208,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Zgg5oLWUf09,SR13a,H. pylori- Done,SR13
+209,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),MSueM02Rned,SR13b,H. pylori - Positive,SR13
+210,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),lvze6t5xhHb,SR14a,Occult blood- Done,SR14
+211,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),ijUAc6k60Wn,SR14b,Occult blood - Positive,SR14
+212,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Fa9hodskeJ9,SR15a,Toxoplasma IgG- Done,SR15
+213,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),CjO5qomd6A5,SR15b,Toxoplasma IgG - Positive,SR15
+214,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),QMf9LkI1COW,SR16a,Toxoplasma IgM- Done,SR16
+215,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),dJIA1SFb816,SR16b,Toxoplasma IgM - Positive,SR16
+216,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),iyHv5ZAvDpl,SR17a,Rubella- Done,SR17
+217,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),y8wjTLBBCSt,SR17b,Rubella - Positive,SR17
+218,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),HNIGPbNjTS1,SR18a,Others- Done,SR18
+219,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),DE64n22luZt,SR18b,Others - Positive,SR18
+220,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),TU4hCLREQB2,TP01.,T3- Done,TP01
+221,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),oCig5lw6NFd,TP02.,T4- Done,TP02
+222,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),f50jzpPHhJV,TP03,TSH - Done,TP03
+223,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),BfUGncAgsIa,TP04,Free T3 - Done,TP04
+224,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),ubBoPfBZF8D,TP05,Free T4 - Done,TP05
+225,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),aJ7qRn2xZJX,VS01A,EID - Samples Referred,VS01
+226,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),ogPzhS1PmWv,VS01C,EID - Pending Results/Feedback,VS01
+227,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),PCgPk2ogPHn,VS02A,Viral Load for HIV - Samples Referred,VS02
+228,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),mY67oZffpOd,VS02C,Viral Load for HIV - Pending Results/Feedback,VS02
+229,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),ASdJwmuvKPO,VS03A,CD4 - Samples Referred,VS03
+230,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),YpMOS6ALssw,VS03C,CD4 - Pending Results/Feedback,VS03
+231,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),gpYLUiKrNHx,VS04A,Sickle Cell Disease Confirmation - Samples Referred,VS04
+232,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Da2nbJXyvFD,VS04C,Sickle Cell Disease Confirmation - Pending Results/Feedback,VS04
+233,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),cE4xYyV9cP0,VS05A,Histology - Samples Referred,VS05
+234,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),x1jRXEJQk7x,VS05C,Histology - Pending Results/Feedback,VS05
+235,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),vXfooQLBVof,VS06A,Polio/ or Acute Flaccid Paralysis - Samples Referred,VS06
+236,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),jz4R6FGAptf,VS06C,Polio/ or Acute Flaccid Paralysis - Pending Results/Feedback,VS06
+237,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),xkzCOlTZvUm,VS07A,Severe Acute Respiratory Syndrome/Infection (SARS/SARI) - Samples Referred,VS07
+238,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),i1wNCbGgehn,VS07C,Severe Acute Respiratory Syndrome/Infection (SARS/SARI) - Pending Results/Feedback,VS07
+239,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),uk1ygS4ih90,VS08A,TB Genexpert - Samples Referred,VS08
+240,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Xl9LoXyDBQi,VS08C,TB Genexpert - Pending Results/Feedback,VS08
+241,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),bb7858UYVhK,VS09A,DST for Multi Drug Resistance TB (MDR TB) - Samples Referred,VS09
+242,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Frr8PBtDifn,VS10A,Hepatitis B Viral load - Samples Referred,VS10
+243,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),QADL6fJFoGZ,VS10C,Hepatitis B Viral load - Pending Results/Feedback,VS10
+244,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Fn15HIXzWg9,VS11A,Hepatitis C Viral load - Samples Referred,VS11
+245,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),OuUfsq2oCzQ,VS11C,Hepatitis C Viral load - Pending Results/Feedback,VS11
+246,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),M2Tgala2egP,VS12A,"Hep BcAg, - Samples Referred",VS12
+247,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),G0NxD60y255,VS12C,"Hep BcAg, - Pending Results/Feedback",VS12
+248,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),tpGCsq755n7,VS13a,"HIV MDR, - Samples Referred",VS13
+249,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),YHvInhasswm,VS13c,"HIV MDR, - Pending Results/Feedback",VS13
+250,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),RY0qt9jp0nZ,VS14A,"VHFs (EBOLA, MARBUG)  - Samples Referred",VS14
+251,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),bcU8Uyg4BwG,VS14C,"VHFs (EBOLA, MARBUG), - Pending Results/Feedback",VS14
+252,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),tvOutAcRbNB,VS15a,"Cytology, - Samples Referred",VS15
+253,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),ErsezpC2yVP,VS15c,"Cytology, - Pending Results/Feedback",VS15
+254,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),S3PQSMMgwfn,VS16A,"Measles / Rubella, - Samples Referred",VS16
+255,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),LWtgifxkOQg,VS16C,"Measles / Rubella, - Pending Results/Feedback",VS16
+256,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),z11eXUduMTj,VS17a,Yellow fever - Samples Referred,VS17
+257,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),KvLgrcwvZgW,VS17c,Yellow fever - Pending Results/Feedback,VS17
+258,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),gwc2FljFEe2,VS18a,Rabies - Samples Referred,VS18
+259,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),UvMyjP1sr4H,VS18c,Rabies - Pending Results/Feedback,VS18
+260,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),tOsGLpfwUxE,VS19A,Typhoid Fever - Samples Referred,VS19
+261,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),SkpUysoBjiU,VS19C,Typhoid Fever - Pending Results/Feedback,VS19
+262,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),ro2teNSPV6w,VS20A,Cholera - Samples Referred,VS20
+263,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),srFuDYplT9H,VS20C,Cholera - Pending Results/Feedback,VS20
+264,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),RjVFFtBf0fQ,VS21A,Dysentery - Samples Referred,VS21
+265,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),DKP8p4TuogU,VS21C,Dysentery - Pending Results/Feedback,VS21
+266,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Fck9FzNPbwj,VS22A,Rota Virus - Samples Referred,VS22
+267,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),USSX14ZROi8,VS22C,Rota Virus - Pending Results/Feedback,VS22
+268,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),K66vr4DBIfd,VS23A,Meningitis - Samples Referred,VS23
+269,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),T042dWDJUI4,VS23C,Meningitis - Pending Results/Feedback,VS23
+270,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),w5I7khBBJaS,VS24A,Neonatal tetanus - Samples Referred,VS24
+271,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),eX8nrnBi2Sv,VS24C,Neonatal tetanus - Pending Results/Feedback,VS24
+272,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),DYQgUlAEiPn,VS25A,Plague - Samples Referred,VS25
+273,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),p8EPIdnGpMD,VS25C,Plague - Pending Results/Feedback,VS25
+274,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),kB8Qlz2IqMJ,VS26A,Isolates - Samples Referred,VS26
+275,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),R8U2KwDlBp1,VS26C,Isolates - Pending Results/Feedback,VS26
+276,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),VaLQ3ZEDyY7,VS27A,Viral Haemorrhagic Fevers (VHF) - Samples Referred,VS27
+277,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),Dz8eF4R8wCZ,VS27C,Viral Haemorrhagic Fevers (VHF) - Pending Results/Feedback,VS27
+278,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),ljSKKF2sS3S,VS28A,Animal Bites (suspected rabies) - Samples Referred,VS28
+279,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),W7lV5TYWYwF,VS28C,Animal Bites (suspected rabies) - Pending Results,VS28
+280,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),fjDk7C69bya,VS29A,Haemoparasites - Samples Referred,VS29
+281,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),doKuLrlQO0v,VS29C,Haemoparasites - Pending Results/Feedback,VS29
+282,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),EXX2b97lU8Q,VS30A,Intestinal parasites - Samples Referred,VS30
+283,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),QqIkh4bVRpw,VS30C,Intestinal parasites - Pending Results/Feedback,VS30
+284,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),U3PMfuxLkg1,VS31A,Tissue parasites - Samples Referred,VS31
+285,quMWqLxzcfO,HMIS1055,HMIS 105:10 - OPD Monthly Report (Lab),vlCCIaDbkBw,VS31C,Tissue parasites - Pending Results/Feedback,VS31
