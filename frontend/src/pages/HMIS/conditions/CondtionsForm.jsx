@@ -1,23 +1,26 @@
 import React, { useState, useEffect, useCallback } from "react";
 import API from "../../../helpers/api";
 
-const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups, 
+const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups,
     genders, ageGroupMapping, section_id }) => {
 
     const [loading, setLoading] = useState(false);
     const [conditions, setConditions] = useState([]);
-    
+
     // Attendance data states
     const [attendanceData, setAttendanceData] = useState([]);
     const [reattendanceData, setReAttendanceData] = useState([]);
     const [attendanceLoading, setAttendanceLoading] = useState(false);
     const [reattendanceLoading, setReAttendanceLoading] = useState(false);
-    
+    // Referrals data state
+    const [referralsData, setReferralsData] = useState([]);
+    const [referralsLoading, setReferralsLoading] = useState(false);
+
     // All sections data state
     const [allSectionsData, setAllSectionsData] = useState([]);
     const [allSectionsLoading, setAllSectionsLoading] = useState(false);
     const [sections, setSections] = useState([]);
-    
+
 
     // Section titles mapping
     const sectionTitles = {
@@ -78,12 +81,12 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
     // Fetch all sections data when no specific section is selected
     const fetchAllSectionsData = useCallback(async () => {
         if (!selectedMonth || section_id) return;
-        
+
         try {
             setAllSectionsLoading(true);
             const monthNumber = getMonthNumber(selectedMonth);
             const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
-            
+
             // Fetch data for all sections (excluding 1.1 since it's handled by attendance)
             const conditionsSections = sections.filter(section => section.section_id !== '1.1');
             const promises = conditionsSections.map(async (section) => {
@@ -103,7 +106,7 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
                     };
                 }
             });
-            
+
             const results = await Promise.all(promises);
             setAllSectionsData(results);
         } catch (error) {
@@ -116,7 +119,7 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
 
     const fetchConditions = useCallback(async () => {
         if (!section_id || !selectedMonth) return;
-        
+
         try {
             setLoading(true);
             const monthNumber = getMonthNumber(selectedMonth);
@@ -135,7 +138,7 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
     // Fetch attendance data
     const fetchAttendance = useCallback(async () => {
         if (!selectedMonth) return;
-        
+
         try {
             setAttendanceLoading(true);
             const monthNumber = getMonthNumber(selectedMonth);
@@ -153,7 +156,7 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
     // Fetch reattendance data
     const fetchReattendance = useCallback(async () => {
         if (!selectedMonth) return;
-        
+
         try {
             setReAttendanceLoading(true);
             const monthNumber = getMonthNumber(selectedMonth);
@@ -168,6 +171,24 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
         }
     }, [selectedMonth, selectedYear, getMonthNumber]);
 
+    // Fetch referrals data
+    const fetchReferrals = useCallback(async () => {
+        if (!selectedMonth) return;
+        try {
+            setReferralsLoading(true);
+            const monthNumber = getMonthNumber(selectedMonth);
+            const formattedMonth = `${selectedYear}${monthNumber.toString().padStart(2, '0')}`;
+
+            const response = await API.get(`/attendance/referrals?report_month=${formattedMonth}`);
+            setReferralsData(response?.data || []);
+        } catch (error) {
+            console.error('Error fetching referrals data:', error);
+            setReferralsData([]);
+        } finally {
+            setReferralsLoading(false);
+        }
+    }, [selectedMonth, selectedYear, getMonthNumber]);
+
     useEffect(() => {
         fetchSections();
     }, [fetchSections]);
@@ -176,8 +197,9 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
         if (selectedMonth) {
             fetchAttendance();
             fetchReattendance();
+            fetchReferrals();
         }
-    }, [selectedMonth, fetchAttendance, fetchReattendance]);
+    }, [selectedMonth, fetchAttendance, fetchReattendance, fetchReferrals]);
 
     useEffect(() => {
         if (selectedMonth && section_id) {
@@ -208,7 +230,7 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
                 </div>
                 <h5 className="card-title text-muted">No Data Available</h5>
                 <p className="card-text text-muted">
-                    No data found for the selected section and month ({selectedMonth} {selectedYear}). 
+                    No data found for the selected section and month ({selectedMonth} {selectedYear}).
                     Please check if data has been uploaded for this period.
                 </p>
             </div>
@@ -229,35 +251,35 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
             "10-19y": "10-19y",
             "20y+": "20y+"
         } : {
-                                    "0-28d": "0_28d",
-                                    "29d-4y": "29d_4y",
-                                    "5-9y": "5_9y",
-                                    "10-19y": "10_19y",
-                                    "20y+": "20y_plus"
-                                };
-                                const key = `${ageKeyMap[ageGroup]}_${gender.toLowerCase() === 'm' ? 'male' : 'female'}`;
-                                return item[key] || "0";
-                            };
+            "0-28d": "0_28d",
+            "29d-4y": "29d_4y",
+            "5-9y": "5_9y",
+            "10-19y": "10_19y",
+            "20y+": "20y_plus"
+        };
+        const key = `${ageKeyMap[ageGroup]}_${gender.toLowerCase() === 'm' ? 'male' : 'female'}`;
+        return item[key] || "0";
+    };
 
     // Helper function to render table rows
     const renderTableRows = (data, isAttendance = false, categoryName = '') => {
         return data.map(item => (
             <tr key={`${isAttendance ? 'attendance' : 'conditions'}-${item.hmis_code}`}>
                 <td className="section-title-bg" style={{ fontWeight: "normal" }}>{categoryName || item.hmis_name}</td>
-                                    {Object.keys(ageGroupMapping).map(ageKey =>
-                                        genders.map(gender => (
-                                            <td key={`${ageKey}-${gender}`} className="text-center">
-                                                <input
-                                                    type="number"
-                                                    min="0"
+                {Object.keys(ageGroupMapping).map(ageKey =>
+                    genders.map(gender => (
+                        <td key={`${ageKey}-${gender}`} className="text-center">
+                            <input
+                                type="number"
+                                min="0"
                                 className="compact-input"
                                 value={getValueForCell(item, ageKey, gender, isAttendance)}
-                                                    readOnly
-                                                />
-                                            </td>
-                                        ))
-                                    )}
-                                </tr>
+                                readOnly
+                            />
+                        </td>
+                    ))
+                )}
+            </tr>
         ));
     };
 
@@ -324,7 +346,7 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
                     overflow-x: auto !important;
                 }
             `}</style>
-            
+
             <div className="section-header mb-3">
                 <h4 className="mb-0">HMIS 105:01 - Conditions Report</h4>
             </div>
@@ -378,6 +400,58 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
                         </div>
                     )}
 
+                    {/* Referrals Section - show below attendance when no specific section selected */}
+                    {(referralsLoading) ? (
+                        <Spinner />
+                    ) : (
+                        <div className="mb-4">
+                            <div className="section-subheader">1.2 - Outpatient Referrals</div>
+                            <div className="table-container">
+                                <table className="data-entry-table compact-table">
+                                    <thead className="table-header-bg">
+                                        <tr>
+                                            <th rowSpan="2" className="align-middle" style={{ fontWeight: "normal" }}>Category</th>
+                                            {ageGroups.map((ag, i) => (
+                                                <th key={`r-${i}`} colSpan={2} className="text-center" style={{ fontWeight: "normal" }}>{ag}</th>
+                                            ))}
+                                        </tr>
+                                        <tr>
+                                            {ageGroups.map((_, i) => (
+                                                genders.map(g => <th key={`r-g-${i}-${g}`} className="text-center" style={{ fontWeight: "normal" }}>{g}</th>)
+                                            ))}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {referralsData.length > 0 ? (
+                                            referralsData.map(item => (
+                                                <tr key={`ref-${item.hmis_code || 'r'}`}>
+                                                    <td className="section-title-bg" style={{ fontWeight: "normal" }}>Referrals</td>
+                                                    {Object.keys(ageGroupMapping).map(ageKey =>
+                                                        genders.map(gender => (
+                                                            <td key={`ref-${ageKey}-${gender}`} className="text-center">
+                                                                <input
+                                                                    type="number"
+                                                                    min="0"
+                                                                    className="compact-input"
+                                                                    value={item[`${ageKey}_${gender.toLowerCase() === 'm' ? 'male' : 'female'}`] || 0}
+                                                                    readOnly
+                                                                />
+                                                            </td>
+                                                        ))
+                                                    )}
+                                                </tr>
+                                            ))
+                                        ) : (
+                                            <tr>
+                                                <td colSpan={ageGroups.length * 2 + 1} className="text-center text-muted py-3">No referrals data available for {selectedMonth} {selectedYear}</td>
+                                            </tr>
+                                        )}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    )}
+
                     {/* All Conditions Sections */}
                     {allSectionsLoading ? (
                         <Spinner />
@@ -385,7 +459,7 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
                         <div>
                             {allSectionsData.map(section => {
                                 if (section.data.length === 0) return null;
-                                
+
                                 return (
                                     <div key={section.sectionId} className="mb-4">
                                         <div className="section-subheader">
@@ -423,7 +497,7 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
                                 </div>
                                 <h5 className="card-title text-muted">No Conditions Data Available</h5>
                                 <p className="card-text text-muted">
-                                    No conditions data found for the selected month ({selectedMonth} {selectedYear}). 
+                                    No conditions data found for the selected month ({selectedMonth} {selectedYear}).
                                     Please check if data has been uploaded for this period.
                                 </p>
                             </div>
@@ -462,6 +536,58 @@ const ConditionsForm = ({ selectedMonth, getMonthNumber, selectedYear, ageGroups
                         </div>
                     ) : (
                         <NoDataCard />
+                    )}
+                </>
+            ) : section_id === '1.2' ? (
+                // Show referrals for section 1.2
+                <>
+                    {(referralsLoading) ? (
+                        <Spinner />
+                    ) : (
+                        hasData ? (
+                            <div className="mb-4">
+                                <div className="section-subheader">1.2 - Outpatient Referrals</div>
+                                <div className="table-container">
+                                    <table className="data-entry-table compact-table">
+                                        <thead className="table-header-bg">
+                                            <tr>
+                                                <th rowSpan="2" className="align-middle" style={{ fontWeight: "normal" }}>Category</th>
+                                                {ageGroups.map((ag, i) => (
+                                                    <th key={`r2-${i}`} colSpan={2} className="text-center" style={{ fontWeight: "normal" }}>{ag}</th>
+                                                ))}
+                                            </tr>
+                                            <tr>
+                                                {ageGroups.map((_, i) => (
+                                                    genders.map(g => <th key={`r2-g-${i}-${g}`} className="text-center" style={{ fontWeight: "normal" }}>{g}</th>)
+                                                ))}
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {referralsData.length > 0 ? (
+                                                referralsData.map(item => (
+                                                    <tr key={`r2-${item.hmis_code || 'r'}`}>
+                                                        <td className="section-title-bg" style={{ fontWeight: "normal" }}>Referrals</td>
+                                                        {Object.keys(ageGroupMapping).map(ageKey =>
+                                                            genders.map(gender => (
+                                                                <td key={`r2-${ageKey}-${gender}`} className="text-center">
+                                                                    <input type="number" min="0" className="compact-input" value={item[`${ageKey}_${gender.toLowerCase() === 'm' ? 'male' : 'female'}`] || 0} readOnly />
+                                                                </td>
+                                                            ))
+                                                        )}
+                                                    </tr>
+                                                ))
+                                            ) : (
+                                                <tr>
+                                                    <td colSpan={ageGroups.length * 2 + 1} className="text-center text-muted py-3">No referrals data available for {selectedMonth} {selectedYear}</td>
+                                                </tr>
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        ) : (
+                            <NoDataCard />
+                        )
                     )}
                 </>
             ) : (

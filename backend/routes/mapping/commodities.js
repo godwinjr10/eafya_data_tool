@@ -3,282 +3,182 @@ import { pool } from "../../config/database.js";
 
 const router = express.Router();
 
-// Get commodities mappings
+// Get conditions mappings
 router.get("/", async (req, res) => {
   try {
-    const query = `
-                SELECT 
-            distinct hmis_code,
-            section_id, 
-            section_name,
-            hmis_name
-            FROM reporting.dhis_eafya_mapping_commodities
-            order by hmis_code
-        `;
+    const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 25, 1), 500);
+    const offset = (page - 1) * limit;
+    const sectionName = (req.query.sectionName || "").trim();
 
-    const { rows } = await pool.query(query);
-    res.json(rows);
+    const whereSql = sectionName ? `WHERE section_name = $1` : "";
+    const countQuery = `SELECT COUNT(*)::int AS total FROM reporting.hmis_commodities ${whereSql}`;
+    const dataQuery = `
+      SELECT 
+        section_id, 
+        section_name, 
+        hmis_code, 
+        hmis_name
+      FROM reporting.hmis_commodities
+      ${whereSql}
+      ORDER BY section_id, hmis_code
+      LIMIT $${sectionName ? 2 : 1} OFFSET $${sectionName ? 3 : 2}
+    `;
+
+    const [countResult, dataResult] = await Promise.all([
+      pool.query(countQuery, sectionName ? [sectionName] : []),
+      pool.query(dataQuery, sectionName ? [sectionName, limit, offset] : [limit, offset])
+    ]);
+
+    const total = countResult.rows[0]?.total || 0;
+    const rows = dataResult.rows;
+    const totalPages = Math.max(Math.ceil(total / limit), 1);
+
+    res.json({ data: rows, page, limit, total, totalPages });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Get products for mapping
+// Distinct section names for dropdown
+router.get("/sections", async (_req, res) => {
+  try {
+    const sql = `
+      SELECT DISTINCT section_name
+      FROM reporting.hmis_commodities
+      ORDER BY section_name
+    `;
+    const { rows } = await pool.query(sql);
+    res.json(rows.map(r => r.section_name));
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get product items for mapping
 router.get("/items", async (req, res) => {
   try {
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 100, 1), 500);
+    const offset = parseInt(req.query.offset, 10) || 0;
+    const search = (req.query.search || "").trim();
+
+    let whereClause = "";
+    let params = [];
+    let paramCount = 0;
+
     const query = `
             SELECT 
-                s.id,
-                s."name"
-            FROM dwh.dim_eafya_product s
-            WHERE s.product_type = 'drug'
-            ORDER BY s."name"
+            p.id,
+            p."name"
+            FROM dwh.dim_eafya_product p
+            where product_type = 'drug'
+            ${whereClause}
+            ORDER BY "name"
+            LIMIT $${paramCount + 1} OFFSET $${paramCount + 2}
         `;
 
-    const { rows } = await pool.query(query);
+    params.push(limit, offset);
+
+    const { rows } = await pool.query(query, params);
     res.json(rows);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Delete a specific commodity mapping
+// Delete a single condition mapping by id
 router.delete("/", async (req, res) => {
   try {
-    const { eafya_id } = req.body;
-
-    if (!eafya_id) {
-      return res.status(400).json({
-        message: "Missing required fields: eafya_id",
-      });
-    }
-
-    const result = await pool.query(
-      "DELETE FROM reporting.dhis_eafya_mapping_commodities WHERE eafya_product_id = $1",
-      [eafya_id]
-    );
-
-    if (result.rowCount === 0) {
-      return res.status(404).json({ message: "Mapping not found" });
-    }
-
-    res.json({ message: "Commodity mapping deleted successfully" });
+    const { id } = req.body;
+    const sql = `DELETE FROM reporting.hmis_eafya_commodities_mapping WHERE id = $1`;
+    const result = await pool.query(sql, [id]);
+    return res.json({ message: "Condition mapping deleted", count: result.rowCount });
   } catch (error) {
-    console.error("Error deleting commodity mapping:", error);
+    console.error("Error deleting condition mapping:", error);
     res.status(500).json({ message: error.message });
   }
 });
 
-// Get commodity mapping details by HMIS code
+// Delete a single condition mapping by id via URL param
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const sql = `DELETE FROM reporting.hmis_eafya_commodities_mapping WHERE id = $1`;
+    const result = await pool.query(sql, [id]);
+    return res.json({ message: "Condition mapping deleted", count: result.rowCount });
+  } catch (error) {
+    console.error("Error deleting condition mapping by id:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get condition mapping details by HMIS code
 router.get("/:hmisCode", async (req, res) => {
   try {
     const { hmisCode } = req.params;
-    console.log("Fetching commodity mappings for HMIS code:", hmisCode);
-
-    // First, let's check if the table exists
-    const tableCheckQuery = `
-      SELECT EXISTS (
-        SELECT FROM information_schema.tables 
-        WHERE table_schema = 'reporting' 
-        AND table_name = 'dhis_eafya_mapping_commodities'
-      ) as table_exists
-    `;
-
-    const tableCheck = await pool.query(tableCheckQuery);
-    console.log("Table exists check:", tableCheck.rows[0]);
-
-    if (!tableCheck.rows[0].table_exists) {
-      console.error(
-        "Table 'reporting.dhis_eafya_mapping_commodities' does not exist"
-      );
-      return res.status(500).json({
-        message:
-          "Database table 'dhis_eafya_mapping_commodities' does not exist",
-        hmis_code: hmisCode,
-        suggestion:
-          "Please check if the table name is correct or if it needs to be created",
-      });
-    }
-
-    // Now let's check the table structure
-    const structureQuery = `
-      SELECT column_name, data_type 
-      FROM information_schema.columns 
-      WHERE table_schema = 'reporting' 
-      AND table_name = 'dhis_eafya_mapping_commodities'
-      ORDER BY ordinal_position
-    `;
-
-    const structure = await pool.query(structureQuery);
-    console.log("Table structure:", structure.rows);
-
     const query = `
       SELECT 
-        distinct
-        eafya_product_id as eafya_id,
-        eafya_product_name as eafya_name,
-        hmis_name
-      FROM reporting.dhis_eafya_mapping_commodities
+        id,
+        hmis_code, 
+        hmis_name, 
+        product_id, 
+        product_name
+      FROM reporting.hmis_eafya_commodities_mapping
       WHERE hmis_code = $1
-      ORDER BY  eafya_product_name
     `;
 
-    console.log("Executing query:", query);
-    console.log("Query parameters:", [hmisCode]);
-
     const { rows } = await pool.query(query, [hmisCode]);
-    console.log("Query result rows:", rows.length);
-
-    if (rows.length === 0) {
-      console.log("No mappings found for HMIS code:", hmisCode);
-      return res.status(404).json({
-        message: "No commodity mappings found for this HMIS code",
-        hmis_code: hmisCode,
-      });
-    }
-
-    console.log("Sending response with", rows.length, "mappings");
-    res.json({
-      hmis_code: hmisCode,
-      hmis_name: rows[0].hmis_name,
-      mappings: rows,
-    });
+    res.json(rows);
   } catch (error) {
-    console.error("Error fetching commodity mapping details:", error);
-    console.error("Error stack:", error.stack);
-    res.status(500).json({
-      message: error.message,
-      stack: error.stack,
-      hmis_code: req.params.hmisCode,
-    });
+    console.error("Error fetching condition mapping details:", error);
+    res.status(500).json({ message: error.message });
   }
 });
 
-// Create commodity mappings
+// Create condition mapping entries
 router.post("/", async (req, res) => {
   try {
-    const {
-      section_id,
-      hmis_code,
-      mappings, // [{ id, name }] eAFYA products
-    } = req.body;
+    const { hmis_code, hmis_name, products } = req.body;
+    
+    
+    // Get section_id from the HMIS code (assuming it's the first part)
+    const section_id = hmis_code.substring(0, 2); // Extract first 2 characters as section_id
+    
+    const columns = `section_id, hmis_code, hmis_name, product_id, product_name`;
+    const valuesPlaceholders = [];
+    const params = [];
 
-    // Simplified validation - only check for required fields
-    if (
-      !hmis_code ||
-      !section_id ||
-      !Array.isArray(mappings) ||
-      mappings.length === 0
-    ) {
-      return res.status(400).json({
-        message:
-          "Missing required fields: hmis_code, section_id and non-empty mappings array",
-      });
-    }
-
-    // Fetch ALL distinct DHIS2 data elements for the given hmis_code and section_id
-    const queryExisting = `
-              SELECT 
-                  DISTINCT   
-                  dhis2_data_element_id, 
-                  data_element_name,
-                  section_id, 
-                  section_name,
-                  hmis_code,
-                  hmis_name
-              FROM reporting.dhis_eafya_mapping_commodities
-              WHERE hmis_code = $1 AND section_id = $2
-              AND dhis2_data_element_id IS NOT NULL
-              ORDER BY dhis2_data_element_id
-          `;
-
-    console.log("Executing query with params:", [hmis_code, section_id]);
-    const { rows } = await pool.query(queryExisting, [hmis_code, section_id]);
-
-    console.log("Raw query result:", JSON.stringify(rows, null, 2));
-    console.log(`Found ${rows.length} distinct DHIS2 data elements`);
-
-    if (rows.length === 0) {
-      return res.status(404).json({
-        message:
-          "No existing DHIS2 data elements found for the provided hmis_code and section_id",
-      });
-    }
-
-    const client = await pool.connect();
-    try {
-      await client.query("BEGIN");
-
-      console.log(
-        `Found ${rows.length} DHIS2 data elements for HMIS code ${hmis_code}, section ${section_id}`
+    for (let i = 0; i < products.length; i++) {
+      // there are 5 columns per row, so placeholders must advance by 5 each iteration
+      const base = i * 5;
+      valuesPlaceholders.push(
+        `($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5})`
       );
-      console.log(`Will create mappings for ${mappings.length} eAFYA products`);
-
-      let totalInserted = 0;
-
-      // Outer loop: For each DHIS2 data element found
-      for (let i = 0; i < rows.length; i++) {
-        const dhis2Element = rows[i];
-        console.log(
-          `Processing DHIS2 element ${i + 1}/${rows.length}: ${
-            dhis2Element.dhis2_data_element_id
-          }`
-        );
-
-        // Inner loop: For each eAFYA product mapping
-        for (let j = 0; j < mappings.length; j++) {
-          const eafyaProduct = mappings[j];
-          console.log(
-            `  - Mapping eAFYA product ${j + 1}/${mappings.length}: ${
-              eafyaProduct.id
-            }`
-          );
-
-          await client.query(
-            `INSERT INTO reporting.dhis_eafya_mapping_commodities (
-                              section_id,
-                              hmis_code,
-                              hmis_name,
-                              eafya_product_id,
-                              eafya_product_name,
-                              dhis2_data_element_id,
-                              data_element_name
-                          ) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-            [
-              dhis2Element.section_id,
-              dhis2Element.hmis_code,
-              dhis2Element.hmis_name,
-              eafyaProduct.id,
-              eafyaProduct.name || null,
-              dhis2Element.dhis2_data_element_id,
-              dhis2Element.data_element_name,
-            ]
-          );
-          totalInserted++;
-        }
-      }
-
-      console.log(`Total mappings created: ${totalInserted}`);
-
-      await client.query("COMMIT");
-      return res.json({
-        message: "Commodity mappings saved successfully",
-        count: totalInserted,
-        details: {
-          dhis2_data_elements: rows.length,
-          eafya_products: mappings.length,
-          total_mappings_created: totalInserted,
-          calculation: `${rows.length} DHIS2 elements × ${mappings.length} eAFYA products = ${totalInserted} mappings`,
-        },
-      });
-    } catch (error) {
-      await client.query("ROLLBACK");
-      throw error;
-    } finally {
-      client.release();
+      const product = products[i];
+      params.push(
+        section_id,
+        hmis_code,
+        hmis_name || '',
+        product.product_id,
+        product.product_name
+      );
     }
+
+    const insertQuery = `
+      INSERT INTO reporting.hmis_eafya_commodities_mapping (${columns})
+      VALUES ${valuesPlaceholders.join(", ")}
+      RETURNING *
+    `;
+
+    const { rows } = await pool.query(insertQuery, params);
+
+    return res.status(201).json({
+      message: "Condition mapping(s) created",
+      count: rows.length,
+      records: rows,
+    });
   } catch (error) {
-    console.error("Error saving commodity mappings:", error);
+    console.error("Error creating condition mapping:", error);
     res.status(500).json({ message: error.message });
   }
 });

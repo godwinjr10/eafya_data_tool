@@ -1,0 +1,201 @@
+id,dataset_id,dataset_code,dataset_name,dataelement_id,dataelement_code,hmis_code,hmis_name,section_name,section_id
+1,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",RIBMopGoWHl,SS01A,SS01,Artemether/Lumefantrine 120/20 mg - Quantity consumed,Essential Medicines,6.1
+2,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",pDoc60OZDbH,SS01B,SS01,Artemether/Lumefantrine 120/20 mg - Days out of stock,Essential Medicines,6.1
+3,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",fy34HLoHa0x,SS01C,SS01,Artemether/Lumefantrine 120/20 mg - Stock on hand,Essential Medicines,6.1
+4,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Q6ne3khBitH,SS01D,SS01,Artemether/Lumefantrine 120/20 mg - Quantity Expired,Essential Medicines,6.1
+5,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",FNT0AWnEok7,SS02A,SS02,Artesunate 60mg - Quantity consumed,Essential Medicines,6.1
+6,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",eSjJv1tjFWu,SS02B,SS02,Artesunate 60mg - Days out of stock,Essential Medicines,6.1
+7,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",O3hT4aIhzLi,SS02C,SS02,Artesunate 60mg - Stock on hand,Essential Medicines,6.1
+8,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Jdb1lBj4uoP,SS02D,SS02,Artesunate 60mg - Quantity Expired,Essential Medicines,6.1
+9,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",LM7oz5Glohw,SS03A,SS03,Long Lasting Insecticidal Nets (LLINs) - Quantity consumed,Essential Medicines,6.1
+10,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",So21oM09xKL,SS03B,SS03,Long Lasting Insecticidal Nets (LLINs) - Days out of stock,Essential Medicines,6.1
+11,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",eJjn1Av0vHI,SS03C,SS03,Long Lasting Insecticidal Nets (LLINs) - Stock on hand,Essential Medicines,6.1
+12,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",f65rrKcnJLg,SS03D,SS03,Long Lasting Insecticidal Nets (LLINs) - Quantity Expired,Essential Medicines,6.1
+13,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",RvUzMtiTOnh,SS04A,SS04,Chlorhexidine Digluconate Gel 7.1% (equivalent to 4% chlorhexidine) - Quantity consumed,Essential Medicines,6.1
+14,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",pnkTSdn1z9e,SS04B,SS04,Chlorhexidine Digluconate Gel 7.1% (equivalent to 4% chlorhexidine) - Days out of stock,Essential Medicines,6.1
+15,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",NH01RQyn58l,SS04C,SS04,Chlorhexidine Digluconate Gel 7.1% (equivalent to 4% chlorhexidine) - Stock on hand,Essential Medicines,6.1
+16,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",tgtarB7Bvsx,SS04D,SS04,Chlorhexidine Digluconate Gel 7.1% (equivalent to 4% chlorhexidine) - Quantity Expired,Essential Medicines,6.1
+17,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",aB6rpIpPXWf,SS05A,SS05,Therapeutic milk F75 (75Kcal/100ml) - Quantity consumed,Essential Medicines,6.1
+18,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",RUgRUwwMAlh,SS05B,SS05,Therapeutic milk F75 (75Kcal/100ml)- Days out of stock,Essential Medicines,6.1
+19,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",YhhLA8HoLr7,SS05C,SS05,Therapeutic milk F75 (75Kcal/100ml) - Stock on hand,Essential Medicines,6.1
+20,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",uhDyKR4nE95,SS05D,SS05,Therapeutic milk F75 (75Kcal/100ml) - Quantity Expired,Essential Medicines,6.1
+21,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",MaYXvxNPKGR,SS06A,SS06,Ready to use Therapeutic feeds (RUTF) - Quantity consumed,Essential Medicines,6.1
+22,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Ftnf3Yn7oht,SS06B,SS06,Ready to use Therapeutic feeds (RUTF) - Days out of stock,Essential Medicines,6.1
+23,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",zc7pf9ctwyc,SS06C,SS06,Ready to use Therapeutic feeds (RUTF) - Stock on hand,Essential Medicines,6.1
+24,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",avFhBPl6YUj,SS06D,SS06,Ready to use Therapeutic feeds (RUTF) - Quantity Expired,Essential Medicines,6.1
+25,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",wIp7Gr1lf7S,SS07A,SS07,Oral Liquid Morphine 5ml/ml - Quantity consumed,Essential Medicines,6.1
+26,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",d9yRtY7kB3L,SS07B,SS07,Oral Liquid Morphine 5ml/ml - Days out of stock,Essential Medicines,6.1
+27,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",wHgX40UfiCw,SS07C,SS07,Oral Liquid Morphine 5ml/ml - Stock on hand,Essential Medicines,6.1
+28,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",JxQNnKwaTbR,SS07D,SS07,Oral Liquid Morphine 5ml/ml - Quantity Expired,Essential Medicines,6.1
+29,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",iQJkiLHfOyZ,SS08A,SS08,Retinol (Vitamin A) 200000IU-Quantity Consumed,Essential Medicines,6.1
+30,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Wc8HjvOATV9,SS08b,SS08,Retinol (Vitamin A) 200000IU-Days out of stock,Essential Medicines,6.1
+31,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",T3I0ee84Xrp,SS08c,SS08,Retinol (Vitamin A) 200000IU-Stock on Hand,Essential Medicines,6.1
+32,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",jTFze4K9xBv,SS08d,SS08,Retinol (Vitamin A) 200000IU-Quantity expired,Essential Medicines,6.1
+33,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",ELUJ8kvdyTi,SS09A,SS09,Bendrofluazide 5mg - Quantity consumed,Essential Medicines,6.1
+34,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",jbVZGLCmLcE,SS09B,SS09,Bendrofluazide 5mg - Days out of stock,Essential Medicines,6.1
+35,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",xfyEsSF1Yeh,SS09C,SS09,Bendrofluazide 5mg - Stock on hand,Essential Medicines,6.1
+36,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",io2jyFaluMb,SS09D,SS09,Bendrofluazide 5mg - Quantity Expired,Essential Medicines,6.1
+37,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",u0eqaAAypzu,SS10A,SS10,Amlodipine 5mg-Quantity Consumed,Essential Medicines,6.1
+38,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",aeoCYWtyaGU,SS10b,SS10,Amlodipine 5mg-Days out of stock,Essential Medicines,6.1
+39,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",vfrGRFSS7ei,SS10c,SS10,Amlodipine 5mg-Stock on Hand,Essential Medicines,6.1
+40,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",MMmOpkseCwP,SS10d,SS10,Amlodipine 5mg-Quantity expired,Essential Medicines,6.1
+41,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",GgypgARVxzI,SS11A,SS11,Captopril 25mg tablet - Quantity consumed,Essential Medicines,6.1
+42,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",YDbEU5bBWyJ,SS11B,SS11,Captopril 25mg tablet - Days out of stock,Essential Medicines,6.1
+43,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",QIy53MYZZHq,SS11C,SS11,Captopril 25mg tablet - Stock on hand,Essential Medicines,6.1
+44,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",bZGloO0dfM6,SS11D,SS11,Captopril 25mg tablet - Quantity Expired,Essential Medicines,6.1
+45,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",klbaYAoSygw,SS12A,SS12,Metformin 500mg - Quantity consumed,Essential Medicines,6.1
+46,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",wiqUBGIcpQd,SS12B,SS12,Metformin 500mg - Days out of stock,Essential Medicines,6.1
+47,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",msmJxt9LGqX,SS12C,SS12,Metformin 500mg - Stock on hand,Essential Medicines,6.1
+48,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",pgMS4A4T41F,SS12D,SS12,Metformin 500mg - Quantity Expired,Essential Medicines,6.1
+49,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",p9xEniNiV1j,SS13A,SS13,Glimepiride 2mg-Quantity Consumed,Essential Medicines,6.1
+50,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",XIIggi79snv,SS13b,SS13,Glimepiride 2mg-Days out of stock,Essential Medicines,6.1
+51,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",EB24zcuiRH4,SS13c,SS13,Glimepiride 2mg-Stock on Hand,Essential Medicines,6.1
+52,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",micrXkUusxI,SS13d,SS13,Glimepiride 2mg-Quantity expired,Essential Medicines,6.1
+53,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",iYxpEkbr4jw,SS14A,SS14,Insulin short-acting 100IU/Ml  - Quantity consumed,Essential Medicines,6.1
+54,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",lx4a6tm5Ctl,SS14B,SS14,Insulin short-acting 100IU/Ml  - Days out of stock,Essential Medicines,6.1
+55,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",bYQQBS9F9Bp,SS14C,SS14,Insulin short-acting 100IU/Ml - Stock on hand,Essential Medicines,6.1
+56,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",y1JeU6PTNy7,SS14D,SS14,Insulin short-acting100IU/Ml - Quantity Expired,Essential Medicines,6.1
+57,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",eorpVNcBh68,SS15A,SS15,Filled Oxygen Cylinder (Big Size) 40-60L WC/6.8m3 GC-Quantity Consumed,Essential Medicines,6.1
+58,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",V3K5RNMBcpr,SS15b,SS15,Filled Oxygen Cylinder (Big Size) 40-60L WC/6.8m3 GC-Days out of stock,Essential Medicines,6.1
+59,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",l45DU6fKh35,SS15c,SS15,Filled Oxygen Cylinder (Big Size) 40-60L WC/6.8m3 GC-Stock on Hand,Essential Medicines,6.1
+60,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",PD0KQJ5jSiV,SS15d,SS15,Filled Oxygen Cylinder (Big Size) 40-60L WC/6.8m3 GC-Quantity expired,Essential Medicines,6.1
+61,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Gko0hroCGQf,SS16A,SS16,Ferrous sulphate + Folic Acid-Quantity Consumed,Essential Medicines,6.1
+62,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",MVeuvhMqlyx,SS16b,SS16,Ferrous sulphate + Folic Acid-Days out of stock,Essential Medicines,6.1
+63,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",U103VVvl2Km,SS16c,SS16,Ferrous sulphate + Folic Acid-Stock on Hand,Essential Medicines,6.1
+64,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",ZYWlByvGa4Y,SS16d,SS16,Ferrous sulphate + Folic Acid-Quantity expired,Essential Medicines,6.1
+65,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",MdDIyLTtzVZ,SS17A,SS17,Salbutamol inhaler-Quantity Consumed,Essential Medicines,6.1
+66,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",UW7CUMrQIUh,SS17b,SS17,Salbutamol inhaler-Days out of stock,Essential Medicines,6.1
+67,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",sO1U2VBiaTL,SS17c,SS17,Salbutamol inhaler-Stock on Hand,Essential Medicines,6.1
+68,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",yMg98ft9QuB,SS17d,SS17,Salbutamol inhaler-Quantity expired,Essential Medicines,6.1
+69,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",H8uIox9gXEA,SS18A,SS18,Carbamazepine 200mg-Quantity consumed,Essential Medicines,6.1
+70,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",R3OzIXOWCOe,SS18b,SS18,Carbamazepine 200mg-Days out of stock,Essential Medicines,6.1
+71,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",ex3OpmyHlxP,SS18c,SS18,Carbamazepine 200mg-Stock on hand,Essential Medicines,6.1
+72,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",DXBOe7Us5yo,SS18d,SS18,Carbamazepine 200mg-Quantity expired,Essential Medicines,6.1
+73,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",fFsNsiGg2CB,SS19A,SS19,Fluoxetine 20 mg-Quantity Consumed,Essential Medicines,6.1
+74,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",xQ8AWPY8Ude,SS19b,SS19,Fluoxetine 20 mg-Days out of stock,Essential Medicines,6.1
+75,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",HPMRhsim2CG,SS19c,SS19,Fluoxetine 20 mg-Stock on Hand,Essential Medicines,6.1
+76,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",tJrUDw21Xmb,SS19d,SS19,Fluoxetine 20 mg-Quantity expired,Essential Medicines,6.1
+77,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",mOOdFWzGNAD,SS20A,SS20,Chlorpromazine 25mg-Quantity Consumed,Essential Medicines,6.1
+78,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",LkQrMVTYCPz,SS20b,SS20,Chlorpromazine 25mg-Days out of stock,Essential Medicines,6.1
+79,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",CHADo6zEvP7,SS20c,SS20,Chlorpromazine 25mg-Stock on Hand,Essential Medicines,6.1
+80,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",AdBRLfOzQQP,SS20d,SS20,Chlorpromazine 25mg-Quantity expired,Essential Medicines,6.1
+81,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",oxs9PnKVkY9,SS21A,SS21,Depot Medroxyprogesterone Acetate (DMPA)_ IM + SC-Quantity Consumed,Essential Medicines,6.1
+82,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",TiTizk6ySeY,SS21b,SS21,Depot Medroxyprogesterone Acetate (DMPA)_ IM + SC-Days out of stock,Essential Medicines,6.1
+83,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",FrWnOPWPbSF,SS21c,SS21,Depot Medroxyprogesterone Acetate (DMPA)_ IM + SC-Stock on Hand,Essential Medicines,6.1
+84,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",btxC6bS9r1M,SS21d,SS21,Depot Medroxyprogesterone Acetate (DMPA)_ IM + SC-Quantity expired,Essential Medicines,6.1
+85,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",aYLRo9MS3zb,SS22A,SS22,Amoxicillin 250 mg capsule - Quantity consumed,Essential Medicines,6.1
+86,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",dBpUBrwQoEg,SS22B,SS22,Amoxicillin 250 mg capsule- Days out of stock,Essential Medicines,6.1
+87,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",z75W19sQozD,SS22C,SS22,Amoxicillin 250 mg capsule - Stock on hand,Essential Medicines,6.1
+88,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",H4UtEhJHCIb,SS22D,SS22,Amoxicillin 250 mg capsule - Quantity Expired,Essential Medicines,6.1
+89,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",pvBjG3TnbtJ,SS23A,SS23,Amoxicillin dispersible 250mg tablet - Quantity consumed,Essential Medicines,6.1
+90,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",ydkgbCWZ0u9,SS23B,SS23,Amoxicillin dispersible 250mg tablet - Days out of stock,Essential Medicines,6.1
+91,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",rPFM5bTGYMY,SS23C,SS23,Amoxicillin dispersible 250mg tablet - Stock on hand,Essential Medicines,6.1
+92,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",SQr7jL5gMBe,SS23D,SS23,Amoxicillin dispersible 250mg tablet - Quantity Expired,Essential Medicines,6.1
+93,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",eu5hj9Xa9vP,SS24A,SS24,Sulfadoxine/ Pyrimethamine tablet - Quantity consumed,Essential Medicines,6.1
+94,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",g6UvWXJodNP,SS24B,SS24,Sulfadoxine/ Pyrimethamine tablet - Days out of stock,Essential Medicines,6.1
+95,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",SttnQWaT8fW,SS24C,SS24,Sulfadoxine/ Pyrimethamine tablet - Stock on hand,Essential Medicines,6.1
+96,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",RKgzwmmLqUK,SS24D,SS24,Sulfadoxine/ Pyrimethamine tablet - Quantity Expired,Essential Medicines,6.1
+97,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",EDOQsUzygay,SS25A,SS25,Misoprostol 200mg-Quantity Consumed,Essential Medicines,6.1
+98,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",yQyD3fmgUkC,SS25b,SS25,Misoprostol 200mg-Days out of stock,Essential Medicines,6.1
+99,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",B9tp1MLDv2F,SS25c,SS25,Misoprostol 200mg-Stock on Hand,Essential Medicines,6.1
+100,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",jrWc3PfVAAK,SS25d,SS25,Misoprostol 200mg-Quantity expired,Essential Medicines,6.1
+101,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",lz5KzKAbFbX,SS26A,SS26,ORS Sachets with zinc tablet - Quantity consumed,Essential Medicines,6.1
+102,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",RooCY6sOLZo,SS26B,SS26,ORS Sachets with zinc tablet - Days out of stock,Essential Medicines,6.1
+103,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",F38NBUN9Srm,SS26C,SS26,ORS Sachets with zinc tablet - Stock on hand,Essential Medicines,6.1
+104,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",RA5qTvZBF8v,SS26D,SS26,ORS Sachets with zinc tablet - Quantity Expired,Essential Medicines,6.1
+105,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",MSKEKWtoB54,SS27A,SS27,Measles-Rubella Vaccine-Quantity Consumed,Essential Medicines,6.1
+106,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",uoCNTBk8wCN,SS27b,SS27,Measles-Rubella Vaccine-Days out of stock,Essential Medicines,6.1
+107,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",WQGiJmR3Fpn,SS27c,SS27,Measles-Rubella Vaccine-Stock on Hand,Essential Medicines,6.1
+108,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",F3qRgHbdaGn,SS27d,SS27,Measles-Rubella Vaccine-Quantity expired,Essential Medicines,6.1
+109,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",wE9AHBOIFCE,SS28A,SS28,Ceftriaxone 1g Injection - Quantity consumed,Essential Medicines,6.1
+110,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",tXhsTnLY5q1,SS28B,SS28,Ceftriaxone 1g Injection - Days out of stock,Essential Medicines,6.1
+111,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",h5nYtk0kLWs,SS28C,SS28,Ceftriaxone 1g Injection - Stock on hand,Essential Medicines,6.1
+112,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",t2ec7RhRJih,SS28D,SS28,Ceftriaxone 1g Injection - Quantity Expired,Essential Medicines,6.1
+113,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",QYtOYWYSof5,SS29A,SS29,Oxytocin Injection - Quantity consumed,Essential Medicines,6.1
+114,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",H9cd4w2pZz7,SS29B,SS29,Oxytocin Injection - Days out of stock,Essential Medicines,6.1
+115,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",XArRo0aFWMq,SS29C,SS29,Oxytocin Injection - Stock on hand,Essential Medicines,6.1
+116,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",ba82zZBuypr,SS29D,SS29,Oxytocin Injection - Quantity Expired,Essential Medicines,6.1
+117,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",I8g7GERvAjt,SS30A,SS30,Mama Kit - Quantity consumed,Essential Medicines,6.1
+118,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",AfULYK9Vpyc,SS30B,SS30,Mama Kit - Days out of stock,Essential Medicines,6.1
+119,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",sFLr3TIyeT3,SS30C,SS30,Mama Kit - Stock on hand,Essential Medicines,6.1
+120,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Z7MLPmFef54,SS30D,SS30,Mama Kit - Quantity Expired,Essential Medicines,6.1
+121,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",mDqfoaIlslo,SS31A,SS31,Etonogestrel 68mg Implant (Implanon)-Quantity Consumed,Essential Medicines,6.1
+122,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",RgJfEDFIOmI,SS31b,SS31,Etonogestrel 68mg Implant (Implanon)-Days out of stock,Essential Medicines,6.1
+123,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",cPQww1wkUF5,SS31c,SS31,Etonogestrel 68mg Implant (Implanon)-Stock on Hand,Essential Medicines,6.1
+124,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",pQS34kFrxph,SS31d,SS31,Etonogestrel 68mg Implant (Implanon)-Quantity expired,Essential Medicines,6.1
+125,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Zbmfh4YV81V,SS32A,SS32,Male Condoms-Quantity Consumed,Essential Medicines,6.1
+126,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",AQBgo2lFYcB,SS32b,SS32,Male Condoms-Days out of stock,Essential Medicines,6.1
+127,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",ydAtcUUXAd4,SS32c,SS32,Male Condoms-Stock on Hand,Essential Medicines,6.1
+128,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",YXxDY7UlYw0,SS32d,SS32,Male Condoms-Quantity expired,Essential Medicines,6.1
+129,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",CQEYQ8lyY3s,SS33A,SS33,CD4 reagent (BD Presto/Visitect/PIMA)-Quantity Consumed,Essential Medicines,6.1
+130,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",MiELOgN8VHl,SS33b,SS33,CD4 reagent (BD Presto/Visitect/PIMA)-Days out of stock,Essential Medicines,6.1
+131,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",FNljrtQsZDH,SS33c,SS33,CD4 reagent (BD Presto/Visitect/PIMA)-Stock on Hand,Essential Medicines,6.1
+132,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",CR482O9NVwb,SS33d,SS33,CD4 reagent (BD Presto/Visitect/PIMA)-Quantity expired,Essential Medicines,6.1
+133,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",oCtCwUE7utd,SS34A,SS34,Malaria Rapid Diagnostic tests - Quantity consumed,Essential Medicines,6.1
+134,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",SBbhtV3VJvj,SS34B,SS34,Malaria Rapid Diagnostic tests - Days out of stock,Essential Medicines,6.1
+135,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",HhhkiZDx1vo,SS34C,SS34,Malaria Rapid Diagnostic tests - Stock on hand,Essential Medicines,6.1
+136,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Uk5CFlynuP8,SS34D,SS34,Malaria Rapid Diagnostic tests - Quantity Expired,Essential Medicines,6.1
+137,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",LwQS4dn6CNo,SS35A,SS35,TB GeneXepert Catridges - Quantity consumed,Essential Medicines,6.1
+138,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",YBrTKDdbjeZ,SS35B,SS35,TB GeneXepert Catridges - Days out of stock,Essential Medicines,6.1
+139,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",tZhzAESh4sL,SS35C,SS35,TB GeneXepert Catridges - Stock on hand,Essential Medicines,6.1
+140,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",T0TejU8ASOy,SS35D,SS35,TB GeneXepert Catridges - Quantity Expired,Essential Medicines,6.1
+141,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",E6bQbrXhKgU,SS36A,SS36,Determine HIV 1 & 2 screening test - Quantity consumed,Essential Medicines,6.1
+142,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",nySjHa5fLGm,SS36B,SS36,Determine HIV 1 & 2 screening test - Days out of stock,Essential Medicines,6.1
+143,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",RQ1tlXaPcar,SS36C,SS36,Determine HIV 1 & 2 screening test - Stock on hand,Essential Medicines,6.1
+144,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",UMNerD5NBOw,SS36D,SS36,Determine HIV 1 & 2 screening test - Quantity Expired,Essential Medicines,6.1
+145,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",mCBBugESiLL,SS37A,SS37,"Stat -pack HIV Confirmatory rapid tests, tests - Quantity consumed",Essential Medicines,6.1
+146,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",lqKvHtoTCSI,SS37B,SS37,"Stat -pack HIV Confirmatory rapid tests, tests - Days out of stock",Essential Medicines,6.1
+147,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",EEx8UTWSL9K,SS37C,SS37,"Stat -pack HIV Confirmatory rapid tests, tests - Stock on hand",Essential Medicines,6.1
+148,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",C6TE4BvkksF,SS37D,SS37,"Stat -pack HIV Confirmatory rapid tests, tests - Quantity Expired",Essential Medicines,6.1
+149,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",QfoK6gO7Ywl,SS38A,SS38,SD Bioline test-Tie Breaker - Quantity consumed,Essential Medicines,6.1
+150,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Xsan86wc3PJ,SS38B,SS38,SD Bioline test-Tie Breaker - Days out of stock,Essential Medicines,6.1
+151,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",ya5mexhLqPi,SS38C,SS38,SD Bioline test-Tie Breaker - Stock on hand,Essential Medicines,6.1
+152,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",mtl18MPGwtc,SS38D,SS38,SD Bioline test-Tie Breaker - Quantity Expired,Essential Medicines,6.1
+153,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",zrzLwJlJT0P,SS39A,SS39,Blood Product - Quantity consumed,Essential Medicines,6.1
+154,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",ia9dCV1swjb,SS39B,SS39,Blood Product  - Days out of stock,Essential Medicines,6.1
+155,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",hIF6SoT1CPV,SS39C,SS39,Blood Product - Stock on hand,Essential Medicines,6.1
+156,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",KjL3gz0ztDT,SS39D,SS39,Blood Product  - Quantity Expired,Essential Medicines,6.1
+157,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",lQRFuUgxIko,SS40A,SS40,"Hepatitis, HBsAg2 Test Kits-Quantity Consumed",Essential Medicines,6.1
+158,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",RMbAB4oIe3v,SS40b,SS40,"Hepatitis, HBsAg2 Test Kits-Days out of stock",Essential Medicines,6.1
+159,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",AhfrSeifgVM,SS40c,SS40,"Hepatitis, HBsAg2 Test Kits-Stock on Hand",Essential Medicines,6.1
+160,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",ObEurrF8fkT,SS40d,SS40,"Hepatitis, HBsAg2 Test Kits-Quantity expired",Essential Medicines,6.1
+161,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Y2rG87X018G,SS41A,SS41,HIV/Syphilis Duo Kit-Quantity Consumed,Essential Medicines,6.1
+162,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",uPxx6wu73ZL,SS41B,SS41,HIV/Syphilis Duo Kit-Days out of stock,Essential Medicines,6.1
+163,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",FjDiDncMSYs,SS41c,SS41,HIV/Syphilis Duo Kit-Stock on Hand,Essential Medicines,6.1
+164,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",WjRrKZXi5UA,SS41D,SS41,HIV/Syphilis Duo Kit-Quantity expired,Essential Medicines,6.1
+165,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",VkjK3NWHyJR,SS42A,SS42,Tenofovir/Lamivudine/Dolutegravir (TDF/3TC/DTG) 300/300/50mg-Quantity Consumed,Essential Medicines,6.1
+166,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",whzcuwyG1mb,SS42b,SS42,Tenofovir/Lamivudine/Dolutegravir (TDF/3TC/DTG) 300/300/50mg-Days out of stock,Essential Medicines,6.1
+167,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",L2exKCG9ZxY,SS42c,SS42,Tenofovir/Lamivudine/Dolutegravir (TDF/3TC/DTG) 300/300/50mg-Stock on Hand,Essential Medicines,6.1
+168,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Ea8UVuVDfa5,SS42d,SS42,Tenofovir/Lamivudine/Dolutegravir (TDF/3TC/DTG) 300/300/50mg-Quantity expired,Essential Medicines,6.1
+169,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",x9HO4Wzv7rx,SS43A,SS43,Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 600/300/50mg-Quantity Consumed,Essential Medicines,6.1
+170,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",IksyrSS2A3e,SS43b,SS43,Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 600/300/50mg-Days out of stock,Essential Medicines,6.1
+171,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",qXdpOMhAsLE,SS43c,SS43,Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 600/300/50mg-Stock on Hand,Essential Medicines,6.1
+172,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",cdMpfZVEhxN,SS43d,SS43,Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 600/300/50mg-Quantity expired,Essential Medicines,6.1
+173,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",RaHMrWfK14P,SS44A,SS44,Zidovudine/Lamivudine (AZT/3TC) 300/150mg-Quantity Consumed,Essential Medicines,6.1
+174,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",hANVx2Y5XjG,SS44b,SS44,Zidovudine/Lamivudine (AZT/3TC) 300/150mg-Days out of stock,Essential Medicines,6.1
+175,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",G998reqcHxo,SS44c,SS44,Zidovudine/Lamivudine (AZT/3TC) 300/150mg-Stock on Hand,Essential Medicines,6.1
+176,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",pzFHcVuOC7F,SS44d,SS44,Zidovudine/Lamivudine (AZT/3TC) 300/150mg-Quantity expired,Essential Medicines,6.1
+177,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",lTLNDFuDDba,SS45A ,SS45,Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 60/30/5mg-Quantity Consumed,Essential Medicines,6.1
+178,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",k4erSOlCCkS,SS45b,SS45,Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 60/30/5mg-Days out of stock,Essential Medicines,6.1
+179,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",rHhScmlbCBl,SS45c,SS45,Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 60/30/5mg-Stock on Hand,Essential Medicines,6.1
+180,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",WqpK9umwIgV,SS45d,SS45,Abacavir/Lamivudine/Dolutegravir (ABC/3TC/DTG) 60/30/5mg-Quantity expired,Essential Medicines,6.1
+181,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",yIWazgZwraU,SS46A,SS46,Zidovudine/Lamivudine (AZT/3TC) 60/30mg-Quantity Consumed,Essential Medicines,6.1
+182,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Q0KPtGrBoQb,SS46b,SS46,Zidovudine/Lamivudine (AZT/3TC) 60/30mg-Days out of stock,Essential Medicines,6.1
+183,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Fjuod4X2s6q,SS46c,SS46,Zidovudine/Lamivudine (AZT/3TC) 60/30mg-Stock on Hand,Essential Medicines,6.1
+184,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",GJh7HiEjOFA,SS46d,SS46,Zidovudine/Lamivudine (AZT/3TC) 60/30mg-Quantity expired,Essential Medicines,6.1
+185,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",NOAUnQ5exkd,SS47A,SS47,Nevirapine (NVP) 10mg/ml oral susp-Quantity Consumed,Essential Medicines,6.1
+186,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",dS1SBQizsCk,SS47b,SS47,Nevirapine (NVP) 10mg/ml oral susp.-Days out of stock,Essential Medicines,6.1
+187,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",eIdyJNIeFMU,SS47c,SS47,Nevirapine (NVP) 10mg/ml oral susp.-Stock on Hand,Essential Medicines,6.1
+188,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",ZQGRrTL9f7f,SS47d,SS47,Nevirapine (NVP) 10mg/ml oral susp.-Quantity expired,Essential Medicines,6.1
+189,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",vLfFqTKaUZc,SS48A,SS48,Ethambutol 100mg-Quantity Consumed,Essential Medicines,6.1
+190,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Cyt3BC4JNR5,SS48B,SS48,Ethambutol 100mg-Days out of Stock,Essential Medicines,6.1
+191,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",M7QQo23mMqK,SS48C,SS48,Ethambutol 100mg- Stock on hand,Essential Medicines,6.1
+192,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",V2IeNGMa5aZ,SS48D,SS48,Ethambutol 100mg - Quantity expired ,Essential Medicines,6.1
+193,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",tViJTDJyvRx,SS49A,SS49,RHZE 150/75/400/275mg - Quantity consumed,Essential Medicines,6.1
+194,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",XcKSEjnZEut,SS49B,SS49,RHZE 150/75/400/275mg - Days out of stock,Essential Medicines,6.1
+195,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",LIyDtNQVsGo,SS49C,SS49,RHZE 150/75/400/275mg - Stock on hand,Essential Medicines,6.1
+196,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",jEjYbOgLaEI,SS49D,SS49,RHZE 150/75/400/275mg - Quantity Expired,Essential Medicines,6.1
+197,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",Ry5PQiLsEZX,SS50A,SS50,RHZ 75/50/150mg - Quantity consumed,Essential Medicines,6.1
+198,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",KVma72HXIFm,SS50B,SS50,RHZ 75/50/150mg - Days out of stock,Essential Medicines,6.1
+199,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",kFVmUnfCxTc,SS50C,SS50,RHZ 75/50/150mg - Stock on hand,Essential Medicines,6.1
+200,VDhwrW9DiC1,HMIS1054,"HMIS 105:06-09 - OPD Monthly Report (Supplies, Outreaches & Supervision)",np7eWusrF7l,SS50D,SS50,RHZ 75/50/150mg - Quantity Expired,Essential Medicines,6.1

@@ -1,0 +1,41 @@
+id,hmis_code,hmis_name,section_name,section_code
+1,CH01,Vit A supplement (1st Dose),Child Health Services,2.6.0
+2,CH02,Vit A supplement (2nd Dose),Child Health Services,2.6.0
+3,CH03,Deworming (1st Dose),Child Health Services,2.6.0
+4,CH04,Deworming (2nd Dose),Child Health Services,2.6.0
+5,CH05,Deworming in school (1st Dose),Child Health Services,2.6.0
+6,CH06,Deworming in schools (2nd Dose),Child Health Services,2.6.0
+7,VP01,HPV-Dose ,HPV Vaccination,2.6.1
+8,TD01,Td1-Dose 1,Tetanus Vaccination,2.6.2
+9,TD02,Td2-Dose 2,Tetanus Vaccination,2.6.2
+10,TD03,Td3-Dose 3,Tetanus Vaccination,2.6.2
+11,TD04,Td4-Dose 4,Tetanus Vaccination,2.6.2
+12,TD05,Td5-Dose 5,Tetanus Vaccination,2.6.2
+13,CL18,RotaVirus 3 Vaccine,Child Immunization,2.6.3
+14,CL01,BCG,Child Immunization,2.6.3
+15,CL02,Hep B zero doze,Child Immunization,2.6.3
+16,CL03,Protection At Birth for Td(PAB),Child Immunization,2.6.3
+17,CL04,Polio 0,Child Immunization,2.6.3
+18,CL05,Polio 1,Child Immunization,2.6.3
+19,CL06,Polio 2,Child Immunization,2.6.3
+20,CL07,Polio 3,Child Immunization,2.6.3
+21,CL08,IPV1,Child Immunization,2.6.3
+22,CL09,IPV2,Child Immunization,2.6.3
+23,CL10,DPT-HepB+Hib 1,Child Immunization,2.6.3
+24,CL11,DPT-HepB+Hib 2,Child Immunization,2.6.3
+25,CL12,DPT-HepB+Hib 3,Child Immunization,2.6.3
+26,CL13,PCV 1,Child Immunization,2.6.3
+27,CL14,PCV 2,Child Immunization,2.6.3
+28,CL15,PCV 3,Child Immunization,2.6.3
+29,CL16,Rotavirus 1 Vaccine,Child Immunization,2.6.3
+30,CL17,Rotavirus 2 Vaccine,Child Immunization,2.6.3
+31,CL19,Malaria 1,Child Immunization,2.6.3
+32,CL20,Malaria 2,Child Immunization,2.6.3
+33,CL21,Malaria 3,Child Immunization,2.6.3
+34,CL22,Yellow Fever,Child Immunization,2.6.3
+35,CL23,Measles (MR1),Child Immunization,2.6.3
+36,CL24,Fully immunized by 1 year,Child Immunization,2.6.3
+37,CL25,Number received LLINs,Child Immunization,2.6.3
+38,CL26,Malaria 4,Child Immunization,2.6.3
+39,CL27,Measles (MR2),Child Immunization,2.6.3
+40,CL28,Fully immunized by 2 years,Child Immunization,2.6.3

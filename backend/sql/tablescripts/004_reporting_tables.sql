@@ -606,3 +606,69 @@ CREATE TABLE IF NOT EXISTS reporting.users (
 CREATE INDEX IF NOT EXISTS idx_datasets_dataset_id ON reporting.datasets(dataset_id);
 CREATE INDEX IF NOT EXISTS idx_users_username ON reporting.users(username);
 CREATE INDEX IF NOT EXISTS idx_users_role ON reporting.users(role);
+
+CREATE TABLE IF NOT EXISTS reporting.hmis_eafya_commodities_mapping (
+	id int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
+	section_id varchar(50) NULL,
+	section_name varchar(50) NULL,
+	hmis_code varchar(50) NULL,
+	hmis_name text NULL,
+	product_id int4 NULL,
+	product_name text NULL,
+	CONSTRAINT hmis_eafya_commodities_mapping_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS reporting.hmis_eafya_labtests_mapping (
+	id int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
+	section_id varchar(50) NULL,
+	section_name varchar(50) NULL,
+	hmis_code varchar(50) NULL,
+	hmis_name text NULL,
+	labtest_id int4 NULL,
+	labtest_name text NULL,
+	CONSTRAINT hmis_eafya_labtests_mapping_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS reporting.hmis_eafya_familyplanning_mapping (
+	id int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
+	section_id varchar(50) NULL,
+	section_name varchar(50) NULL,
+	hmis_code varchar(50) NULL,
+	hmis_name text NULL,
+	familyplanning_id int4 NULL,
+	familyplanning_name text NULL,
+	CONSTRAINT hmis_eafya_familyplanning_mapping_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS reporting.hmis_eafya_vaccines_mapping (
+	id int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
+	section_id varchar(50) NULL,
+	section_name varchar(50) NULL,
+	hmis_code varchar(50) NULL,
+	hmis_name text NULL,
+	vaccine_id int4 NULL,
+	vaccine_name text NULL,
+	CONSTRAINT hmis_eafya_vaccines_mapping_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS reporting.hmis_eafya_procedures_mapping (
+	id int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
+	section_id varchar(50) NULL,
+	section_name varchar(50) NULL,
+	hmis_code varchar(50) NULL,
+	hmis_name text NULL,
+	procedure_id int4 NULL,
+	procedure_name text NULL,
+	CONSTRAINT hmis_eafya_procedures_mapping_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS reporting.hmis_eafya_imaging_mapping (
+	id int4 GENERATED ALWAYS AS IDENTITY( INCREMENT BY 1 MINVALUE 1 MAXVALUE 2147483647 START 1 CACHE 1 NO CYCLE) NOT NULL,
+	section_id varchar(50) NULL,
+	section_name varchar(50) NULL,
+	hmis_code varchar(50) NULL,
+	hmis_name text NULL,
+	imaging_id int4 NULL,
+	imaging_name text NULL,
+	CONSTRAINT hmis_eafya_imaging_mapping_pkey PRIMARY KEY (id)
+);

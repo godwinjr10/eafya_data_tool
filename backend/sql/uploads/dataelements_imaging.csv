@@ -1,0 +1,63 @@
+id,dataset_id,dataset_code,dataset_name,dataelement_id,dataelement_code,dataelement_name,section_name,section_code,hmis_code
+1,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,MX5ze6e9iP2,RA01,Plain radiography (X-ray),X-Ray,5.1.1,RA01
+2,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,yLX4o9peOsQ,RA02,CXR (chest x-ray),X-Ray,5.1.1,RA02
+3,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,OeGeSyYymj2,RA03,Plain abdomen,X-Ray,5.1.1,RA03
+4,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,oetCmJsi1kn,RA04,Spine,X-Ray,5.1.1,RA04
+5,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,tF2QBzkj3Pv,RA05,Upper limbs,X-Ray,5.1.1,RA05
+6,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,un0XVEV2Fqt,RA06,Lower limbs,X-Ray,5.1.1,RA06
+7,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,JXDidYOcYLp,RA07,Skull,X-Ray,5.1.1,RA07
+8,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,e1tvZG8X8IW,RA08,Pelvis,X-Ray,5.1.1,RA08
+9,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,kBfGeUictzC,FG01,Barium swallow,Fluoroscopy Gastrointestinal tract,5.1.2,FG01
+10,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,YXiRy13J8ss,FG02,Barium meal,Fluoroscopy Gastrointestinal tract,5.1.2,FG02
+11,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,nfrl00O8GUa,FG03,Barium follow-through,Fluoroscopy Gastrointestinal tract,5.1.2,FG03
+12,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,zaHYBIpnntL,FG04,Small bowel enema,Fluoroscopy Gastrointestinal tract,5.1.2,FG04
+13,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,QvZxMe5I0xh,FG05,Barium enema,Fluoroscopy Gastrointestinal tract,5.1.2,FG05
+14,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,PIySVhx6DJS,FG06,The 'instant' enema,Fluoroscopy Gastrointestinal tract,5.1.2,FG06
+15,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,uLEwmtgKXMi,FG07,Sonogram/ Fistulogram,Fluoroscopy Gastrointestinal tract,5.1.2,FG07
+16,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,ftI4unKDI8y,FG08,Loopogram/ Colostogram,Fluoroscopy Gastrointestinal tract,5.1.2,FG08
+17,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,bRhyUH8NBNb,FG09,"Others specify; Balloon dialatation of Oesophageal strictures, Intussusception reduction",Fluoroscopy Gastrointestinal tract,5.1.2,FG09
+18,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,HKY8BpjpV5k,WS01,Pre-operative cholangiography,Water soluble contrast examination,5.1.3,WS01
+19,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,jqpTQUwkCNQ,WS02,Postoperative (T-tube) cholangiography,Water soluble contrast examination,5.1.3,WS02
+20,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,tUj0laRvwHM,WS03,Percutaneous extraction of retained biliary calculi,Water soluble contrast examination,5.1.3,WS03
+21,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,jo4anAK0YTh,WS04,Endoscopic retrograde cholangio pancreatography (ERCP),Water soluble contrast examination,5.1.3,WS04
+22,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,R39MIoKivhS,WS05,Percutaneous transhepatic cholangiography (PTCH),Water soluble contrast examination,5.1.3,WS05
+23,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,Dmwjae6G7Il,TR01,Excretion urography,Urinary tract,5.1.4,TR01
+24,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,AlGU4azoEQ6,TR02,Percutaneous renal puncture,Urinary tract,5.1.4,TR02
+25,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,daUTHW3uNC1,TR03,Percutaneous nephrostomy,Urinary tract,5.1.4,TR03
+26,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,DPdFnwVaO51,TR04,Percutaneous nephrolithotomy,Urinary tract,5.1.4,TR04
+27,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,SgTjL8hJ1uS,TR05,Retrograde pyeloureterography,Urinary tract,5.1.4,TR05
+28,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,E8rU6SWAcIB,MC01,Reproductive system,Micturating cystourethrography,5.1.5,MC01
+29,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,WBzy5Tcl3gQ,MC02,Hysterosalpingography,Micturating cystourethrography,5.1.5,MC02
+30,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,JYcSrtHDFbf,MC03,Sialography,Micturating cystourethrography,5.1.5,MC03
+31,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,ZavQSFEftEi,MC04,Fistulography,Micturating cystourethrography,5.1.5,MC04
+32,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,ZP2lc5ILV2U,CT01,Brain,Computed tomography,5.1.6,CT01
+33,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,Mkk2BejAlg8,CT02,Orbits /paranasal sinuses,Computed tomography,5.1.6,CT02
+34,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,IRQHM1CBkp4,CT03,Neck,Computed tomography,5.1.6,CT03
+35,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,krBQ4OPkGHt,CT04,Chest,Computed tomography,5.1.6,CT04
+36,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,eOzvaIUGILC,CT05,Abdomen and pelvis,Computed tomography,5.1.6,CT05
+37,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,X5stldnhNtf,CT06,Spine,Computed tomography,5.1.6,CT06
+38,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,Rp34ZFo33hs,CT07,Limbs,Computed tomography,5.1.6,CT07
+39,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,rV2c6U1HPuK,CT08,Angiography,Computed tomography,5.1.6,CT08
+40,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,LFFHoPWVivy,MA01,Diagnostic,Mammography,5.1.7,MA01
+41,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,jJ5h2IlSZ01,MA02,Screening,Mammography,5.1.7,MA02
+42,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,I0gnbdMZnJ8,MA03,Galactography,Mammography,5.1.7,MA03
+43,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,WHNUWBXbXoD,MR01,Brain,Magnetic Resonance Imaging (MRI),5.1.8,MR01
+44,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,Ywkn1hJ0neb,MR02,Spine,Magnetic Resonance Imaging (MRI),5.1.8,MR02
+45,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,xfdupdekZgg,MR03,Abdomen,Magnetic Resonance Imaging (MRI),5.1.8,MR03
+46,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,l74Up3OSZaB,MR04,Angiography,Magnetic Resonance Imaging (MRI),5.1.8,MR04
+47,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,HRLdjyBvu7M,MR05,Musculoskeletal,Magnetic Resonance Imaging (MRI),5.1.8,MR05
+48,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,FfxcPHmgIWS,UL01,Abdomen and pelvis,Ultrasound,5.1.9,UL01
+49,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,dkyYj6FBGIV,UL02,Obstetrics,Ultrasound,5.1.9,UL02
+50,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,wCHJqtGX4rE,UL03,Gynecology,Ultrasound,5.1.9,UL03
+51,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,dTSlsl0LHkf,UL04,Small parts,Ultrasound,5.1.9,UL04
+52,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,le6WxMHZpu0,UL05,Musculoskeletal,Ultrasound,5.1.9,UL05
+53,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,RArmWwpOZKC,UL06,Cranial,Ultrasound,5.1.9,UL06
+54,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,v0hfRlfkriq,UL07,"Endocavitary ultrasound (transvaginal, transrectal, transesophageal )",Ultrasound,5.1.9,UL07
+55,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,HQ6yO2v07qc,UL08,Vascular,Ultrasound,5.1.9,UL08
+56,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,jMCeB9KiH4n,IP01,Diagnostic,Intervention procedure Types,5.1.10,IP01
+57,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,F0J4YKJGDDG,IP02,Therapeutic,Intervention procedure Types,5.1.10,IP02
+58,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,PS1LPVl81S9,IM01,Ultrasound guided,Imaging modality,5.1.11,IM01
+59,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,yMSYuGrhzXI,IM02,CT guided,Imaging modality,5.1.11,IM02
+60,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,zTP8AouOl6o,IM03,Fluoroscopy,Imaging modality,5.1.11,IM03
+61,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,hIzgkgQvyVR,IM04,MRI guided,Imaging modality,5.1.11,IM04
+62,EBqVAQRmiPm,HMIS108,HMIS 108 - IPD Monthly Report,AxVUBRsLXFs,IM05,Stereotactic biopsy,Imaging modality,5.1.11,IM05

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import API from '../../../helpers/api';
+import API from '../../../../helpers/api';
 
-const Dhis2MappingDialog = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) => {
+const MappingModal = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) => {
   const [diseases, setDiseases] = useState([]);
   const [selectedDiseases, setSelectedDiseases] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -117,14 +117,17 @@ const Dhis2MappingDialog = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) =
       tabIndex="-1" 
       role="dialog"
       onClick={handleBackdropClick}
-      style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}
+      style={{ backgroundColor: 'rgba(0,0,0,0.45)', zIndex: 1050 }}
     >
-      <div className="modal-dialog modal-lg" role="document">
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">
-              Add New Mapping - {hmisName}
-            </h5>
+      <div className="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div className="modal-content shadow-lg" style={{ borderRadius: '0.5rem', overflow: 'hidden' }}>
+          <div className="modal-header bg-white border-0 pb-0 pt-3 px-4">
+            <div>
+              <h5 className="modal-title mb-1" style={{ fontWeight: 600 }}>
+                Add New Mapping - {hmisName}
+              </h5>
+              <small className="text-muted">Select diseases to map to <strong>{hmisCode}</strong></small>
+            </div>
             <button
               type="button"
               className="btn-close"
@@ -134,42 +137,11 @@ const Dhis2MappingDialog = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) =
           </div>
           
           <form onSubmit={handleSubmit}>
-            <div className="modal-body">
-              {/* HMIS Info */}
-              <div className="row mb-4">
-                <div className="col-md-6">
-                  <label htmlFor="hmisCode" className="form-label">HMIS Code</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="hmisCode"
-                    value={hmisCode}
-                    disabled
-                    readOnly
-                  />
-                </div>
-                <div className="col-md-6">
-                  <label htmlFor="hmisName" className="form-label">HMIS Name</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="hmisName"
-                    value={hmisName}
-                    disabled
-                    readOnly
-                  />
-                </div>
-              </div>
-
-              {/* Selected Count */}
-              <div className="alert alert-info mb-3">
-                <i className="fas fa-info-circle me-2"></i>
-                Selected {selectedDiseases.length} disease{selectedDiseases.length !== 1 ? 's' : ''} for mapping
-              </div>
+            <div className="modal-body px-4 pt-2 pb-3">
 
               {/* Search */}
               <div className="mb-3">
-                <label htmlFor="searchDiseases" className="form-label">Search Diseases</label>
+                {/* <label htmlFor="searchDiseases" className="form-label small text-muted">Search Diseases</label> */}
                 <input
                   type="text"
                   className="form-control"
@@ -177,21 +149,19 @@ const Dhis2MappingDialog = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) =
                   placeholder="Search by disease name, ID, or ICD code..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
+                  style={{ padding: '10px 12px', borderRadius: '0.375rem' }}
                 />
-                <div className="form-text">
-                  Showing first 100 results. Use search to find specific diseases.
-                </div>
               </div>
 
               {/* Diseases Grid */}
               <div className="mb-3">
-                <label className="form-label">Available Diseases</label>
+                <label className="form-label small text-muted">Available Diseases</label>
                 <div 
-                  className="border rounded p-2" 
+                  className="border rounded p-3 bg-white"
                   style={{ 
-                    maxHeight: '300px', 
+                    maxHeight: '420px', 
                     overflowY: 'auto',
-                    minHeight: '200px'
+                    minHeight: '220px'
                   }}
                 >
                   {loadingDiseases ? (
@@ -212,11 +182,11 @@ const Dhis2MappingDialog = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) =
                         return (
                           <div className="col-12 col-md-4" key={disease.disease_id}>
                             <div
-                              className={`card h-100 ${isSelected ? 'border-primary' : ''}`}
-                              style={{ cursor: 'pointer' }}
+                              className={`card h-100 ${isSelected ? 'border-2 border-primary' : 'border-0'}`}
+                              style={{ cursor: 'pointer', borderRadius: '0.6rem', boxShadow: isSelected ? '0 6px 12px rgba(20,115,255,0.06)' : 'none' }}
                               onClick={() => handleDiseaseToggle(disease)}
                             >
-                              <div className="card-body py-2">
+                              <div className="card-body py-1">
                                 <div className="d-flex align-items-start">
                                   <div className="form-check me-2 mt-1">
                                     <input
@@ -225,13 +195,14 @@ const Dhis2MappingDialog = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) =
                                       checked={isSelected}
                                       onChange={() => {}} // click handled on card
                                       readOnly
+                                      style={{ width: '16px', height: '16px' }}
                                     />
                                   </div>
                                   <div className="flex-grow-1">
-                                    <div className="text-wrap" title={disease.disease_name}>
+                                      <div className="text-wrap text-truncate" title={disease.disease_name} style={{ fontSize: '0.85rem' }}>
                                       {disease.disease_name}
                                     </div>
-                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -250,10 +221,10 @@ const Dhis2MappingDialog = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) =
               )}
             </div>
 
-            <div className="modal-footer">
+            <div className="modal-footer border-0 pt-0 pb-4 px-4">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-light btn-sm"
                 onClick={handleClose}
                 disabled={loading}
               >
@@ -261,7 +232,7 @@ const Dhis2MappingDialog = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) =
               </button>
               <button
                 type="submit"
-                className="btn btn-primary"
+                className="btn btn-primary btn-sm"
                 disabled={loading || selectedDiseases.length === 0}
               >
                 {loading ? (
@@ -270,7 +241,7 @@ const Dhis2MappingDialog = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) =
                     Saving...
                   </>
                 ) : (
-                  `Save Mapping (${selectedDiseases.length})`
+                  `Save Mapping`
                 )}
               </button>
             </div>
@@ -281,4 +252,4 @@ const Dhis2MappingDialog = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) =
   );
 };
 
-export default Dhis2MappingDialog;
+export default MappingModal;

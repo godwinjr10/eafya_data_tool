@@ -1,0 +1,89 @@
+id,dataset_id,dataset_code,dataset_name,dataelement_id,dataelement_code,dataelement_name,section_name,section_code,hmis_code
+1,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",vI52cxgsBNv,CH01,Vit A supplement (1st Dose),Child Health Services,2.6,CH01
+2,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",A2ZOozUNmDz,CH02,Vit A supplement (2nd Dose),Child Health Services,2.6,CH02
+3,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",UvXn8H6o487,CH03,Deworming (1st Dose),Child Health Services,2.6,CH03
+4,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",KAQG7cbFHFA,CH04,Deworming (2nd Dose),Child Health Services,2.6,CH04
+5,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",XBzzfu55Xh6,CH05,Deworming in school (1st Dose),Child Health Services,2.6,CH05
+6,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",mYSOfPa97Ej,CH06,Deworming in schools (2nd Dose),Child Health Services,2.6,CH06
+7,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",Gtk7tbHfVfj,VP01,HPV-Dose ,HPV Vaccination,2.6.1,VP01
+8,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",oj4ttY118Fg,TD01,Td1-Dose 1,Tetanus Vaccination,2.6.2,TD01
+9,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",OrKSwpDxQaJ,TD02,Td2-Dose 2,Tetanus Vaccination,2.6.2,TD02
+10,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",vMZQxa2plDI,TD03,Td3-Dose 3,Tetanus Vaccination,2.6.2,TD03
+11,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",Jd24EcGuIvS,TD04,Td4-Dose 4,Tetanus Vaccination,2.6.2,TD04
+12,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",fyTVWlH6jqm,TD05,Td5-Dose 5,Tetanus Vaccination,2.6.2,TD05
+13,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",JREalJsVgAD,CL18,RotaVirus 3 Vaccine,Child Immunization,2.6.3,CL18
+14,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",MxAg9De4cra,CL01,BCG,Child Immunization,2.6.3,CL01
+15,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",yJgPv7Q9lS1,CL02,Hep B zero doze,Child Immunization,2.6.3,CL02
+16,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",NYs9Ct3X4FD,CL03,Protection At Birth for Td(PAB),Child Immunization,2.6.3,CL03
+17,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",eEllJg5kQn6,CL04,Polio 0,Child Immunization,2.6.3,CL04
+18,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",G4uZN2Y4oAG,CL05,Polio 1,Child Immunization,2.6.3,CL05
+19,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",Quc9uIBIxk6,CL06,Polio 2,Child Immunization,2.6.3,CL06
+20,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",HLyPaHaoHSu,CL07,Polio 3,Child Immunization,2.6.3,CL07
+21,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",ehj9x0CXNN5,CL08,IPV1,Child Immunization,2.6.3,CL08
+22,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",l8gda1Lshsh,CL09,IPV2,Child Immunization,2.6.3,CL09
+23,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",Ys31ug5E3f1,CL10,DPT-HepB+Hib 1,Child Immunization,2.6.3,CL10
+24,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",z1s4aIzf8ga,CL11,DPT-HepB+Hib 2,Child Immunization,2.6.3,CL11
+25,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",ujs4ipzA4tb,CL12,DPT-HepB+Hib 3,Child Immunization,2.6.3,CL12
+26,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",NbG01i1Md55,CL13,PCV 1,Child Immunization,2.6.3,CL13
+27,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",dmSXPXTnV0e,CL14,PCV 2,Child Immunization,2.6.3,CL14
+28,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",QHawVF72X6E,CL15,PCV 3,Child Immunization,2.6.3,CL15
+29,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",rDZlacXXUPM,CL16,Rotavirus 1 Vaccine,Child Immunization,2.6.3,CL16
+30,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",QFolEgl8SEB,CL17,Rotavirus 2 Vaccine,Child Immunization,2.6.3,CL17
+31,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",umOw6ICceuL,CL19,Malaria 1,Child Immunization,2.6.3,CL19
+32,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",tYobnmqU9Fk,CL20,Malaria 2,Child Immunization,2.6.3,CL20
+33,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",xZTA1fYRqy8,CL21,Malaria 3,Child Immunization,2.6.3,CL21
+34,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",Ln0EgQilDUI,CL22,Yellow Fever,Child Immunization,2.6.3,CL22
+35,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",WAjgHQVxVVm,CL23,Measles (MR1),Child Immunization,2.6.3,CL23
+36,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",OG2VmPZSmyv,CL24,Fully immunized by 1 year,Child Immunization,2.6.3,CL24
+37,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",peXxgiReRrs,CL25,Number received LLINs,Child Immunization,2.6.3,CL25
+38,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",nOi3WF8kNxD,CL26,Malaria 4,Child Immunization,2.6.3,CL26
+39,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",yctOQDdXZav,CL27,Measles (MR2),Child Immunization,2.6.3,CL27
+40,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",t1oNQuw0bL4,CL28,Fully immunized by 2 years,Child Immunization,2.6.3,CL28
+41,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",JSRCj9aRZcz,WT01A,BCG - Open Balance,Vaccine Availability And Wastage,2.6.4,WT01
+42,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",QGoQrfDCKYl,WT01B,BCG - Received,Vaccine Availability And Wastage,2.6.4,WT01
+43,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",OdcboRpaL6I,WT01C,BCG - Closing Balance,Vaccine Availability And Wastage,2.6.4,WT01
+44,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",OZ4bSvHFF9Y,WT01D,BCG - Doses Wasted,Vaccine Availability And Wastage,2.6.4,WT01
+45,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",mfNGTqKlfpc,WT02A ,Hep B zero doze - Open Balance,Vaccine Availability And Wastage,2.6.4,WT02
+46,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",I2rc7lEpb7z,WT02B,Hep B zero doze - Received,Vaccine Availability And Wastage,2.6.4,WT02
+47,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",G6RGJzeAQlR,WT02C ,Hep B zero doze - Closing Balance,Vaccine Availability And Wastage,2.6.4,WT02
+48,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",HHj0p0Ac8A3,WT02D ,Hep B zero doze - Doses Wasted,Vaccine Availability And Wastage,2.6.4,WT02
+49,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",ppGkYNMqWX8,WT03A,Polio(OPV) - Opening Balance,Vaccine Availability And Wastage,2.6.4,WT03
+50,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",iPWG1C3NTi1,WT03B,Polio(OPV)  - Received,Vaccine Availability And Wastage,2.6.4,WT03
+51,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",XQnMR1KMwT5,WT03C,Polio(OPV)  - Closing Balance,Vaccine Availability And Wastage,2.6.4,WT03
+52,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",SUmRVIrStBP,WT03D,Polio(OPV)  - Doses Wasted,Vaccine Availability And Wastage,2.6.4,WT03
+53,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",noDiieWFh6r,WT04A,IPV - Opening Balance,Vaccine Availability And Wastage,2.6.4,WT04
+54,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",lXdHXpzOilO,WT04B,IPV - Received,Vaccine Availability And Wastage,2.6.4,WT04
+55,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",BrWcfdYGPXO,WT04C,IPV - Closing Balance,Vaccine Availability And Wastage,2.6.4,WT04
+56,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",NjD7qC46klG,WT04D,IPV - Doses Wasted,Vaccine Availability And Wastage,2.6.4,WT04
+57,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",q0eJayyV6Js,WT05A,DPT+HepB+Hib - Opening Balance,Vaccine Availability And Wastage,2.6.4,WT05
+58,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",FLBA3T25bpz,WT05B,DPT+HepB+Hib  - Received,Vaccine Availability And Wastage,2.6.4,WT05
+59,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",mBTn9mI2Hx0,WT05C,DPT+HepB+Hib  - Closing Balance,Vaccine Availability And Wastage,2.6.4,WT05
+60,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",Zcw2OCp00oE,WT05D,DPT+HepB+Hib - Doses Wasted,Vaccine Availability And Wastage,2.6.4,WT05
+61,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",R0JGyJ4piOh,WT06A,PCV - Opening Balance,Vaccine Availability And Wastage,2.6.4,WT06
+62,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",BzBLojjjeRB,WT06B,PCV - Received,Vaccine Availability And Wastage,2.6.4,WT06
+63,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",cXy4Pwau1SF,WT06C,PCV - Closing Balance,Vaccine Availability And Wastage,2.6.4,WT06
+64,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",a5p50RZM4j8,WT06D,PCV - Doses Wasted,Vaccine Availability And Wastage,2.6.4,WT06
+65,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",KBxOZNiR67y,WT07A,Rotavirus - Opening Balance,Vaccine Availability And Wastage,2.6.4,WT07
+66,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",xpZ6TjMsme7,WT07B,Rotavirus - Received,Vaccine Availability And Wastage,2.6.4,WT07
+67,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",syx0YWdQeAW,WT07C,Rotavirus - Closing Balance,Vaccine Availability And Wastage,2.6.4,WT07
+68,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",VUcc4loOjrS,WT07D,Rotavirus - Doses Wasted,Vaccine Availability And Wastage,2.6.4,WT07
+69,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",MD2YuRl94Fz,WT08A,Measles - Opening Balance,Vaccine Availability And Wastage,2.6.4,WT08
+70,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",W76e0DKlJ4c,WT08B,Measles - Received,Vaccine Availability And Wastage,2.6.4,WT08
+71,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",kxwF7G5Sa9i,WT08C,Measles - Closing Balance,Vaccine Availability And Wastage,2.6.4,WT08
+72,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",BnJW6UAa9nj,WT08D,Measles - Doses Wasted,Vaccine Availability And Wastage,2.6.4,WT08
+73,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",c4DJHtoOxR5,WT09A,Yellow Fever - Opening Balance,Vaccine Availability And Wastage,2.6.4,WT09
+74,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",FHnkrOy9cyJ,WT09B,Yellow Fever - Received,Vaccine Availability And Wastage,2.6.4,WT09
+75,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",qnUDnMdP4Bl,WT09C,Yellow Fever - Closing Balance,Vaccine Availability And Wastage,2.6.4,WT09
+76,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",lnwoasEJlj6,WT09D,Yellow Fever - Doses Wasted,Vaccine Availability And Wastage,2.6.4,WT09
+77,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",Vm17iJeYWrM,WT10A,Td - Opening Balance,Vaccine Availability And Wastage,2.6.4,WT10
+78,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",rn9w80fi5rI,WT10B,Td - Received,Vaccine Availability And Wastage,2.6.4,WT10
+79,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",lmpQmvOtybC,WT10C,Td - Closing Balance,Vaccine Availability And Wastage,2.6.4,WT10
+80,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",fTonlL3eWFE,WT10D,Td - Doses Wasted,Vaccine Availability And Wastage,2.6.4,WT10
+81,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",gl4CRezThOQ,WT11A,HPV - Opening Balance,Vaccine Availability And Wastage,2.6.4,WT11
+82,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",SELnREPYiGs,WT11B,HPV - Received,Vaccine Availability And Wastage,2.6.4,WT11
+83,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",S3sJne8SfDt,WT11C,HPV - Closing Balance,Vaccine Availability And Wastage,2.6.4,WT11
+84,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",HIRzx2RSpRR,WT11D,HPV - Doses Wasted,Vaccine Availability And Wastage,2.6.4,WT11
+85,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",KkO23okGi5a,WT12A,Malaria - Opening Balance,Vaccine Availability And Wastage,2.6.4,WT12
+86,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",ory0dLlfYiD,WT12B ,Malaria - Received,Vaccine Availability And Wastage,2.6.4,WT12
+87,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",KhS4mq3zNfA,WT12C,Malaria - Closing Balance,Vaccine Availability And Wastage,2.6.4,WT12
+88,ic1BSWhGOso,HMIS1052,"HMIS 105:02-03 - OPD Monthly Report (MCH, FP, EID, EPI & HEPB)",LwD8GEuedFt,WT12D ,Malaria - Doses Wasted,Vaccine Availability And Wastage,2.6.4,WT12

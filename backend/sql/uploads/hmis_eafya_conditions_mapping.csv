@@ -1,0 +1,1153 @@
+"id","section_id","section_name","hmis_code","hmis_name","disease_id","five_character_icd_code","four_character_icd_code","disease_name","simplified_name"
+1,"1.3.0",EP01. Malaria,EP01a, Suspected Fever,8222,R50.2,R502,Drug-induced fever,''
+2,"1.3.0",EP01. Malaria,EP01a, Suspected Fever,8221,R50,R50,Fever of other and unknown origin,"Fever Unspecific, "
+3,"1.3.0",EP01. Malaria,EP01a, Suspected Fever,8224,R50.9,R509,"Fever, unspecified","Hyperpyrexia NOS, Pyrexia NOS, "
+4,"1.3.0",EP01. Malaria,EP01a, Suspected Fever,8223,R50.8,R508,Other specified fever,"Fever with chills, Fever with rigors, Persistent fever, "
+5,"1.3.0",EP01. Malaria,EP01a, Suspected Fever,453,A98,A98,"Other viral haemorrhagic fevers, not elsewhere classified",''
+6,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01d, Malaria cases treated,716,B51.8,B518,Plasmodium vivax malaria with other complications,''
+7,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01d, Malaria cases treated,717,B51.9,B519,Plasmodium vivax malaria without complication,"Plasmodium vivax malaria NOS, "
+8,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,717,B51.9,B519,Plasmodium vivax malaria without complication,"Plasmodium vivax malaria NOS, "
+9,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,718,B52,B52,Plasmodium malariae malaria,"mixed infections of Plasmodium malariae with other Plasmodium species, except Plasmodium falciparum and Plasmodium vivax, "
+10,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01d, Malaria cases treated,718,B52,B52,Plasmodium malariae malaria,"mixed infections of Plasmodium malariae with other Plasmodium species, except Plasmodium falciparum and Plasmodium vivax, "
+11,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01d, Malaria cases treated,719,B52.0,B520,Plasmodium malariae malaria with nephropathy,''
+12,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,719,B52.0,B520,Plasmodium malariae malaria with nephropathy,''
+13,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,720,B52.8,B528,Plasmodium malariae malaria with other complications,''
+14,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01d, Malaria cases treated,720,B52.8,B528,Plasmodium malariae malaria with other complications,''
+15,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,721,B52.9,B529,Plasmodium malariae malaria without complication,"Plasmodium malariae malaria NOS, "
+16,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01d, Malaria cases treated,721,B52.9,B529,Plasmodium malariae malaria without complication,"Plasmodium malariae malaria NOS, "
+17,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01b, Malaria Confirmed (Microscopic & RDT),722,B53,B53,Other parasitologically confirmed malaria,"Confirmed Malaria, "
+18,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,722,B53,B53,Other parasitologically confirmed malaria,"Confirmed Malaria, "
+19,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01d, Malaria cases treated,723,B53.0,B530,Plasmodium ovale malaria,''
+20,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,723,B53.0,B530,Plasmodium ovale malaria,''
+21,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,724,B53.1,B531,Malaria due to simian plasmodia,''
+22,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,725,B53.8,B538,"Other parasitologically confirmed malaria, not elsewhere classified","Parasitologically confirmed malaria NOS, "
+23,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01b, Malaria Confirmed (Microscopic & RDT),725,B53.8,B538,"Other parasitologically confirmed malaria, not elsewhere classified","Parasitologically confirmed malaria NOS, "
+24,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,726,B54,B54,Unspecified malaria,"Clinical Malaria, Clinically diagnosed malaria without parasitological confirmation, "
+25,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP11,Yellow Fever,444,A95.0,A950,Sylvatic yellow fever,"Jungle yellow fever, "
+26,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP11,Yellow Fever,445,A95.1,A951,Urban yellow fever,''
+27,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP11,Yellow Fever,446,A95.9,A959,"Yellow fever, unspecified",''
+28,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,447,A96,A96,Arenaviral haemorrhagic fever,''
+29,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,448,A96.0,A960,Junin haemorrhagic fever,"Argentinian haemorrhagic fever, "
+30,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,449,A96.1,A961,Machupo haemorrhagic fever,"Bolivian haemorrhagic fever, "
+31,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,450,A96.2,A962,Lassa fever,''
+32,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP06,Guinea Worm,801,B72,B72,Dracunculiasis,"Guinea worm infection, Infection due to Dracunculus medinensis, "
+33,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,451,A96.8,A968,Other arenaviral haemorrhagic fevers,''
+34,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,452,A96.9,A969,"Arenaviral haemorrhagic fever, unspecified",''
+35,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,453,A98,A98,"Other viral haemorrhagic fevers, not elsewhere classified",''
+36,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,454,A98.0,A980,Crimean-Congo haemorrhagic fever,"Central Asian haemorrhagic fever, "
+37,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,455,A98.1,A981,Omsk haemorrhagic fever,''
+38,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,456,A98.2,A982,Kyasanur Forest disease,''
+39,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,457,A98.3,A983,Marburg virus disease,''
+40,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP13,Severe Acute Respiratory Infection(SARI),4354,J68.3,J683,"Other acute and subacute respiratory conditions due to chemicals, gases, fumes and vapours","Reactive airways dysfunction syndrome, "
+41,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP11,Yellow Fever,443,A95,A95,Yellow fever,''
+42,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,442,A94,A94,Unspecified arthropod-borne viral fever,"Arboviral fever NOS, Arbovirus infection NOS, "
+43,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,441,A93.8,A938,Other specified arthropod-borne viral fevers,"Piry virus disease, Severe fever with thrombocytopenia syndrome [SFTS], Vesicular stomatitis virus disease [Indiana fever], "
+44,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,440,A93.2,A932,Colorado tick fever,''
+45,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,439,A93.1,A931,Sandfly fever,"Pappataci fever, Phlebotomus fever, "
+46,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,438,A93.0,A930,Oropouche virus disease,"Oropouche fever, "
+47,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,437,A93,A93,"Other arthropod-borne viral fevers, not elsewhere classified",''
+632,"1.3.11","1.3.11 Cancers",CA01,Cervical Cancer,1198,C53.1,C531,Exocervix,"Malignant neoplasm: Exocervix, "
+48,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,436,A92.9,A929,"Mosquito-borne viral fever, unspecified",''
+49,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,435,A92.8,A928,Other specified mosquito-borne viral fevers,''
+50,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,434,A92.4,A924,Rift Valley fever,''
+51,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,433,A92.3,A923,West Nile virus infection,"West Nile fever, "
+52,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,432,A92.2,A922,Venezuelan equine fever,"Venezuelan equine: encephalitis, Venezuelan equine: encephalomyelitis virus disease, "
+53,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,431,A92.1,A921,O'nyong-nyong fever,''
+54,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,430,A92.0,A920,Chikungunya virus disease,"Chikungunya (haemorrhagic) fever, "
+55,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,429,A92,A92,Other mosquito-borne viral fevers,''
+56,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,428,A91,A91,Dengue haemorrhagic fever,""
+57,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,427,A90,A90,Dengue fever [classical dengue],""
+58,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP17,"Other Emerging infectious Diseases specify e.g. Influenza like illness (ILI), SARS",12119,U04,U04,Severe acute respiratory syndrome [SARS],''
+59,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,458,A98.4,A984,Ebola virus disease,''
+60,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP17,"Other Emerging infectious Diseases specify e.g. Influenza like illness (ILI), SARS",12120,U04.9,U049,"Severe acute respiratory syndrome [SARS], unspecified",''
+61,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP04,Cholera,1,A00,A00,Cholera,Cholera
+62,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP09,Neonatal tetanus,188,A33,A33,Tetanus neonatorum,"Neonatal tetanus, "
+63,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP10,Plague,120,A20.9,A209,"Plague, unspecified",''
+64,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP10,Plague,119,A20.8,A208,Other forms of plague,"Abortive plague, Asymptomatic plague, Pestis minor, "
+65,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP10,Plague,118,A20.7,A207,Septicaemic plague,''
+66,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP10,Plague,117,A20.3,A203,Plague meningitis,''
+67,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP10,Plague,116,A20.2,A202,Pneumonic plague,''
+68,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP10,Plague,115,A20.1,A201,Cellulocutaneous plague,''
+69,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP10,Plague,114,A20.0,A200,Bubonic plague,''
+70,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP10,Plague,113,A20,A20,Plague,"infection due to Yersinia pestis, "
+71,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP16,Presumptive MDRTB cases,112,A19.9,A199,"Miliary tuberculosis, unspecified",''
+72,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP05,Dysentery,44,A06.0,A060,Acute amoebic dysentery,"Acute amoebiasis, Intestinal amoebiasis NOS, "
+73,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP15,Typhoid Fever,6,A01.0,A010,Typhoid fever,"Infection due to Salmonella typhi, "
+74,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP04,Cholera,4,A00.9,A009,"Cholera, unspecified",''
+75,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP04,Cholera,3,A00.1,A001,"Cholera due to Vibrio cholerae 01, biovar eltor","Cholera eltor, "
+76,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP04,Cholera,2,A00.0,A000,"Cholera due to Vibrio cholerae 01, biovar cholerae","Classical cholera, "
+77,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,458,A98.4,A984,Ebola virus disease,''
+78,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,459,A98.5,A985,Haemorrhagic fever with renal syndrome,"Haemorrhagic fever: epidemic, Haemorrhagic fever: Korean, Haemorrhagic fever: Russian, Hantaan virus disease, Hantaanvirus disease with renal manifestations, Nephropathia epidemica, "
+79,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP12,Other Viral Hemorrhagic Fevers,460,A98.8,A988,Other specified viral haemorrhagic fevers,''
+80,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP02,Acute Flaccid Paralysis,3185,G82.3,G823,Flaccid tetraplegia,''
+81,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP08,Bacterial Meningitis,2869,G01,G01,Meningitis in bacterial diseases classified elsewhere,"Meningitis (in): anthrax, Meningitis (in): gonococcal, Meningitis (in): leptospirosis, Meningitis (in): listerial, Meningitis (in): Lyme disease, Meningitis (in): meningococcal, Meningitis (in): neurosyphilis, Meningitis (in): salmonella infection, Meningitis (in): syphilis: congenital, Meningitis (in): syphilis: secondary, Meningitis (in): tuberculous, Meningitis (in): typhoid fever, "
+82,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP08,Bacterial Meningitis,2868,G00.9,G009,"Bacterial meningitis, unspecified","Meningitis: purulent NOS, Meningitis: pyogenic NOS, Meningitis: suppurative NOS, "
+83,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP08,Bacterial Meningitis,2867,G00.8,G008,Other bacterial meningitis,"Meningitis due to: Escherichia coli, Meningitis due to: Friedlander bacillus, Meningitis due to: Klebsiella, "
+84,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP02,Acute Flaccid Paralysis,3182,G82.0,G820,Flaccid paraplegia,''
+85,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP07,Measles,488,B05,B05,Measles,"morbilli, "
+86,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP07,Measles,489,B05.0,B050,Measles complicated by encephalitis,"Postmeasles encephalitis, "
+87,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP07,Measles,490,B05.1,B051,Measles complicated by meningitis,"Postmeasles meningitis, "
+88,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP02,Acute Flaccid Paralysis,3178,G81.0,G810,Flaccid hemiplegia,''
+89,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP07,Measles,491,B05.2,B052,Measles complicated by pneumonia,"Postmeasles pneumonia, "
+90,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP07,Measles,492,B05.3,B053,Measles complicated by otitis media,"Postmeasles otitis media, "
+91,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP07,Measles,493,B05.4,B054,Measles with intestinal complications,''
+92,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP07,Measles,494,B05.8,B058,Measles with other complications,"Measles keratitis and keratoconjunctivitis, "
+93,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP07,Measles,495,B05.9,B059,Measles without complication,"Measles NOS, "
+94,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP07,Measles,496,B06,B06,Rubella [German measles],''
+95,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP13,Severe Acute Respiratory Infection(SARI),4176,J06.8,J068,Other acute upper respiratory infections of multiple sites,''
+96,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP03,Animal Bites (suspected rabies),10814,W54,W54,Bitten or struck by dog,"Dog bite, "
+97,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP14,Adverse Events Following Immunization(AEFI),9825,T88.1,T881,"Other complications following immunization, not elsewhere classified","Rash following immunization, "
+98,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP14,Adverse Events Following Immunization(AEFI),9824,T88.0,T880,Infection following immunization,"Sepsis following immunization, "
+99,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP13,Severe Acute Respiratory Infection(SARI),4174,J06,J06,Acute upper respiratory infections of multiple and unspecified sites,''
+100,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP13,Severe Acute Respiratory Infection(SARI),4177,J06.9,J069,"Acute upper respiratory infection, unspecified","Upper respiratory: disease, acute, Upper respiratory: infection NOS, "
+101,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP08,Bacterial Meningitis,2862,G00,G00,"Bacterial meningitis, not elsewhere classified","arachnoiditis bacterial, leptomeningitis bacterial, meningitis bacterial, pachymeningitis bacterial, "
+102,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01d, Malaria cases treated,710,B50,B50,Plasmodium falciparum malaria,"mixed infections of Plasmodium falciparum with any other Plasmodium species, "
+103,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,710,B50,B50,Plasmodium falciparum malaria,"mixed infections of Plasmodium falciparum with any other Plasmodium species, "
+104,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01d, Malaria cases treated,711,B50.0,B500,Plasmodium falciparum malaria with cerebral complications,"Cerebral malaria, Cerebral malaria NOS, "
+105,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,711,B50.0,B500,Plasmodium falciparum malaria with cerebral complications,"Cerebral malaria, Cerebral malaria NOS, "
+106,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,712,B50.8,B508,Other severe and complicated Plasmodium falciparum malaria,"Severe or complicated Plasmodium falciparum malaria NOS, "
+107,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01d, Malaria cases treated,712,B50.8,B508,Other severe and complicated Plasmodium falciparum malaria,"Severe or complicated Plasmodium falciparum malaria NOS, "
+108,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01d, Malaria cases treated,713,B50.9,B509,"Plasmodium falciparum malaria, unspecified",''
+109,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,714,B51,B51,Plasmodium vivax malaria,"mixed infections of Plasmodium vivax with other Plasmodium species, except Plasmodium falciparum, "
+110,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,713,B50.9,B509,"Plasmodium falciparum malaria, unspecified",''
+111,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01d, Malaria cases treated,714,B51,B51,Plasmodium vivax malaria,"mixed infections of Plasmodium vivax with other Plasmodium species, except Plasmodium falciparum, "
+112,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01d, Malaria cases treated,715,B51.0,B510,Plasmodium vivax malaria with rupture of spleen,''
+113,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01e, Malaria Total,715,B51.0,B510,Plasmodium vivax malaria with rupture of spleen,''
+114,"1.3.1 ","1.3.1 Epidemic-Prone Diseases",EP01, Malaria Total,716,B51.8,B518,Plasmodium vivax malaria with other complications,''
+115,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD11,No pneumonia - Cough or cold,8056,R05,R05,Cough,''
+116,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4221,J18.9,J189,"Pneumonia, unspecified",''
+117,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4220,J18.8,J188,"Other pneumonia, organism unspecified",''
+118,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4219,J18.2,J182,"Hypostatic pneumonia, unspecified",''
+119,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4218,J18.1,J181,"Lobar pneumonia, unspecified",''
+120,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4217,J18.0,J180,"Bronchopneumonia, unspecified",''
+121,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4216,J18,J18,"Pneumonia, organism unspecified",''
+122,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4215,J17.8,J178,Pneumonia in other diseases classified elsewhere,"Pneumonia (in): ornithosis, Pneumonia (in): Q fever, Pneumonia (in): rheumatic fever, Pneumonia (in): spirochaetal, not elsewhere classified, "
+123,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4214,J17.3,J173,Pneumonia in parasitic diseases,"Pneumonia in: ascariasis, Pneumonia in: schistosomiasis, Pneumonia in: toxoplasmosis, "
+124,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4213,J17.2,J172,Pneumonia in mycoses,"Pneumonia in: aspergillosis, Pneumonia in: candidiasis, Pneumonia in: coccidioidomycosis, Pneumonia in: histoplasmosis, "
+125,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4212,J17.1,J171,Pneumonia in viral diseases classified elsewhere,"Pneumonia in: cytomegalovirus disease, Pneumonia in: measles, Pneumonia in: rubella, Pneumonia in: varicella, "
+126,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4211,J17.0,J170,Pneumonia in bacterial diseases classified elsewhere,"Pneumonia (due to)(in): actinomycosis, Pneumonia (due to)(in): anthrax, Pneumonia (due to)(in): gonorrhoea, Pneumonia (due to)(in): nocardiosis, Pneumonia (due to)(in): salmonella infection, Pneumonia (due to)(in): tularaemia, Pneumonia (due to)(in): typhoid fever, Pneumonia (due to)(in): whooping cough, "
+127,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4210,J17,J17,Pneumonia in diseases classified elsewhere,''
+128,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4209,J16.8,J168,Pneumonia due to other specified infectious organisms,''
+129,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4208,J16.0,J160,Chlamydial pneumonia,''
+130,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4207,J16,J16,"Pneumonia due to other infectious organisms, not elsewhere classified",''
+131,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4206,J15.9,J159,"Bacterial pneumonia, unspecified","Severe Bacterial Pneumonia, "
+132,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD13,Severe Pneumonia,4206,J15.9,J159,"Bacterial pneumonia, unspecified","Severe Bacterial Pneumonia, "
+133,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4205,J15.8,J158,Other bacterial pneumonia,''
+134,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4204,J15.7,J157,Pneumonia due to Mycoplasma pneumoniae,''
+135,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4203,J15.6,J156,Pneumonia due to other Gram-negative bacteria,"Pneumonia due to Gram-negative (aerobic) bacteria NOS, Pneumonia due to Serratia marcescens, "
+136,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4202,J15.5,J155,Pneumonia due to Escherichia coli,''
+137,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4201,J15.4,J154,Pneumonia due to other streptococci,''
+138,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4200,J15.3,J153,"Pneumonia due to streptococcus, group B",''
+139,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4199,J15.2,J152,Pneumonia due to staphylococcus,''
+140,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4198,J15.1,J151,Pneumonia due to Pseudomonas,''
+141,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4197,J15.0,J150,Pneumonia due to Klebsiella pneumoniae,''
+142,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4196,J15,J15,"Bacterial pneumonia, not elsewhere classified","Bacterial Pneumonia, bronchopneumonia due to bacteria other than S. pneumoniae and H. influenzae, "
+143,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4195,J14,J14,Pneumonia due to Haemophilus influenzae,"Bronchopneumonia due to H. influenzae, "
+144,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4194,J13,J13,Pneumonia due to Streptococcus pneumoniae,"Bronchopneumonia due to S. pneumoniae, "
+145,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4193,J12.9,J129,"Viral pneumonia, unspecified","Severe Viral Pneumonia, "
+146,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4192,J12.8,J128,Other viral pneumonia,''
+147,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4191,J12.3,J123,Human metapneumovirus pneumonia,''
+148,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4190,J12.2,J122,Parainfluenza virus pneumonia,''
+149,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4189,J12.1,J121,Respiratory syncytial virus pneumonia,''
+150,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4188,J12.0,J120,Adenoviral pneumonia,''
+151,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4187,J12,J12,"Viral pneumonia, not elsewhere classified","Viral Pneumonia, bronchopneumonia due to viruses other than influenza viruses, "
+152,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4184,J11.0,J110,"Influenza with pneumonia, virus not identified","Influenzal (broncho)pneumonia, unspecified or specific virus not identified, "
+153,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4180,J10.0,J100,"Influenza with pneumonia, seasonal influenza virus identified","Influenzal (broncho)pneumonia, seasonal influenza virus identified, "
+154,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD11,No pneumonia - Cough or cold,4150,J00,J00,Acute nasopharyngitis [common cold],"Common Cold, Coryza (acute), Nasal catarrh, acute, Nasopharyngitis: NOS, Nasopharyngitis: infective NOS, Rhinitis: acute, Rhinitis: infective, "
+155,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2879,G03.9,G039,"Meningitis, unspecified","Meningitis, Arachnoiditis (spinal) NOS, "
+156,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2878,G03.8,G038,Meningitis due to other specified causes,''
+157,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2877,G03.2,G032,Benign recurrent meningitis [Mollaret],''
+158,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2876,G03.1,G031,Chronic meningitis,''
+159,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2875,G03.0,G030,Nonpyogenic meningitis,"Nonbacterial meningitis, "
+160,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2874,G03,G03,Meningitis due to other and unspecified causes,"arachnoiditis due to other and unspecified causes, leptomeningitis due to other and unspecified causes, meningitis due to other and unspecified causes, pachymeningitis due to other and unspecified causes, "
+161,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2873,G02.8,G028,Meningitis in other specified infectious and parasitic diseases classified elsewhere,"Meningitis due to: African trypanosomiasis, Meningitis due to: Chagas disease (chronic), "
+162,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2872,G02.1,G021,Meningitis in mycoses,"Meningitis (in): candidal, Meningitis (in): coccidioidomycosis, Meningitis (in): cryptococcal, "
+163,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2871,G02.0,G020,Meningitis in viral diseases classified elsewhere,"Meningitis (due to): adenoviral, Meningitis (due to): enteroviral, Meningitis (due to): herpesviral [herpes simplex], Meningitis (due to): infectious mononucleosis, Meningitis (due to): measles, Meningitis (due to): mumps, Meningitis (due to): rubella, Meningitis (due to): varicella [chickenpox], Meningitis (due to): zoster, "
+164,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2870,G02,G02,Meningitis in other infectious and parasitic diseases classified elsewhere,''
+165,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2866,G00.3,G003,Staphylococcal meningitis,''
+166,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2865,G00.2,G002,Streptococcal meningitis,''
+167,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2864,G00.1,G001,Pneumococcal meningitis,''
+168,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD09,Hematological Meningitis,2863,G00.0,G000,Haemophilus meningitis,"Meningitis due to Haemophilus influenzae, "
+169,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,2863,G00.0,G000,Haemophilus meningitis,"Meningitis due to Haemophilus influenzae, "
+170,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD14,Skin Diseases,12074,Z94.5,Z945,Skin transplant status,"Autogenous skin transplant status, "
+171,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,466,B00.3,B003,Herpesviral meningitis,''
+172,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,473,B01.0,B010,Varicella meningitis,''
+173,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,475,B01.2,B012,Varicella pneumonia,''
+174,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,480,B02.1,B021,Zoster meningitis,''
+175,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,490,B05.1,B051,Measles complicated by meningitis,"Postmeasles meningitis, "
+176,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD14,Skin Diseases,11175,Y56,Y56,"Topical agents primarily affecting skin and mucous membrane and ophthalmological, otorhinolaryngological and dental drugs","glucocorticoids, topically used, "
+177,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,571,B26.1,B261,Mumps meningitis,''
+178,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,626,B37.5,B375,Candidal meningitis,''
+179,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,636,B38.4,B384,Coccidioidomycosis meningitis,''
+180,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD03,Urethral discharges,8159,R36,R36,Urethral discharge,"UD, Penile discharge, Urethrorrhoea, "
+181,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD16,Sleeping sickness,732,B56,B56,African trypanosomiasis,''
+182,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD16,Sleeping sickness,733,B56.0,B560,Gambiense trypanosomiasis,"Infection due to Trypanosoma brucei gambiense, West African sleeping sickness, "
+183,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD16,Sleeping sickness,734,B56.1,B561,Rhodesiense trypanosomiasis,"East African sleeping sickness, Infection due to Trypanosoma brucei rhodesiense, "
+184,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD16,Sleeping sickness,735,B56.9,B569,"African trypanosomiasis, unspecified","Sleeping sickness NOS, Trypanosomiasis NOS, in places where African trypanosomiasis is prevalent, "
+185,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4223,J20.0,J200,Acute bronchitis due to Mycoplasma pneumoniae,''
+186,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD02,Diarrhea-Persistent,7636,Q43.7,Q437,Persistent cloaca,"Cloaca NOS, "
+187,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD01,Diarrhea-Acute,7274,P78.3,P783,Noninfective neonatal diarrhoea,''
+188,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD08,Intestinal Worms,812,B76,B76,Hookworm diseases,"uncinariasis, "
+189,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD08,Intestinal Worms,815,B76.8,B768,Other hookworm diseases,''
+190,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD08,Intestinal Worms,816,B76.9,B769,"Hookworm disease, unspecified","Cutaneous larva migrans NOS, "
+191,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD08,Intestinal Worms,826,B79,B79,Trichuriasis,"Whipworm, Trichocephaliasis, Whipworm (disease)(infection), "
+192,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD08,Intestinal Worms,835,B82,B82,Unspecified intestinal parasitism,''
+193,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD08,Intestinal Worms,836,B82.0,B820,"Intestinal helminthiasis, unspecified","Roundworm, "
+194,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD08,Intestinal Worms,837,B82.9,B829,"Intestinal parasitism, unspecified",''
+195,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),7154,P39.3,P393,Neonatal urinary tract infection,''
+196,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),6106,N27,N27,Small kidney of unknown cause,''
+197,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,93,A17.0,A170,Tuberculous meningitis,"Tuberculosis of meninges (cerebral)(spinal), Tuberculous leptomeningitis, "
+198,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,117,A20.3,A203,Plague meningitis,''
+199,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD18,Brucellosis,136,A23,A23,Brucellosis,"fever: Malta, fever: Mediterranean, fever: undulant, "
+200,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD18,Brucellosis,137,A23.0,A230,Brucellosis due to Brucella melitensis,''
+201,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD18,Brucellosis,138,A23.1,A231,Brucellosis due to Brucella abortus,''
+202,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD18,Brucellosis,139,A23.2,A232,Brucellosis due to Brucella suis,''
+203,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD18,Brucellosis,140,A23.3,A233,Brucellosis due to Brucella canis,''
+204,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD18,Brucellosis,141,A23.8,A238,Other brucellosis,''
+205,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD18,Brucellosis,142,A23.9,A239,"Brucellosis, unspecified",''
+206,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,184,A32.1,A321,Listerial meningitis and meningoencephalitis,"Listerial: meningitis, Listerial: meningoencephalitis, "
+207,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD15,Tetanus (over 28 days),188,A33,A33,Tetanus neonatorum,"Neonatal tetanus, "
+208,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,205,A39.0,A390,Meningococcal meningitis,Meningococcal Meningitis
+209,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),291,A54.0,A540,Gonococcal infection of lower genitourinary tract without periurethral or accessory gland abscess,"Gonococcal: cervicitis NOS, Gonococcal: cystitis NOS, Gonococcal: urethritis NOS, Gonococcal: vulvovaginitis NOS, "
+210,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),292,A54.1,A541,Gonococcal infection of lower genitourinary tract with periurethral and accessory gland abscess,"Gonococcal Bartholin gland abscess, "
+211,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD05,Sexually Transmitted Infection due to (Sexual Gender Based Violence),301,A56,A56,Other sexually transmitted chlamydial diseases,"sexually transmitted diseases due to Chlamydia trachomatis, "
+212,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),302,A56.0,A560,Chlamydial infection of lower genitourinary tract,"Chlamydial: cervicitis, Chlamydial: cystitis, Chlamydial: urethritis, Chlamydial: vulvovaginitis, "
+213,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),304,A56.2,A562,"Chlamydial infection of genitourinary tract, unspecified",''
+648,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,3749,I15.2,I152,Hypertension secondary to endocrine disorders,''
+214,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD06,Other Sexually Transmitted Infections,307,A56.8,A568,Sexually transmitted chlamydial infection of other sites,''
+215,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD06,Other Sexually Transmitted Infections,318,A63,A63,"Other predominantly sexually transmitted diseases, not elsewhere classified",''
+216,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD06,Other Sexually Transmitted Infections,320,A63.8,A638,Other specified predominantly sexually transmitted diseases,''
+217,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD05,Sexually Transmitted Infection due to (Sexual Gender Based Violence),321,A64,A64,Unspecified sexually transmitted disease,"Venereal disease NOS, "
+218,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD14,Skin Diseases,12163,L98.7,L987,Excessive and redundant skin and subcutaneous tissue,"Loose or sagging skin: NOS, Loose or sagging skin: following weight loss (bariatric surgery)(dietary), "
+219,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD14,Skin Diseases,12159,K64.4,K644,Residual haemorrhoidal skin tags,"Skin tags of anus, "
+220,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,416,A87,A87,Viral meningitis,''
+221,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,417,A87.0,A870,Enteroviral meningitis,"Coxsackievirus meningitis, Echovirus meningitis, "
+222,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,418,A87.1,A871,Adenoviral meningitis,''
+223,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,419,A87.2,A872,Lymphocytic choriomeningitis,"Lymphocytic meningoencephalitis, "
+224,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,420,A87.8,A878,Other viral meningitis,''
+225,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD10,Other types of meningitis,421,A87.9,A879,"Viral meningitis, unspecified",''
+226,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),6103,N25.8,N258,Other disorders resulting from impaired renal tubular function,"Lightwood-Albright syndrome, Renal tubular acidosis NOS, Secondary hyperparathyroidism of renal origin, "
+227,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),6100,N25,N25,Disorders resulting from impaired renal tubular function,''
+228,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),6097,N22.0,N220,Urinary calculus in schistosomiasis [bilharziasis],''
+229,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),6094,N21.8,N218,Other lower urinary tract calculus,''
+230,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),6091,N21,N21,Calculus of lower urinary tract,"with cystitis and urethritis, "
+231,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD01,Diarrhea-Acute,4730,K59.1,K591,Functional diarrhoea,''
+232,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD01,Diarrhea-Acute,4726,K58.0,K580,Irritable bowel syndrome with diarrhoea,''
+233,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD01,Diarrhea-Acute,4700,K52.9,K529,"Noninfective gastroenteritis and colitis, unspecified","Diarrhoea specified as noninfectious, Enteritis specified as noninfectious, Ileitis specified as noninfectious, Jejunitis specified as noninfectious, Sigmoiditis specified as noninfectious, "
+234,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD01,Diarrhea-Acute,4624,K31.0,K310,Acute dilatation of stomach,"Acute distension of stomach, "
+235,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD12,Pneumonia,4380,J85.1,J851,Abscess of lung with pneumonia,''
+236,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),6947,P00.1,P001,Fetus and newborn affected by maternal renal and urinary tract diseases,"Fetus or newborn affected by maternal conditions classifiable to N00-N39, "
+237,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),6866,O86.3,O863,Other genitourinary tract infections following delivery,"Puerperal genitourinary tract infection NOS, "
+238,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),6865,O86.2,O862,Urinary tract infection following delivery,"Conditions in N10-N12, N15.-, N30.-, N34.-, N39.0 following delivery, "
+239,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),6575,O23.9,O239,Other and unspecified genitourinary tract infection in pregnancy,"Genitourinary tract infection in pregnancy NOS, "
+240,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),6573,O23.4,O234,Unspecified infection of urinary tract in pregnancy,"UTI In pregnancy, "
+241,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),6572,O23.3,O233,Infections of other parts of urinary tract in pregnancy,''
+242,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD07,Urinary Tract Infections(UTI),6568,O23,O23,Infections of genitourinary tract in pregnancy,''
+243,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD04,Genital ulcers,6283,N76.6,N766,Ulceration of vulva,"Genital Ulcer Disease (GUD), "
+244,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD04,Genital ulcers,6282,N76.5,N765,Ulceration of vagina,''
+245,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD17,Pelvic Inflammatory Disease(PID),6270,N74.8,N748,Female pelvic inflammatory disorders in other diseases classified elsewhere,''
+246,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD17,Pelvic Inflammatory Disease(PID),6269,N74.4,N744,Female chlamydial pelvic inflammatory disease,''
+247,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD17,Pelvic Inflammatory Disease(PID),6268,N74.3,N743,Female gonococcal pelvic inflammatory disease,''
+248,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD17,Pelvic Inflammatory Disease(PID),6267,N74.2,N742,Female syphilitic pelvic inflammatory disease,''
+249,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD17,Pelvic Inflammatory Disease(PID),6266,N74.1,N741,Female tuberculous pelvic inflammatory disease,"Tuberculous endometritis, "
+250,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD17,Pelvic Inflammatory Disease(PID),6264,N74,N74,Female pelvic inflammatory disorders in diseases classified elsewhere,''
+251,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD17,Pelvic Inflammatory Disease(PID),6263,N73.9,N739,"Female pelvic inflammatory disease, unspecified","PID, Female pelvic infection or inflammation NOS, "
+252,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD17,Pelvic Inflammatory Disease(PID),6262,N73.8,N738,Other specified female pelvic inflammatory diseases,''
+253,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD17,Pelvic Inflammatory Disease(PID),6254,N73,N73,Other female pelvic inflammatory diseases,''
+254,"1.3.2 ","1.3.2 Other Infectious/Communicable Diseases",CD04,Genital ulcers,6205,N48.5,N485,Ulcer of penis,''
+255,"1.3.3 ","1.3.3 Neonatal Diseases",ND03,Neonatal Pneumonia (0-7days),7076,P23.1,P231,Congenital pneumonia due to Chlamydia,''
+256,"1.3.3 ","1.3.3 Neonatal Diseases",ND03,Neonatal Pneumonia (0-7days),7075,P23.0,P230,Congenital pneumonia due to viral agent,''
+257,"1.3.3 ","1.3.3 Neonatal Diseases",ND03,Neonatal Pneumonia (0-7days),7074,P23,P23,Congenital pneumonia,"infective pneumonia acquired in utero or during birth, "
+258,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7214,P59.0,P590,Neonatal jaundice associated with preterm delivery,"Hyperbilirubinaemia of prematurity, Jaundice due to delayed conjugation associated with preterm delivery, "
+259,"1.3.3 ","1.3.3 Neonatal Diseases",ND05,Neonatal Meningitis,7140,P37,P37,Other congenital infectious and parasitic diseases,''
+260,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7216,P59.2,P592,Neonatal jaundice from other and unspecified hepatocellular damage,"Fetal or neonatal giant cell hepatitis, Fetal or neonatal (idiopathic) hepatitis, "
+261,"1.3.3 ","1.3.3 Neonatal Diseases",ND07,Premature baby (as a condition for management),6689,O42.9,O429,"Premature rupture of membranes, unspecified","Premature delivery, "
+262,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7217,P59.3,P593,Neonatal jaundice from breast milk inhibitor,''
+263,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7218,P59.8,P598,Neonatal jaundice from other specified causes,''
+264,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7219,P59.9,P599,"Neonatal jaundice, unspecified","Physiological jaundice (intense)(prolonged) NOS, "
+265,"1.3.3 ","1.3.3 Neonatal Diseases",ND08,Other Neonatal Conditions,7236,P70.4,P704,Other neonatal hypoglycaemia,"Transitory neonatal hypoglycaemia, "
+266,"1.3.3 ","1.3.3 Neonatal Diseases",ND08,Other Neonatal Conditions,7272,P78.1,P781,Other neonatal peritonitis,"Neonatal peritonitis NOS, "
+267,"1.3.3 ","1.3.3 Neonatal Diseases",ND01,Neonatal Sepsis(0-7days),7138,P36.8,P368,Other bacterial sepsis of newborn,''
+268,"1.3.3 ","1.3.3 Neonatal Diseases",ND08,Other Neonatal Conditions,7182,P54,P54,Other neonatal haemorrhages,''
+269,"1.3.3 ","1.3.3 Neonatal Diseases",ND08,Other Neonatal Conditions,7186,P54.3,P543,Other neonatal gastrointestinal haemorrhage,''
+270,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7204,P58,P58,Neonatal jaundice due to other excessive haemolysis,''
+271,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7205,P58.0,P580,Neonatal jaundice due to bruising,''
+272,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7206,P58.1,P581,Neonatal jaundice due to bleeding,''
+273,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7207,P58.2,P582,Neonatal jaundice due to infection,''
+274,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7208,P58.3,P583,Neonatal jaundice due to polycythaemia,''
+275,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7209,P58.4,P584,Neonatal jaundice due to drugs or toxins transmitted from mother or given to newborn,''
+276,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7210,P58.5,P585,Neonatal jaundice due to swallowed maternal blood,''
+277,"1.3.3 ","1.3.3 Neonatal Diseases",ND03,Neonatal Pneumonia (0-7days),7077,P23.2,P232,Congenital pneumonia due to staphylococcus,''
+278,"1.3.3 ","1.3.3 Neonatal Diseases",ND03,Neonatal Pneumonia (0-7days),7078,P23.3,P233,"Congenital pneumonia due to streptococcus, group B",''
+279,"1.3.3 ","1.3.3 Neonatal Diseases",ND04,Neonatal Pneumonia (8-28days),7078,P23.3,P233,"Congenital pneumonia due to streptococcus, group B",''
+280,"1.3.3 ","1.3.3 Neonatal Diseases",ND03,Neonatal Pneumonia (0-7days),7079,P23.4,P234,Congenital pneumonia due to Escherichia coli,''
+281,"1.3.3 ","1.3.3 Neonatal Diseases",ND03,Neonatal Pneumonia (0-7days),7080,P23.5,P235,Congenital pneumonia due to Pseudomonas,''
+282,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7211,P58.8,P588,Neonatal jaundice due to other specified excessive haemolysis,''
+283,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7212,P58.9,P589,"Neonatal jaundice due to excessive haemolysis, unspecified",''
+284,"1.3.3 ","1.3.3 Neonatal Diseases",ND01,Neonatal Sepsis(0-7days),7139,P36.9,P369,"Bacterial sepsis of newborn, unspecified",''
+285,"1.3.3 ","1.3.3 Neonatal Diseases",ND04,Neonatal Pneumonia (8-28days),7080,P23.5,P235,Congenital pneumonia due to Pseudomonas,''
+286,"1.3.3 ","1.3.3 Neonatal Diseases",ND03,Neonatal Pneumonia (0-7days),7081,P23.6,P236,Congenital pneumonia due to other bacterial agents,"Haemophilus influenzae, Klebsiella pneumoniae, Mycoplasma, Streptococcus, except group B, "
+287,"1.3.3 ","1.3.3 Neonatal Diseases",ND03,Neonatal Pneumonia (0-7days),7082,P23.8,P238,Congenital pneumonia due to other organisms,''
+288,"1.3.3 ","1.3.3 Neonatal Diseases",ND03,Neonatal Pneumonia (0-7days),7083,P23.9,P239,"Congenital pneumonia, unspecified",''
+289,"1.3.3 ","1.3.3 Neonatal Diseases",ND02,Neonatal Sepsis(8-28days),7135,P36.3,P363,Sepsis of newborn due to other and unspecified staphylococci,''
+290,"1.3.3 ","1.3.3 Neonatal Diseases",ND06,Neonatal Jaundice,7213,P59,P59,Neonatal jaundice from other and unspecified causes,''
+291,"1.3.3 ","1.3.3 Neonatal Diseases",ND02,Neonatal Sepsis(8-28days),7136,P36.4,P364,Sepsis of newborn due to Escherichia coli,''
+292,"1.3.3 ","1.3.3 Neonatal Diseases",ND01,Neonatal Sepsis(0-7days),7137,P36.5,P365,Sepsis of newborn due to anaerobes,''
+293,"1.3.3 ","1.3.3 Neonatal Diseases",ND02,Neonatal Sepsis(8-28days),7137,P36.5,P365,Sepsis of newborn due to anaerobes,''
+294,"1.3.3 ","1.3.3 Neonatal Diseases",ND02,Neonatal Sepsis(8-28days),7138,P36.8,P368,Other bacterial sepsis of newborn,''
+295,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC01,Sickle Cell Anaemia,14534,A51.Z,"3A51Z",Sickle cell disorders or other haemoglobinopathies unspecified ,""
+296,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1764,D46.0,D460,"Refractory anaemia without ring sideroblasts, so stated",''
+297,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1765,D46.1,D461,Refractory anaemia with ring sideroblasts,''
+298,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1766,D46.2,D462,Refractory anaemia with excess of blasts [RAEB],''
+299,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1767,D46.4,D464,"Refractory anaemia, unspecified",''
+300,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1768,D46.5,D465,Refractory anaemia with multi-lineage dysplasia,''
+301,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1791,D50,D50,Iron deficiency anaemia,"anaemia: asiderotic, anaemia: hypochromic, "
+302,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1792,D50.0,D500,Iron deficiency anaemia secondary to blood loss (chronic),"Posthaemorrhagic anaemia (chronic), "
+303,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1793,D50.1,D501,Sideropenic dysphagia,"Kelly-Paterson syndrome, Plummer-Vinson syndrome, "
+304,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1794,D50.8,D508,Other iron deficiency anaemias,''
+305,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1795,D50.9,D509,"Iron deficiency anaemia, unspecified",''
+306,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1796,D51,D51,Vitamin B,''
+307,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1797,D51.0,D510,Vitamin B,"Anaemia: Addison, Anaemia: Biermer, Anaemia: pernicious (congenital), Congenital intrinsic factor deficiency, "
+308,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1800,D51.3,D513,Other dietary vitamin B,"Vegan anaemia, "
+309,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1801,D51.8,D518,Other vitamin B,''
+310,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1802,D51.9,D519,Vitamin B,''
+311,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1803,D52,D52,Folate deficiency anaemia,''
+312,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1804,D52.0,D520,Dietary folate deficiency anaemia,"Nutritional megaloblastic anaemia, "
+313,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1805,D52.1,D521,Drug-induced folate deficiency anaemia,''
+314,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1806,D52.8,D528,Other folate deficiency anaemias,''
+315,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1807,D52.9,D529,"Folate deficiency anaemia, unspecified","Folic acid deficiency anaemia NOS, "
+316,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1808,D53,D53,Other nutritional anaemias,"megaloblastic anaemia unresponsive to vitamin B, "
+317,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1809,D53.0,D530,Protein deficiency anaemia,"Amino-acid deficiency anaemia, Orotaciduric anaemia, "
+318,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1810,D53.1,D531,"Other megaloblastic anaemias, not elsewhere classified","Megaloblastic anaemia NOS, "
+319,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1811,D53.2,D532,Scorbutic anaemia,''
+320,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1812,D53.8,D538,Other specified nutritional anaemias,"Anaemia associated with deficiency of: copper, Anaemia associated with deficiency of: molybdenum, Anaemia associated with deficiency of: zinc, "
+321,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1813,D53.9,D539,"Nutritional anaemia, unspecified","Simple chronic anaemia, "
+322,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1814,D55,D55,Anaemia due to enzyme disorders,''
+323,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1815,D55.0,D550,Anaemia due to glucose-6-phosphate dehydrogenase [G6PD] deficiency,"Favism, G6PD deficiency anaemia, "
+324,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1816,D55.1,D551,Anaemia due to other disorders of glutathione metabolism,"Anaemia (due to): enzyme deficiencies, except G6PD, related to the hexose monophosphate [HMP] shunt pathway, Anaemia (due to): haemolytic nonspherocytic (hereditary), type I, "
+325,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1817,D55.2,D552,Anaemia due to disorders of glycolytic enzymes,"Anaemia: haemolytic nonspherocytic (hereditary), type II, Anaemia: hexokinase deficiency, Anaemia: pyruvate kinase [PK] deficiency, Anaemia: triose-phosphate isomerase deficiency, "
+326,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1818,D55.3,D553,Anaemia due to disorders of nucleotide metabolism,''
+327,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1819,D55.8,D558,Other anaemias due to enzyme disorders,''
+328,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1820,D55.9,D559,"Anaemia due to enzyme disorder, unspecified",''
+329,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC01,Sickle Cell Anaemia,1830,D57.0,D570,Sickle-cell anaemia with crisis,"Hb-SS disease with crisis, "
+330,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC01,Sickle Cell Anaemia,1831,D57.1,D571,Sickle-cell anaemia without crisis,"Sickle-cell: anaemia NOS, Sickle-cell: disease NOS, Sickle-cell: disorder NOS, "
+331,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1835,D58,D58,Other hereditary haemolytic anaemias,''
+332,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1839,D58.8,D588,Other specified hereditary haemolytic anaemias,"Stomatocytosis, "
+333,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1840,D58.9,D589,"Hereditary haemolytic anaemia, unspecified",''
+334,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1841,D59,D59,Acquired haemolytic anaemia,''
+335,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1842,D59.0,D590,Drug-induced autoimmune haemolytic anaemia,''
+336,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1843,D59.1,D591,Other autoimmune haemolytic anaemias,"Autoimmune haemolytic disease (cold type)(warm type), Chronic cold haemagglutinin disease, Cold agglutinin: disease, Cold agglutinin: haemoglobinuria, Haemolytic anaemia: cold type (secondary)(symptomatic), Haemolytic anaemia: warm type (secondary)(symptomatic), "
+337,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1844,D59.2,D592,Drug-induced nonautoimmune haemolytic anaemia,"Drug-induced enzyme deficiency anaemia, "
+338,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1846,D59.4,D594,Other nonautoimmune haemolytic anaemias,"Haemolytic anaemia: mechanical, Haemolytic anaemia: microangiopathic, Haemolytic anaemia: toxic, "
+339,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1849,D59.8,D598,Other acquired haemolytic anaemias,''
+340,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1850,D59.9,D599,"Acquired haemolytic anaemia, unspecified","Idiopathic haemolytic anaemia, chronic, "
+341,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1856,D61,D61,Other aplastic anaemias,''
+342,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1857,D61.0,D610,Constitutional aplastic anaemia,"Aplasia, (pure) red cell (of): congenital, Aplasia, (pure) red cell (of): infants, Aplasia, (pure) red cell (of): primary, Blackfan-Diamond syndrome, Familial hypoplastic anaemia, Fanconi anaemia, Pancytopenia with malformations, "
+343,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1858,D61.1,D611,Drug-induced aplastic anaemia,''
+344,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1859,D61.2,D612,Aplastic anaemia due to other external agents,''
+345,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1860,D61.3,D613,Idiopathic aplastic anaemia,''
+346,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1861,D61.8,D618,Other specified aplastic anaemias,''
+347,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1862,D61.9,D619,"Aplastic anaemia, unspecified","Hypoplastic anaemia NOS, Medullary hypoplasia, Panmyelophthisis, "
+348,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1863,D62,D62,Acute posthaemorrhagic anaemia,''
+349,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1864,D63,D63,Anaemia in chronic diseases classified elsewhere,''
+350,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1865,D63.0,D630,Anaemia in neoplastic disease,''
+351,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1866,D63.8,D638,Anaemia in other chronic diseases classified elsewhere,"Anaemia in chronic kidney disease over stage 3, "
+352,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1867,D64,D64,Other anaemias,''
+353,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1868,D64.0,D640,Hereditary sideroblastic anaemia,"Sex-linked hypochromic sideroblastic anaemia, "
+354,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1869,D64.1,D641,Secondary sideroblastic anaemia due to disease,''
+355,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1870,D64.2,D642,Secondary sideroblastic anaemia due to drugs and toxins,''
+356,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1871,D64.3,D643,Other sideroblastic anaemias,"Sideroblastic anaemia: NOS, Sideroblastic anaemia: pyridoxine-responsive NEC, "
+357,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1872,D64.4,D644,Congenital dyserythropoietic anaemia,"Dyshaematopoietic anaemia (congenital), "
+358,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1873,D64.8,D648,Other specified anaemias,"Infantile pseudoleukaemia, Leukoerythroblastic anaemia, "
+359,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,1874,D64.9,D649,"Anaemia, unspecified",''
+360,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC03,Gastro-Intestinal Disorders(non-Infective),4591,K27,K27,"Peptic ulcer, site unspecified","gastroduodenal ulcer NOS, peptic ulcer NOS, "
+361,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC03,Gastro-Intestinal Disorders(non-Infective),4611,K29,K29,Gastritis and duodenitis,"Gastritis, "
+362,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC03,Gastro-Intestinal Disorders(non-Infective),4612,K29.0,K290,Acute haemorrhagic gastritis,"Acute (erosive) gastritis with haemorrhage, "
+363,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC03,Gastro-Intestinal Disorders(non-Infective),4613,K29.1,K291,Other acute gastritis,''
+364,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC03,Gastro-Intestinal Disorders(non-Infective),4614,K29.2,K292,Alcoholic gastritis,''
+365,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC03,Gastro-Intestinal Disorders(non-Infective),4615,K29.3,K293,Chronic superficial gastritis,''
+366,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC03,Gastro-Intestinal Disorders(non-Infective),4616,K29.4,K294,Chronic atrophic gastritis,"Gastric atrophy, "
+367,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC03,Gastro-Intestinal Disorders(non-Infective),4617,K29.5,K295,"Chronic gastritis, unspecified","Chronic gastritis: antral, Chronic gastritis: fundal, "
+368,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC03,Gastro-Intestinal Disorders(non-Infective),4618,K29.6,K296,Other gastritis,"Giant hypertrophic gastritis, Granulomatous gastritis, Menetrier disease, "
+369,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC03,Gastro-Intestinal Disorders(non-Infective),4619,K29.7,K297,"Gastritis, unspecified",''
+370,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC03,Gastro-Intestinal Disorders(non-Infective),4906,K92,K92,Other diseases of digestive system,''
+371,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC03,Gastro-Intestinal Disorders(non-Infective),4909,K92.2,K922,"Gastrointestinal haemorrhage, unspecified","Gastrointestinal (GI) bleeding, Haemorrhage: gastric NOS, Haemorrhage: intestinal NOS, "
+372,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,6936,O99.0,O990,"Anaemia complicating pregnancy, childbirth and the puerperium","Anaemia in pregnancy, Conditions in D50-D64, "
+373,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,7224,P61.2,P612,Anaemia of prematurity,''
+374,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,7225,P61.3,P613,Congenital anaemia from fetal blood loss,''
+375,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,7226,P61.4,P614,"Other congenital anaemias, not elsewhere classified","Congenital anaemia NOS, "
+376,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC04,Pain Requiring Palliative Care,8226,R52,R52,"Pain, not elsewhere classified","Pain Requiring Palliative Care, pain not referable to any one organ or body region, "
+377,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,11061,Y44.0,Y440,Iron preparations and other anti-hypochromic-anaemia preparations,''
+378,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC02,Other types of Anaemia,11062,Y44.1,Y441,Vitamin B,''
+379,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC04,Pain Requiring Palliative Care,11735,Z51.5,Z515,Palliative care,''
+380,"1.3.4 ","1.3.4 Non Communicable Diseases/Conditions",NC03,Gastro-Intestinal Disorders(non-Infective),12162,K64.9,K649,"Haemorrhoids, unspecified","Haemorrhoids (bleeding): NOS, Haemorrhoids (bleeding): without mention of degree, "
+381,"1.3.5 ","1.3.5 Oral diseases",OD05,Other Oral Conditions,952,C06.0,C060,Cheek mucosa,"Malignant neoplasm: Cheek mucosa, Buccal mucosa NOS, Internal cheek, "
+382,"1.3.5 ","1.3.5 Oral diseases",OD03,HIV-Orallesions,548,B21.3,B213,"HIV disease resulting in other malignant neoplasms of lymphoid, haematopoietic and related tissue",''
+383,"1.3.5 ","1.3.5 Oral diseases",OD02,Gingivitis,7765,Q65.5,Q655,"Congenital subluxation of hip, unspecified",''
+384,"1.3.5 ","1.3.5 Oral diseases",OD05,Other Oral Conditions,8279,R68.2,R682,"Dry mouth, unspecified",''
+385,"1.3.5 ","1.3.5 Oral diseases",OD04,Oral Cancers,8279,R68.2,R682,"Dry mouth, unspecified",''
+386,"1.3.5 ","1.3.5 Oral diseases",OD01,Dental Caries,4443,K02,K02,Dental caries,''
+387,"1.3.5 ","1.3.5 Oral diseases",OD01,Dental Caries,4444,K02.0,K020,Caries limited to enamel,"White spot lesions [initial caries], "
+388,"1.3.5 ","1.3.5 Oral diseases",OD01,Dental Caries,4445,K02.1,K021,Caries of dentine,''
+389,"1.3.5 ","1.3.5 Oral diseases",OD01,Dental Caries,4447,K02.3,K023,Arrested dental caries,''
+390,"1.3.5 ","1.3.5 Oral diseases",OD01,Dental Caries,4449,K02.8,K028,Other dental caries,''
+391,"1.3.5 ","1.3.5 Oral diseases",OD01,Dental Caries,4450,K02.9,K029,"Dental caries, unspecified",''
+392,"1.3.5 ","1.3.5 Oral diseases",OD02,Gingivitis,4473,K05,K05,Gingivitis and periodontal diseases,''
+393,"1.3.5 ","1.3.5 Oral diseases",OD02,Gingivitis,4474,K05.0,K050,Acute gingivitis,''
+394,"1.3.5 ","1.3.5 Oral diseases",OD03,HIV-Orallesions,556,B22.7,B227,HIV disease resulting in multiple diseases classified elsewhere,''
+395,"1.3.5 ","1.3.5 Oral diseases",OD05,Other Oral Conditions,954,C06.2,C062,Retromolar area,"Malignant neoplasm: Retromolar area, "
+396,"1.3.5 ","1.3.5 Oral diseases",OD05,Other Oral Conditions,953,C06.1,C061,Vestibule of mouth,"Malignant neoplasm: Vestibule of mouth, Buccal sulcus (upper)(lower), Labial sulcus (upper)(lower), "
+397,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3582,H65.0,H650,Acute serous otitis media,"Acute and subacute secretory otitis media, "
+398,"1.3.6 ","1.3.6 ENT conditions",EN17,Other ENT conditions,3600,H68.0,H680,Eustachian salpingitis,''
+399,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3597,H67.1,H671,Otitis media in viral diseases classified elsewhere,"Otitis media in: influenza: seasonal virus identified, Otitis media in: influenza: virus not identified, Otitis media in: influenza: zoonotic or pandemic influenza virus identified, Otitis media in: measles, "
+400,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3596,H67.0,H670,Otitis media in bacterial diseases classified elsewhere,"Otitis media in: scarlet fever, Otitis media in: tuberculosis, "
+401,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3595,H67,H67,Otitis media in diseases classified elsewhere,''
+402,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3594,H66.9,H669,"Otitis media, unspecified","Otitis media: NOS, Otitis media: acute NOS, Otitis media: chronic NOS, "
+403,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3593,H66.4,H664,"Suppurative otitis media, unspecified","Purulent otitis media NOS, "
+404,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3592,H66.3,H663,Other chronic suppurative otitis media,"Chronic suppurative otitis media NOS, "
+405,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3591,H66.2,H662,Chronic atticoantral suppurative otitis media,"Chronic atticoantral disease, "
+406,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3590,H66.1,H661,Chronic tubotympanic suppurative otitis media,"Benign chronic suppurative otitis media, Chronic tubotympanic disease, "
+407,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3589,H66.0,H660,Acute suppurative otitis media,''
+408,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3588,H66,H66,Suppurative and unspecified otitis media,"with myringitis, "
+409,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3587,H65.9,H659,"Nonsuppurative otitis media, unspecified","Otitis media: allergic, Otitis media: catarrhal, Otitis media: exudative, Otitis media: mucoid, Otitis media: secretory, Otitis media: seromucinous, Otitis media: serous, Otitis media: transudative, Otitis media: with effusion (nonpurulent), "
+410,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3586,H65.4,H654,Other chronic nonsuppurative otitis media,"Otitis media, chronic: allergic, Otitis media, chronic: exudative, Otitis media, chronic: nonsuppurative NOS, Otitis media, chronic: seromucinous, Otitis media, chronic: with effusion (nonpurulent), "
+411,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3585,H65.3,H653,Chronic mucoid otitis media,"Glue ear, Otitis media, chronic: mucinous, Otitis media, chronic: secretory, Otitis media, chronic: transudative, "
+412,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3584,H65.2,H652,Chronic serous otitis media,"Chronic tubotympanal catarrh, "
+413,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3583,H65.1,H651,Other acute nonsuppurative otitis media,"Otitis media, acute and subacute: allergic (mucoid)(sanguinous)(serous), Otitis media, acute and subacute: mucoid, Otitis media, acute and subacute: nonsuppurative NOS, Otitis media, acute and subacute: sanguinous, Otitis media, acute and subacute: seromucinous, "
+414,"1.3.6 ","1.3.6 ENT conditions",EN11,Mastoid abscess,3559,H60.0,H600,Abscess of external ear,"Boil of auricle or external auditory canal, Carbuncle of auricle or external auditory canal, Furuncle of auricle or external auditory canal, "
+415,"1.3.6 ","1.3.6 ENT conditions",EN10,Otitis external,3579,H62.4,H624,Otitis externa in other diseases classified elsewhere,"Otitis externa in impetigo, "
+416,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3581,H65,H65,Nonsuppurative otitis media,"with myringitis, "
+417,"1.3.6 ","1.3.6 ENT conditions",EN12,Vertigo,424,A88.1,A881,Epidemic vertigo,''
+418,"1.3.6 ","1.3.6 ENT conditions",EN16,Head and Neck cancer,4936,L04.0,L040,"Acute lymphadenitis of face, head and neck",''
+419,"1.3.6 ","1.3.6 ENT conditions",EN13,Tonsillitis,465,B00.2,B002,Herpesviral gingivostomatitis and pharyngotonsillitis,"Herpesviral pharyngitis, "
+420,"1.3.6 ","1.3.6 ENT conditions",EN16,Head and Neck cancer,12030,Z90.0,Z900,Acquired absence of part of head and neck,"Eye, Larynx, Nose, "
+421,"1.3.6 ","1.3.6 ENT conditions",EN09, Infected pre-auricular sinuses and abscess,4531,K12.2,K122,Cellulitis and abscess of mouth,"Submandibular abscess / Ludwigs angina, Cellulitis of mouth (floor), Submandibular abscess, "
+422,"1.3.6 ","1.3.6 ENT conditions",EN07, Adenoid Hypertrophy,4273,J35.8,J358,Other chronic diseases of tonsils and adenoids,"Adenoid vegetations, Amygdalolith, Cicatrix of tonsil (and adenoid), Tonsillar tag, Ulcer of tonsil, "
+423,"1.3.6 ","1.3.6 ENT conditions",EN14,Tonsilar hypertrophy,4270,J35.1,J351,Hypertrophy of tonsils,"Enlargement of tonsils, "
+424,"1.3.6 ","1.3.6 ENT conditions",EN13,Tonsillitis,4269,J35.0,J350,Chronic tonsillitis,''
+425,"1.3.6 ","1.3.6 ENT conditions",EN16,Head and Neck cancer,9269,T20.3,T203,Burn of third degree of head and neck,''
+426,"1.3.6 ","1.3.6 ENT conditions",EN08, Foreign Body in nose ear and aero-digestive system,9242,T17.1,T171,Foreign body in nostril,"Nose NOS, "
+427,"1.3.6 ","1.3.6 ENT conditions",EN05,Sinusitis,4256,J32.9,J329,"Chronic sinusitis, unspecified","Sinusitis (chronic) NOS, "
+428,"1.3.6 ","1.3.6 ENT conditions",EN05,Sinusitis,4255,J32.8,J328,Other chronic sinusitis,"Sinusitis (chronic) involving more than one sinus but not pansinusitis, "
+429,"1.3.6 ","1.3.6 ENT conditions",EN05,Sinusitis,4254,J32.4,J324,Chronic pansinusitis,"Pansinusitis NOS, "
+430,"1.3.6 ","1.3.6 ENT conditions",EN04,Rhinitis,4246,J31.0,J310,Chronic rhinitis,"Ozena, Rhinitis (chronic): NOS, Rhinitis (chronic): atrophic, Rhinitis (chronic): granulomatous, Rhinitis (chronic): hypertrophic, Rhinitis (chronic): obstructive, Rhinitis (chronic): purulent, Rhinitis (chronic): ulcerative, "
+431,"1.3.6 ","1.3.6 ENT conditions",EN04,Rhinitis,4245,J31,J31,"Chronic rhinitis, nasopharyngitis and pharyngitis",''
+432,"1.3.6 ","1.3.6 ENT conditions",EN04,Rhinitis,4244,J30.4,J304,"Allergic rhinitis, unspecified",''
+433,"1.3.6 ","1.3.6 ENT conditions",EN04,Rhinitis,4243,J30.3,J303,Other allergic rhinitis,"Perennial allergic rhinitis, "
+434,"1.3.6 ","1.3.6 ENT conditions",EN13,Tonsillitis,4166,J03.9,J039,"Acute tonsillitis, unspecified","Tonsillitis (acute): NOS, Tonsillitis (acute): follicular, Tonsillitis (acute): gangrenous, Tonsillitis (acute): infective, Tonsillitis (acute): ulcerative, "
+435,"1.3.6 ","1.3.6 ENT conditions",EN13,Tonsillitis,4165,J03.8,J038,Acute tonsillitis due to other specified organisms,''
+436,"1.3.6 ","1.3.6 ENT conditions",EN13,Tonsillitis,4164,J03.0,J030,Streptococcal tonsillitis,''
+437,"1.3.6 ","1.3.6 ENT conditions",EN13,Tonsillitis,4163,J03,J03,Acute tonsillitis,''
+438,"1.3.6 ","1.3.6 ENT conditions",EN15,Tinnitus,3680,H93.1,H931,Tinnitus,''
+439,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3673,H91.9,H919,"Hearing loss, unspecified","Deafness: NOS, Deafness: high frequency, Deafness: low frequency, "
+440,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3672,H91.8,H918,Other specified hearing loss,''
+441,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3670,H91.2,H912,Sudden idiopathic hearing loss,"Sudden hearing loss NOS, "
+442,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3668,H91.0,H910,Ototoxic hearing loss,''
+443,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3667,H91,H91,Other hearing loss,''
+444,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3666,H90.8,H908,"Mixed conductive and sensorineural hearing loss, unspecified",''
+445,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3665,H90.7,H907,"Mixed conductive and sensorineural hearing loss, unilateral with unrestricted hearing on the contralateral side",''
+446,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3664,H90.6,H906,"Mixed conductive and sensorineural hearing loss, bilateral",''
+447,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3663,H90.5,H905,"Sensorineural hearing loss, unspecified","Congenital deafness NOS, Hearing loss: central NOS, Hearing loss: neural NOS, Hearing loss: perceptive NOS, Hearing loss: sensory NOS, Sensorineural deafness NOS, "
+448,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3662,H90.4,H904,"Sensorineural hearing loss, unilateral with unrestricted hearing on the contralateral side",''
+449,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3661,H90.3,H903,"Sensorineural hearing loss, bilateral",''
+450,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3660,H90.2,H902,"Conductive hearing loss, unspecified","Conductive deafness NOS, "
+451,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3659,H90.1,H901,"Conductive hearing loss, unilateral with unrestricted hearing on the contralateral side",''
+452,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3658,H90.0,H900,"Conductive hearing loss, bilateral",''
+453,"1.3.6 ","1.3.6 ENT conditions",EN06, Epixtasis,8051,R04.0,R040,Epistaxis,"Haemorrhage from nose, Nosebleed, "
+454,"1.3.6 ","1.3.6 ENT conditions",EN03,Hearing loss,3657,H90,H90,Conductive and sensorineural hearing loss,"congenital deafness, "
+455,"1.3.6 ","1.3.6 ENT conditions",EN12,Vertigo,3646,H81.4,H814,Vertigo of central origin,"Central positional nystagmus, "
+456,"1.3.6 ","1.3.6 ENT conditions",EN12,Vertigo,3645,H81.3,H813,Other peripheral vertigo,"Lermoyez syndrome, Vertigo: aural, Vertigo: otogenic, Vertigo: peripheral NOS, "
+457,"1.3.6 ","1.3.6 ENT conditions",EN12,Vertigo,3643,H81.1,H811,Benign paroxysmal vertigo,''
+458,"1.3.6 ","1.3.6 ENT conditions",EN11,Mastoid abscess,3631,H74.9,H749,"Disorder of middle ear and mastoid, unspecified",''
+459,"1.3.6 ","1.3.6 ENT conditions",EN02,Mastoiditis,3611,H70.9,H709,"Mastoiditis, unspecified",''
+460,"1.3.6 ","1.3.6 ENT conditions",EN17,Other ENT conditions,3605,H69.9,H699,"Eustachian tube disorder, unspecified",''
+461,"1.3.6 ","1.3.6 ENT conditions",EN17,Other ENT conditions,3603,H69.0,H690,Patulous Eustachian tube,''
+462,"1.3.6 ","1.3.6 ENT conditions",EN17,Other ENT conditions,3602,H69,H69,Other disorders of Eustachian tube,''
+463,"1.3.6 ","1.3.6 ENT conditions",EN01,Otitis media acute and chronic,3598,H67.8,H678,Otitis media in other diseases classified elsewhere,''
+464,"1.3.7 ","1.3.7 Eye conditions",EC07,Operable Cataract(<6/60),11264,Y65.2,Y652,Failure in suture or ligature during surgical operation,''
+465,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,3450,H40.6,H406,Glaucoma secondary to drugs,''
+466,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,3451,H40.8,H408,Other glaucoma,''
+467,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,3452,H40.9,H409,"Glaucoma, unspecified",''
+468,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,3453,H42,H42,Glaucoma in diseases classified elsewhere,''
+469,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,3454,H42.0,H420,"Glaucoma in endocrine, nutritional and metabolic diseases","Glaucoma in: amyloidosis, Glaucoma in: Lowe syndrome, "
+470,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,3455,H42.8,H428,Glaucoma in other diseases classified elsewhere,"Glaucoma in onchocerciasis, "
+649,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,3747,I15.0,I150,Renovascular hypertension,''
+471,"1.3.7 ","1.3.7 Eye conditions",EC16,Endophthalmitis,3476,H45.1,H451,Endophthalmitis in diseases classified elsewhere,"Endophthalmitis in: cysticercosis, Endophthalmitis in: onchocerciasis, Endophthalmitis in: toxocariasis, "
+472,"1.3.7 ","1.3.7 Eye conditions",EC19,Strabismus,3509,H50.9,H509,"Strabismus, unspecified","Squint, "
+473,"1.3.7 ","1.3.7 Eye conditions",EC26,Blindness,3532,H53.6,H536,Night blindness,''
+474,"1.3.7 ","1.3.7 Eye conditions",EC26,Blindness,3535,H54,H54,Visual impairment including blindness (binocular or monocular),''
+475,"1.3.7 ","1.3.7 Eye conditions",EC26,Blindness,3536,H54.0,H540,"Blindness, binocular","Visual impairment categories 3,4,5 in both eyes, "
+476,"1.3.7 ","1.3.7 Eye conditions",EC26,Blindness,3540,H54.4,H544,"Blindness, monocular","Visual impairment categories 3, 4, 5 in one eye and categories 0, 1, 2 or 9 in the other eye., "
+477,"1.3.7 ","1.3.7 Eye conditions",EC27,Other eye conditions,3375,H25,H25,Senile cataract,''
+478,"1.3.7 ","1.3.7 Eye conditions",EC03,Ophthalmianeonatorum,7415,Q14.2,Q142,Congenital malformation of optic disc,"Coloboma of optic disc, "
+479,"1.3.7 ","1.3.7 Eye conditions",EC20,Ptosis and other lid Disorders,7382,Q10.0,Q100,Congenital ptosis,''
+480,"1.3.7 ","1.3.7 Eye conditions",EC10,Trachoma,352,A71.0,A710,Initial stage of trachoma,"Trachoma dubium, "
+481,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,3449,H40.5,H405,Glaucoma secondary to other eye disorders,''
+482,"1.3.7 ","1.3.7 Eye conditions",EC10,Trachoma,353,A71.1,A711,Active stage of trachoma,"Granular conjunctivitis (trachomatous) | Traumatic conjunctivitis, Granular conjunctivitis (trachomatous), Trachomatous: follicular conjunctivitis, Trachomatous: pannus, "
+483,"1.3.7 ","1.3.7 Eye conditions",EC10,Trachoma,354,A71.9,A719,"Trachoma, unspecified",''
+484,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,3448,H40.4,H404,Glaucoma secondary to eye inflammation,''
+485,"1.3.7 ","1.3.7 Eye conditions",EC23,Other Malignant Tumours,1129,C44,C44,Other malignant neoplasms of skin,"malignant neoplasm of: sebaceous glands, malignant neoplasm of: sweat glands, "
+486,"1.3.7 ","1.3.7 Eye conditions",EC02,Bacterial conjunctivitis,11534,Z23,Z23,Need for immunization against single bacterial diseases,''
+487,"1.3.7 ","1.3.7 Eye conditions",EC08,Refractive Errors,6906,O92.0,O920,Retracted nipple associated with childbirth,''
+488,"1.3.7 ","1.3.7 Eye conditions",EC06,Unoperable cataract(>6/60),1395,C88,C88,Malignant immunoproliferative diseases,''
+489,"1.3.7 ","1.3.7 Eye conditions",EC18,Tumors,1448,C96.2,C962,Malignant mast cell tumour,"Aggressive systemic mastocytosis, Mast cell sarcoma, "
+490,"1.3.7 ","1.3.7 Eye conditions",EC24,Other Benign Tumours/Growths,1601,D21,D21,Other benign neoplasms of connective and other soft tissue,"blood vessel, bursa, cartilage, fascia, fat, ligament, except uterine, lymphatic channel, muscle, synovia, tendon (sheath), "
+491,"1.3.7 ","1.3.7 Eye conditions",EC15,Uveitis,5573,M41.1,M411,Juvenile idiopathic scoliosis,"Adolescent scoliosis, "
+492,"1.3.7 ","1.3.7 Eye conditions",EC05,Corneal Ulcers/ Keratitis,5122,L57.0,L570,Actinic keratosis,"Keratosis: NOS, Keratosis: senile, Keratosis: solar, "
+493,"1.3.7 ","1.3.7 Eye conditions",EC25,Other Eye Disorders,10890,X37,X37,Victim of cataclysmic storm,"blizzard, cloudburst, cyclone, hurricane, tidal wave caused by storm, tornado, torrential rain, transport vehicle washed off road by storm, "
+494,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,3447,H40.3,H403,Glaucoma secondary to eye trauma,''
+495,"1.3.7 ","1.3.7 Eye conditions",EC21,Squamous Cell Carcinoma of Conjunctiva,5071,L44,L44,Other papulosquamous disorders,''
+496,"1.3.7 ","1.3.7 Eye conditions",EC01,Allergic conjunctivitis,9236,T15.1,T151,Foreign body in conjunctival sac,"Conjunctival foreign body, "
+497,"1.3.7 ","1.3.7 Eye conditions",EC28,Spectacles Dispensed,12103,Z97.3,Z973,Presence of spectacles and contact lenses,''
+498,"1.3.7 ","1.3.7 Eye conditions",EC04,Other forms of conjunctivitis,9236,T15.1,T151,Foreign body in conjunctival sac,"Conjunctival foreign body, "
+499,"1.3.7 ","1.3.7 Eye conditions",EC27,Other eye conditions,3385,H26.3,H263,Drug-induced cataract,''
+500,"1.3.7 ","1.3.7 Eye conditions",EC27,Other eye conditions,3377,H25.1,H251,Senile nuclear cataract,"Cataracta brunescens, Nuclear sclerosis cataract, "
+501,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,3446,H40.2,H402,Primary angle-closure glaucoma,"Angle-closure glaucoma (primary)(residual stage): acute, Angle-closure glaucoma (primary)(residual stage): chronic, Angle-closure glaucoma (primary)(residual stage): intermittent, "
+502,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,3445,H40.1,H401,Primary open-angle glaucoma,"Glaucoma (primary)(residual stage): capsular with pseudoexfoliation of lens, Glaucoma (primary)(residual stage): chronic simple, Glaucoma (primary)(residual stage): low-tension, Glaucoma (primary)(residual stage): pigmentary, "
+503,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,3444,H40.0,H400,Glaucoma suspect,"Ocular hypertension, "
+504,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,3443,H40,H40,Glaucoma,''
+505,"1.3.7 ","1.3.7 Eye conditions",EC13,Diabetic Retinopathy(All stages),3441,H36.0,H360,Diabetic retinopathy,''
+506,"1.3.7 ","1.3.7 Eye conditions",EC22,Retinoblastoma,3437,H35.7,H357,Separation of retinal layers,"Central serous chorioretinopathy, Detachment of retinal pigment epithelium, "
+507,"1.3.7 ","1.3.7 Eye conditions",EC14,"Chorioretinal, Macular & Vitreous Disorders",3433,H35.3,H353,Degeneration of macula and posterior pole,"Macula degeneration, Angioid streaks of macula, Cyst of macula, Drusen (degenerative) of macula, Hole of macula, Puckering of macula, Kuhnt-Junius degeneration, Senile macular degeneration (atrophic)(exudative), Toxic maculopathy, "
+508,"1.3.7 ","1.3.7 Eye conditions",EC25,Other Eye Disorders,3397,H28.2,H282,Cataract in other diseases classified elsewhere,"Myotonic cataract, "
+509,"1.3.7 ","1.3.7 Eye conditions",EC10,Trachoma,351,A71,A71,Trachoma,''
+510,"1.3.7 ","1.3.7 Eye conditions",EC17,Corneal scars (Non trachomatous),3342,H18.2,H182,Other corneal oedema,''
+511,"1.3.7 ","1.3.7 Eye conditions",EC12,Ocular Trauma and Burns,9325,T26.5,T265,Corrosion of eyelid and periocular area,''
+512,"1.3.7 ","1.3.7 Eye conditions",EC27,Other eye conditions,3376,H25.0,H250,Senile incipient cataract,"Senile cataract: coronary, Senile cataract: cortical, Senile cataract: punctate, Subcapsular polar senile cataract (anterior)(posterior), Water clefts, "
+513,"1.3.7 ","1.3.7 Eye conditions",EC09,Glaucoma,7420,Q15.0,Q150,Congenital glaucoma,"Buphthalmos, Glaucoma of newborn, Hydrophthalmos, Keratoglobus, congenital, with glaucoma, Macrocornea with glaucoma, Macrophthalmos in congenital glaucoma, Megalocornea with glaucoma, "
+514,"1.3.7 ","1.3.7 Eye conditions",EC11,Vitamin A Deficiency,2247,E64.1,E641,Sequelae of vitamin A deficiency,''
+515,"1.3.8 ","1.3.8 MentalHealth",MH05,Schizophrenia,2552,F20.2,F202,Catatonic schizophrenia,"Catatonic stupor, Schizophrenic: catalepsy, Schizophrenic: catatonia, Schizophrenic: flexibilitas cerea, "
+516,"1.3.8 ","1.3.8 MentalHealth",MH05,Schizophrenia,2555,F20.5,F205,Residual schizophrenia,"Chronic undifferentiated schizophrenia, Restzustand (schizophrenic), Schizophrenic residual state, "
+517,"1.3.8 ","1.3.8 MentalHealth",MH05,Schizophrenia,2556,F20.6,F206,Simple schizophrenia,''
+518,"1.3.8 ","1.3.8 MentalHealth",MH05,Schizophrenia,2557,F20.8,F208,Other schizophrenia,"Cenesthopathic schizophrenia, Schizophreniform: disorder NOS, Schizophreniform: psychosis NOS, "
+519,"1.3.8 ","1.3.8 MentalHealth",MH05,Schizophrenia,2558,F20.9,F209,"Schizophrenia, unspecified",''
+520,"1.3.8 ","1.3.8 MentalHealth",MH04,Bipolar disorders,2586,F31,F31,Bipolar affective disorder,"manic depression, manic-depressive: illness, manic-depressive: psychosis, manic-depressive: reaction, "
+521,"1.3.8 ","1.3.8 MentalHealth",MH04,Bipolar disorders,2587,F31.0,F310,"Bipolar affective disorder, current episode hypomanic",''
+522,"1.3.8 ","1.3.8 MentalHealth",MH04,Bipolar disorders,2588,F31.1,F311,"Bipolar affective disorder, current episode manic without psychotic symptoms",''
+523,"1.3.8 ","1.3.8 MentalHealth",MH04,Bipolar disorders,2589,F31.2,F312,"Bipolar affective disorder, current episode manic with psychotic symptoms",''
+524,"1.3.8 ","1.3.8 MentalHealth",MH04,Bipolar disorders,2590,F31.3,F313,"Bipolar affective disorder, current episode mild or moderate depression",''
+525,"1.3.8 ","1.3.8 MentalHealth",MH04,Bipolar disorders,2591,F31.4,F314,"Bipolar affective disorder, current episode severe depression without psychotic symptoms",''
+526,"1.3.8 ","1.3.8 MentalHealth",MH04,Bipolar disorders,2592,F31.5,F315,"Bipolar affective disorder, current episode severe depression with psychotic symptoms",''
+527,"1.3.8 ","1.3.8 MentalHealth",MH04,Bipolar disorders,2593,F31.6,F316,"Bipolar affective disorder, current episode mixed",''
+528,"1.3.8 ","1.3.8 MentalHealth",MH04,Bipolar disorders,2594,F31.7,F317,"Bipolar affective disorder, currently in remission",''
+529,"1.3.8 ","1.3.8 MentalHealth",MH04,Bipolar disorders,2595,F31.8,F318,Other bipolar affective disorders,"Bipolar II disorder, Recurrent manic episodes NOS, "
+530,"1.3.8 ","1.3.8 MentalHealth",MH04,Bipolar disorders,2596,F31.9,F319,"Bipolar affective disorder, unspecified","Manic depression NOS, "
+531,"1.3.8 ","1.3.8 MentalHealth",MH03,Unipolar Depressive Disorder,2611,F33.9,F339,"Recurrent depressive disorder, unspecified","Monopolar depression NOS, "
+532,"1.3.8 ","1.3.8 MentalHealth",MH02,Anxiety Disorders due to gender based violence,2629,F41.0,F410,Panic disorder [episodic paroxysmal anxiety],"Panic: attack, Panic: state, "
+533,"1.3.8 ","1.3.8 MentalHealth",MH02,Anxiety Disorders due to gender based violence,2630,F41.1,F411,Generalized anxiety disorder,"Anxiety: neurosis, Anxiety: reaction, Anxiety: state, "
+534,"1.3.8 ","1.3.8 MentalHealth",MH03,Unipolar Depressive Disorder,2631,F41.2,F412,Mixed anxiety and depressive disorder,"Anxiety depression (mild or not persistent), "
+535,"1.3.8 ","1.3.8 MentalHealth",MH01,Anxiety Disorders,2632,F41.3,F413,Other mixed anxiety disorders,''
+536,"1.3.8 ","1.3.8 MentalHealth",MH02,Anxiety Disorders due to gender based violence,2632,F41.3,F413,Other mixed anxiety disorders,''
+537,"1.3.8 ","1.3.8 MentalHealth",MH01,Anxiety Disorders,2633,F41.8,F418,Other specified anxiety disorders,"Anxiety hysteria, "
+538,"1.3.8 ","1.3.8 MentalHealth",MH01,Anxiety Disorders,2634,F41.9,F419,"Anxiety disorder, unspecified","Anxiety NOS, "
+539,"1.3.8 ","1.3.8 MentalHealth",MH06,Post -Traumatic Stress Disorder,2643,F43.1,F431,Post-traumatic stress disorder,"Traumatic neurosis, "
+540,"1.3.8 ","1.3.8 MentalHealth",MH09,Alzheimer’s disease,2673,F50.1,F501,Atypical anorexia nervosa,''
+541,"1.3.8 ","1.3.8 MentalHealth",MH15,Internet addiction,2726,F63.0,F630,Pathological gambling,"Compulsive gambling, "
+542,"1.3.8 ","1.3.8 MentalHealth",MH15,Internet addiction,2730,F63.8,F638,Other habit and impulse disorders,"Intermittent explosive disorder, "
+543,"1.3.8 ","1.3.8 MentalHealth",MH19,Intellectual disability,2789,F80,F80,Specific developmental disorders of speech and language,''
+544,"1.3.8 ","1.3.8 MentalHealth",MH20,Autism spectrum disorders,2806,F84.0,F840,Childhood autism,"Autistic disorder, Infantile: autism, Infantile: psychosis, Kanner syndrome, "
+545,"1.3.8 ","1.3.8 MentalHealth",MH20,Autism spectrum disorders,2807,F84.1,F841,Atypical autism,"Atypical childhood psychosis, Mental retardation with autistic features, "
+546,"1.3.8 ","1.3.8 MentalHealth",MH03,Unipolar Depressive Disorder,2829,F92.0,F920,Depressive conduct disorder,"Conduct disorder in F91.- associated with depressive disorder in F32.-, "
+547,"1.3.8 ","1.3.8 MentalHealth",MH02,Anxiety Disorders due to gender based violence,2834,F93.1,F931,Phobic anxiety disorder of childhood,''
+548,"1.3.8 ","1.3.8 MentalHealth",MH02,Anxiety Disorders due to gender based violence,2835,F93.2,F932,Social anxiety disorder of childhood,"Avoidant disorder of childhood or adolescence, "
+549,"1.3.8 ","1.3.8 MentalHealth",MH13,Other form of Dementia,2396,F00.0,F000,Dementia in Alzheimer disease with early onset,"Alzheimer disease, type 2, Presenile dementia, Alzheimer type, Primary degenerative dementia of the Alzheimer type, presenile onset, "
+550,"1.3.8 ","1.3.8 MentalHealth",MH13,Other form of Dementia,2395,F00,F00,Dementia in Alzheimer disease,''
+551,"1.3.8 ","1.3.8 MentalHealth",MH09,Alzheimer’s disease,2955,G30,G30,Alzheimer disease,"senile and presenile forms, "
+552,"1.3.8 ","1.3.8 MentalHealth",MH09,Alzheimer’s disease,2957,G30.1,G301,Alzheimer disease with late onset,''
+553,"1.3.8 ","1.3.8 MentalHealth",MH09,Alzheimer’s disease,2958,G30.8,G308,Other Alzheimer disease,''
+554,"1.3.8 ","1.3.8 MentalHealth",MH09,Alzheimer’s disease,2959,G30.9,G309,"Alzheimer disease, unspecified",''
+555,"1.3.8 ","1.3.8 MentalHealth",MH07,Epilepsy,2984,G40,G40,Epilepsy,''
+556,"1.3.8 ","1.3.8 MentalHealth",MH07,Epilepsy,2985,G40.0,G400,Localization-related (focal)(partial) idiopathic epilepsy and epileptic syndromes with seizures of localized onset,"Benign childhood epilepsy with centrotemporal EEG spikes, Childhood epilepsy with occipital EEG paroxysms, "
+557,"1.3.8 ","1.3.8 MentalHealth",MH07,Epilepsy,2986,G40.1,G401,Localization-related (focal)(partial) symptomatic epilepsy and epileptic syndromes with simple partial seizures,"Attacks without alteration of consciousness, Simple partial seizures developing into secondarily generalized seizures, "
+558,"1.3.8 ","1.3.8 MentalHealth",MH07,Epilepsy,2987,G40.2,G402,Localization-related (focal)(partial) symptomatic epilepsy and epileptic syndromes with complex partial seizures,"Attacks with alteration of consciousness, often with automatisms, Complex partial seizures developing into secondarily generalized seizures, "
+559,"1.3.8 ","1.3.8 MentalHealth",MH07,Epilepsy,2988,G40.3,G403,Generalized idiopathic epilepsy and epileptic syndromes,"Benign: myoclonic epilepsy in infancy, Benign: neonatal convulsions (familial), Childhood absence epilepsy [pyknolepsy], Epilepsy with grand mal seizures on awakening, Juvenile: absence epilepsy, Juvenile: myoclonic epilepsy [impulsive petit mal], Nonspecific epileptic seizures: atonic, Nonspecific epileptic seizures: clonic, Nonspecific epileptic seizures: myoclonic, Nonspecific epileptic seizures: tonic, Nonspecific epileptic seizures: tonic-clonic, "
+560,"1.3.8 ","1.3.8 MentalHealth",MH07,Epilepsy,2989,G40.4,G404,Other generalized epilepsy and epileptic syndromes,"Epilepsy with: myoclonic absences, Epilepsy with: myoclonic-astatic seizures, Infantile spasms, Lennox-Gastaut syndrome, Salaam attacks, Symptomatic early myoclonic encephalopathy, West syndrome, "
+561,"1.3.8 ","1.3.8 MentalHealth",MH07,Epilepsy,2993,G40.8,G408,Other epilepsy,"Epilepsies and epileptic syndromes undetermined as to whether they are focal or generalized, "
+562,"1.3.8 ","1.3.8 MentalHealth",MH07,Epilepsy,2994,G40.9,G409,"Epilepsy, unspecified","Epileptic: convulsions NOS, Epileptic: fits NOS, Epileptic: seizures NOS, "
+563,"1.3.8 ","1.3.8 MentalHealth",MH17,Substance (Drug) use Disorder,11196,Y57.9,Y579,"Drug or medicament, unspecified",''
+564,"1.3.8 ","1.3.8 MentalHealth",MH08,HIV related psychosis,11519,Z20.6,Z206,Contact with and exposure to human immunodeficiency virus [HIV],''
+565,"1.3.8 ","1.3.8 MentalHealth",MH10,HIV related dementia,11523,Z21,Z21,Asymptomatic human immunodeficiency virus [HIV] infection status,"HIV positive NOS, "
+566,"1.3.8 ","1.3.8 MentalHealth",MH06,Post -Traumatic Stress Disorder,11650,Z39.2,Z392,Routine postpartum follow-up,''
+567,"1.3.8 ","1.3.8 MentalHealth",MH14,Other Adult Mental Health Conditions,11780,Z56.6,Z566,Other physical and mental strain related to work,''
+568,"1.3.8 ","1.3.8 MentalHealth",MH16,Alcohol Use Disorder,11883,Z71.4,Z714,Alcohol abuse counselling and surveillance,''
+569,"1.3.8 ","1.3.8 MentalHealth",MH16,Alcohol Use Disorder,11891,Z72.1,Z721,Alcohol use,''
+570,"1.3.8 ","1.3.8 MentalHealth",MH13,Other form of Dementia,2398,F00.2,F002,"Dementia in Alzheimer disease, atypical or mixed type","Atypical dementia, Alzheimer type, "
+571,"1.3.8 ","1.3.8 MentalHealth",MH09,Alzheimer’s disease,2399,F00.9,F009,"Dementia in Alzheimer disease, unspecified",''
+572,"1.3.8 ","1.3.8 MentalHealth",MH13,Other form of Dementia,2399,F00.9,F009,"Dementia in Alzheimer disease, unspecified",''
+573,"1.3.8 ","1.3.8 MentalHealth",MH13,Other form of Dementia,2407,F02,F02,Dementia in other diseases classified elsewhere,''
+574,"1.3.8 ","1.3.8 MentalHealth",MH12,"Dementia due to stroke (Diabetes, Hypertension)",2409,F02.1,F021,Dementia in Creutzfeldt-Jakob disease,''
+575,"1.3.8 ","1.3.8 MentalHealth",MH10,HIV related dementia,2412,F02.4,F024,Dementia in human immunodeficiency virus [HIV] disease,''
+576,"1.3.8 ","1.3.8 MentalHealth",MH12,"Dementia due to stroke (Diabetes, Hypertension)",2417,F05.0,F050,"Delirium not superimposed on dementia, so described",''
+577,"1.3.8 ","1.3.8 MentalHealth",MH18,Delirium,2419,F05.8,F058,Other delirium,"Delirium of mixed origin, Postoperative delirium, "
+578,"1.3.8 ","1.3.8 MentalHealth",MH18,Delirium,2420,F05.9,F059,"Delirium, unspecified",''
+579,"1.3.8 ","1.3.8 MentalHealth",MH11,Alcohol related Dementia,2448,F10.8,F108,Mental and behavioural disorders due to use of alcohol: Other mental and behavioural disorders,""
+580,"1.3.8 ","1.3.8 MentalHealth",MH11,Alcohol related Dementia,2449,F10.9,F109,Mental and behavioural disorders due to use of alcohol: Unspecified mental and behavioural disorder,""
+581,"1.3.8 ","1.3.8 MentalHealth",MH18,Delirium,2510,F16.4,F164,Mental and behavioural disorders due to use of hallucinogens: Withdrawal state with delirium,""
+582,"1.3.8 ","1.3.8 MentalHealth",MH18,Delirium,2521,F17.4,F174,Mental and behavioural disorders due to use of tobacco: Withdrawal state with delirium,""
+583,"1.3.8 ","1.3.8 MentalHealth",MH18,Delirium,2532,F18.4,F184,Mental and behavioural disorders due to use of volatile solvents: Withdrawal state with delirium,""
+1005,"1.3.12","1.3.12 Physiotherapy",PT05,Chest trauma/Injury,8071,R07.3,R073,Other chest pain,"Anterior chest-wall pain NOS, "
+584,"1.3.8 ","1.3.8 MentalHealth",MH18,Delirium,2543,F19.4,F194,Mental and behavioural disorders due to multiple drug use and use of other psychoactive substances: Withdrawal state with delirium,""
+585,"1.3.8 ","1.3.8 MentalHealth",MH05,Schizophrenia,2549,F20,F20,Schizophrenia,''
+586,"1.3.8 ","1.3.8 MentalHealth",MH05,Schizophrenia,2550,F20.0,F200,Paranoid schizophrenia,"Paraphrenic schizophrenia, "
+587,"1.3.8 ","1.3.8 MentalHealth",MH05,Schizophrenia,2551,F20.1,F201,Hebephrenic schizophrenia,"Disorganized schizophrenia, Hebephrenia, "
+588,"1.3.8 ","1.3.8 MentalHealth",MH05,Schizophrenia,2553,F20.3,F203,Undifferentiated schizophrenia,"Atypical schizophrenia, "
+589,"1.3.10","1.3.10 Chronic respiratory diseases",CR01,Asthma,4314,J45.1,J451,Nonallergic asthma,"Idiosyncratic asthma, Intrinsic nonallergic asthma, "
+590,"1.3.10","1.3.10 Chronic respiratory diseases",CR01,Asthma,4315,J45.8,J458,Mixed asthma,"Combination of conditions listed in J45.0 and J45.1, "
+591,"1.3.10","1.3.10 Chronic respiratory diseases",CR02,Chronic Obstructive Pulmonary Disease (COPD),4310,J44.8,J448,Other specified chronic obstructive pulmonary disease,"Chronic bronchitis: asthmatic (obstructive) NOS, Chronic bronchitis: emphysematous NOS, Chronic bronchitis: obstructive NOS, "
+592,"1.3.10","1.3.10 Chronic respiratory diseases",CR02,Chronic Obstructive Pulmonary Disease (COPD),4311,J44.9,J449,"Chronic obstructive pulmonary disease, unspecified","Chronic obstructive: airway disease NOS, Chronic obstructive: lung disease NOS, "
+593,"1.3.10","1.3.10 Chronic respiratory diseases",CR02,Chronic Obstructive Pulmonary Disease (COPD),4307,J44,J44,Other chronic obstructive pulmonary disease,"chronic: bronchitis: asthmatic (obstructive), chronic: bronchitis: emphysematous, chronic: bronchitis: with: airways obstruction, chronic: bronchitis: with: emphysema, chronic: obstructive: asthma, chronic: obstructive: bronchitis, chronic: obstructive: tracheobronchitis, "
+594,"1.3.10","1.3.10 Chronic respiratory diseases",CR01,Asthma,4312,J45,J45,Asthma,''
+595,"1.3.10","1.3.10 Chronic respiratory diseases",CR02,Chronic Obstructive Pulmonary Disease (COPD),4308,J44.0,J440,Chronic obstructive pulmonary disease with acute lower respiratory infection,''
+596,"1.3.10","1.3.10 Chronic respiratory diseases",CR02,Chronic Obstructive Pulmonary Disease (COPD),4309,J44.1,J441,"Chronic obstructive pulmonary disease with acute exacerbation, unspecified",''
+597,"1.3.10","1.3.10 Chronic respiratory diseases",CR01,Asthma,4316,J45.9,J459,"Asthma, unspecified","Asthmatic bronchitis NOS, Late-onset asthma, "
+650,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,3746,I15,I15,Secondary hypertension,"Secondary hypertension, "
+598,"1.3.10","1.3.10 Chronic respiratory diseases",CR01,Asthma,4313,J45.0,J450,Predominantly allergic asthma,"Allergic bronchitis, Allergic: bronchitis NOS, Allergic: rhinitis with asthma, Atopic asthma, Extrinsic allergic asthma, Hay fever with asthma, "
+599,"1.3.11","1.3.11 Cancers",CA05,Liver Cancer,1038,C22,C22,Malignant neoplasm of liver and intrahepatic bile ducts,''
+600,"1.3.11","1.3.11 Cancers",CA05,Liver Cancer,1039,C22.0,C220,Liver cell carcinoma,"Malignant neoplasm: Liver cell carcinoma, Hepatocellular carcinoma, Hepatoma, "
+601,"1.3.11","1.3.11 Cancers",CA05,Liver Cancer,1040,C22.1,C221,Intrahepatic bile duct carcinoma,"Malignant neoplasm: Intrahepatic bile duct carcinoma, Cholangiocarcinoma, "
+602,"1.3.11","1.3.11 Cancers",CA05,Liver Cancer,1041,C22.2,C222,Hepatoblastoma,"Malignant neoplasm: Hepatoblastoma, "
+603,"1.3.11","1.3.11 Cancers",CA05,Liver Cancer,1042,C22.3,C223,Angiosarcoma of liver,"Malignant neoplasm: Angiosarcoma of liver, Kupffer cell sarcoma, "
+604,"1.3.11","1.3.11 Cancers",CA05,Liver Cancer,1043,C22.4,C224,Other sarcomas of liver,"Malignant neoplasm: Other sarcomas of liver, "
+605,"1.3.11","1.3.11 Cancers",CA05,Liver Cancer,1044,C22.7,C227,Other specified carcinomas of liver,"Malignant neoplasm: Other specified carcinomas of liver, "
+606,"1.3.11","1.3.11 Cancers",CA05,Liver Cancer,1045,C22.9,C229,"Liver, unspecified","Malignant neoplasm: Liver, unspecified, "
+607,"1.3.11","1.3.11 Cancers",CA04,Lung Cancer,1084,C34,C34,Malignant neoplasm of bronchus and lung,''
+608,"1.3.11","1.3.11 Cancers",CA04,Lung Cancer,1085,C34.0,C340,Main bronchus,"Malignant neoplasm: Main bronchus, Carina, Hilus (of lung), "
+609,"1.3.11","1.3.11 Cancers",CA04,Lung Cancer,1086,C34.1,C341,"Upper lobe, bronchus or lung","Malignant neoplasm: Upper lobe, bronchus or lung, "
+610,"1.3.11","1.3.11 Cancers",CA04,Lung Cancer,1087,C34.2,C342,"Middle lobe, bronchus or lung","Malignant neoplasm: Middle lobe, bronchus or lung, "
+611,"1.3.11","1.3.11 Cancers",CA04,Lung Cancer,1088,C34.3,C343,"Lower lobe, bronchus or lung","Malignant neoplasm: Lower lobe, bronchus or lung, "
+612,"1.3.11","1.3.11 Cancers",CA04,Lung Cancer,1089,C34.8,C348,Overlapping lesion of bronchus and lung,"Malignant neoplasm: Overlapping lesion of bronchus and lung, "
+613,"1.3.11","1.3.11 Cancers",CA07,Kaposis Sarcoma,1148,C46.1,C461,Kaposi sarcoma of soft tissue,''
+614,"1.3.11","1.3.11 Cancers",CA07,Kaposis Sarcoma,1153,C46.9,C469,"Kaposi sarcoma, unspecified",''
+615,"1.3.11","1.3.11 Cancers",CA03,Breast Cancer,1179,C50,C50,Malignant neoplasm of breast,"Breast cancer, connective tissue of breast, "
+616,"1.3.11","1.3.11 Cancers",CA03,Breast Cancer,1180,C50.0,C500,Nipple and areola,"Malignant neoplasm: Nipple and areola, "
+617,"1.3.11","1.3.11 Cancers",CA03,Breast Cancer,1181,C50.1,C501,Central portion of breast,"Malignant neoplasm: Central portion of breast, "
+618,"1.3.11","1.3.11 Cancers",CA03,Breast Cancer,1182,C50.2,C502,Upper-inner quadrant of breast,"Malignant neoplasm: Upper-inner quadrant of breast, "
+619,"1.3.11","1.3.11 Cancers",CA03,Breast Cancer,1183,C50.3,C503,Lower-inner quadrant of breast,"Malignant neoplasm: Lower-inner quadrant of breast, "
+620,"1.3.11","1.3.11 Cancers",CA03,Breast Cancer,1184,C50.4,C504,Upper-outer quadrant of breast,"Malignant neoplasm: Upper-outer quadrant of breast, "
+621,"1.3.11","1.3.11 Cancers",CA03,Breast Cancer,1185,C50.5,C505,Lower-outer quadrant of breast,"Malignant neoplasm: Lower-outer quadrant of breast, "
+622,"1.3.11","1.3.11 Cancers",CA03,Breast Cancer,1186,C50.6,C506,Axillary tail of breast,"Malignant neoplasm: Axillary tail of breast, "
+623,"1.3.11","1.3.11 Cancers",CA03,Breast Cancer,1187,C50.8,C508,Overlapping lesion of breast,"Malignant neoplasm: Overlapping lesion of breast, "
+624,"1.3.11","1.3.11 Cancers",CA03,Breast Cancer,1188,C50.9,C509,"Breast, unspecified","Malignant neoplasm: Breast, unspecified, "
+625,"1.3.11","1.3.11 Cancers",CA07,Kaposis Sarcoma,1149,C46.2,C462,Kaposi sarcoma of palate,''
+626,"1.3.11","1.3.11 Cancers",CA07,Kaposis Sarcoma,1150,C46.3,C463,Kaposi sarcoma of lymph nodes,''
+627,"1.3.11","1.3.11 Cancers",CA07,Kaposis Sarcoma,1151,C46.7,C467,Kaposi sarcoma of other sites,''
+628,"1.3.11","1.3.11 Cancers",CA06,Colon Cancer,1020,C18,C18,Malignant neoplasm of colon,''
+629,"1.3.11","1.3.11 Cancers",CA01,Cervical Cancer,1196,C53,C53,Malignant neoplasm of cervix uteri,''
+630,"1.3.11","1.3.11 Cancers",CA06,Colon Cancer,1021,C18.0,C180,Caecum,"Malignant neoplasm: Caecum, Ileocaecal valve, "
+631,"1.3.11","1.3.11 Cancers",CA01,Cervical Cancer,1197,C53.0,C530,Endocervix,"Malignant neoplasm: Endocervix, "
+633,"1.3.11","1.3.11 Cancers",CA01,Cervical Cancer,1199,C53.8,C538,Overlapping lesion of cervix uteri,"Malignant neoplasm: Overlapping lesion of cervix uteri, "
+634,"1.3.11","1.3.11 Cancers",CA01,Cervical Cancer,1200,C53.9,C539,"Cervix uteri, unspecified","Malignant neoplasm: Cervix uteri, unspecified, "
+635,"1.3.11","1.3.11 Cancers",CA02,Prostate Cancer,1226,C61,C61,Malignant neoplasm of prostate,"Prostate cancer, "
+636,"1.3.11","1.3.11 Cancers",CA08,Other Cancers,1343,C79.9,C799,"Secondary malignant neoplasm, unspecified site","Carcinomatosis (secondary), Disseminated (secondary): cancer NOS, Disseminated (secondary): malignancy NOS, Generalized (secondary): cancer NOS, Generalized (secondary): malignancy NOS, Multiple secondary cancer NOS, Sarcomatosis (secondary) NOS, "
+637,"1.3.11","1.3.11 Cancers",CA06,Colon Cancer,1022,C18.1,C181,Appendix,"Malignant neoplasm: Appendix, "
+638,"1.3.11","1.3.11 Cancers",CA04,Lung Cancer,1090,C34.9,C349,"Bronchus or lung, unspecified","Malignant neoplasm: Bronchus or lung, unspecified, "
+639,"1.3.11","1.3.11 Cancers",CA06,Colon Cancer,1023,C18.2,C182,Ascending colon,"Malignant neoplasm: Ascending colon, "
+640,"1.3.11","1.3.11 Cancers",CA07,Kaposis Sarcoma,1152,C46.8,C468,Kaposi sarcoma of multiple organs,''
+641,"1.3.11","1.3.11 Cancers",CA06,Colon Cancer,1024,C18.3,C183,Hepatic flexure,"Malignant neoplasm: Hepatic flexure, "
+642,"1.3.11","1.3.11 Cancers",CA06,Colon Cancer,1025,C18.4,C184,Transverse colon,"Malignant neoplasm: Transverse colon, "
+643,"1.3.11","1.3.11 Cancers",CA06,Colon Cancer,1026,C18.5,C185,Splenic flexure,"Malignant neoplasm: Splenic flexure, "
+644,"1.3.11","1.3.11 Cancers",CA06,Colon Cancer,1027,C18.6,C186,Descending colon,"Malignant neoplasm: Descending colon, "
+645,"1.3.11","1.3.11 Cancers",CA06,Colon Cancer,1028,C18.7,C187,Sigmoid colon,"Malignant neoplasm: Sigmoid colon, Sigmoid (flexure), "
+646,"1.3.11","1.3.11 Cancers",CA06,Colon Cancer,1029,C18.8,C188,Overlapping lesion of colon,"Malignant neoplasm: Overlapping lesion of colon, "
+647,"1.3.11","1.3.11 Cancers",CA06,Colon Cancer,1030,C18.9,C189,"Colon, unspecified","Malignant neoplasm: Colon, unspecified, Large intestine NOS, "
+651,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,3734,I10,I10,Essential (primary) hypertension,"Primary hypertension, High blood pressure, Hypertension (arterial)(benign)(essential)(malignant)(primary)(systemic), "
+652,"1.3.16","1.3.16 Cardiovascular diseases",CV03,Heart failure,3925,I50.9,I509,"Heart failure, unspecified","Cardiac, heart or myocardial failure NOS, "
+653,"1.3.16","1.3.16 Cardiovascular diseases",CV05,Rheumatic Heart Diseases,3732,I09.8,I098,Other specified rheumatic heart diseases,"Rheumatic disease of pulmonary valve, "
+654,"1.3.16","1.3.16 Cardiovascular diseases",CV05,Rheumatic Heart Diseases,3728,I09,I09,Other rheumatic heart diseases,''
+655,"1.3.16","1.3.16 Cardiovascular diseases",CV07,Other Cardiovascular Diseases,3935,I51.8,I518,Other ill-defined heart diseases,"Carditis (acute)(chronic), Pancarditis (acute)(chronic), "
+656,"1.3.16","1.3.16 Cardiovascular diseases",CV07,Other Cardiovascular Diseases,3933,I51.6,I516,"Cardiovascular disease, unspecified","Cardiovascular accident NOS, "
+657,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,6531,O10.9,O109,"Unspecified pre-existing hypertension complicating pregnancy, childbirth and the puerperium",''
+658,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,6530,O10.4,O104,"Pre-existing secondary hypertension complicating pregnancy, childbirth and the puerperium","Any condition in I15.- specified as a reason for obstetric care during pregnancy, childbirth or the puerperium, "
+659,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,6526,O10.0,O100,"Pre-existing essential hypertension complicating pregnancy, childbirth and the puerperium","Any condition in I10 specified as a reason for obstetric care during pregnancy, childbirth or the puerperium, "
+660,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,6525,O10,O10,"Pre-existing hypertension complicating pregnancy, childbirth and the puerperium","the listed conditions with pre-existing proteinuria, "
+661,"1.3.16","1.3.16 Cardiovascular diseases",CV05,Rheumatic Heart Diseases,3699,I01.9,I019,"Acute rheumatic heart disease, unspecified","Any condition in I00 with unspecified type of heart involvement, Rheumatic: carditis, acute, Rheumatic: heart disease, active or acute, "
+662,"1.3.16","1.3.16 Cardiovascular diseases",CV05,Rheumatic Heart Diseases,3698,I01.8,I018,Other acute rheumatic heart disease,"Any condition in I00 with other or multiple types of heart involvement, Acute rheumatic pancarditis, "
+663,"1.3.16","1.3.16 Cardiovascular diseases",CV01,Stroke/Cardiovascular Accident(CVA),3976,I64,I64,"Stroke, not specified as haemorrhage or infarction","Cerebrovascular accident NOS, "
+664,"1.3.16","1.3.16 Cardiovascular diseases",CV03,Heart failure,3923,I50.0,I500,Congestive heart failure,"CCF, Congestive heart disease, Right ventricular failure (secondary to left heart failure), "
+665,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,3215,G93.2,G932,Benign intracranial hypertension,''
+666,"1.3.16","1.3.16 Cardiovascular diseases",CV01,Stroke/Cardiovascular Accident(CVA),3027,G46.3,G463,Brain stem stroke syndrome,"Syndrome: Benedikt, Syndrome: Claude, Syndrome: Foville, Syndrome: Millard-Gubler, Syndrome: Wallenberg, Syndrome: Weber, "
+667,"1.3.16","1.3.16 Cardiovascular diseases",CV03,Heart failure,3922,I50,I50,Heart failure,''
+668,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,4835,K76.6,K766,Portal hypertension,''
+669,"1.3.16","1.3.16 Cardiovascular diseases",CV01,Stroke/Cardiovascular Accident(CVA),3028,G46.4,G464,Cerebellar stroke syndrome,''
+670,"1.3.16","1.3.16 Cardiovascular diseases",CV07,Other Cardiovascular Diseases,3800,I27.8,I278,Other specified pulmonary heart diseases,''
+671,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,3799,I27.2,I272,Other secondary pulmonary hypertension,''
+672,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,7119,P29.2,P292,Neonatal hypertension,''
+673,"1.3.16","1.3.16 Cardiovascular diseases",CV05,Rheumatic Heart Diseases,3733,I09.9,I099,"Rheumatic heart disease, unspecified","Rheumatic: carditis, Rheumatic: heart failure, "
+674,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,3797,I27.0,I270,Primary pulmonary hypertension,''
+675,"1.3.16","1.3.16 Cardiovascular diseases",CV07,Other Cardiovascular Diseases,3796,I27,I27,Other pulmonary heart diseases,''
+676,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,8048,R03.0,R030,"Elevated blood-pressure reading, without diagnosis of hypertension",''
+1006,"1.3.12","1.3.12 Physiotherapy",PT05,Chest trauma/Injury,8072,R07.4,R074,"Chest pain, unspecified",''
+677,"1.3.16","1.3.16 Cardiovascular diseases",CV06,Chronic Heart Diseases,3792,I25.9,I259,"Chronic ischaemic heart disease, unspecified","Ischaemic heart disease (chronic) NOS, "
+678,"1.3.16","1.3.16 Cardiovascular diseases",CV04,Ischemic Heart Diseases,3789,I25.5,I255,Ischaemic cardiomyopathy,''
+679,"1.3.16","1.3.16 Cardiovascular diseases",CV04,Ischemic Heart Diseases,3782,I24.9,I249,"Acute ischaemic heart disease, unspecified","Acute coronary syndrome, "
+680,"1.3.16","1.3.16 Cardiovascular diseases",CV04,Ischemic Heart Diseases,3781,I24.8,I248,Other forms of acute ischaemic heart disease,"Coronary: failure, Coronary: insufficiency, "
+681,"1.3.16","1.3.16 Cardiovascular diseases",CV04,Ischemic Heart Diseases,3778,I24,I24,Other acute ischaemic heart diseases,''
+682,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,3751,I15.9,I159,"Secondary hypertension, unspecified",''
+683,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,3750,I15.8,I158,Other secondary hypertension,''
+684,"1.3.16","1.3.16 Cardiovascular diseases",CV02,Hypertension,3748,I15.1,I151,Hypertension secondary to other renal disorders,''
+685,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM02,Thyroid Disease,2025,E06.9,E069,"Thyroiditis, unspecified",''
+686,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2075,E14,E14,Unspecified diabetes mellitus,"Diabetes Mellitus, diabetes NOS, "
+687,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM03,Other Endocrine and Metabolic Diseases,2382,E88.8,E888,Other specified metabolic disorders,"Launois-Bensaude adenolipomatosis, Trimethylaminuria, "
+688,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM03,Other Endocrine and Metabolic Diseases,2383,E88.9,E889,"Metabolic disorder, unspecified",''
+689,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM03,Other Endocrine and Metabolic Diseases,2384,E89,E89,"Postprocedural endocrine and metabolic disorders, not elsewhere classified",''
+690,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2074,E13.9,E139,Other specified diabetes mellitus: Without complications,""
+691,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2073,E13.8,E138,Other specified diabetes mellitus: With unspecified complications,""
+692,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2072,E13.7,E137,Other specified diabetes mellitus: With multiple complications,""
+693,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2071,E13.6,E136,Other specified diabetes mellitus: With other specified complications,""
+694,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2070,E13.5,E135,Other specified diabetes mellitus: With peripheral circulatory complications,""
+695,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2069,E13.4,E134,Other specified diabetes mellitus: With neurological complications,""
+696,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2068,E13.3,E133,Other specified diabetes mellitus: With ophthalmic complications,""
+697,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2067,E13.2,E132,Other specified diabetes mellitus: With renal complications,""
+698,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2066,E13.1,E131,Other specified diabetes mellitus: With ketoacidosis,""
+699,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2065,E13.0,E130,Other specified diabetes mellitus: With coma,""
+700,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2064,E13,E13,Other specified diabetes mellitus,''
+701,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2063,E12.9,E129,Malnutrition-related diabetes mellitus: Without complications,""
+702,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2062,E12.8,E128,Malnutrition-related diabetes mellitus: With unspecified complications,""
+703,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2061,E12.7,E127,Malnutrition-related diabetes mellitus: With multiple complications,""
+704,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2060,E12.6,E126,Malnutrition-related diabetes mellitus: With other specified complications,""
+705,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2059,E12.5,E125,Malnutrition-related diabetes mellitus: With peripheral circulatory complications,""
+706,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2058,E12.4,E124,Malnutrition-related diabetes mellitus: With neurological complications,""
+707,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2057,E12.3,E123,Malnutrition-related diabetes mellitus: With ophthalmic complications,""
+708,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2056,E12.2,E122,Malnutrition-related diabetes mellitus: With renal complications,""
+709,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2055,E12.1,E121,Malnutrition-related diabetes mellitus: With ketoacidosis,""
+710,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2054,E12.0,E120,Malnutrition-related diabetes mellitus: With coma,""
+711,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2053,E12,E12,Malnutrition-related diabetes mellitus,"malnutrition-related diabetes mellitus: type 1, malnutrition-related diabetes mellitus: type 2, "
+712,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2052,E11.9,E119,Non-insulin-dependent diabetes mellitus: Without complications,Type 2 diabetes
+713,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2051,E11.8,E118,Non-insulin-dependent diabetes mellitus: With unspecified complications,""
+714,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2050,E11.7,E117,Non-insulin-dependent diabetes mellitus: With multiple complications,""
+715,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2049,E11.6,E116,Non-insulin-dependent diabetes mellitus: With other specified complications,""
+716,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2048,E11.5,E115,Non-insulin-dependent diabetes mellitus: With peripheral circulatory complications,""
+717,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2047,E11.4,E114,Non-insulin-dependent diabetes mellitus: With neurological complications,""
+718,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2046,E11.3,E113,Non-insulin-dependent diabetes mellitus: With ophthalmic complications,""
+719,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2045,E11.2,E112,Non-insulin-dependent diabetes mellitus: With renal complications,""
+720,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2044,E11.1,E111,Non-insulin-dependent diabetes mellitus: With ketoacidosis,Type 2 diabetes: with ketoacidosis
+721,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2043,E11.0,E110,Non-insulin-dependent diabetes mellitus: With coma,Diabetic coma (type 2 diabetes)
+722,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2042,E11,E11,Type 2 diabetes mellitus,"diabetes (mellitus)(nonobese)(obese): adult-onset, diabetes (mellitus)(nonobese)(obese): maturity-onset, diabetes (mellitus)(nonobese)(obese): nonketotic, diabetes (mellitus)(nonobese)(obese): stable, non-insulin-dependent diabetes of the young, "
+723,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2041,E10.9,E109,Insulin-dependent diabetes mellitus: Without complications,Type 1 diabetes
+724,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2040,E10.8,E108,Insulin-dependent diabetes mellitus: With unspecified complications,""
+725,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2039,E10.7,E107,Insulin-dependent diabetes mellitus: With multiple complications,""
+726,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2038,E10.6,E106,Insulin-dependent diabetes mellitus: With other specified complications,""
+727,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2037,E10.5,E105,Insulin-dependent diabetes mellitus: With peripheral circulatory complications,""
+728,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2036,E10.4,E104,Insulin-dependent diabetes mellitus: With neurological complications,""
+729,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2035,E10.3,E103,Insulin-dependent diabetes mellitus: With ophthalmic complications,""
+730,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2034,E10.2,E102,Insulin-dependent diabetes mellitus: With renal complications,""
+731,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2033,E10.1,E101,Insulin-dependent diabetes mellitus: With ketoacidosis,Type 1 diabetes: with ketoacidosis
+922,"1.3.9 ","1.3.9 Neurological Disorders",NE02,Dysarthria or Speech Disorder due to stroke,8209,R47.1,R471,Dysarthria and anarthria,''
+732,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM02,Thyroid Disease,2385,E89.0,E890,Postprocedural hypothyroidism,"Postirradiation hypothyroidism, Postsurgical hypothyroidism, "
+733,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM03,Other Endocrine and Metabolic Diseases,2392,E89.8,E898,Other postprocedural endocrine and metabolic disorders,''
+734,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM03,Other Endocrine and Metabolic Diseases,2394,E90,E90,Nutritional and metabolic disorders in diseases classified elsewhere,''
+735,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2032,E10.0,E100,Insulin-dependent diabetes mellitus: With coma,Diabetic coma (Type 1 diabetes)
+736,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2031,E10,E10,Type 1 diabetes mellitus,"diabetes (mellitus): brittle, diabetes (mellitus): juvenile-onset, diabetes (mellitus): ketosis-prone, "
+737,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2078,E14.2,E142,Unspecified diabetes mellitus: With renal complications,""
+738,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2077,E14.1,E141,Unspecified diabetes mellitus: With ketoacidosis,""
+739,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2076,E14.0,E140,Unspecified diabetes mellitus: With coma,""
+740,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM02,Thyroid Disease,2024,E06.5,E065,Other chronic thyroiditis,"Thyroiditis: chronic: NOS, Thyroiditis: chronic: fibrous, Thyroiditis: ligneous, Thyroiditis: Riedel, "
+741,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM02,Thyroid Disease,2018,E06,E06,Thyroiditis,''
+742,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM02,Thyroid Disease,2011,E05.1,E051,Thyrotoxicosis with toxic single thyroid nodule,"Thyrotoxicosis with toxic uninodular goitre, "
+743,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2079,E14.3,E143,Unspecified diabetes mellitus: With ophthalmic complications,""
+744,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2080,E14.4,E144,Unspecified diabetes mellitus: With neurological complications,""
+745,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2081,E14.5,E145,Unspecified diabetes mellitus: With peripheral circulatory complications,""
+746,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2082,E14.6,E146,Unspecified diabetes mellitus: With other specified complications,""
+747,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2083,E14.7,E147,Unspecified diabetes mellitus: With multiple complications,""
+748,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2084,E14.8,E148,Unspecified diabetes mellitus: With unspecified complications,""
+749,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,2085,E14.9,E149,Unspecified diabetes mellitus: Without complications,""
+750,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM03,Other Endocrine and Metabolic Diseases,2173,E34,E34,Other endocrine disorders,''
+751,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM02,Thyroid Disease,2002,E03.9,E039,"Hypothyroidism, unspecified","Myxoedema NOS, "
+752,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM02,Thyroid Disease,2001,E03.8,E038,Other specified hypothyroidism,''
+753,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM02,Thyroid Disease,1998,E03.3,E033,Postinfectious hypothyroidism,''
+754,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM02,Thyroid Disease,1997,E03.2,E032,Hypothyroidism due to medicaments and other exogenous substances,''
+755,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM02,Thyroid Disease,1994,E03,E03,Other hypothyroidism,''
+756,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM03,Other Endocrine and Metabolic Diseases,2181,E34.9,E349,"Endocrine disorder, unspecified","Disturbance: endocrine NOS, Disturbance: hormone NOS, "
+757,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM03,Other Endocrine and Metabolic Diseases,6520,O08.5,O085,Metabolic disorders following abortion and ectopic and molar pregnancy,"Electrolyte imbalance following conditions classifiable to O00-O07, "
+758,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,6576,O24,O24,Diabetes mellitus in pregnancy,"in childbirth and the puerperium, "
+759,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,6577,O24.0,O240,Pre-existing type 1 diabetes mellitus,"Diabetes mellitus in pregnancy: Pre-existing diabetes mellitus, insulin-dependent, "
+760,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,6578,O24.1,O241,Pre-existing type 2 diabetes mellitus,"Diabetes mellitus in pregnancy: Pre-existing diabetes mellitus, non-insulin-dependent, "
+761,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,6579,O24.2,O242,Pre-existing malnutrition-related diabetes mellitus,"Diabetes mellitus in pregnancy: Pre-existing malnutrition-related diabetes mellitus, "
+762,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,6580,O24.3,O243,"Pre-existing diabetes mellitus, unspecified","Diabetes mellitus in pregnancy: Pre-existing diabetes mellitus, unspecified, "
+763,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,6581,O24.4,O244,Diabetes mellitus arising in pregnancy,"Gestational diabetes mellitus NOS, "
+764,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,6582,O24.9,O249,"Diabetes mellitus in pregnancy, unspecified",''
+765,"1.3.17","1.3.17 Endocrine and MetabolicDisorders",EM01,Diabetes mellitus,7234,P70.2,P702,Neonatal diabetes mellitus,''
+766,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Cycle),10081,V29.6,V296,Unspecified motorcycle rider injured in collision with other and unspecified motor vehicles in traffic accident,"Motorcycle collision NOS (traffic), "
+767,"1.3.18","1.3.18 Injuries",IN03,Injuries due to Gender based violence,9714,T74.3,T743,Psychological abuse,''
+768,"1.3.18","1.3.18 Injuries",IN05, Animal bites Wild,10816,W56,W56,Contact with marine animal,"Bitten or struck by marine animal, "
+769,"1.3.18","1.3.18 Injuries",IN04,Injuries (Trauma due to other causes),10706,V91.9,V919,Accident to watercraft causing other injury: Unspecified watercraft,""
+770,"1.3.18","1.3.18 Injuries",IN06,Snake bites,10869,X20,X20,Contact with venomous snakes and lizards,"cobra, fer de lance, Gila monster, krait, rattlesnake, sea snake, snake (venomous), viper, "
+771,"1.3.18","1.3.18 Injuries",IN04,Injuries (Trauma due to other causes),10705,V91.8,V918,Accident to watercraft causing other injury: Other unpowered watercraft,""
+809,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Vehicle),10493,V70.9,V709,Bus occupant injured in collision with pedestrian or animal: Unspecified bus occupant injured in traffic accident,""
+772,"1.3.18","1.3.18 Injuries",IN04,Injuries (Trauma due to other causes),10748,V96,V96,Accident to nonpowered aircraft causing injury to occupant,"collision with any object, fixed, movable or moving of or on nonpowered aircraft, crash of or on nonpowered aircraft, explosion of or on nonpowered aircraft, fire of or on nonpowered aircraft, forced landing of or on nonpowered aircraft, "
+773,"1.3.18","1.3.18 Injuries",IN07,Insect bites,10817,W57,W57,Bitten or stung by nonvenomous insect and other nonvenomous arthropods,''
+774,"1.3.18","1.3.18 Injuries",IN04,Injuries (Trauma due to other causes),9738,T79.5,T795,Traumatic anuria,"Crush syndrome, Renal failure following crushing, "
+775,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Vehicle),10956,Y03,Y03,Assault by crashing of motor vehicle,"deliberately hitting or running over with motor vehicle, "
+776,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Vehicle),10996,Y32,Y32,"Crashing of motor vehicle, undetermined intent",''
+777,"1.3.18","1.3.18 Injuries",IN04,Injuries (Trauma due to other causes),10912,X59.9,X599,Exposure to unspecified factor causing other and unspecified injury,"accident NOS, exposure NOS, "
+778,"1.3.18","1.3.18 Injuries",IN03,Injuries due to Gender based violence,9712,T74.1,T741,Physical abuse,"Battered: baby or child syndrome NOS, Battered: spouse syndrome NOS, "
+779,"1.3.18","1.3.18 Injuries",IN04,Injuries (Trauma due to other causes),10740,V95,V95,Accident to powered aircraft causing injury to occupant,"collision with any object, fixed, movable or moving of or on (powered) aircraft, crash of or on (powered) aircraft, explosion of or on (powered) aircraft, fire of or on (powered) aircraft, forced landing of or on (powered) aircraft, "
+780,"1.3.18","1.3.18 Injuries",IN03,Injuries due to Gender based violence,9713,T74.2,T742,Sexual abuse,''
+781,"1.3.18","1.3.18 Injuries",IN04,Injuries (Trauma due to other causes),10778,W16,W16,Diving or jumping into water causing injury other than drowning or submersion,"striking or hitting: against bottom when jumping or diving into shallow water, striking or hitting: wall or diving board of swimming-pool, striking or hitting: water surface, "
+782,"1.3.18","1.3.18 Injuries",IN05, Animal bites Domestic,10814,W54,W54,Bitten or struck by dog,"Dog bite, "
+783,"1.3.18","1.3.18 Injuries",IN06,Snake bites,7244,P71.4,P714,Transitory neonatal hypoparathyroidism,''
+784,"1.3.18","1.3.18 Injuries",IN05, Animal bites Wild,10876,X27,X27,Contact with other specified venomous animals,''
+785,"1.3.18","1.3.18 Injuries",IN01,Jaw injuries,8469,S03.4,S034,Sprain and strain of jaw,"Temporomandibular (joint)(ligament), "
+786,"1.3.18","1.3.18 Injuries",IN01,Jaw injuries,8465,S03.0,S030,Dislocation of jaw,"Jaw dislocation, Jaw (cartilage)(meniscus), Mandible, Temporomandibular (joint), "
+787,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Vehicle),11371,Y85.0,Y850,Sequelae of motor-vehicle accident,''
+788,"1.3.18","1.3.18 Injuries",IN04,Injuries (Trauma due to other causes),10704,V91.7,V917,Accident to watercraft causing other injury: Water-skis,""
+789,"1.3.18","1.3.18 Injuries",IN04,Injuries (Trauma due to other causes),10703,V91.6,V916,Accident to watercraft causing other injury: Inflatable craft (nonpowered),""
+790,"1.3.18","1.3.18 Injuries",IN04,Injuries (Trauma due to other causes),9859,T92.6,T926,Sequelae of crushing injury and traumatic amputation of upper limb,"Sequelae of injury classifiable to S47-S48, S57-S58, S67-S68 and T11.6, "
+791,"1.3.18","1.3.18 Injuries",IN04,Injuries (Trauma due to other causes),9869,T93.6,T936,Sequelae of crushing injury and traumatic amputation of lower limb,"Sequelae of injury classifiable to S77-S78, S87-S88, S97-S98 and T13.6, "
+792,"1.3.18","1.3.18 Injuries",IN04,Injuries (Trauma due to other causes),10702,V91.5,V915,Accident to watercraft causing other injury: Canoe or kayak,""
+793,"1.3.18","1.3.18 Injuries",IN04,Injuries (Trauma due to other causes),9888,T98.2,T982,Sequelae of certain early complications of trauma,"Sequelae of complications classifiable to T79.-, "
+794,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Bicycle),9999,V19.6,V196,Unspecified pedal cyclist injured in collision with other and unspecified motor vehicles in traffic accident,"Pedal cycle collision NOS (traffic), "
+795,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Bicycle),10000,V19.8,V198,Pedal cyclist [any] injured in other specified transport accidents,"Trapped by part of pedal cycle, "
+796,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Bicycle),10001,V19.9,V199,Pedal cyclist [any] injured in unspecified traffic accident,"Pedal cycle accident NOS, "
+797,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Cycle),10070,V28.3,V283,Motorcycle rider injured in noncollision transport accident: Person injured while boarding or alighting,""
+798,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Cycle),10072,V28.5,V285,Motorcycle rider injured in noncollision transport accident: Passenger injured in traffic accident,""
+799,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Cycle),10073,V28.9,V289,Motorcycle rider injured in noncollision transport accident: Unspecified motorcycle rider injured in traffic accident,""
+800,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Cycle),10074,V29,V29,Motorcycle rider injured in other and unspecified transport accidents,''
+801,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Cycle),10078,V29.3,V293,Motorcycle rider [any] injured in unspecified nontraffic accident,"Motorcycle accident NOS, nontraffic, Motorcycle rider injured in nontraffic accident NOS, "
+802,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Vehicle),10682,V89.2,V892,"Person injured in unspecified motor-vehicle accident, traffic","Motor-vehicle accident [MVA] NOS, Road (traffic) accident [RTA] NOS, "
+803,"1.3.18","1.3.18 Injuries",IN02,Road traffic Injuries,10656,V86.9,V869,Unspecified occupant of all-terrain or other off-road motor vehicle injured in nontraffic accident,"All-terrain motor-vehicle accident NOS, Off-road motor-vehicle accident NOS, "
+804,"1.3.18","1.3.18 Injuries",IN02,Road traffic Injuries,10655,V86.7,V867,Person on outside of all-terrain or other off-road motor vehicle injured in nontraffic accident,''
+805,"1.3.18","1.3.18 Injuries",IN02,Road traffic Injuries,10647,V86,V86,"Occupant of special all-terrain or other motor vehicle designed primarily for off-road use, injured in transport accident",''
+806,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Others),10586,V80.1,V801,Rider or occupant injured in collision with pedestrian or animal,''
+807,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Others),10585,V80.0,V800,Rider or occupant injured by fall from or being thrown from animal or animal-drawn vehicle in noncollision accident,"Overturning: NOS, Overturning: without collision, "
+808,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Others),10584,V80,V80,Animal-rider or occupant of animal-drawn vehicle injured in transport accident,''
+810,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Vehicle),10492,V70.7,V707,Bus occupant injured in collision with pedestrian or animal: Person on outside of vehicle injured in traffic accident,""
+811,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Vehicle),10491,V70.6,V706,Bus occupant injured in collision with pedestrian or animal: Passenger injured in traffic accident,""
+812,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Cycle),10083,V29.9,V299,Motorcycle rider [any] injured in unspecified traffic accident,"Motorcycle accident NOS, "
+813,"1.3.18","1.3.18 Injuries",IN02, Road Traffic Injuries (Motor Cycle),10082,V29.8,V298,Motorcycle rider [any] injured in other specified transport accidents,"Trapped by part of motorcycle, "
+814,"1.3.19","1.3.19 Minor Operations in OPD",MN01,Tooth extractions,4499,K08.1,K081,"Loss of teeth due to accident, extraction or local periodontal disease",''
+815,"1.3.19","1.3.19 Minor Operations in OPD",MN03,Other Minor Operations,11662,Z42,Z42,Follow-up care involving plastic surgery,"plastic and reconstructive surgery following healed injury or operation, repair of scarred tissue, "
+816,"1.3.19","1.3.19 Minor Operations in OPD",MN03,Other Minor Operations,11658,Z41.2,Z412,Routine and ritual circumcision,''
+817,"1.3.19","1.3.19 Minor Operations in OPD",MN02,Dental Fillings,12111,Z98.8,Z988,Other specified postsurgical states,''
+818,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT01,Leishmaniasis,728,B55.0,B550,Visceral leishmaniasis,"Kala-azar, Post-kala-azar dermal leishmaniasis, "
+819,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT02,Lymphatic Filariasis (hydrocele),6190,N43.2,N432,Other hydrocele,''
+820,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT01,Leishmaniasis,729,B55.1,B551,Cutaneous leishmaniasis,''
+821,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT02,Lymphatic Filariasis (hydrocele),6187,N43,N43,Hydrocele and spermatocele,"hydrocele of spermatic cord, testis or tunica vaginalis, "
+822,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT01,Leishmaniasis,730,B55.2,B552,Mucocutaneous leishmaniasis,''
+823,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT03,Lymphatic Filariasis (Lympoedema),4140,I97.2,I972,Postmastectomy lymphoedema syndrome,"Elephantiasis due to mastectomy, Obliteration of lymphatic vessels due to mastectomy, "
+824,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT04,Urinary Schistosomiasis,758,B65.0,B650,Schistosomiasis due to Schistosoma haematobium [urinary schistosomiasis],''
+825,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT06,Onchocerciasis,802,B73,B73,Onchocerciasis,"Onchocerca volvulus infection, Onchocercosis, River blindness, "
+826,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT03,Lymphatic Filariasis (Lympoedema),4127,I89.0,I890,"Lymphoedema, not elsewhere classified","Lymphangiectasis, "
+827,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT03,Lymphatic Filariasis (Lympoedema),7908,Q82.0,Q820,Hereditary lymphoedema,''
+828,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT02,Lymphatic Filariasis (hydrocele),6189,N43.1,N431,Infected hydrocele,''
+829,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT02,Lymphatic Filariasis (hydrocele),6188,N43.0,N430,Encysted hydrocele,''
+830,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT02,Lymphatic Filariasis (hydrocele),7291,P83.5,P835,Congenital hydrocele,''
+831,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT01,Leishmaniasis,731,B55.9,B559,"Leishmaniasis, unspecified",''
+832,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT02,Lymphatic Filariasis (hydrocele),6191,N43.3,N433,"Hydrocele, unspecified",''
+833,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT05,Intestinal Schistosomiasis,759,B65.1,B651,Schistosomiasis due to Schistosoma mansoni [intestinal schistosomiasis],''
+834,"1.3.20","1.3.20 Neglected Tropical Diseases (NTDs)",NT01,Leishmaniasis,727,B55,B55,Leishmaniasis,''
+835,"1.3.21","1.3.21 Maternal conditions",MC07,Puerperal sepsis,6861,O85,O85,Puerperal sepsis,"Puerperal: endometritis, Puerperal: fever, Puerperal: peritonitis, Puerperal: sepsis, "
+836,"1.3.21","1.3.21 Maternal conditions",MC11,Cervical Cancer Total Screened,1200,C53.9,C539,"Cervix uteri, unspecified","Malignant neoplasm: Cervix uteri, unspecified, "
+837,"1.3.21","1.3.21 Maternal conditions",MC11,Cervical Cancer Number with Cervical Cancer,6336,N85,N85,"Other noninflammatory disorders of uterus, except cervix",''
+838,"1.3.21","1.3.21 Maternal conditions",MC11,Cervical Cancer Number with Cervical Cancer,6355,N88.1,N881,Old laceration of cervix uteri,"Adhesions of cervix, "
+839,"1.3.21","1.3.21 Maternal conditions",MC02,Abortions due to other causes,6517,O08.2,O082,Embolism following abortion and ectopic and molar pregnancy,"Embolism: NOS following conditions classifiable to O00-O07, Embolism: air following conditions classifiable to O00-O07, Embolism: amniotic fluid following conditions classifiable to O00-O07, Embolism: blood-clot following conditions classifiable to O00-O07, Embolism: pulmonary following conditions classifiable to O00-O07, Embolism: pyaemic following conditions classifiable to O00-O07, Embolism: septic or septicopyaemic following conditions classifiable to O00-O07, Embolism: soap following conditions classifiable to O00-O07, "
+840,"1.3.21","1.3.21 Maternal conditions",MC02,Abortions due to other causes,6518,O08.3,O083,Shock following abortion and ectopic and molar pregnancy,"Circulatory collapse following conditions classifiable to O00-O07, Shock (postoperative) following conditions classifiable to O00-O07, "
+878,"1.3.21","1.3.21 Maternal conditions",MC09,Haemorrhage related to pregnancy (PPH),6799,O72,O72,Postpartum haemorrhage,"haemorrhage after delivery of fetus or infant, "
+841,"1.3.21","1.3.21 Maternal conditions",MC02,Abortions due to other causes,6519,O08.4,O084,Renal failure following abortion and ectopic and molar pregnancy,"Oliguria following conditions classifiable to O00-O07, Renal: failure (acute) following conditions classifiable to O00-O07, Renal: shutdown following conditions classifiable to O00-O07, Renal: tubular necrosis following conditions classifiable to O00-O07, Uraemia following conditions classifiable to O00-O07, "
+842,"1.3.21","1.3.21 Maternal conditions",MC02,Abortions due to other causes,6520,O08.5,O085,Metabolic disorders following abortion and ectopic and molar pregnancy,"Electrolyte imbalance following conditions classifiable to O00-O07, "
+880,"1.3.21","1.3.21 Maternal conditions",MC04,Malaria in pregnancy,6924,O98,O98,"Maternal infectious and parasitic diseases classifiable elsewhere but complicating pregnancy, childbirth and the puerperium","the listed conditions when complicating the pregnant state, when aggravated by the pregnancy, or as a reason for obstetric care, "
+881,"1.3.21","1.3.21 Maternal conditions",MC04,Malaria in pregnancy,6933,O98.8,O988,"Other maternal infectious and parasitic diseases complicating pregnancy, childbirth and the puerperium",''
+843,"1.3.21","1.3.21 Maternal conditions",MC02,Abortions due to other causes,6521,O08.6,O086,Damage to pelvic organs and tissues following abortion and ectopic and molar pregnancy,"Laceration, perforation, tear or chemical damage of: bladder following conditions classifiable to O00-O07, Laceration, perforation, tear or chemical damage of: bowel following conditions classifiable to O00-O07, Laceration, perforation, tear or chemical damage of: broad ligament following conditions classifiable to O00-O07, Laceration, perforation, tear or chemical damage of: cervix following conditions classifiable to O00-O07, Laceration, perforation, tear or chemical damage of: periurethral tissue following conditions classifiable to O00-O07, Laceration, perforation, tear or chemical damage of: uterus following conditions classifiable to O00-O07, "
+844,"1.3.21","1.3.21 Maternal conditions",MC03,Number of Post Abortion women who received FP,6522,O08.7,O087,Other venous complications following abortion and ectopic and molar pregnancy,''
+845,"1.3.21","1.3.21 Maternal conditions",MC02,Abortions due to other causes,6522,O08.7,O087,Other venous complications following abortion and ectopic and molar pregnancy,''
+846,"1.3.21","1.3.21 Maternal conditions",MC02,Abortions due to other causes,6523,O08.8,O088,Other complications following abortion and ectopic and molar pregnancy,"Cardiac arrest following conditions classifiable to O00-O07, Urinary tract infection following conditions classifiable to O00-O07, "
+847,"1.3.21","1.3.21 Maternal conditions",MC02,Abortions due to other causes,6524,O08.9,O089,"Complication following abortion and ectopic and molar pregnancy, unspecified",Molar Pregnancy
+848,"1.3.21","1.3.21 Maternal conditions",MC05,High blood pressure in pregnancy,6537,O13,O13,Gestational [pregnancy-induced] hypertension,"Gestational hypertension NOS, Pregnancy-induced hypertension NOS, Transient hypertension of pregnancy, "
+849,"1.3.21","1.3.21 Maternal conditions",MC08,Haemorrhage related to pregnancy (APH),6549,O20,O20,Haemorrhage in early pregnancy,''
+850,"1.3.21","1.3.21 Maternal conditions",MC08,Haemorrhage related to pregnancy (APH),6551,O20.8,O208,Other haemorrhage in early pregnancy,''
+851,"1.3.21","1.3.21 Maternal conditions",MC08,Haemorrhage related to pregnancy (APH),6552,O20.9,O209,"Haemorrhage in early pregnancy, unspecified",''
+852,"1.3.21","1.3.21 Maternal conditions",MC10,Breast Cancer Total Screened,1188,C50.9,C509,"Breast, unspecified","Malignant neoplasm: Breast, unspecified, "
+853,"1.3.21","1.3.21 Maternal conditions",MC10,Breast Cancer Number with Breast Cancers,1188,C50.9,C509,"Breast, unspecified","Malignant neoplasm: Breast, unspecified, "
+854,"1.3.21","1.3.21 Maternal conditions",MC02,Abortions due to other causes,6622,O31.1,O311,Continuing pregnancy after abortion of one fetus or more,''
+855,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6735,O64,O64,Obstructed labour due to malposition and malpresentation of fetus,''
+856,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6736,O64.0,O640,Obstructed labour due to incomplete rotation of fetal head,"Deep transverse arrest, Obstructed labour due to persistent (position): occipitoiliac, Obstructed labour due to persistent (position): occipitoposterior, Obstructed labour due to persistent (position): occipitosacral, Obstructed labour due to persistent (position): occipitotransverse, "
+857,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6737,O64.1,O641,Obstructed labour due to breech presentation,''
+858,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6738,O64.2,O642,Obstructed labour due to face presentation,"Obstructed labour due to chin presentation, "
+859,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6739,O64.3,O643,Obstructed labour due to brow presentation,''
+860,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6740,O64.4,O644,Obstructed labour due to shoulder presentation,"Prolapsed arm, "
+861,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6741,O64.5,O645,Obstructed labour due to compound presentation,''
+862,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6742,O64.8,O648,Obstructed labour due to other malposition and malpresentation,''
+863,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6743,O64.9,O649,"Obstructed labour due to malposition and malpresentation, unspecified",''
+864,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6744,O65,O65,Obstructed labour due to maternal pelvic abnormality,''
+865,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6745,O65.0,O650,Obstructed labour due to deformed pelvis,''
+866,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6746,O65.1,O651,Obstructed labour due to generally contracted pelvis,''
+867,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6747,O65.2,O652,Obstructed labour due to pelvic inlet contraction,''
+868,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6748,O65.3,O653,Obstructed labour due to pelvic outlet and mid-cavity contraction,''
+869,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6749,O65.4,O654,"Obstructed labour due to fetopelvic disproportion, unspecified",''
+870,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6750,O65.5,O655,Obstructed labour due to abnormality of maternal pelvic organs,"Obstructed labour due to conditions listed in O34.-, "
+871,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6751,O65.8,O658,Obstructed labour due to other maternal pelvic abnormalities,''
+872,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6752,O65.9,O659,"Obstructed labour due to maternal pelvic abnormality, unspecified",''
+873,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6753,O66,O66,Other obstructed labour,''
+874,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6754,O66.0,O660,Obstructed labour due to shoulder dystocia,"Impacted shoulders, "
+875,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6755,O66.1,O661,Obstructed labour due to locked twins,''
+876,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6756,O66.2,O662,Obstructed labour due to unusually large fetus,''
+877,"1.3.21","1.3.21 Maternal conditions",MC06,Obstructed labour,6757,O66.3,O663,Obstructed labour due to other abnormalities of fetus,"Dystocia due to: conjoined twins, Dystocia due to: fetal: ascites, Dystocia due to: fetal: hydrops, Dystocia due to: fetal: meningomyelocele, Dystocia due to: fetal: sacral teratoma, Dystocia due to: fetal: tumour, Dystocia due to: hydrocephalic fetus, "
+879,"1.3.21","1.3.21 Maternal conditions",MC09,Haemorrhage related to pregnancy (PPH),6802,O72.2,O722,Delayed and secondary postpartum haemorrhage,"Retained placenta with haemorrhage, Haemorrhage associated with retained portions of placenta or membranes, Retained products of conception NOS, following delivery, "
+882,"1.3.21","1.3.21 Maternal conditions",MC04,Malaria in pregnancy,6934,O98.9,O989,"Unspecified maternal infectious or parasitic disease complicating pregnancy, childbirth and the puerperium",''
+883,"1.3.21","1.3.21 Maternal conditions",MC01,Abortions due to Gender-Based Violence (GBV),11602,Z33,Z33,"Pregnant state, incidental","Pregnant state NOS, "
+884,"1.3.22","1.3.22 Other OPD conditions",OP02,Other Diagnoses (specify priority diseases for District),10721,V93.2,V932,"Accident on board watercraft without accident to watercraft, not causing drowning and submersion: Fishing boat",""
+885,"1.3.22","1.3.22 Other OPD conditions",OP02,Other Diagnoses (specify priority diseases for District),12165,R95.0,R950,Sudden infant death syndrome with mention of autopsy,''
+886,"1.3.22","1.3.22 Other OPD conditions",OP01,All Others,10770,W08,W08,Fall involving other furniture,''
+887,"1.3.22","1.3.22 Other OPD conditions",DT01,Deaths in OPD,8428,R96,R96,"Other sudden death, cause unknown",''
+888,"1.3.22","1.3.22 Other OPD conditions",OP01,All Others,12010,Z88.2,Z882,Personal history of allergy to sulfonamides,''
+889,"1.3.9 ","1.3.9 Neurological Disorders",NE14,Conduct disorders,2829,F92.0,F920,Depressive conduct disorder,"Conduct disorder in F91.- associated with depressive disorder in F32.-, "
+890,"1.3.9 ","1.3.9 Neurological Disorders",NE14,Conduct disorders,2827,F91.9,F919,"Conduct disorder, unspecified","Childhood: behavioural disorder NOS, Childhood: conduct disorder NOS, "
+891,"1.3.9 ","1.3.9 Neurological Disorders",NE14,Conduct disorders,2826,F91.8,F918,Other conduct disorders,''
+892,"1.3.9 ","1.3.9 Neurological Disorders",NE03,Parkinson's disease,2944,G25,G25,Other extrapyramidal and movement disorders,''
+893,"1.3.9 ","1.3.9 Neurological Disorders",NE03,Parkinson's disease,2954,G26,G26,Extrapyramidal and movement disorders in diseases classified elsewhere,''
+894,"1.3.9 ","1.3.9 Neurological Disorders",NE14,Conduct disorders,2824,F91.2,F912,Socialized conduct disorder,"Conduct disorder, group type, Group delinquency, Offences in the context of gang membership, Stealing in company with others, Truancy from school, "
+895,"1.3.9 ","1.3.9 Neurological Disorders",NE14,Conduct disorders,2823,F91.1,F911,Unsocialized conduct disorder,"Conduct disorder, solitary aggressive type, Unsocialized aggressive disorder, "
+896,"1.3.9 ","1.3.9 Neurological Disorders",NE14,Conduct disorders,2822,F91.0,F910,Conduct disorder confined to the family context,''
+897,"1.3.9 ","1.3.9 Neurological Disorders",NE14,Conduct disorders,2821,F91,F91,Conduct disorders,''
+898,"1.3.9 ","1.3.9 Neurological Disorders",NE21,Attempted Suicide / Self Harm,11375,Y87.0,Y870,Sequelae of intentional self-harm,''
+899,"1.3.9 ","1.3.9 Neurological Disorders",NE06,Speech disorders due to Head Injuries (penetrating or closed),2792,F80.2,F802,Receptive language disorder,"Congenital auditory imperception, Developmental: dysphasia or aphasia, receptive type, Developmental: Wernicke aphasia, Word deafness, "
+900,"1.3.9 ","1.3.9 Neurological Disorders",NE21,Attempted Suicide / Self Harm,11191,Y57.4,Y574,Pharmaceutical excipients,''
+901,"1.3.9 ","1.3.9 Neurological Disorders",NE06,Speech disorders due to Head Injuries (penetrating or closed),2791,F80.1,F801,Expressive language disorder,"Developmental dysphasia or aphasia, expressive type, "
+902,"1.3.9 ","1.3.9 Neurological Disorders",NE16,Somatoform disorders,2658,F45,F45,Somatoform disorders,''
+903,"1.3.9 ","1.3.9 Neurological Disorders",NE20,Mental illness due other Medical / Surgical conditions,2579,F29,F29,Unspecified nonorganic psychosis,"Psychosis NOS, "
+904,"1.3.9 ","1.3.9 Neurological Disorders",NE06,Speech disorders due to Head Injuries (penetrating or closed),2790,F80.0,F800,Specific speech articulation disorder,"Developmental: phonological disorder, Developmental: speech articulation disorder, Dyslalia, Functional speech articulation disorder, Lalling, "
+905,"1.3.9 ","1.3.9 Neurological Disorders",NE19,Other childhood mental Disorders,2820,F90.9,F909,"Hyperkinetic disorder, unspecified","Hyperkinetic reaction of childhood or adolescence NOS, Hyperkinetic syndrome NOS, "
+906,"1.3.9 ","1.3.9 Neurological Disorders",NE06,Speech disorders due to Head Injuries (penetrating or closed),2795,F80.9,F809,"Developmental disorder of speech and language, unspecified","Language disorder NOS, "
+907,"1.3.9 ","1.3.9 Neurological Disorders",NE16,Somatoform disorders,2660,F45.1,F451,Undifferentiated somatoform disorder,"Undifferentiated psychosomatic disorder, "
+908,"1.3.9 ","1.3.9 Neurological Disorders",NE13,Learning Disability,2797,F81.0,F810,Specific reading disorder,"Backward reading"", Developmental dyslexia, Specific reading retardation, """
+909,"1.3.9 ","1.3.9 Neurological Disorders",NE12,Attention Deficit Hyperactivity disorder (ADHD),2820,F90.9,F909,"Hyperkinetic disorder, unspecified","Hyperkinetic reaction of childhood or adolescence NOS, Hyperkinetic syndrome NOS, "
+910,"1.3.9 ","1.3.9 Neurological Disorders",NE21,Attempted Suicide / Self Harm,10937,X84,X84,Intentional self-harm by unspecified means,"Attempted suicide, "
+911,"1.3.9 ","1.3.9 Neurological Disorders",NE12,Attention Deficit Hyperactivity disorder (ADHD),2819,F90.8,F908,Other hyperkinetic disorders,''
+912,"1.3.9 ","1.3.9 Neurological Disorders",NE21,Attempted Suicide / Self Harm,10936,X83,X83,Intentional self-harm by other specified means,"intentional self-harm by: caustic substances, except poisoning, intentional self-harm by: crashing of aircraft, intentional self-harm by: electrocution, "
+913,"1.3.9 ","1.3.9 Neurological Disorders",NE11,Child abuse and neglect,11830,Z61.5,Z615,Problems related to alleged sexual abuse of child by person outside primary support group,''
+914,"1.3.9 ","1.3.9 Neurological Disorders",NE17,Sleeping Disorders,2686,F51.5,F515,Nightmares,"Dream anxiety disorder, "
+915,"1.3.9 ","1.3.9 Neurological Disorders",NE19,Other childhood mental Disorders,2819,F90.8,F908,Other hyperkinetic disorders,''
+916,"1.3.9 ","1.3.9 Neurological Disorders",NE17,Sleeping Disorders,3036,G47.2,G472,Disorders of the sleep-wake schedule,"Delayed sleep phase syndrome, Irregular sleep-wake pattern, "
+917,"1.3.9 ","1.3.9 Neurological Disorders",NE11,Child abuse and neglect,11831,Z61.6,Z616,Problems related to alleged physical abuse of child,''
+918,"1.3.9 ","1.3.9 Neurological Disorders",NE03,Parkinson's disease,2953,G25.9,G259,"Extrapyramidal and movement disorder, unspecified",''
+919,"1.3.9 ","1.3.9 Neurological Disorders",NE15,"Eating disorders (anorexia, Bulimia, other feeding)",2679,F50.9,F509,"Eating disorder, unspecified",''
+920,"1.3.9 ","1.3.9 Neurological Disorders",NE12,Attention Deficit Hyperactivity disorder (ADHD),2818,F90.1,F901,Hyperkinetic conduct disorder,"Hyperkinetic disorder associated with conduct disorder, "
+921,"1.3.9 ","1.3.9 Neurological Disorders",NE21,Attempted Suicide / Self Harm,10935,X82,X82,Intentional self-harm by crashing of motor vehicle,"intentional collision with: motor vehicle, intentional collision with: train, intentional collision with: tram (streetcar), "
+923,"1.3.9 ","1.3.9 Neurological Disorders",NE15,"Eating disorders (anorexia, Bulimia, other feeding)",2854,F98.2,F982,Feeding disorder of infancy and childhood,"Rumination disorder of infancy, "
+924,"1.3.9 ","1.3.9 Neurological Disorders",NE18,Enuresis / Encopresis,2853,F98.1,F981,Nonorganic encopresis,"Functional encopresis, Incontinence of faeces of nonorganic origin, Psychogenic encopresis, "
+925,"1.3.9 ","1.3.9 Neurological Disorders",NE21,Attempted Suicide / Self Harm,11374,Y87,Y87,"Sequelae of intentional self-harm, assault and events of undetermined intent",''
+926,"1.3.9 ","1.3.9 Neurological Disorders",NE18,Enuresis / Encopresis,2852,F98.0,F980,Nonorganic enuresis,"Enuresis (primary)(secondary) of nonorganic origin, Functional enuresis, Psychogenic enuresis, Urinary incontinence of nonorganic origin, "
+927,"1.3.9 ","1.3.9 Neurological Disorders",NE13,Learning Disability,2799,F81.2,F812,Specific disorder of arithmetical skills,"Developmental: acalculia, Developmental: arithmetical disorder, Developmental: Gerstmann syndrome, "
+928,"1.3.9 ","1.3.9 Neurological Disorders",NE13,Learning Disability,2800,F81.3,F813,Mixed disorder of scholastic skills,''
+929,"1.3.9 ","1.3.9 Neurological Disorders",NE11,Child abuse and neglect,11840,Z62.4,Z624,Emotional neglect of child,''
+930,"1.3.9 ","1.3.9 Neurological Disorders",NE14,Conduct disorders,2818,F90.1,F901,Hyperkinetic conduct disorder,"Hyperkinetic disorder associated with conduct disorder, "
+931,"1.3.9 ","1.3.9 Neurological Disorders",NE16,Somatoform disorders,2663,F45.4,F454,Persistent somatoform pain disorder,"Psychalgia, Psychogenic: backache, Psychogenic: headache, Somatoform pain disorder, "
+932,"1.3.9 ","1.3.9 Neurological Disorders",NE09,Down Syndrome (DS),7960,Q90,Q90,Down syndrome,''
+933,"1.3.9 ","1.3.9 Neurological Disorders",NE09,Down Syndrome (DS),7964,Q90.9,Q909,"Down syndrome, unspecified","Trisomy 21 NOS, "
+934,"1.3.9 ","1.3.9 Neurological Disorders",NE21,Attempted Suicide / Self Harm,12045,Z91.5,Z915,Personal history of self-harm,"Parasuicide, Self-poisoning, Suicide attempt, "
+935,"1.3.9 ","1.3.9 Neurological Disorders",NE17,Sleeping Disorders,2684,F51.3,F513,Sleepwalking [somnambulism],''
+936,"1.3.9 ","1.3.9 Neurological Disorders",NE12,Attention Deficit Hyperactivity disorder (ADHD),2817,F90.0,F900,Disturbance of activity and attention,"Attention deficit: disorder with hyperactivity, Attention deficit: hyperactivity disorder, Attention deficit: syndrome with hyperactivity, "
+937,"1.3.9 ","1.3.9 Neurological Disorders",NE17,Sleeping Disorders,2681,F51.0,F510,Nonorganic insomnia,''
+938,"1.3.9 ","1.3.9 Neurological Disorders",NE17,Sleeping Disorders,3039,G47.8,G478,Other sleep disorders,"Kleine-Levin syndrome, "
+939,"1.3.9 ","1.3.9 Neurological Disorders",NE16,Somatoform disorders,2664,F45.8,F458,Other somatoform disorders,"Psychogenic: dysmenorrhoea, Psychogenic: dysphagia, including globus hystericus"", Psychogenic: pruritus, Psychogenic: torticollis, Teeth-grinding, """
+940,"1.3.9 ","1.3.9 Neurological Disorders",NE16,Somatoform disorders,2665,F45.9,F459,"Somatoform disorder, unspecified","Psychosomatic disorder NOS, "
+941,"1.3.9 ","1.3.9 Neurological Disorders",NE17,Sleeping Disorders,3035,G47.1,G471,Disorders of excessive somnolence [hypersomnias],''
+942,"1.3.9 ","1.3.9 Neurological Disorders",NE15,"Eating disorders (anorexia, Bulimia, other feeding)",2671,F50,F50,Eating disorders,''
+943,"1.3.9 ","1.3.9 Neurological Disorders",NE15,"Eating disorders (anorexia, Bulimia, other feeding)",2674,F50.2,F502,Bulimia nervosa,"Bulimia NOS, Hyperorexia nervosa, "
+944,"1.3.9 ","1.3.9 Neurological Disorders",NE15,"Eating disorders (anorexia, Bulimia, other feeding)",2678,F50.8,F508,Other eating disorders,"Pica in adults, Psychogenic loss of appetite, "
+945,"1.3.9 ","1.3.9 Neurological Disorders",NE17,Sleeping Disorders,3037,G47.3,G473,Sleep apnoea,"Sleep apnoea: central, Sleep apnoea: obstructive, "
+946,"1.3.9 ","1.3.9 Neurological Disorders",NE17,Sleeping Disorders,3040,G47.9,G479,"Sleep disorder, unspecified",''
+947,"1.3.9 ","1.3.9 Neurological Disorders",NE07,Persons in Coma / Emergency Care,8168,R40.2,R402,"Coma, unspecified","Unconsciousness NOS, "
+948,"1.3.9 ","1.3.9 Neurological Disorders",NE01,Aphasia or Loss of Language due to stroke,8208,R47.0,R470,Dysphasia and aphasia,''
+949,"1.3.9 ","1.3.9 Neurological Disorders",NE17,Sleeping Disorders,3038,G47.4,G474,Narcolepsy and cataplexy,''
+950,"1.3.9 ","1.3.9 Neurological Disorders",NE21,Attempted Suicide / Self Harm,10934,X81,X81,Intentional self-harm by jumping or lying before moving object,''
+951,"1.3.9 ","1.3.9 Neurological Disorders",NE13,Learning Disability,2801,F81.8,F818,Other developmental disorders of scholastic skills,"Developmental expressive writing disorder, "
+952,"1.3.9 ","1.3.9 Neurological Disorders",NE04,Dementia or excessive forgetfulness due to advanced age,2429,F06.7,F067,Mild cognitive disorder,''
+953,"1.3.9 ","1.3.9 Neurological Disorders",NE21,Attempted Suicide / Self Harm,11860,Z64.3,Z643,Seeking and accepting behavioural and psychological interventions known to be hazardous and harmful,''
+954,"1.3.9 ","1.3.9 Neurological Disorders",NE15,"Eating disorders (anorexia, Bulimia, other feeding)",8261,R63.0,R630,Anorexia,"Loss of appetite, "
+955,"1.3.9 ","1.3.9 Neurological Disorders",NE17,Sleeping Disorders,3034,G47.0,G470,Disorders of initiating and maintaining sleep [insomnias],''
+956,"1.3.9 ","1.3.9 Neurological Disorders",NE19,Other childhood mental Disorders,2816,F90,F90,Hyperkinetic disorders,''
+957,"1.3.9 ","1.3.9 Neurological Disorders",NE12,Attention Deficit Hyperactivity disorder (ADHD),2816,F90,F90,Hyperkinetic disorders,''
+958,"1.3.9 ","1.3.9 Neurological Disorders",NE13,Learning Disability,2802,F81.9,F819,"Developmental disorder of scholastic skills, unspecified","Knowledge acquisition disability NOS, Learning: disability NOS, Learning: disorder NOS, "
+959,"1.3.9 ","1.3.9 Neurological Disorders",NE17,Sleeping Disorders,2682,F51.1,F511,Nonorganic hypersomnia,''
+1002,"1.3.12","1.3.12 Physiotherapy",PT15,Congenital abnormalities,7959,Q89.9,Q899,"Congenital malformation, unspecified","Congenital: anomaly NOS, Congenital: deformity NOS, "
+1003,"1.3.12","1.3.12 Physiotherapy",PT05,Chest trauma/Injury,8067,R07,R07,Pain in throat and chest,''
+1004,"1.3.12","1.3.12 Physiotherapy",PT05,Chest trauma/Injury,8069,R07.1,R071,Chest pain on breathing,"Painful respiration, "
+960,"1.3.9 ","1.3.9 Neurological Disorders",NE16,Somatoform disorders,2662,F45.3,F453,Somatoform autonomic dysfunction,"Cardiac neurosis, Da Costa syndrome, Gastric neurosis, Neurocirculatory asthenia, Psychogenic forms of: aerophagy, Psychogenic forms of: cough, Psychogenic forms of: diarrhoea, Psychogenic forms of: dyspepsia, Psychogenic forms of: dysuria, Psychogenic forms of: flatulence, Psychogenic forms of: hiccough, Psychogenic forms of: hyperventilation, Psychogenic forms of: increased frequency of micturition, Psychogenic forms of: irritable bowel syndrome, Psychogenic forms of: pylorospasm, "
+961,"1.3.9 ","1.3.9 Neurological Disorders",NE05,Amyotrophic Lateral Sclerosis (ALS),2910,G12.2,G122,Motor neuron disease,"Amyotrophic lateral sclerosis (ALS), Familial motor neuron disease, Lateral sclerosis: amyotrophic, Lateral sclerosis: primary, Progressive: bulbar palsy, Progressive: spinal muscular atrophy, "
+962,"1.3.9 ","1.3.9 Neurological Disorders",NE03,Parkinson's disease,2952,G25.8,G258,Other specified extrapyramidal and movement disorders,"Akathisia (drug-induced) (treatment-induced), Restless legs syndrome, Stiff-man syndrome, "
+963,"1.3.9 ","1.3.9 Neurological Disorders",NE21,Attempted Suicide / Self Harm,11859,Z64.2,Z642,"Seeking and accepting physical, nutritional and chemical interventions known to be hazardous and harmful",''
+964,"1.3.9 ","1.3.9 Neurological Disorders",NE13,Learning Disability,2798,F81.1,F811,Specific spelling disorder,"Specific spelling retardation (without reading disorder), "
+965,"1.3.23","1.3.23. Risky Behaviours",RB03,Tobacco exposure,11801,Z58.7,Z587,Exposure to tobacco smoke,"Passive smoking, "
+966,"1.3.23","1.3.23. Risky Behaviours",RB01,Alcohol use,11891,Z72.1,Z721,Alcohol use,''
+967,"1.3.23","1.3.23. Risky Behaviours",RB02,Tobacco use,11890,Z72.0,Z720,Tobacco use,''
+968,"1.3.12","1.3.12 Physiotherapy",PT13,Altered Posture and gait,8135,R26.1,R261,Paralytic gait,"Spastic gait, "
+969,"1.3.12","1.3.12 Physiotherapy",PT08,Upper Motor Neuron Lesions (UMN),2910,G12.2,G122,Motor neuron disease,"Amyotrophic lateral sclerosis (ALS), Familial motor neuron disease, Lateral sclerosis: amyotrophic, Lateral sclerosis: primary, Progressive: bulbar palsy, Progressive: spinal muscular atrophy, "
+970,"1.3.12","1.3.12 Physiotherapy",PT17,Lymph oedema,4127,I89.0,I890,"Lymphoedema, not elsewhere classified","Lymphangiectasis, "
+971,"1.3.12","1.3.12 Physiotherapy",PT17,Lymph oedema,4140,I97.2,I972,Postmastectomy lymphoedema syndrome,"Elephantiasis due to mastectomy, Obliteration of lymphatic vessels due to mastectomy, "
+972,"1.3.12","1.3.12 Physiotherapy",PT04,Chronic respiratory diseases,4355,J68.4,J684,"Chronic respiratory conditions due to chemicals, gases, fumes and vapours","Emphysema (diffuse)(chronic) due to inhalation of chemicals, gases, fumes and vapours, Obliterative bronchiolitis (chronic)(subacute) due to inhalation of chemicals, gases, fumes and vapours, Pulmonary fibrosis (chronic) due to inhalation of chemicals, gases, fumes and vapours, "
+973,"1.3.12","1.3.12 Physiotherapy",PT04,Chronic respiratory diseases,4413,J96.1,J961,Chronic respiratory failure,''
+974,"1.3.12","1.3.12 Physiotherapy",PT02,Joint dysfunction,5491,M24,M24,Other specific joint derangements,''
+975,"1.3.12","1.3.12 Physiotherapy",PT02,Joint dysfunction,5500,M24.8,M248,"Other specific joint derangements, not elsewhere classified",''
+976,"1.3.12","1.3.12 Physiotherapy",PT02,Joint dysfunction,5501,M24.9,M249,"Joint derangement, unspecified",''
+977,"1.3.12","1.3.12 Physiotherapy",PT02,Joint dysfunction,5511,M25.8,M258,Other specified joint disorders,''
+978,"1.3.12","1.3.12 Physiotherapy",PT02,Joint dysfunction,5512,M25.9,M259,"Joint disorder, unspecified",''
+979,"1.3.12","1.3.12 Physiotherapy",PT01,Muscular disorders,5682,M62.9,M629,"Disorder of muscle, unspecified",''
+980,"1.3.12","1.3.12 Physiotherapy",PT03,Soft tissue injuries,5776,M79,M79,"Other soft tissue disorders, not elsewhere classified",''
+981,"1.3.12","1.3.12 Physiotherapy",PT14,Injection Neuritis/Acute flaccid paralysis,5779,M79.2,M792,"Neuralgia and neuritis, unspecified",''
+982,"1.3.12","1.3.12 Physiotherapy",PT03,Soft tissue injuries,5785,M79.8,M798,Other specified soft tissue disorders,''
+983,"1.3.12","1.3.12 Physiotherapy",PT03,Soft tissue injuries,5786,M79.9,M799,"Soft tissue disorder, unspecified",Soft Tissue Injury
+984,"1.3.12","1.3.12 Physiotherapy",PT05,Chest trauma/Injury,5914,M95.4,M954,Acquired deformity of chest and rib,''
+985,"1.3.12","1.3.12 Physiotherapy",PT11,Gynaecological obstetric and urogenital conditions,6385,N91.1,N911,Secondary amenorrhoea,''
+986,"1.3.12","1.3.12 Physiotherapy",PT11,Gynaecological obstetric and urogenital conditions,6388,N91.4,N914,Secondary oligomenorrhoea,''
+987,"1.3.12","1.3.12 Physiotherapy",PT11,Gynaecological obstetric and urogenital conditions,6408,N94.5,N945,Secondary dysmenorrhoea,''
+988,"1.3.12","1.3.12 Physiotherapy",PT04,Chronic respiratory diseases,7102,P27,P27,Chronic respiratory disease originating in the perinatal period,''
+989,"1.3.12","1.3.12 Physiotherapy",PT04,Chronic respiratory diseases,7105,P27.8,P278,Other chronic respiratory diseases originating in the perinatal period,"Congenital pulmonary fibrosis, Ventilator lung in newborn, "
+990,"1.3.12","1.3.12 Physiotherapy",PT04,Chronic respiratory diseases,7106,P27.9,P279,Unspecified chronic respiratory disease originating in the perinatal period,''
+991,"1.3.12","1.3.12 Physiotherapy",PT19,Others,2707,F59,F59,Unspecified behavioural syndromes associated with physiological disturbances and physical factors,"Psychogenic physiological dysfunction NOS, "
+992,"1.3.12","1.3.12 Physiotherapy",PT05,Chest trauma/Injury,7780,Q67,Q67,"Congenital musculoskeletal deformities of head, face, spine and chest",''
+993,"1.3.12","1.3.12 Physiotherapy",PT05,Chest trauma/Injury,7789,Q67.8,Q678,Other congenital deformities of chest,"Congenital deformity of chest wall NOS, "
+994,"1.3.12","1.3.12 Physiotherapy",PT15,Congenital abnormalities,7812,Q71.1,Q711,Congenital absence of upper arm and forearm with hand present,''
+995,"1.3.12","1.3.12 Physiotherapy",PT15,Congenital abnormalities,7813,Q71.2,Q712,Congenital absence of both forearm and hand,''
+996,"1.3.12","1.3.12 Physiotherapy",PT15,Congenital abnormalities,7814,Q71.3,Q713,Congenital absence of hand and finger(s),''
+997,"1.3.12","1.3.12 Physiotherapy",PT15,Congenital abnormalities,7823,Q72.2,Q722,Congenital absence of both lower leg and foot,''
+998,"1.3.12","1.3.12 Physiotherapy",PT15,Congenital abnormalities,7824,Q72.3,Q723,Congenital absence of foot and toe(s),''
+999,"1.3.12","1.3.12 Physiotherapy",PT15,Congenital abnormalities,7832,Q73.0,Q730,Congenital absence of unspecified limb(s),"Amelia NOS, "
+1000,"1.3.12","1.3.12 Physiotherapy",PT17,Lymph oedema,7908,Q82.0,Q820,Hereditary lymphoedema,''
+1001,"1.3.12","1.3.12 Physiotherapy",PT09,Facial palsy,7944,Q87.0,Q870,Congenital malformation syndromes predominantly affecting facial appearance,"Acrocephalopolysyndactyly, Acrocephalosyndactyly [Apert], Cryptophthalmos syndrome, Cyclopia, Syndrome: Goldenhar, Syndrome: Moebius, Syndrome: oro-facial-digital, Syndrome: Robin, Whistling face, "
+1007,"1.3.12","1.3.12 Physiotherapy",PT13,Altered Posture and gait,8133,R26,R26,Abnormalities of gait and mobility,''
+1008,"1.3.12","1.3.12 Physiotherapy",PT13,Altered Posture and gait,8134,R26.0,R260,Ataxic gait,"Staggering gait, "
+1009,"1.3.12","1.3.12 Physiotherapy",PT13,Altered Posture and gait,8138,R26.8,R268,Other and unspecified abnormalities of gait and mobility,"Unsteadiness on feet NOS, "
+1010,"1.3.12","1.3.12 Physiotherapy",PT13,Altered Posture and gait,8146,R29.3,R293,Abnormal posture,''
+1011,"1.3.12","1.3.12 Physiotherapy",PT19,Others,8256,R62,R62,Lack of expected normal physiological development,''
+1012,"1.3.12","1.3.12 Physiotherapy",PT19,Others,8258,R62.8,R628,Other lack of expected normal physiological development,"Failure to: gain weight, Failure to: thrive, Infantilism NOS, Lack of growth, Physical retardation, "
+1013,"1.3.12","1.3.12 Physiotherapy",PT09,Facial palsy,8453,S02,S02,Fracture of skull and facial bones,''
+1014,"1.3.12","1.3.12 Physiotherapy",PT09,Facial palsy,8461,S02.7,S027,Multiple fractures involving skull and facial bones,''
+1015,"1.3.12","1.3.12 Physiotherapy",PT09,Facial palsy,8462,S02.8,S028,Fractures of other skull and facial bones,"Alveolus, Orbit NOS, Palate, "
+1016,"1.3.12","1.3.12 Physiotherapy",PT08,Upper Motor Neuron Lesions (UMN),8473,S04.1,S041,Injury of oculomotor nerve,"3rd cranial nerve, "
+1017,"1.3.12","1.3.12 Physiotherapy",PT09,Facial palsy,8477,S04.5,S045,Injury of facial nerve,"7th cranial nerve, "
+1018,"1.3.12","1.3.12 Physiotherapy",PT16,"Spine disorders e.g neck, thoracic, lumber, coccygeal pains",8541,S13,S13,"Dislocation, sprain and strain of joints and ligaments at neck level",''
+1019,"1.3.12","1.3.12 Physiotherapy",PT16,"Spine disorders e.g neck, thoracic, lumber, coccygeal pains",8562,S15.7,S157,Injury of multiple blood vessels at neck level,''
+1020,"1.3.12","1.3.12 Physiotherapy",PT05,Chest trauma/Injury,8596,S22.5,S225,Flail chest,''
+1021,"1.3.12","1.3.12 Physiotherapy",PT05,Chest trauma/Injury,8640,S28.0,S280,Crushed chest,''
+1022,"1.3.12","1.3.12 Physiotherapy",PT16,"Spine disorders e.g neck, thoracic, lumber, coccygeal pains",8663,S32,S32,Fracture of lumbar spine and pelvis,"lumbosacral: neural arch, lumbosacral: spinous process, lumbosacral: transverse process, lumbosacral: vertebra, lumbosacral: vertebral arch, "
+1023,"1.3.12","1.3.12 Physiotherapy",PT16,"Spine disorders e.g neck, thoracic, lumber, coccygeal pains",8670,S32.7,S327,Multiple fractures of lumbar spine and pelvis,''
+1024,"1.3.12","1.3.12 Physiotherapy",PT16,"Spine disorders e.g neck, thoracic, lumber, coccygeal pains",8672,S33,S33,"Dislocation, sprain and strain of joints and ligaments of lumbar spine and pelvis",''
+1025,"1.3.12","1.3.12 Physiotherapy",PT16,"Spine disorders e.g neck, thoracic, lumber, coccygeal pains",8680,S33.7,S337,Sprain and strain of other and unspecified parts of lumbar spine and pelvis,''
+1026,"1.3.12","1.3.12 Physiotherapy",PT06,Paralysis due to spinal cord injury and other diseases,8682,S34.0,S340,Concussion and oedema of lumbar spinal cord,''
+1027,"1.3.12","1.3.12 Physiotherapy",PT06,Paralysis due to spinal cord injury and other diseases,8683,S34.1,S341,Other injury of lumbar spinal cord,''
+1028,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9171,T05,T05,Traumatic amputations involving multiple body regions,"avulsion involving multiple body regions, "
+1029,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9172,T05.0,T050,Traumatic amputation of both hands,''
+1030,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9173,T05.1,T051,"Traumatic amputation of one hand and other arm [any level, except hand]",''
+1031,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9174,T05.2,T052,Traumatic amputation of both arms [any level],''
+1032,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9175,T05.3,T053,Traumatic amputation of both feet,''
+1033,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9178,T05.6,T056,"Traumatic amputation of upper and lower limbs, any combination [any level]",''
+1034,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9179,T05.8,T058,Traumatic amputations involving other combinations of body regions,"Transection of: abdomen, Transection of: thorax, "
+1035,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9180,T05.9,T059,"Multiple traumatic amputations, unspecified",''
+1036,"1.3.12","1.3.12 Physiotherapy",PT06,Paralysis due to spinal cord injury and other diseases,9182,T06.0,T060,Injuries of brain and cranial nerves with injuries of nerves and spinal cord at neck level,"Injuries classifiable to S04.- and S06.- with injuries classifiable to S14.-, "
+1037,"1.3.12","1.3.12 Physiotherapy",PT06,Paralysis due to spinal cord injury and other diseases,9183,T06.1,T061,Injuries of nerves and spinal cord involving other multiple body regions,''
+1038,"1.3.12","1.3.12 Physiotherapy",PT16,"Spine disorders e.g neck, thoracic, lumber, coccygeal pains",9191,T09,T09,"Other injuries of spine and trunk, level unspecified",''
+1039,"1.3.12","1.3.12 Physiotherapy",PT06,Paralysis due to spinal cord injury and other diseases,9195,T09.3,T093,"Injury of spinal cord, level unspecified",''
+1040,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9198,T09.6,T096,"Traumatic amputation of trunk, level unspecified",''
+1041,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9209,T11.6,T116,"Traumatic amputation of upper limb, level unspecified","Traumatic amputation of arm NOS, "
+1042,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9220,T13.6,T136,"Traumatic amputation of lower limb, level unspecified","Traumatic amputation of leg NOS, "
+1043,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9231,T14.7,T147,Crushing injury and traumatic amputation of unspecified body region,"Crushing injury NOS, Traumatic amputation NOS, "
+1044,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9815,T87,T87,Complications peculiar to reattachment and amputation,''
+1045,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9819,T87.3,T873,Neuroma of amputation stump,''
+1046,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9820,T87.4,T874,Infection of amputation stump,''
+1047,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9821,T87.5,T875,Necrosis of amputation stump,''
+1048,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9822,T87.6,T876,Other and unspecified complications of amputation stump,"Amputation stump: contracture (flexion)(of next proximal joint), Amputation stump: haematoma, Amputation stump: oedema, "
+1049,"1.3.12","1.3.12 Physiotherapy",PT09,Facial palsy,9837,T90.2,T902,Sequelae of fracture of skull and facial bones,"Sequelae of injury classifiable to S02.-, "
+1050,"1.3.12","1.3.12 Physiotherapy",PT06,Paralysis due to spinal cord injury and other diseases,9847,T91.3,T913,Sequelae of injury of spinal cord,"Sequelae of injury classifiable to S14.0-S14.1, S24.0-S24.1, S34.0-S34.1 and T09.3, "
+1051,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9859,T92.6,T926,Sequelae of crushing injury and traumatic amputation of upper limb,"Sequelae of injury classifiable to S47-S48, S57-S58, S67-S68 and T11.6, "
+1052,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,9869,T93.6,T936,Sequelae of crushing injury and traumatic amputation of lower limb,"Sequelae of injury classifiable to S77-S78, S87-S88, S97-S98 and T13.6, "
+1053,"1.3.12","1.3.12 Physiotherapy",PT18,Patients prescribed with assistive devices,11334,Y80.2,Y802,"Physical medicine devices associated with adverse incidents: Prosthetic and other implants, materials and accessory devices",""
+1054,"1.3.12","1.3.12 Physiotherapy",PT18,Patients prescribed with assistive devices,11335,Y80.3,Y803,"Physical medicine devices associated with adverse incidents: Surgical instruments, materials and devices (including sutures)",""
+1055,"1.3.12","1.3.12 Physiotherapy",PT18,Patients prescribed with assistive devices,11341,Y81.3,Y813,"General- and plastic-surgery devices associated with adverse incidents: Surgical instruments, materials and devices (including sutures)",""
+1056,"1.3.12","1.3.12 Physiotherapy",PT18,Patients prescribed with assistive devices,11348,Y82.8,Y828,"Other and unspecified medical devices associated with adverse incidents: Miscellaneous devices, not elsewhere classified",""
+1057,"1.3.12","1.3.12 Physiotherapy",PT12,Amputee,11355,Y83.5,Y835,Amputation of limb(s),''
+1058,"1.3.12","1.3.12 Physiotherapy",PT18,Patients prescribed with assistive devices,11704,Z46.8,Z468,Fitting and adjustment of other specified devices,"Wheelchair, "
+1059,"1.3.12","1.3.12 Physiotherapy",PT10,Lower Motor neuron lesions (LMN),3232,G95.8,G958,Other specified diseases of spinal cord,"Cord bladder NOS, Myelopathy: drug-induced, Myelopathy: radiation-induced, "
+1060,"1.3.12","1.3.12 Physiotherapy",PT14,Injection Neuritis/Acute flaccid paralysis,3185,G82.3,G823,Flaccid tetraplegia,''
+1061,"1.3.12","1.3.12 Physiotherapy",PT14,Injection Neuritis/Acute flaccid paralysis,3182,G82.0,G820,Flaccid paraplegia,''
+1062,"1.3.12","1.3.12 Physiotherapy",PT14,Injection Neuritis/Acute flaccid paralysis,3178,G81.0,G810,Flaccid hemiplegia,''
+1063,"1.3.12","1.3.12 Physiotherapy",PT07,Cerebral Palsy/Delayed motor or sensory development milestones.(CP),3176,G80.9,G809,"Cerebral palsy, unspecified","Cerebral palsy NOS, "
+1064,"1.3.12","1.3.12 Physiotherapy",PT07,Cerebral Palsy/Delayed motor or sensory development milestones.(CP),3175,G80.8,G808,Other cerebral palsy,"Mixed cerebral palsy syndromes, "
+1065,"1.3.12","1.3.12 Physiotherapy",PT07,Cerebral Palsy/Delayed motor or sensory development milestones.(CP),3174,G80.4,G804,Ataxic cerebral palsy,''
+1066,"1.3.12","1.3.12 Physiotherapy",PT07,Cerebral Palsy/Delayed motor or sensory development milestones.(CP),3173,G80.3,G803,Dyskinetic cerebral palsy,"Athetoid cerebral palsy, Dystonic cerebral palsy, "
+1067,"1.3.12","1.3.12 Physiotherapy",PT07,Cerebral Palsy/Delayed motor or sensory development milestones.(CP),3171,G80.1,G801,Spastic diplegic cerebral palsy,"Congenital spastic paralysis (cerebral), Spastic cerebral palsy NOS, "
+1068,"1.3.12","1.3.12 Physiotherapy",PT07,Cerebral Palsy/Delayed motor or sensory development milestones.(CP),3169,G80,G80,Cerebral palsy,''
+1069,"1.3.12","1.3.12 Physiotherapy",PT06,Paralysis due to spinal cord injury and other diseases,3156,G72.3,G723,Periodic paralysis,"Periodic paralysis (familial): hyperkalaemic, Periodic paralysis (familial): hypokalaemic, Periodic paralysis (familial): myotonic, Periodic paralysis (familial): normokalaemic, "
+1070,"1.3.12","1.3.12 Physiotherapy",PT09,Facial palsy,3043,G50.1,G501,Atypical facial pain,''
+1071,"1.3.13","1.3.13 Occupational therapy Conditions",OT14,Cardiac Conditions,12086,Z95.8,Z958,Presence of other cardiac and vascular implants and grafts,"Presence of intravascular prosthesis NEC, Status following peripheral angioplasty NOS, "
+1072,"1.3.13","1.3.13 Occupational therapy Conditions",OT09,rthrogryposis,7839,Q74.3,Q743,Arthrogryposis multiplex congenita,''
+1073,"1.3.13","1.3.13 Occupational therapy Conditions",OT10,HIV/AIDS,11886,Z71.7,Z717,Human immunodeficiency virus [HIV] counselling,''
+1074,"1.3.13","1.3.13 Occupational therapy Conditions",OT05,Post-burn contractures,5497,M24.5,M245,Contracture of joint,''
+1075,"1.3.13","1.3.13 Occupational therapy Conditions",OT07,Mental Health Conditions,2400,F01,F01,Vascular dementia,"arteriosclerotic dementia, "
+1076,"1.3.13","1.3.13 Occupational therapy Conditions",OT01,Neuro-developmental Disorders,2814,F88,F88,Other disorders of psychological development,"Developmental agnosia, "
+1077,"1.3.13","1.3.13 Occupational therapy Conditions",OT04,Burn Injuries,11900,Z73.0,Z730,Burn-out,"State of vital exhaustion, "
+1078,"1.3.13","1.3.13 Occupational therapy Conditions",OT13,ther chronic conditions,11952,Z82,Z82,Family history of certain disabilities and chronic diseases leading to disablement,''
+1079,"1.3.13","1.3.13 Occupational therapy Conditions",OT02,Sensory Integration disorders,3030,G46.6,G466,Pure sensory lacunar syndrome,''
+1080,"1.3.13","1.3.13 Occupational therapy Conditions",OT06,Orthopaedic Conditions,12095,Z96.6,Z966,Presence of orthopaedic joint implants,"Finger-joint replacement, Hip-joint replacement (partial)(total), "
+1081,"1.3.13","1.3.13 Occupational therapy Conditions",OT14,Cardiac Conditions,12087,Z95.9,Z959,"Presence of cardiac and vascular implant and graft, unspecified",''
+1082,"1.3.13","1.3.13 Occupational therapy Conditions",OT02,Sensory Integration disorders,3112,G60.0,G600,Hereditary motor and sensory neuropathy,"Disease: Charcot-Marie-Tooth, Disease: Dejerine-Sottas, Hereditary motor and sensory neuropathy, types I-IV, Hypertrophic neuropathy of infancy, Peroneal muscular atrophy (axonal type)(hypertrophic type), Roussy-Levy syndrome, "
+1083,"1.3.13","1.3.13 Occupational therapy Conditions",OT15,Patients prescribed with assistive devices,12080,Z95.0,Z950,Presence of electronic cardiac devices,"Presence of: cardiac pacemaker, Presence of: cardiac resynchronization therapy defibrillator (CRT-D), Presence of: cardiac resynchronization therapy (CRT) pacemaker, Presence of: cardioverter-defibrillator (ICD), "
+1084,"1.3.13","1.3.13 Occupational therapy Conditions",OT14,Cardiac Conditions,12080,Z95.0,Z950,Presence of electronic cardiac devices,"Presence of: cardiac pacemaker, Presence of: cardiac resynchronization therapy defibrillator (CRT-D), Presence of: cardiac resynchronization therapy (CRT) pacemaker, Presence of: cardioverter-defibrillator (ICD), "
+1085,"1.3.13","1.3.13 Occupational therapy Conditions",OT04,Burn Injuries,9880,T95.4,T954,Sequelae of burn and corrosion classifiable only according to extent of body surface involved,"Sequelae of injury classifiable to T31-T32, "
+1086,"1.3.13","1.3.13 Occupational therapy Conditions",OT10,HIV/AIDS,560,B23.2,B232,"HIV disease resulting in haematological and immunological abnormalities, not elsewhere classified",''
+1087,"1.3.13","1.3.13 Occupational therapy Conditions",OT10,HIV/AIDS,561,B23.8,B238,HIV disease resulting in other specified conditions,''
+1088,"1.3.13","1.3.13 Occupational therapy Conditions",OT04,Burn Injuries,9363,T30.3,T303,"Burn of third degree, body region unspecified","Third-degree burn NOS, "
+1089,"1.3.13","1.3.13 Occupational therapy Conditions",OT04,Burn Injuries,9362,T30.2,T302,"Burn of second degree, body region unspecified","Second-degree burn NOS, "
+1090,"1.3.13","1.3.13 Occupational therapy Conditions",OT04,Burn Injuries,9361,T30.1,T301,"Burn of first degree, body region unspecified","First-degree burn NOS, "
+1091,"1.3.13","1.3.13 Occupational therapy Conditions",OT04,Burn Injuries,9360,T30.0,T300,"Burn of unspecified body region, unspecified degree","Burn NOS, "
+1092,"1.3.13","1.3.13 Occupational therapy Conditions",OT04,Burn Injuries,9359,T30,T30,"Burn and corrosion, body region unspecified",''
+1093,"1.3.13","1.3.13 Occupational therapy Conditions",OT04,Burn Injuries,9344,T28.4,T284,Burn of other and unspecified internal organs,''
+1094,"1.3.13","1.3.13 Occupational therapy Conditions",OT04,Burn Injuries,9343,T28.3,T283,Burn of internal genitourinary organs,''
+1095,"1.3.13","1.3.13 Occupational therapy Conditions",OT04,Burn Injuries,9342,T28.2,T282,Burn of other parts of alimentary tract,''
+1096,"1.3.13","1.3.13 Occupational therapy Conditions",OT04,Burn Injuries,9332,T27.1,T271,Burn involving larynx and trachea with lung,''
+1097,"1.3.13","1.3.13 Occupational therapy Conditions",OT13,ther chronic conditions,8228,R52.1,R521,Chronic intractable pain,''
+1098,"1.3.13","1.3.13 Occupational therapy Conditions",OT03,Adult Neurological Disorders,2754,F68,F68,Other disorders of adult personality and behaviour,''
+1099,"1.3.13","1.3.13 Occupational therapy Conditions",OT03,Adult Neurological Disorders,2757,F68.8,F688,Other specified disorders of adult personality and behaviour,"Character disorder NOS, Relationship disorder NOS, "
+1100,"1.3.13","1.3.13 Occupational therapy Conditions",OT03,Adult Neurological Disorders,2758,F69,F69,Unspecified disorder of adult personality and behaviour,''
+1101,"1.3.13","1.3.13 Occupational therapy Conditions",OT11,Diabetes,7234,P70.2,P702,Neonatal diabetes mellitus,''
+1102,"1.3.13","1.3.13 Occupational therapy Conditions",OT13,ther chronic conditions,12142,I48.2,I482,Chronic atrial fibrillation,''
+1103,"1.3.13","1.3.13 Occupational therapy Conditions",OT13,ther chronic conditions,11958,Z82.5,Z825,Family history of asthma and other chronic lower respiratory diseases,"Conditions classifiable to J40-J47, "
+1104,"1.3.13","1.3.13 Occupational therapy Conditions",OT02,Sensory Integration disorders,2654,F44.6,F446,Dissociative anaesthesia and sensory loss,"Psychogenic deafness, "
+1105,"1.3.13","1.3.13 Occupational therapy Conditions",OT14,Cardiac Conditions,12079,Z95,Z95,Presence of cardiac and vascular implants and grafts,''
+1106,"1.3.13","1.3.13 Occupational therapy Conditions",OT08,Birth Defects and Trauma,7060,P15.9,P159,"Birth injury, unspecified",''
+1107,"1.3.13","1.3.13 Occupational therapy Conditions",OT11,Diabetes,11503,Z13.1,Z131,Special screening examination for diabetes mellitus,''
+1108,"1.3.13","1.3.13 Occupational therapy Conditions",OT13,ther chronic conditions,11961,Z82.8,Z828,"Family history of other disabilities and chronic diseases leading to disablement, not elsewhere classified",''
+1109,"1.3.13","1.3.13 Occupational therapy Conditions",OT10,HIV/AIDS,11519,Z20.6,Z206,Contact with and exposure to human immunodeficiency virus [HIV],''
+1110,"1.3.13","1.3.13 Occupational therapy Conditions",OT10,HIV/AIDS,11523,Z21,Z21,Asymptomatic human immunodeficiency virus [HIV] infection status,"HIV positive NOS, "
+1111,"1.3.13","1.3.13 Occupational therapy Conditions",OT08,Birth Defects and Trauma,7059,P15.8,P158,Other specified birth injuries,''
+1112,"1.3.13","1.3.13 Occupational therapy Conditions",OT08,Birth Defects and Trauma,7056,P15.4,P154,Birth injury to face,"Facial congestion due to birth injury, "
+1113,"1.3.13","1.3.13 Occupational therapy Conditions",OT10,HIV/AIDS,11963,Z83.0,Z830,Family history of human immunodeficiency virus [HIV] disease,"Conditions classifiable to B20-B24, O98.7, "
+1114,"1.3.13","1.3.13 Occupational therapy Conditions",OT08,Birth Defects and Trauma,7054,P15.2,P152,Sternomastoid injury due to birth injury,''
+1115,"1.3.13","1.3.13 Occupational therapy Conditions",OT10,HIV/AIDS,6932,O98.7,O987,"Human immunodeficiency virus [HIV] disease complicating pregnancy, childbirth and the puerperium",''
+1116,"1.3.13","1.3.13 Occupational therapy Conditions",OT14,Cardiac Conditions,11689,Z45.0,Z450,Adjustment and management of cardiac devices,"Checking and testing of cardiac devices, "
+1117,"1.3.13","1.3.13 Occupational therapy Conditions",OT06,Orthopaedic Conditions,11703,Z46.7,Z467,Fitting and adjustment of orthopaedic device,"Orthopaedic: brace, Orthopaedic: cast, Orthopaedic: corset, Orthopaedic: shoes, "
+1118,"1.3.13","1.3.13 Occupational therapy Conditions",OT06,Orthopaedic Conditions,11706,Z47,Z47,Other orthopaedic follow-up care,''
+1119,"1.3.13","1.3.13 Occupational therapy Conditions",OT06,Orthopaedic Conditions,11708,Z47.8,Z478,Other specified orthopaedic follow-up care,"Change, checking or removal of: external fixation or traction device, Change, checking or removal of: plaster cast, "
+1120,"1.3.13","1.3.13 Occupational therapy Conditions",OT06,Orthopaedic Conditions,11709,Z47.9,Z479,"Orthopaedic follow-up care, unspecified",''
+1121,"1.3.13","1.3.13 Occupational therapy Conditions",OT14,Cardiac Conditions,11719,Z50.0,Z500,Cardiac rehabilitation,''
+1122,"1.3.13","1.3.13 Occupational therapy Conditions",OT11,Diabetes,11966,Z83.3,Z833,Family history of diabetes mellitus,"Conditions classifiable to E10-E14, O24, "
+1123,"1.3.13","1.3.13 Occupational therapy Conditions",OT11,Diabetes,6581,O24.4,O244,Diabetes mellitus arising in pregnancy,"Gestational diabetes mellitus NOS, "
+1124,"1.3.13","1.3.13 Occupational therapy Conditions",OT12,Cancer,1774,D47.1,D471,Chronic myeloproliferative disease,"Chronic neutrophilic leukaemia, Myeloproliferative disease, unspecified, "
+1125,"1.3.13","1.3.13 Occupational therapy Conditions",OT12,Cancer,1775,D47.2,D472,Monoclonal gammopathy of undetermined significance (MGUS),''
+1126,"1.3.13","1.3.13 Occupational therapy Conditions",OT05,Post-burn contractures,5706,M67.1,M671,Other contracture of tendon (sheath),''
+1127,"1.3.13","1.3.13 Occupational therapy Conditions",OT05,Post-burn contractures,5678,M62.4,M624,Contracture of muscle,''
+1128,"1.3.14","1.3.14 Speech and Language Therapy",SL07,Cleft lip and palate,7587,Q37.9,Q379,Unspecified cleft palate with unilateral cleft lip,"Cleft palate with cleft lip NOS, "
+1129,"1.3.14","1.3.14 Speech and Language Therapy",SL04,Voice disorders,8220,R49.8,R498,Other and unspecified voice disturbances,"Change in voice NOS, "
+1130,"1.3.14","1.3.14 Speech and Language Therapy",SL05,Dysfluency /stammering,2857,F98.5,F985,Stuttering [stammering],''
+1131,"1.3.14","1.3.14 Speech and Language Therapy",SL06,Acquired neurological disorders,2793,F80.3,F803,Acquired aphasia with epilepsy [Landau-Kleffner],''
+1132,"1.3.14","1.3.14 Speech and Language Therapy",SL01,Speech and language delay or disorder,2795,F80.9,F809,"Developmental disorder of speech and language, unspecified","Language disorder NOS, "
+1133,"1.3.14","1.3.14 Speech and Language Therapy",SL08,Others,3667,H91,H91,Other hearing loss,''
+1134,"1.3.14","1.3.14 Speech and Language Therapy",SL03,Hearing impairments,3670,H91.2,H912,Sudden idiopathic hearing loss,"Sudden hearing loss NOS, "
+1135,"1.3.14","1.3.14 Speech and Language Therapy",SL02,Motor speech disorders,8210,R47.8,R478,Other and unspecified speech disturbances,''
+1136,"1.3.15","1.3.15 Disabilities",DS02,ndividuals with Albinism,2270,E70.3,E703,Albinism,"Albinism: ocular, Albinism: oculocutaneous, Syndrome: Chediak(-Steinbrinck)-Higashi, Syndrome: Cross, Syndrome: Hermansky-Pudlak, "
+1137,"1.3.15","1.3.15 Disabilities",DS01,ndividuals with Difficulty in seeing,11961,Z82.8,Z828,"Family history of other disabilities and chronic diseases leading to disablement, not elsewhere classified",''
+1138,"1.3.24","1.3.24. Emergency Medical Services",ES01,Number of emergency cases at the facility,6843,O82.1,O821,Delivery by emergency caesarean section,''
+1139,"1.3.24","1.3.24. Emergency Medical Services",ES05,Number of patients accessing care within 1hr in an emergency unit,11380,Y88.1,Y881,Sequelae of misadventures to patients during surgical and medical procedures,''
+1140,"1.3.24","1.3.24. Emergency Medical Services",ES08,Number of patients with external haemorrhages controlled,4099,I84.4,I844,External haemorrhoids with other complications,""
+1141,"1.3.24","1.3.24. Emergency Medical Services",ES09, Road traffic Injuries Deaths,3905,I46.1,I461,"Sudden cardiac death, so described",''
+1142,"1.3.24","1.3.24. Emergency Medical Services",ES06,Number of patients who develop complications within 24 hours after management/care,11382,Y88.3,Y883,"Sequelae of surgical and medical procedures as the cause of abnormal reaction of the patient, or of later complication, without mention of misadventure at the time of the procedure",''
+1143,"1.3.24","1.3.24. Emergency Medical Services",ES04,Number of patients assessed for level of consciousness using GCS/ other comma score,9548,T48.5,T485,Anti-common-cold drugs,"Poisoning: Anti-common-cold drugs, "
+1144,"1.3.24","1.3.24. Emergency Medical Services",ES09, Poisoning  Emergency Deaths,9542,T48,T48,Poisoning by agents primarily acting on smooth and skeletal muscles and the respiratory system,''
+1145,"1.3.24","1.3.24. Emergency Medical Services",ES09, Medical emergencies Deaths,8429,R96.0,R960,Instantaneous death,"Sudden unexplained death in adult, "
+1146,"1.3.24","1.3.24. Emergency Medical Services",ES09, Paediatric emergencies Death,7322,P95,P95,Fetal death of unspecified cause,"Deadborn fetus NOS, Stillbirth NOS, "
+1147,"1.3.24","1.3.24. Emergency Medical Services",ES07,Number of patients with hypoxemia administered with oxygen,11043,Y42.3,Y423,Insulin and oral hypoglycaemic [antidiabetic] drugs,''
+1148,"1.3.24","1.3.24. Emergency Medical Services",ES09, Obstetrics gynaecology Deaths,7322,P95,P95,Fetal death of unspecified cause,"Deadborn fetus NOS, Stillbirth NOS, "
+1149,"1.3.24","1.3.24. Emergency Medical Services",ES03,Emergency cases that arrive at the facility using an Ambulance,12172,U06,U06,Emergency use of U06,''
+1150,"1.3.24","1.3.24. Emergency Medical Services",ES09,  Burns Deaths,8428,R96,R96,"Other sudden death, cause unknown",''
+1151,"1.3.24","1.3.24. Emergency Medical Services",ES02,Patients that receive care at the scene of emergency,11624,Z36.5,Z365,Antenatal screening for isoimmunization,''
+1152,"1.3.24","1.3.24. Emergency Medical Services",ES09, Surgical emergencies Death,6915,O95,O95,Obstetric death of unspecified cause,"Maternal death from unspecified cause occurring during pregnancy, labour and delivery, or the puerperium, "
