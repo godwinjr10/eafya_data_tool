@@ -519,7 +519,7 @@
 , is_system_defined
 , last_updated
 , "name"
-FROM "import".eafya_blood_transfussion
+FROM "stage".eafya_blood_transfussion
 </sql>
     <limit>0</limit>
     <lookup/>

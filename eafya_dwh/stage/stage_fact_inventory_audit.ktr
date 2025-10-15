@@ -518,7 +518,7 @@
 , reference
 , short_description
 , store_inventory_id
-FROM "import".eafya_inventory_audit
+FROM "stage".eafya_inventory_audit
 </sql>
     <limit>0</limit>
     <lookup/>

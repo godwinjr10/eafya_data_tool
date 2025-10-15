@@ -506,7 +506,7 @@
     </partitioning>
     <connection>dwh_conn</connection>
     <sql>SELECT *
-FROM "import".eafya_patient_admissions
+FROM "stage".eafya_patient_admissions
 </sql>
     <limit>0</limit>
     <lookup/>

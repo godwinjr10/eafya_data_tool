@@ -512,7 +512,7 @@
 , date_created
 , last_updated
 , "name"
-FROM "import".eafya_imaging_category
+FROM "stage".eafya_imaging_category
 </sql>
     <limit>0</limit>
     <lookup/>

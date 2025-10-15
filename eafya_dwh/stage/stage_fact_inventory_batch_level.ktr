@@ -610,7 +610,7 @@
 , unit_in_stock
 , unit_selling_price
 , voucher_line_id
-FROM "import".eafya_inventory_batch_level
+FROM "stage".eafya_inventory_batch_level
 </sql>
     <limit>0</limit>
     <lookup/>

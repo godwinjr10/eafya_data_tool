@@ -521,7 +521,7 @@
 , is_system_defined
 , last_updated
 , "name"
-FROM "import".eafya_family_planning
+FROM "stage".eafya_family_planning
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -771,7 +771,7 @@ FROM "import".eafya_family_planning
 , is_system_defined
 , last_updated
 , "name"
-FROM "import".eafya_family_planning_category
+FROM "stage".eafya_family_planning_category
 </sql>
     <limit>0</limit>
     <lookup/>

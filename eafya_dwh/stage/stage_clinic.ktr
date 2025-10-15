@@ -505,7 +505,7 @@
       <schema_name/>
     </partitioning>
     <connection>dwh_conn</connection>
-    <sql>select * from "import".eafya_clinic</sql>
+    <sql>select * from "stage".eafya_clinic</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

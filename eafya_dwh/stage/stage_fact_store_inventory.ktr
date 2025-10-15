@@ -515,7 +515,7 @@
 , replenishment_level
 , store_id
 , unit_in_stock
-FROM "import".eafya_store_inventory
+FROM "stage".eafya_store_inventory
 </sql>
     <limit>0</limit>
     <lookup/>

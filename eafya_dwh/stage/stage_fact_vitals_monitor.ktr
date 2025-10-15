@@ -519,7 +519,7 @@
 , triage_id
 , "value"
 , vital_type_id
-FROM "import".eafya_vital_monitor
+FROM "stage".eafya_vital_monitor
 </sql>
     <limit>0</limit>
     <lookup/>

@@ -523,7 +523,7 @@
 , description
 , last_updated
 , "name"
-FROM "import".eafya_role
+FROM "stage".eafya_role
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -708,7 +708,7 @@ FROM "import".eafya_role
 , is_active
 , last_updated
 , "name"
-FROM "import".eafya_department
+FROM "stage".eafya_department
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -996,7 +996,7 @@ FROM "import".eafya_department
 , is_locked
 , last_login_attempt
 , login_attempts
-FROM "import".eafya_system_user
+FROM "stage".eafya_system_user
 </sql>
     <limit>0</limit>
     <lookup/>

@@ -521,7 +521,7 @@
 , validation_error_message
 , validator_pattern
 , vitals_value_type_id
-FROM import.eafya_vital_type
+FROM stage.eafya_vital_type
 </sql>
     <limit>0</limit>
     <lookup/>

@@ -515,7 +515,7 @@
 , date_created
 , last_updated
 , vaccine_id
-FROM "import".eafya_administered_vaccine
+FROM "stage".eafya_administered_vaccine
 </sql>
     <limit>0</limit>
     <lookup/>

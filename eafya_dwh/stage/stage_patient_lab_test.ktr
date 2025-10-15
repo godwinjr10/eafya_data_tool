@@ -526,7 +526,7 @@ verified_by_id,
 visit_type,
 date_created,
 last_updated 
-FROM "import".eafya_patient_lab_test</sql>
+FROM "stage".eafya_patient_lab_test</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

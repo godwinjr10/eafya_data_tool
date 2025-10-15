@@ -515,7 +515,7 @@
 , last_updated
 , "name"
 , prescription_category_id
-FROM "import".eafya_pharmacology
+FROM "stage".eafya_pharmacology
 </sql>
     <limit>0</limit>
     <lookup/>

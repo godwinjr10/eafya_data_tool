@@ -511,7 +511,7 @@
 , lab_test_category_id
 , date_created
 , last_updated
-FROM "import".eafya_lab_test
+FROM "stage".eafya_lab_test
 where parent_id = 0
 </sql>
     <limit>0</limit>

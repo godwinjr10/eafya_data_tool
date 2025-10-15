@@ -506,7 +506,7 @@
     </partitioning>
     <connection>dwh_conn</connection>
     <sql>SELECT *
-FROM "import".eafya_labour_monitor
+FROM "stage".eafya_labour_monitor
 </sql>
     <limit>0</limit>
     <lookup/>

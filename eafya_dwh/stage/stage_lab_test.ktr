@@ -548,7 +548,7 @@
 , lab_test_worksheet_id
 , processing_hour_type
 , processing_time
-FROM "import".eafya_lab_test
+FROM "stage".eafya_lab_test
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -1329,7 +1329,7 @@ FROM "import".eafya_lab_test
 , "name"
 , system_defined
 , order_sequence
-FROM "import".eafya_lab_test_category
+FROM "stage".eafya_lab_test_category
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -1556,7 +1556,7 @@ FROM "import".eafya_lab_test_category
 , description
 , last_updated
 , "name"
-FROM "import".eafya_lab_test_sample_type
+FROM "stage".eafya_lab_test_sample_type
 </sql>
     <limit>0</limit>
     <lookup/>

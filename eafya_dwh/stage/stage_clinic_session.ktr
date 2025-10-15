@@ -516,7 +516,7 @@
 , last_updated
 , patient_visit_id
 , visit_type_id
-FROM "import".eafya_clinic_session
+FROM "stage".eafya_clinic_session
 </sql>
     <limit>0</limit>
     <lookup/>

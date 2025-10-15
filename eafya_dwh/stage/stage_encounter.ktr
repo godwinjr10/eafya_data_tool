@@ -514,7 +514,7 @@
 , illness_history
 , last_updated
 , origin
-FROM "import".eafya_encounters
+FROM "stage".eafya_encounters
 </sql>
     <limit>0</limit>
     <lookup/>

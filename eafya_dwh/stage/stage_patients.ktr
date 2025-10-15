@@ -548,7 +548,7 @@ with one patient dimensional table</note>
 , partner_type
 , phone_number
 , postal_code
-FROM "import".eafya_patients
+FROM "stage".eafya_patients
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -1053,7 +1053,7 @@ FROM "import".eafya_patients
 , village
 , ethnicity
 , category
-FROM "import".eafya_patients_bio
+FROM "stage".eafya_patients_bio
 </sql>
     <limit>0</limit>
     <lookup/>

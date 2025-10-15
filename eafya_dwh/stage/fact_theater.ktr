@@ -526,7 +526,7 @@
 , performed_at
 , "result"
 , status
-FROM "import".eafya_patient_imaging
+FROM "stage".eafya_patient_imaging
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -805,7 +805,7 @@ FROM "import".eafya_patient_imaging
 , performed_at
 , scheduled_date
 , scheduled_time
-FROM "import".eafya_patient_major_theatre
+FROM "stage".eafya_patient_major_theatre
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -1125,7 +1125,7 @@ FROM "import".eafya_patient_major_theatre
 , last_updated
 , minor_theater_id
 , treatment_duration
-FROM "import".eafya_patient_minor_theatre
+FROM "stage".eafya_patient_minor_theatre
 </sql>
     <limit>0</limit>
     <lookup/>

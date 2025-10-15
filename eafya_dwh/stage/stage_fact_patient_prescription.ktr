@@ -522,7 +522,7 @@
 , pharmacology_id
 , route
 , description
-FROM "import".eafya_patient_prescription
+FROM "stage".eafya_patient_prescription
 </sql>
     <limit>0</limit>
     <lookup/>

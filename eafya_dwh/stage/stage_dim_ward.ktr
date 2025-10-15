@@ -513,7 +513,7 @@
 , last_updated
 , "name"
 , ward_category_id
-FROM "import".eafya_ward
+FROM "stage".eafya_ward
 </sql>
     <limit>0</limit>
     <lookup/>

@@ -549,7 +549,7 @@
 , third_apgar_score
 , upper_limbs_condition
 , baby_gender
-FROM "import".eafya_newborn
+FROM "stage".eafya_newborn
 </sql>
     <limit>0</limit>
     <lookup/>

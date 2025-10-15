@@ -322,7 +322,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_dim</name>
+      <name>dwh_dim</name>
       <description/>
       <type>JOB</type>
       <attributes/>
@@ -359,7 +359,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage_facts</name>
+      <name>dwh_facts</name>
       <description/>
       <type>JOB</type>
       <attributes/>
@@ -399,7 +399,7 @@
   <hops>
     <hop>
       <from>Start</from>
-      <to>stage_dim</to>
+      <to>dwh_dim</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -407,8 +407,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>stage_dim</from>
-      <to>stage_facts</to>
+      <from>dwh_dim</from>
+      <to>dwh_facts</to>
       <from_nr>0</from_nr>
       <to_nr>1</to_nr>
       <enabled>Y</enabled>
@@ -416,7 +416,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage_facts</from>
+      <from>dwh_facts</from>
       <to>Success</to>
       <from_nr>1</from_nr>
       <to_nr>0</to_nr>

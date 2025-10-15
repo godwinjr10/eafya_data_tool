@@ -514,7 +514,7 @@
   id
 , created_by_id
 , "name" as major_theater_category
-FROM "import".eafya_major_theatre_category
+FROM "stage".eafya_major_theatre_category
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -629,7 +629,7 @@ FROM "import".eafya_major_theatre_category
 , description
 , last_updated
 , "name" as minor_theater_categroy
-FROM "import".eafya_minor_theatre_category
+FROM "stage".eafya_minor_theatre_category
 </sql>
     <limit>0</limit>
     <lookup/>

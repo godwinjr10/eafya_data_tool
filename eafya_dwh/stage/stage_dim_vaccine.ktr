@@ -517,7 +517,7 @@
 , is_children_vaccine
 , last_updated
 , "name"
-FROM "import".eafya_vaccine
+FROM "stage".eafya_vaccine
 </sql>
     <limit>0</limit>
     <lookup/>

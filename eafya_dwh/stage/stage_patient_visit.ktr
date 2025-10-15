@@ -585,7 +585,7 @@
 , last_updated
 , patient_id
 , process
-FROM "import".eafya_patient_visit
+FROM "stage".eafya_patient_visit
 </sql>
     <limit>0</limit>
     <lookup/>

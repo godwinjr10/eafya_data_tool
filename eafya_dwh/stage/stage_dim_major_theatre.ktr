@@ -516,7 +516,7 @@
 , date_created
 , major_theater_category_id
 , "name"
-FROM "import".eafya_major_theatre
+FROM "stage".eafya_major_theatre
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -671,7 +671,7 @@ FROM "import".eafya_major_theatre
   id
 , date_created
 , "name" as major_theater_room
-FROM "import".eafya_major_theatre_room
+FROM "stage".eafya_major_theatre_room
 </sql>
     <limit>0</limit>
     <lookup/>

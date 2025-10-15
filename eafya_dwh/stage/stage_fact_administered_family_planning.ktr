@@ -515,7 +515,7 @@
 , family_planning_id
 , last_updated
 , patient_family_planning_id
-FROM "import".eafya_administered_family_planning
+FROM "stage".eafya_administered_family_planning
 </sql>
     <limit>0</limit>
     <lookup/>

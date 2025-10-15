@@ -310,7 +310,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>import</name>
+      <name>stage</name>
       <description/>
       <type>JOB</type>
       <attributes/>
@@ -352,7 +352,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage</name>
+      <name>dwh</name>
       <description/>
       <type>JOB</type>
       <attributes/>
@@ -385,43 +385,6 @@
       <draw>Y</draw>
       <nr>1</nr>
       <xloc>800</xloc>
-      <yloc>144</yloc>
-      <attributes_kjc/>
-    </entry>
-    <entry>
-      <name>dwh</name>
-      <description/>
-      <type>JOB</type>
-      <attributes/>
-      <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>${Internal.Entry.Current.Directory}\dwh\dwh_job_main.kjb</filename>
-      <jobname/>
-      <directory/>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
-      <slave_server_name/>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
-      <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
-      <run_configuration>Pentaho local</run_configuration>
-      <parameters>
-        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>
-      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>2</nr>
-      <xloc>944</xloc>
       <yloc>144</yloc>
       <attributes_kjc/>
     </entry>
@@ -551,19 +514,10 @@
   </entries>
   <hops>
     <hop>
-      <from>import</from>
-      <to>stage</to>
-      <from_nr>0</from_nr>
-      <to_nr>1</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>stage</from>
       <to>dwh</to>
-      <from_nr>1</from_nr>
-      <to_nr>2</to_nr>
+      <from_nr>0</from_nr>
+      <to_nr>1</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
@@ -588,17 +542,8 @@
     </hop>
     <hop>
       <from>log_last_run_date</from>
-      <to>import</to>
+      <to>stage</to>
       <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>dwh</from>
-      <to>log_etl_run </to>
-      <from_nr>2</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
@@ -609,6 +554,15 @@
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>1</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>dwh</from>
+      <to>log_etl_run </to>
+      <from_nr>1</from_nr>
+      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>

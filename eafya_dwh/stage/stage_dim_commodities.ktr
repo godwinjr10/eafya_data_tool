@@ -821,7 +821,7 @@
 , "name"
 , quantity
 , unit_id
-FROM "import".eafya_inventory_unit
+FROM "stage".eafya_inventory_unit
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -1089,7 +1089,7 @@ FROM "import".eafya_inventory_unit
 , unit_selling_price
 , vat_class_id
 , product_bill_category_id
-FROM "import".eafya_product
+FROM "stage".eafya_product
 
 
 </sql>
@@ -1689,7 +1689,7 @@ FROM "import".eafya_product
 , parent_id
 , stock_control_account_id
 , adjustment_control_ledger_id
-FROM "import".eafya_store
+FROM "stage".eafya_store
 </sql>
     <limit>0</limit>
     <lookup/>

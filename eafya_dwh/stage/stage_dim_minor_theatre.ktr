@@ -511,7 +511,7 @@
 , date_created
 , minor_theater_category_id
 , "name"
-FROM "import".eafya_minor_theatre
+FROM "stage".eafya_minor_theatre
 </sql>
     <limit>0</limit>
     <lookup/>

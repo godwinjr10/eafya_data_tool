@@ -514,7 +514,7 @@
 , is_new_to_method
 , last_updated
 , treatment_stage
-FROM "import".eafya_patient_family_planning
+FROM "stage".eafya_patient_family_planning
 </sql>
     <limit>0</limit>
     <lookup/>

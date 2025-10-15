@@ -514,7 +514,7 @@
 , encounter_id
 , is_surveilled
 , last_updated
-FROM "import".eafya_patient_disease
+FROM "stage".eafya_patient_disease
 </sql>
     <limit>0</limit>
     <lookup/>

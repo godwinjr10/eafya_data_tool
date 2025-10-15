@@ -515,7 +515,7 @@
 , created_by_id
 , date_created
 , "name"
-FROM "import".eafya_triage_type
+FROM "stage".eafya_triage_type
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -783,7 +783,7 @@ FROM "import".eafya_triage_type
 , created_by_id
 , triage_type_id
 , vital_type_id
-FROM import."eafya_triage_type_vital_sign "
+FROM stage."eafya_triage_type_vital_sign "
 </sql>
     <limit>0</limit>
     <lookup/>

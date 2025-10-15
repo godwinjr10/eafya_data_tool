@@ -513,7 +513,7 @@
 , created_by_id
 , date_created
 , priority_level
-FROM "import".eafya_triage
+FROM "stage".eafya_triage
 </sql>
     <limit>0</limit>
     <lookup/>

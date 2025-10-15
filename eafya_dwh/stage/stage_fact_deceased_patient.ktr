@@ -514,7 +514,7 @@
 , patient_visit_id
 , place_of_death
 , time_of_death
-FROM import.eafya_deceased_patient
+FROM stage.eafya_deceased_patient
 </sql>
     <limit>0</limit>
     <lookup/>

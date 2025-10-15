@@ -511,7 +511,7 @@
     </partitioning>
     <connection>dwh_conn</connection>
     <sql>SELECT *
-FROM "import".eafya_bed
+FROM "stage".eafya_bed
 </sql>
     <limit>0</limit>
     <lookup/>
@@ -870,7 +870,7 @@ FROM "import".eafya_bed
     </partitioning>
     <connection>dwh_conn</connection>
     <sql>SELECT *
-FROM "import".eafya_room
+FROM "stage".eafya_room
 </sql>
     <limit>0</limit>
     <lookup/>
