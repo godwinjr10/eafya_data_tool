@@ -3,43 +3,110 @@ import { pool } from "../../config/database.js";
 
 const router = express.Router();
 
-// Get Imaging mappings
+// Get imaging mappings
 router.get("/", async (req, res) => {
   try {
+    const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 25, 1), 500);
+    const offset = (page - 1) * limit;
+    const sectionName = (req.query.sectionName || "").trim();
+
+    const whereSql = sectionName ? `WHERE section_name = $1` : "";
+    const countQuery = `SELECT COUNT(*)::int AS total FROM reporting.dataelements_imaging ${whereSql}`;
+    const dataQuery = `
+        SELECT 
+          section_code as section_id, 
+          section_name, 
+          hmis_code, 
+          dataelement_name as hmis_name
+        FROM reporting.dataelements_imaging
+      ${whereSql}
+      ORDER BY section_code, hmis_code
+      LIMIT $${sectionName ? 2 : 1} OFFSET $${sectionName ? 3 : 2}
+    `;
+
+    const [countResult, dataResult] = await Promise.all([
+      pool.query(countQuery, sectionName ? [sectionName] : []),
+      pool.query(dataQuery, sectionName ? [sectionName, limit, offset] : [limit, offset])
+    ]);
+
+    const total = countResult.rows[0]?.total || 0;
+    const rows = dataResult.rows;
+    const totalPages = Math.max(Math.ceil(total / limit), 1);
+
+    res.json({ data: rows, page, limit, total, totalPages });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Distinct section names for dropdown
+router.get("/sections", async (_req, res) => {
+  try {
+    const sql = `
+      SELECT DISTINCT section_name
+      FROM reporting.dataelements_imaging
+      ORDER BY section_name
+    `;
+    const { rows } = await pool.query(sql);
+    res.json(rows.map(r => r.section_name));
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get imaging items for mapping
+router.get("/items", async (req, res) => {
+  try {
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 100, 1), 500);
+    const offset = parseInt(req.query.offset, 10) || 0;
+    const search = (req.query.search || "").trim();
+
+    let whereClause = "";
+    let params = [];
+    let paramCount = 0;
+
     const query = `
-      select 
-        MIN(id) as id,
-        hmis_code, 
-        SUBSTRING(hmis_name FROM 6) AS hmis_name,
-        section_id, 
-        section_name
-      FROM reporting.dhis2_dataelements_108_imaging
-      GROUP BY hmis_code, hmis_name, section_id, section_name
-      ORDER BY section_id
+            SELECT 
+            p.id,
+            p.name
+            FROM dwh.dim_eafya_imaging p
+            ${whereClause}
+            ORDER BY name
+            LIMIT $${paramCount + 1} OFFSET $${paramCount + 2}
         `;
 
-    const { rows } = await pool.query(query);
+    params.push(limit, offset);
+
+    const { rows } = await pool.query(query, params);
     res.json(rows);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Get Imaging items for mapping
-router.get("/items", async (req, res) => {
+// Delete a single imaging mapping by id
+router.delete("/", async (req, res) => {
   try {
-    const query = `
-            SELECT 
-              id, 
-              "name",
-              imaging_category_id
-            FROM dwh.dim_eafya_imaging
-            ORDER BY "name"
-        `;
-
-    const { rows } = await pool.query(query);
-    res.json(rows);
+    const { id } = req.body;
+    const sql = `DELETE FROM reporting.hmis_eafya_imaging_mapping WHERE id = $1`;
+    const result = await pool.query(sql, [id]);
+    return res.json({ message: "imaging mapping deleted", count: result.rowCount });
   } catch (error) {
+    console.error("Error deleting imaging mapping:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Delete a single imaging mapping by id via URL param
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const sql = `DELETE FROM reporting.hmis_eafya_imaging_mapping WHERE id = $1`;
+    const result = await pool.query(sql, [id]);
+    return res.json({ message: "imaging mapping deleted", count: result.rowCount });
+  } catch (error) {
+    console.error("Error deleting imaging mapping by id:", error);
     res.status(500).json({ message: error.message });
   }
 });
@@ -48,164 +115,73 @@ router.get("/items", async (req, res) => {
 router.get("/:hmisCode", async (req, res) => {
   try {
     const { hmisCode } = req.params;
-
     const query = `
       SELECT 
-        distinct hmis_code,
-        hmis_name,
-        eafya_id,
-        eafya_name
-      FROM reporting.dhis2_dataelements_108_imaging
+        id,
+        hmis_code, 
+        hmis_name, 
+        imaging_id, 
+        imaging_name
+      FROM reporting.hmis_eafya_imaging_mapping
       WHERE hmis_code = $1
-      ORDER BY hmis_code
     `;
 
     const { rows } = await pool.query(query, [hmisCode]);
-
-    if (rows.length === 0) {
-      return res.status(404).json({
-        message: "No imaging mappings found for this HMIS code",
-        hmis_code: hmisCode,
-      });
-    }
-
-    res.json({
-      hmis_code: hmisCode,
-      hmis_name: rows[0].hmis_name,
-      mappings: rows,
-    });
+    res.json(rows);
   } catch (error) {
     console.error("Error fetching imaging mapping details:", error);
     res.status(500).json({ message: error.message });
   }
 });
 
-// Create imaging mappings
+// Create imaging mapping entries
 router.post("/", async (req, res) => {
   try {
-    const {
-      hmis_code,
-      mappings, // [{ id, name }] eAFYA imaging
-    } = req.body;
+    const { hmis_code, hmis_name, imaging } = req.body;
+    
+    
+    // Get section_id from the HMIS code (assuming it's the first part)
+    const section_id = hmis_code.substring(0, 2); // Extract first 2 characters as section_id
+    
+    const columns = `section_id, hmis_code, hmis_name, imaging_id, imaging_name`;
+    const valuesPlaceholders = [];
+    const params = [];
 
-
-    // Fetch existing imaging data for the given hmis_code
-    const queryExisting = `
-        SELECT 
-          DISTINCT   
-          id,
-          hmis_code,
-          hmis_name,
-          section_id,
-          section_name,
-          dataelement
-        FROM reporting.dhis2_dataelements_108_imaging
-        WHERE hmis_code = $1
-        ORDER BY id
-      `;
-
-    console.log("Executing imaging query with params:", [
-      hmis_code,
-    ]);
-    const { rows } = await pool.query(queryExisting, [hmis_code]);
-
-    console.log(`Found ${rows.length} distinct imaging entries`);
-
-    if (rows.length === 0) {
-      return res.status(404).json({
-        message:
-          "No existing imaging data found for the provided hmis_code",
-      });
+    if (!Array.isArray(imaging) || imaging.length === 0) {
+      return res.status(400).json({ message: 'imaging must be a non-empty array' });
     }
 
-    const client = await pool.connect();
-    try {
-      await client.query("BEGIN");
-
-      let totalInserted = 0;
-
-      // For each eAFYA imaging mapping, create one new record using the first existing imaging data
-      for (let j = 0; j < mappings.length; j++) {
-        const eafyaImaging = mappings[j];
-        const existingData = rows[0]; // Use the first existing imaging data
-        
-        console.log(
-          `Creating record for eAFYA imaging ${j + 1}/${mappings.length}: ${
-            eafyaImaging.id
-          }`
-        );
-
-        await client.query(
-          `INSERT INTO reporting.dhis2_dataelements_108_imaging 
-           (hmis_code, hmis_name, section_id, section_name, dataelement, eafya_id, eafya_name) 
-           VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-          [
-            existingData.hmis_code,
-            existingData.hmis_name,
-            existingData.section_id,
-            existingData.section_name,
-            existingData.dataelement,
-            parseInt(eafyaImaging.id),
-            eafyaImaging.name || null,
-          ]
-        );
-        totalInserted++;
-      }
-
-      console.log(`Total imaging mappings created: ${totalInserted}`);
-
-      await client.query("COMMIT");
-      return res.json({
-        message: "New imaging mapping records created successfully",
-        count: totalInserted,
-        details: {
-          imaging_entries: rows.length,
-          eafya_imaging: mappings.length,
-          total_mappings_created: totalInserted,
-          calculation: `${mappings.length} eAFYA imaging = ${totalInserted} new records`,
-        },
-      });
-    } catch (error) {
-      await client.query("ROLLBACK");
-      throw error;
-    } finally {
-      client.release();
-    }
-  } catch (error) {
-    console.error("Error saving imaging mappings:", error);
-    res.status(500).json({ message: error.message });
-  }
-});
-
-// Delete a specific imaging mapping
-router.delete("/", async (req, res) => {
-  try {
-    const { eafya_id } = req.body;
-
-    if (!eafya_id) {
-      return res.status(400).json({
-        message: "Missing required fields: eafya_id",
-      });
+    for (let i = 0; i < imaging.length; i++) {
+      // there are 5 columns per row, so placeholders must advance by 5 each iteration
+      const base = i * 5;
+      valuesPlaceholders.push(
+        `($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5})`
+      );
+      const fp = imaging[i];
+      params.push(
+        section_id,
+        hmis_code,
+        hmis_name || '',
+        fp.imaging_id,
+        fp.imaging_name
+      );
     }
 
-    console.log("Deleting imaging mapping with:", {
-      eafya_id,
+    const insertQuery = `
+      INSERT INTO reporting.hmis_eafya_imaging_mapping (${columns})
+      VALUES ${valuesPlaceholders.join(", ")}
+      RETURNING *
+    `;
+
+    const { rows } = await pool.query(insertQuery, params);
+
+    return res.status(201).json({
+      message: "imaging mapping(s) created",
+      count: rows.length,
+      records: rows,
     });
-
-    const result = await pool.query(
-      "DELETE FROM reporting.dhis2_dataelements_108_imaging WHERE eafya_id = $1",
-      [eafya_id]
-    );
-
-    console.log("Delete result:", result.rowCount, "rows affected");
-
-    if (result.rowCount === 0) {
-      return res.status(404).json({ message: "Mapping not found" });
-    }
-
-    res.json({ message: "Imaging mapping deleted successfully" });
   } catch (error) {
-    console.error("Error deleting imaging mapping:", error);
+    console.error("Error creating imaging mapping:", error);
     res.status(500).json({ message: error.message });
   }
 });

@@ -12,7 +12,7 @@ router.get("/", async (req, res) => {
     const sectionName = (req.query.sectionName || "").trim();
 
     const whereSql = sectionName ? `WHERE section_name = $1` : "";
-    const countQuery = `SELECT COUNT(*)::int AS total FROM reporting.dataelements_commodities ${whereSql}`;
+    const countQuery = `SELECT COUNT(*)::int AS total FROM reporting.hmis_commodities ${whereSql}`;
     const dataQuery = `
       SELECT 
         section_id, 
@@ -149,7 +149,8 @@ router.post("/", async (req, res) => {
     const params = [];
 
     for (let i = 0; i < products.length; i++) {
-      const base = i * 7;
+      // there are 5 columns per row, so placeholders must advance by 5 each iteration
+      const base = i * 5;
       valuesPlaceholders.push(
         `($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5})`
       );

@@ -24,6 +24,11 @@ import FamilyPlanning from "../pages/FamilyPlanning";
 import MappingTest from "../pages/MappingTest";
 import MappingDetail from "../pages/MappingTest/dhis2/Conditions/MappingDetail";
 import CommoditiesDetail from "../pages/MappingTest/dhis2/Commodities/CommoditiesDetail";
+import LabTestsDetail from "../pages/MappingTest/dhis2/LabTests/LabTestsDetail";
+import FamilyPlanningDetail from "../pages/MappingTest/dhis2/FamilyPlanning/FamilyPlanningDetail";
+import VaccinesDetail from "../pages/MappingTest/dhis2/Vaccines/VaccinesDetail";
+import ProceduresDetail from "../pages/MappingTest/dhis2/Procedures/ProceduresDetail";
+import ImagingDetail from "../pages/MappingTest/dhis2/Imaging/ImagingDetail";
 
 const AppRoutes = () => {
   return (
@@ -50,6 +55,11 @@ const AppRoutes = () => {
           <ProtectedRoute path="/mapping" exact component={MappingTest} />
           <ProtectedRoute path="/mapping/:id" exact component={MappingDetail} />
           <ProtectedRoute path="/mapping/commodities/:id" exact component={CommoditiesDetail} />
+          <ProtectedRoute path="/mapping/labtests/:id" exact component={LabTestsDetail} />
+          <ProtectedRoute path="/mapping/familyplanning/:id" exact component={FamilyPlanningDetail} />
+          <ProtectedRoute path="/mapping/vaccines/:id" exact component={VaccinesDetail} />
+          <ProtectedRoute path="/mapping/procedures/:id" exact component={ProceduresDetail} />
+          <ProtectedRoute path="/mapping/imaging/:id" exact component={ImagingDetail} />
         </MainLayout>
       </Switch>
     </Fragment>

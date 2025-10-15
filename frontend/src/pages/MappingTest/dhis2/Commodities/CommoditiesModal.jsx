@@ -3,7 +3,7 @@ import API from '../../../../helpers/api';
 
 const CommoditiesModal = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) => {
   const [products, setDiseases] = useState([]);
-  const [selectedProducts, setSelectedDiseases] = useState([]);
+  const [selectedProducts, setSelectedProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [loadingDiseases, setLoadingDiseases] = useState(false);
   const [error, setError] = useState('');
@@ -12,7 +12,7 @@ const CommoditiesModal = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) => 
   // Fetch products when modal opens
   useEffect(() => {
     if (isOpen) {
-      fetchDiseases();
+      fetchProducts();
     }
   }, [isOpen]);
 
@@ -21,13 +21,13 @@ const CommoditiesModal = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) => 
     if (!isOpen) return;
     
     const timeoutId = setTimeout(() => {
-      fetchDiseases(searchTerm);
+      fetchProducts(searchTerm);
     }, 300);
 
     return () => clearTimeout(timeoutId);
   }, [searchTerm, isOpen]);
 
-  const fetchDiseases = async (searchTerm = '') => {
+  const fetchProducts = async (searchTerm = '') => {
     setLoadingDiseases(true);
     setError('');
     try {
@@ -47,11 +47,11 @@ const CommoditiesModal = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) => 
     }
   };
 
-  const handleDiseaseToggle = (product) => {
-    setSelectedDiseases(prev => {
-      const isSelected = prev.some(selected => selected.product_id === product.product_id);
+  const handleCommoditiesToggle = (product) => {
+    setSelectedProducts(prev => {
+      const isSelected = prev.some(selected => selected.id === product.id);
       if (isSelected) {
-        return prev.filter(selected => selected.product_id !== product.product_id);
+        return prev.filter(selected => selected.id !== product.id);
       } else {
         return [...prev, product];
       }
@@ -77,10 +77,12 @@ const CommoditiesModal = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) => 
         hmis_code: hmisCode,
         hmis_name: hmisName,
         products: selectedProducts.map(product => ({
-          product_id: product.product_id,
-          product_name: product.product_name,
+          product_id: product.id,
+          product_name: product.name,
         }))
       };
+
+      console.log('Submitting payload:', payload);
       
       await API.post('/mapping/commodities', payload);
       onSubmit();
@@ -93,7 +95,7 @@ const CommoditiesModal = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) => 
   };
 
   const handleClose = () => {
-    setSelectedDiseases([]);
+    setSelectedProducts([]);
     setSearchTerm('');
     setError('');
     onClose();
@@ -182,7 +184,7 @@ const CommoditiesModal = ({ isOpen, onClose, onSubmit, hmisCode, hmisName }) => 
                             <div
                               className={`card h-100 ${isSelected ? 'border-2 border-primary' : 'border-0'}`}
                               style={{ cursor: 'pointer', borderRadius: '0.6rem', boxShadow: isSelected ? '0 6px 12px rgba(20,115,255,0.06)' : 'none' }}
-                              onClick={() => handleDiseaseToggle(product)}
+                              onClick={() => handleCommoditiesToggle(product)}
                             >
                               <div className="card-body py-1">
                                 <div className="d-flex align-items-start">

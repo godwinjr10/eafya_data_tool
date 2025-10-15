@@ -922,28 +922,28 @@ class SimpleSetup {
 
     try {
       // Step 1: Test connection
-      //await this.testConnection();
+      await this.testConnection();
 
       // Step 2: Setup database structure
-      //await this.setupDatabaseStructure();
+      await this.setupDatabaseStructure();
 
       // Step 3: Create datasets
-      //await this.createDatasets();
+      await this.createDatasets();
 
       // Step 4: Create users
-      //await this.createUsers();
+      await this.createUsers();
 
       // Step 5: Create facility table
-      //await this.createFacilityTable();
+      await this.createFacilityTable();
 
       // Step 6: Create CustomizationSets
-      //await this.createCustomizationSets();
+      await this.createCustomizationSets();
 
       // Step 7: Upload CSV files
       await this.uploadCSVFiles();
 
       // Step 8: Setup views
-      //await this.setupViews();
+      await this.setupViews();
 
       // Print summary
       this.logger.printSummary();

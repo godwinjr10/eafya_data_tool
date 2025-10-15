@@ -6,204 +6,182 @@ const router = express.Router();
 // Get procedures mappings
 router.get("/", async (req, res) => {
   try {
-    const query = `
-      select 
-        MIN(id) as id,
-        hmis_code, 
-        SUBSTRING(hmis_name FROM 6) AS hmis_name,
-        section_id, 
-        section_name
-      FROM reporting.dhis2_dataelements_108_procedures
-      GROUP BY hmis_code, hmis_name, section_id, section_name
-      ORDER BY section_id
-        `;
+    const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 25, 1), 500);
+    const offset = (page - 1) * limit;
+    const sectionName = (req.query.sectionName || "").trim();
 
-    const { rows } = await pool.query(query);
-    res.json(rows);
+    const whereSql = sectionName ? `WHERE section_name = $1` : "";
+    const countQuery = `SELECT COUNT(*)::int AS total FROM reporting.dataelements_procedures ${whereSql}`;
+    const dataQuery = `
+        SELECT 
+          section_id, 
+          section_name, 
+          hmis_code, 
+          dataelement_name as hmis_name
+        FROM reporting.dataelements_procedures
+      ${whereSql}
+      ORDER BY section_id, hmis_code
+      LIMIT $${sectionName ? 2 : 1} OFFSET $${sectionName ? 3 : 2}
+    `;
+
+    const [countResult, dataResult] = await Promise.all([
+      pool.query(countQuery, sectionName ? [sectionName] : []),
+      pool.query(dataQuery, sectionName ? [sectionName, limit, offset] : [limit, offset])
+    ]);
+
+    const total = countResult.rows[0]?.total || 0;
+    const rows = dataResult.rows;
+    const totalPages = Math.max(Math.ceil(total / limit), 1);
+
+    res.json({ data: rows, page, limit, total, totalPages });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Get procedures items for mapping
+// Distinct section names for dropdown
+router.get("/sections", async (_req, res) => {
+  try {
+    const sql = `
+      SELECT DISTINCT section_name
+      FROM reporting.dataelements_procedures
+      ORDER BY section_name
+    `;
+    const { rows } = await pool.query(sql);
+    res.json(rows.map(r => r.section_name));
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get procedure items for mapping
 router.get("/items", async (req, res) => {
   try {
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 100, 1), 500);
+    const offset = parseInt(req.query.offset, 10) || 0;
+    const search = (req.query.search || "").trim();
+
+    let whereClause = "";
+    let params = [];
+    let paramCount = 0;
+
     const query = `
             SELECT 
-              id, 
-              major_theater_name as name
-            FROM dwh.dim_eafya_major_theatre
-            ORDER BY "name"
+            p.id,
+            p.major_theater_name as name
+            FROM dwh.dim_eafya_major_theatre p
+            ${whereClause}
+            ORDER BY major_theater_name
+            LIMIT $${paramCount + 1} OFFSET $${paramCount + 2}
         `;
 
-    const { rows } = await pool.query(query);
+    params.push(limit, offset);
+
+    const { rows } = await pool.query(query, params);
     res.json(rows);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Get procedures mapping details by HMIS code
+// Delete a single procedure mapping by id
+router.delete("/", async (req, res) => {
+  try {
+    const { id } = req.body;
+    const sql = `DELETE FROM reporting.hmis_eafya_procedures_mapping WHERE id = $1`;
+    const result = await pool.query(sql, [id]);
+    return res.json({ message: "procedure mapping deleted", count: result.rowCount });
+  } catch (error) {
+    console.error("Error deleting procedure mapping:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Delete a single procedure mapping by id via URL param
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const sql = `DELETE FROM reporting.hmis_eafya_procedures_mapping WHERE id = $1`;
+    const result = await pool.query(sql, [id]);
+    return res.json({ message: "procedure mapping deleted", count: result.rowCount });
+  } catch (error) {
+    console.error("Error deleting procedure mapping by id:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get procedure mapping details by HMIS code
 router.get("/:hmisCode", async (req, res) => {
   try {
     const { hmisCode } = req.params;
-
     const query = `
       SELECT 
-        distinct hmis_code,
-        hmis_name,
-        eafya_id,
-        eafya_name
-      FROM reporting.dhis2_dataelements_108_procedures
+        id,
+        hmis_code, 
+        hmis_name, 
+        procedure_id, 
+        procedure_name
+      FROM reporting.hmis_eafya_procedures_mapping
       WHERE hmis_code = $1
-      ORDER BY hmis_code
     `;
 
     const { rows } = await pool.query(query, [hmisCode]);
-
-    if (rows.length === 0) {
-      return res.status(404).json({
-        message: "No procedures mappings found for this HMIS code",
-        hmis_code: hmisCode,
-      });
-    }
-
-    res.json({
-      hmis_code: hmisCode,
-      hmis_name: rows[0].hmis_name,
-      mappings: rows,
-    });
+    res.json(rows);
   } catch (error) {
-    console.error("Error fetching procedures mapping details:", error);
+    console.error("Error fetching procedure mapping details:", error);
     res.status(500).json({ message: error.message });
   }
 });
 
-// Create procedures mappings
+// Create procedure mapping entries
 router.post("/", async (req, res) => {
   try {
-    const {
-      hmis_code,
-      mappings, // [{ id, name }] eAFYA procedures
-    } = req.body;
+    const { hmis_code, hmis_name, procedures } = req.body;
+    
+    
+    // Get section_id from the HMIS code (assuming it's the first part)
+    const section_id = hmis_code.substring(0, 2); // Extract first 2 characters as section_id
+    
+    const columns = `section_id, hmis_code, hmis_name, procedure_id, procedure_name`;
+    const valuesPlaceholders = [];
+    const params = [];
 
-    // Fetch existing procedures data for the given hmis_code
-    const queryExisting = `
-        SELECT 
-          DISTINCT   
-          id,
-          hmis_code,
-          hmis_name,
-          section_id,
-          section_name,
-          dataelement
-        FROM reporting.dhis2_dataelements_108_procedures
-        WHERE hmis_code = $1
-        ORDER BY id
-      `;
-
-    console.log("Executing procedures query with params:", [
-      hmis_code,
-    ]);
-    const { rows } = await pool.query(queryExisting, [hmis_code]);
-
-    console.log(`Found ${rows.length} distinct procedures entries`);
-
-    if (rows.length === 0) {
-      return res.status(404).json({
-        message:
-          "No existing procedures data found for the provided hmis_code",
-      });
+    if (!Array.isArray(procedures) || procedures.length === 0) {
+      return res.status(400).json({ message: 'procedure must be a non-empty array' });
     }
 
-    const client = await pool.connect();
-    try {
-      await client.query("BEGIN");
-
-      let totalInserted = 0;
-
-      // For each eAFYA procedure mapping, create one new record using the first existing procedure data
-      for (let j = 0; j < mappings.length; j++) {
-        const eafyaProcedure = mappings[j];
-        const existingData = rows[0]; // Use the first existing procedure data
-        
-        console.log(
-          `Creating record for eAFYA procedure ${j + 1}/${mappings.length}: ${
-            eafyaProcedure.id
-          }`
-        );
-
-        await client.query(
-          `INSERT INTO reporting.dhis2_dataelements_108_procedures 
-           (hmis_code, hmis_name, section_id, section_name, dataelement, eafya_id, eafya_name) 
-           VALUES ($1, $2, $3, $4, $5, $6, $7)`,
-          [
-            existingData.hmis_code,
-            existingData.hmis_name,
-            existingData.section_id,
-            existingData.section_name,
-            existingData.dataelement,
-            parseInt(eafyaProcedure.id),
-            eafyaProcedure.name || null,
-          ]
-        );
-        totalInserted++;
-      }
-
-      console.log(`Total procedures mappings created: ${totalInserted}`);
-
-      await client.query("COMMIT");
-      return res.json({
-        message: "New procedures mapping records created successfully",
-        count: totalInserted,
-        details: {
-          procedures_entries: rows.length,
-          eafya_procedures: mappings.length,
-          total_mappings_created: totalInserted,
-          calculation: `${mappings.length} eAFYA procedures = ${totalInserted} new records`,
-        },
-      });
-    } catch (error) {
-      await client.query("ROLLBACK");
-      throw error;
-    } finally {
-      client.release();
-    }
-  } catch (error) {
-    console.error("Error saving procedures mappings:", error);
-    res.status(500).json({ message: error.message });
-  }
-});
-
-// Delete a specific procedures mapping
-router.delete("/", async (req, res) => {
-  try {
-    const { eafya_id } = req.body;
-
-    if (!eafya_id) {
-      return res.status(400).json({
-        message: "Missing required fields: eafya_id",
-      });
+    for (let i = 0; i < procedures.length; i++) {
+      // there are 5 columns per row, so placeholders must advance by 5 each iteration
+      const base = i * 5;
+      valuesPlaceholders.push(
+        `($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5})`
+      );
+      const fp = procedures[i];
+      params.push(
+        section_id,
+        hmis_code,
+        hmis_name || '',
+        fp.procedure_id,
+        fp.procedure_name
+      );
     }
 
-    console.log("Deleting procedures mapping with:", {
-      eafya_id,
+    const insertQuery = `
+      INSERT INTO reporting.hmis_eafya_procedures_mapping (${columns})
+      VALUES ${valuesPlaceholders.join(", ")}
+      RETURNING *
+    `;
+
+    const { rows } = await pool.query(insertQuery, params);
+
+    return res.status(201).json({
+      message: "procedure mapping(s) created",
+      count: rows.length,
+      records: rows,
     });
-
-    const result = await pool.query(
-      "DELETE FROM reporting.dhis2_dataelements_108_procedures WHERE eafya_id = $1",
-      [eafya_id]
-    );
-
-    console.log("Delete result:", result.rowCount, "rows affected");
-
-    if (result.rowCount === 0) {
-      return res.status(404).json({ message: "Mapping not found" });
-    }
-
-    res.json({ message: "Procedures mapping deleted successfully" });
   } catch (error) {
-    console.error("Error deleting procedures mapping:", error);
+    console.error("Error creating procedure mapping:", error);
     res.status(500).json({ message: error.message });
   }
 });
