@@ -3,22 +3,53 @@ import { pool } from "../../config/database.js";
 
 const router = express.Router();
 
-// Get vaccines mappings
+// Get conditions mappings
 router.get("/", async (req, res) => {
   try {
-    const query = `
-        SELECT 
-            
-            distinct hmis_code,
-            hmis_name,
-              _section_id,
-            section_name
-        FROM reporting.dhis_eafya_mapping_vaccines
-        ORDER BY hmis_code
-        `;
+    const page = Math.max(parseInt(req.query.page, 10) || 1, 1);
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 25, 1), 500);
+    const offset = (page - 1) * limit;
+    const sectionName = (req.query.sectionName || "").trim();
 
-    const { rows } = await pool.query(query);
-    res.json(rows);
+    const whereSql = sectionName ? `WHERE section_name = $1` : "";
+    const countQuery = `SELECT COUNT(*)::int AS total FROM reporting.hmis_vaccines ${whereSql}`;
+    const dataQuery = `
+      SELECT 
+        section_code as section_id, 
+        section_name, 
+        hmis_code, 
+        hmis_name
+      FROM reporting.hmis_vaccines
+      ${whereSql}
+      ORDER BY section_id, hmis_code
+      LIMIT $${sectionName ? 2 : 1} OFFSET $${sectionName ? 3 : 2}
+    `;
+
+    const [countResult, dataResult] = await Promise.all([
+      pool.query(countQuery, sectionName ? [sectionName] : []),
+      pool.query(dataQuery, sectionName ? [sectionName, limit, offset] : [limit, offset])
+    ]);
+
+    const total = countResult.rows[0]?.total || 0;
+    const rows = dataResult.rows;
+    const totalPages = Math.max(Math.ceil(total / limit), 1);
+
+    res.json({ data: rows, page, limit, total, totalPages });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Distinct section names for dropdown
+router.get("/sections", async (_req, res) => {
+  try {
+    const sql = `
+      SELECT DISTINCT section_name
+      FROM reporting.hmis_vaccines
+      ORDER BY section_name
+    `;
+    const { rows } = await pool.query(sql);
+    res.json(rows.map(r => r.section_name));
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -27,204 +58,126 @@ router.get("/", async (req, res) => {
 // Get vaccine items for mapping
 router.get("/items", async (req, res) => {
   try {
+    const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 100, 1), 500);
+    const offset = parseInt(req.query.offset, 10) || 0;
+    const search = (req.query.search || "").trim();
+
+    let whereClause = "";
+    let params = [];
+    let paramCount = 0;
+
     const query = `
             SELECT 
-                id, 
-                "name"
-            FROM dwh.dim_eafya_vaccine
+            p.id,
+            p."name"
+            FROM dwh.dim_eafya_vaccine p
+            ${whereClause}
             ORDER BY "name"
+            LIMIT $${paramCount + 1} OFFSET $${paramCount + 2}
         `;
 
-    const { rows } = await pool.query(query);
+    params.push(limit, offset);
+
+    const { rows } = await pool.query(query, params);
     res.json(rows);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// Delete a specific vaccine mapping
+// Delete a single condition mapping by id
 router.delete("/", async (req, res) => {
   try {
-    const { eafya_id } = req.body;
-
-    if (!eafya_id) {
-      return res.status(400).json({
-        message: "Missing required fields: eafya_id",
-      });
-    }
-
-    console.log("Deleting vaccine mapping with:", {
-      eafya_id,
-    });
-
-    const result = await pool.query(
-      "DELETE FROM reporting.dhis_eafya_mapping_vaccines WHERE eafya_vaccine_id = $1",
-      [eafya_id]
-    );
-
-    console.log("Delete result:", result.rowCount, "rows affected");
-
-    if (result.rowCount === 0) {
-      return res.status(404).json({ message: "Mapping not found" });
-    }
-
-    res.json({ message: "Vaccine mapping deleted successfully" });
+    const { id } = req.body;
+    const sql = `DELETE FROM reporting.hmis_eafya_vaccines_mapping WHERE id = $1`;
+    const result = await pool.query(sql, [id]);
+    return res.json({ message: "Condition mapping deleted", count: result.rowCount });
   } catch (error) {
-    console.error("Error deleting vaccine mapping:", error);
+    console.error("Error deleting condition mapping:", error);
     res.status(500).json({ message: error.message });
   }
 });
 
-// Get vaccine mapping details by HMIS code
+// Delete a single condition mapping by id via URL param
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const sql = `DELETE FROM reporting.hmis_eafya_vaccines_mapping WHERE id = $1`;
+    const result = await pool.query(sql, [id]);
+    return res.json({ message: "Condition mapping deleted", count: result.rowCount });
+  } catch (error) {
+    console.error("Error deleting condition mapping by id:", error);
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get condition mapping details by HMIS code
 router.get("/:hmisCode", async (req, res) => {
   try {
     const { hmisCode } = req.params;
-
     const query = `
       SELECT 
-     
-        distinct hmis_code,
-        hmis_name,
-        eafya_vaccine_id as eafya_id,
-        eafya_vaccine_name as eafya_name
-      FROM reporting.dhis_eafya_mapping_vaccines
+        id,
+        hmis_code, 
+        hmis_name, 
+        vaccine_id, 
+        vaccine_name
+      FROM reporting.hmis_eafya_vaccines_mapping
       WHERE hmis_code = $1
-      ORDER BY hmis_code
     `;
 
     const { rows } = await pool.query(query, [hmisCode]);
-
-    if (rows.length === 0) {
-      return res.status(404).json({
-        message: "No vaccine mappings found for this HMIS code",
-        hmis_code: hmisCode,
-      });
-    }
-
-    res.json({
-      hmis_code: hmisCode,
-      hmis_name: rows[0].hmis_name,
-      mappings: rows,
-    });
+    res.json(rows);
   } catch (error) {
-    console.error("Error fetching vaccine mapping details:", error);
+    console.error("Error fetching condition mapping details:", error);
     res.status(500).json({ message: error.message });
   }
 });
 
-// Create vaccine mappings
+// Create condition mapping entries
 router.post("/", async (req, res) => {
   try {
-    const {
-      _section_id,
-      hmis_code,
-      mappings, // [{ id, name }] eAFYA vaccines
-    } = req.body;
+    const { hmis_code, hmis_name, vaccines } = req.body;
 
-    // Simplified validation - only check for required fields
-    if (
-      !hmis_code ||
-      !_section_id ||
-      !Array.isArray(mappings) ||
-      mappings.length === 0
-    ) {
-      return res.status(400).json({
-        message:
-          "Missing required fields: hmis_code, section_id and non-empty mappings array",
-      });
+
+    // Get section_id from the HMIS code (assuming it's the first part)
+    const section_id = hmis_code.substring(0, 2); // Extract first 2 characters as section_id
+
+    const columns = `section_id, hmis_code, hmis_name, vaccine_id, vaccine_name`;
+    const valuesPlaceholders = [];
+    const params = [];
+
+    for (let i = 0; i < vaccines.length; i++) {
+      // there are 5 columns per row, so placeholders must advance by 5 each iteration
+      const base = i * 5;
+      valuesPlaceholders.push(
+        `($${base + 1}, $${base + 2}, $${base + 3}, $${base + 4}, $${base + 5})`
+      );
+      const va = vaccines[i];
+      params.push(
+        section_id,
+        hmis_code,
+        hmis_name || '',
+        va.vaccine_id,
+        va.vaccine_name
+      );
     }
 
-    // Fetch existing vaccine data for the given hmis_code and section_id
-    const queryExisting = `
-        SELECT 
-          DISTINCT   
-          _section_id,
-          section_name,
-          hmis_code,
-          hmis_name
-        FROM reporting.dhis_eafya_mapping_vaccines
-        WHERE hmis_code = $1 
-        ORDER BY hmis_code
-      `;
+    const insertQuery = `
+      INSERT INTO reporting.hmis_eafya_vaccines_mapping (${columns})
+      VALUES ${valuesPlaceholders.join(", ")}
+      RETURNING *
+    `;
 
-    console.log("Executing vaccines query with params:", [
-      hmis_code,
-      _section_id,
-    ]);
-    const { rows } = await pool.query(queryExisting, [hmis_code]);
+    const { rows } = await pool.query(insertQuery, params);
 
-    console.log(`Found ${rows.length} distinct vaccine entries`);
-
-    if (rows.length === 0) {
-      return res.status(404).json({
-        message:
-          "No existing vaccine data found for the provided hmis_code and section_id",
-      });
-    }
-
-    const client = await pool.connect();
-    try {
-      await client.query("BEGIN");
-
-      let totalInserted = 0;
-
-      // Outer loop: For each existing vaccine entry
-      for (let i = 0; i < rows.length; i++) {
-        const existingData = rows[i];
-        console.log(`Processing vaccine entry ${i + 1}/${rows.length}`);
-
-        // Inner loop: For each eAFYA vaccine
-        for (let j = 0; j < mappings.length; j++) {
-          const eafyaVaccine = mappings[j];
-          console.log(
-            `  - Mapping eAFYA vaccine ${j + 1}/${mappings.length}: ${
-              eafyaVaccine.id
-            }`
-          );
-
-          await client.query(
-            `INSERT INTO reporting.dhis_eafya_mapping_vaccines (
-                _section_id,
-                section_name,
-                hmis_code,
-                hmis_name,
-                eafya_vaccine_id,
-                eafya_vaccine_name
-              ) VALUES ($1, $2, $3, $4, $5, $6)`,
-            [
-              existingData._section_id,
-              existingData.section_name,
-              existingData.hmis_code,
-              existingData.hmis_name,
-              eafyaVaccine.id,
-              eafyaVaccine.name || null,
-            ]
-          );
-          totalInserted++;
-        }
-      }
-
-      console.log(`Total vaccine mappings created: ${totalInserted}`);
-
-      await client.query("COMMIT");
-      return res.json({
-        message: "Vaccine mappings saved successfully",
-        count: totalInserted,
-        details: {
-          vaccine_entries: rows.length,
-          eafya_vaccines: mappings.length,
-          total_mappings_created: totalInserted,
-          calculation: `${rows.length} vaccine entries × ${mappings.length} eAFYA vaccines = ${totalInserted} mappings`,
-        },
-      });
-    } catch (error) {
-      await client.query("ROLLBACK");
-      throw error;
-    } finally {
-      client.release();
-    }
+    return res.status(201).json({
+      message: "Condition mapping(s) created",
+      count: rows.length,
+      records: rows,
+    });
   } catch (error) {
-    console.error("Error saving vaccine mappings:", error);
+    console.error("Error creating condition mapping:", error);
     res.status(500).json({ message: error.message });
   }
 });

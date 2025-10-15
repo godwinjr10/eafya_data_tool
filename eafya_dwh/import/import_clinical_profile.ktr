@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>import_patients</name>
+    <name>import_clinical_profile</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -427,36 +427,13 @@
     <clusterschemas>
     </clusterschemas>
     <created_user>-</created_user>
-    <created_date>2025/05/03 12:03:43.909</created_date>
+    <created_date>2025/10/07 14:12:30.613</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2025/05/03 12:03:43.909</modified_date>
+    <modified_date>2025/10/07 14:12:30.613</modified_date>
     <key_for_session_key>H4sIAAAAAAAA/wMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
-    <notepad>
-      <note>This transformation contains import tables for;
-1. patient ids
-2. patient bio data</note>
-      <xloc>864</xloc>
-      <yloc>48</yloc>
-      <width>317</width>
-      <heigth>70</heigth>
-      <fontname>Segoe UI</fontname>
-      <fontsize>9</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
   </notepads>
   <connection>
     <name>dwh_conn</name>
@@ -562,18 +539,23 @@
   </connection>
   <order>
     <hop>
-      <from>registered_patients</from>
-      <to>registered_patients- output</to>
+      <from>Clinical Profile</from>
+      <to>Clinical Profile - Output</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>patients</from>
-      <to>patients - output</to>
+      <from>Clinical Profile Clinic</from>
+      <to>Table output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Patient Clinical Profile</from>
+      <to>Patient Clinical Profile - Output</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>patients</name>
+    <name>Clinical Profile</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -584,23 +566,39 @@
       <schema_name/>
     </partitioning>
     <connection>local_conn</connection>
-    <sql>select * from public.patient where date_created >'${LAST_RUN_DATE}'</sql>
+    <sql>SELECT
+  id
+, version
+, branch_id
+, clinical_profile_category_id
+, company_id
+, created_by_id
+, date_created
+, hint
+, is_active
+, is_mandatory
+, is_system_defined
+, last_updated
+, "name"
+, response_type
+FROM "public".clinical_profile
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
+    <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
       <value-meta>
-        <type>String</type>
+        <type>Integer</type>
         <storagetype>normal</storagetype>
         <name>id</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>patients</origin>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Clinical Profile Clinic 2</origin>
         <comments>id</comments>
-        <conversion_Mask/>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -621,32 +619,9 @@
         <name>version</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>patients</origin>
+        <origin>Clinical Profile Clinic 2</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>address</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>patients</origin>
-        <comments>address</comments>
-        <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -667,7 +642,7 @@
         <name>branch_id</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>patients</origin>
+        <origin>Clinical Profile Clinic 2</origin>
         <comments>branch_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -685,14 +660,14 @@
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>city</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>patients</origin>
-        <comments>city</comments>
-        <conversion_Mask/>
+        <name>clinical_profile_category_id</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Clinical Profile Clinic 2</origin>
+        <comments>clinical_profile_category_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -713,7 +688,7 @@
         <name>company_id</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>patients</origin>
+        <origin>Clinical Profile Clinic 2</origin>
         <comments>company_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -736,7 +711,7 @@
         <name>created_by_id</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>patients</origin>
+        <origin>Clinical Profile Clinic 2</origin>
         <comments>created_by_id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -759,7 +734,7 @@
         <name>date_created</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>patients</origin>
+        <origin>Clinical Profile Clinic 2</origin>
         <comments>date_created</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -779,11 +754,11 @@
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>debtor_account_id</name>
-        <length>255</length>
+        <name>hint</name>
+        <length>2147483647</length>
         <precision>-1</precision>
-        <origin>patients</origin>
-        <comments>debtor_account_id</comments>
+        <origin>Clinical Profile Clinic 2</origin>
+        <comments>hint</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -800,13 +775,13 @@
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Boolean</type>
         <storagetype>normal</storagetype>
-        <name>email</name>
-        <length>255</length>
+        <name>is_active</name>
+        <length>-1</length>
         <precision>-1</precision>
-        <origin>patients</origin>
-        <comments>email</comments>
+        <origin>Clinical Profile Clinic 2</origin>
+        <comments>is_active</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -823,14 +798,37 @@
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>Boolean</type>
         <storagetype>normal</storagetype>
-        <name>employee_account_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>patients</origin>
-        <comments>employee_account_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
+        <name>is_mandatory</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Clinical Profile Clinic 2</origin>
+        <comments>is_mandatory</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Boolean</type>
+        <storagetype>normal</storagetype>
+        <name>is_system_defined</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Clinical Profile Clinic 2</origin>
+        <comments>is_system_defined</comments>
+        <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -851,7 +849,7 @@
         <name>last_updated</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>patients</origin>
+        <origin>Clinical Profile Clinic 2</origin>
         <comments>last_updated</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -871,11 +869,11 @@
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>partner_type</name>
-        <length>18</length>
+        <name>name</name>
+        <length>2147483647</length>
         <precision>-1</precision>
-        <origin>patients</origin>
-        <comments>partner_type</comments>
+        <origin>Clinical Profile Clinic 2</origin>
+        <comments>name</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -894,34 +892,11 @@
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>phone_number</name>
-        <length>255</length>
+        <name>response_type</name>
+        <length>15</length>
         <precision>-1</precision>
-        <origin>patients</origin>
-        <comments>phone_number</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>postal_code</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>patients</origin>
-        <comments>postal_code</comments>
+        <origin>Clinical Profile Clinic 2</origin>
+        <comments>response_type</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -947,13 +922,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>464</xloc>
-      <yloc>96</yloc>
+      <xloc>304</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>patients - output</name>
+    <name>Clinical Profile - Output</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -964,8 +939,8 @@
       <schema_name/>
     </partitioning>
     <connection>dwh_conn</connection>
-    <schema>stage</schema>
-    <table>eafya_patients</table>
+    <schema>import</schema>
+    <table>eafya_clinical_profile</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -990,16 +965,12 @@
         <stream_name>version</stream_name>
       </field>
       <field>
-        <column_name>address</column_name>
-        <stream_name>address</stream_name>
-      </field>
-      <field>
         <column_name>branch_id</column_name>
         <stream_name>branch_id</stream_name>
       </field>
       <field>
-        <column_name>city</column_name>
-        <stream_name>city</stream_name>
+        <column_name>clinical_profile_category_id</column_name>
+        <stream_name>clinical_profile_category_id</stream_name>
       </field>
       <field>
         <column_name>company_id</column_name>
@@ -1014,32 +985,32 @@
         <stream_name>date_created</stream_name>
       </field>
       <field>
-        <column_name>debtor_account_id</column_name>
-        <stream_name>debtor_account_id</stream_name>
+        <column_name>hint</column_name>
+        <stream_name>hint</stream_name>
       </field>
       <field>
-        <column_name>email</column_name>
-        <stream_name>email</stream_name>
+        <column_name>is_active</column_name>
+        <stream_name>is_active</stream_name>
       </field>
       <field>
-        <column_name>employee_account_id</column_name>
-        <stream_name>employee_account_id</stream_name>
+        <column_name>is_mandatory</column_name>
+        <stream_name>is_mandatory</stream_name>
+      </field>
+      <field>
+        <column_name>is_system_defined</column_name>
+        <stream_name>is_system_defined</stream_name>
       </field>
       <field>
         <column_name>last_updated</column_name>
         <stream_name>last_updated</stream_name>
       </field>
       <field>
-        <column_name>partner_type</column_name>
-        <stream_name>partner_type</stream_name>
+        <column_name>name</column_name>
+        <stream_name>name</stream_name>
       </field>
       <field>
-        <column_name>phone_number</column_name>
-        <stream_name>phone_number</stream_name>
-      </field>
-      <field>
-        <column_name>postal_code</column_name>
-        <stream_name>postal_code</stream_name>
+        <column_name>response_type</column_name>
+        <stream_name>response_type</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1051,13 +1022,98 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
-      <yloc>96</yloc>
+      <xloc>608</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>registered_patients</name>
+    <name>Clinical Profile Clinic</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>local_conn</connection>
+    <sql>SELECT
+  clinical_profile_id
+, clinic_id
+FROM "public".clinic_clinical_profiles
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>clinical_profile_id</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>clinical_profile_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>clinic_id</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>clinic_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>336</xloc>
+      <yloc>48</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Patient Clinical Profile</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1071,29 +1127,24 @@
     <sql>SELECT
   id
 , version
-, birth_date
+, branch_id
+, clinical_profile_category_id
+, company_id
+, created_by_id
 , date_created
-, first_name
-, gender
-, geo_area_level5_id
-, id_no
-, last_name
+, hint
+, is_active
+, is_mandatory
+, is_system_defined
 , last_updated
-, marital_status
-, nationality_id
-, other_name
-, patient_id
-, patient_image_id
-, sub_location
-, village
-, ethnicity
-, category
-FROM "public".registered_patient_detail
-where date_created >'${LAST_RUN_DATE}'</sql>
+, "name"
+, response_type
+FROM "public".clinical_profile
+</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
+    <variables_active>N</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
     <cached_row_meta_active>N</cached_row_meta_active>
     <row-meta>
@@ -1103,7 +1154,7 @@ where date_created >'${LAST_RUN_DATE}'</sql>
         <name>id</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>registered_patients</origin>
+        <origin>Clinical Profile 2</origin>
         <comments>id</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1126,7 +1177,7 @@ where date_created >'${LAST_RUN_DATE}'</sql>
         <name>version</name>
         <length>15</length>
         <precision>0</precision>
-        <origin>registered_patients</origin>
+        <origin>Clinical Profile 2</origin>
         <comments>version</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
@@ -1144,14 +1195,83 @@ where date_created >'${LAST_RUN_DATE}'</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Timestamp</type>
+        <type>Integer</type>
         <storagetype>normal</storagetype>
-        <name>birth_date</name>
-        <length>6</length>
-        <precision>-1</precision>
-        <origin>registered_patients</origin>
-        <comments>birth_date</comments>
-        <conversion_Mask/>
+        <name>branch_id</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Clinical Profile 2</origin>
+        <comments>branch_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>clinical_profile_category_id</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Clinical Profile 2</origin>
+        <comments>clinical_profile_category_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>company_id</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Clinical Profile 2</origin>
+        <comments>company_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>en_US</date_format_locale>
+        <date_format_timezone>Africa/Nairobi</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>created_by_id</name>
+        <length>15</length>
+        <precision>0</precision>
+        <origin>Clinical Profile 2</origin>
+        <comments>created_by_id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
@@ -1172,7 +1292,7 @@ where date_created >'${LAST_RUN_DATE}'</sql>
         <name>date_created</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>registered_patients</origin>
+        <origin>Clinical Profile 2</origin>
         <comments>date_created</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -1192,11 +1312,11 @@ where date_created >'${LAST_RUN_DATE}'</sql>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>first_name</name>
-        <length>255</length>
+        <name>hint</name>
+        <length>2147483647</length>
         <precision>-1</precision>
-        <origin>registered_patients</origin>
-        <comments>first_name</comments>
+        <origin>Clinical Profile 2</origin>
+        <comments>hint</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1213,13 +1333,13 @@ where date_created >'${LAST_RUN_DATE}'</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Boolean</type>
         <storagetype>normal</storagetype>
-        <name>gender</name>
-        <length>6</length>
+        <name>is_active</name>
+        <length>-1</length>
         <precision>-1</precision>
-        <origin>registered_patients</origin>
-        <comments>gender</comments>
+        <origin>Clinical Profile 2</origin>
+        <comments>is_active</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1236,36 +1356,13 @@ where date_created >'${LAST_RUN_DATE}'</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>Boolean</type>
         <storagetype>normal</storagetype>
-        <name>geo_area_level5_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>registered_patients</origin>
-        <comments>geo_area_level5_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>id_no</name>
-        <length>255</length>
+        <name>is_mandatory</name>
+        <length>-1</length>
         <precision>-1</precision>
-        <origin>registered_patients</origin>
-        <comments>id_no</comments>
+        <origin>Clinical Profile 2</origin>
+        <comments>is_mandatory</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1282,13 +1379,13 @@ where date_created >'${LAST_RUN_DATE}'</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>String</type>
+        <type>Boolean</type>
         <storagetype>normal</storagetype>
-        <name>last_name</name>
-        <length>255</length>
+        <name>is_system_defined</name>
+        <length>-1</length>
         <precision>-1</precision>
-        <origin>registered_patients</origin>
-        <comments>last_name</comments>
+        <origin>Clinical Profile 2</origin>
+        <comments>is_system_defined</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1310,7 +1407,7 @@ where date_created >'${LAST_RUN_DATE}'</sql>
         <name>last_updated</name>
         <length>6</length>
         <precision>-1</precision>
-        <origin>registered_patients</origin>
+        <origin>Clinical Profile 2</origin>
         <comments>last_updated</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
@@ -1330,11 +1427,11 @@ where date_created >'${LAST_RUN_DATE}'</sql>
       <value-meta>
         <type>String</type>
         <storagetype>normal</storagetype>
-        <name>marital_status</name>
-        <length>9</length>
+        <name>name</name>
+        <length>2147483647</length>
         <precision>-1</precision>
-        <origin>registered_patients</origin>
-        <comments>marital_status</comments>
+        <origin>Clinical Profile 2</origin>
+        <comments>name</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1351,174 +1448,13 @@ where date_created >'${LAST_RUN_DATE}'</sql>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
       <value-meta>
-        <type>Integer</type>
+        <type>String</type>
         <storagetype>normal</storagetype>
-        <name>nationality_id</name>
+        <name>response_type</name>
         <length>15</length>
-        <precision>0</precision>
-        <origin>registered_patients</origin>
-        <comments>nationality_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>other_name</name>
-        <length>255</length>
         <precision>-1</precision>
-        <origin>registered_patients</origin>
-        <comments>other_name</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>patient_id</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>registered_patients</origin>
-        <comments>patient_id</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>patient_image_id</name>
-        <length>15</length>
-        <precision>0</precision>
-        <origin>registered_patients</origin>
-        <comments>patient_image_id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>sub_location</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>registered_patients</origin>
-        <comments>sub_location</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>village</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>registered_patients</origin>
-        <comments>village</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>ethnicity</name>
-        <length>5</length>
-        <precision>-1</precision>
-        <origin>registered_patients</origin>
-        <comments>ethnicity</comments>
-        <conversion_Mask/>
-        <decimal_symbol>.</decimal_symbol>
-        <grouping_symbol>,</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>en_US</date_format_locale>
-        <date_format_timezone>Africa/Nairobi</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>category</name>
-        <length>9</length>
-        <precision>-1</precision>
-        <origin>registered_patients</origin>
-        <comments>category</comments>
+        <origin>Clinical Profile 2</origin>
+        <comments>response_type</comments>
         <conversion_Mask/>
         <decimal_symbol>.</decimal_symbol>
         <grouping_symbol>,</grouping_symbol>
@@ -1544,13 +1480,13 @@ where date_created >'${LAST_RUN_DATE}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
-      <yloc>256</yloc>
+      <xloc>304</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>registered_patients- output</name>
+    <name>Patient Clinical Profile - Output</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1561,8 +1497,8 @@ where date_created >'${LAST_RUN_DATE}'</sql>
       <schema_name/>
     </partitioning>
     <connection>dwh_conn</connection>
-    <schema>stage</schema>
-    <table>eafya_patients_bio</table>
+    <schema>import</schema>
+    <table>eafya_patient_clinical_profile</table>
     <commit>1000</commit>
     <truncate>Y</truncate>
     <ignore_errors>N</ignore_errors>
@@ -1587,72 +1523,52 @@ where date_created >'${LAST_RUN_DATE}'</sql>
         <stream_name>version</stream_name>
       </field>
       <field>
-        <column_name>birth_date</column_name>
-        <stream_name>birth_date</stream_name>
+        <column_name>branch_id</column_name>
+        <stream_name>branch_id</stream_name>
+      </field>
+      <field>
+        <column_name>clinical_profile_category_id</column_name>
+        <stream_name>clinical_profile_category_id</stream_name>
+      </field>
+      <field>
+        <column_name>company_id</column_name>
+        <stream_name>company_id</stream_name>
+      </field>
+      <field>
+        <column_name>created_by_id</column_name>
+        <stream_name>created_by_id</stream_name>
       </field>
       <field>
         <column_name>date_created</column_name>
         <stream_name>date_created</stream_name>
       </field>
       <field>
-        <column_name>first_name</column_name>
-        <stream_name>first_name</stream_name>
+        <column_name>hint</column_name>
+        <stream_name>hint</stream_name>
       </field>
       <field>
-        <column_name>gender</column_name>
-        <stream_name>gender</stream_name>
+        <column_name>is_active</column_name>
+        <stream_name>is_active</stream_name>
       </field>
       <field>
-        <column_name>geo_area_level5_id</column_name>
-        <stream_name>geo_area_level5_id</stream_name>
+        <column_name>is_mandatory</column_name>
+        <stream_name>is_mandatory</stream_name>
       </field>
       <field>
-        <column_name>id_no</column_name>
-        <stream_name>id_no</stream_name>
-      </field>
-      <field>
-        <column_name>last_name</column_name>
-        <stream_name>last_name</stream_name>
+        <column_name>is_system_defined</column_name>
+        <stream_name>is_system_defined</stream_name>
       </field>
       <field>
         <column_name>last_updated</column_name>
         <stream_name>last_updated</stream_name>
       </field>
       <field>
-        <column_name>marital_status</column_name>
-        <stream_name>marital_status</stream_name>
+        <column_name>name</column_name>
+        <stream_name>name</stream_name>
       </field>
       <field>
-        <column_name>nationality_id</column_name>
-        <stream_name>nationality_id</stream_name>
-      </field>
-      <field>
-        <column_name>other_name</column_name>
-        <stream_name>other_name</stream_name>
-      </field>
-      <field>
-        <column_name>patient_id</column_name>
-        <stream_name>patient_id</stream_name>
-      </field>
-      <field>
-        <column_name>patient_image_id</column_name>
-        <stream_name>patient_image_id</stream_name>
-      </field>
-      <field>
-        <column_name>sub_location</column_name>
-        <stream_name>sub_location</stream_name>
-      </field>
-      <field>
-        <column_name>village</column_name>
-        <stream_name>village</stream_name>
-      </field>
-      <field>
-        <column_name>ethnicity</column_name>
-        <stream_name>ethnicity</stream_name>
-      </field>
-      <field>
-        <column_name>category</column_name>
-        <stream_name>category</stream_name>
+        <column_name>response_type</column_name>
+        <stream_name>response_type</stream_name>
       </field>
     </fields>
     <attributes/>
@@ -1664,8 +1580,60 @@ where date_created >'${LAST_RUN_DATE}'</sql>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>672</xloc>
-      <yloc>256</yloc>
+      <xloc>608</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table output</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>dwh_conn</connection>
+    <schema>import</schema>
+    <table>eafya_clinical_profile_clinic</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>clinical_profile_id</column_name>
+        <stream_name>clinical_profile_id</stream_name>
+      </field>
+      <field>
+        <column_name>clinic_id</column_name>
+        <stream_name>clinic_id</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>48</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

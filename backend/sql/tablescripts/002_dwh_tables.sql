@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_clinic
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_clinic
 (
   id BIGINT
 , version BIGINT
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_clinic
 , order_sequence INTEGER
 );
 
-CREATE  TABLE IF NOT EXISTS stage.fact_eafya_encounters
+CREATE  TABLE IF NOT EXISTS dwh.fact_eafya_encounters
 (
   id BIGINT
 , clinic_session_id BIGINT
@@ -31,7 +31,7 @@ CREATE  TABLE IF NOT EXISTS stage.fact_eafya_encounters
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_disease
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_patient_disease
 (
   id BIGINT
 , classification VARCHAR(11)
@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_disease
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_visit
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_patient_visit
 (
   id BIGINT
 , created_by_id BIGINT
@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_visit
 , process VARCHAR(9)
 );
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_clinic_session
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_clinic_session
 (
   id BIGINT
 , clinic_id BIGINT
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_clinic_session
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_minor_theatre
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_patient_minor_theatre
 (
   id BIGINT
 , created_by_id BIGINT
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_minor_theatre
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_imaging
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_patient_imaging
 (
   id BIGINT
 , attended_by_id BIGINT
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_imaging
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_imaging
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_imaging
 (
   id BIGINT
 , allow_multiple_orders BOOLEAN
@@ -110,7 +110,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_imaging
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_imaging_category
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_imaging_category
 (
   id BIGINT
 , created_by_id BIGINT
@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_imaging_category
 ;
 
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_blood_transfussion
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_patient_blood_transfussion
 (
   id BIGINT
 , version BIGINT
@@ -142,7 +142,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_blood_transfussion
 , rn BIGINT
 );
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_sample
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_lab_sample
 (
   id BIGINT
 , lab_sample_type VARCHAR(255)
@@ -152,7 +152,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_sample
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_pharmacology
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_pharmacology
 (
   id BIGINT
 , date_created TIMESTAMP
@@ -166,7 +166,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_pharmacology
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_store
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_store
 (
   id BIGINT
 , created_by_id BIGINT
@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_store
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_inventory_audit
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_inventory_audit
 (
   id BIGINT
 , created_by_id BIGINT
@@ -197,7 +197,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_inventory_audit
 ;
 
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_product
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_product
 (
   id BIGINT
 , created_by_id BIGINT
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_product
 )
 ;
 
-CREATE TABLE  IF NOT EXISTS stage.fact_eafya_store_inventory
+CREATE TABLE  IF NOT EXISTS dwh.fact_eafya_store_inventory
 (
   id BIGINT
 , date_created TIMESTAMP
@@ -239,7 +239,7 @@ CREATE TABLE  IF NOT EXISTS stage.fact_eafya_store_inventory
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_inventory_audit
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_inventory_audit
 (
   id BIGINT
 , created_by_id BIGINT
@@ -254,7 +254,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_inventory_audit
 , store_inventory_id BIGINT
 )
 ;
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_inventory_batch_level
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_inventory_batch_level
 (
   id BIGINT
 , batch_number VARCHAR(255)
@@ -271,7 +271,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_inventory_batch_level
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_administered_vaccine
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_administered_vaccine
 (
   id BIGINT
 , administered_by_id BIGINT
@@ -285,7 +285,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_administered_vaccine
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_bed
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_bed
 (
   id BIGINT
 , version BIGINT
@@ -304,7 +304,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_bed
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_room
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_room
 (
   id BIGINT
 , version BIGINT
@@ -321,7 +321,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_room
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_admissions
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_patient_admissions
 (
   id BIGINT
 , version BIGINT
@@ -351,7 +351,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_admissions
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_newborn
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_newborn
 (
   id BIGINT
 , version BIGINT
@@ -399,7 +399,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_newborn
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_labour_monitor
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_labour_monitor
 (
   id BIGINT
 , version BIGINT
@@ -417,7 +417,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_labour_monitor
 , delivery_time TIMESTAMP
 , drugs_given VARCHAR(255)
 , episiotomy BOOLEAN
-, first_stage_duration DOUBLE PRECISION
+, first_dwh_duration DOUBLE PRECISION
 , gravidity VARCHAR(255)
 , hours_since_rupture DOUBLE PRECISION
 , induced_labour BOOLEAN
@@ -435,7 +435,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_labour_monitor
 , repair BOOLEAN
 , respiratory_rate INTEGER
 , ruptured_membranes BOOLEAN
-, second_stage_duration DOUBLE PRECISION
+, second_dwh_duration DOUBLE PRECISION
 , temperature DOUBLE PRECISION
 , vaginal_exams_count INTEGER
 , edd TIMESTAMP
@@ -446,7 +446,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_labour_monitor
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_family_planning
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_patient_family_planning
 (
   id BIGINT
 , created_by_id BIGINT
@@ -455,11 +455,11 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_family_planning
 , family_planning_id BIGINT
 , is_new_to_method BOOLEAN
 , last_updated TIMESTAMP
-, treatment_stage VARCHAR(7)
+, treatment_dwh VARCHAR(7)
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_prescription
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_prescription
 (
   id BIGINT
 , version BIGINT
@@ -480,7 +480,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_prescription
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_test_category
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_lab_test_category
 (
   id BIGINT
 , created_by_id BIGINT
@@ -493,7 +493,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_test_category
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_test_sample
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_lab_test_sample
 (
   id BIGINT
 , created_by_id BIGINT
@@ -504,7 +504,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_test_sample
 )
 ;
 
-CREATE TABLE stage.dim_eafya_family_planning
+CREATE TABLE dwh.dim_eafya_family_planning
 (
   last_created TIMESTAMP
 , id BIGINT
@@ -518,7 +518,7 @@ CREATE TABLE stage.dim_eafya_family_planning
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_patients
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_patients
 (
   id VARCHAR(255)
 , version BIGINT
@@ -538,7 +538,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_patients
 );
 
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_registered_patients
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_registered_patients
 (
   id BIGINT
 , version BIGINT
@@ -561,7 +561,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_registered_patients
 , category VARCHAR(9)
 );
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_system_user
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_system_user
 (
  id BIGINT
 , created_by_id BIGINT
@@ -587,7 +587,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_system_user
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_role
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_role
 (
 id BIGINT
 , created_by_id INTEGER
@@ -598,7 +598,7 @@ id BIGINT
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_department
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_department
 (
  id BIGINT
 , created_by_id BIGINT
@@ -613,7 +613,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_department
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_major_theatre
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_patient_major_theatre
 (
   id BIGINT
 , administered_by_id BIGINT
@@ -628,7 +628,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_major_theatre
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_test_category
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_lab_test_category
 (
   id BIGINT
 , created_by_id BIGINT
@@ -641,7 +641,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_test_category
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_inventory_unit
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_inventory_unit
 (
   id BIGINT
 , created_by_id BIGINT
@@ -655,7 +655,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_inventory_unit
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_administered_family_planning
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_administered_family_planning
 (
   id BIGINT
 , administered_at VARCHAR(255)
@@ -669,7 +669,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_administered_family_planning
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_major_theatre
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_major_theatre
 (
   id BIGINT
 , version BIGINT
@@ -685,7 +685,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_major_theatre
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.eafya_dim_major_theatre_category
+CREATE TABLE IF NOT EXISTS dwh.eafya_dim_major_theatre_category
 (
   id BIGINT
 , created_by_id BIGINT
@@ -693,7 +693,7 @@ CREATE TABLE IF NOT EXISTS stage.eafya_dim_major_theatre_category
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_minor_theatre
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_minor_theatre
 (
   id BIGINT
 , clinic_id BIGINT
@@ -706,7 +706,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_minor_theatre
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_major_theatre_room
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_major_theatre_room
 (
   id BIGINT
 , date_created TIMESTAMP
@@ -714,7 +714,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_major_theatre_room
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_ward
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_ward
 (
   id BIGINT
 , description TEXT
@@ -726,7 +726,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_ward
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_vaccine
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_vaccine
 (
   id BIGINT
 , version BIGINT
@@ -741,7 +741,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_vaccine
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_tests_parent
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_lab_tests_parent
 (
   id BIGINT
 , "name" VARCHAR(255)
@@ -751,7 +751,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_tests_parent
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_disease
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_disease
 (
   id BIGINT
 , version BIGINT
@@ -769,7 +769,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_disease
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_visit_type
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_visit_type
 (
   id BIGINT
 , version BIGINT
@@ -784,7 +784,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_visit_type
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_family_planning_category
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_family_planning_category
 (
   id BIGINT
 , created_by_id BIGINT
@@ -795,7 +795,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_family_planning_category
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_triage_type
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_triage_type
 (
   id BIGINT
 , created_by_id BIGINT
@@ -804,7 +804,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_triage_type
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_vitals_monitor
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_vitals_monitor
 (
   id BIGINT
 , admission_id BIGINT
@@ -822,7 +822,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_vitals_monitor
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_blood_transfussion
+CREATE TABLE IF NOT EXISTS dwh.dim_blood_transfussion
 (
   last_update TIMESTAMP
 , id BIGINT
@@ -839,7 +839,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_blood_transfussion
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_triage
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_triage
 (
   id BIGINT
 , branch_id BIGINT
@@ -851,7 +851,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_triage
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_major_theatre
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_major_theatre
 (
   id BIGINT
 , created_by_id BIGINT
@@ -861,7 +861,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_major_theatre
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_minor_theatre
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_minor_theatre
 (
   id BIGINT
 , clinic_id BIGINT
@@ -871,14 +871,14 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_minor_theatre
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_major_theatre_room
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_major_theatre_room
 (
   id BIGINT
 , date_created TIMESTAMP
 , major_theater_room VARCHAR(255)
 )
 ;
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_minor_theatre_category
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_minor_theatre_category
 (
   id BIGINT
 , version BIGINT
@@ -892,7 +892,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_minor_theatre_category
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_test
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_lab_test
 (
   id BIGINT
 , allow_multiple_orders BOOLEAN
@@ -929,7 +929,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_lab_test
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_deceased_patient
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_deceased_patient
 (
   id BIGINT
 , admission_id BIGINT
@@ -941,7 +941,7 @@ CREATE TABLE IF NOT EXISTS stage.fact_eafya_deceased_patient
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_vital_type
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_vital_type
 (
   id BIGINT
 , version BIGINT
@@ -961,7 +961,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_vital_type
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.dim_eafya_triage_type_vital_sign
+CREATE TABLE IF NOT EXISTS dwh.dim_eafya_triage_type_vital_sign
 (
   id BIGINT
 , version BIGINT
@@ -973,7 +973,7 @@ CREATE TABLE IF NOT EXISTS stage.dim_eafya_triage_type_vital_sign
 )
 ;
 
-CREATE TABLE IF NOT EXISTS stage.fact_eafya_patient_lab_test
+CREATE TABLE IF NOT EXISTS dwh.fact_eafya_patient_lab_test
 (
   id BIGINT
 , created_by_id BIGINT

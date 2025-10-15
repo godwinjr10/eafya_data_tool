@@ -1,10 +1,10 @@
 id,hmis_code,hmis_name,section_name,section_code
-1,CH01,Vit A supplement (1st Dose),Child Health Services,2.6
-2,CH02,Vit A supplement (2nd Dose),Child Health Services,2.6
-3,CH03,Deworming (1st Dose),Child Health Services,2.6
-4,CH04,Deworming (2nd Dose),Child Health Services,2.6
-5,CH05,Deworming in school (1st Dose),Child Health Services,2.6
-6,CH06,Deworming in schools (2nd Dose),Child Health Services,2.6
+1,CH01,Vit A supplement (1st Dose),Child Health Services,2.6.0
+2,CH02,Vit A supplement (2nd Dose),Child Health Services,2.6.0
+3,CH03,Deworming (1st Dose),Child Health Services,2.6.0
+4,CH04,Deworming (2nd Dose),Child Health Services,2.6.0
+5,CH05,Deworming in school (1st Dose),Child Health Services,2.6.0
+6,CH06,Deworming in schools (2nd Dose),Child Health Services,2.6.0
 7,VP01,HPV-Dose ,HPV Vaccination,2.6.1
 8,TD01,Td1-Dose 1,Tetanus Vaccination,2.6.2
 9,TD02,Td2-Dose 2,Tetanus Vaccination,2.6.2

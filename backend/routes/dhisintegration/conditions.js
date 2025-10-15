@@ -10,7 +10,8 @@ const dhis2Auth = {
 };
 
 //const ORG_UNIT = 'h40pKp93Mtc'; nagguru
-const ORG_UNIT = "vX6kcAwvaS0";
+//const ORG_UNIT = "vX6kcAwvaS0";
+const ORG_UNIT = "TjEiAVNTIFy"
 const ATTRIBUTE_OPTION_COMBO = "Lf2Axb9E6B4";
 
 const fetchStructuredDataQuery = (period) => `

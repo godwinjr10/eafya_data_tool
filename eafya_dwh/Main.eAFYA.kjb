@@ -310,7 +310,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>import</name>
+      <name>stage</name>
       <description/>
       <type>JOB</type>
       <attributes/>
@@ -352,7 +352,7 @@
       <attributes_kjc/>
     </entry>
     <entry>
-      <name>stage</name>
+      <name>stage-old</name>
       <description/>
       <type>JOB</type>
       <attributes/>
@@ -551,8 +551,8 @@
   </entries>
   <hops>
     <hop>
-      <from>import</from>
-      <to>stage</to>
+      <from>stage</from>
+      <to>stage-old</to>
       <from_nr>0</from_nr>
       <to_nr>1</to_nr>
       <enabled>Y</enabled>
@@ -560,7 +560,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>stage</from>
+      <from>stage-old</from>
       <to>dwh</to>
       <from_nr>1</from_nr>
       <to_nr>2</to_nr>
@@ -588,7 +588,7 @@
     </hop>
     <hop>
       <from>log_last_run_date</from>
-      <to>import</to>
+      <to>stage</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

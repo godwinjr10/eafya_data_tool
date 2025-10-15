@@ -1,4 +1,4 @@
-CREATE TABLE  IF NOT EXISTS  import.eafya_patients
+CREATE TABLE  IF NOT EXISTS  stage.eafya_patients
 (
   id VARCHAR(255)
 , version BIGINT
@@ -18,7 +18,7 @@ CREATE TABLE  IF NOT EXISTS  import.eafya_patients
 )
 ;
 
-CREATE TABLE IF NOT EXISTS  import.eafya_clinic
+CREATE TABLE IF NOT EXISTS  stage.eafya_clinic
 (
   id BIGINT
 , version BIGINT
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_clinic
 , order_sequence INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_patient_disease
+CREATE TABLE IF NOT EXISTS  stage.eafya_patient_disease
 (
   id BIGINT
 , version BIGINT
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_patient_disease
 , annulled_by_id BIGINT
 );
 
-CREATE TABLE import.eafya_lab_test
+CREATE TABLE stage.eafya_lab_test
 (
   id BIGINT
 , version BIGINT
@@ -97,7 +97,7 @@ CREATE TABLE import.eafya_lab_test
 )
 ;
 
-CREATE TABLE IF NOT EXISTS  import.eafya_lab_test_category
+CREATE TABLE IF NOT EXISTS  stage.eafya_lab_test_category
 (
   id BIGINT
 , version BIGINT
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_lab_test_category
 , order_sequence INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_inventory_audit
+CREATE TABLE IF NOT EXISTS  stage.eafya_inventory_audit
 (
   id BIGINT
 , version BIGINT
@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_inventory_audit
 , store_inventory_id BIGINT
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_store_inventory
+CREATE TABLE IF NOT EXISTS  stage.eafya_store_inventory
 (
   id BIGINT
 , version BIGINT
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_store_inventory
 , unit_in_stock NUMERIC(21, 2)
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_store
+CREATE TABLE IF NOT EXISTS  stage.eafya_store
 (
   id BIGINT
 , version BIGINT
@@ -160,7 +160,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_store
 , adjustment_control_ledger_id BIGINT
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_product
+CREATE TABLE IF NOT EXISTS  stage.eafya_product
 (
   id BIGINT
 , version BIGINT
@@ -192,7 +192,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_product
 , product_bill_category_id BIGINT
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_inventory_unit
+CREATE TABLE IF NOT EXISTS  stage.eafya_inventory_unit
 (
   id BIGINT
 , version BIGINT
@@ -208,13 +208,13 @@ CREATE TABLE IF NOT EXISTS  import.eafya_inventory_unit
 , unit_id BIGINT
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_product_pharmacology
+CREATE TABLE IF NOT EXISTS  stage.eafya_product_pharmacology
 (
   pharmacology_id BIGINT
 , product_id BIGINT
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_pharmacology
+CREATE TABLE IF NOT EXISTS  stage.eafya_pharmacology
 (
   id BIGINT
 , version BIGINT
@@ -235,7 +235,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_pharmacology
 , is_active BOOLEAN
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_inventory_batch_level
+CREATE TABLE IF NOT EXISTS  stage.eafya_inventory_batch_level
 (
   id BIGINT
 , version BIGINT
@@ -256,7 +256,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_inventory_batch_level
 
 
 
-CREATE TABLE IF NOT EXISTS  import.eafya_lab_test
+CREATE TABLE IF NOT EXISTS  stage.eafya_lab_test
 (
   id BIGINT
 , version BIGINT
@@ -299,7 +299,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_lab_test
 , code_url VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_lab_test_category
+CREATE TABLE IF NOT EXISTS  stage.eafya_lab_test_category
 (
   id BIGINT
 , version BIGINT
@@ -314,7 +314,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_lab_test_category
 , order_sequence INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS import.eafya_lab_test_sample_type
+CREATE TABLE IF NOT EXISTS stage.eafya_lab_test_sample_type
 (
   id BIGINT
 , version BIGINT
@@ -330,7 +330,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_lab_test_sample_type
 , code_url VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_patients
+CREATE TABLE IF NOT EXISTS  stage.eafya_patients
 (
   id VARCHAR(255)
 , version BIGINT
@@ -349,7 +349,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_patients
 , postal_code VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_patients_bio
+CREATE TABLE IF NOT EXISTS  stage.eafya_patients_bio
 (
   id BIGINT
 , version BIGINT
@@ -374,9 +374,9 @@ CREATE TABLE IF NOT EXISTS  import.eafya_patients_bio
 
 
 
------COMMODITY FACT & DIM IMPORT TABLES-------------------------------
+-----COMMODITY FACT & DIM stage TABLES-------------------------------
 
-CREATE TABLE IF NOT EXISTS  import.eafya_pharmacology
+CREATE TABLE IF NOT EXISTS  stage.eafya_pharmacology
 (
   id BIGINT
 , version BIGINT
@@ -396,7 +396,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_pharmacology
 , system_defined BOOLEAN
 , is_active BOOLEAN
 );
-CREATE TABLE IF NOT EXISTS  import.eafya_product
+CREATE TABLE IF NOT EXISTS  stage.eafya_product
 (
   id BIGINT
 , version BIGINT
@@ -427,13 +427,13 @@ CREATE TABLE IF NOT EXISTS  import.eafya_product
 , vat_class_id BIGINT
 , product_bill_category_id BIGINT
 );
-CREATE TABLE IF NOT EXISTS  import.eafya_product_pharmacology
+CREATE TABLE IF NOT EXISTS  stage.eafya_product_pharmacology
 (
   pharmacology_id BIGINT
 , product_id BIGINT
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_inventory_unit
+CREATE TABLE IF NOT EXISTS  stage.eafya_inventory_unit
 (
   id BIGINT
 , version BIGINT
@@ -448,7 +448,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_inventory_unit
 , quantity NUMERIC(21, 2)
 , unit_id BIGINT
 );
-CREATE TABLE IF NOT EXISTS  import.eafya_inventory_audit
+CREATE TABLE IF NOT EXISTS  stage.eafya_inventory_audit
 (
   id BIGINT
 , version BIGINT
@@ -466,7 +466,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_inventory_audit
 , store_inventory_id BIGINT
 );
 
- CREATE TABLE IF NOT EXISTS  import.eafya_store
+ CREATE TABLE IF NOT EXISTS  stage.eafya_store
 (
   id BIGINT
 , version BIGINT
@@ -482,7 +482,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_inventory_audit
 , stock_control_account_id BIGINT
 , adjustment_control_ledger_id BIGINT
 );
-CREATE TABLE IF NOT EXISTS  import.eafya_store_inventory
+CREATE TABLE IF NOT EXISTS  stage.eafya_store_inventory
 (
   id BIGINT
 , version BIGINT
@@ -495,7 +495,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_store_inventory
 , unit_in_stock NUMERIC(21, 2)
 );
 
-CREATE TABLE IF NOT EXISTS import.eafya_patient_family_planning
+CREATE TABLE IF NOT EXISTS stage.eafya_patient_family_planning
 (
   id BIGINT
 , version BIGINT
@@ -514,7 +514,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_patient_family_planning
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_administered_family_planning
+CREATE TABLE IF NOT EXISTS stage.eafya_administered_family_planning
 (
   id BIGINT
 , version BIGINT
@@ -533,7 +533,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_administered_family_planning
 ;
 
 
-CREATE TABLE IF NOT EXISTS import.eafya_administered_vaccine
+CREATE TABLE IF NOT EXISTS stage.eafya_administered_vaccine
 (
   id BIGINT
 , version BIGINT
@@ -551,7 +551,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_administered_vaccine
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_vaccine
+CREATE TABLE IF NOT EXISTS stage.eafya_vaccine
 (
   id BIGINT
 , version BIGINT
@@ -566,7 +566,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_vaccine
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_patient_major_theatre
+CREATE TABLE IF NOT EXISTS stage.eafya_patient_major_theatre
 (
   id BIGINT
 , version BIGINT
@@ -587,7 +587,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_patient_major_theatre
 , scheduled_time VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS import.eafya_patient_minor_theatre
+CREATE TABLE IF NOT EXISTS stage.eafya_patient_minor_theatre
 (
   id BIGINT
 , version BIGINT
@@ -604,7 +604,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_patient_minor_theatre
 , treatment_duration VARCHAR(26)
 );
 
-CREATE TABLE IF NOT EXISTS import.eafya_patient_imaging
+CREATE TABLE IF NOT EXISTS stage.eafya_patient_imaging
 (
   id BIGINT
 , version BIGINT
@@ -625,7 +625,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_patient_imaging
 , status VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS import.eafya_imaging
+CREATE TABLE IF NOT EXISTS stage.eafya_imaging
 (
   id BIGINT
 , version BIGINT
@@ -644,7 +644,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_imaging
   
 
   
-CREATE TABLE IF NOT EXISTS import.eafya_blood_transfussion
+CREATE TABLE IF NOT EXISTS stage.eafya_blood_transfussion
 (
   last_update TIMESTAMP
 , id BIGINT
@@ -661,7 +661,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_blood_transfussion
 );
 
 
-CREATE TABLE IF NOT EXISTS  import.eafya_imaging_category
+CREATE TABLE IF NOT EXISTS  stage.eafya_imaging_category
 (
   id BIGINT
 , version BIGINT
@@ -675,7 +675,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_imaging_category
 , system_defined BOOLEAN
 );
 
-CREATE TABLE IF NOT EXISTS  import.eafya_patient_prescription
+CREATE TABLE IF NOT EXISTS  stage.eafya_patient_prescription
 (
   id BIGINT
 , version BIGINT
@@ -696,7 +696,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_patient_prescription
 )
 ;
 
-CREATE TABLE IF NOT EXISTS  import.eafya_patient_admissions
+CREATE TABLE IF NOT EXISTS  stage.eafya_patient_admissions
 (
   id BIGINT
 , version BIGINT
@@ -726,7 +726,7 @@ CREATE TABLE IF NOT EXISTS  import.eafya_patient_admissions
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_bed
+CREATE TABLE IF NOT EXISTS stage.eafya_bed
 (
   id BIGINT
 , version BIGINT
@@ -745,7 +745,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_bed
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_room
+CREATE TABLE IF NOT EXISTS stage.eafya_room
 (
   id BIGINT
 , version BIGINT
@@ -762,7 +762,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_room
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_newborn
+CREATE TABLE IF NOT EXISTS stage.eafya_newborn
 (
   id BIGINT
 , version BIGINT
@@ -810,7 +810,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_newborn
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_labour_monitor
+CREATE TABLE IF NOT EXISTS stage.eafya_labour_monitor
 (
   id BIGINT
 , version BIGINT
@@ -857,7 +857,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_labour_monitor
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_ward
+CREATE TABLE IF NOT EXISTS stage.eafya_ward
 (
   id BIGINT
 , version BIGINT
@@ -876,7 +876,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_ward
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_patient_visit
+CREATE TABLE IF NOT EXISTS stage.eafya_patient_visit
 (
   id BIGINT
 , version BIGINT
@@ -900,7 +900,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_patient_visit
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_clinic_session
+CREATE TABLE IF NOT EXISTS stage.eafya_clinic_session
 (
   id BIGINT
 , version BIGINT
@@ -921,7 +921,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_clinic_session
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_encounters
+CREATE TABLE IF NOT EXISTS stage.eafya_encounters
 (
   id BIGINT
 , version BIGINT
@@ -941,7 +941,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_encounters
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_visit_type
+CREATE TABLE IF NOT EXISTS stage.eafya_visit_type
 (
   id BIGINT
 , version BIGINT
@@ -956,7 +956,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_visit_type
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_family_planning
+CREATE TABLE IF NOT EXISTS stage.eafya_family_planning
 (
   last_created TIMESTAMP
 , id BIGINT
@@ -972,7 +972,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_family_planning
 , "name" VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS import.eafya_disease
+CREATE TABLE IF NOT EXISTS stage.eafya_disease
 (
   id BIGINT
 , version BIGINT
@@ -990,7 +990,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_disease
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_triage
+CREATE TABLE IF NOT EXISTS stage.eafya_triage
 (
   id BIGINT
 , version BIGINT
@@ -1005,7 +1005,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_triage
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_system_user
+CREATE TABLE IF NOT EXISTS stage.eafya_system_user
 (
   id BIGINT
 , version BIGINT
@@ -1034,7 +1034,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_system_user
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_role
+CREATE TABLE IF NOT EXISTS stage.eafya_role
 (
    id BIGINT
 , version BIGINT
@@ -1049,7 +1049,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_role
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_department
+CREATE TABLE IF NOT EXISTS stage.eafya_department
 (
   id BIGINT
 , version BIGINT
@@ -1067,7 +1067,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_department
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_major_theatre_category
+CREATE TABLE IF NOT EXISTS stage.eafya_major_theatre_category
 (
   id BIGINT
 , version BIGINT
@@ -1081,7 +1081,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_major_theatre_category
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_minor_theatre_category
+CREATE TABLE IF NOT EXISTS stage.eafya_minor_theatre_category
 (
   id BIGINT
 , version BIGINT
@@ -1095,7 +1095,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_minor_theatre_category
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_ward
+CREATE TABLE IF NOT EXISTS stage.eafya_ward
 (
   id BIGINT
 , version BIGINT
@@ -1114,7 +1114,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_ward
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_family_planning_category
+CREATE TABLE IF NOT EXISTS stage.eafya_family_planning_category
 (
   id BIGINT
 , version BIGINT
@@ -1129,7 +1129,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_family_planning_category
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_triage
+CREATE TABLE IF NOT EXISTS stage.eafya_triage
 (
   id BIGINT
 , version BIGINT
@@ -1144,7 +1144,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_triage
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_triage_type
+CREATE TABLE IF NOT EXISTS stage.eafya_triage_type
 (
   id BIGINT
 , version BIGINT
@@ -1158,7 +1158,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_triage_type
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_vital_monitor
+CREATE TABLE IF NOT EXISTS stage.eafya_vital_monitor
 (
   id BIGINT
 , version BIGINT
@@ -1180,7 +1180,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_vital_monitor
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_vital_type
+CREATE TABLE IF NOT EXISTS stage.eafya_vital_type
 (
   id BIGINT
 , version BIGINT
@@ -1200,7 +1200,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_vital_type
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_major_theatre_room
+CREATE TABLE IF NOT EXISTS stage.eafya_major_theatre_room
 (
   id BIGINT
 , version BIGINT
@@ -1214,7 +1214,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_major_theatre_room
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_patient_major_theatre
+CREATE TABLE IF NOT EXISTS stage.eafya_patient_major_theatre
 (
   id BIGINT
 , version BIGINT
@@ -1236,7 +1236,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_patient_major_theatre
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_minor_theatre
+CREATE TABLE IF NOT EXISTS stage.eafya_minor_theatre
 (
   id BIGINT
 , version BIGINT
@@ -1253,7 +1253,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_minor_theatre
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_major_theatre
+CREATE TABLE IF NOT EXISTS stage.eafya_major_theatre
 (
   id BIGINT
 , version BIGINT
@@ -1268,7 +1268,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_major_theatre
 , is_active BOOLEAN
 )
 ;
-CREATE TABLE IF NOT EXISTS import.eafya_minor_theatre
+CREATE TABLE IF NOT EXISTS stage.eafya_minor_theatre
 (
   id BIGINT
 , version BIGINT
@@ -1284,7 +1284,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_minor_theatre
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_deceased_patient
+CREATE TABLE IF NOT EXISTS stage.eafya_deceased_patient
 (
   id BIGINT
 , version BIGINT
@@ -1305,7 +1305,7 @@ CREATE TABLE IF NOT EXISTS import.eafya_deceased_patient
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import."eafya_triage_type_vital_sign "
+CREATE TABLE IF NOT EXISTS stage."eafya_triage_type_vital_sign "
 (
   id BIGINT
 , version BIGINT
@@ -1317,7 +1317,7 @@ CREATE TABLE IF NOT EXISTS import."eafya_triage_type_vital_sign "
 )
 ;
 
-CREATE TABLE IF NOT EXISTS import.eafya_patient_lab_test
+CREATE TABLE IF NOT EXISTS stage.eafya_patient_lab_test
 (
   id BIGINT
 , created_by_id BIGINT
@@ -1331,5 +1331,50 @@ CREATE TABLE IF NOT EXISTS import.eafya_patient_lab_test
 , "result" VARCHAR(255)
 , status VARCHAR(255)
 , visit_type VARCHAR(28)
+)
+;
+
+CREATE TABLE IF NOT EXISTS stage.eafya_clinical_profile_clinic
+(
+  clinical_profile_id BIGINT
+, clinic_id BIGINT
+)
+;
+
+CREATE TABLE IF NOT EXISTS stage.eafya_clinical_profile
+(
+  id BIGINT
+, version BIGINT
+, branch_id BIGINT
+, clinical_profile_category_id BIGINT
+, company_id BIGINT
+, created_by_id BIGINT
+, date_created TIMESTAMP
+, hint TEXT
+, is_active BOOLEAN
+, is_mandatory BOOLEAN
+, is_system_defined BOOLEAN
+, last_updated TIMESTAMP
+, "name" TEXT
+, response_type VARCHAR(15)
+)
+;
+
+CREATE TABLE IF NOT EXISTS stage.eafya_patient_clinical_profile
+(
+  id BIGINT
+, version BIGINT
+, branch_id BIGINT
+, clinical_profile_category_id BIGINT
+, company_id BIGINT
+, created_by_id BIGINT
+, date_created TIMESTAMP
+, hint TEXT
+, is_active BOOLEAN
+, is_mandatory BOOLEAN
+, is_system_defined BOOLEAN
+, last_updated TIMESTAMP
+, "name" TEXT
+, response_type VARCHAR(15)
 )
 ;
